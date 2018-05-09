@@ -4,6 +4,7 @@ var strength = 0;
 var dexterity = 0;
 var intelligence = 0;
 var chance = 0;
+var healthPoints = 0;
 
 
 //Character Declarations
@@ -12,7 +13,8 @@ var rogue = false;
 var wizard = false;
 
 
-//Min and Max Stat States
+
+//Min and Max States
 var minStrength = 5;
 var midStrength = 12;
 var maxStrength = 25;
@@ -25,8 +27,13 @@ var maxDexterity = 25;
 var minChance = 5;
 var midChance = 12;
 var maxChance = 25;
+var barbarianHealthPoints = 50;
+var rogueHealthPoints = 30;
+var wizardHealthPoints = 15;
 
 
+
+choice = barbarian;
 //Run Generate Function
 generate(choice);
 
@@ -54,8 +61,9 @@ function generate(choice)
             dexterity = Math.ceil(Math.random()*midDexterity);
             intelligence = Math.ceil(Math.random()*minIntelligence);
             chance = Math.ceil(Math.random()*midChance);
+            healthPoints = barbarianHealthPoints;
+            console.log(healthPoints);
             break;
-            
         //Rogue Class
         //Rogues are dexterity based characters
         //While the random strength number generated for
@@ -71,8 +79,8 @@ function generate(choice)
             }
             intelligence = Math.ceil(Math.random()*midIntelligence);
             chance = Math.ceil(Math.random()*midChance);
+            healthPoints = rogueHealthPoints;
             break;
-            
         //Wizard Class
         //Wizards are intelligence based characters
         //While the random strength number generated for
@@ -90,6 +98,7 @@ function generate(choice)
                 intelligence = Math.ceil(Math.random()*maxIntelligence);
             }
             chance = Math.ceil(Math.random()*midChance);
+            healthPoints = wizardHealthPoints;
             break;
         default:
             break;
