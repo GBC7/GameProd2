@@ -15,5 +15,6 @@ RE  statsGenerator.js   Javascript file to generate the stats for the 3 starter 
 RE  statsGenerator.js   Corrected names of 3 starter classes                                  2018-05-09 10:09AM
 RE  statsGenerator.js   Commented the code                                                    2018-05-09 10:24AM
 RE  statsGenerator.js   Changed math equations to variables instead of numbers for editing    2018-05-09 11:07AM
+RE  statsGenerator.js   Added healthpoint assigning                                           2018-05-09 11:51AM
 
 
