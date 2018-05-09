@@ -12,6 +12,21 @@ var rogue = false;
 var wizard = false;
 
 
+//Min and Max Stat States
+var minStrength = 5;
+var midStrength = 12;
+var maxStrength = 25;
+var minIntelligence = 5;
+var midIntelligence = 12;
+var maxIntelligence = 25;
+var minDexterity = 5;
+var midDexterity = 12;
+var maxDexterity = 25;
+var minChance = 5;
+var midChance = 12;
+var maxChance = 25;
+
+
 //Run Generate Function
 generate(choice);
 
@@ -31,15 +46,16 @@ function generate(choice)
         //Dexterity and chance are set lower based on
         //a very low intelligence level
         case barbarian:
-            strength = Math.ceil(Math.random()*25);
-            while(strength < 12)
+            strength = Math.ceil(Math.random()*maxStrength);
+            while(strength < midStrength)
             {
-                strength = Math.ceil(Math.random()*25);
+                strength = Math.ceil(Math.random()*maxStrength);
             }
-            dexterity = Math.ceil(Math.random()*10);
-            intelligence = Math.ceil(Math.random()*5);
-            chance = Math.ceil(Math.random()*10);
+            dexterity = Math.ceil(Math.random()*midDexterity);
+            intelligence = Math.ceil(Math.random()*minIntelligence);
+            chance = Math.ceil(Math.random()*midChance);
             break;
+            
         //Rogue Class
         //Rogues are dexterity based characters
         //While the random strength number generated for
@@ -47,15 +63,16 @@ function generate(choice)
         //until the end result is greater than 12.
         //Strength, intelligence, and chance are set midlevel.
         case rogue:
-            strength = Math.ceil(Math.random()*15);
-            dexterity = Math.ceil(Math.random()*25);
-            while(deterity < 12)
+            strength = Math.ceil(Math.random()*midStrength);
+            dexterity = Math.ceil(Math.random()*maxDexterity);
+            while(dexterity < midDexterity)
             {
-                deterity = Math.ceil(Math.random()*25);
+                dexterity = Math.ceil(Math.random()*maxDexterity);
             }
-            intelligence = Math.ceil(Math.random()*15);
-            chance = Math.ceil(Math.random()*15);
+            intelligence = Math.ceil(Math.random()*midIntelligence);
+            chance = Math.ceil(Math.random()*midChance);
             break;
+            
         //Wizard Class
         //Wizards are intelligence based characters
         //While the random strength number generated for
@@ -65,14 +82,14 @@ function generate(choice)
         //physically strong character.
         //Dexterity, and chance are set midlevel.
         case wizard:
-            strength = Math.ceil(Math.random()*5);
-            dexterity = Math.ceil(Math.random()*10);
-            intelligence = Math.ceil(Math.random()*25);
-            while(intelligence < 12)
+            strength = Math.ceil(Math.random()*minStrength);
+            dexterity = Math.ceil(Math.random()*midDexterity);
+            intelligence = Math.ceil(Math.random()*maxIntelligence);
+            while(intelligence < midIntelligence)
             {
-                intelligence = Math.ceil(Math.random()*25);
+                intelligence = Math.ceil(Math.random()*maxIntelligence);
             }
-            chance = Math.ceil(Math.random()*15);
+            chance = Math.ceil(Math.random()*midChance);
             break;
         default:
             break;
