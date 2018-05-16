@@ -12,6 +12,7 @@ RE  statsGenerator.js   Javascript file to generate the stats for the 3 starter 
 
 Uploads:
 RE  enemyStatsGenerator.js   Javascript file to generate the stats for the enemis         2018-05-13 01:38AM
+RE  mediaCredits.txt         Text file to keep track of all asset credits                 2018-05-16 10:24AM
                                 
 
 
