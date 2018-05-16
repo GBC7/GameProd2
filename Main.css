@@ -1,0 +1,28 @@
+html
+
+    {
+        background-color: #3c3c3c;
+    }
+
+#lvlCanvasSizer
+
+    {
+        position: relative;
+        width: 900px;
+        height: 700px;
+        background-color: white;
+        margin: 0 auto;
+    }
+
+canvas
+
+    {
+        /* not sure if needed */
+    }
+
+h1
+
+    {
+        text-align: center;
+        margin: 0 auto;
+    }
