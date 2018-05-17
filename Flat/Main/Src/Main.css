@@ -4,20 +4,20 @@ html
         background-color: #3c3c3c;
     }
 
-#lvlCanvasSizer
+#center
 
     {
         position: relative;
-        width: 900px;
-        height: 700px;
-        background-color: white;
+        width: 800px;
+        height: 576px;
         margin: 0 auto;
+        border: 2px inset black;
     }
 
 canvas
 
     {
-        /* not sure if needed */
+
     }
 
 h1
