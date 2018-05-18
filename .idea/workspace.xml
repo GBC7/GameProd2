@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -40,10 +37,9 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="263" column="22" selection-start-line="263" selection-start-column="22" selection-end-line="263" selection-end-column="22" />
+            <state relative-caret-position="230">
+              <caret line="229" column="22" selection-start-line="229" selection-start-column="22" selection-end-line="229" selection-end-column="22" />
               <folding>
-                <element signature="e#3400#18646#0" />
                 <element signature="n#!!block;n#drawPMap#0" />
                 <element signature="n#!!block;n#onKeyDown#0" />
                 <element signature="n#!!block;n#onKeyUp#0" />
@@ -171,12 +167,12 @@
       <option name="presentableId" value="Default" />
       <updated>1526602698315</updated>
       <workItem from="1526602700772" duration="6346000" />
-      <workItem from="1526657203220" duration="3823000" />
+      <workItem from="1526657203220" duration="4352000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10169000" />
+    <option name="totallyTimeSpent" value="10698000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="0" />
@@ -209,7 +205,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
+          <line>75</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -263,13 +267,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -277,12 +274,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="263" column="22" selection-start-line="263" selection-start-column="22" selection-end-line="263" selection-end-column="22" />
+        <state relative-caret-position="230">
+          <caret line="229" column="22" selection-start-line="229" selection-start-column="22" selection-end-line="229" selection-end-column="22" />
           <folding>
-            <element signature="e#3400#18646#0" />
             <element signature="n#!!block;n#drawPMap#0" />
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="n#!!block;n#onKeyUp#0" />
