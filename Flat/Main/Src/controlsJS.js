@@ -2,12 +2,14 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-
+ctx.fillStyle = '#ffffff';
+ctx.fillRect(0,0,800,600);
 ctx.font = "48px Arial";
-ctx.fillText("Controls\n", 200, 50);
+ctx.fillStyle = '#000000';
+ctx.fillText("Controls\n", 300, 100);
 ctx.font = "26px Arial";
-ctx.fillText("The controls are simple.  Use the arrow keys to", 20, 75);
-ctx.fillText("move the character and the spacebar to attack!", 20, 100);
+ctx.fillText("The controls are simple.  Use the arrow keys to", 120, 175);
+ctx.fillText("move the character and the spacebar to attack!", 120, 200);
 
 //Image Declarations
 var enterKey = new Image();
@@ -23,9 +25,10 @@ arrowKeys.onload = function()
 
 function render()
 {
-    ctx.drawImage(enterKey, 350, 125);
-    ctx.drawImage(arrowKeys, 70, 120);
+    ctx.drawImage(enterKey, 450, 275);
+    ctx.drawImage(arrowKeys, 170, 270);
     flashingText();
+
 
 }
 
@@ -38,11 +41,12 @@ function flashingText()
     {
         ctx.font = "26px Arial";
         ctx.fillStyle = '#000000';
-        ctx.fillText("Press Enter to Continue...", 150, 275);
+        ctx.fillText("Press Enter to Continue...", 250, 475);
     }
     else
     {
-        ctx.clearRect(0,250, 600, 26);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0,450, 800, 26);
     }
 }
 setTimeout(input, 500);                                                    // after all effect, add keyboard input

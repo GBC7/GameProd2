@@ -11,16 +11,15 @@ warningBackground.src = "../images/warning.gif";
 window.addEventListener("keydown", onKeyDown, false);
 window.addEventListener("keyup", onKeyUp, false);*/
 
-
-ctx.fillRect(450,0,100,20);
-ctx.fillRect(450,270,100,20);
+/*ctx.fillStyle = '#FF0000';*/
+ctx.fillRect(550,0,300,600);
+ctx.fillRect(550,440,300,600);
+ctx.fillRect(0,0,260,600);
+ctx.fillRect(0,440,260,600);
 ctx.font = "20px Arial";
 ctx.fillStyle = '#FF0000';
-ctx.fillText("There is violence in", 385, 100);
-ctx.fillText("this game that might ", 385, 122);
-ctx.fillText("be offensive to some ", 385, 144);
-ctx.fillText("people.  Players be  ", 385, 166);
-ctx.fillText("advised.  ", 385, 188);
+ctx.fillText("There is violence in this game that might be ", 200, 161);
+ctx.fillText("offensive to some people. Players be advised.", 192.5, 183);
 
 let timer = setInterval(flashingText, 1000);
 
@@ -31,15 +30,18 @@ function flashingText()
     if(count%2 === 1)
     {
         ctx.font = "20px Arial";
+        ctx.fillStyle ='#ffe900';
+        ctx.fillRect(280,425,250,35);
         ctx.fillStyle ='#FF0000';
-        ctx.fillText("Press Enter to Continue...", 190, 280);
+        ctx.fillText("Press Enter to Continue", 299, 450);
     }
     else
     {
-        ctx.clearRect(0,250, 420, 50);
-        /*ctx.font = "26px Arial";
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillText("Press Enter to Continue...", 150, 275);*/
+        /*ctx.clearRect(280, 420, 270, 50);*/
+        ctx.fillStyle ='#FF0000';
+        ctx.fillRect(280,425,250,35);
+        ctx.fillStyle ='#ffe900';
+        ctx.fillText("Press Enter to Continue", 299, 450);
     }
 }
 
