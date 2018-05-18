@@ -1,0 +1,15 @@
+body
+{   width: 800px;
+    margin: 0 auto;
+}
+
+/*Styling for #container                                 */
+#canvas
+{
+    border-color: black;                                /*border colour for main container set to black               */
+    border-style: solid;                                /*border style for main container set to solid                */
+    border-width: thick;                                /*border thickness for main container set to thick            */
+    border-radius: 25px;                                /*border radius set to 25 px                                  */
+    margin: auto;                                       /*body position set to auto (centered)                        */
+}
+
