@@ -19,15 +19,15 @@
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var playerImg = new Image();
-    playerImg.src = "images/player.png";
+    playerImg.src = "../images/player.png";
     var titleImg = new Image();
-    titleImg.src = "images/title.png"; //temporary image and name
+    titleImg.src = "../images/title.png"; //temporary image and name
     var spotlightLImg = new Image();
-    spotlightLImg.src = "images/spotlight-left.png";
+    spotlightLImg.src = "../images/spotlight-left.png";
     var spotlightRImg = new Image();
-    spotlightRImg.src = "images/spotlight-right.png";
+    spotlightRImg.src = "../images/spotlight-right.png";
     var startTextImg = new Image();
-    startTextImg.src = "images/startText.png";
+    startTextImg.src = "../images/startText.png";
 
 
     playerImg.onload = function() { //load player and background image
@@ -105,7 +105,7 @@
         window.addEventListener("keyup", startGame);
 
         function startGame() {
-            location.href = 'test.html'                                         //next page link
+            location.href = 'Main.html'                                         //next page link
         }
 
     }

@@ -36,7 +36,7 @@ scientist.src = "../images/scientist2.png";             //Set player image using
 
 wall.onload = function(){drawTheMap();};
 scientist.onload = function(){loadPlayer();};
-floor.onload = function(){addEventListener("keydown", playerActions, false);};
+drain.onload = function(){addEventListener("keydown", playerActions, false);};
 
 function loadPlayer()               //Loads player at start position for particular level
 
