@@ -45,7 +45,7 @@
     setTimeout(spotlightDraw, 1000);
     setTimeout(titleDraw, 3000);
     setTimeout(startDraw, 3000);
-    setTimeout(flashyText, 5300);
+    setTimeout(setUpFlash, 5300);
 
 
     function playerDraw() {
@@ -92,19 +92,24 @@
         })();
 
     }
+    var tog = 2, timer = undefined;
+    function setUpFlash()
+    {
 
-    function flashyText() {                                                    // after text animation, add flicker effect for emphasis
-        var tog = 2,
-            timer = setInterval(function() {
+        timer = setInterval(flashyText, 500);
+    }
 
+    function flashyText()
+    {
             tog = (tog === 1)? 2 : 1;
-                if (tog === 1){
+            if (tog === 1)
+            {
                 ctx.clearRect(230, 660, 700, 70);
             }
-            else {
+            else
+            {
                 ctx.drawImage(startTextImg, 240, 663);
             }
-        }, 500)
     }
 
     setTimeout(input, 6000);                                                    // after all effect, add keyboard input
@@ -112,8 +117,10 @@
     function input() {
         window.addEventListener("keyup", startGame);
 
-        function startGame() {
-            location.href = 'Main.html'                                         //next page link
+        function startGame()
+        {
+            clearInterval(timer);
+            location.href = 'warnings.html'                                         //next page link
         }
 
     }
