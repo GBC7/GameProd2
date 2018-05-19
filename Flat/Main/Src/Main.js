@@ -277,8 +277,8 @@ function movePlayer()
         p.frameX ++;
     }
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-    drawTheMap();//Redraw entire canvas -- this function also calls the function to draw the players map (pMap)
-
+    fillErasedMap(); //Fills portion of the canvas the player was just on
+    drawPMap();//Draws the new players position
 }
 
 function onKeyDown(e)
@@ -348,62 +348,35 @@ function onKeyUp(e)
 }
 
 
-
-
-
-
-
-
-/*   Below is a work in progress and therefor commented out   */
-
 function fillErasedMap()
-//Intended to re-draw only the erased section of map that the character was just standing on
-//  in order to help with CPU usage
+//Re-draws only the section of map that was erased by the character moving over
+//  it vs. redrawing the whole map.(helps with game speed)
 {
-    /*
-        let mapX =  Math.ceil(p.prevX / 32) +1; //check where on the x-axis of the canvas was erased
-        let mapY = Math.floor(p.prevY / 29.4); //check where on the y-axis of the canvas was erased
-        let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
+    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
-        for (let mX = mapX-2; mX < 0; mX ++)
+    for (let mC = p.col - 4; mC < p.col + 5; mC ++) // mC = map column
+    {
+        for (let mR = p.row - 4; mR < p.row + 7; mR ++)
         {
-            for (let mY = 0; mY < 1; mY ++)
+            if (map[mR/4] !== undefined && map[mR/4][mC/4] !== undefined)
             {
-                if (map[mapY + mY] !== undefined)
+                switch (map[mR/4][mC/4])//decide what needs drawing based on map index
                 {
-                    switch (map[mapY + mY][mapX + mX])//decide what needs drawing based on map index
-                    {
-                        case 0:
-                            thingToDraw = wall;
-                            break;
-                        case 1:
-                            thingToDraw = door;
-                            break;
-                        case 2:
-                            thingToDraw = floor;
-                            break;
-                    }
-                    ctx.drawImage(thingToDraw, (mapX+mX)*32, (mapY+mY)*32);
+                    case 0:
+                        thingToDraw = wall;
+                        break;
+                    case 1:
+                        thingToDraw = door;
+                        break;
+                    case 2:
+                        thingToDraw = floor;
+                        break;
+                    case 3:
+                        thingToDraw = drain;
+                        break;
                 }
+                ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
             }
         }
-
-        let roamWidth = 768;
-        //768 / 8 = 96
-        //768 / 25 = 30.72
-        let roamHeight = 528;
-        // 528 / 8 = 66
-        // 528 / 18 = 29.33333
-
-
-        for (let x = p.x - 8; x < p.x + 16; x += 8)
-        {
-            for (let y = p.y - 8; y < p.y + 16; y += 8)
-            {
-                let mapX = Math.floor(768 % x);
-                console.log("x:" + x);
-                console.log("y:" + y);
-
-            }
-        }*/
+    }
 }
