@@ -2,7 +2,6 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 
 var level = 1;
-var level = 1;
 
 var p =         //PlayerObject
 
@@ -36,13 +35,14 @@ outsideWall.src = "../images/outsideWall.png";
 drain.src = "../../Lvl2Sewer/images/drain.png";*/
 
 var scientist = new Image();                            //Declare image for player
-scientist.src = "../images/scientist2.png";             //Set player image using player object
+scientist.src = "../../Main/images/scientist2.png";             //Set player image using player object
 
 roof.onload = function(){drawTheMap();};
 outsideWall.onload = function(){drawTheMap();};
 /*drain.onload = function(){addEventListener("keydown", onKeyDown, false);};
 floor.onload = function(){addEventListener("keyup", onKeyUp, false);};*/
-
+addEventListener("keyup", onKeyUp, false);
+addEventListener("keydown", onKeyDown, false);
 var map =
     //                    10                  20
     [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
