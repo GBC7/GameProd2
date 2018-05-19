@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -37,17 +39,15 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="205" selection-start-line="205" selection-end-line="282" />
+            <state relative-caret-position="228">
+              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
               <folding>
-                <element signature="e#1685#3046#0" />
-                <element signature="e#3060#3131#0" />
-                <element signature="e#3464#18284#0" />
+                <element signature="e#131#959#0" />
+                <element signature="e#1525#2743#0" />
                 <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#movePlayer#0" />
-                <element signature="e#22009#22092#0" />
                 <element signature="n#!!block;n#onKeyDown#0" />
                 <element signature="n#!!block;n#onKeyUp#0" />
+                <element signature="n#!!block;n#fillErasedMap#0" />
               </folding>
             </state>
           </provider>
@@ -132,6 +132,13 @@
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl1Home" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -189,12 +196,12 @@
       <workItem from="1526602700772" duration="6346000" />
       <workItem from="1526657203220" duration="9392000" />
       <workItem from="1526743533031" duration="778000" />
-      <workItem from="1526757156871" duration="3138000" />
+      <workItem from="1526757156871" duration="9030000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19654000" />
+    <option name="totallyTimeSpent" value="25546000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -230,18 +237,30 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>149</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>206</line>
+          <line>160</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js</url>
+          <line>287</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js</url>
+          <line>67</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js</url>
+          <line>149</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="12" />
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -323,27 +342,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" selection-start-line="20" selection-start-column="17" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="278" column="115" lean-forward="true" selection-start-line="278" selection-start-column="4" selection-end-line="278" selection-end-column="115" />
+        <state relative-caret-position="502">
+          <caret line="314" column="19" lean-forward="true" selection-start-line="314" selection-start-column="19" selection-end-line="314" selection-end-column="19" />
           <folding>
-            <element signature="e#1751#3126#0" />
-            <element signature="e#3140#3211#0" />
-            <element signature="e#3548#18652#0" />
+            <element signature="e#3630#18734#0" />
             <element signature="n#!!block;n#drawTheMap#0" />
             <element signature="n#!!block;n#drawPMap#0" />
+            <element signature="n#!!block;n#movePlayer#0" />
+            <element signature="e#22474#22557#0" />
+            <element signature="n#!!block;n#onKeyDown#0" />
+            <element signature="n#!!block;n#onKeyUp#0" />
+            <element signature="n#!!block;n#fillErasedMap#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="20" selection-start-column="17" selection-end-line="21" />
         </state>
       </provider>
     </entry>
@@ -363,17 +385,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="205" selection-start-line="205" selection-end-line="282" />
+        <state relative-caret-position="228">
+          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
           <folding>
-            <element signature="e#1685#3046#0" />
-            <element signature="e#3060#3131#0" />
-            <element signature="e#3464#18284#0" />
+            <element signature="e#131#959#0" />
+            <element signature="e#1525#2743#0" />
             <element signature="n#!!block;n#drawPMap#0" />
-            <element signature="n#!!block;n#movePlayer#0" />
-            <element signature="e#22009#22092#0" />
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="n#!!block;n#onKeyUp#0" />
+            <element signature="n#!!block;n#fillErasedMap#0" />
           </folding>
         </state>
       </provider>

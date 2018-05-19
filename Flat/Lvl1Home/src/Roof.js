@@ -277,8 +277,8 @@ function movePlayer()
         p.frameX ++;
     }
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-
-    drawTheMap();//Redraw entire canvas -- this function also calls the function to draw the players map (pMap)
+    fillErasedMap(); //Fills portion of the canvas the player was just on
+    drawPMap();//Draws the new players position
 }
 
 function onKeyDown(e)
@@ -347,6 +347,38 @@ function onKeyUp(e)
     }
 }
 
+
+function fillErasedMap()
+//Re-draws only the section of map that was erased by the character moving over
+//  it vs. redrawing the whole map.(helps with game speed)
+{
+    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
+
+    for (let mC = p.col - 4; mC < p.col + 5; mC ++) // mC = map column
+    {
+        for (let mR = p.row - 4; mR < p.row + 7; mR ++)
+        {
+            if (map[mR/4] !== undefined && map[mR/4][mC/4] !== undefined)
+            {
+                switch (map[mR/4][mC/4])//decide what needs drawing based on map index
+                {
+                    case 0:
+                        thingToDraw = roof;
+                        break;
+                    case 1:
+                        thingToDraw = outsideWall;
+                        break;
+                    case 2:
+                        continue;
+                    /* case 3:
+                         thingToDraw = drain;
+                         break;*/
+                }
+                ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
+            }
+        }
+    }
+}
 
 
 
