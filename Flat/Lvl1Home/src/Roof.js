@@ -276,7 +276,8 @@ function movePlayer()
         //Increment in order to flip through the walking tiles for this direction
         p.frameX ++;
     }
-    ctx.clearRect(p.prevCol, p.prevRow, p.width, p.height);//Clear portion of canvas the player was last on
+    ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
+
     drawTheMap();//Redraw entire canvas -- this function also calls the function to draw the players map (pMap)
 }
 
