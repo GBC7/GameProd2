@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -39,12 +37,16 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+            <state relative-caret-position="220">
+              <caret line="71" column="25" lean-forward="true" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
               <folding>
                 <element signature="e#131#959#0" />
                 <element signature="e#1525#2743#0" />
+                <element signature="e#2861#2924#0" />
+                <element signature="e#3199#3290#0" />
+                <element signature="n#!!block;n#drawTheMap#0" />
                 <element signature="n#!!block;n#drawPMap#0" />
+                <element signature="n#!!block;n#movePlayer#0" />
                 <element signature="n#!!block;n#onKeyDown#0" />
                 <element signature="n#!!block;n#onKeyUp#0" />
                 <element signature="n#!!block;n#fillErasedMap#0" />
@@ -196,12 +198,12 @@
       <workItem from="1526602700772" duration="6346000" />
       <workItem from="1526657203220" duration="9392000" />
       <workItem from="1526743533031" duration="778000" />
-      <workItem from="1526757156871" duration="9030000" />
+      <workItem from="1526757156871" duration="9450000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25546000" />
+    <option name="totallyTimeSpent" value="25966000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -237,7 +239,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>160</line>
+          <line>157</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -385,12 +387,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+        <state relative-caret-position="220">
+          <caret line="71" column="25" lean-forward="true" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
           <folding>
             <element signature="e#131#959#0" />
             <element signature="e#1525#2743#0" />
+            <element signature="e#2861#2924#0" />
+            <element signature="e#3199#3290#0" />
+            <element signature="n#!!block;n#drawTheMap#0" />
             <element signature="n#!!block;n#drawPMap#0" />
+            <element signature="n#!!block;n#movePlayer#0" />
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="n#!!block;n#onKeyUp#0" />
             <element signature="n#!!block;n#fillErasedMap#0" />

@@ -67,7 +67,6 @@ for (let y = 1; y < map.length; y++)        //Randomize floor pattern
     {
         map[y][x] = (Math.floor(Math.random() * 4)+ 2);
     }
-
 map[13][24] = 6;                            //Set the drains position
 
 var pMap = [];                              //Declare a player map
@@ -80,13 +79,11 @@ for (let y = 0; y < 70; y++)                //Initialize all indices with 0
         pMap[y].push(0)
     }
 }
+
 pMap[0][0] = 1;                             //Set the players starting position
 wall.onload = function(){addEventListener("keyup", onKeyUp, false);};
 drain.onload = function(){addEventListener("keydown", onKeyDown, false);};
 floor.onload = function(){drawTheMap();};
-
-
-
 
 function drawTheMap()
 {
