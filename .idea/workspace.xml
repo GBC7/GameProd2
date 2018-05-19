@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Title.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Title.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/controls.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/controls.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/controlsCSS.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/controlsCSS.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/controlsJS.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/controlsJS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/warningCSS.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/warningCSS.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/warningJS.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/warningJS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/warnings.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/warnings.html" afterDir="false" />
-    </list>
+    <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -24,33 +14,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Title.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Title.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="warnings.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warnings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="warningCSS.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningCSS.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="3" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="warningJS.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningJS.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -60,7 +23,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controls.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controls.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/controls.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -78,7 +41,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controlsJS.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controlsJS.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/controlsJS.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="494">
@@ -212,12 +175,12 @@
       <option name="presentableId" value="Default" />
       <updated>1526602698315</updated>
       <workItem from="1526602700772" duration="6346000" />
-      <workItem from="1526657203220" duration="9142000" />
+      <workItem from="1526657203220" duration="9392000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15488000" />
+    <option name="totallyTimeSpent" value="15738000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -263,41 +226,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/TempTester.js" />
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningJS.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="43" column="58" lean-forward="true" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Title.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningCSS.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/controls.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warnings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -339,6 +267,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Title.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warnings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="7" lean-forward="true" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningCSS.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/warningJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="43" column="58" lean-forward="true" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/controls.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
         </state>
       </provider>
     </entry>
