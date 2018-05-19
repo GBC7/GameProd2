@@ -30,14 +30,15 @@ wall.src = "../../Lvl2Sewer/images/wall.png";
 var door = new Image();
 door.src = "../../Lvl2Sewer/images/door.png";
 
-var floor = new Image();
-floor.src = "../../Lvl2Sewer/images/floor.png";
-
 var drain = new Image();
 drain.src = "../../Lvl2Sewer/images/drain.png";
 
 var scientist = new Image();                            //Declare image for player
 scientist.src = "../images/scientist2.png";             //Set player image using player object
+
+var floor = new Image();
+floor.src = "../../Lvl2Sewer/images/floor.png";
+
 var map =
     //                    10                  20
     [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
