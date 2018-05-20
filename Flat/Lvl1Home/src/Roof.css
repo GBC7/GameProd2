@@ -17,6 +17,10 @@ html
 canvas
 
 {
+    background: black;
+    background-image: url("../images/city.gif");
+    background-repeat: no-repeat;
+    background-position-y: 135px;
 
 }
 

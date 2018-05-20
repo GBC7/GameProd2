@@ -26,45 +26,61 @@ var p =         //PlayerObject
 
 var roof = new Image();
 roof.src = "../images/shingles.jpg";
-
 var outsideWall = new Image();
 outsideWall.src = "../images/outsideWall.png";
-
-
-/*var drain = new Image();
-drain.src = "../../Lvl2Sewer/images/drain.png";*/
-
+var chimney = new Image();
+chimney.src = "../images/chimney.png";
+var windowTopLeft = new Image();
+windowTopLeft.src = "../images/windowTopLeft.png";
+var windowTopRight = new Image();
+windowTopRight.src = "../images/windowTopRight.png";
+var windowBottomLeft = new Image();
+windowBottomLeft.src = "../images/windowBottomLeft.png";
+var windowBottomRight = new Image();
+windowBottomRight.src = "../images/windowBottomRight.png";
+//var tree = new Image();
+//tree.src = "../images/tree.png";
+var streetLight = new Image();
+streetLight.src = "../images/streetLight.png";
 var scientist = new Image();                            //Declare image for player
 scientist.src = "../../Main/images/scientist2.png";             //Set player image using player object
 
 roof.onload = function(){drawTheMap();};
 outsideWall.onload = function(){drawTheMap();};
-/*drain.onload = function(){addEventListener("keydown", onKeyDown, false);};
-floor.onload = function(){addEventListener("keyup", onKeyUp, false);};*/
+chimney.onload = function(){drawTheMap();};
+windowTopLeft.onload = function(){drawTheMap();};
+windowTopRight.onload = function(){drawTheMap();};
+windowBottomLeft.onload = function(){drawTheMap();};
+windowBottomRight.onload = function(){drawTheMap();};
+streetLight.onload = function(){drawTheMap();};
+//tree.onload = function(){drawTheMap();};
+
+//chimney.onload = function(){addEventListener("keydown", onKeyDown, false);};
+//floor.onload = function(){addEventListener("keyup", onKeyUp, false);};*/
 addEventListener("keyup", onKeyUp, false);
 addEventListener("keydown", onKeyDown, false);
 var map =
     //                    10                  20
     [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //0
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //1
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //2
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //3
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //4
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //5
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //6
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //7
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],     //8
-        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],    //10
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //11
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //12
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //13
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],    //14
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //15
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //16
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],     //17
-        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]     //18
+        [2,2,2,2,2,2,2,2,2,2],//0
+        [2,2,2,2,2,2,2,2,2,2], //1
+        [2,2,2,2,2,2,2,2,2,2],  //2
+        [2,2,2,2,2,2,2,2,2,2],    //3
+        [2,2,2,2,2,2,2,2,2,2],     //4
+        [3,2,2,2,2,2,2,2,2,3],    //5
+        [0,0,0,0,0,0,0,0,0,0],     //6
+        [0,0,0,0,0,0,0,0,0,0],     //7
+        [0,0,0,0,0,0,0,0,0,0],     //8
+        [0,0,0,0,0,0,0,0,0,0],   //9
+        [0,0,0,0,0,0,0,0,0,0],     //10
+        [0,0,0,0,0,0,0,0,0,0],      //11
+        [0,0,0,0,0,0,0,0,0,0],      //12
+        [1,1,1,1,1,1,1,1,1,1],     //13
+        [1,1,1,1,1,1,1,1,1,1],    //14
+        [1,1,4,5,1,1,4,5,1,1],     //15
+        [1,1,6,7,1,1,6,7,1,1],     //16
+        [1,1,1,1,1,1,1,1,1,1],     //17
+        [1,1,1,1,1,1,1,1,1,1]     //18
     ];
 
 var pMap =
@@ -162,12 +178,23 @@ function drawTheMap()
                 case 1:
                     ctx.drawImage(outsideWall, destX, destY, 32, 32);
                     break;
-                /*case 2:
-                    ctx.drawImage(floor, destX, destY, 32, 32);
+                case 2:
                     break;
                 case 3:
-                    ctx.drawImage(drain, destX, destY, 32, 32);
-                    break;*/
+                    ctx.drawImage(chimney, destX, destY, 32, 32);
+                    break;
+                case 4:
+                    ctx.drawImage(windowTopLeft, destX, destY, 32, 32);
+                    break;
+                case 5:
+                    ctx.drawImage(windowTopRight, destX, destY, 32, 32);
+                    break;
+                case 6:
+                    ctx.drawImage(windowBottomLeft, destX, destY, 32, 32);
+                    break;
+                case 7:
+                    ctx.drawImage(windowBottomRight, destX, destY, 32, 32);
+                    break;
             }
 
             destX += 32;
@@ -180,7 +207,7 @@ function drawTheMap()
 
 function drawPMap()
 {
-    let destX = 0, destY = 0;
+    let destX = 0, destY = 150;
 
     for (let row = 0; row < pMap.length; row++)
     {
@@ -193,6 +220,8 @@ function drawPMap()
                     p.srcX = p.width * (p.frameX % 4);
                     p.srcY = p.height * p.frameY;
                     ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
+                    ctx.drawImage(streetLight, 450, 510);
+                    //ctx.drawImage(tree, 450, 470);
                     break;
             }
 
@@ -227,7 +256,7 @@ function movePlayer()
 
     if (p.right)
     {
-        if (p.col < 96)
+        if (p.col < 36)
         {
             //remove player from current column
             pMap[p.row][p.col] = 0;
@@ -244,7 +273,7 @@ function movePlayer()
 
     if (p.up)
     {
-        if (p.row > 0)
+        if (p.row > 1)
         {
             //remove player from current row
             pMap[p.row][p.col] = 0;
@@ -261,7 +290,7 @@ function movePlayer()
 
     if (p.down)
     {
-        if (p.row < 69)
+        if (p.row < 27)
         {
             //remove player from current row
             pMap[p.row][p.col] = 0;
@@ -277,8 +306,8 @@ function movePlayer()
         p.frameX ++;
     }
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-    fillErasedMap(); //Fills portion of the canvas the player was just on
-    drawPMap();//Draws the new players position
+
+    drawTheMap();//Redraw entire canvas -- this function also calls the function to draw the players map (pMap)
 }
 
 function onKeyDown(e)
@@ -347,38 +376,6 @@ function onKeyUp(e)
     }
 }
 
-
-function fillErasedMap()
-//Re-draws only the section of map that was erased by the character moving over
-//  it vs. redrawing the whole map.(helps with game speed)
-{
-    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
-
-    for (let mC = p.col - 4; mC < p.col + 5; mC ++) // mC = map column
-    {
-        for (let mR = p.row - 4; mR < p.row + 7; mR ++)
-        {
-            if (map[mR/4] !== undefined && map[mR/4][mC/4] !== undefined)
-            {
-                switch (map[mR/4][mC/4])//decide what needs drawing based on map index
-                {
-                    case 0:
-                        thingToDraw = roof;
-                        break;
-                    case 1:
-                        thingToDraw = outsideWall;
-                        break;
-                    case 2:
-                        continue;
-                    /* case 3:
-                         thingToDraw = drain;
-                         break;*/
-                }
-                ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
-            }
-        }
-    }
-}
 
 
 
