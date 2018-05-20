@@ -2,9 +2,6 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 
 var level = 1;
-var lightsOn = true, sewersDrained = true;
-var lightSwitch = 1, sewerSwitch = 0;
-var floorSpriteX = undefined;
 var p =         //PlayerObject
 
 {
@@ -26,11 +23,11 @@ var p =         //PlayerObject
     starY: [0,0,0,0,0,0,0]
 };
 
-var wall = new Image();
-wall.src = "../../Lvl6Lab/images/Wall.png";
-
 var floor = new Image();
 floor.src = "../../Lvl6Lab/images/Floor.png";
+
+var wall = new Image();
+wall.src = "../../Lvl6Lab/images/Wall.png";
 
 var scientist = new Image();                            //Declare image for player
 scientist.src = "../../Main/images/scientist2.png";             //Set player image using player object
@@ -61,13 +58,6 @@ var map =
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
 
-for (let y = 1; y < map.length; y++)        //Randomize floor pattern
-    for (let x = 0; x < map[0].length; x++)
-    {
-        map[y][x] = (Math.floor(Math.random() * 4)+ 2);
-    }
-map[13][24] = 6;                            //Set the drains position
-
 var pMap = [];                              //Declare a player map
 for (let y = 0; y < 70; y++)                //Initialize all indices with 0
 {
@@ -78,11 +68,12 @@ for (let y = 0; y < 70; y++)                //Initialize all indices with 0
         pMap[y].push(0)
     }
 }
-
 pMap[0][0] = 1;                             //Set the players starting position
-pMap[64][96] = pMap[8][96] = 2;
-scientist.onload = function(){drawTheMap();};
+
 floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
+wall.onload = function(){addEventListener("keyup", onKeyUp, false);};
+scientist.onload = function(){drawTheMap();};
+
 
 function drawTheMap()
 {
@@ -97,7 +88,7 @@ function drawTheMap()
                     ctx.drawImage(wall, destX, destY, 32, 32);
                     break;
                 case 1:
-                    ctx.drawImage(floor, floorSpriteX, 0, 32, 32, destX, destY, 32, 32);
+                    ctx.drawImage(floor, destX, destY, 32, 32);
                     break;
             }
 
@@ -105,18 +96,6 @@ function drawTheMap()
         }
         destX = 0;
         destY += 32;
-    }
-    if (!sewersDrained)
-    {
-        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";
-        ctx.fillRect(0,24,320,600);
-        ctx.fillRect(352,24,800,600);
-        ctx.fillRect(320,32,32,600);
-    }
-    if (!lightsOn)
-    {
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-        ctx.fillRect(0,0,800,600);
     }
     drawPMap();
 }
@@ -135,10 +114,7 @@ function drawPMap()
                     //Sets position on tile sheet to pick from when drawing player
                     p.srcX = p.width * (p.frameX % 4);
                     p.srcY = p.height * p.frameY;
-                    if (!sewersDrained)
-                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
-                    else
-                        ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
+                    ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
                     break;
             }
 
@@ -337,60 +313,10 @@ function fillErasedMap()
                         thingToDraw = wall;
                         break;
                     case 1:
-                        thingToDraw = door;
-                        break;
-                    case 2:
                         thingToDraw = floor;
-                        floorSpriteX = 0;
-                        break;
-                    case 3:
-                        thingToDraw = floor;
-                        floorSpriteX = 32;
-                        break;
-                    case 4:
-                        thingToDraw = floor;
-                        floorSpriteX = 64;
-                        break;
-                    case 5:
-                        thingToDraw = floor;
-                        floorSpriteX = 96;
-                        break;
-                    case 6:
-                        thingToDraw = drain;
-                        break;
-                    case 7:
-                        if (!sewersDrained)
-                            thingToDraw = wetPipe;
-                        else thingToDraw = pipe;
                         break;
                 }
-                if (thingToDraw === floor)
-
-                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC)*8, (mR*8), 32, 32);
-                else
-                    ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
-
-                if (xPos !== undefined && yPos !== undefined)
-                {
-                    if (!sewersDrained)
-                    {
-                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour}
-                        if (yPos === 0 && xPos !== 320)
-                            ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
-                        else if (yPos === 0 && xPos === 320)
-                            continue;
-                        else
-                            ctx.fillRect(xPos, yPos, 32, 32);
-                    }
-                    if (!lightsOn)
-                    {
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-                        ctx.fillRect(xPos + 96, 0, 800, 600);
-                        ctx.fillRect(0, yPos + 96, 800, 600);
-                        ctx.fillRect(0, 0, xPos - 64, 600);
-                        ctx.fillRect(0, 0, 800, yPos - 64);
-                    }
-                }
+                ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
 
             }
         }
