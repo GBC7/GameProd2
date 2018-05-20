@@ -1,7 +1,6 @@
 var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 
-var level = 1;
 var lightsOn = true, sewersDrained = false;
 var lightSwitch = 1, sewerSwitch = 0;
 var floorSpriteX = undefined;
@@ -27,31 +26,31 @@ var p =         //PlayerObject
 };
 
 var wetPipe = new Image();
-wetPipe.src = "../../Lvl2Sewer/images/pipeWet.png";
+wetPipe.src = "../images/pipeWet.png";
 
 var pipe = new Image();
-pipe.src = "../../Lvl2Sewer/images/pipe.png";
+pipe.src = "../images/pipe.png";
 
 var pillar = new Image();
-pillar.src = "../../Lvl2Sewer/images/pillar.png";
+pillar.src = "../images/pillar.png";
 
 var wall = new Image();
-wall.src = "../../Lvl2Sewer/images/wall.png";
+wall.src = "../images/wall.png";
 
 var door = new Image();
-door.src = "../../Lvl2Sewer/images/door.png";
+door.src = "../images/door.png";
 
 var drain = new Image();
-drain.src = "../../Lvl2Sewer/images/drain.png";
+drain.src = "../images/drain.png";
 
 var floor = new Image();
-floor.src = "../../Lvl2Sewer/images/floor.png";
+floor.src = "../images/floor.png";
 
 var sciUndWater = new Image();
-sciUndWater.src = "../../Lvl2Sewer/images/scientist2.png";
+sciUndWater.src = "../images/scientist2.png";
 
 var scientist = new Image();                            //Declare image for player
-scientist.src = "../images/scientist2.png";             //Set player image using player object
+scientist.src = "../../Main/images/scientist2.png";             //Set player image using player object
 
 
 
