@@ -1,0 +1,22 @@
+html
+
+{
+    background-color: #3c3c3c;
+}
+
+#center
+
+{
+    position: relative;
+    width: 800px;
+    height: 480px;
+    margin: 0 auto;
+    border: 2px inset black;
+}
+
+h1
+
+{
+    text-align: center;
+    margin: 0 auto;
+}
