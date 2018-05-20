@@ -13,58 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="roof.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" selection-start-line="20" selection-start-column="17" selection-end-line="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Roof.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="Roof.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="235" selection-start-line="235" selection-end-line="235" />
-              <folding>
-                <element signature="e#3473#3544#0" />
-                <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#movePlayer#0" />
-                <element signature="e#21142#21597#0" />
-                <element signature="e#21620#22079#0" />
-                <element signature="e#22099#22545#0" />
-                <element signature="e#22567#23017#0" />
-                <element signature="e#23272#23355#0" />
-                <element signature="n#!!block;n#onKeyDown#0" />
-                <element signature="e#23554#23584#0" />
-                <element signature="n#!!block;n#onKeyUp#0" />
-                <element signature="n#!!block;n#fillErasedMap#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="711">
-              <caret line="271" column="47" lean-forward="true" selection-start-line="271" selection-start-column="15" selection-end-line="271" selection-end-column="47" />
-              <folding>
-                <element signature="n#!!block;n#onKeyUp#0" />
-                <element signature="n#!!block;n#fillErasedMap#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -211,16 +160,15 @@
       <workItem from="1526657203220" duration="9392000" />
       <workItem from="1526743533031" duration="778000" />
       <workItem from="1526757156871" duration="20766000" />
-      <workItem from="1526830778090" duration="4643000" />
+      <workItem from="1526830778090" duration="5098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41925000" />
+    <option name="totallyTimeSpent" value="42380000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -406,17 +354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="271" column="47" lean-forward="true" selection-start-line="271" selection-start-column="15" selection-end-line="271" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!block;n#onKeyUp#0" />
-            <element signature="n#!!block;n#fillErasedMap#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -432,6 +369,17 @@
             <element signature="e#23272#23355#0" />
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="e#23554#23584#0" />
+            <element signature="n#!!block;n#onKeyUp#0" />
+            <element signature="n#!!block;n#fillErasedMap#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="711">
+          <caret line="271" column="47" lean-forward="true" selection-start-line="271" selection-start-column="15" selection-end-line="271" selection-end-column="47" />
+          <folding>
             <element signature="n#!!block;n#onKeyUp#0" />
             <element signature="n#!!block;n#fillErasedMap#0" />
           </folding>
