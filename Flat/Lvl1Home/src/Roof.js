@@ -6,7 +6,7 @@ var level = 1;
 var p =         //PlayerObject
 
     {
-        row: 0,
+        row: 20,
         col: 0,
         prevRow: undefined,        //Collects players previous x location to use for clearing only that section of canvas
         prevCol: undefined,        //Collects players previous y location to use for clearing only that section of canvas
@@ -90,7 +90,7 @@ var pMap =
 //
 //                       10                  20                  30                  40                  50                  60                  70                  80                  90          96
     [ //-0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //0
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //0
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //1
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //2
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //3
@@ -110,7 +110,7 @@ var pMap =
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //17
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //18
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //20
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //21
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //21
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //22
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //23
         [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //24
@@ -207,7 +207,7 @@ function drawTheMap()
 
 function drawPMap()
 {
-    let destX = 0, destY = 150;
+    let destX = 0, destY = 0;
 
     for (let row = 0; row < pMap.length; row++)
     {
@@ -220,7 +220,6 @@ function drawPMap()
                     p.srcX = p.width * (p.frameX % 4);
                     p.srcY = p.height * p.frameY;
                     ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
-                    ctx.drawImage(streetLight, 450, 510);
                     //ctx.drawImage(tree, 450, 470);
                     break;
             }
@@ -230,13 +229,13 @@ function drawPMap()
         destX = 0;
         destY += 8;
     }
+    ctx.drawImage(streetLight, 450, 510);
 }
 
 function movePlayer()
 {
     p.prevCol = p.col;//Set column to clear
     p.prevRow = p.row;//Set row to clear
-
     if (p.left)
     {
         if (p.col > 0)
@@ -253,11 +252,10 @@ function movePlayer()
         //Increment in order to flip through the walking tiles for this direction
         p.frameX ++;
     }
-
     if (p.right)
     {
         if (p.col < 36)
-        {
+{
             //remove player from current column
             pMap[p.row][p.col] = 0;
             //update player column
@@ -273,7 +271,7 @@ function movePlayer()
 
     if (p.up)
     {
-        if (p.row > 1)
+        if (p.row > 20)
         {
             //remove player from current row
             pMap[p.row][p.col] = 0;
@@ -290,7 +288,7 @@ function movePlayer()
 
     if (p.down)
     {
-        if (p.row < 27)
+        if (p.row < 46)
         {
             //remove player from current row
             pMap[p.row][p.col] = 0;
@@ -306,8 +304,8 @@ function movePlayer()
         p.frameX ++;
     }
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-
-    drawTheMap();//Redraw entire canvas -- this function also calls the function to draw the players map (pMap)
+    fillErasedMap();//Fills portion of the canvas the player was just on
+    drawPMap();//Draws the new players position
 }
 
 function onKeyDown(e)
@@ -379,6 +377,55 @@ function onKeyUp(e)
 
 
 
+function fillErasedMap()
+//Re-draws only the section of map that was erased by the character moving over
+//  it vs. redrawing the whole map.(helps with game speed)
+{
+    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
+
+    for (let mC = p.col - 4; mC < p.col + 5; mC ++) // mC = map column
+    {
+        for (let mR = p.row - 4; mR < p.row + 7; mR ++)
+        {
+            let xPos = undefined, yPos= undefined;
+            if (map[mR/4] !== undefined && map[mR/4][mC/4] !== undefined)
+            {
+                xPos = mC*8;
+                yPos = mR*8;
+                switch (map[mR/4][mC/4])//decide what needs drawing based on map index
+                {
+                    case 0:
+                        thingToDraw = roof;
+                        break;
+                    case 1:
+                        thingToDraw = outsideWall;
+                        break;
+                    case 2:
+                        thingToDraw = undefined;
+                        break;
+                    case 3:
+                        thingToDraw = chimney;
+                        break;
+                    case 4:
+                        thingToDraw = windowTopLeft;
+                        break;
+                    case 5:
+                        thingToDraw = windowTopRight;
+                        break;
+                    case 6:
+                        thingToDraw = windowBottomLeft;
+                        break;
+                    case 7:
+                        thingToDraw = windowBottomRight;
+                        break;
+                }
+                if (thingToDraw !== undefined)
+                    ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
+
+            }
+        }
+    }
+}
 
 
 
