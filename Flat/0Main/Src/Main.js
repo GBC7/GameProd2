@@ -168,8 +168,8 @@ function startGame()              //      **** = floor
         changePStartPos();
 
 
-        scientist.onload = function(){streetLight.onload = function (){drawMap();};};
-        windowBottomRight.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        streetLight.onload = function (){drawMap();};
+        scientist.onload = function(){addEventListener("keydown", onKeyDown, false);};
     }
 
     if (l2)//Sewer                        **** 2345
