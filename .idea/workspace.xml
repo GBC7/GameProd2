@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/Stairs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/Stairs:Hallways.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor2.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,7 +18,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
@@ -27,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="691">
-              <caret line="461" column="5" lean-forward="true" selection-start-line="461" selection-start-column="5" selection-end-line="461" selection-end-column="5" />
+            <state relative-caret-position="411">
+              <caret line="551" lean-forward="true" selection-start-line="551" selection-end-line="551" />
               <folding>
                 <element signature="e#361#411#0" />
                 <element signature="e#578#612#0" />
@@ -51,6 +51,7 @@
                 <element signature="e#12968#13360#0" />
                 <element signature="e#13088#13179#0" />
                 <element signature="e#13146#13177#0" />
+                <element signature="e#11113#13948#0" />
                 <element signature="e#13979#16580#0" />
                 <element signature="e#16604#18961#0" />
                 <element signature="e#19046#19125#0" />
@@ -248,15 +249,16 @@
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
       <workItem from="1526846857395" duration="24949000" />
-      <workItem from="1526922065811" duration="8019000" />
+      <workItem from="1526922065811" duration="8781000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79097000" />
+    <option name="totallyTimeSpent" value="79859000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -335,6 +337,7 @@
             <element signature="e#12968#13360#0" />
             <element signature="e#13088#13179#0" />
             <element signature="e#13146#13177#0" />
+            <element signature="e#11113#13948#0" />
             <element signature="e#13979#16580#0" />
             <element signature="e#16604#18961#0" />
             <element signature="e#19046#19125#0" />
@@ -407,6 +410,7 @@
             <element signature="e#12968#13360#0" />
             <element signature="e#13088#13179#0" />
             <element signature="e#13146#13177#0" />
+            <element signature="e#11113#13948#0" />
             <element signature="e#13979#16580#0" />
             <element signature="e#16604#18961#0" />
             <element signature="e#19046#19125#0" />
@@ -569,13 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2550">
@@ -594,8 +591,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="461" column="5" lean-forward="true" selection-start-line="461" selection-start-column="5" selection-end-line="461" selection-end-column="5" />
+        <state relative-caret-position="411">
+          <caret line="551" lean-forward="true" selection-start-line="551" selection-end-line="551" />
           <folding>
             <element signature="e#361#411#0" />
             <element signature="e#578#612#0" />
@@ -615,6 +612,7 @@
             <element signature="e#12968#13360#0" />
             <element signature="e#13088#13179#0" />
             <element signature="e#13146#13177#0" />
+            <element signature="e#11113#13948#0" />
             <element signature="e#13979#16580#0" />
             <element signature="e#16604#18961#0" />
             <element signature="e#19046#19125#0" />
@@ -645,6 +643,13 @@
             <element signature="e#41155#41297#0" />
             <element signature="e#30984#31073#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>
