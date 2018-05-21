@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,82 +17,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <file leaf-file-name="ClothingStore.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="139" column="49" selection-start-line="139" selection-start-column="49" selection-end-line="139" selection-end-column="49" />
+            <state relative-caret-position="1816">
+              <caret line="596" column="22" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="22" />
               <folding>
-                <element signature="e#1888#5244#0" />
-                <element signature="e#3923#5055#0" />
-                <element signature="e#5990#6018#0" />
-                <element signature="e#6289#8422#0" />
-                <element signature="e#8563#8651#0" />
-                <element signature="e#8752#8795#0" />
-                <element signature="e#9047#9209#0" />
-                <element signature="e#9133#9195#0" />
-                <element signature="n#!!block;n#fillErasedMap#0" />
-                <element signature="e#17981#18103#0" />
-                <element signature="e#18124#18246#0" />
-                <element signature="e#18267#18346#0" />
-                <element signature="e#18367#18580#0" />
-                <element signature="e#18601#18680#0" />
-                <element signature="e#18701#18780#0" />
-                <element signature="e#18801#18881#0" />
-                <element signature="e#18902#18982#0" />
-                <element signature="e#19003#19083#0" />
-                <element signature="e#19104#19184#0" />
-                <element signature="e#19420#19791#0" />
-                <element signature="e#19871#20837#0" />
-                <element signature="n#!!block;n#onKeyDown#0" />
-                <element signature="e#25163#25634#0" />
-                <element signature="e#25674#26150#0" />
-                <element signature="e#26187#26650#0" />
-                <element signature="e#26689#27154#0" />
-                <element signature="e#27688#27722#0" />
-                <element signature="e#17090#17106#0" />
-                <element signature="e#17127#17143#0" />
-                <element signature="e#27905#27964#0" />
-                <element signature="n#!!block;n#changePStartPos#0" />
-                <element signature="e#28159#28279#0" />
-                <element signature="e#28226#28273#0" />
-                <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#drawMap#0" />
-                <element signature="e#29400#30478#0" />
-                <element signature="e#27611#27829#0" />
-                <element signature="e#27875#27988#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sewer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2390">
-              <caret line="189" selection-start-line="189" selection-end-line="189" />
-              <folding>
-                <element signature="n#!!block;n#drawPMap#0;n#!!top" />
-                <element signature="e#8177#8674#0" />
-                <element signature="e#8206#8461#0" />
-                <element signature="e#8697#9198#0" />
-                <element signature="e#9218#9706#0" />
-                <element signature="e#9247#9496#0" />
-                <element signature="e#9728#10220#0" />
-                <element signature="n#!!block;n#onKeyDown#0;n#!!top" />
-                <element signature="e#11206#11377#0" />
-                <element signature="e#11430#11602#0" />
-                <element signature="e#11652#11821#0" />
-                <element signature="e#11873#12044#0" />
+                <element signature="e#184#1081#0" />
+                <element signature="e#1394#2611#0" />
+                <element signature="e#2625#4168#0" />
+                <element signature="e#4182#5661#0" />
+                <element signature="e#5674#7068#0" />
+                <element signature="e#7082#8300#0" />
+                <element signature="e#8314#9767#0" />
+                <element signature="e#9781#11123#0" />
+                <element signature="e#11270#11291#0" />
+                <element signature="e#11437#11528#0" />
+                <element signature="e#15861#16512#0" />
               </folding>
             </state>
           </provider>
@@ -124,6 +66,9 @@
       <find>console</find>
       <find>level-1</find>
       <find>lightsOn</find>
+      <find>mC</find>
+      <find>mR</find>
+      <find>map</find>
     </findStrings>
     <replaceStrings>
       <replace>drawPMap</replace>
@@ -158,6 +103,7 @@
         <option value="$PROJECT_DIR$/Flat/Main/Src/Main.css" />
         <option value="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js" />
         <option value="$PROJECT_DIR$/Flat/Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" />
       </list>
     </option>
   </component>
@@ -203,26 +149,26 @@
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
               <item name="Src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl3ClothingStore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl3ClothingStore" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl3ClothingStore" type="462c0819:PsiDirectoryNode" />
               <item name="Src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -279,12 +225,12 @@
       <workItem from="1526757156871" duration="20766000" />
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
-      <workItem from="1526846857395" duration="17594000" />
+      <workItem from="1526846857395" duration="20958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63723000" />
+    <option name="totallyTimeSpent" value="67087000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -336,12 +282,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>504</line>
+          <line>524</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="91" />
+      <option name="time" value="92" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -359,6 +305,7 @@
           <folding>
             <element signature="e#1888#5244#0" />
             <element signature="e#3923#5055#0" />
+            <element signature="e#5722#13711#0" />
             <element signature="e#5990#6018#0" />
             <element signature="e#6289#8422#0" />
             <element signature="e#8563#8651#0" />
@@ -428,6 +375,7 @@
           <folding>
             <element signature="e#1888#5244#0" />
             <element signature="e#3923#5055#0" />
+            <element signature="e#5722#13711#0" />
             <element signature="e#5990#6018#0" />
             <element signature="e#6289#8422#0" />
             <element signature="e#8563#8651#0" />
@@ -635,27 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2390">
-          <caret line="189" selection-start-line="189" selection-end-line="189" />
-          <folding>
-            <element signature="n#!!block;n#drawPMap#0;n#!!top" />
-            <element signature="e#8177#8674#0" />
-            <element signature="e#8206#8461#0" />
-            <element signature="e#8697#9198#0" />
-            <element signature="e#9218#9706#0" />
-            <element signature="e#9247#9496#0" />
-            <element signature="e#9728#10220#0" />
-            <element signature="n#!!block;n#onKeyDown#0;n#!!top" />
-            <element signature="e#11206#11377#0" />
-            <element signature="e#11430#11602#0" />
-            <element signature="e#11652#11821#0" />
-            <element signature="e#11873#12044#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/images/scientist2.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -668,11 +595,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="139" column="49" selection-start-line="139" selection-start-column="49" selection-end-line="139" selection-end-column="49" />
+        <state relative-caret-position="697">
+          <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
           <folding>
             <element signature="e#1888#5244#0" />
             <element signature="e#3923#5055#0" />
+            <element signature="e#5722#13711#0" />
             <element signature="e#5990#6018#0" />
             <element signature="e#6289#8422#0" />
             <element signature="e#8563#8651#0" />
@@ -709,6 +637,57 @@
             <element signature="e#29400#30478#0" />
             <element signature="e#27611#27829#0" />
             <element signature="e#27875#27988#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/images/ClothingStoreSprite.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="398" column="5" lean-forward="true" selection-start-line="324" selection-start-column="4" selection-end-line="398" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!block;n#drawPMap#0;n#!!top" />
+            <element signature="e#8177#8674#0" />
+            <element signature="e#8206#8461#0" />
+            <element signature="e#8697#9198#0" />
+            <element signature="e#9218#9706#0" />
+            <element signature="e#9247#9496#0" />
+            <element signature="e#9728#10220#0" />
+            <element signature="n#!!block;n#onKeyDown#0;n#!!top" />
+            <element signature="e#11206#11377#0" />
+            <element signature="e#11430#11602#0" />
+            <element signature="e#11652#11821#0" />
+            <element signature="e#11873#12044#0" />
+            <element signature="n#!!block;n#fillErasedMap#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1816">
+          <caret line="596" column="22" selection-start-line="596" selection-start-column="9" selection-end-line="596" selection-end-column="22" />
+          <folding>
+            <element signature="e#184#1081#0" />
+            <element signature="e#1394#2611#0" />
+            <element signature="e#2625#4168#0" />
+            <element signature="e#4182#5661#0" />
+            <element signature="e#5674#7068#0" />
+            <element signature="e#7082#8300#0" />
+            <element signature="e#8314#9767#0" />
+            <element signature="e#9781#11123#0" />
+            <element signature="e#11270#11291#0" />
+            <element signature="e#11437#11528#0" />
+            <element signature="e#15861#16512#0" />
           </folding>
         </state>
       </provider>

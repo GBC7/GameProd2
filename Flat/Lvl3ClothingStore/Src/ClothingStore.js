@@ -197,7 +197,7 @@ for (let y = 0; y < 70; y++)                //Initialize all indices with 0
         pMap[y].push(0)
     }
 }
-pMap[50][4] = 1;                             //Set the players starting position
+pMap[14][1] = 1;                             //Set the players starting position
 
 addEventListener("keyup", onKeyUp, false);
 addEventListener("keydown", onKeyDown, false);
@@ -398,6 +398,7 @@ function movePlayer()
     }
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
     fillErasedMap(); //Fills portion of the canvas the player was just on
+    moveRoom();
     drawPMap();//Draws the new players position
 }
 
@@ -590,6 +591,124 @@ function moveRoom() {
             drawTheMap();
             p.row = 11;
             p.col = 23;
+        }
+    }
+}
+function fillErasedMap()
+{
+    var map = undefined;
+    switch (roomNumber)
+    {
+        case 0:
+            map = map1;
+            break;
+        case 1:
+            map = map2;
+            break;
+        case 2:
+            map = map3;
+            break;
+        case 3:
+            map = map4;
+            break;
+        case 4:
+            map = map5;
+            break;
+        case 5:
+            map = map6;
+            break;
+        case 6:
+            map = map7;
+            break;
+    }
+
+    for (let mC = p.col - 4; mC < p.col + 5; mC++) // mC = map column
+    {
+        for (let mR = p.row - 4; mR < p.row + 7; mR++) {
+            let xPos = undefined, yPos = undefined;
+            if (map[mR / 4] !== undefined && map[mR / 4][mC / 4] !== undefined) {
+                xPos = mC * 8;
+                yPos = mR * 8;
+                switch (map[mR / 4][mC / 4])//decide what needs drawing based on map index
+                {
+                    case 0: //floor
+                        ctx.drawImage(level3sprite, 96, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 1: //rack1
+                        ctx.drawImage(level3sprite, 128, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 2: //rack2
+                        ctx.drawImage(level3sprite, 160, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 3: //rack3
+                        ctx.drawImage(level3sprite, 192, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 4: //stand1
+                        ctx.drawImage(level3sprite, 32, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 5: //stand2
+                        ctx.drawImage(level3sprite, 64, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 6: //stand3
+                        ctx.drawImage(level3sprite, 32, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 7: //stand4
+                        ctx.drawImage(level3sprite, 64, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 8: //counter1
+                        ctx.drawImage(level3sprite, 96, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 9: //counter2
+                        ctx.drawImage(level3sprite, 128, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 10: //counter3
+                        ctx.drawImage(level3sprite, 160, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 11: //wall1
+                        ctx.drawImage(level3sprite, 0, 0, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 12: //wall2
+                        ctx.drawImage(level3sprite, 0, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 13: //black:void
+                        ctx.drawImage(level3sprite, 224, 96, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 14: // cabinet1
+                        ctx.drawImage(level3sprite, 0, 64, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 15: //cabinet2
+                        ctx.drawImage(level3sprite, 0, 96, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 16: //stair1
+                        ctx.drawImage(level3sprite, 192, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 17: //stair2
+                        ctx.drawImage(level3sprite, 224, 32, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 18: //doormat1:exit
+                        ctx.drawImage(level3sprite, 32, 64, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 19: //doormat2:exit
+                        ctx.drawImage(level3sprite, 64, 64, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 20: // window
+                        ctx.drawImage(level3sprite, 33, 96, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 22: // door1
+                        ctx.drawImage(level3sprite, 96, 64, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 23: // door2
+                        ctx.drawImage(level3sprite, 128, 64, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 24: // door3
+                        ctx.drawImage(level3sprite, 96, 96, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                    case 25: // door4
+                        ctx.drawImage(level3sprite, 128, 96, 32, 32, mC*8, mR*8, 32, 32);
+                        break;
+                }
+
+            }
         }
     }
 }
