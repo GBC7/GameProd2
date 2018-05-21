@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Plan.numbers" beforeDir="false" afterPath="$PROJECT_DIR$/Game Plan.numbers" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Game Plan.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Game Plan.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -82,24 +80,6 @@
                 <element signature="e#32846#36553#0" />
                 <element signature="e#41155#41297#0" />
                 <element signature="e#30984#31073#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClothingStore.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2550">
-              <caret line="423" column="30" lean-forward="true" selection-start-line="355" selection-start-column="20" selection-end-line="423" selection-end-column="30" />
-              <folding>
-                <element signature="e#2894#2985#0" />
-                <element signature="e#2952#2983#0" />
-                <element signature="n#!!block;n#drawTheMap#0" />
-                <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#movePlayer#0" />
-                <element signature="n#!!block;n#onKeyDown#0" />
-                <element signature="n#!!block;n#onKeyUp#0" />
               </folding>
             </state>
           </provider>
@@ -212,19 +192,6 @@
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl3ClothingStore" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl3ClothingStore" type="462c0819:PsiDirectoryNode" />
-              <item name="Src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -281,16 +248,15 @@
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
       <workItem from="1526846857395" duration="24949000" />
-      <workItem from="1526922065811" duration="7664000" />
+      <workItem from="1526922065811" duration="8019000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78742000" />
+    <option name="totallyTimeSpent" value="79097000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -603,6 +569,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2550">
@@ -616,13 +589,6 @@
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="n#!!block;n#onKeyUp#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>
