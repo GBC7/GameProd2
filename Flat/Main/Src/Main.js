@@ -1,9 +1,16 @@
 let gameOver = false, changedLevels = false;
-let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
+let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
 
-let startX = [0,0,0,0,0,0,0], startY = [20,0,0,0,0,0,0];//
+let lightSwitch = 1, sewerSwitch = 0;               //For sewer level
+let lightsOn = true, sewersDrained = true;         //For sewer level
+let floorSpriteX = undefined;                       //For sewer level
 
-let level = 1;
+//level 0 is undefined as we do not have a level 0
+let startX = [undefined, 0,0,0,0,0,0,0], startY = [undefined,20,0,0,0,0,0,0];
+//x and y map boundaries per level
+let xMax = [undefined, 36, 96], xMin = [undefined, 0, 0], yMax = [undefined, 46, 69], yMin = [undefined, 20, 0];
+
+let level = 2;
 
 let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
@@ -11,7 +18,7 @@ let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, u
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 
-var a,b,c,d,e,f,g,h,i,j,k,l,m,n, thingToDraw; //Used with global functions to pass case numbers to
+let a,b,c,d,e,f,g,h,i,j,k,l,m,n, thingToDraw; //Used with global functions to pass case numbers to
     a = b = c  = d = e = f = g = h = i = j = k = l = m = n = thingToDraw = undefined;
 
 let p =                                                         //PlayerObject
@@ -28,14 +35,22 @@ frameX: 0,                //Counter to use for selecting section of tile sheet b
 frameY: 0,
 };
 
-let scientist = new Image();                                    //Declare image for player
-scientist.src = "../../Main/images/scientist2.png";             //Set player image using player object
+let scientist = new Image();                                    //Regular player image
+scientist.src = "../../Main/images/scientist2.png";
 
+let sciUndWater = new Image();                                  //Image fpr player while in sewer
+sciUndWater.src = "../../Lvl2Sewer/images/scientist2.png";
+
+let wetPipe = new Image();
+wetPipe.src = "../../Lvl2Sewer/images/pipeWet.png";
+let floor = new Image();
+floor.src = "../../Lvl2Sewer/images/floor.png";
 startGame();
 
 function startGame()
 {
     if (l1)//Home(roof)
+
     {
         lPMap[level] = [];                                                  //Declare a player map
         for (let y = 0; y < 70; y++)                                    //Initialize all indices with 0
@@ -70,13 +85,13 @@ function startGame()
         windowBottomLeft.src = "../../Lvl1Home/images/windowBottomLeft.png";
         let windowBottomRight = new Image();
         windowBottomRight.src = "../../Lvl1Home/images/windowBottomRight.png";
-        //var tree = new Image();
+        //let tree = new Image();
         //tree.src = "../images/tree.png";
         let streetLight = new Image();
         streetLight.src = "../../Lvl1Home/images/streetLight.png";
 
 
-        //Below one letter variables must be updated upon calling each level
+        //Below one letter letiables must be updated upon calling each level
         a = roof;
         b = outsideWall;
         c = undefined;
@@ -116,23 +131,124 @@ function startGame()
 
         scientist.onload = function(){streetLight.onload = function (){drawMap();};};
         windowBottomRight.onload = function(){addEventListener("keydown", onKeyDown, false);};
-
+        changedLevels = false;
     }
 
     if (l2)//Sewer
+
+    {
+        canvas.style.backgroundImage = "";
+        let pipe = new Image();
+        pipe.src = "../../Lvl2Sewer/images/pipe.png";
+        let pillar = new Image();
+        pillar.src = "../../Lvl2Sewer/images/pillar.png";
+        let wall = new Image();
+        wall.src = "../../Lvl2Sewer/images/wall.png";
+        let door = new Image();
+        door.src = "../../Lvl2Sewer/images/door.png";
+        let drain = new Image();
+        drain.src = "../../Lvl2Sewer/images/drain.png";
+
+
+        a = wall;
+        b = door;
+        c = floor;
+        d = floor;
+        e = floor;
+        f = floor;
+        g = drain;
+        h = pipe;
+
+        if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
+            lMap[level] =                                           //Initialize this levels map
+                //                                 10                            20
+                [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
+
+                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //0
+                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //1
+                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //2
+                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //3
+                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //4
+                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //5
+                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //6
+                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 6],        //7
+                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //8
+                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //9
+                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //10
+                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //11
+                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //12
+                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //13
+                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //14
+                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //15
+                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //16
+                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //17
+                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3]         //18
+                ];
+
+
+        for (let y = 1; y < lMap[level].length; y++)                        //Randomize floor pattern
+            for (let x = 0; x < lMap[level][0].length; x++)
+            {
+                lMap[level][y][x] = (Math.floor(Math.random() * 4) + 2);
+            }
+
+
+        lMap[level][13][24] = 6;                                    //Set the drains position (Needs to be done
+                                                                    // manually like this in order to allow
+                                                                    // for randomized floor pattern
+
+
+        lPMap[level] = [];                                          //Declare a player map for this level
+        for (let y = 0; y < 70; y++)                                //Initialize all indices with 0
+        {
+            lPMap[level][y] = [];
+
+            for (let x = 0; x < 97; x++)
+            {
+                lPMap[level][y].push(0)
+            }
+        }
+
+
+        changePStartPos();
+        p.row = 0;
+
+
+        //Below ensures all elements are on screen when level is drawn
+        scientist.onload = function () {drawMap();};
+        floor.onload = function () {addEventListener("keydown", onKeyDown, false);};
+        changedLevels = false;
+    }
+
+    if (l3)
+
     {
 
     }
 
+    if (l4)
 
+    {
 
+    }
 
+    if (l5)
 
+    {
 
+    }
 
+    if (l6)
 
-    if (!gameOver && changedLevels)
-        startGame();
+    {
+
+    }
+
+    if (l7)
+
+    {
+
+    }
 }
 
 
@@ -142,14 +258,20 @@ function startGame()
 
 
 
-//Use arguments (a,b,c,d,e,f...) to pass cases 0,1,2,3, etc.. respectively
-//eg.. if case one is a floor object -
-//replace 'a' with with the object variable 'floor' when calling the fillErasedMap function
-function fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n)
+
+
+
+
+
+
+
+
+
+function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
-    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
+    let thingToDraw = new Image(); //Setup an image letiable to use for choosing what image to draw where
 
     for (let mR = p.row - 4; mR < p.row + 7; mR ++) // mC = map column
     {
@@ -172,22 +294,29 @@ function fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n)
                         thingToDraw = b;
                         break;
                     case 2:
+                        floorSpriteX = 0;
                         thingToDraw = c;
                         break;
                     case 3:
+                        floorSpriteX = 32;
                         thingToDraw = d;
                         break;
                     case 4:
+                        floorSpriteX = 64;
                         thingToDraw = e;
                         break;
                     case 5:
+                        floorSpriteX = 96;
                         thingToDraw = f;
                         break;
                     case 6:
                         thingToDraw = g;
                         break;
                     case 7:
-                        thingToDraw = h;
+                        if (l2 && !sewersDrained)
+                            thingToDraw = wetPipe;
+                        else
+                            thingToDraw = h;
                         break;
                     case 8:
                         thingToDraw = i;
@@ -208,26 +337,55 @@ function fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n)
                         thingToDraw = n;
                         break;
                 }
-                mC = mC *4;
-                mR = mR *4;
+                mC = mC * 4;
+                mR = mR * 4;
+
+                //Below is exclusively for sewer level
                 if (thingToDraw !== undefined)
-                    ctx.drawImage(thingToDraw, (mC)*8, (mR)*8);
+                {
+                    if (thingToDraw === floor  && l2) // If drawing the floor on level 2
+                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 8), (mR * 8), 32, 32);
+                    else
+                        ctx.drawImage(thingToDraw, (mC * 8), (mR * 8));
+                }
+
+                if (xPos !== undefined && yPos !== undefined)
+                {
+                    if (!sewersDrained && l2)
+                    {
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour}
+                        if (yPos === 0 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
+                        else if (yPos === 0 && xPos === 320)
+                            continue;
+                        else
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                    }
+                    if (!lightsOn && l2)
+                    {
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                        ctx.fillRect(xPos + 96, 0, 800, 600);
+                        ctx.fillRect(0, yPos + 96, 800, 600);
+                        ctx.fillRect(0, 0, xPos - 64, 600);
+                        ctx.fillRect(0, 0, 800, yPos - 64);
+                    }
+                }
             }
         }
     }
 }
 
 function onKeyDown(e)
-//Maybe change.. take out onKeyUp function and have all commands in onKeyDown so that
-//  you can not go diagonally -- character will always hover when going diagonally
-//  unless new sprite sheet is found/made with character walking diagonally
+//Has event listeners for numbers 1 & 2 buttons
+// and S & L keys for switching levels and turning
+// the sewer and lights on and off respectively
 {
     p.prevCol = p.col;//Set column to clear
     p.prevRow = p.row;//Set row to clear
     if (e.keyCode === 37)//Left
 
     {
-        if (p.col > 0)
+        if (p.col > xMin[level])
         {
             //remove player from current column
             lPMap[level][p.row][p.col] = 0;
@@ -245,7 +403,7 @@ function onKeyDown(e)
     if (e.keyCode === 39)//Right
 
     {
-        if (p.col < 36)
+        if (p.col < xMax[level])
         {
             //remove player from current column
             lPMap[level][p.row][p.col] = 0;
@@ -264,7 +422,7 @@ function onKeyDown(e)
     if (e.keyCode === 38)//Up
 
     {
-        if (p.row > 20)
+        if (p.row > yMin[level])
         {
             //remove player from current row
             lPMap[level][p.row][p.col] = 0;
@@ -282,7 +440,7 @@ function onKeyDown(e)
     if (e.keyCode === 40)//Down
 
     {
-        if (p.row < 46)
+        if (p.row < yMax[level])
         {
             //remove player from current row
             lPMap[level][p.row][p.col] = 0;
@@ -301,22 +459,16 @@ function onKeyDown(e)
 
     {
         lightSwitch++;
-        lightsOn = function()
-        {
-            return lightSwitch % 2 === 0
-        };
-        drawTheMap();   //Drawing whole map because light/shade covers whole map
+        lightsOn = (lightSwitch % 2 === 0);
+        drawMap();   //Drawing whole map because light/shade covers whole map
     }
 
     if (e.keyCode === 83) //S - swamp
 
     {
         sewerSwitch++;
-        sewersDrained = function()
-        {
-            return sewerSwitch % 2 === 0
-        };
-        drawTheMap(); //Drawing whole map because swamp covers whole map
+        sewersDrained = (sewerSwitch % 2 === 0);
+        drawMap(); //Drawing whole map because swamp covers whole map
     }
 
     if (e.keyCode === 32) //Space
@@ -325,11 +477,34 @@ function onKeyDown(e)
         //Character action
     }
 
+    if (e.keyCode === 49) //1
+    {
+        level = 1;
+        l2 = false;
+        l1 = true;
+        changedLevels = true;
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+    if (e.keyCode === 50) //2
+    {
+        level = 2;
+        l1 = false;
+        l2 = true;
+        changedLevels = true;
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
     //Fills portion of the canvas the player was just taking up
     //a,b,c,d,e... are passed from movePlayer function call
     drawPMap();//Draws the new players position
+    if (!gameOver && changedLevels)
+        startGame();
 }
 
 function changePStartPos()
@@ -341,7 +516,9 @@ function changePStartPos()
             lPMap[level][y][x] = 0;
         }
     }
-    lPMap[level][startY[level-1]][startX[level-1]] = 1;   //Set the players starting position for particular level
+    lPMap[level][startY[level]][startX[level]] = 1;   //Set the players starting position for particular level
+    p.row = startY[level];
+    p.col = startX[level];
 }
 
 function drawPMap() //Move Streetlight to pMap function
@@ -358,7 +535,10 @@ function drawPMap() //Move Streetlight to pMap function
                     //Sets position on tile sheet to pick from when drawing player
                     p.srcX = p.width * (p.frameX % 4);
                     p.srcY = p.height * p.frameY;
-                    ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
+                    if (!sewersDrained && l2)
+                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
+                    else
+                        ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
                     //ctx.drawImage(tree, 450, 470);
                     break;
             }
@@ -390,32 +570,57 @@ function drawMap()
                     thingToDraw = b;
                     break;
                 case 2:
+                    floorSpriteX = 0;
                     thingToDraw = c;
                     break;
                 case 3:
+                    floorSpriteX = 32;
                     thingToDraw = d;
                     break;
                 case 4:
+                    floorSpriteX = 64;
                     thingToDraw = e;
                     break;
                 case 5:
+                    floorSpriteX = 96;
                     thingToDraw = f;
                     break;
                 case 6:
                     thingToDraw = g;
                     break;
                 case 7:
-                    thingToDraw = h;
+                    if (l2 && !sewersDrained)
+                        thingToDraw = wetPipe;
+                    else
+                        thingToDraw = h;
                     break;
             }
 
             if (thingToDraw !== undefined)
-                ctx.drawImage(thingToDraw, destX, destY, 32, 32);
-
+            {
+                if (thingToDraw === floor  && l2) // If drawing the floor on level 2
+                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);
+                else
+                    ctx.drawImage(thingToDraw, (col * 32), (row * 32));
+            }
             destX += 32;
         }
         destX = 0;
         destY += 32;
+    }
+    if (!sewersDrained && l2)
+    {
+        console.log(l2);
+        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";
+        ctx.fillRect(0, 24, 320, 600);
+        ctx.fillRect(352, 24, 800, 600);
+        ctx.fillRect(320, 32, 32, 600);
+    }
+    if (!lightsOn && l2)
+    {
+        console.log(l2);
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fillRect(0, 0, 800, 600);
     }
     drawPMap();
 }
