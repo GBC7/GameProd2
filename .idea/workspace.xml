@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/0Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/0Main/Src/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project Review and Critical Stage Analysis First Playable.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Project Review and Critical Stage Analysis First Playable.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Status Reports First Playable.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Status Reports First Playable.docx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,32 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="263" column="48" lean-forward="true" selection-start-line="263" selection-start-column="48" selection-end-line="263" selection-end-column="48" />
-              <folding>
-                <element signature="e#361#411#0" />
-                <element signature="e#841#888#0" />
-                <element signature="e#6620#11117#0" />
-                <element signature="e#11173#13314#0" />
-                <element signature="e#13370#16172#0" />
-                <element signature="e#16228#18817#0" />
-                <element signature="e#18873#21224#0" />
-                <element signature="e#21256#21264#0" />
-                <element signature="n#!!block;n#fillErasedMap#0" />
-                <element signature="n#!!block;n#onKeyDown#0" />
-                <element signature="n#!!block;n#changePStartPos#0" />
-                <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#drawMap#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -218,16 +195,15 @@
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
       <workItem from="1526846857395" duration="24949000" />
-      <workItem from="1526922065811" duration="10557000" />
+      <workItem from="1526922065811" duration="10857000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81635000" />
+    <option name="totallyTimeSpent" value="81935000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -497,8 +473,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="263" column="48" lean-forward="true" selection-start-line="263" selection-start-column="48" selection-end-line="263" selection-end-column="48" />
+        <state relative-caret-position="424">
+          <caret line="161" column="13" lean-forward="true" selection-start-line="161" selection-start-column="13" selection-end-line="161" selection-end-column="13" />
           <folding>
             <element signature="e#361#411#0" />
             <element signature="e#841#888#0" />
