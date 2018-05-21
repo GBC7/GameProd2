@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/momsFullerLivingRoom.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/momsLivingRoom.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl6Lab/images/Lab.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Temp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Main/images/scientist.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,64 +30,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
-              <folding>
-                <element signature="e#2352#5738#0" />
-                <element signature="e#5764#10130#0" />
-                <element signature="e#10149#10157#0" />
-                <element signature="e#10176#10184#0" />
-                <element signature="e#10203#38989#0" />
-                <element signature="e#10824#12117#0" />
-                <element signature="e#12681#12836#0" />
-                <element signature="e#12771#12826#0" />
-                <element signature="e#13126#14344#0" />
-                <element signature="e#14819#14974#0" />
-                <element signature="e#14909#14964#0" />
-                <element signature="e#10257#10265#0" />
-                <element signature="n#!!block;n#fillErasedMap#0" />
-                <element signature="e#14681#15162#0" />
-                <element signature="e#15202#15687#0" />
-                <element signature="e#15724#16196#0" />
-                <element signature="e#16235#16709#0" />
-                <element signature="e#16754#16906#0" />
-                <element signature="e#16951#17100#0" />
-                <element signature="e#17141#17175#0" />
-                <element signature="e#17211#17396#0" />
-                <element signature="e#17431#17616#0" />
-                <element signature="e#20296#20501#0" />
-                <element signature="e#17799#17858#0" />
-                <element signature="n#!!block;n#changePStartPos#0" />
-                <element signature="n#!!block;n#drawPMap#0" />
-                <element signature="n#!!block;n#drawMap#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lab.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="59" lean-forward="true" selection-start-line="36" selection-end-line="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -184,39 +138,6 @@
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
-              <item name="Src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl6Lab" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl6Lab" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Lvl6Lab" type="462c0819:PsiDirectoryNode" />
-              <item name="Src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -254,6 +175,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Flat/Lvl6Lab/images" />
       <recent name="$PROJECT_DIR$/Flat/Lvl1Home/src" />
       <recent name="$PROJECT_DIR$/Flat/Lvl1Home/images" />
       <recent name="$PROJECT_DIR$/Flat/Lvl1Home" />
@@ -287,16 +209,15 @@
       <workItem from="1526757156871" duration="20766000" />
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
-      <workItem from="1526846857395" duration="24626000" />
+      <workItem from="1526846857395" duration="24949000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70755000" />
+    <option name="totallyTimeSpent" value="71078000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -359,13 +280,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1815">
@@ -705,12 +619,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Wall.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/LabMats.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Floor.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Lab.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/images/player.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/images/scientist.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/images/starttext.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/images/warning.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/images/title.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -745,6 +679,13 @@
             <element signature="n#!!block;n#drawPMap#0" />
             <element signature="n#!!block;n#drawMap#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>
