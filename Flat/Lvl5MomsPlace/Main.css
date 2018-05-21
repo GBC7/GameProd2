@@ -1,0 +1,23 @@
+html
+
+{
+    background-color: #3c3c3c;
+}
+
+#center
+
+{
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    border: 2px inset black;
+}
+canvas
+
+{
+    background: black;
+    background-repeat: no-repeat;
+    background-position-y: 135px;
+
+}

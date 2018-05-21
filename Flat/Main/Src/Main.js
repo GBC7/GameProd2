@@ -1,16 +1,20 @@
-let gameOver = false, changedLevels = false;
-let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
+let gameOver = false;
+let l1 = false, l2 = false, l3 = false, l4 = false, l5 = true, l6 = false, l7 = false;
 
 let lightSwitch = 1, sewerSwitch = 0;               //For sewer level
 let lightsOn = true, sewersDrained = true;         //For sewer level
 let floorSpriteX = undefined;                       //For sewer level
 
 //level 0 is undefined as we do not have a level 0
-let startX = [undefined, 0,0,0,0,0,0,0], startY = [undefined,20,0,0,0,0,0,0];
+let startX = [undefined, 0, 0, undefined, undefined, 0, 0],
+    startY = [undefined, 20, 0, undefined, undefined, 0, 4];
 //x and y map boundaries per level
-let xMax = [undefined, 36, 96], xMin = [undefined, 0, 0], yMax = [undefined, 46, 69], yMin = [undefined, 20, 0];
+let xMax = [undefined, 36, 96, undefined, undefined, 96, 96],
+    xMin = [undefined, 0, 0, undefined, undefined, 0, 0],
+    yMax = [undefined, 46, 69, undefined, undefined, 69, 69],
+    yMin = [undefined, 20, 0, undefined, undefined, 0, 4];
 
-let level = 2;
+let level = 5;
 
 let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
@@ -43,6 +47,7 @@ sciUndWater.src = "../../Lvl2Sewer/images/scientist2.png";
 
 let wetPipe = new Image();
 wetPipe.src = "../../Lvl2Sewer/images/pipeWet.png";
+
 let floor = new Image();
 floor.src = "../../Lvl2Sewer/images/floor.png";
 startGame();
@@ -209,7 +214,6 @@ function startGame()
             }
         }
 
-
         changePStartPos();
         p.row = 0;
 
@@ -232,16 +236,134 @@ function startGame()
 
     }
 
-    if (l5)
+    if (l5)//Moms House
 
     {
+        let wall = new Image();
+        wall.src = "../../Lvl5MomsPlace/images/wall.png";
 
+        let door = new Image();
+        door.src = "../../Lvl5MomsPlace/images/door.png";
+
+        let floor = new Image();
+        floor.src = "../../Lvl5MomsPlace/images/floor.png";
+
+        let cat = new Image();
+        cat.src = "../../Lvl5MomsPlace/images/cat.png";
+
+
+        if (lMap[level] === undefined)
+            lMap[level] =
+            //                  10                  20
+            [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //1
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //2
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //3
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //4
+                [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //5
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //6
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //7
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //10
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //11
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //12
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
+                [2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3],    //14
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //15
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
+                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
+            ];
+
+
+        a = wall;
+        b = door;
+        c = floor;
+        d = cat;
+        e = undefined;
+        f = undefined;
+        g = undefined;
+        h = undefined;
+
+
+        lPMap[level] = [];
+        for (let y = 0; y < 70; y++)
+        {
+            lPMap[level][y] = [];
+
+            for (let x = 0; x < 97; x++)
+            {
+                lPMap[level][y].push(0)
+            }
+        }
+
+
+        changePStartPos();
+
+        cat.onload = function(){drawMap();};
+        floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
     }
 
-    if (l6)
+    if (l6)//Lab
 
     {
+        let floor = new Image();
+        floor.src = "../../Lvl6Lab/images/Floor.png";
 
+        let wall = new Image();
+        wall.src = "../../Lvl6Lab/images/Wall.png";
+
+        if (lMap[level] === undefined)
+            lMap[level]=
+            //                    10                  20
+            [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            ];
+
+
+        a = wall;
+        b = floor;
+        c = undefined;
+        d = undefined;
+        e = undefined;
+        f = undefined;
+        g = undefined;
+        h = undefined;
+
+        lPMap[level] = [];
+        for (let y = 0; y < 70; y++)
+        {
+            lPMap[level][y] = [];
+
+            for (let x = 0; x < 97; x++)
+            {
+                lPMap[level][y].push(0)
+            }
+        }
+
+        changePStartPos();
+
+        floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        wall.onload = function(){drawMap();};
     }
 
     if (l7)
@@ -477,10 +599,12 @@ function onKeyDown(e)
         //Character action
     }
 
+
+    /* TEMP - for switching levels during testing - TEMP */
     if (e.keyCode === 49) //1
     {
         level = 1;
-        l2 = false;
+        l2 = l3 = l4 = l5 = l6 = false;
         l1 = true;
         changedLevels = true;
         ctx.clearRect(0,0,800,600);
@@ -490,21 +614,41 @@ function onKeyDown(e)
     if (e.keyCode === 50) //2
     {
         level = 2;
-        l1 = false;
+        l1 = l3 = l4 = l5 = l6 = false;
         l2 = true;
         changedLevels = true;
         ctx.clearRect(0,0,800,600);
         startGame();
         setTimeout(drawMap, 40);
     }
+    if (e.keyCode === 53) //5
+    {
+        level = 5;
+        l1 = l2 = l3 = l4 = l6 = false;
+        l5 = true;
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+    if (e.keyCode === 54) //6
+    {
+        level = 6;
+        l1 = l2 = l3 = l4 = l5 = false;
+        l6 = true;
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+    /* TEMP - for switching levels during testing - TEMP */
+
 
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
     //Fills portion of the canvas the player was just taking up
     //a,b,c,d,e... are passed from movePlayer function call
     drawPMap();//Draws the new players position
-    if (!gameOver && changedLevels)
-        startGame();
+/*    if (!gameOver && changedLevels)
+        startGame();*/
 }
 
 function changePStartPos()
