@@ -1,0 +1,18 @@
+door:
+https://ayene-chan.deviantart.com/art/RPG-Maker-VX-Door-II-321675413
+
+window:
+http://www.hbgames.org/forums/viewtopic.php?f=160&t=57502
+
+cabinet:
+https://www.pinterest.com.au/pin/443323157061510824/?autologin=true
+
+stairs:
+https://vxresource.wordpress.com/2011/07/18/recolored-objects/stairs-a/
+
+checkout.jpg:
+I don't know. I didn't add this file.
+
+ClothingStoreSprite.png:
+made by me (each resource is from above list)
+
