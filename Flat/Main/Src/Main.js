@@ -1,29 +1,43 @@
 let gameOver = false;
-let l1 = false, l2 = false, l3 = false, l4 = false, l5 = true, l6 = false, l7 = false;
 
-let lightSwitch = 1, sewerSwitch = 0;               //For sewer level
-let lightsOn = true, sewersDrained = true;         //For sewer level
-let floorSpriteX = undefined;                       //For sewer level
+
+let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
+
+
+let level = 1;
+
+
+let lightSwitch = 1, sewerSwitch = 1;               //For sewer level
+let lightsOn = false, sewersDrained = false;         //For sewer level
+let floorSpriteX = undefined, floorSet = false;                       //For sewer level
+
 
 //level 0 is undefined as we do not have a level 0
-let startX = [undefined, 0, 0, undefined, undefined, 0, 0],
-    startY = [undefined, 20, 0, undefined, undefined, 0, 4];
+   // Level       0      1   2       3      4   5   6
+let startX = [undefined, 0,  0,  undefined, 0,  0,  0],
+    startY = [undefined, 20, 0,  undefined, 4,  0,  4];
+
+
 //x and y map boundaries per level
-let xMax = [undefined, 36, 96, undefined, undefined, 96, 96],
-    xMin = [undefined, 0, 0, undefined, undefined, 0, 0],
-    yMax = [undefined, 46, 69, undefined, undefined, 69, 69],
-    yMin = [undefined, 20, 0, undefined, undefined, 0, 4];
+// Level          0      1   2       3      4   5   6
+let xMax =   [undefined, 36, 96, undefined, 96, 96, 96],
+    xMin =   [undefined, 0,  0,  undefined, 0,  0,  0],
+    yMax =   [undefined, 46, 69, undefined, 69, 69, 69],
+    yMin =   [undefined, 20, 0,  undefined, 4,  0,  4];
 
-let level = 5;
 
+    // Level    0          1          2          3          4          5          6
 let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+
 
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 
+
 let a,b,c,d,e,f,g,h,i,j,k,l,m,n, thingToDraw; //Used with global functions to pass case numbers to
     a = b = c  = d = e = f = g = h = i = j = k = l = m = n = thingToDraw = undefined;
+
 
 let p =                                                         //PlayerObject
 {
@@ -39,38 +53,32 @@ frameX: 0,                //Counter to use for selecting section of tile sheet b
 frameY: 0,
 };
 
+
+//Global Images
 let scientist = new Image();                                    //Regular player image
 scientist.src = "../../Main/images/scientist2.png";
-
 let sciUndWater = new Image();                                  //Image fpr player while in sewer
 sciUndWater.src = "../../Lvl2Sewer/images/scientist2.png";
-
 let wetPipe = new Image();
 wetPipe.src = "../../Lvl2Sewer/images/pipeWet.png";
-
 let floor = new Image();
 floor.src = "../../Lvl2Sewer/images/floor.png";
+
+
+//Global Audio
+let waterRunning = new Audio('../../Lvl2Sewer/audio/waterRunning.mp3');
+waterRunning.loop = true;
+waterRunning.volume = 0.3;
+
+
 startGame();
+
 
 function startGame()
 {
     if (l1)//Home(roof)
 
     {
-        lPMap[level] = [];                                                  //Declare a player map
-        for (let y = 0; y < 70; y++)                                    //Initialize all indices with 0
-        {
-            lPMap[level][y] = [];
-
-            for (let x = 0; x < 97; x++)
-            {
-                lPMap[level][y].push(0)
-            }
-        }
-        lPMap[level][20][0] = 1; //Putting the player (scientist) into the player map for this level
-        changePStartPos();
-
-
         canvas.style.backgroundImage = "url('../../Lvl1Home/images/city.gif')";
         /*You could change fill style to brown or some other colour and fill a rectangle behind the house so that the
         * background picture doesn't show through the house*/
@@ -96,7 +104,7 @@ function startGame()
         streetLight.src = "../../Lvl1Home/images/streetLight.png";
 
 
-        //Below one letter letiables must be updated upon calling each level
+        //Below one letter variables must be updated upon calling each level
         a = roof;
         b = outsideWall;
         c = undefined;
@@ -106,7 +114,8 @@ function startGame()
         g = windowBottomLeft;
         h = windowBottomRight;
 
-        if (lMap[level] === undefined)
+
+        if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
         {
             lMap[level] = //Map for level 1
                 [
@@ -134,9 +143,30 @@ function startGame()
                 ];
         }
 
+
+        if (lPMap[level] === undefined) //Initialize this levels player map if it has not been initialized
+        {
+            lPMap[level] = [];                                                  //Declare a player map
+
+            for (let y = 0; y < 70; y++)                                        //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 97; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+
+            lPMap[level][20][0] = 1; //Putting the player (scientist) into the player map for this level
+        }
+
+
+        changePStartPos();
+
+
         scientist.onload = function(){streetLight.onload = function (){drawMap();};};
         windowBottomRight.onload = function(){addEventListener("keydown", onKeyDown, false);};
-        changedLevels = false;
     }
 
     if (l2)//Sewer
@@ -190,38 +220,44 @@ function startGame()
                     [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3]         //18
                 ];
 
-
-        for (let y = 1; y < lMap[level].length; y++)                        //Randomize floor pattern
-            for (let x = 0; x < lMap[level][0].length; x++)
+        if (!floorSet)
+        {
+            for (let y = 1; y < lMap[level].length; y++)                        //Randomize floor pattern
             {
-                lMap[level][y][x] = (Math.floor(Math.random() * 4) + 2);
+                for (let x = 0; x < lMap[level][0].length; x++)
+                {
+                    lMap[level][y][x] = (Math.floor(Math.random() * 4) + 2);
+                }
             }
 
+            lMap[level][13][24] = 6;                                    //Set the drains position (Needs to be done
+                                                                        // manually like this in order to allow
+                                                                        // for randomized floor pattern
+        }
 
-        lMap[level][13][24] = 6;                                    //Set the drains position (Needs to be done
-                                                                    // manually like this in order to allow
-                                                                    // for randomized floor pattern
-
-
-        lPMap[level] = [];                                          //Declare a player map for this level
-        for (let y = 0; y < 70; y++)                                //Initialize all indices with 0
+        if (lPMap[level] === undefined)
         {
-            lPMap[level][y] = [];
-
-            for (let x = 0; x < 97; x++)
+            lPMap[level] = [];                                          //Declare a player map for this level
+            for (let y = 0; y < 70; y++)                                //Initialize all indices with 0
             {
-                lPMap[level][y].push(0)
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 97; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
             }
         }
 
+
+
         changePStartPos();
-        p.row = 0;
+        p.row = 0;                                                                                                      //May need to set differently
 
 
         //Below ensures all elements are on screen when level is drawn
         scientist.onload = function () {drawMap();};
         floor.onload = function () {addEventListener("keydown", onKeyDown, false);};
-        changedLevels = false;
     }
 
     if (l3)
@@ -230,9 +266,81 @@ function startGame()
 
     }
 
-    if (l4)
+    if (l4)//The Streetz
 
     {
+        let grass = new Image();
+        grass.src = "../../Lvl4TheStreetz/images/grass.png";
+
+        let sidewalk = new Image();
+        sidewalk.src = "../../Lvl4TheStreetz/images/sidewalk.png";
+        
+        let house = new Image();
+        house.src = "../../Lvl4TheStreetz/images/house.png";
+        
+        let bank = new Image();
+        bank.src = "../../Lvl4TheStreetz/images/bank.png";
+        
+        let store = new Image();
+        store.src = "../../Lvl4TheStreetz/images/store.png";
+
+
+        a = sidewalk;
+        b = grass;
+        c = house;
+        d = bank;
+        e = store;
+        f = undefined;
+        g = undefined;
+        h = undefined;
+
+
+        if (lMap[level] === undefined) 
+            lMap[level] =
+            //                    10                  20
+            [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            ];
+
+
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];                           
+            for (let y = 0; y < 70; y++)                
+            {
+                lPMap[level][y] = [];
+        
+                for (let x = 0; x < 97; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+
+            lPMap[level][0][0] = 1;                             //Set the players starting position
+        }
+
+        changePStartPos();
+
+        bank.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        store.onload = function(){drawTheMap()};
 
     }
 
@@ -287,17 +395,20 @@ function startGame()
         h = undefined;
 
 
-        lPMap[level] = [];
-        for (let y = 0; y < 70; y++)
+        if (lPMap[level] === undefined)
         {
-            lPMap[level][y] = [];
+            lPMap[level] = [];
 
-            for (let x = 0; x < 97; x++)
+            for (let y = 0; y < 70; y++)
             {
-                lPMap[level][y].push(0)
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 97; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
             }
         }
-
 
         changePStartPos();
 
@@ -310,9 +421,9 @@ function startGame()
     {
         let floor = new Image();
         floor.src = "../../Lvl6Lab/images/Floor.png";
-
         let wall = new Image();
         wall.src = "../../Lvl6Lab/images/Wall.png";
+
 
         if (lMap[level] === undefined)
             lMap[level]=
@@ -349,24 +460,31 @@ function startGame()
         g = undefined;
         h = undefined;
 
-        lPMap[level] = [];
-        for (let y = 0; y < 70; y++)
-        {
-            lPMap[level][y] = [];
 
-            for (let x = 0; x < 97; x++)
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];
+
+            for (let y = 0; y < 70; y++)
             {
-                lPMap[level][y].push(0)
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 97; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
             }
         }
 
+
         changePStartPos();
+
 
         floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
         wall.onload = function(){drawMap();};
     }
 
-    if (l7)
+    if (l7)//Not decided
 
     {
 
@@ -475,13 +593,14 @@ function fillErasedMap()
                 {
                     if (!sewersDrained && l2)
                     {
-                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour}
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour
                         if (yPos === 0 && xPos !== 320)
                             ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
                         else if (yPos === 0 && xPos === 320)
                             continue;
                         else
                             ctx.fillRect(xPos, yPos, 32, 32);
+                        waterRunning.play();
                     }
                     if (!lightsOn && l2)
                     {
@@ -606,7 +725,6 @@ function onKeyDown(e)
         level = 1;
         l2 = l3 = l4 = l5 = l6 = false;
         l1 = true;
-        changedLevels = true;
         ctx.clearRect(0,0,800,600);
         startGame();
         setTimeout(drawMap, 40);
@@ -616,7 +734,17 @@ function onKeyDown(e)
         level = 2;
         l1 = l3 = l4 = l5 = l6 = false;
         l2 = true;
-        changedLevels = true;
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+
+
+    if (e.keyCode === 52) //4
+    {
+        level = 4;
+        l1 = l2 = l3 = l5 = l6 = false;
+        l4 = true;
         ctx.clearRect(0,0,800,600);
         startGame();
         setTimeout(drawMap, 40);
@@ -647,8 +775,8 @@ function onKeyDown(e)
     //Fills portion of the canvas the player was just taking up
     //a,b,c,d,e... are passed from movePlayer function call
     drawPMap();//Draws the new players position
-/*    if (!gameOver && changedLevels)
-        startGame();*/
+    if (sewersDrained || !l2)
+        waterRunning.pause();
 }
 
 function changePStartPos()
@@ -754,15 +882,14 @@ function drawMap()
     }
     if (!sewersDrained && l2)
     {
-        console.log(l2);
         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";
         ctx.fillRect(0, 24, 320, 600);
         ctx.fillRect(352, 24, 800, 600);
         ctx.fillRect(320, 32, 32, 600);
+        waterRunning.play();
     }
     if (!lightsOn && l2)
     {
-        console.log(l2);
         ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.fillRect(0, 0, 800, 600);
     }

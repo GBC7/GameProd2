@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl6Lab/images/Lab.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/Temp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/Test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Main/images/scientist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,7 +16,93 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="74" column="1" lean-forward="true" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+              <folding>
+                <element signature="e#341#391#0" />
+                <element signature="e#558#592#0" />
+                <element signature="e#1315#1981#0" />
+                <element signature="e#2519#5935#0" />
+                <element signature="e#3541#3566#0" />
+                <element signature="e#2568#3700#0" />
+                <element signature="e#2630#3689#0" />
+                <element signature="e#3751#4129#0" />
+                <element signature="e#3964#4119#0" />
+                <element signature="e#4054#4109#0" />
+                <element signature="e#5931#10365#0" />
+                <element signature="e#6736#6764#0" />
+                <element signature="e#6865#9023#0" />
+                <element signature="e#9075#9369#0" />
+                <element signature="e#9137#9296#0" />
+                <element signature="e#9201#9289#0" />
+                <element signature="e#9460#9503#0" />
+                <element signature="e#9800#9824#0" />
+                <element signature="e#10020#10175#0" />
+                <element signature="e#10110#10165#0" />
+                <element signature="e#10297#10305#0" />
+                <element signature="e#10324#12676#0" />
+                <element signature="e#10906#12124#0" />
+                <element signature="e#12397#12670#0" />
+                <element signature="e#12517#12572#0" />
+                <element signature="e#13975#16539#0" />
+                <element signature="e#10862#12307#0" />
+                <element signature="e#16137#16376#0" />
+                <element signature="e#12549#12704#0" />
+                <element signature="e#12639#12694#0" />
+                <element signature="e#16616#18932#0" />
+                <element signature="e#13200#14578#0" />
+                <element signature="e#18530#18769#0" />
+                <element signature="e#14830#14985#0" />
+                <element signature="e#14920#14975#0" />
+                <element signature="e#15168#15176#0" />
+                <element signature="e#15221#15300#0" />
+                <element signature="n#!!block;n#fillErasedMap#0" />
+                <element signature="e#19321#19368#0" />
+                <element signature="n#!!block;n#onKeyDown#0" />
+                <element signature="e#19592#20073#0" />
+                <element signature="e#19635#19879#0" />
+                <element signature="e#20113#20598#0" />
+                <element signature="e#20635#21107#0" />
+                <element signature="e#21146#21620#0" />
+                <element signature="e#21665#21817#0" />
+                <element signature="e#21862#22011#0" />
+                <element signature="e#22052#22086#0" />
+                <element signature="e#22183#22388#0" />
+                <element signature="e#22423#22628#0" />
+                <element signature="e#22663#22838#0" />
+                <element signature="e#22873#23048#0" />
+                <element signature="e#23292#23351#0" />
+                <element signature="n#!!block;n#changePStartPos#0" />
+                <element signature="n#!!block;n#drawPMap#0" />
+                <element signature="n#!!block;n#drawMap#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="theStreetz.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -54,13 +126,14 @@
       <find>var scientist</find>
       <find>drawL1PMap</find>
       <find>drawL1Map</find>
-      <find>console</find>
       <find>level-1</find>
       <find>lightsOn</find>
       <find>mC</find>
       <find>mR</find>
       <find>map</find>
       <find>var</find>
+      <find>changedL</find>
+      <find>console</find>
     </findStrings>
     <replaceStrings>
       <replace>drawPMap</replace>
@@ -99,6 +172,7 @@
         <option value="$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html" />
         <option value="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.css" />
         <option value="$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js" />
+        <option value="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html" />
         <option value="$PROJECT_DIR$/Flat/Main/Src/Main.js" />
       </list>
     </option>
@@ -112,7 +186,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
@@ -138,14 +212,33 @@
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl2Sewer" type="462c0819:PsiDirectoryNode" />
+              <item name="audio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl4TheStreetz" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="Lvl4TheStreetz" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
@@ -210,14 +303,16 @@
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
       <workItem from="1526846857395" duration="24949000" />
+      <workItem from="1526922065811" duration="3852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71078000" />
+    <option name="totallyTimeSpent" value="74930000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -260,23 +355,21 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js</url>
           <line>223</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>668</line>
-          <properties lambdaOrdinal="-1" />
+          <line>793</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/Flat/Main/Src/Main.js</url>
-          <line>701</line>
+          <line>251</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="96" />
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="97" />
+      <option name="time" value="102" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -285,30 +378,59 @@
         <state relative-caret-position="1815">
           <caret line="121" column="42" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="42" />
           <folding>
-            <element signature="e#2352#5738#0" />
-            <element signature="e#5764#10130#0" />
-            <element signature="e#10149#10157#0" />
-            <element signature="e#10176#10184#0" />
-            <element signature="e#10203#38989#0" />
-            <element signature="e#10824#12117#0" />
-            <element signature="e#12681#12836#0" />
-            <element signature="e#12771#12826#0" />
-            <element signature="e#13126#14344#0" />
-            <element signature="e#14819#14974#0" />
-            <element signature="e#14909#14964#0" />
-            <element signature="e#10257#10265#0" />
+            <element signature="e#341#391#0" />
+            <element signature="e#558#592#0" />
+            <element signature="e#1315#1981#0" />
+            <element signature="e#2519#5935#0" />
+            <element signature="e#3541#3566#0" />
+            <element signature="e#2568#3700#0" />
+            <element signature="e#2630#3689#0" />
+            <element signature="e#3751#4129#0" />
+            <element signature="e#3964#4119#0" />
+            <element signature="e#4054#4109#0" />
+            <element signature="e#5931#10365#0" />
+            <element signature="e#6736#6764#0" />
+            <element signature="e#6865#9023#0" />
+            <element signature="e#9075#9369#0" />
+            <element signature="e#9137#9296#0" />
+            <element signature="e#9201#9289#0" />
+            <element signature="e#9460#9503#0" />
+            <element signature="e#9800#9824#0" />
+            <element signature="e#10020#10175#0" />
+            <element signature="e#10110#10165#0" />
+            <element signature="e#10297#10305#0" />
+            <element signature="e#10324#12676#0" />
+            <element signature="e#10906#12124#0" />
+            <element signature="e#12397#12670#0" />
+            <element signature="e#12517#12572#0" />
+            <element signature="e#13975#16539#0" />
+            <element signature="e#10862#12307#0" />
+            <element signature="e#16137#16376#0" />
+            <element signature="e#12549#12704#0" />
+            <element signature="e#12639#12694#0" />
+            <element signature="e#16616#18932#0" />
+            <element signature="e#13200#14578#0" />
+            <element signature="e#18530#18769#0" />
+            <element signature="e#14830#14985#0" />
+            <element signature="e#14920#14975#0" />
+            <element signature="e#15168#15176#0" />
+            <element signature="e#15221#15300#0" />
             <element signature="n#!!block;n#fillErasedMap#0" />
-            <element signature="e#14681#15162#0" />
-            <element signature="e#15202#15687#0" />
-            <element signature="e#15724#16196#0" />
-            <element signature="e#16235#16709#0" />
-            <element signature="e#16754#16906#0" />
-            <element signature="e#16951#17100#0" />
-            <element signature="e#17141#17175#0" />
-            <element signature="e#17211#17396#0" />
-            <element signature="e#17431#17616#0" />
-            <element signature="e#20296#20501#0" />
-            <element signature="e#17799#17858#0" />
+            <element signature="e#19321#19368#0" />
+            <element signature="n#!!block;n#onKeyDown#0" />
+            <element signature="e#19592#20073#0" />
+            <element signature="e#19635#19879#0" />
+            <element signature="e#20113#20598#0" />
+            <element signature="e#20635#21107#0" />
+            <element signature="e#21146#21620#0" />
+            <element signature="e#21665#21817#0" />
+            <element signature="e#21862#22011#0" />
+            <element signature="e#22052#22086#0" />
+            <element signature="e#22183#22388#0" />
+            <element signature="e#22423#22628#0" />
+            <element signature="e#22663#22838#0" />
+            <element signature="e#22873#23048#0" />
+            <element signature="e#23292#23351#0" />
             <element signature="n#!!block;n#changePStartPos#0" />
             <element signature="n#!!block;n#drawPMap#0" />
             <element signature="n#!!block;n#drawMap#0" />
@@ -316,13 +438,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html" />
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -343,30 +459,59 @@
         <state relative-caret-position="2775">
           <caret line="185" column="26" selection-start-line="185" selection-start-column="26" selection-end-line="185" selection-end-column="26" />
           <folding>
-            <element signature="e#2352#5738#0" />
-            <element signature="e#5764#10130#0" />
-            <element signature="e#10149#10157#0" />
-            <element signature="e#10176#10184#0" />
-            <element signature="e#10203#38989#0" />
-            <element signature="e#10824#12117#0" />
-            <element signature="e#12681#12836#0" />
-            <element signature="e#12771#12826#0" />
-            <element signature="e#13126#14344#0" />
-            <element signature="e#14819#14974#0" />
-            <element signature="e#14909#14964#0" />
-            <element signature="e#10257#10265#0" />
+            <element signature="e#341#391#0" />
+            <element signature="e#558#592#0" />
+            <element signature="e#1315#1981#0" />
+            <element signature="e#2519#5935#0" />
+            <element signature="e#3541#3566#0" />
+            <element signature="e#2568#3700#0" />
+            <element signature="e#2630#3689#0" />
+            <element signature="e#3751#4129#0" />
+            <element signature="e#3964#4119#0" />
+            <element signature="e#4054#4109#0" />
+            <element signature="e#5931#10365#0" />
+            <element signature="e#6736#6764#0" />
+            <element signature="e#6865#9023#0" />
+            <element signature="e#9075#9369#0" />
+            <element signature="e#9137#9296#0" />
+            <element signature="e#9201#9289#0" />
+            <element signature="e#9460#9503#0" />
+            <element signature="e#9800#9824#0" />
+            <element signature="e#10020#10175#0" />
+            <element signature="e#10110#10165#0" />
+            <element signature="e#10297#10305#0" />
+            <element signature="e#10324#12676#0" />
+            <element signature="e#10906#12124#0" />
+            <element signature="e#12397#12670#0" />
+            <element signature="e#12517#12572#0" />
+            <element signature="e#13975#16539#0" />
+            <element signature="e#10862#12307#0" />
+            <element signature="e#16137#16376#0" />
+            <element signature="e#12549#12704#0" />
+            <element signature="e#12639#12694#0" />
+            <element signature="e#16616#18932#0" />
+            <element signature="e#13200#14578#0" />
+            <element signature="e#18530#18769#0" />
+            <element signature="e#14830#14985#0" />
+            <element signature="e#14920#14975#0" />
+            <element signature="e#15168#15176#0" />
+            <element signature="e#15221#15300#0" />
             <element signature="n#!!block;n#fillErasedMap#0" />
-            <element signature="e#14681#15162#0" />
-            <element signature="e#15202#15687#0" />
-            <element signature="e#15724#16196#0" />
-            <element signature="e#16235#16709#0" />
-            <element signature="e#16754#16906#0" />
-            <element signature="e#16951#17100#0" />
-            <element signature="e#17141#17175#0" />
-            <element signature="e#17211#17396#0" />
-            <element signature="e#17431#17616#0" />
-            <element signature="e#20296#20501#0" />
-            <element signature="e#17799#17858#0" />
+            <element signature="e#19321#19368#0" />
+            <element signature="n#!!block;n#onKeyDown#0" />
+            <element signature="e#19592#20073#0" />
+            <element signature="e#19635#19879#0" />
+            <element signature="e#20113#20598#0" />
+            <element signature="e#20635#21107#0" />
+            <element signature="e#21146#21620#0" />
+            <element signature="e#21665#21817#0" />
+            <element signature="e#21862#22011#0" />
+            <element signature="e#22052#22086#0" />
+            <element signature="e#22183#22388#0" />
+            <element signature="e#22423#22628#0" />
+            <element signature="e#22663#22838#0" />
+            <element signature="e#22873#23048#0" />
+            <element signature="e#23292#23351#0" />
             <element signature="n#!!block;n#changePStartPos#0" />
             <element signature="n#!!block;n#drawPMap#0" />
             <element signature="n#!!block;n#drawMap#0" />
@@ -418,22 +563,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" selection-start-line="20" selection-start-column="17" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/roof.html" />
     <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Main.html" />
     <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Main.js" />
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="6" lean-forward="true" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Lab.html" />
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1329" />
@@ -460,13 +593,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.css" />
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/loadLevels.js" />
     <entry file="file://$PROJECT_DIR$/Flat/Main/Src/controlsJS.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -475,70 +602,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-end-line="433" />
-          <folding>
-            <element signature="n#!!block;n#drawPMap#0" />
-            <element signature="n#!!block;n#movePlayer#0" />
-            <element signature="n#!!block;n#onKeyDown#0" />
-            <element signature="n#!!block;n#onKeyUp#0" />
-            <element signature="n#!!block;n#fillErasedMap#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Temp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="687" selection-start-line="687" selection-end-line="687" />
-          <folding>
-            <element signature="e#26#15676#0" />
-            <element signature="e#886#2939#0" />
-            <element signature="e#3611#5945#0" />
-            <element signature="e#5975#6951#0" />
-            <element signature="e#6983#9646#0" />
-            <element signature="e#9678#9761#0" />
-            <element signature="e#9929#11010#0" />
-            <element signature="e#11040#12031#0" />
-            <element signature="e#12066#12145#0" />
-            <element signature="e#12213#15670#0" />
-            <element signature="e#15696#15704#0" />
-            <element signature="e#15724#15732#0" />
-            <element signature="e#15752#15760#0" />
-            <element signature="e#15785#25710#0" />
-            <element signature="e#25730#25738#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" selection-start-line="16" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/images/scientist2.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/images/ClothingStoreSprite.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.html" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/Temp.js" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.css" />
     <entry file="file://$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1044">
@@ -566,118 +633,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.css">
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.css" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js" />
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        <state relative-caret-position="240">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/test.html">
+    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="97" column="35" lean-forward="true" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="35" />
+        <state relative-caret-position="552">
+          <caret line="124" column="27" selection-start-line="110" selection-start-column="16" selection-end-line="124" selection-end-column="27" />
           <folding>
-            <element signature="n#!!block;n#drawPMap#0;n#!!top" />
-            <element signature="e#8177#8674#0" />
-            <element signature="e#8206#8461#0" />
-            <element signature="e#8697#9198#0" />
-            <element signature="e#9218#9706#0" />
-            <element signature="e#9247#9496#0" />
-            <element signature="e#9728#10220#0" />
-            <element signature="n#!!block;n#onKeyDown#0;n#!!top" />
-            <element signature="e#11206#11377#0" />
-            <element signature="e#11430#11602#0" />
-            <element signature="e#11652#11821#0" />
-            <element signature="e#11873#12044#0" />
-            <element signature="n#!!block;n#fillErasedMap#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" selection-start-line="42" selection-end-line="42" selection-end-column="72" />
-          <folding>
-            <element signature="e#3410#18656#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="59" lean-forward="true" selection-start-line="36" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Wall.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/LabMats.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Floor.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/images/Lab.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/images/player.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/images/scientist.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/images/starttext.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/images/warning.gif">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/images/title.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="75" selection-start-line="18" selection-start-column="75" selection-end-line="18" selection-end-column="75" />
-          <folding>
-            <element signature="e#2352#5738#0" />
-            <element signature="e#5764#10130#0" />
-            <element signature="e#10149#10157#0" />
-            <element signature="e#10176#10184#0" />
-            <element signature="e#10203#38989#0" />
-            <element signature="e#10824#12117#0" />
-            <element signature="e#12681#12836#0" />
-            <element signature="e#12771#12826#0" />
-            <element signature="e#13126#14344#0" />
-            <element signature="e#14819#14974#0" />
-            <element signature="e#14909#14964#0" />
-            <element signature="e#10257#10265#0" />
-            <element signature="n#!!block;n#fillErasedMap#0" />
-            <element signature="e#14681#15162#0" />
-            <element signature="e#15202#15687#0" />
-            <element signature="e#15724#16196#0" />
-            <element signature="e#16235#16709#0" />
-            <element signature="e#16754#16906#0" />
-            <element signature="e#16951#17100#0" />
-            <element signature="e#17141#17175#0" />
-            <element signature="e#17211#17396#0" />
-            <element signature="e#17431#17616#0" />
-            <element signature="e#20296#20501#0" />
-            <element signature="e#17799#17858#0" />
-            <element signature="n#!!block;n#changePStartPos#0" />
-            <element signature="n#!!block;n#drawPMap#0" />
-            <element signature="n#!!block;n#drawMap#0" />
+            <element signature="e#130#958#0" />
           </folding>
         </state>
       </provider>
@@ -686,6 +662,71 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="74" column="1" lean-forward="true" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
+          <folding>
+            <element signature="e#341#391#0" />
+            <element signature="e#558#592#0" />
+            <element signature="e#1315#1981#0" />
+            <element signature="e#2519#5935#0" />
+            <element signature="e#3541#3566#0" />
+            <element signature="e#2568#3700#0" />
+            <element signature="e#2630#3689#0" />
+            <element signature="e#3751#4129#0" />
+            <element signature="e#3964#4119#0" />
+            <element signature="e#4054#4109#0" />
+            <element signature="e#5931#10365#0" />
+            <element signature="e#6736#6764#0" />
+            <element signature="e#6865#9023#0" />
+            <element signature="e#9075#9369#0" />
+            <element signature="e#9137#9296#0" />
+            <element signature="e#9201#9289#0" />
+            <element signature="e#9460#9503#0" />
+            <element signature="e#9800#9824#0" />
+            <element signature="e#10020#10175#0" />
+            <element signature="e#10110#10165#0" />
+            <element signature="e#10297#10305#0" />
+            <element signature="e#10324#12676#0" />
+            <element signature="e#10906#12124#0" />
+            <element signature="e#12397#12670#0" />
+            <element signature="e#12517#12572#0" />
+            <element signature="e#13975#16539#0" />
+            <element signature="e#10862#12307#0" />
+            <element signature="e#16137#16376#0" />
+            <element signature="e#12549#12704#0" />
+            <element signature="e#12639#12694#0" />
+            <element signature="e#16616#18932#0" />
+            <element signature="e#13200#14578#0" />
+            <element signature="e#18530#18769#0" />
+            <element signature="e#14830#14985#0" />
+            <element signature="e#14920#14975#0" />
+            <element signature="e#15168#15176#0" />
+            <element signature="e#15221#15300#0" />
+            <element signature="n#!!block;n#fillErasedMap#0" />
+            <element signature="e#19321#19368#0" />
+            <element signature="n#!!block;n#onKeyDown#0" />
+            <element signature="e#19592#20073#0" />
+            <element signature="e#19635#19879#0" />
+            <element signature="e#20113#20598#0" />
+            <element signature="e#20635#21107#0" />
+            <element signature="e#21146#21620#0" />
+            <element signature="e#21665#21817#0" />
+            <element signature="e#21862#22011#0" />
+            <element signature="e#22052#22086#0" />
+            <element signature="e#22183#22388#0" />
+            <element signature="e#22423#22628#0" />
+            <element signature="e#22663#22838#0" />
+            <element signature="e#22873#23048#0" />
+            <element signature="e#23292#23351#0" />
+            <element signature="n#!!block;n#changePStartPos#0" />
+            <element signature="n#!!block;n#drawPMap#0" />
+            <element signature="n#!!block;n#drawMap#0" />
+          </folding>
         </state>
       </provider>
     </entry>
