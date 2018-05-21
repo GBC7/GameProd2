@@ -30,7 +30,7 @@ var sidewalk = new Image();
 sidewalk.src = "../../4Streetz/images/sidewalk.png";
 
 var scientist = new Image();                            //Declare image for player
-scientist.src = "../../Main/images/scientist2.png"; 
+scientist.src = "../../0Main/images/scientist2.png";
 var house = new Image();
 house.src = "../../4Streetz/images/house.png";
 var bank = new Image();

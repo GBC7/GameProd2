@@ -57,7 +57,7 @@ frameY: 0,
 
 //Global Images
 let scientist = new Image();                                    //Regular player image
-scientist.src = "../../Main/images/scientist2.png";
+scientist.src = "../../0Main/images/scientist2.png";
 let sciUndWater = new Image();                                  //Image fpr player while in sewer
 sciUndWater.src = "../../2Sewer/images/scientist2.png";
 let wetPipe = new Image();

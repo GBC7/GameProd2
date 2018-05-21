@@ -58,7 +58,7 @@ function input()
     function startGame()
     {
         clearInterval(timer);
-        location.href = 'Main.html'                                         //next page link
+        location.href = '0Main.html'                                         //next page link
     }
 
 }
