@@ -24,23 +24,23 @@ var p =         //PlayerObject
 };
 
 var grass = new Image();
-grass.src = "../../Lvl4TheStreetz/images/grass.png";
+grass.src = "../../4Streetz/images/grass.png";
 
 var sidewalk = new Image();
-sidewalk.src = "../../Lvl4TheStreetz/images/sidewalk.png";
+sidewalk.src = "../../4Streetz/images/sidewalk.png";
 
 var scientist = new Image();                            //Declare image for player
 scientist.src = "../../Main/images/scientist2.png"; 
 var house = new Image();
-house.src = "../../Lvl4TheStreetz/images/house.png";
+house.src = "../../4Streetz/images/house.png";
 var bank = new Image();
-bank.src = "../../Lvl4TheStreetz/images/bank.png";
+bank.src = "../../4Streetz/images/bank.png";
 var store = new Image();
-store.src = "../../Lvl4TheStreetz/images/store.png";
+store.src = "../../4Streetz/images/store.png";
 /*var house3 = new Image();
-house.src = "../../Lvl4TheStreetz/images/house3.png";
+house.src = "../../4Streetz/images/house3.png";
 var house4 = new Image();
-house.src = "../../Lvl4TheStreetz/images/house4.png"; */
+house.src = "../../4Streetz/images/house4.png"; */
 
 
             //Set player image using player object

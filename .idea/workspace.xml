@@ -2,9 +2,84 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54daef3a-b5ba-48d0-ba88-1fd655b80745" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/Stairs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/Stairs:Hallways.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/chimney.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/chimney.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/city.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/city.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/outsideWall.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/outsideWall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/shingles.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/shingles.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/streetLight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/streetLight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/windowBottomLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/windowBottomLeft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/windowBottomRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/windowBottomRight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/windowTopLeft.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/windowTopLeft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl1Home/images/windowTopRight.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/1Home/images/windowTopRight.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/audio/AudioCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/audio/AudioCredits.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/audio/waterRunning.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/audio/waterRunning.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/ImageCredits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/ImageCredits.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatBlack_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatBlack_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatBlack_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatBlack_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatBlack_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatBlack_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatGreen_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatGreen_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatGreen_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatGreen_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatGreen_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatGreen_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatWhite_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatWhite_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatWhite_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatWhite_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/RatWhite_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/RatWhite_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/Rat_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/Rat_0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/Rat_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/Rat_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/NewRats/Rat_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/NewRats/Rat_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/door.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/door.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/door2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/door2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/drain.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/drain.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/floor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/floorTiles.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/floorTiles.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/phase_spider_by_zireael07-d7eymb4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/phase_spider_by_zireael07-d7eymb4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/pillar.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/pillar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/pipe.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/pipe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/pipe1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/pipe1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/pipe2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/pipe2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/pipeWet.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/pipeWet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/scientist2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/scientist2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/sewerSpritesheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/sewerSpritesheet.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/stairs.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/stairs.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/stairs2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/stairs2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/torch.gif" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/torch.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/wall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl2Sewer/images/wall2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/2Sewer/images/wall2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/credits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/3Store/credits.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/images/ClothingStoreSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/3Store/images/ClothingStoreSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl3ClothingStore/images/checkout.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/3Store/images/checkout.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/credits.doc" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/credits.doc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/credits.rtf" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/credits.rtf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/bank.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/bank.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/grass.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/grass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/house.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/house.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/house1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/house1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/house2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/house2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/house3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/house3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/house4.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/house4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/sidewalk.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/sidewalk.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/store.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/store.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/images/streetzSprite.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/images/streetzSprite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.css" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/CatSS.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/CatSS.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/Sources.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/Sources.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/Walls (1).png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/Walls (1).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/Walls (2).png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/Walls (2).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/cat.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/cat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/catSS2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/catSS2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/door.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/door.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/floor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/staff.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/staff.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/wall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/wall1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/wall1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/wall2.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/wall2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl5MomsPlace/images/wall3.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/5MomsPlace/images/wall3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/images/Floor.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/6Lab/images/Floor.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/images/Lab.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/6Lab/images/Lab.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/images/LabMats.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/6Lab/images/LabMats.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Lvl6Lab/images/Wall.png" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/6Lab/images/Wall.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Flat/Main/Src/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Flat/Main/Src/Main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,7 +93,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
@@ -27,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="411">
@@ -249,21 +324,21 @@
       <workItem from="1526830778090" duration="6272000" />
       <workItem from="1526838691546" duration="2575000" />
       <workItem from="1526846857395" duration="24949000" />
-      <workItem from="1526922065811" duration="8781000" />
+      <workItem from="1526922065811" duration="8973000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79859000" />
+    <option name="totallyTimeSpent" value="80051000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32900944" />
       <window_info anchor="bottom" id="Run" order="6" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
@@ -276,7 +351,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,17 +363,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js</url>
+          <url>file://$PROJECT_DIR$/Flat/1Home/src/Roof.js</url>
           <line>69</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Flat/Lvl1Home/src/Roof.js</url>
+          <url>file://$PROJECT_DIR$/Flat/1Home/src/Roof.js</url>
           <line>114</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js</url>
+          <url>file://$PROJECT_DIR$/Flat/2Sewer/Src/sewer.js</url>
           <line>223</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
@@ -543,17 +617,17 @@
     <entry file="file://$PROJECT_DIR$/Flat/Lvl2Sewer/Src/sewer.js" />
     <entry file="file://$PROJECT_DIR$/Flat/Lvl5MomsPlace/Main.js" />
     <entry file="file://$PROJECT_DIR$/Flat/Lvl6Lab/Src/lab.js" />
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.css">
+    <entry file="file://$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html">
+    <entry file="file://$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.js">
+    <entry file="file://$PROJECT_DIR$/Flat/4Streetz/src/theStreetz.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="124" column="27" selection-start-line="110" selection-start-column="16" selection-end-line="124" selection-end-column="27" />
@@ -586,6 +660,13 @@
             <element signature="n#!!block;n#onKeyDown#0" />
             <element signature="n#!!block;n#onKeyUp#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -643,13 +724,6 @@
             <element signature="e#41155#41297#0" />
             <element signature="e#30984#31073#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>

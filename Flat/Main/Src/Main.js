@@ -59,17 +59,17 @@ frameY: 0,
 let scientist = new Image();                                    //Regular player image
 scientist.src = "../../Main/images/scientist2.png";
 let sciUndWater = new Image();                                  //Image fpr player while in sewer
-sciUndWater.src = "../../Lvl2Sewer/images/scientist2.png";
+sciUndWater.src = "../../2Sewer/images/scientist2.png";
 let wetPipe = new Image();
-wetPipe.src = "../../Lvl2Sewer/images/pipeWet.png";
+wetPipe.src = "../../2Sewer/images/pipeWet.png";
 let floor = new Image();
-floor.src = "../../Lvl2Sewer/images/floor.png";
+floor.src = "../../2Sewer/images/floor.png";
 let level3sprite = new Image();
-level3sprite.src = "../../Lvl3ClothingStore/images/ClothingStoreSprite.png";
+level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
 
 
 //Global Audio
-let waterRunning = new Audio('../../Lvl2Sewer/audio/waterRunning.mp3');
+let waterRunning = new Audio('../../2Sewer/audio/waterRunning.mp3');
 waterRunning.loop = true;
 waterRunning.volume = 0.3;
 
@@ -82,29 +82,29 @@ function startGame()
     if (l1)//Home(roof)
 
     {
-        canvas.style.backgroundImage = "url('../../Lvl1Home/images/city.gif')";
+        canvas.style.backgroundImage = "url('../../1Home/images/city.gif')";
         /*You could change fill style to brown or some other colour and fill a rectangle behind the house so that the
         * background picture doesn't show through the house*/
 
 
         let roof = new Image();
-        roof.src = "../../Lvl1Home/images/shingles.jpg";
+        roof.src = "../../1Home/images/shingles.jpg";
         let outsideWall = new Image();
-        outsideWall.src = "../../Lvl1Home/images/outsideWall.png";
+        outsideWall.src = "../../1Home/images/outsideWall.png";
         let chimney = new Image();
-        chimney.src = "../../Lvl1Home/images/chimney.png";
+        chimney.src = "../../1Home/images/chimney.png";
         let windowTopLeft = new Image();
-        windowTopLeft.src = "../../Lvl1Home/images/windowTopLeft.png";
+        windowTopLeft.src = "../../1Home/images/windowTopLeft.png";
         let windowTopRight = new Image();
-        windowTopRight.src = "../../Lvl1Home/images/windowTopRight.png";
+        windowTopRight.src = "../../1Home/images/windowTopRight.png";
         let windowBottomLeft = new Image();
-        windowBottomLeft.src = "../../Lvl1Home/images/windowBottomLeft.png";
+        windowBottomLeft.src = "../../1Home/images/windowBottomLeft.png";
         let windowBottomRight = new Image();
-        windowBottomRight.src = "../../Lvl1Home/images/windowBottomRight.png";
+        windowBottomRight.src = "../../1Home/images/windowBottomRight.png";
         //let tree = new Image();
         //tree.src = "../images/tree.png";
         let streetLight = new Image();
-        streetLight.src = "../../Lvl1Home/images/streetLight.png";
+        streetLight.src = "../../1Home/images/streetLight.png";
 
 
         //Below one letter variables must be updated upon calling each level
@@ -177,15 +177,15 @@ function startGame()
     {
         canvas.style.backgroundImage = "";
         let pipe = new Image();
-        pipe.src = "../../Lvl2Sewer/images/pipe.png";
+        pipe.src = "../../2Sewer/images/pipe.png";
         let pillar = new Image();
-        pillar.src = "../../Lvl2Sewer/images/pillar.png";
+        pillar.src = "../../2Sewer/images/pillar.png";
         let wall = new Image();
-        wall.src = "../../Lvl2Sewer/images/wall.png";
+        wall.src = "../../2Sewer/images/wall.png";
         let door = new Image();
-        door.src = "../../Lvl2Sewer/images/door.png";
+        door.src = "../../2Sewer/images/door.png";
         let drain = new Image();
-        drain.src = "../../Lvl2Sewer/images/drain.png";
+        drain.src = "../../2Sewer/images/drain.png";
 
 
         a = wall;
@@ -315,19 +315,19 @@ function startGame()
 
     {
         let grass = new Image();
-        grass.src = "../../Lvl4TheStreetz/images/grass.png";
+        grass.src = "../../4Streetz/images/grass.png";
 
         let sidewalk = new Image();
-        sidewalk.src = "../../Lvl4TheStreetz/images/sidewalk.png";
+        sidewalk.src = "../../4Streetz/images/sidewalk.png";
         
         let house = new Image();
-        house.src = "../../Lvl4TheStreetz/images/house.png";
+        house.src = "../../4Streetz/images/house.png";
         
         let bank = new Image();
-        bank.src = "../../Lvl4TheStreetz/images/bank.png";
+        bank.src = "../../4Streetz/images/bank.png";
         
         let store = new Image();
-        store.src = "../../Lvl4TheStreetz/images/store.png";
+        store.src = "../../4Streetz/images/store.png";
 
 
         a = sidewalk;
@@ -393,16 +393,16 @@ function startGame()
 
     {
         let wall = new Image();
-        wall.src = "../../Lvl5MomsPlace/images/wall.png";
+        wall.src = "../../5MomsPlace/images/wall.png";
 
         let door = new Image();
-        door.src = "../../Lvl5MomsPlace/images/door.png";
+        door.src = "../../5MomsPlace/images/door.png";
 
         let floor = new Image();
-        floor.src = "../../Lvl5MomsPlace/images/floor.png";
+        floor.src = "../../5MomsPlace/images/floor.png";
 
         let cat = new Image();
-        cat.src = "../../Lvl5MomsPlace/images/cat.png";
+        cat.src = "../../5MomsPlace/images/cat.png";
 
 
         if (lMap[level] === undefined)
@@ -465,9 +465,9 @@ function startGame()
 
     {
         let floor = new Image();
-        floor.src = "../../Lvl6Lab/images/Floor.png";
+        floor.src = "../../6Lab/images/Floor.png";
         let wall = new Image();
-        wall.src = "../../Lvl6Lab/images/Wall.png";
+        wall.src = "../../6Lab/images/Wall.png";
 
 
         if (lMap[level] === undefined)
