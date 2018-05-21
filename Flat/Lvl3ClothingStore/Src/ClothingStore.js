@@ -124,9 +124,6 @@ function drawTheMap()
                 case 12: //wall2
                     ctx.drawImage(level3sprite, 0, 32, 32, 32, destX, destY, 32, 32);
                     break;
-                case 13: //black:void
-                    ctx.drawImage(level3sprite, 224, 96, 32, 32, destX, destY, 32, 32);
-                    break;
                 case 14: // cabinet1
                     ctx.drawImage(level3sprite, 0, 64, 32, 32, destX, destY, 32, 32);
                     break;
@@ -135,9 +132,6 @@ function drawTheMap()
                     break;
                 case 16: //stair1
                     ctx.drawImage(level3sprite, 192, 32, 32, 32, destX, destY, 32, 32);
-                    break;
-                case 17: //stair2
-                    ctx.drawImage(level3sprite, 224, 32, 32, 32, destX, destY, 32, 32);
                     break;
                 case 18: //doormat1:exit
                     ctx.drawImage(level3sprite, 32, 64, 32, 32, destX, destY, 32, 32);
@@ -398,9 +392,6 @@ function fillErasedMap()
                     case 12: //wall2
                         ctx.drawImage(level3sprite, 0, 32, 32, 32, mC*8, mR*8, 32, 32);
                         break;
-                    case 13: //black:void
-                        ctx.drawImage(level3sprite, 224, 96, 32, 32, mC*8, mR*8, 32, 32);
-                        break;
                     case 14: // cabinet1
                         ctx.drawImage(level3sprite, 0, 64, 32, 32, mC*8, mR*8, 32, 32);
                         break;
@@ -409,9 +400,6 @@ function fillErasedMap()
                         break;
                     case 16: //stair1
                         ctx.drawImage(level3sprite, 192, 32, 32, 32, mC*8, mR*8, 32, 32);
-                        break;
-                    case 17: //stair2
-                        ctx.drawImage(level3sprite, 224, 32, 32, 32, mC*8, mR*8, 32, 32);
                         break;
                     case 18: //doormat1:exit
                         ctx.drawImage(level3sprite, 32, 64, 32, 32, mC*8, mR*8, 32, 32);
