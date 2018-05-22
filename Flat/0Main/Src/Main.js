@@ -1,14 +1,14 @@
 let gameOver = false;
 
 
-let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
+let l1 = false, l2 = false, l3 = true, l4 = false, l5 = false, l6 = false, l7 = false;
 
 
-let level = 1;
+let level = 3;
 
 
 let lightSwitch = 1, sewerSwitch = 1;               //For sewer level
-let lightsOn = false, sewersDrained = false;         //For sewer level
+let lightsOn = true, sewersDrained = true;         //For sewer level
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
 
 
@@ -176,6 +176,10 @@ function startGame()              //      **** = floor
 
     {
         canvas.style.backgroundImage = "";
+
+
+        let stairs = new Image();
+        stairs.src = "../../2Sewer/images/stairs.png";
         let pipe = new Image();
         pipe.src = "../../2Sewer/images/pipe.png";
         let pillar = new Image();
@@ -196,13 +200,14 @@ function startGame()              //      **** = floor
         f = floor;
         g = drain;
         h = pipe;
+        i = stairs;
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
             lMap[level] =                                           //Initialize this levels map
                 //                                 10                            20
                 [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
 
-                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //0
+                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],        //0
                     [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //1
                     [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //2
                     [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //3
@@ -257,8 +262,9 @@ function startGame()              //      **** = floor
 
 
         //Below ensures all elements are on screen when level is drawn
-        scientist.onload = function () {drawMap();};
-        floor.onload = function () {addEventListener("keydown", onKeyDown, false);};
+        scientist.onload = function () {stairs.onload = function(){drawMap();};};
+        addEventListener("keydown", onKeyDown, false);
+        startX[2] = startY[2] = 0;
     }
 
     if (l3)//Clothing Store               **** 0
@@ -308,7 +314,9 @@ function startGame()              //      **** = floor
 
         changePStartPos();
 
-        level3sprite.onload = function(){drawMap();addEventListener("keydown", onKeyDown, false);};
+        level3sprite.onload = function(){drawMap();};
+
+        addEventListener("keydown", onKeyDown, false);
     }
 
     if (l4)//The Streetz                  **** 1
@@ -719,13 +727,22 @@ function fillErasedMap()
                 {
                     if (!sewersDrained && l2)
                     {
-                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour green
                         if (yPos === 0 && xPos !== 320)
                             ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
                         else if (yPos === 0 && xPos === 320)
                             continue;
                         else
                             ctx.fillRect(xPos, yPos, 32, 32);
+
+                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";//Change to swamp colour brown
+                        if (yPos === 0 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
+                        else if (yPos === 0 && xPos === 320)
+                            continue;
+                        else
+                            ctx.fillRect(xPos, yPos, 32, 32);
+
                         waterRunning.play();
                     }
                     if (!lightsOn && l2)
@@ -752,6 +769,37 @@ function onKeyDown(e)
     if (e.keyCode === 37)//Left
 
     {
+        if (l3 && p.col === 3 && (p.row === 65 || p.row === 64))//Go back to sewer from store
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            startX[2] = 96;
+            startY[2] = 0;
+            setTimeout(goDownStays, 120);
+            var allTheStays = 0;
+            function goDownStays()
+            {
+                allTheStays++;
+                lPMap[level][p.row][p.col] = 0;
+                p.col --;
+                lPMap[level][p.row][p.col] = 1;
+                ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                ctx.drawImage(scientist, 0, 48, 32, 48, p.col* (8 - 2*allTheStays) , p.row*8 + (allTheStays * 15), 32- (allTheStays * 5), 48 - (allTheStays * 15));
+
+
+                if (allTheStays !== 3)            //If there are stairs to go down
+                    setTimeout(goDownStays, 300); //...Go down them
+                else                              //Otherwise, load level 2.
+                {
+                    level = 2;
+                    l1 = l3 = l4 = l5 = l6 = false;
+                    l2 = true;
+                    ctx.clearRect(0,0,800,600);
+                    startGame();
+                    setTimeout(drawMap, 40);
+                }
+            }
+        }
         if (p.col > xMin[level])
         {
             //remove player from current column
@@ -789,6 +837,40 @@ function onKeyDown(e)
     if (e.keyCode === 38)//Up
 
     {
+        if (l2 && p.col === 96 && p.row === 0)
+        {
+            let stairs = new Image();
+            stairs.src = "../../2Sewer/images/stairs.png";
+            stairs.onload = function()
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                goUpDaStays();
+                var staysClimbed = 0;
+                function goUpDaStays()
+                {
+                    staysClimbed ++;
+                    ctx.clearRect(96*8, 0, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, 0, 154 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
+                    if (staysClimbed !== 4)
+                        setTimeout(goUpDaStays, 120);
+                    else
+                    {
+                        waterRunning.pause();
+                        level = 3;
+                        l1 = l2 = l4 = l5 = l6 = false;
+                        l3 = true;
+                        ctx.clearRect(0,0,800,600);
+                        startGame();
+                        setTimeout(drawMap, 40);
+                    }
+                }
+
+
+            };
+
+        }
+
         if (p.row > yMin[level])
         {
             //remove player from current row
@@ -910,6 +992,8 @@ function onKeyDown(e)
     drawPMap();//Draws the new players position
     if (sewersDrained || !l2)
         waterRunning.pause();
+    console.log("p.row: " + p.row);
+    console.log("p.col: " + p.col);
 }
 
 function changePStartPos()
@@ -1000,6 +1084,9 @@ function drawMap()
                             thingToDraw = wetPipe;
                         else
                             thingToDraw = h;
+                        break;
+                    case 8:
+                        thingToDraw = i;
                         break;
                 }
             }
@@ -1098,6 +1185,12 @@ function drawMap()
         ctx.fillRect(0, 24, 320, 600);
         ctx.fillRect(352, 24, 800, 600);
         ctx.fillRect(320, 32, 32, 600);
+
+        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";
+        ctx.fillRect(0, 24, 320, 600);
+        ctx.fillRect(352, 24, 800, 600);
+        ctx.fillRect(320, 32, 32, 600);
+
         waterRunning.play();
     }
     if (!lightsOn && l2)

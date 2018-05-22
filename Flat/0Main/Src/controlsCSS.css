@@ -18,3 +18,6 @@ body
     margin: 0 auto;                                       /*body position set to auto (centered)                        */
 }
 
+html{
+color: rgba(98, 79, 18, 0.51);
+}
