@@ -12,8 +12,8 @@ ctx.fillText("The controls are simple.  Use the arrow keys to", 120, 175);
 ctx.fillText("move the character and the spacebar to attack!", 120, 200);
 
 //Image Declarations
-var enterKey = new Image();
-enterKey.src = "../images/computer_key_spacebar.png";
+var spacebar = new Image();
+spacebar.src = "../images/computer_key_spacebar.png";
 var arrowKeys = new Image();
 arrowKeys.src = "../images/arrow-keys-vectors.jpg";
 
@@ -25,8 +25,8 @@ arrowKeys.onload = function()
 
 function render()
 {
-    ctx.drawImage(enterKey, 450, 275);
-    ctx.drawImage(arrowKeys, 170, 270);
+    ctx.drawImage(spacebar, 350, 290);
+    ctx.drawImage(arrowKeys, 120, 270);
     flashingText();
 
 
@@ -53,13 +53,18 @@ setTimeout(input, 500);                                                    // af
 
 function input()
 {
-    window.addEventListener("keyup", startGame);
-
-    function startGame()
-    {
-        clearInterval(timer);
-        location.href = 'Main.html'                                         //next page link
-    }
-
+    window.addEventListener("keydown", onKeyDown, false);
 }
-
+function onKeyDown(e)
+{
+    console.log(e.keyCode);
+    if (e.keyCode === 13)
+    {
+        startGame();
+    }
+}
+function startGame()
+{
+    clearInterval(timer);
+    location.href = 'Main.html'                                         //next page link
+}
