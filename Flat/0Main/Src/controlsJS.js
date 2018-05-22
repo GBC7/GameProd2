@@ -13,7 +13,7 @@ ctx.fillText("move the character and the spacebar to attack!", 120, 200);
 
 //Image Declarations
 var enterKey = new Image();
-enterKey.src = "../images/computer_key_enter.png";
+enterKey.src = "../images/computer_key_spacebar.png";
 var arrowKeys = new Image();
 arrowKeys.src = "../images/arrow-keys-vectors.jpg";
 

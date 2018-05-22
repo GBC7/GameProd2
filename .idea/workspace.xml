@@ -13,12 +13,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3040">
-              <caret line="224" column="0" lean-forward="true" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+            <state relative-caret-position="19">
+              <caret line="224" column="0" lean-forward="false" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
               <folding>
                 <element signature="e#361#411#0" expanded="false" />
                 <element signature="e#841#888#0" expanded="false" />
@@ -28,6 +28,16 @@
                 <element signature="n#!!block;n#drawPMap#0" expanded="false" />
                 <element signature="n#!!block;n#drawMap#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controlsJS.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/controlsJS.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,8 +115,8 @@
         <option value="$PROJECT_DIR$/Flat/Lvl4TheStreetz/src/theStreetz.html" />
         <option value="$PROJECT_DIR$/Flat/Lvl3ClothingStore/Src/ClothingStore.js" />
         <option value="$PROJECT_DIR$/Flat/Main/Src/Main.js" />
-        <option value="$PROJECT_DIR$/Flat/0Main/Src/controlsJS.js" />
         <option value="$PROJECT_DIR$/Flat/0Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/Flat/0Main/Src/controlsJS.js" />
       </list>
     </option>
   </component>
@@ -140,37 +150,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2Git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2Git" type="462c0819:PsiDirectoryNode" />
+              <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
-              <item name="Src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="0Main" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,11 +238,12 @@
       <workItem from="1526846857395" duration="24949000" />
       <workItem from="1526922065811" duration="10857000" />
       <workItem from="1526948214394" duration="115000" />
+      <workItem from="1526950302609" duration="170000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82050000" />
+    <option name="totallyTimeSpent" value="82220000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="164" y="137" width="1341" height="812" extended-state="0" />
@@ -291,6 +302,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#361#411#0" expanded="false" />
+            <element signature="e#841#888#0" expanded="false" />
+            <element signature="n#!!block;n#fillErasedMap#0" expanded="false" />
+            <element signature="n#!!block;n#onKeyDown#0" expanded="false" />
+            <element signature="n#!!block;n#changePStartPos#0" expanded="false" />
+            <element signature="n#!!block;n#drawPMap#0" expanded="false" />
+            <element signature="n#!!block;n#drawMap#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1815">
@@ -444,9 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="124" column="27" lean-forward="false" selection-start-line="110" selection-start-column="16" selection-end-line="124" selection-end-column="27" />
-          <folding>
-            <element signature="e#130#958#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -459,17 +483,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/controlsJS.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="711">
-          <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3040">
-          <caret line="224" column="0" lean-forward="true" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
+        <state relative-caret-position="19">
+          <caret line="224" column="0" lean-forward="false" selection-start-line="224" selection-start-column="0" selection-end-line="224" selection-end-column="0" />
           <folding>
             <element signature="e#361#411#0" expanded="false" />
             <element signature="e#841#888#0" expanded="false" />
@@ -479,6 +496,14 @@
             <element signature="n#!!block;n#drawPMap#0" expanded="false" />
             <element signature="n#!!block;n#drawMap#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flat/0Main/Src/controlsJS.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
