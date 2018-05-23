@@ -177,19 +177,6 @@ function startGame()              //      **** = floor
     {
         canvas.style.backgroundImage = "";
 
-
-        let wallTop = new Image();
-        wallTop.src = "../../2Sewer/images/wallTop.png";
-        let wallCorner = new Image();
-        wallCorner.src = "../../2Sewer/images/wallCorn.png";
-        let topOfWall = new Image();
-        topOfWall.src = "../../2Sewer/images/topOfWall.png";
-        let wallSwamp = new Image();
-        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
-        let door2 = new Image();
-        door2.src = "../../2Sewer/images/door2.png";
-        let stairs = new Image();
-        stairs.src = "../../2Sewer/images/stairs.png";
         let pipe = new Image();
         pipe.src = "../../2Sewer/images/pipe.png";
         let pillar = new Image();
@@ -200,6 +187,19 @@ function startGame()              //      **** = floor
         door.src = "../../2Sewer/images/door.png";
         let drain = new Image();
         drain.src = "../../2Sewer/images/drain.png";
+        let topSide = new Image();
+        topSide.src = "../../2Sewer/images/topSide.png";
+        let topCorner = new Image();
+        topCorner.src = "../../2Sewer/images/topCorner.png";
+        let wallCorner = new Image();
+        wallCorner.src = "../../2Sewer/images/wallCorner.png";
+        let wallSwamp = new Image();
+        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
+        let door2 = new Image();
+        door2.src = "../../2Sewer/images/door2.png";
+        let stairs = new Image();
+        stairs.src = "../../2Sewer/images/stairs.png";
+
 
 
         a = wall;       //0
@@ -213,9 +213,9 @@ function startGame()              //      **** = floor
         i = stairs;     //8
         j = door2;      //9
         k = wallSwamp;  //10
-        l = topOfWall;    //11
-        m = wallCorner; //12
-        n = wallTop;    //13
+        l = wallCorner; //11
+        m = topSide;    //12
+        n = topCorner;  //13
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
@@ -223,7 +223,7 @@ function startGame()              //      **** = floor
                 //                                 10                            20
                 [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
 
-                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8],        //0
+                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 8],        //0
                     [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //1
                     [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //2
                     [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //3
@@ -251,7 +251,7 @@ function startGame()              //      **** = floor
             {
                 for (let x = 0; x < lMap[level][0].length; x++)
                 {
-                    lMap[level][y][x] = (Math.floor(Math.random() * 4) + 2);
+                    lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
                 }
             }
 
@@ -260,23 +260,19 @@ function startGame()              //      **** = floor
                                                                         // for randomized floor pattern
         }
 
-        // Wall barrier for the locked portion of the map
-        lMap[level][0][18] = 13;
-        lMap[level][1][18] = 11;
-        lMap[level][2][18] = 11;
-        lMap[level][3][18] = 11;
-        lMap[level][3][18] = 11;
-        lMap[level][4][18] = 11;
-        lMap[level][5][18] = 11;
-        lMap[level][6][18] = 11;
-        lMap[level][7][18] = 12;
-        lMap[level][7][19] = 10;
-        lMap[level][7][20] = 10;
-        lMap[level][7][21] = 10;
-        lMap[level][7][22] = 9;
-        lMap[level][7][23] = 10;
-        lMap[level][7][24] = 10;
 
+        for (let wall = 1; wall < 7; wall++)                        //Setup locked room
+        {
+            lMap[level][wall][18] = 12;
+            lMap[level][7][wall + 17] = 10;
+            for (let tiles = 19; tiles < 25; tiles++)
+            {
+                lMap[level][wall][tiles] = 5;
+            }
+        }
+        lMap[level][7][22] = 9;
+        lMap[level][7][24] = 10;
+        lMap[level][7][18] = 11;
 
         if (lPMap[level] === undefined)
         {
@@ -666,6 +662,18 @@ function fillErasedMap()
                             break;
                         case 13:
                             thingToDraw = n;
+                            break;
+                        case 14:
+                            thingToDraw = o;
+                            break;
+                        case 15:
+                            thingToDraw = q;
+                            break;
+                        case 16:
+                            thingToDraw = r;
+                            break;
+                        case 17:
+                            thingToDraw = s;
                             break;
                     }
                 }
@@ -1146,6 +1154,19 @@ function drawMap()
                     case 13:
                         thingToDraw = n;
                         break;
+                    case 14:
+                        thingToDraw = o;
+                        break;
+                    case 15:
+                        thingToDraw = q;
+                        break;
+                    case 16:
+                        thingToDraw = r;
+                        break;
+                    case 17:
+                        thingToDraw = s;
+                        break;
+
                 }
             }
 
