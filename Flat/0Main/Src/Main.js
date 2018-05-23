@@ -1,10 +1,10 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = false, l3 = true, l4 = false, l5 = false, l6 = false, l7 = false;
+let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
 
 
-let level = 3;
+let level = 2;
 
 
 let lightSwitch = 1, sewerSwitch = 1;               //For sewer level
@@ -178,6 +178,16 @@ function startGame()              //      **** = floor
         canvas.style.backgroundImage = "";
 
 
+        let wallTop = new Image();
+        wallTop.src = "../../2Sewer/images/wallTop.png";
+        let wallCorner = new Image();
+        wallCorner.src = "../../2Sewer/images/wallCorn.png";
+        let topOfWall = new Image();
+        topOfWall.src = "../../2Sewer/images/topOfWall.png";
+        let wallSwamp = new Image();
+        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
+        let door2 = new Image();
+        door2.src = "../../2Sewer/images/door2.png";
         let stairs = new Image();
         stairs.src = "../../2Sewer/images/stairs.png";
         let pipe = new Image();
@@ -185,24 +195,30 @@ function startGame()              //      **** = floor
         let pillar = new Image();
         pillar.src = "../../2Sewer/images/pillar.png";
         let wall = new Image();
-        wall.src = "../../2Sewer/images/wall.png";
+        wall.src = "../../2Sewer/images/upperWall.png";
         let door = new Image();
         door.src = "../../2Sewer/images/door.png";
         let drain = new Image();
         drain.src = "../../2Sewer/images/drain.png";
 
 
-        a = wall;
-        b = door;
-        c = floor;
-        d = floor;
-        e = floor;
-        f = floor;
-        g = drain;
-        h = pipe;
-        i = stairs;
+        a = wall;       //0
+        b = door;       //1
+        c = floor;      //2
+        d = floor;      //3
+        e = floor;      //4
+        f = floor;      //5
+        g = drain;      //6
+        h = pipe;       //7
+        i = stairs;     //8
+        j = door2;      //9
+        k = wallSwamp;  //10
+        l = topOfWall;    //11
+        m = wallCorner; //12
+        n = wallTop;    //13
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
+        {
             lMap[level] =                                           //Initialize this levels map
                 //                                 10                            20
                 [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
@@ -227,6 +243,7 @@ function startGame()              //      **** = floor
                     [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //17
                     [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3]         //18
                 ];
+        }
 
         if (!floorSet)
         {
@@ -242,6 +259,24 @@ function startGame()              //      **** = floor
                                                                         // manually like this in order to allow
                                                                         // for randomized floor pattern
         }
+
+        // Wall barrier for the locked portion of the map
+        lMap[level][0][18] = 13;
+        lMap[level][1][18] = 11;
+        lMap[level][2][18] = 11;
+        lMap[level][3][18] = 11;
+        lMap[level][3][18] = 11;
+        lMap[level][4][18] = 11;
+        lMap[level][5][18] = 11;
+        lMap[level][6][18] = 11;
+        lMap[level][7][18] = 12;
+        lMap[level][7][19] = 10;
+        lMap[level][7][20] = 10;
+        lMap[level][7][21] = 10;
+        lMap[level][7][22] = 9;
+        lMap[level][7][23] = 10;
+        lMap[level][7][24] = 10;
+
 
         if (lPMap[level] === undefined)
         {
@@ -725,22 +760,30 @@ function fillErasedMap()
 
                 if (xPos !== undefined && yPos !== undefined)
                 {
-                    if (!sewersDrained && l2)
+                    if (!sewersDrained && l2)//Draw the section of sewage that was just erased
                     {
-                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";//Change to swamp colour green
-                        if (yPos === 0 && xPos !== 320)
-                            ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
-                        else if (yPos === 0 && xPos === 320)
-                            continue;
-                        else
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles (to make water look knee level)
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && xPos === 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles (to make water look knee level)
+                        else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
-                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";//Change to swamp colour brown
-                        if (yPos === 0 && xPos !== 320)
-                            ctx.fillRect(xPos, yPos + 24, 32, 16); //Draw over the bottom eighth of the tiles (to make water look knee level)
-                        else if (yPos === 0 && xPos === 320)
-                            continue;
-                        else
+                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && xPos === 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);
+                        else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
                         waterRunning.play();
@@ -1088,6 +1131,21 @@ function drawMap()
                     case 8:
                         thingToDraw = i;
                         break;
+                    case 9:
+                        thingToDraw = j;
+                        break;
+                    case 10:
+                        thingToDraw = k;
+                        break;
+                    case 11:
+                        thingToDraw = l;
+                        break;
+                    case 12:
+                        thingToDraw = m;
+                        break;
+                    case 13:
+                        thingToDraw = n;
+                        break;
                 }
             }
 
@@ -1182,14 +1240,16 @@ function drawMap()
     if (!sewersDrained && l2)
     {
         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";
-        ctx.fillRect(0, 24, 320, 600);
-        ctx.fillRect(352, 24, 800, 600);
-        ctx.fillRect(320, 32, 32, 600);
+        ctx.fillRect(0, 24, 320, 576);//Left
+        ctx.fillRect(320, 32, 32, 600);//Middle
+        ctx.fillRect(352, 24, 224, 576);//Right
+        ctx.fillRect(576, 252, 224, 376);//RightBottom
 
         ctx.fillStyle = "rgba(98, 79, 18, 0.51)";
-        ctx.fillRect(0, 24, 320, 600);
-        ctx.fillRect(352, 24, 800, 600);
-        ctx.fillRect(320, 32, 32, 600);
+        ctx.fillRect(0, 24, 320, 576);//Left
+        ctx.fillRect(320, 32, 32, 600);//Middle
+        ctx.fillRect(352, 24, 224, 576);//Right
+        ctx.fillRect(576, 252, 224, 376);//RightBottom
 
         waterRunning.play();
     }
