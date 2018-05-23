@@ -169,7 +169,7 @@ function startGame()              //      **** = floor
 
 
         streetLight.onload = function (){drawMap();};
-        scientist.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        addEventListener("keydown", onKeyDown, false);
     }
 
     if (l2)//Sewer                        **** 2345
@@ -296,6 +296,7 @@ function startGame()              //      **** = floor
         scientist.onload = function () {stairs.onload = function(){drawMap();};};
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
+        startX[1] = 36; startY[1] = 21;
     }
 
     if (l3)//Clothing Store               **** 0
@@ -851,7 +852,7 @@ function onKeyDown(e)
                 }
             }
         }
-        if (p.col > xMin[level])
+        if (p.col > xMin[level])    //Levels boundaries
         {
             //remove player from current column
             lPMap[level][p.row][p.col] = 0;
@@ -869,7 +870,7 @@ function onKeyDown(e)
     if (e.keyCode === 39)//Right
 
     {
-        if (p.col < xMax[level])
+        if (p.col < xMax[level])    //Levels boundaries
         {
             //remove player from current column
             lPMap[level][p.row][p.col] = 0;
@@ -888,41 +889,74 @@ function onKeyDown(e)
     if (e.keyCode === 38)//Up
 
     {
-        if (l2 && p.col === 96 && p.row === 0)
+        if (l2)//If in level two while character is pressing up
         {
-            let stairs = new Image();
-            stairs.src = "../../2Sewer/images/stairs.png";
-            stairs.onload = function()
+            if (p.col === 96 && p.row === 0) // && character is right under door 2
+            {
+                let stairs = new Image();
+                stairs.src = "../../2Sewer/images/stairs.png";
+                stairs.onload = function()
+                {
+                    removeEventListener("keydown", onKeyDown, false);
+                    let staysClimbed = 0;
+                    goUpDaStays();
+                    function goUpDaStays()
+                    {
+                        staysClimbed ++;
+                        ctx.clearRect(96*8, 0, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, 0, 154 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
+                        if (staysClimbed !== 4)
+                            setTimeout(goUpDaStays, 120);
+                        else
+                        {
+                            waterRunning.pause();
+                            level = 3;
+                            l1 = l2 = l4 = l5 = l6 = false;
+                            l3 = true;
+                            ctx.clearRect(0,0,800,600);
+                            startGame();
+                            setTimeout(drawMap, 40);
+                        }
+                    }
+
+
+                };
+            }  //Go through the door to level 3
+
+            if (p.col === 0 && p.row === 0) // || character is right under door 1
             {
                 removeEventListener("keydown", onKeyDown, false);
-                goUpDaStays();
-                var staysClimbed = 0;
-                function goUpDaStays()
+                ctx.clearRect(0, 0, 32, 48);
+                let sizer = 0;
+                shrink();
+
+                function shrink()
                 {
-                    staysClimbed ++;
-                    ctx.clearRect(96*8, 0, 32, 48);
-                    fillErasedMap();
-                    ctx.drawImage(scientist, 0, 154 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
-                    if (staysClimbed !== 4)
-                        setTimeout(goUpDaStays, 120);
-                    else
+                    if (sizer < 2)//If is not small enough to fit through the door..
                     {
-                        waterRunning.pause();
-                        level = 3;
-                        l1 = l2 = l4 = l5 = l6 = false;
-                        l3 = true;
+                        ctx.clearRect(0, 0, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, 0, 144, 32, 48, sizer*4, sizer*6, 28-(4*sizer), 42-(6*sizer));
+                        sizer++;
+                        setTimeout(shrink, 120);
+                    }       //Shrink
+                    else        //Otherwise, go through door and load level 1
+                    {
+                        level = 1;
+                        l2 = l3 = l4 = l5 = l6 = false;
+                        l1 = true;
                         ctx.clearRect(0,0,800,600);
                         startGame();
                         setTimeout(drawMap, 40);
                     }
                 }
-
-
-            };
-
+            }   //Go through the door to level 1
         }
 
-        if (p.row > yMin[level])
+
+
+        if (p.row > yMin[level])        //Levels boundaries
         {
             //remove player from current row
             lPMap[level][p.row][p.col] = 0;
@@ -940,7 +974,7 @@ function onKeyDown(e)
     if (e.keyCode === 40)//Down
 
     {
-        if (p.row < yMax[level])
+        if (p.row < yMax[level])        //Levels boundaries
         {
             //remove player from current row
             lPMap[level][p.row][p.col] = 0;
