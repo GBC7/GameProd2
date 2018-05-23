@@ -11,7 +11,10 @@ stairs:
 https://vxresource.wordpress.com/2011/07/18/recolored-objects/stairs-a/
 
 checkout.jpg:
-I don't know. I didn't add this file.
+http://www.rpgmakerweb.com/a/rpg-maker-vxace-tileset/modern-shop-add-on
+
+doormat.png:
+made by me
 
 ClothingStoreSprite.png:
 made by me (each resource is from above list)
