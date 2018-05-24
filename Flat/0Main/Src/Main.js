@@ -170,6 +170,7 @@ function startGame()              //      **** = floor
 
         streetLight.onload = function (){drawMap();};
         addEventListener("keydown", onKeyDown, false);
+        waterRunning.pause();
     }
 
     if (l2)//Sewer                        **** 2345
@@ -349,6 +350,7 @@ function startGame()              //      **** = floor
         level3sprite.onload = function(){drawMap();};
 
         addEventListener("keydown", onKeyDown, false);
+        waterRunning.pause();
     }
 
     if (l4)//The Streetz                  **** 1
@@ -596,24 +598,24 @@ function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
-    let thingToDraw = new Image(); //Setup an image letiable to use for choosing what image to draw where
+    let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
-    for (let mR = p.row - 4; mR < p.row + 7; mR ++) // mC = map column
+    for (let mR = p.row - 4; mR < p.row + 7; mR ++) //Run through all rows in the levels map (mR = map row)
     {
-        for (let mC = p.col - 4; mC < p.col + 5; mC ++)
+        for (let mC = p.col - 4; mC < p.col + 5; mC ++)//Run through all the columns in the levels map (mC = map Column)
         {
-            let xPos = undefined, yPos= undefined;
+            let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
 
-            if (lMap[level][mR/4] !== undefined && lMap[level][mR/4][mC/4] !== undefined)
+
+            if (lMap[level][mR/4] !== undefined && lMap[level][mR/4][mC/4] !== undefined)//If the space being examined exists
             {
                 xPos = mC*8;
                 yPos = mR*8;
                 mC = mC / 4;
                 mR = mR / 4;
-
-                if (!l3)//Uniform image placement switch statement
+                if (!l3)//Uniform image placement switch statement (for all levels except level 3
                 {
-                    switch (lMap[level][mR][mC])//decide what needs drawing based on map index
+                    switch (lMap[level][mR][mC])//check what needs drawing based on map index
                     {
                         case 0:
                             thingToDraw = a;
@@ -755,15 +757,18 @@ function fillErasedMap()
                     }
                 }
 
-                mC = mC * 4;
-                mR = mR * 4;
+                mC = mC * 4;    //Scale up for appropriate positioning
+                mR = mR * 4;    //Scale up for appropriate positioning
 
                 //Below is exclusively for sewer level
-                if (thingToDraw !== undefined)
+                if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                 {
-                    if (thingToDraw === floor  && l2) // If drawing the floor on level 2
+                    if (thingToDraw === floor  && l2)
+                        // If drawing the floor on level 2
+                        // then draw based on floorSpriteX var positioning
                         ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 8), (mR * 8), 32, 32);
                     else
+                        //Otherwise draw regularly
                         ctx.drawImage(thingToDraw, (mC * 8), (mR * 8));
                 }
 
@@ -773,17 +778,22 @@ function fillErasedMap()
                     {
                         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles (to make water look knee level)
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
-                            ctx.fillRect(xPos, yPos, 32, 32);
-                        else if (yPos > 0 && xPos === 320)
-                            ctx.fillRect(xPos, yPos, 32, 32);
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
+                                                                            // on row 0 (to make water look knee level)
+
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+                            ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
+                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                            ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
+
                         else if (yPos === 224 && xPos >= 576)
-                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
+                                                                            // of the secondary rooms outer wall
+                                                                            // (to make water look knee level)
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
-                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown
+                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
                             ctx.fillRect(xPos, yPos + 24, 32, 24);
                         else if (yPos > 0 && xPos < 576 && xPos !== 320)
@@ -794,12 +804,10 @@ function fillErasedMap()
                             ctx.fillRect(xPos, yPos + 28, 32, 4);
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
-
-                        waterRunning.play();
                     }
-                    if (!lightsOn && l2)
+                    if (!lightsOn && l2)                //If 'the lights are off' on level two
                     {
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
                         ctx.fillRect(xPos + 96, 0, 800, 600);
                         ctx.fillRect(0, yPos + 96, 800, 600);
                         ctx.fillRect(0, 0, xPos - 64, 600);
@@ -816,43 +824,15 @@ function onKeyDown(e)
 // and S & L keys for switching levels and turning
 // the sewer and lights on and off respectively
 {
-    p.prevCol = p.col;//Set column to clear
-    p.prevRow = p.row;//Set row to clear
+
+    p.prevCol = p.col;      //Set column to be cleared
+    p.prevRow = p.row;      //Set row to be cleared
+
+    checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
+
     if (e.keyCode === 37)//Left
 
     {
-        if (l3 && p.col === 3 && (p.row === 65 || p.row === 64))//Go back to sewer from store
-        {
-            removeEventListener("keydown", onKeyDown, false);
-            startX[2] = 96;
-            startY[2] = 0;
-            setTimeout(goDownStays, 120);
-            var allTheStays = 0;
-            function goDownStays()
-            {
-                allTheStays++;
-                lPMap[level][p.row][p.col] = 0;
-                p.col --;
-                lPMap[level][p.row][p.col] = 1;
-                ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                ctx.drawImage(scientist, 0, 48, 32, 48, p.col* (8 - 2*allTheStays) , p.row*8 + (allTheStays * 15), 32- (allTheStays * 5), 48 - (allTheStays * 15));
-
-
-                if (allTheStays !== 3)            //If there are stairs to go down
-                    setTimeout(goDownStays, 300); //...Go down them
-                else                              //Otherwise, load level 2.
-                {
-                    level = 2;
-                    l1 = l3 = l4 = l5 = l6 = false;
-                    l2 = true;
-                    ctx.clearRect(0,0,800,600);
-                    p.frameY = 0;
-                    startGame();
-                    setTimeout(drawMap, 40);
-                }
-            }
-        }
         if (p.col > xMin[level])    //Levels boundaries
         {
             //remove player from current column
@@ -890,76 +870,6 @@ function onKeyDown(e)
     if (e.keyCode === 38)//Up
 
     {
-        if (l2)//If in level two while character is pressing up
-        {
-            if (p.col === 96 && p.row === 0) // && character is right under door 2
-            {
-                p.frameY = 3;
-                let stairs = new Image();
-                stairs.src = "../../2Sewer/images/stairs.png";
-                stairs.onload = function()
-                {
-                    removeEventListener("keydown", onKeyDown, false);
-                    let staysClimbed = 0;
-                    goUpDaStays();
-                    function goUpDaStays()
-                    {
-                        staysClimbed ++;
-                        ctx.clearRect(96*8, 0, 32, 48);
-                        fillErasedMap();
-                        ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
-                        if (staysClimbed !== 4)
-                            setTimeout(goUpDaStays, 120);
-                        else
-                        {
-                            waterRunning.pause();
-                            level = 3;
-                            l1 = l2 = l4 = l5 = l6 = false;
-                            l3 = true;
-                            ctx.clearRect(0,0,800,600);
-                            p.frameY = 2;
-                            startGame();
-                            setTimeout(drawMap, 40);
-                        }
-                    }
-
-
-                };
-            }  //Go through the door to level 3
-
-            if (p.col === 0 && p.row === 0) // || character is right under door 1
-            {
-                removeEventListener("keydown", onKeyDown, false);
-                ctx.clearRect(0, 0, 32, 48);
-                let sizer = 0;
-                shrink();
-
-                function shrink()
-                {
-                    if (sizer < 2)//If is not small enough to fit through the door..
-                    {
-                        ctx.clearRect(0, 0, 32, 48);
-                        fillErasedMap();
-                        ctx.drawImage(scientist, 0, 144, 32, 48, sizer*4, sizer*6, 28-(4*sizer), 42-(6*sizer));
-                        sizer++;
-                        setTimeout(shrink, 120);
-                    }       //Shrink
-                    else        //Otherwise, go through door and load level 1
-                    {
-                        level = 1;
-                        l2 = l3 = l4 = l5 = l6 = false;
-                        l1 = true;
-                        ctx.clearRect(0,0,800,600);
-                        p.frameY = 0;
-                        startGame();
-                        setTimeout(drawMap, 40);
-                    }
-                }
-            }   //Go through the door to level 1
-        }
-
-
-
         if (p.row > yMin[level])        //Levels boundaries
         {
             //remove player from current row
@@ -993,6 +903,19 @@ function onKeyDown(e)
         p.frameX ++;
     }
 
+    if (e.keyCode === 32) //Space
+
+    {
+        //Character action
+    }
+
+
+
+
+
+
+    /* TEMP - for testing - TEMP */
+
     if (e.keyCode === 76) //L - light
 
     {
@@ -1009,142 +932,150 @@ function onKeyDown(e)
         drawMap(); //Drawing whole map because swamp covers whole map
     }
 
-    if (e.keyCode === 32) //Space
-
-    {
-        //Character action
-    }
-
-
-    /* TEMP - for switching levels during testing - TEMP */
     if (e.keyCode === 49) //1
     {
-        level = 1;
-        l2 = l3 = l4 = l5 = l6 = false;
-        l1 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 1;              //Change level identifier appropriately
+        l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l1 = true;                                  //Set level being travelled to as true
+
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 50) //2
     {
-        level = 2;
-        l1 = l3 = l4 = l5 = l6 = false;
-        l2 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 2;              //Change level identifier appropriately
+        l1 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l2 = true;                                  //Set level being travelled to as true
+
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 51) //3
     {
-        level = 3;
-        l1 = l2 = l4 = l5 = l6 = false;
-        l3 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 3;              //Change level identifier appropriately
+        l1 = l2 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l3 = true;                                  //Set level being travelled to as true
+
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 52) //4
     {
-        level = 4;
-        l1 = l2 = l3 = l5 = l6 = false;
-        l4 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 4;              //Change level identifier appropriately
+        l1 = l2 = l3 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l4 = true;                                  //Set level being travelled to as true
+
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 53) //5
     {
-        level = 5;
-        l1 = l2 = l3 = l4 = l6 = false;
-        l5 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 5;              //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l6 = false;             //Set all levels to false but the one being travelled to
+        l5 = true;                                  //Set level being travelled to as true
+
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
     if (e.keyCode === 54) //6
     {
-        level = 6;
-        l1 = l2 = l3 = l4 = l5 = false;
-        l6 = true;
-        ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
+        level = 6;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = false;             //Set all levels to false but the one being travelled to
+        l6 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
     }
-    /* TEMP - for switching levels during testing - TEMP */
 
 
     ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
     //Fills portion of the canvas the player was just taking up
     //a,b,c,d,e... are passed from movePlayer function call
+    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
     drawPMap();//Draws the new players position
-    if (sewersDrained || !l2)
-        waterRunning.pause();
+
+    if (sewersDrained) //If the water has been shut off
+            waterRunning.pause();           //Stop playing the noise of running water
+
+
+
     console.log("p.row: " + p.row);
     console.log("p.col: " + p.col);
 }
 
 function changePStartPos()
 {
-    for (let y = 0; y < lPMap[level].length; y++)
+    for (let y = 0; y < lPMap[level].length; y++) //Run through all Rows
     {
-        for (let x = 0; x < lPMap[level][0].length; x++)
+        for (let x = 0; x < lPMap[level][0].length; x++) // and columns
         {
-            lPMap[level][y][x] = 0;
+            lPMap[level][y][x] = 0;                           // and set their value to 0 (0 is nothing - 1 is player)
         }
     }
-    lPMap[level][startY[level]][startX[level]] = 1;   //Set the players starting position for particular level
-    p.row = startY[level];
-    p.col = startX[level];
+
+    lPMap[level][startY[level]][startX[level]] = 1;   //Set players map position in the levels player map
+    p.row = startY[level];                              // then set player objects row
+    p.col = startX[level];                                // and column to match
 }
 
-function drawPMap() //Move Streetlight to pMap function
+function drawPMap()
 {
-    let destX = 0, destY = 0;
+    let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
-    for (let row = 0; row < lPMap[level].length; row++)
+    for (let row = 0; row < lPMap[level].length; row++)         //Run through rows
     {
-        for (let col = 0; col < lPMap[level][0].length; col++)
+        for (let col = 0; col < lPMap[level][0].length; col++)      // and columns, checking each element for the player
         {
             switch (lPMap[level][row][col])
             {
-                case 1:
-                    //Sets position on tile sheet to pick from when drawing player
+                case 1:                                                 //If the element check contains the player
+                    //Sets position on tile sheet to
+                    // pick from when drawing player
                     p.srcX = p.width * (p.frameX % 4);
                     p.srcY = p.height * p.frameY;
-                    if (!sewersDrained && l2)
+
+                    if (!sewersDrained && l2)                           //and the sewer is filled with water
+                                                                            //draw the players standing in water image
+
                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
-                    else
+                    else                                                 //and the sewer is  not filled with water
+                                                                            //draw the players regular image
+
                         ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
-                    //ctx.drawImage(tree, 450, 470);
                     break;
             }
 
-            destX += 8;
+            destX += 8;         //Increment column by 1 (8 is column width in ratio to the canvas width)
         }
-        destX = 0;
-        destY += 8;
+        destX = 0;              //Start over at beginning position of array as we are at a new row
+        destY += 8;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
     }
-   /* ctx.drawImage(streetLight, 450, 510);  //Will be called for each level if function is made global*/
 }
 
 function drawMap()
 {
-    let destX = 0, destY = 0;
+    let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
-    for (let row = 0; row < lMap[level].length; row++)
+    for (let row = 0; row < lMap[level].length; row++)         //Run through rows
     {
-        for (let col = 0; col < lMap[level][0].length; col++)
+        for (let col = 0; col < lMap[level][0].length; col++)      // and columns, checking each elements contents
         {
-            thingToDraw = undefined;
+            thingToDraw = undefined;       //Reset the thing that will be drawn to nothing
 
-            if (!l3)//Uniform image placement switch statement
+            if (!l3)//Uniform image placement switch statement (for every level except level 3 for now)
             {
-                switch (lMap[level][row][col])
+                switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
                 {
-                    case 0:
-                        thingToDraw = a;
+                    case 0:                   //letters (a through n) are reassigned to an image upon loading each level
+                                                // in order to correspond with this drawing scheme
+                        thingToDraw = a;            // set the thing that will be drawn as an image based on level
                         break;
                     case 1:
                         thingToDraw = b;
@@ -1169,10 +1100,10 @@ function drawMap()
                         thingToDraw = g;
                         break;
                     case 7:
-                        if (l2 && !sewersDrained)
-                            thingToDraw = wetPipe;
-                        else
-                            thingToDraw = h;
+                        if (l2 && !sewersDrained)               //If on level 2 and the sewer is not drained (filled)
+                            thingToDraw = wetPipe;                  //draw pipe spewing liquid
+                        else                                    //Otherwise
+                            thingToDraw = h;                        //draw pipe not spewing liquid
                         break;
                     case 8:
                         thingToDraw = i;
@@ -1192,24 +1123,11 @@ function drawMap()
                     case 13:
                         thingToDraw = n;
                         break;
-                    case 14:
-                        thingToDraw = o;
-                        break;
-                    case 15:
-                        thingToDraw = q;
-                        break;
-                    case 16:
-                        thingToDraw = r;
-                        break;
-                    case 17:
-                        thingToDraw = s;
-                        break;
-
                 }
             }
 
             if (l3)//Image placement switch statement for l3 only
-            {
+            {//Special switch statement needed for now for level 3 since there are so many sprite conditions
                 switch (lMap[level][row][col])
                 {
                     case 0: //floor
@@ -1284,38 +1202,202 @@ function drawMap()
                 }
             }
 
-            if (thingToDraw !== undefined)
+            if (thingToDraw !== undefined) //If this space has something to draw in it
             {
-                if (thingToDraw === floor  && l2) // If drawing the floor on level 2
-                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);
-                else
-                    ctx.drawImage(thingToDraw, (col * 32), (row * 32));
+                if (thingToDraw === floor  && l2) // and that thing is flooring
+                    ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);// then draw it
+                                                                                                    // based on sprite
+                                                                                                    // sheet positions
+                                                                                                    // defined earlier
+                else                              //If its anything else
+                    ctx.drawImage(thingToDraw, (col * 32), (row * 32)); //Draw whatever it is
             }
-            destX += 32;
+            destX += 32;            //increment variable based on width ratio of map array elements to canvas width
         }
-        destX = 0;
-        destY += 32;
+        destX = 0;              //start from the beginning of array since we are on a new row
+        destY += 32;            //increment variable based on height ratio of map array elements to canvas height
     }
-    if (!sewersDrained && l2)
-    {
-        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";
-        ctx.fillRect(0, 24, 320, 576);//Left
-        ctx.fillRect(320, 32, 32, 600);//Middle
-        ctx.fillRect(352, 24, 224, 576);//Right
-        ctx.fillRect(576, 252, 224, 376);//RightBottom
 
-        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";
-        ctx.fillRect(0, 24, 320, 576);//Left
-        ctx.fillRect(320, 32, 32, 600);//Middle
-        ctx.fillRect(352, 24, 224, 576);//Right
-        ctx.fillRect(576, 252, 224, 376);//RightBottom
-
-        waterRunning.play();
-    }
-    if (!lightsOn && l2)
+    if (l2)//If on level 2
     {
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-        ctx.fillRect(0, 0, 800, 600);
+        if (!sewersDrained) // and the sewer is turned on
+        {//Draw a simulated sewer water color
+            ctx.fillStyle = "rgba(47, 141, 91, 0.41)";    //Draw a green haze over portion of canvas to simulate sewer water
+            ctx.fillRect(0, 24, 320, 576);//Left
+            ctx.fillRect(320, 32, 32, 600);//Middle
+            ctx.fillRect(352, 24, 224, 576);//Right
+            ctx.fillRect(576, 252, 224, 376);//RightBottom
+
+            ctx.fillStyle = "rgba(98, 79, 18, 0.51)";     //Draw a brown haze over portion of canvas to simulate sewer water
+            ctx.fillRect(0, 24, 320, 576);//Left
+            ctx.fillRect(320, 32, 32, 600);//Middle
+            ctx.fillRect(352, 24, 224, 576);//Right
+            ctx.fillRect(576, 252, 224, 376);//RightBottom
+
+            waterRunning.play();                            //Play the water running mp3 file to simulate running water
+        }
+        if (!lightsOn)      // and lights are on
+        {   //Draw a solid black block over entire canvas
+            // (fillErasedMap function will allow for small area around player to be 'lit' still)
+            ctx.fillStyle = "rgba(0, 0, 0, 1)";
+            ctx.fillRect(0, 0, 800, 600);
+        }
     }
     drawPMap();
+}
+
+function checkLevelSwitch(e /* pass e.keyCode through this argument */)
+{
+    //    37 - left , 38 - up , 39 - right , 40 - down
+
+    if (l1)//If it's Lvl 1
+    {
+
+    }
+
+    if (l2)//If it's Lvl 2
+    {
+        if (e === 38 && p.col === 0 && p.row === 0) //If going UP & character is right under door 1
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            ctx.clearRect(0, 0, 32, 48);
+            let sizer = 0;
+            shrink();
+
+            function shrink()
+            {
+                if (sizer < 2)//If is not small enough to fit through the door..
+                {
+                    ctx.clearRect(0, 0, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, 0, 144, 32, 48, sizer*4, sizer*6, 28-(4*sizer), 42-(6*sizer));
+                    sizer++;
+                    setTimeout(shrink, 120);
+                }       //Shrink
+                else        //Otherwise, go through door and load level 1
+                {
+                    level = 1;
+                    l2 = l3 = l4 = l5 = l6 = false;
+                    l1 = true;
+                    ctx.clearRect(0,0,800,600);
+                    p.frameY = 0;
+                    startGame();
+                    setTimeout(drawMap, 40);
+                }
+            }
+        }   //Go through the door to level 1
+
+        if (e === 38 && p.col === 96 && p.row === 0) //If going UP & character is right under door 2
+        {
+            p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+
+            let stairs = new Image();   //Define stairs so they can be re-drawn each 'step' taken
+            stairs.src = "../../2Sewer/images/stairs.png";  //Set stairs src property
+
+
+            stairs.onload = function()//When the stairs image loads
+            {
+                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                                                                  // cannot be changed while animating stair climbing
+                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+                goUpDaStays();                                      //Start climbing stairs
+
+                function goUpDaStays()                  //Climbing stairs animation function
+                {
+                    staysClimbed ++;                //Count each step taken
+
+                    ctx.clearRect(96*8, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                    fillErasedMap();        //Draw the map image that was cleared
+
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed),96*8, 0, 32, 38 - (10 * staysClimbed));
+
+
+                    if (staysClimbed !== 4)         //If player has not climbed all stairs
+                        setTimeout(goUpDaStays, 120);     //Keep climbing them - Call the stair climbing function again
+                    else                            //Otherwise
+                    {
+                        level = 3;                              //Change level identifier appropriately
+                        l1 = l2 = l4 = l5 = l6 = false;         //Set all levels not being travelled to as false
+                        l3 = true;                              //Set the one that is being travelled to to true
+
+                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                        startGame();                            //Load new levels assets and settings
+                        setTimeout(drawMap, 40);                //Draw its entire map
+                    }
+                }
+            };
+        }  //Go through the door to level 3
+    }
+
+    if (l3)//If it's Lvl 3
+    {
+        if (e === 37 && p.col === 3 && (p.row === 65 || p.row === 64))//If going LEFT at the staircase
+        {//go back to sewer (from store)
+            removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
+
+            startX[2] = 96;                     //Set location for character to appear on map that is being travelled to
+            startY[2] = 0;                      //Set location for character to appear on map that is being travelled to
+
+            let allTheStays = 0;                //Create variable to be used for counting stairs
+
+            setTimeout(goDownStays, 120);       //Start animation of going down stairs
+
+            function goDownStays()              //Animates player going down stairs and appearing in previous levels map
+            {
+                allTheStays++;                  //Increment stairs descended each time a stair is descended
+
+
+                lPMap[level][p.row][p.col] = 0;    //Clear players previous position on in the levels player map (lPMap)
+                p.col --;                           //Set character column member one to the left
+                lPMap[level][p.row][p.col] = 1;     //Use players column member to set its new map position
+
+
+                ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                ctx.drawImage(scientist, 0, 48, 32, 48, p.col* (8 - 2*allTheStays) , p.row*8 + (allTheStays * 15), 32- (allTheStays * 5), 48 - (allTheStays * 15));
+
+
+                if (allTheStays !== 3)            //If there are stairs to go down
+                    setTimeout(goDownStays, 300); //...Go down them
+                else                              //Otherwise, load level 2.
+                {
+                    level = 2;                              //Change level identifier to appropriate level
+                    l1 = l3 = l4 = l5 = l6 = false;         //Set all levels false aside from new level
+                    l2 = true;                              //Set new level to true
+                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                    p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
+                                                            // the player will be facing
+                    startGame();                            //Load assets and settings of the level being travelled to
+                    setTimeout(drawMap, 40);                //Draw its map
+                }
+            }
+        }
+    }
+
+    if (l4)//If it's Lvl 4
+    {
+
+    }
+
+    if (l5)//If it's Lvl 5
+    {
+
+    }
+
+    if (l6)//If it's Lvl 6
+    {
+
+    }
+
+    if (l7)//If it's Lvl 7
+    {
+
+    }
+
 }
