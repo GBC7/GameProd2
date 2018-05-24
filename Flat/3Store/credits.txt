@@ -19,3 +19,5 @@ made by me
 ClothingStoreSprite.png:
 made by me (each resource is from above list)
 
+Desk:
+https://forums.introversion.co.uk/viewtopic.php?t=49914
