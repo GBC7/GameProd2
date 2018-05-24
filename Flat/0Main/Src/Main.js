@@ -15,7 +15,7 @@ let floorSpriteX = undefined, floorSet = false;                       //For sewe
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6
 let startX = [undefined, 0,  0,  4,  0,  0,  0],
-    startY = [undefined, 20, 0,  66, 4,  0,  4];
+    startY = [undefined, 20, 0,  65, 4,  0,  4];
 
 
 //x and y map boundaries per level
@@ -341,7 +341,7 @@ function startGame()              //      **** = floor
                 }
             }
 
-            lPMap[level][66][4] = 1;                    //Set the players starting position
+            lPMap[level][65][4] = 1;                    //Set the players starting position
         }
 
         changePStartPos();
@@ -847,6 +847,7 @@ function onKeyDown(e)
                     l1 = l3 = l4 = l5 = l6 = false;
                     l2 = true;
                     ctx.clearRect(0,0,800,600);
+                    p.frameY = 0;
                     startGame();
                     setTimeout(drawMap, 40);
                 }
@@ -893,6 +894,7 @@ function onKeyDown(e)
         {
             if (p.col === 96 && p.row === 0) // && character is right under door 2
             {
+                p.frameY = 3;
                 let stairs = new Image();
                 stairs.src = "../../2Sewer/images/stairs.png";
                 stairs.onload = function()
@@ -905,7 +907,7 @@ function onKeyDown(e)
                         staysClimbed ++;
                         ctx.clearRect(96*8, 0, 32, 48);
                         fillErasedMap();
-                        ctx.drawImage(scientist, 0, 154 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
+                        ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed), 96*8, 0, 32, 38 - (10 * staysClimbed));
                         if (staysClimbed !== 4)
                             setTimeout(goUpDaStays, 120);
                         else
@@ -915,6 +917,7 @@ function onKeyDown(e)
                             l1 = l2 = l4 = l5 = l6 = false;
                             l3 = true;
                             ctx.clearRect(0,0,800,600);
+                            p.frameY = 2;
                             startGame();
                             setTimeout(drawMap, 40);
                         }
@@ -947,6 +950,7 @@ function onKeyDown(e)
                         l2 = l3 = l4 = l5 = l6 = false;
                         l1 = true;
                         ctx.clearRect(0,0,800,600);
+                        p.frameY = 0;
                         startGame();
                         setTimeout(drawMap, 40);
                     }
