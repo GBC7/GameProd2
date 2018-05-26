@@ -23,7 +23,7 @@ let startX = [undefined, 0,  0,  4,  0,  0,  0],
 let xMax =   [undefined, 36, 96, 96, 96, 96, 96],
     xMin =   [undefined, 0,  0,  0,  0,  0,  0],
     yMax =   [undefined, 46, 69, 69, 69, 69, 69],
-    yMin =   [undefined, 20, 0,  3,  4,  0,  4];
+    yMin =   [undefined, 20, 0,  0,  4,  0,  4];
 
 
 //level maps initialized when levels are loaded
@@ -36,8 +36,9 @@ let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 
 
-let a,b,c,d,e,f,g,h,i,j,k,l,m,n,thingToDraw; //Used with global functions to pass case numbers to
-    a = b = c  = d = e = f = g = h = i = j = k = l = m = n = thingToDraw = undefined;
+let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,thingToDraw; //Used with global functions to pass case numbers to
+    a = b = c  = d = e = f = g = h = i = j = k = l = m = n =
+        o = q = r = s = t = u = v = w = x = y = thingToDraw = undefined;
 
 
 let p =                                                         //PlayerObject
@@ -303,29 +304,109 @@ function startGame()              //      **** = floor
     if (l3)//Clothing Store               **** 0
 
     {
+        canvas.style.backgroundImage = "";
+
+        let floor = new Image();
+        floor.src = "../../3Store/images/floor.png";
+        let rack1 = new Image();
+        rack1.src = "../../3Store/images/rack_1.png";
+        let rack2 = new Image();
+        rack2.src = "../../3Store/images/rack_2.png";
+        let rack3 = new Image();
+        rack3.src = "../../3Store/images/rack_3.png";
+        let display1 = new Image();
+        display1.src = "../../3Store/images/display_1.png";
+        let display2 = new Image();
+        display2.src = "../../3Store/images/display_2.png";
+        let display3 = new Image();
+        display3.src = "../../3Store/images/display_3.png";
+        let display4 = new Image();
+        display4.src = "../../3Store/images/display_4.png";
+        let counter1 = new Image();
+        counter1.src = "../../3Store/images/counter_1.png";
+        let counter2 = new Image();
+        counter2.src = "../../3Store/images/counter_2.png";
+        let counter3 = new Image();
+        counter3.src = "../../3Store/images/counter_3.png";
+        let wall = new Image();
+        wall.src = "../../3Store/images/wall_1.png";
+        let wallLeft = new Image();
+        wallLeft.src = "../../3Store/images/wall_left.png";
+        let wallRight = new Image();
+        wallRight.src = "../../3Store/images/wall_right.png";
+        let cabinet = new Image();
+        cabinet.src = "../../3Store/images/cabinet.png";
+        let stair = new Image();
+        stair.src = "../../3Store/images/downstair.png";
+        let exit1 = new Image();
+        exit1.src = "../../3Store/images/welcome_1.png";
+        let exit2 = new Image();
+        exit2.src = "../../3Store/images/welcome_2.png";
+        let windowClose = new Image();
+        windowClose.src = "../../3Store/images/window_close.png";
+        let windowOpen = new Image();
+        windowOpen.src = "../../3Store/images/window_open.png";
+        let door1 = new Image();
+        door1.src = "../../3Store/images/door_1.png";
+        let door2 = new Image();
+        door2.src = "../../3Store/images/door_2.png";
+        let desk = new Image();
+        desk.src = "../../3Store/images/desk.png";
+        let chair = new Image();
+        chair.src = "../../3Store/images/chair.png";
+
+
+
+        a = floor;         //0
+        b = rack1;         //1
+        c = rack2;         //2
+        d = rack3;         //3
+        e = display1;      //4
+        f = display2;      //5
+        g = display3;      //6
+        h = display4;      //7
+        i = counter1;      //8
+        j = counter2;      //9
+        k = counter3;      //10
+        l = wall;          //11
+        m = wallLeft;      //12
+        n = wallRight;     //13
+        o = cabinet;     //14
+        q = stair;       //15
+        r = exit1;       //16
+        s = exit2;       //17
+        t = windowClose; //18
+        u = windowOpen;  //19
+        v = door1;       // 20
+        w = door2;       //21
+        x = desk;        //22
+        y = chair;       // 23
+
+
         if (lMap[level] === undefined)
         {
-            lMap[level] = [                    //10                          //20                          // 1F center - main floor
-            [11,11,11,20,11,11,11,20,11,11,22,23,11,11,20,11,11,11,20,11,11,11,20,11,11],
-            [14,14,14,12,12,12,12,12,12,12,24,25,12,12,12,12,12,12,12,12,12,12,12,12,12],
-            [15,15,15,0,0,0,0,0,0,0,18,19,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,9,10,8,9,10,8,9,10],
-            [14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [15,15,15,0,0,0,4,5,0,4,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,6,7,0,6,7,0,0,0,0,0,0,0,1,2,3,0,1,2,3],
-            [14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [15,15,15,0,0,0,4,5,0,4,5,0,0,0,0,0,0,0,0,4,5,0,4,5,0],
-            [0,0,0,0,0,0,6,7,0,6,7,0,0,0,0,0,0,0,0,6,7,0,6,7,0],
-            [14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,0,1,2,3],
-            [0,0,0,0,0,0,4,5,0,0,4,5,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [14,14,14,0,0,0,6,7,0,0,6,7,0,0,0,0,0,0,0,4,5,0,4,5,0],
-            [15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,7,0,6,7,0],
-            [0,0,0,0,0,0,1,2,3,0,1,2,3,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,0,1,2,3],
-            [16,0,0,0,0,0,1,2,3,0,1,2,3,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                           ];
+            lMap[level] = [                    //10                          //20
+                [18,11,11,11,18,11,11,11,18,11,20,21,11,11,18,11,11,11,18,11,11,11,18,11,11],
+                [14, 0, 0,22,22,13, 0, 0, 0, 0,16,17, 0, 0, 0, 0, 0, 0, 0,12,14,14, 0,14,14],
+                [22,22, 0, 0,23,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0],
+                [23, 0, 0, 0, 0,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,14,14, 0,14,14],
+                [ 0, 0, 0,22,22,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0],
+                [22,22, 0, 0,23,13, 0, 0, 0, 0, 4, 5, 0, 0, 4, 5, 0, 0, 0,12,14,14, 0,14,14],
+                [23, 0, 0, 0, 0,13, 0, 0, 0, 0, 6, 7, 0, 0, 6, 7, 0, 0, 0,12, 0, 0, 0, 0, 0],
+                [11,11,11,11,20,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,11,21,11,11,11,11],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 4, 5, 0, 0, 4, 5, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 6, 7, 0, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 0, 4, 5, 0],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3, 0, 0, 6, 7, 0, 6, 7, 0],
+                [ 0, 4, 5, 0, 0, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 6, 7, 0, 0, 6, 7, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1 ,2 ,3],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [ 0, 8, 9,10, 8, 9,10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 0, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 7, 0, 6, 7, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3],
+                [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0]
+
+            ];
         }
 
         if (lPMap[level] === undefined)
@@ -613,149 +694,89 @@ function fillErasedMap()
                 yPos = mR*8;
                 mC = mC / 4;
                 mR = mR / 4;
-                if (!l3)//Uniform image placement switch statement (for all levels except level 3
+                switch (lMap[level][mR][mC])//check what needs drawing based on map index
                 {
-                    switch (lMap[level][mR][mC])//check what needs drawing based on map index
-                    {
-                        case 0:
-                            thingToDraw = a;
-                            break;
-                        case 1:
-                            thingToDraw = b;
-                            break;
-                        case 2:
-                            floorSpriteX = 0;
-                            thingToDraw = c;
-                            break;
-                        case 3:
-                            floorSpriteX = 32;
-                            thingToDraw = d;
-                            break;
-                        case 4:
-                            floorSpriteX = 64;
-                            thingToDraw = e;
-                            break;
-                        case 5:
-                            floorSpriteX = 96;
-                            thingToDraw = f;
-                            break;
-                        case 6:
-                            thingToDraw = g;
-                            break;
-                        case 7:
-                            if (l2 && !sewersDrained)
-                                thingToDraw = wetPipe;
-                            else
-                                thingToDraw = h;
-                            break;
-                        case 8:
-                            thingToDraw = i;
-                            break;
-                        case 9:
-                            thingToDraw = j;
-                            break;
-                        case 10:
-                            thingToDraw = k;
-                            break;
-                        case 11:
-                            thingToDraw = l;
-                            break;
-                        case 12:
-                            thingToDraw = m;
-                            break;
-                        case 13:
-                            thingToDraw = n;
-                            break;
-                        case 14:
-                            thingToDraw = o;
-                            break;
-                        case 15:
-                            thingToDraw = q;
-                            break;
-                        case 16:
-                            thingToDraw = r;
-                            break;
-                        case 17:
-                            thingToDraw = s;
-                            break;
-                    }
+                    case 0:
+                        thingToDraw = a;
+                        break;
+                    case 1:
+                        thingToDraw = b;
+                        break;
+                    case 2:
+                        floorSpriteX = 0;
+                        thingToDraw = c;
+                        break;
+                    case 3:
+                        floorSpriteX = 32;
+                        thingToDraw = d;
+                        break;
+                    case 4:
+                        floorSpriteX = 64;
+                        thingToDraw = e;
+                        break;
+                    case 5:
+                        floorSpriteX = 96;
+                        thingToDraw = f;
+                        break;
+                    case 6:
+                        thingToDraw = g;
+                        break;
+                    case 7:
+                        if (l2 && !sewersDrained)
+                            thingToDraw = wetPipe;
+                        else
+                            thingToDraw = h;
+                        break;
+                    case 8:
+                        thingToDraw = i;
+                        break;
+                    case 9:
+                        thingToDraw = j;
+                        break;
+                    case 10:
+                        thingToDraw = k;
+                        break;
+                    case 11:
+                        thingToDraw = l;
+                        break;
+                    case 12:
+                        thingToDraw = m;
+                        break;
+                    case 13:
+                        thingToDraw = n;
+                        break;
+                    case 14:
+                        thingToDraw = o;
+                        break;
+                    case 15:
+                        thingToDraw = q;
+                        break;
+                    case 16:
+                        thingToDraw = r;
+                        break;
+                    case 17:
+                        thingToDraw = s;
+                        break;
+                    case 18:
+                        thingToDraw = t;
+                        break;
+                    case 19:
+                        thingToDraw = u;
+                        break;
+                    case 20:
+                        thingToDraw = v;
+                        break;
+                    case 21:
+                        thingToDraw = w;
+                        break;
+                    case 22:
+                        thingToDraw = x;
+                        break;
+                    case 23:
+                        thingToDraw = y;
+                        break;
                 }
 
-                if (l3)//Image placement switch statement for l3 only
-                {
-                    switch (lMap[level][mR][mC]) //decide what needs drawing based on map index
-                    {
-                        case 0: //floor
-                            ctx.drawImage(level3sprite, 96, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 1: //rack1
-                            ctx.drawImage(level3sprite, 128, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 2: //rack2
-                            ctx.drawImage(level3sprite, 160, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 3: //rack3
-                            ctx.drawImage(level3sprite, 192, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 4: //stand1
-                            ctx.drawImage(level3sprite, 32, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 5: //stand2
-                            ctx.drawImage(level3sprite, 64, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 6: //stand3
-                            ctx.drawImage(level3sprite, 32, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 7: //stand4
-                            ctx.drawImage(level3sprite, 64, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 8: //counter1
-                            ctx.drawImage(level3sprite, 96, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 9: //counter2
-                            ctx.drawImage(level3sprite, 128, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 10: //counter3
-                            ctx.drawImage(level3sprite, 160, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 11: //wall1
-                            ctx.drawImage(level3sprite, 0, 0, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 12: //wall2
-                            ctx.drawImage(level3sprite, 0, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 14: // cabinet1
-                            ctx.drawImage(level3sprite, 0, 64, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 15: //cabinet2
-                            ctx.drawImage(level3sprite, 0, 96, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 16: //stair1
-                            ctx.drawImage(level3sprite, 192, 32, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 18: //doormat1:exit
-                            ctx.drawImage(level3sprite, 32, 64, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 19: //doormat2:exit
-                            ctx.drawImage(level3sprite, 64, 64, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 20: // window
-                            ctx.drawImage(level3sprite, 33, 96, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 22: // door1
-                            ctx.drawImage(level3sprite, 96, 64, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 23: // door2
-                            ctx.drawImage(level3sprite, 128, 64, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 24: // door3
-                            ctx.drawImage(level3sprite, 96, 96, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                        case 25: // door4
-                            ctx.drawImage(level3sprite, 128, 96, 32, 32, mC*32, mR*32, 32, 32);
-                            break;
-                    }
-                }
 
                 mC = mC * 4;    //Scale up for appropriate positioning
                 mR = mR * 4;    //Scale up for appropriate positioning
@@ -1069,137 +1090,88 @@ function drawMap()
         {
             thingToDraw = undefined;       //Reset the thing that will be drawn to nothing
 
-            if (!l3)//Uniform image placement switch statement (for every level except level 3 for now)
+            switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
             {
-                switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
-                {
-                    case 0:                   //letters (a through n) are reassigned to an image upon loading each level
-                                                // in order to correspond with this drawing scheme
-                        thingToDraw = a;            // set the thing that will be drawn as an image based on level
-                        break;
-                    case 1:
-                        thingToDraw = b;
-                        break;
-                    case 2:
-                        floorSpriteX = 0;
-                        thingToDraw = c;
-                        break;
-                    case 3:
-                        floorSpriteX = 32;
-                        thingToDraw = d;
-                        break;
-                    case 4:
-                        floorSpriteX = 64;
-                        thingToDraw = e;
-                        break;
-                    case 5:
-                        floorSpriteX = 96;
-                        thingToDraw = f;
-                        break;
-                    case 6:
-                        thingToDraw = g;
-                        break;
-                    case 7:
-                        if (l2 && !sewersDrained)               //If on level 2 and the sewer is not drained (filled)
-                            thingToDraw = wetPipe;                  //draw pipe spewing liquid
-                        else                                    //Otherwise
-                            thingToDraw = h;                        //draw pipe not spewing liquid
-                        break;
-                    case 8:
-                        thingToDraw = i;
-                        break;
-                    case 9:
-                        thingToDraw = j;
-                        break;
-                    case 10:
-                        thingToDraw = k;
-                        break;
-                    case 11:
-                        thingToDraw = l;
-                        break;
-                    case 12:
-                        thingToDraw = m;
-                        break;
-                    case 13:
-                        thingToDraw = n;
-                        break;
-                }
-            }
-
-            if (l3)//Image placement switch statement for l3 only
-            {//Special switch statement needed for now for level 3 since there are so many sprite conditions
-                switch (lMap[level][row][col])
-                {
-                    case 0: //floor
-                        ctx.drawImage(level3sprite, 96, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 1: //rack1
-                        ctx.drawImage(level3sprite, 128, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 2: //rack2
-                        ctx.drawImage(level3sprite, 160, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 3: //rack3
-                        ctx.drawImage(level3sprite, 192, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 4: //stand1
-                        ctx.drawImage(level3sprite, 32, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 5: //stand2
-                        ctx.drawImage(level3sprite, 64, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 6: //stand3
-                        ctx.drawImage(level3sprite, 32, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 7: //stand4
-                        ctx.drawImage(level3sprite, 64, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 8: //counter1
-                        ctx.drawImage(level3sprite, 96, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 9: //counter2
-                        ctx.drawImage(level3sprite, 128, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 10: //counter3
-                        ctx.drawImage(level3sprite, 160, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 11: //wall1
-                        ctx.drawImage(level3sprite, 0, 0, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 12: //wall2
-                        ctx.drawImage(level3sprite, 0, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 14: // cabinet1
-                        ctx.drawImage(level3sprite, 0, 64, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 15: //cabinet2
-                        ctx.drawImage(level3sprite, 0, 96, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 16: //stair1
-                        ctx.drawImage(level3sprite, 192, 32, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 18: //doormat1:exit
-                        ctx.drawImage(level3sprite, 32, 64, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 19: //doormat2:exit
-                        ctx.drawImage(level3sprite, 64, 64, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 20: // window
-                        ctx.drawImage(level3sprite, 33, 96, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 22: // door1
-                        ctx.drawImage(level3sprite, 96, 64, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 23: // door2
-                        ctx.drawImage(level3sprite, 128, 64, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 24: // door3
-                        ctx.drawImage(level3sprite, 96, 96, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                    case 25: // door4
-                        ctx.drawImage(level3sprite, 128, 96, 32, 32, col*32, row*32, 32, 32);
-                        break;
-                }
+                case 0:                   //letters (a through n) are reassigned to an image upon loading each level
+                                            // in order to correspond with this drawing scheme
+                    thingToDraw = a;            // set the thing that will be drawn as an image based on level
+                    break;
+                case 1:
+                    thingToDraw = b;
+                    break;
+                case 2:
+                    floorSpriteX = 0;
+                    thingToDraw = c;
+                    break;
+                case 3:
+                    floorSpriteX = 32;
+                    thingToDraw = d;
+                    break;
+                case 4:
+                    floorSpriteX = 64;
+                    thingToDraw = e;
+                    break;
+                case 5:
+                    floorSpriteX = 96;
+                    thingToDraw = f;
+                    break;
+                case 6:
+                    thingToDraw = g;
+                    break;
+                case 7:
+                    if (l2 && !sewersDrained)               //If on level 2 and the sewer is not drained (filled)
+                        thingToDraw = wetPipe;                  //draw pipe spewing liquid
+                    else                                    //Otherwise
+                        thingToDraw = h;                        //draw pipe not spewing liquid
+                    break;
+                case 8:
+                    thingToDraw = i;
+                    break;
+                case 9:
+                    thingToDraw = j;
+                    break;
+                case 10:
+                    thingToDraw = k;
+                    break;
+                case 11:
+                    thingToDraw = l;
+                    break;
+                case 12:
+                    thingToDraw = m;
+                    break;
+                case 13:
+                    thingToDraw = n;
+                    break;
+                case 14:
+                    thingToDraw = o;
+                    break;
+                case 15:
+                    thingToDraw = q;
+                    break;
+                case 16:
+                    thingToDraw = r;
+                    break;
+                case 17:
+                    thingToDraw = s;
+                    break;
+                case 18:
+                    thingToDraw = t;
+                    break;
+                case 19:
+                    thingToDraw = u;
+                    break;
+                case 20:
+                    thingToDraw = v;
+                    break;
+                case 21:
+                    thingToDraw = w;
+                    break;
+                case 22:
+                    thingToDraw = x;
+                    break;
+                case 23:
+                    thingToDraw = y;
+                    break;
             }
 
             if (thingToDraw !== undefined) //If this space has something to draw in it
