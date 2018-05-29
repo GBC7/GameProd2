@@ -207,20 +207,21 @@ function startGame()
 
 
 
-        a = wall;       //0
-        b = door;       //1
-        c = floor;      //2
-        d = floor;      //3
-        e = floor;      //4
+        a = wall;           //0
+        b = door;           //1
+        c = undefined;          //2
+        d = floor;          //3
+        e = floor;          //4
         f = floor;      //5
-        g = drain;      //6
-        h = pipe;       //7
-        i = stairs;     //8
-        j = door2;      //9
-        k = wallSwamp;  //10
-        l = wallCorner; //11
-        m = topSide;    //12
-        n = topCorner;  //13
+        g = drain;          //6
+        h = pipe;           //7
+        i = stairs;         //8
+        j = door2;          //9
+        k = wallSwamp;      //10
+        l = wallCorner;     //11
+        m = topSide;        //12
+        n = topCorner;      //13
+
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
@@ -741,7 +742,6 @@ function fillErasedMap()
                         thingToDraw = b;
                         break;
                     case 2:
-                        floorSpriteX = 0;
                         thingToDraw = c;
                         break;
                     case 3:
@@ -948,7 +948,6 @@ function drawMap()
                     thingToDraw = b;
                     break;
                 case 2:
-                    floorSpriteX = 0;
                     thingToDraw = c;
                     break;
                 case 3:
@@ -1514,7 +1513,6 @@ function checkBoundaries(e)
             {
                 canGoThisWay =
                 (
-                    lMap[level][p.row + 1][p.col - 1] === 2 ||
                     lMap[level][p.row + 1][p.col - 1] === 3 ||
                     lMap[level][p.row + 1][p.col - 1] === 4 ||
                     lMap[level][p.row + 1][p.col - 1] === 5
@@ -1529,7 +1527,6 @@ function checkBoundaries(e)
         {
             canGoThisWay =
                 (
-                    lMap[level][p.row + 1][p.col + 1] === 2 ||
                     lMap[level][p.row + 1][p.col + 1] === 3 ||
                     lMap[level][p.row + 1][p.col + 1] === 4 ||
                     lMap[level][p.row + 1][p.col + 1] === 5
@@ -1544,7 +1541,6 @@ function checkBoundaries(e)
         {
             canGoThisWay =
                 (
-                    lMap[level][p.row][p.col] === 2 ||
                     lMap[level][p.row][p.col] === 3 ||
                     lMap[level][p.row][p.col] === 4 ||
                     lMap[level][p.row][p.col] === 5
@@ -1559,7 +1555,6 @@ function checkBoundaries(e)
         {
             canGoThisWay =
                 (
-                    lMap[level][p.row + 2][p.col] === 2 ||
                     lMap[level][p.row + 2][p.col] === 3 ||
                     lMap[level][p.row + 2][p.col] === 4 ||
                     lMap[level][p.row + 2][p.col] === 5
