@@ -11,7 +11,7 @@ let walkingSpeed = 15;
 let lightSwitch = 2, sewerSwitch = 2;               //For sewer level
 let lightsOn = false, sewersDrained = false;         //For sewer level
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
-let notWalking = true;
+let notWalking = true, canGoThisWay = false;
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6
@@ -25,6 +25,10 @@ let xMax =   [undefined, 24, 24, 24, 24, 24, 24],
     xMin =   [undefined, 0,  0,  0,  0,  0,  0],
     yMax =   [undefined, 17, 17, 17, 17, 17, 17],
     yMin =   [undefined, 10, 0,  0,  4,  0,  4];
+
+
+// Level floor numbers -   0 , 1,     2,     3, 4, 5, 6
+let floorNumbers = [undefined, 0, undefined, undefined, undefined, undefined, undefined];
 
 
 //level maps initialized when levels are loaded
@@ -256,7 +260,7 @@ function startGame()              //      **** = floor
                 }
             }
 
-            lMap[level][13][24] = 6;                                    //Set the drains position (Needs to be done
+            lMap[level][11][24] = 6;                                    //Set the drains position (Needs to be done
                                                                         // manually like this in order to allow
                                                                         // for randomized floor pattern
         }
@@ -278,7 +282,7 @@ function startGame()              //      **** = floor
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];                                          //Declare a player map for this level
-            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
+            for (let y = 0; y < 25; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
@@ -1225,11 +1229,12 @@ function onKeyDown(e)
      p.prevRow = p.row;      //Set row to be cleared
 
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
+     checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
      if (e.keyCode === 37)//Left
 
      {
-         if (p.col > xMin[level] && notWalking)    //Levels boundaries
+         if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
          {
              //Change tile sheet frame to show player walking up
              p.frameY = 1;
@@ -1273,7 +1278,7 @@ function onKeyDown(e)
      if (e.keyCode === 39)//Right
 
      {
-         if (p.col < xMax[level] && notWalking)    //Levels boundaries
+         if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
          {
              //Change tile sheet frame to show player walking up
              p.frameY = 2;
@@ -1317,7 +1322,7 @@ function onKeyDown(e)
      if (e.keyCode === 38)//Up
 
      {
-         if (p.row > yMin[level] && notWalking)        //Levels boundaries
+         if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
          {
              //Change tile sheet frame to show player walking up
              p.frameY = 3;
@@ -1361,7 +1366,7 @@ function onKeyDown(e)
      if (e.keyCode === 40)//Down
 
      {
-         if (p.row < yMax[level] && notWalking)        //Levels boundaries
+         if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
          {
              //Change tile sheet frame to show player walking up
              p.frameY = 0;
@@ -1498,4 +1503,68 @@ function onKeyDown(e)
              waterRunning.pause();           //Stop playing the noise of running water
 }
 
+function checkBoundaries(e)
+
+{
+    if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    {
+           if (!l2)
+               canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
+           else
+            {
+                canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col - 1] === 2 ||
+                    lMap[level][p.row + 1][p.col - 1] === 3 ||
+                    lMap[level][p.row + 1][p.col - 1] === 4 ||
+                    lMap[level][p.row + 1][p.col - 1] === 5
+                );
+            }
+    }
+    if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
+    {
+        if (!l2)
+            canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
+        else
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col + 1] === 2 ||
+                    lMap[level][p.row + 1][p.col + 1] === 3 ||
+                    lMap[level][p.row + 1][p.col + 1] === 4 ||
+                    lMap[level][p.row + 1][p.col + 1] === 5
+                );
+        }
+    }
+    if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
+    {
+        if (!l2)
+            canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
+        else
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row][p.col] === 2 ||
+                    lMap[level][p.row][p.col] === 3 ||
+                    lMap[level][p.row][p.col] === 4 ||
+                    lMap[level][p.row][p.col] === 5
+                );
+        }
+    }
+    if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
+    {
+        if (!l2)
+            canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
+        else
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 2][p.col] === 2 ||
+                    lMap[level][p.row + 2][p.col] === 3 ||
+                    lMap[level][p.row + 2][p.col] === 4 ||
+                    lMap[level][p.row + 2][p.col] === 5
+                );
+        }
+    }
+}
 
