@@ -2,28 +2,29 @@ let gameOver = false;
 
 
 let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
-
-
 let level = 2;
 
 
-let lightSwitch = 1, sewerSwitch = 1;               //For sewer level
-let lightsOn = true, sewersDrained = true;         //For sewer level
-let floorSpriteX = undefined, floorSet = false;                       //For sewer level
+let walkingSpeed = 15;
 
+
+let lightSwitch = 2, sewerSwitch = 2;               //For sewer level
+let lightsOn = false, sewersDrained = false;         //For sewer level
+let floorSpriteX = undefined, floorSet = false;                       //For sewer level
+let notWalking = true;
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6
-let startX = [undefined, 0,  0,  4,  0,  0,  0],
-    startY = [undefined, 20, 0,  65, 4,  0,  4];
+let startX = [undefined, 0,  0,  1,  0,  0,  0],
+    startY = [undefined, 5,  0,  16, 4,  0,  1];
 
 
 //x and y map boundaries per level
 // Level          0      1   2   3   4   5   6
-let xMax =   [undefined, 36, 96, 96, 96, 96, 96],
+let xMax =   [undefined, 24, 24, 24, 24, 24, 24],
     xMin =   [undefined, 0,  0,  0,  0,  0,  0],
-    yMax =   [undefined, 46, 69, 69, 69, 69, 69],
-    yMin =   [undefined, 20, 0,  0,  4,  0,  4];
+    yMax =   [undefined, 17, 17, 17, 17, 17, 17],
+    yMin =   [undefined, 10, 0,  0,  4,  0,  4];
 
 
 //level maps initialized when levels are loaded
@@ -43,8 +44,8 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,thingToDraw; //Used with glo
 
 let p =                                                         //PlayerObject
 {
-row: 20,
-col: 0,
+row: 10,
+col: 10,
 prevRow: undefined,        //Collects players previous x location to use for clearing only that section of canvas
 prevCol: undefined,        //Collects players previous y location to use for clearing only that section of canvas
 width: 32,               //The players width in the tile sheet
@@ -73,7 +74,6 @@ level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
 let waterRunning = new Audio('../../2Sewer/audio/waterRunning.mp3');
 waterRunning.loop = true;
 waterRunning.volume = 0.3;
-
 
 startGame();
 
@@ -148,21 +148,20 @@ function startGame()              //      **** = floor
         }
 
 
-        if (lPMap[level] === undefined) //Initialize this levels player map if it has not been initialized
+        if (lPMap[level] === undefined)
         {
-            lPMap[level] = [];                                                  //Declare a player map
-
-            for (let y = 0; y < 70; y++)                                        //Initialize all indices with 0
+            lPMap[level] = [];                                          //Declare a player map for this level
+            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 97; x++)
+                for (let x = 0; x < 18; x++)
                 {
                     lPMap[level][y].push(0)
                 }
             }
 
-            lPMap[level][20][0] = 1; //Putting the player (scientist) into the player map for this level
+            lPMap[level][5][0] = 1; //Putting the player (scientist) into the player map for this level
         }
 
 
@@ -279,11 +278,11 @@ function startGame()              //      **** = floor
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];                                          //Declare a player map for this level
-            for (let y = 0; y < 70; y++)                                //Initialize all indices with 0
+            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 97; x++)
+                for (let x = 0; x < 18; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -298,7 +297,7 @@ function startGame()              //      **** = floor
         scientist.onload = function () {stairs.onload = function(){drawMap();};};
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
-        startX[1] = 36; startY[1] = 21;
+    /*    startX[1] = 36; startY[1] = 21;*/
     }
 
     if (l3)//Clothing Store               **** 0
@@ -413,17 +412,16 @@ function startGame()              //      **** = floor
         {
             lPMap[level] = [];
 
-            for (let y = 0; y < 70; y++)                //Initialize all indices with 0
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 97; x++)
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
             }
-
-            lPMap[level][65][4] = 1;                    //Set the players starting position
+            lPMap[level][16][1] = 1;                    //Set the players starting position
         }
 
         changePStartPos();
@@ -437,66 +435,97 @@ function startGame()              //      **** = floor
     if (l4)//The Streetz                  **** 1
 
     {
-        let grass = new Image();
-        grass.src = "../../4Streetz/images/grass.png";
-
-        let sidewalk = new Image();
-        sidewalk.src = "../../4Streetz/images/sidewalk.png";
-        
+        let street = new Image();
+        let side = new Image();
         let house = new Image();
-        house.src = "../../4Streetz/images/house.png";
-        
+        let mall = new Image();
+        let clothingstore = new Image();
+        let park = new Image();
         let bank = new Image();
-        bank.src = "../../4Streetz/images/bank.png";
-        
+        let market = new Image();
+        let school = new Image();
+        let machine = new Image();
+        let coffee = new Image();
+        let momhouse = new Image();
         let store = new Image();
-        store.src = "../../4Streetz/images/store.png";
+        let player = new Image();
+
+        street.src = "../../4Streetz/images/street.png";
+        side.src = "../../4Streetz/images/side.png";
+        house.src = "../../4Streetz/images/house.png";
+        mall.src = "../../4Streetz/images/mall.png";
+        clothingstore.src = "../../4Streetz/images/clothingstore.png";
+        park.src = "../../4Streetz/images/park.png";
+        market.src = "../../4Streetz/images/market.png";
+        bank.src = "../../4Streetz/images/bank.png";
+        school.src = "../../4Streetz/images/school.png";
+        machine.src = "../../4Streetz/images/machine.png";
+        coffee.src = "../../4Streetz/images/coffee.png";
+        momhouse.src = "../../4Streetz/images/momhouse.png";
+        store.src= "../../4Streetz/images/store.png";
+        player.src= "../../4Streetz/images/player.png";
 
 
-        a = sidewalk;
-        b = grass;
+        a = street;
+        b = side;
         c = house;
-        d = bank;
-        e = store;
-        f = undefined;
-        g = undefined;
-        h = undefined;
+        d = mall;
+        e = clothingstore;
+        f = park;
+        g = market;
+        h = bank;
+        i = school;
+        j = machine;
+        k = coffee;
+        l = momhouse;
+        m = store;
+        n = player;
+        o = undefined;
+        q = undefined;
+        r = undefined;
+        s = undefined;
+        t = undefined;
+        u = undefined;
+        v = undefined;
+        w = undefined;
+        x = undefined;
+        y = undefined;
 
 
-        if (lMap[level] === undefined) 
+        if (lMap[level] === undefined)
             lMap[level] =
-            //                    10                  20
-            [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
-                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-            ];
-
+                [
+                //                    10                  20
+                [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                [0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	21,	2,	2],
+                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	62,	6,	6,	1,	2,	2,	2],
+                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	6,	6,	6,	1,	1,	1,	0],
+                [0,	0,	5,	1,	0,	0,	0,	0,	1,	0,	81,	8,	8,	0,	0,	0,	0,	0,	6,	6,	6,	1,	0,	0,	0],
+                [0,	0,	5,	1,	0,	0,	0,	0,	1,	0,	8,	8,	8,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                [0,	0,	5,	1,	0,	0,	70,	7,	1,	0,	8,	8,	8,	0,	0,	5,	5,	5,	5,	5,	5,	1,	0,	0,	0],
+                [0,	0,	5,	1,	0,	0,	7,	7,	1,	0,	8,	8,	8,	0,	0,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0],
+                [0,	0,	5,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                [0,	0,	5,	1,	0,	0,	0,	0,	1,	41,	4,	0,	0,	0,	0,	1,	0,	0,	0,	90,	9,	1,	0,	0,	0],
+                [0,	0,	0,	1,	0,	0,	0,	0,	1,	4,	4,	0,	0,	0,	0,	1,	0,	0,	0,	9,	9,	1,	0,	0,	0],
+                [0,	0,	0,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	141,	14,	14,	0,	0,	1,	0,	0,	0],
+                [0,	0,	0,	1,	1,	130,13,	13,	1,	0,	0,	0,	0,	0,	0,	0,	14,	14,	14,	1,	1,	1,	1,	1,	0],
+                [0, 0,	0,	1,	0,	13,	13,	13,	1,	0,	0,	0,	0,	120,	12,	0,	14,	14,	14,	0,	0,	0,	0,	1,	0],
+                [101,10,10,	1,	0,	13,	13,	13,	1,	0,	0,	0,	0,	12,	12,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0],
+                [10,10,	10,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0],
+                [10,10,	10,	1,	5,	5,	5,	5,	5,	5,	5,	5,	5,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                [10,10,	10,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0]
+                ];
 
         if (lPMap[level] === undefined)
         {
-            lPMap[level] = [];                           
-            for (let y = 0; y < 70; y++)                
+            lPMap[level] = [];
+
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
-        
-                for (let x = 0; x < 97; x++)
+
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -507,11 +536,11 @@ function startGame()              //      **** = floor
 
         changePStartPos();
 
-        bank.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        player.onload = function(){addEventListener("keydown", onKeyDown, false);};
         store.onload = function(){drawMap()};
 
     }
-
+    
     if (l5)//Moms House                   **** 2
 
     {
@@ -530,27 +559,27 @@ function startGame()              //      **** = floor
 
         if (lMap[level] === undefined)
             lMap[level] =
-            //                  10                  20
-            [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
-                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //1
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //2
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //3
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //4
-                [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //5
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //6
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //7
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //10
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //11
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //12
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
-                [2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3],    //14
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //15
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
-                [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
-            ];
+                //                  10                  20
+                [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
+                    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //1
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //2
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //3
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //4
+                    [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //5
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //6
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //7
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //10
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //11
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //12
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
+                    [2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3],    //14
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //15
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
+                ];
 
 
         a = wall;
@@ -567,11 +596,11 @@ function startGame()              //      **** = floor
         {
             lPMap[level] = [];
 
-            for (let y = 0; y < 70; y++)
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 97; x++)
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -591,36 +620,36 @@ function startGame()              //      **** = floor
         floor.src = "../../6Lab/images/Floor.png";
         let wall = new Image();
         wall.src = "../../6Lab/images/Wall.png";
-		let door1 = new Image();
-		door1.src = "../../6Lab/images/door1.png";
-		let stairs = new Image();
-		stairs.src = "../../6Lab/images/stairs.png";
+        let door1 = new Image();
+        door1.src = "../../6Lab/images/door1.png";
+        let stairs = new Image();
+        stairs.src = "../../6Lab/images/stairs.png";
 
 
         if (lMap[level] === undefined)
             lMap[level]=
-            //                    10                  20
-            [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
-                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3]
-            ];
+                //                    10                  20
+                [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3]
+                ];
 
 
         a = wall;
@@ -637,11 +666,11 @@ function startGame()              //      **** = floor
         {
             lPMap[level] = [];
 
-            for (let y = 0; y < 70; y++)
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 97; x++)
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -679,25 +708,26 @@ function startGame()              //      **** = floor
 
 
 
+
 function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
+    ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
+
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
-    for (let mR = p.row - 4; mR < p.row + 7; mR ++) //Run through all rows in the levels map (mR = map row)
+    for (let mR = p.row - 2; mR < p.row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
     {
-        for (let mC = p.col - 4; mC < p.col + 5; mC ++)//Run through all the columns in the levels map (mC = map Column)
+        for (let mC = p.col - 2; mC < p.col + 3; mC ++)//Run through all the columns in the levels map (mC = map Column)
         {
             let xPos = undefined, yPos= undefined; //Defined vars that will be used for positioning images to be drawn
 
-
-            if (lMap[level][mR/4] !== undefined && lMap[level][mR/4][mC/4] !== undefined)//If the space being examined exists
+            if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
             {
-                xPos = mC*8;
-                yPos = mR*8;
-                mC = mC / 4;
-                mR = mR / 4;
+                xPos = mC*32;
+                yPos = mR*32;
+
                 switch (lMap[level][mR][mC])//check what needs drawing based on map index
                 {
                     case 0:
@@ -782,19 +812,16 @@ function fillErasedMap()
                 }
 
 
-                mC = mC * 4;    //Scale up for appropriate positioning
-                mR = mR * 4;    //Scale up for appropriate positioning
-
                 //Below is exclusively for sewer level
                 if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                 {
                     if (thingToDraw === floor  && l2)
                         // If drawing the floor on level 2
                         // then draw based on floorSpriteX var positioning
-                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 8), (mR * 8), 32, 32);
+                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
                     else
                         //Otherwise draw regularly
-                        ctx.drawImage(thingToDraw, (mC * 8), (mR * 8));
+                        ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
                 }
 
                 if (xPos !== undefined && yPos !== undefined)
@@ -830,209 +857,21 @@ function fillErasedMap()
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
                     }
-                    if (!lightsOn && l2)                //If 'the lights are off' on level two
-                    {
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
-                        ctx.fillRect(xPos + 96, 0, 800, 600);
-                        ctx.fillRect(0, yPos + 96, 800, 600);
-                        ctx.fillRect(0, 0, xPos - 64, 600);
-                        ctx.fillRect(0, 0, 800, yPos - 64);
-                    }
+
                 }
             }
         }
     }
-}
-
-function onKeyDown(e)
-//Has event listeners for numbers 1 & 2 buttons
-// and S & L keys for switching levels and turning
-// the sewer and lights on and off respectively
-{
-
-    p.prevCol = p.col;      //Set column to be cleared
-    p.prevRow = p.row;      //Set row to be cleared
-
-    checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
-
-    if (e.keyCode === 37)//Left
-
+    if (!lightsOn && l2)                //If 'the lights are off' on level two
     {
-        if (p.col > xMin[level])    //Levels boundaries
-        {
-            //remove player from current column
-            lPMap[level][p.row][p.col] = 0;
-            //update player column
-            p.col --;
-            //add player to updated row
-            lPMap[level][p.row][p.col] = 1;
-        }
-        //Change tile sheet frame to show player walking right
-        p.frameY = 1;
-        //Increment in order to flip through the walking tiles for this direction
-        p.frameX ++;
+        let xPos = (p.col + 1) * 32, yPos = p.row * 32;
+
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
+        ctx.fillRect(xPos + 48, 0, 800, 600);
+        ctx.fillRect(0, yPos + 96, 800, 600);
+        ctx.fillRect(0, 0, xPos - 80, 600);
+        ctx.fillRect(0, 0, 800, yPos - 32);
     }
-
-    if (e.keyCode === 39)//Right
-
-    {
-        if (p.col < xMax[level])    //Levels boundaries
-        {
-            //remove player from current column
-            lPMap[level][p.row][p.col] = 0;
-            //update player column
-            p.col ++;
-            //add player to updated column
-            lPMap[level][p.row][p.col] = 1;
-        }
-        //Change tile sheet frame to show player walking right
-        p.frameY = 2;
-        //Increment in order to flip through the walking tiles for this direction
-        p.frameX ++;
-
-    }
-
-    if (e.keyCode === 38)//Up
-
-    {
-        if (p.row > yMin[level])        //Levels boundaries
-        {
-            //remove player from current row
-            lPMap[level][p.row][p.col] = 0;
-            //update player row
-            p.row --;
-            //add player to updated row
-            lPMap[level][p.row][p.col] = 1;
-        }
-        //Change tile sheet frame to show player walking up
-        p.frameY = 3;
-        //Increment in order to flip through the walking tiles for this direction
-        p.frameX ++;
-    }
-
-    if (e.keyCode === 40)//Down
-
-    {
-        if (p.row < yMax[level])        //Levels boundaries
-        {
-            //remove player from current row
-            lPMap[level][p.row][p.col] = 0;
-            //update player row
-            p.row ++;
-            //add player to updated row
-            lPMap[level][p.row][p.col] = 1;
-        }
-        //Change tile sheet frame to show player walking down
-        p.frameY = 0;
-        //Increment in order to flip through the walking tiles for this direction
-        p.frameX ++;
-    }
-
-    if (e.keyCode === 32) //Space
-
-    {
-        //Character action
-    }
-
-
-
-
-
-
-    /* TEMP - for testing - TEMP */
-
-    if (e.keyCode === 76) //L - light
-
-    {
-        lightSwitch++;
-        lightsOn = (lightSwitch % 2 === 0);
-        drawMap();   //Drawing whole map because light/shade covers whole map
-    }
-
-    if (e.keyCode === 83) //S - swamp
-
-    {
-        sewerSwitch++;
-        sewersDrained = (sewerSwitch % 2 === 0);
-        drawMap(); //Drawing whole map because swamp covers whole map
-    }
-
-    if (e.keyCode === 49) //1
-    {
-        level = 1;              //Change level identifier appropriately
-        l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
-        l1 = true;                                  //Set level being travelled to as true
-
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-    if (e.keyCode === 50) //2
-    {
-        level = 2;              //Change level identifier appropriately
-        l1 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
-        l2 = true;                                  //Set level being travelled to as true
-
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-    if (e.keyCode === 51) //3
-    {
-        level = 3;              //Change level identifier appropriately
-        l1 = l2 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
-        l3 = true;                                  //Set level being travelled to as true
-
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-    if (e.keyCode === 52) //4
-    {
-        level = 4;              //Change level identifier appropriately
-        l1 = l2 = l3 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
-        l4 = true;                                  //Set level being travelled to as true
-
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-    if (e.keyCode === 53) //5
-    {
-        level = 5;              //Change level identifier appropriately
-        l1 = l2 = l3 = l4 = l6 = false;             //Set all levels to false but the one being travelled to
-        l5 = true;                                  //Set level being travelled to as true
-
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-    if (e.keyCode === 54) //6
-    {
-        level = 6;                  //Change level identifier appropriately
-        l1 = l2 = l3 = l4 = l5 = false;             //Set all levels to false but the one being travelled to
-        l6 = true;                                  //Set level being travelled to as true
-        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-        startGame();                                //Load settings and assets for next map
-        setTimeout(drawMap, 40);                    //Draw next map
-    }
-
-
-    ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
-
-    //Fills portion of the canvas the player was just taking up
-    //a,b,c,d,e... are passed from movePlayer function call
-    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-
-    drawPMap();//Draws the new players position
-
-    if (sewersDrained) //If the water has been shut off
-            waterRunning.pause();           //Stop playing the noise of running water
-
-
-
-    console.log("p.row: " + p.row);
-    console.log("p.col: " + p.col);
 }
 
 function changePStartPos()
@@ -1077,10 +916,10 @@ function drawPMap()
                     break;
             }
 
-            destX += 8;         //Increment column by 1 (8 is column width in ratio to the canvas width)
+            destX += 32;         //Increment column by 1 (8 is column width in ratio to the canvas width)
         }
         destX = 0;              //Start over at beginning position of array as we are at a new row
-        destY += 8;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
+        destY += 32;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
     }
 }
 
@@ -1093,7 +932,8 @@ function drawMap()
         for (let col = 0; col < lMap[level][0].length; col++)      // and columns, checking each elements contents
         {
             thingToDraw = undefined;       //Reset the thing that will be drawn to nothing
-
+            
+            
             switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
             {
                 case 0:                   //letters (a through n) are reassigned to an image upon loading each level
@@ -1263,7 +1103,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             }
         }   //Go through the door to level 1
 
-        if (e === 38 && p.col === 96 && p.row === 0) //If going UP & character is right under door 2
+        if (e === 38 && p.col === 24 && p.row === 0) //If going UP & character is right under door 2
         {
             p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
@@ -1377,3 +1217,285 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
     }
 
 }
+
+function onKeyDown(e)
+
+{
+     p.prevCol = p.col;      //Set column to be cleared
+     p.prevRow = p.row;      //Set row to be cleared
+
+     checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
+
+     if (e.keyCode === 37)//Left
+
+     {
+         if (p.col > xMin[level] && notWalking)    //Levels boundaries
+         {
+             //Change tile sheet frame to show player walking up
+             p.frameY = 1;
+             p.srcY = p.height * p.frameY;
+             let walk = 0;
+
+             walkLeft();
+
+             function walkLeft()
+             {
+                 if (walk < 4)
+                 {
+                     notWalking = false;
+                     //Increment in order to flip through the walking tiles for this direction
+                     p.frameX ++;
+                     walk++;
+                     p.srcX = p.width * (p.frameX % 4);
+                     //Fills portion of the canvas the player was just taking up
+                     //a,b,c,d,e... are passed from movePlayer function call
+                     ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                     setTimeout(walkLeft, walkingSpeed);
+                 }
+                 else
+                 {
+                     //remove player from current column
+                     lPMap[level][p.row][p.col] = 0;
+                     //update player column
+                     p.col --;
+                     //add player to updated row
+                     lPMap[level][p.row][p.col] = 1;
+                     walk = 0;
+                     drawPMap();//Draws the new players position
+                     notWalking = true;
+                 }
+             }
+         }
+     }
+
+     if (e.keyCode === 39)//Right
+
+     {
+         if (p.col < xMax[level] && notWalking)    //Levels boundaries
+         {
+             //Change tile sheet frame to show player walking up
+             p.frameY = 2;
+             p.srcY = p.height * p.frameY;
+             let walk = 0;
+
+             walkRight();
+
+             function walkRight()
+             {
+                 if (walk < 4)
+                 {
+                     notWalking = false;
+                     //Increment in order to flip through the walking tiles for this direction
+                     p.frameX ++;
+                     walk++;
+                     p.srcX = p.width * (p.frameX % 4);
+                     //Fills portion of the canvas the player was just taking up
+                     //a,b,c,d,e... are passed from movePlayer function call
+                     ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                     setTimeout(walkRight, walkingSpeed);
+                 }
+                 else
+                 {
+                     //remove player from current column
+                     lPMap[level][p.row][p.col] = 0;
+                     //update player column
+                     p.col ++;
+                     //add player to updated column
+                     lPMap[level][p.row][p.col] = 1;
+                     walk = 0;
+                     drawPMap();//Draws the new players position
+                     notWalking = true;
+                 }
+             }
+         }
+     }
+
+     if (e.keyCode === 38)//Up
+
+     {
+         if (p.row > yMin[level] && notWalking)        //Levels boundaries
+         {
+             //Change tile sheet frame to show player walking up
+             p.frameY = 3;
+             p.srcY = p.height * p.frameY;
+             let walk = 0;
+
+             animateWalking();
+
+             function animateWalking()
+             {
+                 if (walk < 4)
+                 {
+                     notWalking = false;
+                     //Increment in order to flip through the walking tiles for this direction
+                     p.frameX ++;
+                     walk++;
+                     p.srcX = p.width * (p.frameX % 4);
+                     //Fills portion of the canvas the player was just taking up
+                     //a,b,c,d,e... are passed from movePlayer function call
+                     ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
+                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
+                     setTimeout(animateWalking, walkingSpeed);
+                 }
+                 else
+                 {
+                     //remove player from current row
+                     lPMap[level][p.row][p.col] = 0;
+                     //update player row
+                     p.row --;
+                     //add player to updated row
+                     lPMap[level][p.row][p.col] = 1;
+                     walk = 0;
+                     drawPMap();//Draws the new players position
+                     notWalking = true;
+                 }
+             }
+         }
+     }
+
+     if (e.keyCode === 40)//Down
+
+     {
+         if (p.row < yMax[level] && notWalking)        //Levels boundaries
+         {
+             //Change tile sheet frame to show player walking up
+             p.frameY = 0;
+             p.srcY = p.height * p.frameY;
+             let walk = 0;
+
+             walkDown();
+
+             function walkDown()
+             {
+                 if (walk < 4)
+                 {
+                     notWalking = false;
+                     //Increment in order to flip through the walking tiles for this direction
+                     p.frameX ++;
+                     walk++;
+                     p.srcX = p.width * (p.frameX % 4);
+                     //Fills portion of the canvas the player was just taking up
+                     //a,b,c,d,e... are passed from movePlayer function call
+                     ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     setTimeout(walkDown, walkingSpeed);
+                 }
+                 else
+                 {
+                     //remove player from current row
+                     lPMap[level][p.row][p.col] = 0;
+                     //update player row
+                     p.row ++;
+                     //add player to updated row
+                     lPMap[level][p.row][p.col] = 1;
+                     walk = 0;
+                     drawPMap();//Draws the new players position
+                     notWalking = true;
+                 }
+             }
+         }
+     }
+
+     if (e.keyCode === 32) //Space
+
+     {
+         //Character action
+     }
+
+
+
+
+
+
+     /* TEMP - for testing - TEMP */
+
+     if (e.keyCode === 76) //L - light
+
+     {
+         lightSwitch++;
+         lightsOn = (lightSwitch % 2 === 0);
+         drawMap();   //Drawing whole map because light/shade covers whole map
+     }
+
+     if (e.keyCode === 83) //S - swamp
+
+     {
+         sewerSwitch++;
+         sewersDrained = (sewerSwitch % 2 === 0);
+         drawMap(); //Drawing whole map because swamp covers whole map
+     }
+
+     if (e.keyCode === 49) //1
+     {
+         level = 1;              //Change level identifier appropriately
+         l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l1 = true;                                  //Set level being travelled to as true
+
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+     if (e.keyCode === 50) //2
+     {
+         level = 2;              //Change level identifier appropriately
+         l1 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l2 = true;                                  //Set level being travelled to as true
+
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+     if (e.keyCode === 51) //3
+     {
+         level = 3;              //Change level identifier appropriately
+         l1 = l2 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l3 = true;                                  //Set level being travelled to as true
+
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+     if (e.keyCode === 52) //4
+     {
+         level = 4;              //Change level identifier appropriately
+         l1 = l2 = l3 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l4 = true;                                  //Set level being travelled to as true
+
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+     if (e.keyCode === 53) //5
+     {
+         level = 5;              //Change level identifier appropriately
+         l1 = l2 = l3 = l4 = l6 = false;             //Set all levels to false but the one being travelled to
+         l5 = true;                                  //Set level being travelled to as true
+
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+     if (e.keyCode === 54) //6
+     {
+         level = 6;                  //Change level identifier appropriately
+         l1 = l2 = l3 = l4 = l5 = false;             //Set all levels to false but the one being travelled to
+         l6 = true;                                  //Set level being travelled to as true
+         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         startGame();                                //Load settings and assets for next map
+         setTimeout(drawMap, 40);                    //Draw next map
+     }
+
+
+
+
+     if (sewersDrained) //If the water has been shut off
+             waterRunning.pause();           //Stop playing the noise of running water
+}
+
+
