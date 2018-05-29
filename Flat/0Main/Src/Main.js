@@ -82,9 +82,9 @@ waterRunning.volume = 0.3;
 startGame();
 
 
-function startGame()              //      **** = floor
+function startGame()
 {
-    if (l1)//Home(roof)                   **** 0
+    if (l1)//Home(roof)
 
     {
         canvas.style.backgroundImage = "url('../../1Home/images/city.gif')";
@@ -177,7 +177,7 @@ function startGame()              //      **** = floor
         waterRunning.pause();
     }
 
-    if (l2)//Sewer                        **** 2345
+    if (l2)//Sewer
 
     {
         canvas.style.backgroundImage = "";
@@ -304,7 +304,7 @@ function startGame()              //      **** = floor
     /*    startX[1] = 36; startY[1] = 21;*/
     }
 
-    if (l3)//Clothing Store               **** 0
+    if (l3)//Clothing Store
 
     {
         canvas.style.backgroundImage = "";
@@ -436,7 +436,7 @@ function startGame()              //      **** = floor
         waterRunning.pause();
     }
 
-    if (l4)//The Streetz                  **** 1
+    if (l4)//The Streetz
 
     {
         let street = new Image();
@@ -545,7 +545,7 @@ function startGame()              //      **** = floor
 
     }
     
-    if (l5)//Moms House                   **** 2
+    if (l5)//Moms House
 
     {
         let wall = new Image();
@@ -617,7 +617,7 @@ function startGame()              //      **** = floor
         floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
     }
 
-    if (l6)//Lab                          **** 1
+    if (l6)//Lab
 
     {
         let floor = new Image();
