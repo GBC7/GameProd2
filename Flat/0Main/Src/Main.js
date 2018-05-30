@@ -28,7 +28,7 @@ let xMax =   [undefined, 24, 24, 24, 24, 24, 24],
 
 
 // Level floor numbers -   0 , 1,     2,     3, 4, 5, 6
-let floorNumbers = [undefined, 0, undefined, undefined, undefined, undefined, undefined];
+let floorNumbers = [undefined, 0, undefined, 0, undefined, 2, undefined];
 
 
 //level maps initialized when levels are loaded
@@ -1157,7 +1157,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l3)//If it's Lvl 3
     {
-        if (e === 37 && p.col === 3 && (p.row === 65 || p.row === 64))//If going LEFT at the staircase
+        if (e === 37 && p.col === 1 && (p.row === 16 || p.row === 17))//If going LEFT at the staircase
         {//go back to sewer (from store)
             removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
 
@@ -1410,7 +1410,10 @@ function onKeyDown(e)
      if (e.keyCode === 32) //Space
 
      {
-         //Character action
+         if (l3)
+         {
+             
+         }
      }
 
 
