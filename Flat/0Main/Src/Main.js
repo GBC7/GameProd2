@@ -8,10 +8,10 @@ let level = 2;
 let walkingSpeed = 15;
 
 
-let lightSwitch = 2, sewerSwitch = 2;               //For sewer level
-let lightsOn = false, sewersDrained = false;         //For sewer level
+let lightSwitch = 2, sewerSwitch = 2;                                 //For sewer level
+let lightsOn = false, sewersDrained = false;                          //For sewer level
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
-let notWalking = true, canGoThisWay = false;
+let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6
@@ -28,7 +28,7 @@ let xMax =   [undefined, 24, 24, 24, 24, 24, 24],
 
 
 // Level floor numbers -   0 , 1,     2,     3, 4, 5, 6
-let floorNumbers = [undefined, 0, undefined, undefined, undefined, undefined, undefined];
+let floorNumbers = [undefined, 0, undefined, 0, undefined, undefined, undefined];
 
 
 //level maps initialized when levels are loaded
@@ -209,10 +209,10 @@ function startGame()
 
         a = wall;           //0
         b = door;           //1
-        c = undefined;          //2
+        c = undefined;      //2
         d = floor;          //3
         e = floor;          //4
-        f = floor;      //5
+        f = floor;          //5
         g = drain;          //6
         h = pipe;           //7
         i = stairs;         //8
@@ -302,7 +302,7 @@ function startGame()
         scientist.onload = function () {stairs.onload = function(){drawMap();};};
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
-    /*    startX[1] = 36; startY[1] = 21;*/
+    /*    startX[7] = 36; startY[7] = 21;*/
     }
 
     if (l3)//Clothing Store
@@ -925,6 +925,7 @@ function drawPMap()
         destX = 0;              //Start over at beginning position of array as we are at a new row
         destY += 32;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
     }
+    notWalking = true;
 }
 
 function drawMap()
@@ -1230,7 +1231,7 @@ function onKeyDown(e)
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
      checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
-     if (e.keyCode === 37)//Left
+     if (e.keyCode === 37 && e.keyCode !== 38 && e.keyCode !== 39 && e.keyCode !== 40)//Left
 
      {
          if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -1268,13 +1269,26 @@ function onKeyDown(e)
                      lPMap[level][p.row][p.col] = 1;
                      walk = 0;
                      drawPMap();//Draws the new players position
-                     notWalking = true;
                  }
              }
          }
+
+         else
+         {
+             p.frameY = 1;
+             p.frameX ++;
+
+             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+             p.srcX = p.width * (p.frameX % 4);
+             p.srcY = p.height * (p.frameY);
+
+             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+         }
      }
 
-     if (e.keyCode === 39)//Right
+     if (e.keyCode === 39 && e.keyCode !== 37 && e.keyCode !== 38 && e.keyCode !== 40)//Right
 
      {
          if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -1312,13 +1326,25 @@ function onKeyDown(e)
                      lPMap[level][p.row][p.col] = 1;
                      walk = 0;
                      drawPMap();//Draws the new players position
-                     notWalking = true;
                  }
              }
          }
+         else
+         {
+             p.frameY = 2;
+             p.frameX ++;
+
+             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+             p.srcX = p.width * (p.frameX % 4);
+             p.srcY = p.height * (p.frameY);
+
+             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+         }
      }
 
-     if (e.keyCode === 38)//Up
+     if (e.keyCode === 38 && e.keyCode !== 37 && e.keyCode !== 39 && e.keyCode !== 40)//Up
 
      {
          if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
@@ -1356,13 +1382,25 @@ function onKeyDown(e)
                      lPMap[level][p.row][p.col] = 1;
                      walk = 0;
                      drawPMap();//Draws the new players position
-                     notWalking = true;
                  }
              }
          }
+         else
+         {
+             p.frameY = 3;
+             p.frameX ++;
+
+             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+             p.srcX = p.width * (p.frameX % 4);
+             p.srcY = p.height * (p.frameY);
+
+             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+         }
      }
 
-     if (e.keyCode === 40)//Down
+     if (e.keyCode === 40 && e.keyCode !== 37 && e.keyCode !== 38 && e.keyCode !== 39)//Down
 
      {
          if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
@@ -1400,9 +1438,22 @@ function onKeyDown(e)
                      lPMap[level][p.row][p.col] = 1;
                      walk = 0;
                      drawPMap();//Draws the new players position
-                     notWalking = true;
                  }
              }
+         }
+
+         else
+         {
+             p.frameY = 0;
+             p.frameX ++;
+
+             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+
+             p.srcX = p.width * (p.frameX % 4);
+             p.srcY = p.height * (p.frameY);
+
+             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
      }
 
