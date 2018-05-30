@@ -73,8 +73,6 @@ floor.src = "../../2Sewer/images/floor.png";
 let level3sprite = new Image();
 level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
 
-//test
-
 //Global Audio
 let waterRunning = new Audio('../../2Sewer/audio/waterRunning.mp3');
 waterRunning.loop = true;
