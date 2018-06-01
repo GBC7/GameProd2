@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
-let level = 2;
+let l1 = false, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = true;
+let level = 7;
 
 
 let walkingSpeed = 15;
@@ -15,26 +15,26 @@ let notWalking = true, canGoThisWay = false;                          //For boun
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6
-let startX = [undefined, 0,  0,  1,  0,  0,  0],
-    startY = [undefined, 5,  0,  16, 4,  0,  1];
+let startX = [undefined, 0,  0,  1,  0,  0,  undefined, 0],
+    startY = [undefined, 5,  0,  16, 4,  0,  undefined, 1];
 
 
 //x and y map boundaries per level
 // Level          0      1   2   3   4   5   6
-let xMax =   [undefined, 24, 24, 24, 24, 24, 24],
-    xMin =   [undefined, 0,  0,  0,  0,  0,  0],
-    yMax =   [undefined, 17, 17, 17, 17, 17, 17],
-    yMin =   [undefined, 10, 0,  0,  4,  0,  4];
+let xMax =   [undefined, 24, 24, 24, 24, 24, undefined, 24],
+    xMin =   [undefined, 0,  0,  0,  0,  0,  undefined, 0],
+    yMax =   [undefined, 17, 17, 17, 17, 17, undefined, 17],
+    yMin =   [undefined, 10, 0,  0,  4,  0,  undefined, 1];
 
 
-// Level floor numbers -   0 , 1,     2,     3, 4, 5, 6
-let floorNumbers = [undefined, 0, undefined, 0, undefined, undefined, undefined];
+// Level floor numbers -   0 , 1,     2,     3, 4,         5, 6,         7
+let floorNumbers = [undefined, 0, undefined, 0, undefined, 2, undefined, 1];
 
 
 //level maps initialized when levels are loaded
-    // Level    0          1          2          3          4          5          6
-let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
-let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+    // Level    0          1          2          3          4          5          6         7
+let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 
 
 let canvas = document.querySelector("canvas");
@@ -431,7 +431,7 @@ function startGame()
 
         changePStartPos();
 
-        level3sprite.onload = function(){drawMap();};
+        chair.onload = function(){drawMap();};
 
         addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
@@ -618,7 +618,14 @@ function startGame()
         floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
     }
 
-    if (l6)//Lab
+    if (l6)//Roof (Home)
+
+    {
+
+
+    }
+
+    if (l7)//Lab
 
     {
         let floor = new Image();
@@ -688,12 +695,6 @@ function startGame()
 
         floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
         wall.onload = function(){drawMap();};
-    }
-
-    if (l7)//Not decided
-
-    {
-
     }
 }
 
@@ -1097,7 +1098,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else        //Otherwise, go through door and load level 1
                 {
                     level = 1;
-                    l2 = l3 = l4 = l5 = l6 = false;
+                    l2 = l3 = l4 = l5 = l6 = l7 = false;
                     l1 = true;
                     ctx.clearRect(0,0,800,600);
                     p.frameY = 0;
@@ -1141,7 +1142,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     else                            //Otherwise
                     {
                         level = 3;                              //Change level identifier appropriately
-                        l1 = l2 = l4 = l5 = l6 = false;         //Set all levels not being travelled to as false
+                        l1 = l2 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
                         l3 = true;                              //Set the one that is being travelled to to true
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -1188,7 +1189,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else                              //Otherwise, load level 2.
                 {
                     level = 2;                              //Change level identifier to appropriate level
-                    l1 = l3 = l4 = l5 = l6 = false;         //Set all levels false aside from new level
+                    l1 = l3 = l4 = l5 = l6 = l7 =false;         //Set all levels false aside from new level
                     l2 = true;                              //Set new level to true
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
@@ -1489,7 +1490,7 @@ function onKeyDown(e)
      if (e.keyCode === 49) //1
      {
          level = 1;              //Change level identifier appropriately
-         l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l2 = l3 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
          l1 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1499,7 +1500,7 @@ function onKeyDown(e)
      if (e.keyCode === 50) //2
      {
          level = 2;              //Change level identifier appropriately
-         l1 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l1 = l3 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
          l2 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1509,7 +1510,7 @@ function onKeyDown(e)
      if (e.keyCode === 51) //3
      {
          level = 3;              //Change level identifier appropriately
-         l1 = l2 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
          l3 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1519,7 +1520,7 @@ function onKeyDown(e)
      if (e.keyCode === 52) //4
      {
          level = 4;              //Change level identifier appropriately
-         l1 = l2 = l3 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
          l4 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1529,7 +1530,7 @@ function onKeyDown(e)
      if (e.keyCode === 53) //5
      {
          level = 5;              //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l6 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
          l5 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1539,13 +1540,21 @@ function onKeyDown(e)
      if (e.keyCode === 54) //6
      {
          level = 6;                  //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l5 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l5 = l7 = false;             //Set all levels to false but the one being travelled to
          l6 = true;                                  //Set level being travelled to as true
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
          startGame();                                //Load settings and assets for next map
          setTimeout(drawMap, 40);                    //Draw next map
      }
-
+    if (e.keyCode === 55) //7
+    {
+        level = 7;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l7 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
 
 
 
