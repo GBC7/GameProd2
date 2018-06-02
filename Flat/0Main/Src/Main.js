@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
-let level = 2;
+let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
+let level = 1;
 
 
 let walkingSpeed = 15;
@@ -15,8 +15,8 @@ let notWalking = true, canGoThisWay = false;                          //For boun
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4   5   6  7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  0,  0,  0, 0, undefined, undefined, undefined, 12],
-    startY = [undefined, 5,  0,  16, 4,  0,  5, 1, undefined, undefined, undefined, 17];
+let startX = [undefined, 0,  0,  1,  12,  0,  0, 0, undefined, undefined, undefined, 12],
+    startY = [undefined, 5,  0,  16, 17,  0,  5, 1, undefined, undefined, undefined, 17];
 
 
 //x and y map boundaries per level
@@ -24,11 +24,11 @@ let startX = [undefined, 0,  0,  1,  0,  0,  0, 0, undefined, undefined, undefin
 let xMax =   [undefined,  9,  24,  24,  24,  24,  12,  24,  undefined,  undefined,  undefined,  24],
     xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0],
     yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17],
-    yMin =   [undefined,  5,   0,   0,   4,   0,   5,   1,  undefined,  undefined,  undefined,  2];
+    yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,  undefined,  undefined,  undefined,  2];
 
 
-// Level floor numbers -   0 , 1,     2,     3, 4,         5, 6, 7      8          9         10       11
-let floorNumbers = [undefined, 0, undefined, 0, undefined, 2, 0, 1, undefined, undefined, undefined, undefined];
+// Level floor numbers -   0 , 1,     2,     3, 4, 5, 6, 7      8          9         10       11
+let floorNumbers = [undefined, 0, undefined, 0, 1, 2, 0, 1, undefined, undefined, undefined, undefined];
 
 
 //level maps initialized when levels are loaded
@@ -48,9 +48,14 @@ let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 
 
-let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,thingToDraw; //Used with global functions to pass case numbers to
-    a = b = c  = d = e = f = g = h = i = j = k = l = m = n =
-        o = q = r = s = t = u = v = w = x = y = thingToDraw = undefined;
+let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,qq,rr,ss,tt,uu,vv,ww,
+    xx,yy,zz,aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lll,mmm,nnn,ooo,qqq,rrr,sss,ttt,uuu,vvv,www,xxx,yyy,zzz,
+    thingToDraw;       //Used with global functions to pass case numbers to
+
+    a = b = c  = d = e = f = g = h = i = j = k = l = m = n = o = q = r = s = t = u = v = w = x = y = z =
+    aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu = vv = ww = xx =
+    yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll = mmm = nnn = ooo = qqq = rrr = sss
+    = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
 
 
 let p =                                                         //PlayerObject
@@ -347,6 +352,7 @@ function startGame()
     {
         canvas.style.backgroundImage = "";
 
+
         let floor = new Image();
         floor.src = "../../3Store/images/floor.png";
         let rack1 = new Image();
@@ -391,11 +397,10 @@ function startGame()
         door1.src = "../../3Store/images/door_1.png";
         let door2 = new Image();
         door2.src = "../../3Store/images/door_2.png";
-        let desk = new Image();
-        desk.src = "../../3Store/images/desk.png";
         let chair = new Image();
         chair.src = "../../3Store/images/chair.png";
-
+        let desk = new Image();
+        desk.src = "../../3Store/images/desk.png";
 
 
         a = floor;         //0
@@ -450,6 +455,7 @@ function startGame()
             ];
         }
 
+
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];
@@ -466,9 +472,11 @@ function startGame()
             lPMap[level][16][1] = 1;                    //Set the players starting position
         }
 
+
         changePStartPos();
 
-        chair.onload = function(){drawMap();};
+
+        desk.onload = function(){drawMap();};
 
         addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
@@ -477,87 +485,253 @@ function startGame()
     if (l4)//The Streetz
 
     {
+
         let street = new Image();
         let side = new Image();
+        let house1 = new Image();
+        let bank1 = new Image();
+        let bank2 = new Image();
+        let bank3 = new Image();
+        let bank4 = new Image();
+        let clothingStore1 = new Image();
+        let clothingStore2 = new Image();
+        let clothingStore3 = new Image();
+        let clothingStore4 = new Image();
+        let clothingStore5 = new Image();
+        let clothingStore6 = new Image();
+        let coffee1 = new Image();
+        let coffee2 = new Image();
+        let coffee3 = new Image();
+        let coffee4 = new Image();
         let house = new Image();
-        let mall = new Image();
-        let clothingstore = new Image();
-        let park = new Image();
-        let bank = new Image();
-        let market = new Image();
-        let school = new Image();
         let machine = new Image();
-        let coffee = new Image();
-        let momhouse = new Image();
-        let store = new Image();
-        let player = new Image();
+        let mall1 = new Image();
+        let mall2 = new Image();
+        let mall3 = new Image();
+        let mall4 = new Image();
+        let mall5 = new Image();
+        let mall6 = new Image();
+        let mall7 = new Image();
+        let mall8 = new Image();
+        let mall9 = new Image();
+        let mall10 = new Image();
+        let mall11 = new Image();
+        let mall12 = new Image();
+        let market1 = new Image();
+        let market2 = new Image();
+        let market3 = new Image();
+        let market4 = new Image();
+        let market5 = new Image();
+        let market6 = new Image();
+        let market7 = new Image();
+        let market8 = new Image();
+        let market9 = new Image();
+        let momsHouse1 = new Image();
+        let momsHouse2 = new Image();
+        let momsHouse3 = new Image();
+        let momsHouse4 = new Image();
+        let momsHouse5 = new Image();
+        let momsHouse6 = new Image();
+        let momsHouse7 = new Image();
+        let momsHouse8 = new Image();
+        let momsHouse9 = new Image();
+        let park1 = new Image();
+        let park2 = new Image();
+        let park3 = new Image();
+        let park4 = new Image();
+        let park5 = new Image();
+        let park6 = new Image();
+        let park7 = new Image();
+        let park8 = new Image();
+        let park9 = new Image();
+        let school1 = new Image();
+        let school2 = new Image();
+        let school3 = new Image();
+        let school4 = new Image();
+        let school5 = new Image();
+        let school6 = new Image();
+        let school7 = new Image();
+        let school8 = new Image();
+        let school9 = new Image();
+        let store1 = new Image();
+        let store2 = new Image();
+        let store3 = new Image();
+        let store4 = new Image();
 
-        street.src = "../../4Streetz/images/street.png";
-        side.src = "../../4Streetz/images/side.png";
+
+        bank1.src = "../../4Streetz/images/bank1.png";
+        bank2.src = "../../4Streetz/images/bank2.png";
+        bank3.src = "../../4Streetz/images/bank3.png";
+        bank4.src = "../../4Streetz/images/bank4.png";
+        clothingStore1.src = "../../4Streetz/images/clothingStore1.png";
+        clothingStore2.src = "../../4Streetz/images/clothingStore2.png";
+        clothingStore3.src = "../../4Streetz/images/clothingStore3.png";
+        clothingStore4.src = "../../4Streetz/images/clothingStore4.png";
+        clothingStore5.src = "../../4Streetz/images/clothingStore5.png";
+        clothingStore6.src = "../../4Streetz/images/clothingStore6.png";
+        coffee1.src = "../../4Streetz/images/coffee1.png";
+        coffee2.src = "../../4Streetz/images/coffee2.png";
+        coffee3.src = "../../4Streetz/images/coffee3.png";
+        coffee4.src = "../../4Streetz/images/coffee4.png";
         house.src = "../../4Streetz/images/house.png";
-        mall.src = "../../4Streetz/images/mall.png";
-        clothingstore.src = "../../4Streetz/images/clothingstore.png";
-        park.src = "../../4Streetz/images/park.png";
-        market.src = "../../4Streetz/images/market.png";
-        bank.src = "../../4Streetz/images/bank.png";
-        school.src = "../../4Streetz/images/school.png";
         machine.src = "../../4Streetz/images/machine.png";
-        coffee.src = "../../4Streetz/images/coffee.png";
-        momhouse.src = "../../4Streetz/images/momhouse.png";
-        store.src= "../../4Streetz/images/store.png";
-        player.src= "../../4Streetz/images/player.png";
+        mall1.src = "../../4Streetz/images/mall1.png";
+        mall2.src = "../../4Streetz/images/mall2.png";
+        mall3.src = "../../4Streetz/images/mall3.png";
+        mall4.src = "../../4Streetz/images/mall4.png";
+        mall5.src = "../../4Streetz/images/mall5.png";
+        mall6.src = "../../4Streetz/images/mall6.png";
+        mall7.src = "../../4Streetz/images/mall7.png";
+        mall8.src = "../../4Streetz/images/mall8.png";
+        mall9.src = "../../4Streetz/images/mall9.png";
+        mall10.src = "../../4Streetz/images/mall10.png";
+        mall11.src = "../../4Streetz/images/mall11.png";
+        mall12.src = "../../4Streetz/images/mall12.png";
+        market1.src = "../../4Streetz/images/market1.png";
+        market2.src = "../../4Streetz/images/market2.png";
+        market3.src = "../../4Streetz/images/market3.png";
+        market4.src = "../../4Streetz/images/market4.png";
+        market5.src = "../../4Streetz/images/market5.png";
+        market6.src = "../../4Streetz/images/market6.png";
+        market7.src = "../../4Streetz/images/market7.png";
+        market8.src = "../../4Streetz/images/market8.png";
+        market9.src = "../../4Streetz/images/market9.png";
+        momsHouse1.src = "../../4Streetz/images/momsHouse1.png";
+        momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
+        momsHouse3.src = "../../4Streetz/images/momsHouse3.png";
+        momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
+        momsHouse5.src = "../../4Streetz/images/momsHouse5.png";
+        momsHouse6.src = "../../4Streetz/images/momsHouse6.png";
+        momsHouse7.src = "../../4Streetz/images/momsHouse7.png";
+        momsHouse8.src = "../../4Streetz/images/momsHouse8.png";
+        momsHouse9.src = "../../4Streetz/images/momsHouse9.png";
+        park1.src = "../../4Streetz/images/park1.png";
+        park2.src = "../../4Streetz/images/park2.png";
+        park3.src = "../../4Streetz/images/park3.png";
+        park4.src = "../../4Streetz/images/park4.png";
+        park5.src = "../../4Streetz/images/park5.png";
+        park6.src = "../../4Streetz/images/park6.png";
+        park7.src = "../../4Streetz/images/park7.png";
+        park8.src = "../../4Streetz/images/park8.png";
+        park9.src = "../../4Streetz/images/park9.png";
+        school1.src = "../../4Streetz/images/school1.png";
+        school2.src = "../../4Streetz/images/school2.png";
+        school3.src = "../../4Streetz/images/school3.png";
+        school4.src = "../../4Streetz/images/school4.png";
+        school5.src = "../../4Streetz/images/school5.png";
+        school6.src = "../../4Streetz/images/school6.png";
+        school7.src = "../../4Streetz/images/school7.png";
+        school8.src = "../../4Streetz/images/school8.png";
+        school9.src = "../../4Streetz/images/school9.png";
+        store1.src= "../../4Streetz/images/store1.png";
+        store2.src= "../../4Streetz/images/store2.png";
+        store3.src= "../../4Streetz/images/store3.png";
+        store4.src= "../../4Streetz/images/store4.png";
+        street.src = "../../4Streetz/images/street.png";
+        house1.src= "../../4Streetz/images/house.png";
+        side.src = "../../4Streetz/images/side.png";
+
+        a = side;               //0
+        b = street;             //1
+        c = clothingStore1;     //2
+        d = clothingStore2;     //3
+        e = clothingStore3;     //4
+        f = clothingStore4;     //5
+        g = clothingStore5;     //6
+        h = clothingStore6;     //7
+        i = market1;            //8
+        j = market2;            //9
+        k = market3;            //10
+        l = market4;            //11
+        m = market5;            //12
+        n = market6;            //13
+        o = market7;            //14
+        q = market8;            //15
+        r = market9;            //16
+        s = house1;             //17
+        t = machine;            //18
+        u = momsHouse1;         //19
+        v = momsHouse2;         //20
+        w = momsHouse3;         //21
+        x = momsHouse4;         //22
+        y = momsHouse5;         //23
+        z = momsHouse6;         //24
+        aa = momsHouse7;        //25
+        bb = momsHouse8;        //26
+        cc = momsHouse9;        //27
+        dd = momsHouse5;        //28
+        ee = mall1;         //29
+        ff = mall2;         //30
+        gg = mall3;         //31
+        hh = mall4;         //32
+        ii = mall5;         //33
+        jj = mall6;         //34
+        kk = mall7;         //35
+        ll = mall8;         //36
+        mm = mall9;         //37
+        nn = mall10;        //38
+        oo = mall11;        //39
+        qq = mall12;        //40
+        rr = store1;        //41
+        ss = store2;        //42
+        tt = store3;        //43
+        uu = store4;        //44
+        vv = bank1;         //45
+        ww = bank2;         //46
+        xx = bank3;         //47
+        yy = bank4;         //48
+        zz = coffee1;       //49
+        aaa = coffee2;      //50
+        bbb = coffee3;      //51
+        ccc = coffee4;      //52
+        ddd = school1;      //53
+        eee = school2;      //54
+        fff = school3;      //55
+        ggg = school4;      //56
+        hhh = school5;      //57
+        iii = school6;      //58
+        jjj = school7;      //59
+        kkk = school8;      //60
+        lll = school9;      //61
+        mmm = park1;      //62
+        nnn = park2;      //63
+        ooo = park3;      //64
+        qqq = park4;      //65
+        rrr = park5;      //66
+        sss = park6;      //67
+        ttt = park7;      //68
+        uuu = park8;      //69
+        vvv = park9;      //70
+        www = park1;      //71
 
 
-        a = street;
-        b = side;
-        c = house;
-        d = mall;
-        e = clothingstore;
-        f = park;
-        g = market;
-        h = bank;
-        i = school;
-        j = machine;
-        k = coffee;
-        l = momhouse;
-        m = store;
-        n = player;
-        o = undefined;
-        q = undefined;
-        r = undefined;
-        s = undefined;
-        t = undefined;
-        u = undefined;
-        v = undefined;
-        w = undefined;
-        x = undefined;
-        y = undefined;
 
 
         if (lMap[level] === undefined)
             lMap[level] =
                 [
-                //                    10                  20
-                [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-                [0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	21,	2,	2],
-                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	62,	6,	6,	1,	2,	2,	2],
-                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	6,	6,	6,	1,	1,	1,	0],
-                [0,	0,	5,	1,	0,	0,	0,	0,	1,	0,	81,	8,	8,	0,	0,	0,	0,	0,	6,	6,	6,	1,	0,	0,	0],
-                [0,	0,	5,	1,	0,	0,	0,	0,	1,	0,	8,	8,	8,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0],
-                [0,	0,	5,	1,	0,	0,	70,	7,	1,	0,	8,	8,	8,	0,	0,	5,	5,	5,	5,	5,	5,	1,	0,	0,	0],
-                [0,	0,	5,	1,	0,	0,	7,	7,	1,	0,	8,	8,	8,	0,	0,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0],
-                [0,	0,	5,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
-                [0,	0,	5,	1,	0,	0,	0,	0,	1,	41,	4,	0,	0,	0,	0,	1,	0,	0,	0,	90,	9,	1,	0,	0,	0],
-                [0,	0,	0,	1,	0,	0,	0,	0,	1,	4,	4,	0,	0,	0,	0,	1,	0,	0,	0,	9,	9,	1,	0,	0,	0],
-                [0,	0,	0,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
-                [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	141,	14,	14,	0,	0,	1,	0,	0,	0],
-                [0,	0,	0,	1,	1,	130,13,	13,	1,	0,	0,	0,	0,	0,	0,	0,	14,	14,	14,	1,	1,	1,	1,	1,	0],
-                [0, 0,	0,	1,	0,	13,	13,	13,	1,	0,	0,	0,	0,	120,	12,	0,	14,	14,	14,	0,	0,	0,	0,	1,	0],
-                [101,10,10,	1,	0,	13,	13,	13,	1,	0,	0,	0,	0,	12,	12,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0],
-                [10,10,	10,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0],
-                [10,10,	10,	1,	5,	5,	5,	5,	5,	5,	5,	5,	5,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-                [10,10,	10,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0]
+                    //                    10                  20
+                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                    [0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	2,	3,	4],
+                    [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	8,	9,	10,	1,	5,	6,	7],
+                    [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	1,	0,	0,	0,	0,	0,	0,	11,	12,	13,	1,	1,	1,	0],
+                    [0,	0,	17,	1,	0,	0,	0,	0,	1,	0,	29,	30,	31,	0,	0,	0,	0,	0,	14,	15,	16,	1,	0,	0,	0],
+                    [0,	0,	17,	1,	0,	0,	0,	0,	1,	0,	32,	33,	34,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                    [0,	0,	17,	1,	0,	0,	49,	50,	1,	0,	35,	36,	37,	0,	0,	17,	17,	17,	17,	17,	17,	1,	0,	0,	0],
+                    [0,	0,	17,	1,	0,	0,	51,	52,	1,	0,	38,	39,	40,	0,	0,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0],
+                    [0,	0,	17,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                    [0,	0,	17,	1,	0,	0,	0,	0,	1,	45,	46,	0,	0,	0,	0,	1,	0,	0,	0,	0,	18,	1,	0,	0,	0],
+                    [0,	0,	0,	1,	0,	0,	0,	0,	1,	47,	48,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                    [0,	0,	0,	1,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	1,	0,	0,	0],
+                    [0,	0,	0,	1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	19, 20, 21, 0,	0,	1,	0,	0,	0],
+                    [0,	0,	0,	1,	1,	53, 54,	55,	1,	0,	0,	0,	0,	0,	0,	0,	22,	23,	24,	1,	1,	1,	1,	1,	0],
+                    [0, 0,	0,	1,	0,	56,	57,	58,	1,	0,	0,	0,	0,	41, 42, 0,	25,	26,	27,	0,	0,	0,	0,	1,	0],
+                    [0,0,0,	1,	0,	59,	60,	61,	1,	0,	0,	0,	0,	43,	44,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0],
+                    [62,63,	64,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0],
+                    [65,66,	67,	1,	17, 17,	17,	17,	17,	17,	17,	17,	17,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                    [68,69,	70,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0]
                 ];
+
 
         if (lPMap[level] === undefined)
         {
@@ -576,11 +750,14 @@ function startGame()
             lPMap[level][0][0] = 1;                             //Set the players starting position
         }
 
+
         changePStartPos();
 
-        player.onload = function(){addEventListener("keydown", onKeyDown, false);};
-        store.onload = function(){drawMap()};
 
+        side.onload = function(){drawMap()};
+
+
+        addEventListener("keydown", onKeyDown, false);
     }
     
     if (l5)//Moms House
@@ -1109,6 +1286,159 @@ function fillErasedMap()
                     case 23:
                         thingToDraw = y;
                         break;
+                    case 24:
+                        thingToDraw = z;
+                        break;
+                    case 25:
+                        thingToDraw = aa;
+                        break;
+                    case 26:
+                        thingToDraw = bb;
+                        break;
+                    case 27:
+                        thingToDraw = cc;
+                        break;
+                    case 28:
+                        thingToDraw = dd;
+                        break;
+                    case 29:
+                        thingToDraw = ee;
+                        break;
+                    case 30:
+                        thingToDraw = ff;
+                        break;
+                    case 31:
+                        thingToDraw = gg;
+                        break;
+                    case 32:
+                        thingToDraw = hh;
+                        break;
+                    case 33:
+                        thingToDraw = ii;
+                        break;
+                    case 34:
+                        thingToDraw = jj;
+                        break;
+                    case 35:
+                        thingToDraw = kk;
+                        break;
+                    case 36:
+                        thingToDraw = ll;
+                        break;
+                    case 37:
+                        thingToDraw = mm;
+                        break;
+                    case 38:
+                        thingToDraw = nn;
+                        break;
+                    case 39:
+                        thingToDraw = oo;
+                        break;
+                    case 40:
+                        thingToDraw = qq;
+                        break;
+                    case 41:
+                        thingToDraw = rr;
+                        break;
+                    case 42:
+                        thingToDraw = ss;
+                        break;
+                    case 43:
+                        thingToDraw = tt;
+                        break;
+                    case 44:
+                        thingToDraw = uu;
+                        break;
+                    case 45:
+                        thingToDraw = vv;
+                        break;
+                    case 46:
+                        thingToDraw = ww;
+                        break;
+                    case 47:
+                        thingToDraw = xx;
+                        break;
+                    case 48:
+                        thingToDraw = yy;
+                        break;
+                    case 49:
+                        thingToDraw = zz;
+                        break;
+                    case 50:
+                        thingToDraw = aaa;
+                        break;
+                    case 51:
+                        thingToDraw = bbb;
+                        break;
+                    case 52:
+                        thingToDraw = ccc;
+                        break;
+                    case 53:
+                        thingToDraw = ddd;
+                        break;
+                    case 54:
+                        thingToDraw = eee;
+                        break;
+                    case 55:
+                        thingToDraw = fff;
+                        break;
+                    case 56:
+                        thingToDraw = ggg;
+                        break;
+                    case 57:
+                        thingToDraw = hhh;
+                        break;
+                    case 58:
+                        thingToDraw = iii;
+                        break;
+                    case 59:
+                        thingToDraw = jjj;
+                        break;
+                    case 60:
+                        thingToDraw = kkk;
+                        break;
+                    case 61:
+                        thingToDraw = lll;
+                        break;
+                    case 62:
+                        thingToDraw = mmm;
+                        break;
+                    case 63:
+                        thingToDraw = nnn;
+                        break;
+                    case 64:
+                        thingToDraw = ooo;
+                        break;
+                    case 65:
+                        thingToDraw = qqq;
+                        break;
+                    case 66:
+                        thingToDraw = rrr;
+                        break;
+                    case 67:
+                        thingToDraw = sss;
+                        break;
+                    case 68:
+                        thingToDraw = ttt;
+                        break;
+                    case 69:
+                        thingToDraw = uuu;
+                        break;
+                    case 70:
+                        thingToDraw = vvv;
+                        break;
+                    case 71:
+                        thingToDraw = www;
+                        break;
+                    case 72:
+                        thingToDraw = xxx;
+                        break;
+                    case 73:
+                        thingToDraw = yyy;
+                        break;
+                    case 74:
+                        thingToDraw = zzz;
+                        break;
                 }
 
 
@@ -1314,6 +1644,159 @@ function drawMap()
                     break;
                 case 23:
                     thingToDraw = y;
+                    break;
+                case 24:
+                    thingToDraw = z;
+                    break;
+                case 25:
+                    thingToDraw = aa;
+                    break;
+                case 26:
+                    thingToDraw = bb;
+                    break;
+                case 27:
+                    thingToDraw = cc;
+                    break;
+                case 28:
+                    thingToDraw = dd;
+                    break;
+                case 29:
+                    thingToDraw = ee;
+                    break;
+                case 30:
+                    thingToDraw = ff;
+                    break;
+                case 31:
+                    thingToDraw = gg;
+                    break;
+                case 32:
+                    thingToDraw = hh;
+                    break;
+                case 33:
+                    thingToDraw = ii;
+                    break;
+                case 34:
+                    thingToDraw = jj;
+                    break;
+                case 35:
+                    thingToDraw = kk;
+                    break;
+                case 36:
+                    thingToDraw = ll;
+                    break;
+                case 37:
+                    thingToDraw = mm;
+                    break;
+                case 38:
+                    thingToDraw = nn;
+                    break;
+                case 39:
+                    thingToDraw = oo;
+                    break;
+                case 40:
+                    thingToDraw = qq;
+                    break;
+                case 41:
+                    thingToDraw = rr;
+                    break;
+                case 42:
+                    thingToDraw = ss;
+                    break;
+                case 43:
+                    thingToDraw = tt;
+                    break;
+                case 44:
+                    thingToDraw = uu;
+                    break;
+                case 45:
+                    thingToDraw = vv;
+                    break;
+                case 46:
+                    thingToDraw = ww;
+                    break;
+                case 47:
+                    thingToDraw = xx;
+                    break;
+                case 48:
+                    thingToDraw = yy;
+                    break;
+                case 49:
+                    thingToDraw = zz;
+                    break;
+                case 50:
+                    thingToDraw = aaa;
+                    break;
+                case 51:
+                    thingToDraw = bbb;
+                    break;
+                case 52:
+                    thingToDraw = ccc;
+                    break;
+                case 53:
+                    thingToDraw = ddd;
+                    break;
+                case 54:
+                    thingToDraw = eee;
+                    break;
+                case 55:
+                    thingToDraw = fff;
+                    break;
+                case 56:
+                    thingToDraw = ggg;
+                    break;
+                case 57:
+                    thingToDraw = hhh;
+                    break;
+                case 58:
+                    thingToDraw = iii;
+                    break;
+                case 59:
+                    thingToDraw = jjj;
+                    break;
+                case 60:
+                    thingToDraw = kkk;
+                    break;
+                case 61:
+                    thingToDraw = lll;
+                    break;
+                case 62:
+                    thingToDraw = mmm;
+                    break;
+                case 63:
+                    thingToDraw = nnn;
+                    break;
+                case 64:
+                    thingToDraw = ooo;
+                    break;
+                case 65:
+                    thingToDraw = qqq;
+                    break;
+                case 66:
+                    thingToDraw = rrr;
+                    break;
+                case 67:
+                    thingToDraw = sss;
+                    break;
+                case 68:
+                    thingToDraw = ttt;
+                    break;
+                case 69:
+                    thingToDraw = uuu;
+                    break;
+                case 70:
+                    thingToDraw = vvv;
+                    break;
+                case 71:
+                    thingToDraw = www;
+                    break;
+                case 72:
+                    thingToDraw = xxx;
+                    break;
+                case 73:
+                    thingToDraw = yyy;
+                    break;
+                case 74:
+                    thingToDraw = zzz;
                     break;
             }
 
