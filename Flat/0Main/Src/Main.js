@@ -1,40 +1,47 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = true;
-let level = 7;
+let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
+let level = 2;
 
 
 let walkingSpeed = 15;
 
 
-let lightSwitch = 2, sewerSwitch = 2;                                 //For sewer level
-let lightsOn = false, sewersDrained = false;                          //For sewer level
+let lightSwitch = 1, sewerSwitch = 1;                                 //For sewer level
+let lightsOn = true, sewersDrained = true;                          //For sewer level
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 
 //level 0 is undefined as we do not have a level 0
-   // Level       0      1   2   3   4   5   6
-let startX = [undefined, 0,  0,  1,  0,  0,  undefined, 0],
-    startY = [undefined, 5,  0,  16, 4,  0,  undefined, 1];
+   // Level       0      1   2   3   4   5   6  7      8          9         10      11
+let startX = [undefined, 0,  0,  1,  0,  0,  0, 0, undefined, undefined, undefined, 12],
+    startY = [undefined, 5,  0,  16, 4,  0,  5, 1, undefined, undefined, undefined, 17];
 
 
 //x and y map boundaries per level
-// Level          0      1   2   3   4   5   6
-let xMax =   [undefined, 24, 24, 24, 24, 24, undefined, 24],
-    xMin =   [undefined, 0,  0,  0,  0,  0,  undefined, 0],
-    yMax =   [undefined, 17, 17, 17, 17, 17, undefined, 17],
-    yMin =   [undefined, 10, 0,  0,  4,  0,  undefined, 1];
+// Level          0       1    2    3    4    5   6    7       8           9           10       11
+let xMax =   [undefined,  9,  24,  24,  24,  24,  12,  24,  undefined,  undefined,  undefined,  24],
+    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0],
+    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17],
+    yMin =   [undefined,  5,   0,   0,   4,   0,   5,   1,  undefined,  undefined,  undefined,  2];
 
 
-// Level floor numbers -   0 , 1,     2,     3, 4,         5, 6,         7
-let floorNumbers = [undefined, 0, undefined, 0, undefined, 2, undefined, 1];
+// Level floor numbers -   0 , 1,     2,     3, 4,         5, 6, 7      8          9         10       11
+let floorNumbers = [undefined, 0, undefined, 0, undefined, 2, 0, 1, undefined, undefined, undefined, undefined];
 
 
 //level maps initialized when levels are loaded
     // Level    0          1          2          3          4          5          6         7
-let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
-let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+    //   8        9         10          11
+    undefined, undefined, undefined, undefined];
+
+
+//level player maps initialized when levels are loaded
+let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+    //   8        9         10          11
+    undefined, undefined, undefined, undefined];
 
 
 let canvas = document.querySelector("canvas");
@@ -68,10 +75,40 @@ let sciUndWater = new Image();                                  //Image fpr play
 sciUndWater.src = "../../2Sewer/images/scientist2.png";
 let wetPipe = new Image();
 wetPipe.src = "../../2Sewer/images/pipeWet.png";
-let floor = new Image();
-floor.src = "../../2Sewer/images/floor.png";
+let sewerFloor = new Image();
+sewerFloor.src = "../../2Sewer/images/floor.png";
 let level3sprite = new Image();
 level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
+
+
+
+//Level6 Roof
+let gate = new Image();
+gate.src = "../../6Roof/images/gate.png";
+let fence = new Image();
+fence.src = "../../6Roof/images/fence.png";
+let litWindow = new Image();
+litWindow.src = "../../6Roof/images/litWindow.png";
+let darkWindow = new Image();
+darkWindow.src = "../../6Roof/images/darkWindow.png";
+let cherryTree = new Image();
+cherryTree.src = "../../6Roof/images/cherryTree.png";
+let statue = new Image();
+statue.src = "../../6Roof/images/statue.png";
+let car = new Image();
+car.src = "../../6Roof/images/car.png";
+let ladder = new Image();
+ladder.src = "../../6Roof/images/ladder.png";
+let helipad = new Image();
+helipad.src = "../../6Roof/images/helipad.png";
+let helicopter = new Image();
+helicopter.src = "../../6Roof/images/helicopter1.png";
+let exit = new Image();
+exit.src = "../../6Roof/images/exit.png";
+let shrub = new Image();
+shrub.src = "../../6Roof/images/shrub.png";
+//Level6 Roof
+
 
 
 //Global Audio
@@ -210,9 +247,9 @@ function startGame()
         a = wall;           //0
         b = door;           //1
         c = undefined;      //2
-        d = floor;          //3
-        e = floor;          //4
-        f = floor;          //5
+        d = sewerFloor;          //3
+        e = sewerFloor;          //4
+        f = sewerFloor;          //5
         g = drain;          //6
         h = pipe;           //7
         i = stairs;         //8
@@ -299,7 +336,7 @@ function startGame()
 
 
         //Below ensures all elements are on screen when level is drawn
-        scientist.onload = function () {stairs.onload = function(){drawMap();};};
+        topCorner.onload = function(){drawMap();};
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
     /*    startX[7] = 36; startY[7] = 21;*/
@@ -621,7 +658,159 @@ function startGame()
     if (l6)//Roof (Home)
 
     {
+        canvas.style.backgroundImage = "url('../../6Roof/images/city.gif')";
+        /*You could change fill style to brown or some other colour and fill a rectangle behind the house so that the
+        * background picture doesn't show through the house*/
 
+
+        let roof = new Image();
+        roof.src = "../../6Roof/images/shingles.jpg";
+        let wall = new Image();
+        wall.src = "../../6Roof/images/wall.png";
+        let shinglesEdge = new Image();
+        shinglesEdge.src = "../../6Roof/images/shinglesEdge.jpg";
+        let shinglesLeft = new Image();
+        shinglesLeft.src = "../../6Roof/images/shinglesLeft.png";
+        let shinglesRight = new Image();
+        shinglesRight.src = "../../6Roof/images/shinglesRight.png";
+
+
+
+
+
+
+        //Below one letter variables must be updated upon calling each level
+        a = roof;
+        b = wall;
+        c = undefined;
+        d = undefined;
+        e = shinglesEdge;
+        f = shinglesLeft;
+        g = shinglesRight;
+
+
+
+
+        if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
+        {
+            lMap[level] = //Map for level 1
+                [
+                    //0,1,2,3,4,5,6,7,8,9
+
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //0
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //1
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //2
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //3
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //4
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //5
+                    [0,0,0,0,0,0,0,6,2,2,2,2,2],      //6
+                    [0,0,0,0,0,0,0,0,6,2,2,2,2],      //7
+                    [0,0,0,0,0,0,0,0,0,6,2,2,2],      //8
+                    [0,0,0,0,0,0,0,0,0,0,6,2,2],      //9
+                    [0,0,0,0,0,0,0,0,0,0,0,6,2],      //10
+                    [0,0,0,0,0,0,0,0,0,0,0,0,6],      //11
+                    [4,4,4,4,4,4,4,4,4,4,4,4,4],      //12
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //13
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //14
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //15
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //16
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //17
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1]       //18
+                ];
+        }
+
+
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];                                          //Declare a player map for this level
+            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 18; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+
+            lPMap[level][5][0] = 1; //Putting the player (scientist) into the player map for this level
+        }
+
+
+        changePStartPos();
+
+
+        shinglesRight.onload = function(){drawMap();};
+        scientist.onload = function(){addEventListener("keydown", onKeyDown, false);};
+
+
+        shrub.onload = function()
+        {
+            ctx.drawImage(gate, 700, 520);
+            ctx.drawImage(shrub, 300,545);
+            ctx.drawImage(darkWindow, 260,520);
+            ctx.drawImage(shrub, 260,545);
+            ctx.drawImage(fence, 260,545);
+
+            ctx.drawImage(fence, 650,545);
+            ctx.drawImage(fence, 585,545);
+            ctx.drawImage(fence, 520,545);
+            ctx.drawImage(fence, 455,545);
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.drawImage(fence, 390,545);
+            ctx.drawImage(fence, 325,545);
+            ctx.drawImage(fence, 260,545);
+            ctx.drawImage(fence, 195,545);
+            ctx.drawImage(fence, 130,545);
+            ctx.drawImage(fence, 65,545);
+            ctx.drawImage(fence, 0,545);
+
+            ctx.drawImage(shrub, 380,545);
+            ctx.drawImage(darkWindow, 360,520);
+            ctx.drawImage(shrub, 340,545);
+            ctx.drawImage(litWindow, 310,520);
+
+
+            ctx.drawImage(shrub, 220,545);
+            ctx.drawImage(darkWindow, 210,520);
+            ctx.drawImage(shrub, 180,545);
+            ctx.drawImage(shrub, 140,545);
+            ctx.drawImage(darkWindow, 160,520);
+            ctx.drawImage(shrub, 100,545);
+            ctx.drawImage(litWindow, 110,520);
+            ctx.drawImage(shrub, 60,545);
+            ctx.drawImage(darkWindow, 60,520);
+            ctx.drawImage(shrub, 20,545);
+            ctx.drawImage(litWindow, 10,520);
+
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.drawImage(car, 500,555);
+            ctx.drawImage(cherryTree, 385,490);
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.drawImage(ladder, 80,160);
+            ctx.drawImage(helipad, 60,150);
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.drawImage(statue, 710,560);
+            ctx.drawImage(statue, 790,560);
+
+
+            ctx.drawImage(litWindow, 360,447);
+            ctx.drawImage(darkWindow, 310,447);
+            ctx.drawImage(darkWindow, 260,447);
+            ctx.drawImage(darkWindow, 210,447);
+            ctx.drawImage(litWindow, 160,447);
+            ctx.drawImage(litWindow, 110,447);
+            ctx.drawImage(darkWindow, 60,447);
+            ctx.drawImage(darkWindow, 10,447);
+            ctx.globalCompositeOperation = 'source-over';
+
+            ctx.drawImage(helicopter, 58,85);
+            ctx.drawImage(exit, 360,370);
+
+
+            ctx.globalCompositeOperation = 'destination-over';
+        };
 
     }
 
@@ -629,13 +818,13 @@ function startGame()
 
     {
         let floor = new Image();
-        floor.src = "../../6Lab/images/Floor.png";
+        floor.src = "../../7Lab/images/Floor.png";
         let wall = new Image();
-        wall.src = "../../6Lab/images/Wall.png";
+        wall.src = "../../7Lab/images/Wall.png";
         let door1 = new Image();
-        door1.src = "../../6Lab/images/door1.png";
+        door1.src = "../../7Lab/images/door1.png";
         let stairs = new Image();
-        stairs.src = "../../6Lab/images/stairs.png";
+        stairs.src = "../../7Lab/images/stairs.png";
 
 
         if (lMap[level] === undefined)
@@ -696,7 +885,112 @@ function startGame()
         floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
         wall.onload = function(){drawMap();};
     }
+
+
+
+
+    if (l11)//SewerPipe While Drained
+    {
+
+        let wall = new Image();
+        wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
+        let upperWall = new Image();
+        upperWall.src = "../../2Sewer/images/upperWall.png";
+        let valveTl = new Image();
+        valveTl.src = "../../2Sewer/images/valveTl.png";
+        let valveTm = new Image();
+        valveTm.src = "../../2Sewer/images/valveTm.png";
+        let valveTr = new Image();
+        valveTr.src = "../../2Sewer/images/valveTr.png";
+        let valveMl = new Image();
+        valveMl.src = "../../2Sewer/images/valveMl.png";
+        let valveMm = new Image();
+        valveMm.src = "../../2Sewer/images/valveMm.png";
+        let valveMr = new Image();
+        valveMr.src = "../../2Sewer/images/valveMr.png";
+        let valveBl = new Image();
+        valveBl.src = "../../2Sewer/images/valveBl.png";
+        let valveBm = new Image();
+        valveBm.src = "../../2Sewer/images/valveBm.png";
+        let valveBr = new Image();
+        valveBr.src = "../../2Sewer/images/valveBr.png";
+
+        a = undefined;           //0
+        b = wall;                //1
+        c = upperWall;           //2
+        d = sewerFloor;          //3
+        e = sewerFloor;          //4
+        f = valveTl;           //5
+        g = valveTm;           //6
+        h = valveTr;           //7
+        i = valveMl;           //8
+        j = valveMm;           //9
+        k = valveMr;           //10
+        l = valveBl;           //11
+        m = valveBm;           //12
+        n = valveBr;           //13
+
+        if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
+        {
+            lMap[level] =                                           //Initialize this levels map
+                //                                 10                            20
+                [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
+
+                    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],        //0
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],        //1
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 12, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],        //2
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //3
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //4
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //5
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //6
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //7
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //8
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //9
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //10
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //11
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //12
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //13
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //14
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //15
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //16
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //17
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]         //18
+                ];
+        }
+
+        if (!floorSet)
+        {
+            for (let y = 3; y < lMap[level].length; y++)                        //Randomize floor pattern
+            {
+                for (let x = 0; x < lMap[level][0].length; x++)
+                {
+                    lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
+                }
+            }
+        }
+
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];                                          //Declare a player map for this level
+            for (let y = 0; y < 25; y++)                                //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 18; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+        }
+
+        changePStartPos();
+
+        addEventListener("keydown", onKeyDown, false);
+    }
 }
+
+
+
 
 
 
@@ -719,6 +1013,7 @@ function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
+
     ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
 
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
@@ -820,7 +1115,7 @@ function fillErasedMap()
                 //Below is exclusively for sewer level
                 if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
                 {
-                    if (thingToDraw === floor  && l2)
+                    if (thingToDraw === sewerFloor  && (l2 || l11))
                         // If drawing the floor on level 2
                         // then draw based on floorSpriteX var positioning
                         ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
@@ -912,12 +1207,11 @@ function drawPMap()
 
                     if (!sewersDrained && l2)                           //and the sewer is filled with water
                                                                             //draw the players standing in water image
-
-                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
+                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
                     else                                                 //and the sewer is  not filled with water
                                                                             //draw the players regular image
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
 
-                        ctx.drawImage(scientist, p.srcX, p.srcY, p.width, p.height, destX, destY, p.width, p.height);
                     break;
             }
 
@@ -1025,7 +1319,7 @@ function drawMap()
 
             if (thingToDraw !== undefined) //If this space has something to draw in it
             {
-                if (thingToDraw === floor  && l2) // and that thing is flooring
+                if (thingToDraw === sewerFloor  && (l2 || l11)) // and that thing is flooring
                     ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);// then draw it
                                                                                                     // based on sprite
                                                                                                     // sheet positions
@@ -1064,7 +1358,8 @@ function drawMap()
             ctx.fillRect(0, 0, 800, 600);
         }
     }
-    drawPMap();
+
+    setTimeout(drawPMap, 10);
 }
 
 function checkLevelSwitch(e /* pass e.keyCode through this argument */)
@@ -1154,15 +1449,45 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 }
             };
         }  //Go through the door to level 3
+
+        if (e === 38 && p.col === 10 && p.row === 0 && sewersDrained) //If going UP & character is under pipe
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            ctx.clearRect(320, 0, 32, 48);
+            let sizer = 0;
+            getInTheTube();
+
+            function getInTheTube()
+            {
+                if (sizer < 10)//If is not small enough to fit through the door..
+                {
+                    ctx.clearRect(320, 0, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
+                    sizer++;
+                    setTimeout(getInTheTube, 120);
+                }       //Shrink
+                else        //Otherwise, go through door and load level 1
+                {
+                    level = 11;
+                    l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
+                    l11 = true;
+                    ctx.clearRect(0,0,800,600);
+                    p.frameY = 0;
+                    startGame();
+                    setTimeout(drawMap, 40);
+                }
+            }
+        }   //Go through the door to level 1
     }
 
     if (l3)//If it's Lvl 3
     {
-        if (e === 37 && p.col === 3 && (p.row === 65 || p.row === 64))//If going LEFT at the staircase
+        if (e === 37 && p.col === 1 && (p.row === 16))//If going LEFT at the staircase
         {//go back to sewer (from store)
             removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
 
-            startX[2] = 96;                     //Set location for character to appear on map that is being travelled to
+            startX[2] = 24;                     //Set location for character to appear on map that is being travelled to
             startY[2] = 0;                      //Set location for character to appear on map that is being travelled to
 
             let allTheStays = 0;                //Create variable to be used for counting stairs
@@ -1173,22 +1498,16 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             {
                 allTheStays++;                  //Increment stairs descended each time a stair is descended
 
-
-                lPMap[level][p.row][p.col] = 0;    //Clear players previous position on in the levels player map (lPMap)
-                p.col --;                           //Set character column member one to the left
-                lPMap[level][p.row][p.col] = 1;     //Use players column member to set its new map position
-
-
-                ctx.clearRect(p.prevCol * 8, p.prevRow * 8, p.width, p.height);//Clear portion of canvas the player was last on
+                ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
                 fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                ctx.drawImage(scientist, 0, 48, 32, 48, p.col* (8 - 2*allTheStays) , p.row*8 + (allTheStays * 15), 32- (allTheStays * 5), 48 - (allTheStays * 15));
+                ctx.drawImage(scientist, (p.srcX + allTheStays)% 4 * 32, 48, 32, 48, p.col* (20 - 6*allTheStays) , p.row*32 + (allTheStays * 12), 32- (allTheStays * 5), 48 - (allTheStays * 10));
 
-
-                if (allTheStays !== 3)            //If there are stairs to go down
-                    setTimeout(goDownStays, 300); //...Go down them
+                if (allTheStays !== 4)            //If there are stairs to go down
+                    setTimeout(goDownStays, 180); //...Go down them
                 else                              //Otherwise, load level 2.
                 {
                     level = 2;                              //Change level identifier to appropriate level
+           /*         changePStartPos();*/
                     l1 = l3 = l4 = l5 = l6 = l7 =false;         //Set all levels false aside from new level
                     l2 = true;                              //Set new level to true
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -1232,7 +1551,7 @@ function onKeyDown(e)
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
      checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
-     if (e.keyCode === 37 && e.keyCode !== 38 && e.keyCode !== 39 && e.keyCode !== 40)//Left
+     if (e.keyCode === 37)//Left
 
      {
          if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -1257,7 +1576,10 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                     if (l2 && !sewersDrained)
+                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                     else
+                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      setTimeout(walkLeft, walkingSpeed);
                  }
                  else
@@ -1274,7 +1596,7 @@ function onKeyDown(e)
              }
          }
 
-         else
+         else if (notWalking)
          {
              p.frameY = 1;
              p.frameX ++;
@@ -1285,11 +1607,14 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             if (l2 && !sewersDrained)
+                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             else
+                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
      }
 
-     if (e.keyCode === 39 && e.keyCode !== 37 && e.keyCode !== 38 && e.keyCode !== 40)//Right
+     if (e.keyCode === 39)//Right
 
      {
          if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -1314,7 +1639,10 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                     if (l2 && !sewersDrained)
+                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                     else
+                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      setTimeout(walkRight, walkingSpeed);
                  }
                  else
@@ -1330,7 +1658,7 @@ function onKeyDown(e)
                  }
              }
          }
-         else
+         else if (notWalking)
          {
              p.frameY = 2;
              p.frameX ++;
@@ -1341,11 +1669,14 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             if (l2 && !sewersDrained)
+                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             else
+                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
      }
 
-     if (e.keyCode === 38 && e.keyCode !== 37 && e.keyCode !== 39 && e.keyCode !== 40)//Up
+     if (e.keyCode === 38)//Up
 
      {
          if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
@@ -1370,7 +1701,10 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
+                     if (l2 && !sewersDrained)
+                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                     else
+                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
                      setTimeout(animateWalking, walkingSpeed);
                  }
                  else
@@ -1386,7 +1720,7 @@ function onKeyDown(e)
                  }
              }
          }
-         else
+         else if (notWalking)
          {
              p.frameY = 3;
              p.frameX ++;
@@ -1397,11 +1731,14 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             if (l2 && !sewersDrained)
+                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             else
+                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
      }
 
-     if (e.keyCode === 40 && e.keyCode !== 37 && e.keyCode !== 38 && e.keyCode !== 39)//Down
+     if (e.keyCode === 40)//Down
 
      {
          if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
@@ -1426,7 +1763,10 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     if (l2 && !sewersDrained)
+                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     else
+                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      setTimeout(walkDown, walkingSpeed);
                  }
                  else
@@ -1443,7 +1783,7 @@ function onKeyDown(e)
              }
          }
 
-         else
+         else if (notWalking)
          {
              p.frameY = 0;
              p.frameX ++;
@@ -1454,7 +1794,10 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             if (l2 && !sewersDrained)
+                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+             else
+                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
      }
 
@@ -1477,6 +1820,7 @@ function onKeyDown(e)
          lightSwitch++;
          lightsOn = (lightSwitch % 2 === 0);
          drawMap();   //Drawing whole map because light/shade covers whole map
+         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
      }
 
      if (e.keyCode === 83) //S - swamp
@@ -1485,12 +1829,13 @@ function onKeyDown(e)
          sewerSwitch++;
          sewersDrained = (sewerSwitch % 2 === 0);
          drawMap(); //Drawing whole map because swamp covers whole map
+         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
      }
 
      if (e.keyCode === 49) //1
      {
          level = 1;              //Change level identifier appropriately
-         l2 = l3 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
+         l2 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l1 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1500,7 +1845,7 @@ function onKeyDown(e)
      if (e.keyCode === 50) //2
      {
          level = 2;              //Change level identifier appropriately
-         l1 = l3 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
+         l1 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l2 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1510,7 +1855,7 @@ function onKeyDown(e)
      if (e.keyCode === 51) //3
      {
          level = 3;              //Change level identifier appropriately
-         l1 = l2 = l4 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l3 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1520,7 +1865,7 @@ function onKeyDown(e)
      if (e.keyCode === 52) //4
      {
          level = 4;              //Change level identifier appropriately
-         l1 = l2 = l3 = l5 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l4 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1530,7 +1875,7 @@ function onKeyDown(e)
      if (e.keyCode === 53) //5
      {
          level = 5;              //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l6 = l7 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l5 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -1540,7 +1885,7 @@ function onKeyDown(e)
      if (e.keyCode === 54) //6
      {
          level = 6;                  //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l5 = l7 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l5 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l6 = true;                                  //Set level being travelled to as true
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
          startGame();                                //Load settings and assets for next map
@@ -1549,7 +1894,7 @@ function onKeyDown(e)
     if (e.keyCode === 55) //7
     {
         level = 7;                  //Change level identifier appropriately
-        l1 = l2 = l3 = l4 = l5 = l6 = false;             //Set all levels to false but the one being travelled to
+        l1 = l2 = l3 = l4 = l5 = l6 = l11 = false;             //Set all levels to false but the one being travelled to
         l7 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
@@ -1567,9 +1912,9 @@ function checkBoundaries(e)
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
-           if (!l2)
+           if (l1 || l4 || l5 || l7)
                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
-           else
+           else if (l2)
             {
                 canGoThisWay =
                 (
@@ -1578,12 +1923,38 @@ function checkBoundaries(e)
                     lMap[level][p.row + 1][p.col - 1] === 5
                 );
             }
+           else if (l11)
+           {
+               canGoThisWay =
+                   (
+                       lMap[level][p.row + 1][p.col - 1] === 3 ||
+                       lMap[level][p.row + 1][p.col - 1] === 4 ||
+                       lMap[level][p.row + 1][p.col - 1] === 0
+                   );
+           }
+           else if (l6)
+           {
+               canGoThisWay =
+                   (
+                       lMap[level][p.row + 1][p.col - 1] === 0 ||
+                       lMap[level][p.row + 1][p.col - 1] === 4
+                   );
+           }
+           else if (l3)
+           {
+               canGoThisWay =
+                   (
+                       lMap[level][p.row + 1][p.col - 1] === 16 ||
+                       lMap[level][p.row + 1][p.col - 1] === 17 ||
+                       lMap[level][p.row + 1][p.col - 1] === 0
+                   );
+           }
     }
     if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
-        if (!l2)
+        if (l1 || l4 || l5 || l7)
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
-        else
+        else if (l2)
         {
             canGoThisWay =
                 (
@@ -1592,12 +1963,38 @@ function checkBoundaries(e)
                     lMap[level][p.row + 1][p.col + 1] === 5
                 );
         }
+        else if (l11)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col + 1] === 3 ||
+                    lMap[level][p.row + 1][p.col + 1] === 4 ||
+                    lMap[level][p.row + 1][p.col + 1] === 0
+                );
+        }
+        else if (l6)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col + 1] === 0 ||
+                    lMap[level][p.row + 1][p.col + 1] === 4
+                );
+        }
+        else if (l3)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col + 1] === 16 ||
+                    lMap[level][p.row + 1][p.col + 1] === 17 ||
+                    lMap[level][p.row + 1][p.col + 1] === 0
+                );
+        }
     }
     if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
-        if (!l2)
+        if (l1 || l4 || l5 || l7)
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
-        else
+        else if (l2)
         {
             canGoThisWay =
                 (
@@ -1606,18 +2003,70 @@ function checkBoundaries(e)
                     lMap[level][p.row][p.col] === 5
                 );
         }
+        else if (l11)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row][p.col] === 3 ||
+                    lMap[level][p.row][p.col] === 4 ||
+                    lMap[level][p.row][p.col] === 0
+                );
+        }
+        else if (l6)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row][p.col] === 0 ||
+                    lMap[level][p.row][p.col] === 4
+                );
+        }
+        else if (l3)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row][p.col] === 16 ||
+                    lMap[level][p.row][p.col] === 17 ||
+                    lMap[level][p.row][p.col] === 0
+                );
+        }
     }
     if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
-        if (!l2)
+        if (l1 || l4 || l5 || l7)
             canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
-        else
+        else if (l2)
         {
             canGoThisWay =
                 (
                     lMap[level][p.row + 2][p.col] === 3 ||
                     lMap[level][p.row + 2][p.col] === 4 ||
                     lMap[level][p.row + 2][p.col] === 5
+                );
+        }
+        else if (l11)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 2][p.col] === 3 ||
+                    lMap[level][p.row + 2][p.col] === 4 ||
+                    lMap[level][p.row + 2][p.col] === 0
+                );
+        }
+        else if (l6)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 2][p.col] === 0 ||
+                    lMap[level][p.row + 2][p.col] === 4
+                );
+        }
+        else if (l3)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 2][p.col] === 16 ||
+                    lMap[level][p.row + 2][p.col] === 17 ||
+                    lMap[level][p.row + 2][p.col] === 0
                 );
         }
     }
