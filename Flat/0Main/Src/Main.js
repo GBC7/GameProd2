@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
-let level = 1;
+let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
+let level = 2;
 
 
 let walkingSpeed = 15;
@@ -12,16 +12,22 @@ let lightSwitch = 1, sewerSwitch = 1;                                 //For sewe
 let lightsOn = true, sewersDrained = true;                          //For sewer level
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
+let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 
 //level 0 is undefined as we do not have a level 0
-   // Level       0      1   2   3   4   5   6  7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  10,  0,  0, 0, undefined, undefined, undefined, 12],
-    startY = [undefined, 5,  0,  16, 17,  0,  5, 1, undefined, undefined, undefined, 17];
+   // Level       0      1   2   3   4    5   6   7      8          9         10      11
+let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
+    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 17];
+
+
+//For setting direction the character is facing when entering a new level
+let startFrameY = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+                   undefined, undefined, undefined];
 
 
 //x and y map boundaries per level
-// Level          0       1    2    3    4    5   6    7       8           9           10       11
-let xMax =   [undefined,  9,  24,  24,  24,  24,  12,  24,  undefined,  undefined,  undefined,  24],
+// Level          0       1    2    3    4    5    6    7       8           9           10       11
+let xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  undefined,  undefined,  undefined,  24],
     xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0],
     yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17],
     yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,  undefined,  undefined,  undefined,  2];
@@ -86,7 +92,6 @@ let level3sprite = new Image();
 level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
 
 
-
 //Level6 Roof
 let gate = new Image();
 gate.src = "../../6Roof/images/gate.png";
@@ -109,11 +114,10 @@ helipad.src = "../../6Roof/images/helipad.png";
 let helicopter = new Image();
 helicopter.src = "../../6Roof/images/helicopter1.png";
 let exit = new Image();
-exit.src = "../../6Roof/images/exit.png";
+exit.src = "../../6Roof/images/exit2.png";
 let shrub = new Image();
 shrub.src = "../../6Roof/images/shrub.png";
 //Level6 Roof
-
 
 
 //Global Audio
@@ -134,8 +138,7 @@ function startGame()
         * background picture doesn't show through the house*/
 
 
-        let roof = new Image();
-        roof.src = "../../1Home/images/shingles.jpg";
+
         let outsideWall = new Image();
         outsideWall.src = "../../1Home/images/outsideWall.png";
         let chimney = new Image();
@@ -148,10 +151,10 @@ function startGame()
         windowBottomLeft.src = "../../1Home/images/windowBottomLeft.png";
         let windowBottomRight = new Image();
         windowBottomRight.src = "../../1Home/images/windowBottomRight.png";
-        //let tree = new Image();
-        //tree.src = "../images/tree.png";
         let streetLight = new Image();
         streetLight.src = "../../1Home/images/streetLight.png";
+        let roof = new Image();
+        roof.src = "../../1Home/images/shingles.jpg";
 
 
         //Below one letter variables must be updated upon calling each level
@@ -214,7 +217,7 @@ function startGame()
         changePStartPos();
 
 
-        streetLight.onload = function (){drawMap();};
+        roof.onload = function (){drawMap();};
         addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
     }
@@ -224,6 +227,9 @@ function startGame()
     {
         canvas.style.backgroundImage = "";
 
+
+        let wallSwamp = new Image();
+        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
         let pipe = new Image();
         pipe.src = "../../2Sewer/images/pipe.png";
         let pillar = new Image();
@@ -240,8 +246,6 @@ function startGame()
         topCorner.src = "../../2Sewer/images/topCorner.png";
         let wallCorner = new Image();
         wallCorner.src = "../../2Sewer/images/wallCorner.png";
-        let wallSwamp = new Image();
-        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
         let door2 = new Image();
         door2.src = "../../2Sewer/images/door2.png";
         let stairs = new Image();
@@ -341,7 +345,7 @@ function startGame()
 
 
         //Below ensures all elements are on screen when level is drawn
-        topCorner.onload = function(){drawMap();};
+        stairs.onload = function(){drawMap();};
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
     /*    startX[7] = 36; startY[7] = 21;*/
@@ -838,8 +842,6 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "url('../../6Roof/images/city.gif')";
-        /*You could change fill style to brown or some other colour and fill a rectangle behind the house so that the
-        * background picture doesn't show through the house*/
 
 
         let roof = new Image();
@@ -852,49 +854,48 @@ function startGame()
         shinglesLeft.src = "../../6Roof/images/shinglesLeft.png";
         let shinglesRight = new Image();
         shinglesRight.src = "../../6Roof/images/shinglesRight.png";
-
-
-
+        let shinglesBRight = new Image();
+        shinglesBRight.src = "../../6Roof/images/shinglesBRight.png";
 
 
 
         //Below one letter variables must be updated upon calling each level
-        a = roof;
-        b = wall;
-        c = undefined;
-        d = undefined;
-        e = shinglesEdge;
-        f = shinglesLeft;
-        g = shinglesRight;
-
-
+        a = roof;           //0
+        b = wall;           //1
+        c = undefined;      //2
+        d = undefined;      //3
+        e = shinglesEdge;   //4
+        f = shinglesLeft;   //5
+        g = shinglesRight;  //6
+        h = exit;           //7
+        i = shinglesBRight;
 
 
         if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
         {
             lMap[level] = //Map for level 1
-                [
-                    //0,1,2,3,4,5,6,7,8,9
+                [//                      10                  20      24
+                   //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
 
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //0
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //1
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //2
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //3
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //4
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2],      //5
-                    [0,0,0,0,0,0,0,6,2,2,2,2,2],      //6
-                    [0,0,0,0,0,0,0,0,6,2,2,2,2],      //7
-                    [0,0,0,0,0,0,0,0,0,6,2,2,2],      //8
-                    [0,0,0,0,0,0,0,0,0,0,6,2,2],      //9
-                    [0,0,0,0,0,0,0,0,0,0,0,6,2],      //10
-                    [0,0,0,0,0,0,0,0,0,0,0,0,6],      //11
-                    [4,4,4,4,4,4,4,4,4,4,4,4,4],      //12
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //13
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //14
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //15
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //16
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1],      //17
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1]       //18
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //0
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //1
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //2
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //3
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //4
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],      //5
+                    [0,0,0,0,0,0,0,0,0,0,0,0,6,2,2,2,2,2,2,2,2,2,2,2,2],      //6
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,6,2,2,2,2,2,2,2,2,2,2,2],      //7
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,2,2,2,2,2,2,2,2,2,2],      //8
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,2,2,2,2,2,2,2,2,2],      //9
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,2,2,2,2,2,2,2,2],      //10
+                    [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,8,2,2,2,2,2,2,2],      //11
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //12
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //13
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //14
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //15
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //16
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2],      //17
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2]       //18
                 ];
         }
 
@@ -912,84 +913,16 @@ function startGame()
                 }
             }
 
-            lPMap[level][5][0] = 1; //Putting the player (scientist) into the player map for this level
+            lPMap[level][14][10] = 1; //Putting the player (scientist) into the player map for this level
         }
 
 
         changePStartPos();
 
 
-        shinglesRight.onload = function(){drawMap();};
-        scientist.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        /*shinglesBRight.onload = function(){drawMap();};*/
 
-
-        shrub.onload = function()
-        {
-            ctx.drawImage(gate, 700, 520);
-            ctx.drawImage(shrub, 300,545);
-            ctx.drawImage(darkWindow, 260,520);
-            ctx.drawImage(shrub, 260,545);
-            ctx.drawImage(fence, 260,545);
-
-            ctx.drawImage(fence, 650,545);
-            ctx.drawImage(fence, 585,545);
-            ctx.drawImage(fence, 520,545);
-            ctx.drawImage(fence, 455,545);
-            ctx.globalCompositeOperation = 'destination-over';
-            ctx.drawImage(fence, 390,545);
-            ctx.drawImage(fence, 325,545);
-            ctx.drawImage(fence, 260,545);
-            ctx.drawImage(fence, 195,545);
-            ctx.drawImage(fence, 130,545);
-            ctx.drawImage(fence, 65,545);
-            ctx.drawImage(fence, 0,545);
-
-            ctx.drawImage(shrub, 380,545);
-            ctx.drawImage(darkWindow, 360,520);
-            ctx.drawImage(shrub, 340,545);
-            ctx.drawImage(litWindow, 310,520);
-
-
-            ctx.drawImage(shrub, 220,545);
-            ctx.drawImage(darkWindow, 210,520);
-            ctx.drawImage(shrub, 180,545);
-            ctx.drawImage(shrub, 140,545);
-            ctx.drawImage(darkWindow, 160,520);
-            ctx.drawImage(shrub, 100,545);
-            ctx.drawImage(litWindow, 110,520);
-            ctx.drawImage(shrub, 60,545);
-            ctx.drawImage(darkWindow, 60,520);
-            ctx.drawImage(shrub, 20,545);
-            ctx.drawImage(litWindow, 10,520);
-
-            ctx.globalCompositeOperation = 'destination-over';
-            ctx.drawImage(car, 500,555);
-            ctx.drawImage(cherryTree, 385,490);
-            ctx.globalCompositeOperation = 'destination-over';
-            ctx.drawImage(ladder, 80,160);
-            ctx.drawImage(helipad, 60,150);
-
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.drawImage(statue, 710,560);
-            ctx.drawImage(statue, 790,560);
-
-
-            ctx.drawImage(litWindow, 360,447);
-            ctx.drawImage(darkWindow, 310,447);
-            ctx.drawImage(darkWindow, 260,447);
-            ctx.drawImage(darkWindow, 210,447);
-            ctx.drawImage(litWindow, 160,447);
-            ctx.drawImage(litWindow, 110,447);
-            ctx.drawImage(darkWindow, 60,447);
-            ctx.drawImage(darkWindow, 10,447);
-            ctx.globalCompositeOperation = 'source-over';
-
-            ctx.drawImage(helicopter, 58,85);
-            ctx.drawImage(exit, 360,370);
-
-
-            ctx.globalCompositeOperation = 'destination-over';
-        };
+        addEventListener("keydown", onKeyDown, false);
 
     }
 
@@ -1556,7 +1489,68 @@ function drawPMap()
         destX = 0;              //Start over at beginning position of array as we are at a new row
         destY += 32;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
     }
+
     notWalking = true;
+    let alreadyDoinIt = false;
+
+    if (!alreadyDoinIt)
+    if (l6 && !walkedUpAlready)
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        alreadyDoinIt = true;
+        let steps = 0;
+        upTheFireEscape();
+        function upTheFireEscape()
+        {
+            steps++;
+            p.srcX++;
+            p.srcY = 2;
+
+            let row = ((448 - (8 * (steps - 4))) / 32);
+            let col = (309 + 11 + (8 * steps)) / 32;
+
+
+            if (steps < 4)
+            {
+                ctx.clearRect(309 + (8 * (steps - 1)), 448, 32, 48);
+                fillErasedMap();
+                drawL6Full();
+                ctx.drawImage(scientist, (p.srcX%4) * 32, 96, 32, 48, 309 + (8 * steps), 448, 32, 48);
+                setTimeout(upTheFireEscape, walkingSpeed * 2); //Multiplying by two makes walk player slower
+            }
+            else if (steps < 21)
+            {
+                if (Number.isInteger(col))
+                {
+                    lPMap[level][p.row][p.col] = 0;
+                    p.col++;
+                    lPMap[level][p.row][p.col] = 1;
+                }
+                if (Number.isInteger(row) && steps !== 20)
+                {
+                    lPMap[level][p.row][p.col] = 0;
+                    p.row--;
+                    lPMap[level][p.row][p.col] = 1;
+                }
+                ctx.clearRect(309 + (8 * (steps - 1)), 448 - (8 * (steps - 4)), 32, 48);
+                fillErasedMap();
+                drawL6Full();
+                ctx.drawImage(scientist, (p.srcX % 4) * 32, 96, 32, 48, 309 + (8 * (steps)), 448 - (8 * (steps - 3)), 32, 48);
+                setTimeout(upTheFireEscape, walkingSpeed * 2);//Multiplying by two makes walk player slower
+            }
+            else
+            {
+                ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+                fillErasedMap();
+                drawL6Full();
+                ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY * 48, 32, 48, p.col*32, p.row*32, 32, 48);
+                walkedUpAlready = true;
+                addEventListener("keydown", onKeyDown, false);
+                alreadyDoinIt = true;
+            }
+        }
+
+    }
 }
 
 function drawMap()
@@ -1847,7 +1841,7 @@ function drawMap()
             ctx.fillRect(0, 0, 800, 600);
         }
     }
-
+    drawL6Full();
     setTimeout(drawPMap, 10);
 }
 
@@ -2034,7 +2028,19 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 function onKeyDown(e)
 
 {
-     p.prevCol = p.col;      //Set column to be cleared
+    if (l6)
+    {
+        if (p.col >= 6)
+            yMin[6] = 5;
+        else
+            yMin[6] = 6;
+        if (p.row === 5)
+            xMin[6] = 6;
+        else
+            xMin[6] = 0;
+    }
+
+    p.prevCol = p.col;      //Set column to be cleared
      p.prevRow = p.row;      //Set row to be cleared
 
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
@@ -2065,6 +2071,7 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     drawL6();
                      if (l2 && !sewersDrained)
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      else
@@ -2092,7 +2099,7 @@ function onKeyDown(e)
 
              ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
              fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-
+             drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
@@ -2128,6 +2135,7 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     drawL6();
                      if (l2 && !sewersDrained)
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      else
@@ -2154,7 +2162,7 @@ function onKeyDown(e)
 
              ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
              fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-
+             drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
@@ -2190,6 +2198,7 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     drawL6();
                      if (l2 && !sewersDrained)
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
                      else
@@ -2216,7 +2225,7 @@ function onKeyDown(e)
 
              ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
              fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-
+             drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
@@ -2252,6 +2261,7 @@ function onKeyDown(e)
                      //a,b,c,d,e... are passed from movePlayer function call
                      ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                     drawL6();
                      if (l2 && !sewersDrained)
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      else
@@ -2279,7 +2289,7 @@ function onKeyDown(e)
 
              ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
              fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-
+             drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
@@ -2295,11 +2305,6 @@ function onKeyDown(e)
      {
          //Character action
      }
-
-
-
-
-
 
      /* TEMP - for testing - TEMP */
 
@@ -2323,6 +2328,7 @@ function onKeyDown(e)
 
      if (e.keyCode === 49) //1
      {
+         removeEventListener("keydown", onKeyDown, false);
          level = 1;              //Change level identifier appropriately
          l2 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l1 = true;                                  //Set level being travelled to as true
@@ -2333,6 +2339,7 @@ function onKeyDown(e)
      }
      if (e.keyCode === 50) //2
      {
+         removeEventListener("keydown", onKeyDown, false);
          level = 2;              //Change level identifier appropriately
          l1 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l2 = true;                                  //Set level being travelled to as true
@@ -2343,6 +2350,7 @@ function onKeyDown(e)
      }
      if (e.keyCode === 51) //3
      {
+         removeEventListener("keydown", onKeyDown, false);
          level = 3;              //Change level identifier appropriately
          l1 = l2 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l3 = true;                                  //Set level being travelled to as true
@@ -2353,6 +2361,7 @@ function onKeyDown(e)
      }
      if (e.keyCode === 52) //4
      {
+         removeEventListener("keydown", onKeyDown, false);
          level = 4;              //Change level identifier appropriately
          l1 = l2 = l3 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l4 = true;                                  //Set level being travelled to as true
@@ -2363,6 +2372,7 @@ function onKeyDown(e)
      }
      if (e.keyCode === 53) //5
      {
+         removeEventListener("keydown", onKeyDown, false);
          level = 5;              //Change level identifier appropriately
          l1 = l2 = l3 = l4 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l5 = true;                                  //Set level being travelled to as true
@@ -2373,6 +2383,9 @@ function onKeyDown(e)
      }
      if (e.keyCode === 54) //6
      {
+         removeEventListener("keydown", onKeyDown, false);
+         walkedUpAlready = false;
+         changePStartPos();
          level = 6;                  //Change level identifier appropriately
          l1 = l2 = l3 = l4 = l5 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l6 = true;                                  //Set level being travelled to as true
@@ -2382,6 +2395,7 @@ function onKeyDown(e)
      }
     if (e.keyCode === 55) //7
     {
+        removeEventListener("keydown", onKeyDown, false);
         level = 7;                  //Change level identifier appropriately
         l1 = l2 = l3 = l4 = l5 = l6 = l11 = false;             //Set all levels to false but the one being travelled to
         l7 = true;                                  //Set level being travelled to as true
@@ -2390,10 +2404,33 @@ function onKeyDown(e)
         setTimeout(drawMap, 40);                    //Draw next map
     }
 
-
-
      if (sewersDrained) //If the water has been shut off
              waterRunning.pause();           //Stop playing the noise of running water
+
+    function drawL6()
+    {
+        if (l6)
+        {
+            ctx.drawImage(darkWindow, 10, 427);
+            ctx.drawImage(darkWindow, 60, 427);
+            ctx.drawImage(darkWindow, 210, 427);
+            ctx.drawImage(darkWindow, 260, 427);
+            ctx.drawImage(darkWindow, 310, 427);
+            ctx.drawImage(darkWindow, 460, 427);
+            ctx.drawImage(litWindow, 110, 427);
+            ctx.drawImage(litWindow, 160, 427);
+            ctx.drawImage(litWindow, 360, 427);
+            ctx.drawImage(litWindow, 410, 427);
+            ctx.drawImage(litWindow, 510, 427);
+            ctx.drawImage(ladder, 0, 160);
+            ctx.drawImage(helipad, 0, 150);
+            ctx.drawImage(helicopter, 0, 85);
+            ctx.drawImage(exit, 309, 335);
+            ctx.drawImage(cherryTree, 385, 490);
+            ctx.drawImage(fence, 390, 545);
+            ctx.drawImage(fence, 455, 545);
+        }
+    }
 }
 
 function checkBoundaries(e)
@@ -2561,3 +2598,63 @@ function checkBoundaries(e)
     }
 }
 
+function drawL6Full()
+{
+    if (l6)
+    {
+
+        ctx.drawImage(ladder, 0, 160);
+        ctx.drawImage(helipad, 0, 150);
+        ctx.drawImage(helicopter, 0, 85);
+
+
+        ctx.drawImage(darkWindow, 10, 427);
+        ctx.drawImage(darkWindow, 60, 500);
+        ctx.drawImage(darkWindow, 60, 427);
+        ctx.drawImage(darkWindow, 160, 500);
+        ctx.drawImage(darkWindow, 210, 427);
+        ctx.drawImage(darkWindow, 210, 500);
+        ctx.drawImage(darkWindow, 260, 427);
+        ctx.drawImage(darkWindow, 260, 500);
+        ctx.drawImage(darkWindow, 310, 427);
+        ctx.drawImage(darkWindow, 360, 500);
+
+        ctx.drawImage(darkWindow, 410, 500);
+        ctx.drawImage(darkWindow, 460, 427);
+        ctx.drawImage(darkWindow, 510, 500);
+        ctx.drawImage(litWindow, 10, 500);
+        ctx.drawImage(litWindow, 110, 427);
+        ctx.drawImage(litWindow, 110, 500);
+        ctx.drawImage(litWindow, 160, 427);
+        ctx.drawImage(litWindow, 310, 500);
+        ctx.drawImage(litWindow, 360, 427);
+        ctx.drawImage(litWindow, 410, 427);
+        ctx.drawImage(litWindow, 460, 500);
+        ctx.drawImage(litWindow, 510, 427);
+
+
+        ctx.drawImage(car, 500, 555);
+
+
+        for (let x = 20; x < 400; x += 40)
+        {
+            ctx.drawImage(shrub, x, 545);
+        }
+
+
+        ctx.drawImage(exit, 309, 335);
+        ctx.drawImage(cherryTree, 385, 490);
+
+
+        for (let x = 0; x < 715; x += 65)
+        {
+            ctx.drawImage(fence, x, 545);
+        }
+
+
+        ctx.drawImage(gate, 700, 520);
+        ctx.drawImage(statue, 710, 560);
+        ctx.drawImage(statue, 790, 560);
+
+    }
+}
