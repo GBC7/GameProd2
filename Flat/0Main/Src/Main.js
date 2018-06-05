@@ -16,7 +16,7 @@ let walkedUpAlready = false;                                            //For an
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4    5   6   7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
+let startX = [undefined, 0,  0,  1,  10,  0,  10, 1, undefined, undefined, undefined, 12],
     startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 17];
 
 
@@ -1512,6 +1512,18 @@ function drawPMap()
             let row = ((448 - (8 * (steps - 4))) / 32);
             let col = (309 + 11 + (8 * steps)) / 32;
 
+            if (Number.isInteger(col))
+            {
+                lPMap[level][p.row][p.col] = 0;
+                p.col++;
+                lPMap[level][p.row][p.col] = 1;
+            }
+            if (Number.isInteger(row) && steps !== 20)
+            {
+                lPMap[level][p.row][p.col] = 0;
+                p.row--;
+                lPMap[level][p.row][p.col] = 1;
+            }
 
             if (steps < 4)
             {
@@ -1519,27 +1531,16 @@ function drawPMap()
                 fillErasedMap();
                 drawL6Full();
                 ctx.drawImage(scientist, (p.srcX%4) * 32, 96, 32, 48, 309 + (8 * steps), 448, 32, 48);
-                setTimeout(upTheFireEscape, walkingSpeed * 2); //Multiplying by two makes walk player slower
+                setTimeout(upTheFireEscape, walkingSpeed * 3); //Multiplying by two makes walk player slower
             }
             else if (steps < 21)
             {
-                if (Number.isInteger(col))
-                {
-                    lPMap[level][p.row][p.col] = 0;
-                    p.col++;
-                    lPMap[level][p.row][p.col] = 1;
-                }
-                if (Number.isInteger(row) && steps !== 20)
-                {
-                    lPMap[level][p.row][p.col] = 0;
-                    p.row--;
-                    lPMap[level][p.row][p.col] = 1;
-                }
+
                 ctx.clearRect(309 + (8 * (steps - 1)), 448 - (8 * (steps - 4)), 32, 48);
                 fillErasedMap();
                 drawL6Full();
                 ctx.drawImage(scientist, (p.srcX % 4) * 32, 96, 32, 48, 309 + (8 * (steps)), 448 - (8 * (steps - 3)), 32, 48);
-                setTimeout(upTheFireEscape, walkingSpeed * 2);//Multiplying by two makes walk player slower
+                setTimeout(upTheFireEscape, walkingSpeed * 3);//Multiplying by two makes walk player slower
             }
             else
             {
@@ -2034,25 +2035,34 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 if (steps < 21)
                 {
                     p.srcX++;
-                    if (stepsUp < 8)
+
+                    if (steps === 0)
+                    {
+                        ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                        drawL6();
+                        ctx.drawImage(scientist, ((p.srcX % 4) * 32), p.srcY, 32, 48, p.col * 32, (p.row * 32) - (8 * (stepsUp)), 32, 48);
+                        stepsUp++;
+                    }
+                    else if (stepsUp < 8)
                     {
                         console.log(p.srcY);
                         stepsUp++;
-                        ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                        ctx.clearRect(p.col * 32, (p.row * 32) - (8 * (stepsUp - 1)), p.width, p.height);//Clear portion of canvas the player was last on
                         fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                         drawL6();
-                        ctx.drawImage(scientist, ((p.srcX % 4) * 32), p.srcY, 32, 48, p.col * 32, (p.row * 32) - (8 * stepsUp), 32, 48);
+                        ctx.drawImage(scientist, ((p.srcX % 4) * 32), p.srcY, 32, 48, p.col * 32, (p.row * 32) - (8 * (stepsUp)), 32, 48);
                     }
                     else
                     {
                         p.srcY = 96;
                         stepsOver++;
-                        ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                        ctx.clearRect((p.col * 32) + (8 * (stepsOver - 1)), (p.row * 32) - (8 * (stepsUp)), p.width, p.height);//Clear portion of canvas the player was last on
                         fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                         drawL6();
                         ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, (p.col * 32) + (8 * stepsOver), (p.row * 32) - (8 * stepsUp), 32, 48);
                     }
-                    setTimeout(getInTheChopper, 120);
+                    setTimeout(getInTheChopper, walkingSpeed * 3);
                 }
 
                 else
