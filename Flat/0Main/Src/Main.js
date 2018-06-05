@@ -926,19 +926,43 @@ function startGame()
 
     }
 
-    if (l7)//Lab
-
+    if (l7)
     {
         canvas.style.backgroundImage = "";
 
+
         let floor = new Image();
-        floor.src = "../../7Lab/images/Floor.png";
+        floor.src = "../../6Lab/images/Floor.png";
         let wall = new Image();
-        wall.src = "../../7Lab/images/Wall.png";
+        wall.src = "../../6Lab/images/Wall.png";
         let door1 = new Image();
-        door1.src = "../../7Lab/images/door1.png";
+        door1.src = "../../6Lab/images/door1.png";
         let stairs = new Image();
-        stairs.src = "../../7Lab/images/stairs.png";
+        stairs.src = "../../6Lab/images/stairs.png";
+        let emptyShelvesTop = new Image();
+        emptyShelvesTop.src = "../../6Lab/images/emptyShelves-top.png";
+        let emptyShelvesBottom = new Image();
+        emptyShelvesBottom.src = "../../6Lab/images/emptyShelves-bottom.png";
+        let lockerTop = new Image();
+        lockerTop.src = "../../6Lab/images/locker-top.png";
+        let lockerBottom = new Image();
+        lockerBottom.src = "../../6Lab/images/locker-bottom.png";
+        let computerTop = new Image();
+        computerTop.src = "../../6Lab/images/computer-top.png";
+        let computerBottom = new Image();
+        computerBottom.src = "../../6Lab/images/computer-bottom.png";
+        let metalCabinetTop = new Image();
+        metalCabinetTop.src = "../../6Lab/images/metalCabinet-top.png";
+        let metalCabinetBottom = new Image();
+        metalCabinetBottom.src = "../../6Lab/images/metalCabinet-bottom.png";
+        let glassCabinetTop = new Image();
+        glassCabinetTop.src = "../../6Lab/images/glassCabinet-top.png";
+        let glassCabinetBottom = new Image();
+        glassCabinetBottom.src = "../../6Lab/images/glassCabinet-bottom.png";
+        let fullShelvesTop = new Image();
+        fullShelvesTop.src = "../../6Lab/images/fullShelves-top.png";
+        let fullShelvesBottom = new Image();
+        fullShelvesBottom.src = "../../6Lab/images/fullShelves-bottom.png";
 
 
         if (lMap[level] === undefined)
@@ -946,7 +970,10 @@ function startGame()
                 //                    10                  20
                 [  //0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4
                     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                    [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                    [0,2,0,0,0,0,0,0,0,0,0,14,14,14,14,14,10,10,10,10,6,6,6,4,0],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,11,11,11,11,7,7,7,5,1],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,8],
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -960,21 +987,28 @@ function startGame()
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3]
+                    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3]
                 ];
 
 
-        a = wall;
-        b = floor;
-        c = door1;
-        d = stairs;
-        e = undefined;
-        f = undefined;
-        g = undefined;
-        h = undefined;
+        a = wall;				// 0
+        b = floor;				// 1
+        c = door1;				// 2
+        d = stairs;				// 3
+        e = emptyShelvesTop;	// 4
+        f = emptyShelvesBottom;	// 5
+        g = lockerTop;			// 6
+        h = lockerBottom;		// 7
+        i = computerTop;		// 8
+        j = computerBottom;		// 9
+        k = metalCabinetTop;	// 10
+        l = metalCabinetBottom;	// 11
+        m = glassCabinetTop;	// 12
+        n = glassCabinetBottom;	// 13
+        o = fullShelvesTop;		// 14
+        p = fullShelvesBottom;	// 15
+        q = undefined;
+        r = undefined;
 
 
         if (lPMap[level] === undefined)
@@ -996,10 +1030,10 @@ function startGame()
         changePStartPos();
 
 
-        floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
-        wall.onload = function(){drawMap();};
-    }
 
+        fullShelvesBottom.onload = function(){drawMap();};
+        addEventListener("keydown", onKeyDown, false);
+    }
 
 
 
