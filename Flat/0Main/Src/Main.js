@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
-let level = 2;
+let l1 = false, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = true, l11 = false;
+let level = 7;
 
 
 let walkingSpeed = 15;
@@ -16,7 +16,7 @@ let walkedUpAlready = false;                                            //For an
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4    5   6   7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  10,  0,  10, 1, undefined, undefined, undefined, 12],
+let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
     startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 17];
 
 
@@ -66,8 +66,8 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii
 
 let p =                                                         //PlayerObject
 {
-row: 10,
-col: 10,
+row: 0,
+col: 2,
 prevRow: undefined,        //Collects players previous x location to use for clearing only that section of canvas
 prevCol: undefined,        //Collects players previous y location to use for clearing only that section of canvas
 width: 32,               //The players width in the tile sheet
@@ -932,37 +932,55 @@ function startGame()
 
 
         let floor = new Image();
-        floor.src = "../../6Lab/images/Floor.png";
+        floor.src = "../../7Lab/images/Floor.png";
         let wall = new Image();
-        wall.src = "../../6Lab/images/Wall.png";
+        wall.src = "../../7Lab/images/Wall.png";
         let door1 = new Image();
-        door1.src = "../../6Lab/images/door1.png";
+        door1.src = "../../7Lab/images/door1.png";
         let stairs = new Image();
-        stairs.src = "../../6Lab/images/stairs.png";
+        stairs.src = "../../7Lab/images/stairs.png";
         let emptyShelvesTop = new Image();
-        emptyShelvesTop.src = "../../6Lab/images/emptyShelves-top.png";
+        emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
         let emptyShelvesBottom = new Image();
-        emptyShelvesBottom.src = "../../6Lab/images/emptyShelves-bottom.png";
+        emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
         let lockerTop = new Image();
-        lockerTop.src = "../../6Lab/images/locker-top.png";
+        lockerTop.src = "../../7Lab/images/locker-top.png";
         let lockerBottom = new Image();
-        lockerBottom.src = "../../6Lab/images/locker-bottom.png";
+        lockerBottom.src = "../../7Lab/images/locker-bottom.png";
         let computerTop = new Image();
-        computerTop.src = "../../6Lab/images/computer-top.png";
+        computerTop.src = "../../7Lab/images/computer-top.png";
         let computerBottom = new Image();
-        computerBottom.src = "../../6Lab/images/computer-bottom.png";
+        computerBottom.src = "../../7Lab/images/computer-bottom.png";
         let metalCabinetTop = new Image();
-        metalCabinetTop.src = "../../6Lab/images/metalCabinet-top.png";
+        metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
         let metalCabinetBottom = new Image();
-        metalCabinetBottom.src = "../../6Lab/images/metalCabinet-bottom.png";
+        metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
         let glassCabinetTop = new Image();
-        glassCabinetTop.src = "../../6Lab/images/glassCabinet-top.png";
+        glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
         let glassCabinetBottom = new Image();
-        glassCabinetBottom.src = "../../6Lab/images/glassCabinet-bottom.png";
+        glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
         let fullShelvesTop = new Image();
-        fullShelvesTop.src = "../../6Lab/images/fullShelves-top.png";
+        fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
         let fullShelvesBottom = new Image();
-        fullShelvesBottom.src = "../../6Lab/images/fullShelves-bottom.png";
+        fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
+
+        a = wall;				// 0
+        b = floor;				// 1
+        c = door1;				// 2
+        d = stairs;				// 3
+        e = emptyShelvesTop;	// 4
+        f = emptyShelvesBottom;	// 5
+        g = lockerTop;			// 6
+        h = lockerBottom;		// 7
+        i = computerTop;		// 8
+        j = computerBottom;		// 9
+        k = metalCabinetTop;	// 10
+        l = metalCabinetBottom;	// 11
+        m = glassCabinetTop;	// 12
+        n = glassCabinetBottom;	// 13
+        o = fullShelvesTop;		// 14
+        q = fullShelvesBottom;  //15
+        r = undefined;
 
 
         if (lMap[level] === undefined)
@@ -991,26 +1009,6 @@ function startGame()
                 ];
 
 
-        a = wall;				// 0
-        b = floor;				// 1
-        c = door1;				// 2
-        d = stairs;				// 3
-        e = emptyShelvesTop;	// 4
-        f = emptyShelvesBottom;	// 5
-        g = lockerTop;			// 6
-        h = lockerBottom;		// 7
-        i = computerTop;		// 8
-        j = computerBottom;		// 9
-        k = metalCabinetTop;	// 10
-        l = metalCabinetBottom;	// 11
-        m = glassCabinetTop;	// 12
-        n = glassCabinetBottom;	// 13
-        o = fullShelvesTop;		// 14
-        p = fullShelvesBottom;	// 15
-        q = undefined;
-        r = undefined;
-
-
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];
@@ -1024,6 +1022,7 @@ function startGame()
                     lPMap[level][y].push(0)
                 }
             }
+            lPMap[level][1][0] = 1;
         }
 
 
@@ -1499,6 +1498,11 @@ function drawPMap()
 {
     let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
+    //Sets position on tile sheet to
+    // pick from when drawing player
+    p.srcX = p.width * (p.frameX % 4);
+    p.srcY = p.height * p.frameY;
+
     for (let row = 0; row < lPMap[level].length; row++)         //Run through rows
     {
         for (let col = 0; col < lPMap[level][0].length; col++)      // and columns, checking each element for the player
@@ -1506,10 +1510,7 @@ function drawPMap()
             switch (lPMap[level][row][col])
             {
                 case 1:                                                 //If the element check contains the player
-                    //Sets position on tile sheet to
-                    // pick from when drawing player
-                    p.srcX = p.width * (p.frameX % 4);
-                    p.srcY = p.height * p.frameY;
+
 
                     if (!sewersDrained && l2)                           //and the sewer is filled with water
                                                                             //draw the players standing in water image
@@ -2162,7 +2163,7 @@ function onKeyDown(e)
     }
 
     p.prevCol = p.col;      //Set column to be cleared
-     p.prevRow = p.row;      //Set row to be cleared
+    p.prevRow = p.row;      //Set row to be cleared
 
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
      checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
