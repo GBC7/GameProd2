@@ -354,8 +354,9 @@ function startGame()
     if (l3)//Clothing Store
 
     {
-        canvas.style.backgroundImage = "";
 
+        canvas.style.backgroundImage = "";
+        /*bgm_level3.play();*/
 
         let floor = new Image();
         floor.src = "../../3Store/images/floor.png";
@@ -389,10 +390,10 @@ function startGame()
         cabinet.src = "../../3Store/images/cabinet.png";
         let stair = new Image();
         stair.src = "../../3Store/images/downstair.png";
-        let exit1 = new Image();
-        exit1.src = "../../3Store/images/welcome_1.png";
-        let exit2 = new Image();
-        exit2.src = "../../3Store/images/welcome_2.png";
+        let doorOpenRight = new Image();
+        doorOpenRight.src = "../../3Store/images/door_open_right.png";
+        let doorOpenLeft = new Image();
+        doorOpenLeft.src = "../../3Store/images/door_open_left.png";
         let windowClose = new Image();
         windowClose.src = "../../3Store/images/window_close.png";
         let windowOpen = new Image();
@@ -405,7 +406,6 @@ function startGame()
         chair.src = "../../3Store/images/chair.png";
         let desk = new Image();
         desk.src = "../../3Store/images/desk.png";
-
 
         a = floor;         //0
         b = rack1;         //1
@@ -423,8 +423,8 @@ function startGame()
         n = wallRight;     //13
         o = cabinet;     //14
         q = stair;       //15
-        r = exit1;       //16
-        s = exit2;       //17
+        r = doorOpenRight;       //16
+        s = doorOpenLeft;       //17
         t = windowClose; //18
         u = windowOpen;  //19
         v = door1;       // 20
@@ -437,7 +437,7 @@ function startGame()
         {
             lMap[level] = [                    //10                          //20
                 [18,11,11,11,18,11,11,11,18,11,20,21,11,11,18,11,11,11,18,11,11,11,18,11,11],
-                [14, 0, 0,22,22,13, 0, 0, 0, 0,16,17, 0, 0, 0, 0, 0, 0, 0,12,14,14, 0,14,14],
+                [14, 0, 0,22,22,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,14,14, 0,14,14],
                 [22,22, 0, 0,23,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0],
                 [23, 0, 0, 0, 0,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,14,14, 0,14,14],
                 [ 0, 0, 0,22,22,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0],
@@ -483,7 +483,52 @@ function startGame()
         desk.onload = function(){drawMap();};
 
         addEventListener("keydown", onKeyDown, false);
-        waterRunning.pause();
+
+        let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
+        let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
+        let enemyAppear = false;
+
+        timer_level3 = setInterval(appearEnemy, 1000);
+
+        function appearEnemy() {
+            console.log(warningTime);
+            console.log(findingTime);
+            warningTime--;
+            if (warningTime <= 5 && warningTime > 0) {
+                console.log(warningTime);
+                bgm_level3.pause();
+                dangerous.play();
+                drawMap();
+                ctx.font = "30px Arial";
+                ctx.fillStyle = '#FF0000';
+                ctx.fillText("Warning! Mobbist will open window!", 180, 120);
+                ctx.fillText(warningTime + " seconds left.", 280, 150);
+            }
+            if (warningTime === 0) {
+                t=windowOpen;
+                drawMap();
+                enemyAppear = true;
+
+            }
+            if (enemyAppear === true){
+                findingTime--;
+                drawMap();
+                ctx.font = "30px Arial";
+                ctx.fillStyle = '#FF0000';
+                ctx.fillText("Mobbists are finding you!", 230, 120);
+                ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
+
+                if (findingTime === 0) {
+                    t=windowClose;
+                    drawMap();
+                    warningTime = Math.floor(Math.random() * 20 + 10);
+                    findingTime = Math.floor(Math.random() * 10 + 5);
+                    enemyAppear = false;
+                    dangerous.pause();
+                    bgm_level3.play();
+                }
+            }
+        }
     }
 
     if (l4)//The Streetz
@@ -2101,6 +2146,56 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 }
             }
         }
+
+        if (e === 38 && p.row === 0 && (p.col === 10 || p.col === 11)) //If going UP & character is right under door 2
+        {
+            p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+            setTimeout(goToStreet, 40);
+
+            function goToStreet()//When the stairs image loads
+            {
+                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                clearInterval(timer_level3);
+                /*bgm_level3.pause();
+                dangerous.pause();*/
+                // cannot be changed while animating stair climbing
+                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+                walkToStreet();                                      //Start climbing stairs
+
+                function walkToStreet()                  //Climbing stairs animation function
+                {
+                    p.frameX ++;
+                    p.srcX = p.width * (p.frameX%4);
+                    p.srcY = p.height * p.frameY;
+                    //Count each step taken
+                    staysClimbed++;
+
+                    ctx.clearRect(320, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                    fillErasedMap();        //Draw the map image that was cleared
+
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, p.srcX, p.srcY + (5 * staysClimbed), 32, 48 - (5 * staysClimbed), p.col * 32, p.row * 32 - (5 * staysClimbed), 32, 48 - (5 * staysClimbed));
+
+                    if (staysClimbed !== 5)         //If player has not climbed all stairs
+                        setTimeout(walkToStreet , 500);     //Keep climbing them - Call the stair climbing function again
+                    else                            //Otherwise
+                    {
+                        level = 4;                              //Change level identifier appropriately
+                        l1 = l2 = l3 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l4 = true;                              //Set the one that is being travelled to to true
+
+                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                        startGame();                            //Load new levels assets and settings
+                        setTimeout(drawMap, 500);                //Draw its entire map
+                    }
+                }
+            }
+        }  //Go through the door to level 3
     }
 
     if (l4)//If it's Lvl 4
@@ -2178,58 +2273,60 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l7)//If it's Lvl 7
     {
-        if (e === 40 && p.col === 24 && p.row === 16) //If going UP & character is right under door 2
         {
-
-
-            p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
-
-            removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
-                                                                  // cannot be changed while animating stair climbing
-            let staysClimbed = 0;                               //Define variable to use to count stairs climbed
-
-            goUpALvl();                                      //Start climbing stairs
-
-            function goUpALvl()                  //Climbing stairs animation function
+            if (e === 40 && p.col === 24 && p.row === 16) //If going UP & character is right under door 2
             {
-                staysClimbed ++;
-                p.frameX++;
-                p.srcX = p.width * (p.frameX % 4);
-                p.srcY = p.height * p.frameY;
 
-                if (staysClimbed < 3)
-                {
-                    ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
-                    fillErasedMap();        //Draw the map image that was cleared
-                    //Draw scientist incrementally smaller each 'step' taken
-                    // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (4 * staysClimbed), 32, 48);
-                    setTimeout(goUpALvl, 80);
-                }
-                else if (staysClimbed !== 20)
-                {
-                                  //Count each step taken
-                    ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
-                    fillErasedMap();        //Draw the map image that was cleared
-                    //Draw scientist incrementally smaller each 'step' taken
-                    // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
-                    setTimeout(goUpALvl, 80);
-                }
-                else                            //Otherwise
-                {
-                    level = 3;                              //Change level identifier appropriately
-                    l1 = l2 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
-                    l3 = true;                              //Set the one that is being travelled to to true
 
-                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
-                    p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+                p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
-                    startGame();                            //Load new levels assets and settings
-                    setTimeout(drawMap, 40);                //Draw its entire map
+                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                // cannot be changed while animating stair climbing
+                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+                goUpALvl();                                      //Start climbing stairs
+
+                function goUpALvl()                  //Climbing stairs animation function
+                {
+                    staysClimbed ++;
+                    p.frameX++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    p.srcY = p.height * p.frameY;
+
+                    if (staysClimbed < 3)
+                    {
+                        ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                        fillErasedMap();        //Draw the map image that was cleared
+                        //Draw scientist incrementally smaller each 'step' taken
+                        // and move player slightly up to portray movement
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (4 * staysClimbed), 32, 48);
+                        setTimeout(goUpALvl, 80);
+                    }
+                    else if (staysClimbed !== 20)
+                    {
+                        //Count each step taken
+                        ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                        fillErasedMap();        //Draw the map image that was cleared
+                        //Draw scientist incrementally smaller each 'step' taken
+                        // and move player slightly up to portray movement
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
+                        setTimeout(goUpALvl, 80);
+                    }
+                    else                            //Otherwise
+                    {
+                        level = 3;                              //Change level identifier appropriately
+                        l1 = l2 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l3 = true;                              //Set the one that is being travelled to to true
+
+                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                        startGame();                            //Load new levels assets and settings
+                        setTimeout(drawMap, 40);                //Draw its entire map
+                    }
                 }
-            }
-        }  //Go through the door to level 3
+            }  //Go through the door to level 3
+        }
     }
 
     function drawL6()
