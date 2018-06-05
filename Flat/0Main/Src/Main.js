@@ -772,37 +772,86 @@ function startGame()
         canvas.style.backgroundImage = "";
 
         let wall = new Image();
-        wall.src = "../../5MomsPlace/images/wall.png";
+        wall.src = "../../5MomsPlace/images/wall.png";  //0
+
         let door = new Image();
-        door.src = "../../5MomsPlace/images/door.png";
+        door.src = "../../5MomsPlace/images/door.png"; //1
+
         let floor = new Image();
-        floor.src = "../../5MomsPlace/images/floor.png";
+        floor.src = "../../5MomsPlace/images/floor.png";  //2
+
         let cat = new Image();
-        cat.src = "../../5MomsPlace/images/cat.png";
+        cat.src = "../../5MomsPlace/images/cat.png";  //3
+
+        let w1 = new Image();
+        w1.src = "../../5MomsPlace/images/w1.png"; //4
+
+        let w2 = new Image();
+        w2.src = "../../5MomsPlace/images/w2.png"; //5
+
+        let w3 = new Image();
+        w3.src = "../../5MomsPlace/images/w3.png"; //6
+
+        let w4 = new Image();
+        w4.src = "../../5MomsPlace/images/w4.png"; //7
+
+        let w5 = new Image();
+        w5.src = "../../5MomsPlace/images/w5.png"; //8
+
+        let granny2 = new Image();
+        granny2.src = "../../5MomsPlace/images/granny2.png"; //9
+
+        let piano1 = new Image();
+        piano1.src = "../../5MomsPlace/images/piano1.png"; //10
+
+        let piano2 = new Image();
+        piano2.src = "../../5MomsPlace/images/piano2.png"; //11
+
+        let piano3 = new Image();
+        piano3.src = "../../5MomsPlace/images/piano3.png"; //12
+
+        let piano4 = new Image();
+        piano4.src = "../../5MomsPlace/images/piano4.png"; //13
+
+        let window1 = new Image();
+        window1.src = "../../5MomsPlace/images/window1.png"; //14
+
+        let catPro1 = new Image();
+        catPro1.src = "../../5MomsPlace/images/catPro1.png"; //15
+
+        let catPro2 = new Image();
+        catPro2.src = "../../5MomsPlace/images/catPro2.png"; //16
+
+        let catPro3 = new Image();
+        catPro3.src = "../../5MomsPlace/images/catPro3.png"; //17
+
+        let catPro4 = new Image();
+        catPro4.src = "../../5MomsPlace/images/catPro4.png"; //18
+
 
 
         if (lMap[level] === undefined)
             lMap[level] =
                 //                  10                  20
                 [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
-                    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],    //0
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //1
+                    [1,0,0,14,0,0,0,0,14,0,0,0,0,14,0,0,0,0,14,0,0,0,0,14,0],    //0
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,5,5,6,7,8,2,2,2],    //1
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //2
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //3
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //4
-                    [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //5
+                    [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,9,2,18,2,2,2,2,2,2],    //5
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //6
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //7
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,15,2,2,2,2,2,2,2,2,2,2,2],    //7
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
+                    [2,2,17,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //10
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2],    //11
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,16,2,2,2,2,2,2],    //11
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //12
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
-                    [2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3],    //14
+                    [2,2,2,2,2,16,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,15],    //14
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //15
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
+                    [2,2,10,11,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
+                    [2,2,12,13,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
                 ];
 
@@ -811,10 +860,21 @@ function startGame()
         b = door;
         c = floor;
         d = cat;
-        e = undefined;
-        f = undefined;
-        g = undefined;
-        h = undefined;
+        e = w1;
+        f = w2;
+        g = w3;
+        h = w4;
+        i = w5;
+        j = granny2;
+        k = piano1;
+        l = piano2;
+        m = piano3;
+        n = piano4;
+        o = window1;
+        q = catPro1;
+        r = catPro2;
+        s = catPro3;
+        t = catPro4;
 
 
         if (lPMap[level] === undefined)
@@ -830,12 +890,13 @@ function startGame()
                     lPMap[level][y].push(0)
                 }
             }
+            lPMap[level][0][0] = 1;
         }
 
         changePStartPos();
 
-        cat.onload = function(){drawMap();};
-        floor.onload = function(){addEventListener("keydown", onKeyDown, false);};
+        catPro4.onload = function(){drawMap();};
+        addEventListener("keydown", onKeyDown, false);
     }
 
     if (l6)//Roof (Home)
@@ -2117,37 +2178,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l7)//If it's Lvl 7
     {
-        if (e === 40 && p.row === 16 && p.col === 24)
-        {
-            {
-                removeEventListener("keydown", onKeyDown, false);
-                ctx.clearRect(484, 736, 32, 48);
-                let sizer = 0;
-                goUpAFloor();
 
-                function goUpAFloor()
-                {
-                    if (sizer < 10)//If is not small enough to fit through the door..
-                    {
-                        ctx.clearRect(484, 736, 32, 48);
-                        fillErasedMap();
-                        ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
-                        sizer++;
-                        setTimeout(goUpAFloor, 120);
-                    }       //Shrink
-                    else        //Otherwise, go through door and load level 1
-                    {
-                        level = 11;
-                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
-                        l11 = true;
-                        ctx.clearRect(0,0,800,600);
-                        p.frameY = 0;
-                        startGame();
-                        setTimeout(drawMap, 40);
-                    }
-                }
-            }   //Go through the door to level 1
-        }
     }
 
     function drawL6()
