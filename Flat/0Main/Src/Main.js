@@ -1003,15 +1003,16 @@ function startGame()
 
 
 
-    if (l11)//SewerPipe While Drained
+    if (l11)//SewerPipe Map
     {
         canvas.style.backgroundImage = "";
-
 
         let wall = new Image();
         wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
         let upperWall = new Image();
         upperWall.src = "../../2Sewer/images/upperWall.png";
+        let pipeTopView = new Image();
+        pipeTopView.src = "../../2Sewer/images/pipe3.png";
         let valveTl = new Image();
         valveTl.src = "../../2Sewer/images/valveTl.png";
         let valveTm = new Image();
@@ -1036,15 +1037,16 @@ function startGame()
         c = upperWall;           //2
         d = sewerFloor;          //3
         e = sewerFloor;          //4
-        f = valveTl;           //5
-        g = valveTm;           //6
-        h = valveTr;           //7
-        i = valveMl;           //8
-        j = valveMm;           //9
-        k = valveMr;           //10
-        l = valveBl;           //11
-        m = valveBm;           //12
-        n = valveBr;           //13
+        f = valveTl;             //5
+        g = valveTm;             //6
+        h = valveTr;             //7
+        i = valveMl;             //8
+        j = valveMm;             //9
+        k = valveMr;             //10
+        l = valveBl;             //11
+        m = valveBm;             //12
+        n = valveBr;             //13
+        o = pipeTopView;           //14
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
@@ -1068,9 +1070,9 @@ function startGame()
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //13
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //14
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //15
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //16
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //17
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]         //18
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //16
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //17
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]         //18
                 ];
         }
 
@@ -1084,6 +1086,10 @@ function startGame()
                 }
             }
         }
+
+
+        lMap[level][18][12] = 14;
+
 
         if (lPMap[level] === undefined)
         {
@@ -1104,9 +1110,6 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
     }
 }
-
-
-
 
 
 
@@ -2015,12 +2018,86 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l6)//If it's Lvl 6
     {
+        if (e = 38 && p.row === 6 && p.col === 0)
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            let stepsUp = 0;
+            let stepsOver = 0;
+            let steps = 0;
 
+            getInTheChopper();
+
+            function getInTheChopper()
+            {
+                steps = stepsOver + stepsUp;
+
+                if (steps < 21)
+                {
+                    p.srcX++;
+                    if (stepsUp < 8)
+                    {
+                        console.log(p.srcY);
+                        stepsUp++;
+                        ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                        drawL6();
+                        ctx.drawImage(scientist, ((p.srcX % 4) * 32), p.srcY, 32, 48, p.col * 32, (p.row * 32) - (8 * stepsUp), 32, 48);
+                    }
+                    else
+                    {
+                        p.srcY = 96;
+                        stepsOver++;
+                        ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                        fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                        drawL6();
+                        ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, (p.col * 32) + (8 * stepsOver), (p.row * 32) - (8 * stepsUp), 32, 48);
+                    }
+                    setTimeout(getInTheChopper, 120);
+                }
+
+                else
+                {
+                    level = 7;                  //Change level identifier appropriately
+                    l1 = l2 = l3 = l4 = l5 = l6 = l11 = false;             //Set all levels to false but the one being travelled to
+                    l7 = true;                                  //Set level being travelled to as true
+                    ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+                    startGame();                                //Load settings and assets for next map
+                    setTimeout(drawMap, 40);                    //Draw next map
+               }
+            }
+
+
+        }
     }
 
     if (l7)//If it's Lvl 7
     {
 
+    }
+
+    function drawL6()
+    {
+        if (l6)
+        {
+            ctx.drawImage(darkWindow, 10, 427);
+            ctx.drawImage(darkWindow, 60, 427);
+            ctx.drawImage(darkWindow, 210, 427);
+            ctx.drawImage(darkWindow, 260, 427);
+            ctx.drawImage(darkWindow, 310, 427);
+            ctx.drawImage(darkWindow, 460, 427);
+            ctx.drawImage(litWindow, 110, 427);
+            ctx.drawImage(litWindow, 160, 427);
+            ctx.drawImage(litWindow, 360, 427);
+            ctx.drawImage(litWindow, 410, 427);
+            ctx.drawImage(litWindow, 510, 427);
+            ctx.drawImage(ladder, 5, 160);
+            ctx.drawImage(helipad, 5, 150);
+            ctx.drawImage(helicopter, 5, 85);
+            ctx.drawImage(exit, 309, 335);
+            ctx.drawImage(cherryTree, 385, 490);
+            ctx.drawImage(fence, 390, 545);
+            ctx.drawImage(fence, 455, 545);
+        }
     }
 
 }
@@ -2422,9 +2499,9 @@ function onKeyDown(e)
             ctx.drawImage(litWindow, 360, 427);
             ctx.drawImage(litWindow, 410, 427);
             ctx.drawImage(litWindow, 510, 427);
-            ctx.drawImage(ladder, 0, 160);
-            ctx.drawImage(helipad, 0, 150);
-            ctx.drawImage(helicopter, 0, 85);
+            ctx.drawImage(ladder, 5, 160);
+            ctx.drawImage(helipad, 5, 150);
+            ctx.drawImage(helicopter, 5, 85);
             ctx.drawImage(exit, 309, 335);
             ctx.drawImage(cherryTree, 385, 490);
             ctx.drawImage(fence, 390, 545);
@@ -2603,9 +2680,9 @@ function drawL6Full()
     if (l6)
     {
 
-        ctx.drawImage(ladder, 0, 160);
-        ctx.drawImage(helipad, 0, 150);
-        ctx.drawImage(helicopter, 0, 85);
+        ctx.drawImage(ladder, 5, 160);
+        ctx.drawImage(helipad, 5, 150);
+        ctx.drawImage(helicopter, 5, 85);
 
 
         ctx.drawImage(darkWindow, 10, 427);
