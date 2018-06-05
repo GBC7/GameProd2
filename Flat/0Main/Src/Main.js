@@ -14,6 +14,30 @@ let floorSpriteX = undefined, floorSet = false;                       //For sewe
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 
+
+let timer_level3;                                                        //For checking time for level 3
+let leftDoorOpen = false;
+let rightDoorOpen = false;
+let findPasscode = false;                                               //For clothing store
+let findMap = false;                                                     //For clothing store
+let findRollerblades = false;                                           //For clothing store
+let findDisguise = false;                                                //For clothing store
+
+let bgm_level3 = new Audio;
+bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
+let dangerous = new Audio;
+dangerous.src = ("../../3Store/audio/enemyappear.mp3");
+
+bgm_level3.loop = true;
+bgm_level3.volume = 0.2;
+
+dangerous.loop = true;
+dangerous.volume = 0.2;
+
+let doorSound = new Audio();
+doorSound.src = ('../../3Store/audio/open.mp3');
+
+
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4    5   6   7      8          9         10      11
 let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
@@ -356,7 +380,7 @@ function startGame()
     {
 
         canvas.style.backgroundImage = "";
-        /*bgm_level3.play();*/
+        bgm_level3.play();
 
         let floor = new Image();
         floor.src = "../../3Store/images/floor.png";
@@ -1139,8 +1163,6 @@ function startGame()
         fullShelvesBottom.onload = function(){drawMap();};
         addEventListener("keydown", onKeyDown, false);
     }
-
-
 
     if (l11)//SewerPipe Map
     {
@@ -2273,7 +2295,60 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l7)//If it's Lvl 7
     {
+        {
+            if (e === 40 && p.col === 24 && p.row === 16) //If going UP & character is right under door 2
+            {
 
+
+                p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                // cannot be changed while animating stair climbing
+                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+                goUpALvl();                                      //Start climbing stairs
+
+                function goUpALvl()                  //Climbing stairs animation function
+                {
+                    staysClimbed ++;
+                    p.frameX++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    p.srcY = p.height * p.frameY;
+
+                    if (staysClimbed < 3)
+                    {
+                        ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                        fillErasedMap();        //Draw the map image that was cleared
+                        //Draw scientist incrementally smaller each 'step' taken
+                        // and move player slightly up to portray movement
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (4 * staysClimbed), 32, 48);
+                        setTimeout(goUpALvl, 80);
+                    }
+                    else if (staysClimbed !== 20)
+                    {
+                        //Count each step taken
+                        ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                        fillErasedMap();        //Draw the map image that was cleared
+                        //Draw scientist incrementally smaller each 'step' taken
+                        // and move player slightly up to portray movement
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
+                        setTimeout(goUpALvl, 80);
+                    }
+                    else                            //Otherwise
+                    {
+                        level = 11;                              //Change level identifier appropriately
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l11 = true;                              //Set the one that is being travelled to to true
+
+                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                        startGame();                            //Load new levels assets and settings
+                        setTimeout(drawMap, 40);                //Draw its entire map
+                    }
+                }
+            }  //Go through the door to level 3
+        }
     }
 
     function drawL6()
@@ -2581,7 +2656,48 @@ function onKeyDown(e)
      if (e.keyCode === 32) //Space
 
      {
-         //Character action
+         if (l3)
+         {
+
+             if (leftDoorOpen === false && p.row === 7 && p.col === 4)
+             {
+                 doorSound.play();
+                 leftDoorOpen = true;
+                 lMap[level][7][4] = 0;
+                 lMap[level][6][5] = 16;
+             }
+             if (findPasscode === false && p.row ===2 && p.col ===1)
+             {
+                 findPasscode = true;
+                 alert("you found the passcode(temp msg)");
+             }
+             if (rightDoorOpen === false && findPasscode && p.row === 7 && p.col === 20)
+             {
+                 doorSound.play();
+                 rightDoorOpen = true;
+                 lMap[level][7][20] = 0;
+                 lMap[level][6][19] = 17;
+             }
+             if (findMap === false && p.row === 15 && p.col === 5)
+             {
+                 findMap = true;
+                 alert("you found the map(temp msg)");
+             }
+             if (findRollerblades === false && p.row === 5 && p.col === 20)
+             {
+                 findRollerblades = true;
+                 alert("you found the rollerblades(temp msg)");
+             }
+             if (findDisguise === false && p.row === 13 && p.col === 23)
+             {
+                 findDisguise = true;
+                 alert("you found the disguise(temp msg)");
+             }
+             if (findDisguise && findRollerblades && findMap && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+             {
+                 alert("you go to street(temp msg)");
+             }
+         }
      }
 
      /* TEMP - for testing - TEMP */
