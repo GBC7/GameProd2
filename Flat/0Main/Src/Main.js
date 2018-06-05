@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = true, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false;
-let level = 2;
+let l1 = false, l2 = false, l3 = false, l4 = false, l5 = false, l6 = true, l7 = false;
+let level = 6;
 
 
 let walkingSpeed = 15;
