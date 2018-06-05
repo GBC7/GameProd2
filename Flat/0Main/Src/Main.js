@@ -2117,7 +2117,37 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l7)//If it's Lvl 7
     {
+        if (e === 40 && p.row === 16 && p.col === 24)
+        {
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                ctx.clearRect(484, 736, 32, 48);
+                let sizer = 0;
+                goUpAFloor();
 
+                function goUpAFloor()
+                {
+                    if (sizer < 10)//If is not small enough to fit through the door..
+                    {
+                        ctx.clearRect(484, 736, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
+                        sizer++;
+                        setTimeout(goUpAFloor, 120);
+                    }       //Shrink
+                    else        //Otherwise, go through door and load level 1
+                    {
+                        level = 11;
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
+                        l11 = true;
+                        ctx.clearRect(0,0,800,600);
+                        p.frameY = 0;
+                        startGame();
+                        setTimeout(drawMap, 40);
+                    }
+                }
+            }   //Go through the door to level 1
+        }
     }
 
     function drawL6()
