@@ -2178,7 +2178,58 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     if (l7)//If it's Lvl 7
     {
+        if (e === 40 && p.col === 24 && p.row === 16) //If going UP & character is right under door 2
+        {
 
+
+            p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+            removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                                                                  // cannot be changed while animating stair climbing
+            let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+            goUpALvl();                                      //Start climbing stairs
+
+            function goUpALvl()                  //Climbing stairs animation function
+            {
+                staysClimbed ++;
+                p.frameX++;
+                p.srcX = p.width * (p.frameX % 4);
+                p.srcY = p.height * p.frameY;
+
+                if (staysClimbed < 3)
+                {
+                    ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                    fillErasedMap();        //Draw the map image that was cleared
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (4 * staysClimbed), 32, 48);
+                    setTimeout(goUpALvl, 80);
+                }
+                else if (staysClimbed !== 20)
+                {
+                                  //Count each step taken
+                    ctx.clearRect(768, 512, 32, 48);  //Clear tile player is on so new animation image can take its place
+                    fillErasedMap();        //Draw the map image that was cleared
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, 768, 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
+                    setTimeout(goUpALvl, 80);
+                }
+                else                            //Otherwise
+                {
+                    level = 3;                              //Change level identifier appropriately
+                    l1 = l2 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                    l3 = true;                              //Set the one that is being travelled to to true
+
+                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                    p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                    startGame();                            //Load new levels assets and settings
+                    setTimeout(drawMap, 40);                //Draw its entire map
+                }
+            }
+        }  //Go through the door to level 3
     }
 
     function drawL6()
