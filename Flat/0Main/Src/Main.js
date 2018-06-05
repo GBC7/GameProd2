@@ -2073,6 +2073,57 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 }
             }
         }
+
+
+        if (e === 38 && p.row === 0 && (p.col === 10 || p.col === 11)) //If going UP & character is right under door 2
+        {
+            p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+            setTimeout(goToStreet, 40);
+
+            function goToStreet()//When the stairs image loads
+            {
+                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                clearInterval(timer_level3);
+                bgm_level3.pause();
+                dangerous.pause();
+                                                                  // cannot be changed while animating stair climbing
+                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+                walkToStreet();                                      //Start climbing stairs
+
+                function walkToStreet()                  //Climbing stairs animation function
+                {
+                           //Count each step taken
+
+                    ctx.clearRect(96*10, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                    fillErasedMap();        //Draw the map image that was cleared
+
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed),96*10, 0, 32, 38 - (10 * staysClimbed));
+
+
+                    for (staysClimbed; staysClimbed < 5; staysClimbed++){
+                        if (staysClimbed !== 4)         //If player has not climbed all stairs
+                            setTimeout(walkToStreet, 120);     //Keep climbing them - Call the stair climbing function again
+                        else                            //Otherwise
+                        {
+                            level = 4;                              //Change level identifier appropriately
+                            l1 = l2 = l3 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                            l4 = true;                              //Set the one that is being travelled to to true
+
+                            ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                            startGame();                            //Load new levels assets and settings
+                            setTimeout(drawMap, 500);                //Draw its entire map
+                        }
+
+                    }
+                }
+            }
+        }  //Go through the door to level 3
     }
 
     if (l4)//If it's Lvl 4
