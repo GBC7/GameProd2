@@ -1,8 +1,8 @@
 let gameOver = false;
 
 
-let l1 = false, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = true, l11 = false;
-let level = 7;
+let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
+let level = 1;
 
 
 let walkingSpeed = 15;
@@ -41,7 +41,7 @@ doorSound.src = ('../../3Store/audio/open.mp3');
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4    5   6   7      8          9         10      11
 let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
-    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 17];
+    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 16];
 
 
 //For setting direction the character is facing when entering a new level
@@ -72,6 +72,10 @@ let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, un
 let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
     //   8        9         10          11
     undefined, undefined, undefined, undefined];
+
+
+//For finding out if level is ready to be drawn
+let l2Ready = false, l3Ready = false, l4Ready = false, l5Ready = false, l6Ready = false, l7Ready=false, l11Ready = false;
 
 
 let canvas = document.querySelector("canvas");
@@ -367,12 +371,12 @@ function startGame()
 
         changePStartPos();
 
-
+        stairs.onload = function(){l2Ready=true;};
         //Below ensures all elements are on screen when level is drawn
-        stairs.onload = function(){drawMap();};
+
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
-    /*    startX[7] = 36; startY[7] = 21;*/
+
     }
 
     if (l3)//Clothing Store
@@ -504,9 +508,30 @@ function startGame()
         changePStartPos();
 
 
-        desk.onload = function(){drawMap();};
+        l3Ready = false;
+        desk.onload = function(){l3Ready=true;};
+        waitForLoading();
+
+
+        function waitForLoading()
+        {
+            if (!l3Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 10);
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
+        }
+
 
         addEventListener("keydown", onKeyDown, false);
+
+
 
         let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
         let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
@@ -829,7 +854,27 @@ function startGame()
         changePStartPos();
 
 
-        side.onload = function(){drawMap()};
+
+        l4Ready = false;
+        side.onload = function(){l4Ready=true;};
+        waitForLoad();
+
+
+        function waitForLoad()
+        {
+            if (!l4Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoad, 10);
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
+        }
+
 
 
         addEventListener("keydown", onKeyDown, false);
@@ -964,7 +1009,28 @@ function startGame()
 
         changePStartPos();
 
-        catPro4.onload = function(){drawMap();};
+
+        l5Ready = false;
+        catPro4.onload = function(){l5Ready=true;};
+        waitingForLoad();
+
+
+        function waitingForLoad()
+        {
+            if (!l5Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitingForLoad, 10);
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
+        }
+
+
         addEventListener("keydown", onKeyDown, false);
     }
 
@@ -1049,9 +1115,7 @@ function startGame()
 
         changePStartPos();
 
-
-        /*shinglesBRight.onload = function(){drawMap();};*/
-
+        shinglesBRight.onload = function(){l6Ready=true;};
         addEventListener("keydown", onKeyDown, false);
 
     }
@@ -1159,8 +1223,27 @@ function startGame()
         changePStartPos();
 
 
+        l7Ready = false;
+        fullShelvesBottom.onload = function(){l7Ready=true;};
+        waitForItToLoad();
 
-        fullShelvesBottom.onload = function(){drawMap();};
+
+        function waitForItToLoad()
+        {
+            if (!l7Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForItToLoad, 10);
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
+        }
+
+
         addEventListener("keydown", onKeyDown, false);
     }
 
@@ -1168,12 +1251,7 @@ function startGame()
     {
         canvas.style.backgroundImage = "";
 
-        let wall = new Image();
-        wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
-        let upperWall = new Image();
-        upperWall.src = "../../2Sewer/images/upperWall.png";
-        let pipeTopView = new Image();
-        pipeTopView.src = "../../2Sewer/images/pipe3.png";
+
         let valveTl = new Image();
         valveTl.src = "../../2Sewer/images/valveTl.png";
         let valveTm = new Image();
@@ -1192,6 +1270,14 @@ function startGame()
         valveBm.src = "../../2Sewer/images/valveBm.png";
         let valveBr = new Image();
         valveBr.src = "../../2Sewer/images/valveBr.png";
+        let wall = new Image();
+        wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
+        let upperWall = new Image();
+        upperWall.src = "../../2Sewer/images/upperWall.png";
+        let pipeTopView = new Image();
+        pipeTopView.src = "../../2Sewer/images/pipe3.png";
+
+
 
         a = undefined;           //0
         b = wall;                //1
@@ -1267,6 +1353,7 @@ function startGame()
         }
 
         changePStartPos();
+        pipeTopView.onload = function(){l11Ready = true;};
 
         addEventListener("keydown", onKeyDown, false);
     }
@@ -1620,6 +1707,8 @@ function changePStartPos()
     lPMap[level][startY[level]][startX[level]] = 1;   //Set players map position in the levels player map
     p.row = startY[level];                              // then set player objects row
     p.col = startX[level];                                // and column to match
+    p.prevRow = p.row;
+    p.prevCol = p.col;
 }
 
 function drawPMap()
@@ -1660,67 +1749,78 @@ function drawPMap()
     let alreadyDoinIt = false;
 
     if (!alreadyDoinIt)
-    if (l6 && !walkedUpAlready)
-    {
-        removeEventListener("keydown", onKeyDown, false);
-        alreadyDoinIt = true;
-        let steps = 0;
-        upTheFireEscape();
-        function upTheFireEscape()
+        if (l6 && !walkedUpAlready)
         {
-            steps++;
-            p.srcX++;
-            p.srcY = 2;
+            removeEventListener("keydown", onKeyDown, false);
+            alreadyDoinIt = true;
+            let steps = 0;
+            upTheFireEscape();
+            function upTheFireEscape()
+            {
+                steps++;
+                p.srcX++;
+                p.srcY = 2;
 
-            let row = ((448 - (8 * (steps - 4))) / 32);
-            let col = (309 + 11 + (8 * steps)) / 32;
+                let row = ((448 - (8 * (steps - 4))) / 32);
+                let col = (309 + 11 + (8 * steps)) / 32;
 
-            if (Number.isInteger(col))
-            {
-                lPMap[level][p.row][p.col] = 0;
-                p.col++;
-                lPMap[level][p.row][p.col] = 1;
-            }
-            if (Number.isInteger(row) && steps !== 20)
-            {
-                lPMap[level][p.row][p.col] = 0;
-                p.row--;
-                lPMap[level][p.row][p.col] = 1;
+                if (steps !== 12 && steps !== 16 && steps !== 20)
+                {
+                    if (Number.isInteger(col))
+                    {
+                        lPMap[level][p.row][p.col] = 0;
+                        p.col++;
+                        lPMap[level][p.row][p.col] = 1;
+                    }
+                    if (Number.isInteger(row) && steps !== 20)
+                    {
+                        lPMap[level][p.row][p.col] = 0;
+                        p.row--;
+                        lPMap[level][p.row][p.col] = 1;
+                    }
+                }
+                if (steps < 4)
+                {
+                    fillErasedMap();
+                    drawL6Full();
+                    ctx.drawImage(scientist, (p.srcX%4) * 32, 96, 32, 48, 309 + (8 * steps), 448, 32, 48);
+                    setTimeout(upTheFireEscape, walkingSpeed * 3); //Multiplying by two makes walk player slower
+                }
+                /*else if (steps === 12)
+                {
+                    /!*drawL6Full();*!/
+                    setTimeout(upTheFireEscape, walkingSpeed * 3); //Multiplying by two makes walk player slower
+                }*/
+                else if (steps < 21)
+                {
+                    fillErasedMap();
+                    drawL6Full();
+                    ctx.drawImage(scientist, (p.srcX % 4) * 32, 96, 32, 48, 309 + (8 * (steps)), 448 - (8 * (steps - 3)), 32, 48);
+                    setTimeout(upTheFireEscape, walkingSpeed * 3);//Multiplying by two makes walk player slower
+                }
+                else
+                {
+                    fillErasedMap();
+                    drawL6Full();
+                    p.col = 15;
+                    p.row = 10;
+                    lPMap[level][12][12] = 0;
+                    ctx.clearRect((p.col - 0.25) *32, (p.row - 0.25)*32, 32, 48);
+                    drawMap();
+                    ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY * 48, 32, 48, p.col*32, p.row*32, 32, 48);
+                    walkedUpAlready = true;
+                    addEventListener("keydown", onKeyDown, false);
+                    alreadyDoinIt = true;
+                }
+
+                console.log(steps);
             }
 
-            if (steps < 4)
-            {
-                ctx.clearRect(309 + (8 * (steps - 1)), 448, 32, 48);
-                fillErasedMap();
-                drawL6Full();
-                ctx.drawImage(scientist, (p.srcX%4) * 32, 96, 32, 48, 309 + (8 * steps), 448, 32, 48);
-                setTimeout(upTheFireEscape, walkingSpeed * 3); //Multiplying by two makes walk player slower
-            }
-            else if (steps < 21)
-            {
-
-                ctx.clearRect(309 + (8 * (steps - 1)), 448 - (8 * (steps - 4)), 32, 48);
-                fillErasedMap();
-                drawL6Full();
-                ctx.drawImage(scientist, (p.srcX % 4) * 32, 96, 32, 48, 309 + (8 * (steps)), 448 - (8 * (steps - 3)), 32, 48);
-                setTimeout(upTheFireEscape, walkingSpeed * 3);//Multiplying by two makes walk player slower
-            }
-            else
-            {
-                ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-                fillErasedMap();
-                drawL6Full();
-                ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY * 48, 32, 48, p.col*32, p.row*32, 32, 48);
-                walkedUpAlready = true;
-                addEventListener("keydown", onKeyDown, false);
-                alreadyDoinIt = true;
-            }
         }
-
-    }
 }
 
-function drawMap()
+function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling it is not neccessary) it allows
+                            // for you to draw the map without it calling the draw player map function if given a value
 {
     let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
@@ -2009,7 +2109,9 @@ function drawMap()
         }
     }
     drawL6Full();
-    setTimeout(drawPMap, 10);
+
+    if (dontDrawP === undefined)
+        setTimeout(drawPMap, 10);
 }
 
 function checkLevelSwitch(e /* pass e.keyCode through this argument */)
@@ -2109,7 +2211,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
             function getInTheTube()
             {
-                if (sizer < 10)//If is not small enough to fit through the door..
+                if (sizer < 10)//If is not small enough to fit through the tube..
                 {
                     ctx.clearRect(320, 0, 32, 48);
                     fillErasedMap();
@@ -2122,10 +2224,57 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     level = 11;
                     l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
                     l11 = true;
+                    p.frameY = 3;
                     ctx.clearRect(0,0,800,600);
-                    p.frameY = 0;
-                    startGame();
-                    setTimeout(drawMap, 40);
+                    l11Ready = false;
+                    startGame(0);
+                    changePStartPos();
+                    removeEventListener("keydown", onKeyDown, false);
+                    waitForLoad();
+
+                    function waitForLoad()
+                    {
+                        if (!l11Ready)
+                        {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font="20px Arial";
+                            ctx.fillText("Loading...", 350, 290);
+                            setTimeout(waitForLoad, 10);
+                        }
+                        else
+                        {
+                            setTimeout(emerge, 120);
+                            drawMap();
+                        }
+                    }
+
+
+                }
+
+                function emerge()
+                {
+                    p.frameX++;
+                    p.srcX = p.width * (p.frameX%4);
+                    p.srcY = p.height * p.frameY;
+
+                    if (sizer > 5)
+                    {
+                        fillErasedMap();
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (2 * sizer), 389, 542 + (2 * sizer), 20, 33 - (2 * sizer));
+                        sizer--;
+                        setTimeout(emerge, 80);
+                    }
+                    else if (sizer > 0)//If is not small enough to fit through the tube..
+                    {
+                        fillErasedMap();
+                        sizer--;
+                        ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, 384 + sizer, 512 + (8 * sizer), 32 - 2 * sizer, 48 - 4 * sizer);
+                        setTimeout(emerge, 60);
+                    }       //Shrink
+                    else
+                    {
+                        addEventListener("keydown", onKeyDown, false);
+                    }
                 }
             }
         }   //Go through the door to level 1
@@ -2157,7 +2306,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else                              //Otherwise, load level 2.
                 {
                     level = 2;                              //Change level identifier to appropriate level
-           /*         changePStartPos();*/
+                    changePStartPos();
                     l1 = l3 = l4 = l5 = l6 = l7 =false;         //Set all levels false aside from new level
                     l2 = true;                              //Set new level to true
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -2165,6 +2314,9 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                                                             // the player will be facing
                     startGame();                            //Load assets and settings of the level being travelled to
                     setTimeout(drawMap, 40);                //Draw its map
+                    clearInterval(timer_level3);
+                    dangerous.pause();
+                    bgm_level3.pause();
                 }
             }
         }
@@ -2214,6 +2366,9 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
                         startGame();                            //Load new levels assets and settings
                         setTimeout(drawMap, 500);                //Draw its entire map
+                        clearInterval(timer_level3);
+                        dangerous.pause();
+                        bgm_level3.pause();
                     }
                 }
             }
@@ -2351,6 +2506,86 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
         }
     }
 
+    if (l11)//Sewer map 2
+    {
+        if (e === 40 && p.col === 12 && p.row === 16) //If going down & character is over pipe/tube
+        {
+            p.frameX++;
+            p.srcX = p.width * (p.frameX % 4);
+            removeEventListener("keydown", onKeyDown, false);
+            ctx.clearRect(384, 512, 32, 48);
+            let sizer = 0;
+            goBackOut();
+
+            function goBackOut()
+            {
+                if (sizer < 5)//If is not small enough to fit through the tube..
+                {
+                    sizer++;
+                    ctx.clearRect(384, 512, 96, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, (p.srcX % 4) * 32, sizer, 32, 48, 384 + sizer, 512 + (8 * sizer), 32 - 2 * sizer, 48 - 4 * sizer);
+                    setTimeout(goBackOut, 60);
+                }       //Shrink
+                else if (sizer < 15)
+                {
+                    ctx.clearRect(384, 512, 32, 96);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, p.srcX, 0, 32, 48 - (2 * sizer), 389, 542 + (2 * sizer), 20, 33 - (2 * sizer));
+                    sizer++;
+                    setTimeout(goBackOut, 80);
+                }
+                else        //Otherwise, go through door and load level 1
+                {
+                    level = 2;
+                    l1 = l3 = l4 = l5 = l6 = l7 = l11 = false;
+                    l2 = true;
+                    startX[level] = 10;
+                    startY[level] = 0;
+                    p.frameY = 0;
+                    changePStartPos();
+                    ctx.clearRect(0,0,800,600);
+                    l2Ready=false;
+                    startGame(0);
+                    setTimeout(drawMap(0), 40);
+                    sizer = 10;
+                    removeEventListener("keydown", onKeyDown, false);
+                    waitToLoad();
+                    function waitToLoad()
+                    {
+                        if (!l2Ready)
+                        {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font="20px Arial";
+                            ctx.fillText("Loading...", 350, 290);
+                            setTimeout(waitToLoad, 10);
+                        }
+                        else
+                        {
+                            setTimeout(crawlOut, 80);
+                            drawMap(0);
+                        }
+                    }
+
+                }
+
+                function crawlOut()//crawl out the other side
+                {
+                    if (sizer > 0)
+                    {
+                        ctx.drawImage(scientist, (p.srcX % 4)*32, p.frameY, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
+                        sizer--;
+                        setTimeout(crawlOut, 80);
+                    }
+                    else
+                    {
+                        addEventListener("keydown", onKeyDown, false);
+                    }
+                }
+            }
+        }
+    }
+
     function drawL6()
     {
         if (l6)
@@ -2381,6 +2616,9 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 function onKeyDown(e)
 
 {
+    if (!l3)
+        clearInterval(timer_level3);
+
     if (l6)
     {
         if (p.col >= 6)
@@ -2784,8 +3022,24 @@ function onKeyDown(e)
          l1 = l2 = l3 = l4 = l5 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l6 = true;                                  //Set level being travelled to as true
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+         l6Ready=false;
          startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
+         waitForLoading();
+         function waitForLoading()
+         {
+             if (!l6Ready)
+             {
+                 ctx.fillStyle = '#ffffff';
+                 ctx.font="20px Arial";
+                 ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 10);
+             }
+             else
+             {
+                 drawMap();                   //Draw next map
+             }
+         }
+
      }
     if (e.keyCode === 55) //7
     {
