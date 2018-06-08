@@ -13,6 +13,8 @@ let lightsOn = true, sewersDrained = true;                          //For sewer 
 let floorSpriteX = undefined, floorSet = false;                       //For sewer level
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
+let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
+let pSizer = 1;                                                         //For sizing player under doors
 
 
 let timer_level3;                                                        //For checking time for level 3
@@ -23,19 +25,23 @@ let findMap = false;                                                     //For c
 let findRollerblades = false;                                           //For clothing store
 let findDisguise = false;                                                //For clothing store
 
+
+let doorSound = new Audio();
+doorSound.src = ('../../3Store/audio/open.mp3');
 let bgm_level3 = new Audio;
 bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
 let dangerous = new Audio;
 dangerous.src = ("../../3Store/audio/enemyappear.mp3");
+let waterRunning = new Audio;
+waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
+
 
 bgm_level3.loop = true;
 bgm_level3.volume = 0.2;
-
 dangerous.loop = true;
 dangerous.volume = 0.2;
-
-let doorSound = new Audio();
-doorSound.src = ('../../3Store/audio/open.mp3');
+waterRunning.loop = true;
+waterRunning.volume = 0.3;
 
 
 //level 0 is undefined as we do not have a level 0
@@ -118,6 +124,12 @@ let sewerFloor = new Image();
 sewerFloor.src = "../../2Sewer/images/floor.png";
 let level3sprite = new Image();
 level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
+let door3 = new Image();
+door3.src = "../../2Sewer/images/door3.png";
+let wallBesideDoor = new Image();
+wallBesideDoor.src = "../../2Sewer/images/wallBesideDoor.png";
+let floorAboveDoor = new Image();
+floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
 
 
 //Level6 Roof
@@ -147,11 +159,6 @@ let shrub = new Image();
 shrub.src = "../../6Roof/images/shrub.png";
 //Level6 Roof
 
-
-//Global Audio
-let waterRunning = new Audio('../../2Sewer/audio/waterRunning.mp3');
-waterRunning.loop = true;
-waterRunning.volume = 0.3;
 
 startGame();
 
@@ -281,20 +288,27 @@ function startGame()
 
 
 
-        a = wall;           //0
-        b = door;           //1
-        c = undefined;      //2
-        d = sewerFloor;          //3
-        e = sewerFloor;          //4
-        f = sewerFloor;          //5
-        g = drain;          //6
-        h = pipe;           //7
-        i = stairs;         //8
-        j = door2;          //9
-        k = wallSwamp;      //10
-        l = wallCorner;     //11
-        m = topSide;        //12
-        n = topCorner;      //13
+        a = wall;               //0
+        b = door;               //1
+        c = undefined;          //2
+        d = sewerFloor;         //3
+        e = sewerFloor;         //4
+        f = sewerFloor;         //5
+        g = drain;              //6
+        h = pipe;               //7
+        i = stairs;             //8
+
+        if (doorThreeOpen)
+            j = door3;          //9
+        else
+            j = door2;          //9
+
+        k = wallSwamp;          //10
+        l = wallCorner;         //11
+        m = topSide;            //12
+        n = topCorner;          //13
+        o = wallBesideDoor;     //14
+        q = floorAboveDoor;     //15
 
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
@@ -1380,7 +1394,6 @@ function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
-
     ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
 
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
@@ -2791,9 +2804,13 @@ function onKeyDown(e)
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
                      if (l2 && !sewersDrained)
+                     {
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                     }
                      else
+                     {
                          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                     }
                      setTimeout(animateWalking, walkingSpeed);
                  }
                  else
@@ -2819,7 +2836,6 @@ function onKeyDown(e)
              drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
-
              if (l2 && !sewersDrained)
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
@@ -2854,10 +2870,15 @@ function onKeyDown(e)
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
                      if (l2 && !sewersDrained)
+                     {
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     }
                      else
+                     {
                          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                     }
                      setTimeout(walkDown, walkingSpeed);
+
                  }
                  else
                  {
@@ -2894,48 +2915,8 @@ function onKeyDown(e)
      if (e.keyCode === 32) //Space
 
      {
-         if (l3)
-         {
+         checkActions();
 
-             if (leftDoorOpen === false && p.row === 7 && p.col === 4)
-             {
-                 doorSound.play();
-                 leftDoorOpen = true;
-                 lMap[level][7][4] = 0;
-                 lMap[level][6][5] = 16;
-             }
-             if (findPasscode === false && p.row ===2 && p.col ===1)
-             {
-                 findPasscode = true;
-                 alert("you found the passcode(temp msg)");
-             }
-             if (rightDoorOpen === false && findPasscode && p.row === 7 && p.col === 20)
-             {
-                 doorSound.play();
-                 rightDoorOpen = true;
-                 lMap[level][7][20] = 0;
-                 lMap[level][6][19] = 17;
-             }
-             if (findMap === false && p.row === 15 && p.col === 5)
-             {
-                 findMap = true;
-                 alert("you found the map(temp msg)");
-             }
-             if (findRollerblades === false && p.row === 5 && p.col === 20)
-             {
-                 findRollerblades = true;
-                 alert("you found the rollerblades(temp msg)");
-             }
-             if (findDisguise === false && p.row === 13 && p.col === 23)
-             {
-                 findDisguise = true;
-                 alert("you found the disguise(temp msg)");
-             }
-             if (findDisguise && findRollerblades && findMap && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
-             {
-                 alert("you go to street(temp msg)");
-             }
-         }
      }
 
      /* TEMP - for testing - TEMP */
@@ -3094,7 +3075,14 @@ function checkBoundaries(e)
                 (
                     lMap[level][p.row + 1][p.col - 1] === 3 ||
                     lMap[level][p.row + 1][p.col - 1] === 4 ||
-                    lMap[level][p.row + 1][p.col - 1] === 5
+                    lMap[level][p.row + 1][p.col - 1] === 5 ||
+                    (
+                        lMap[level][p.row + 1][p.col - 1] === 15 ||
+                        lMap[level][p.row + 1][p.col - 1] === 9
+                        &&
+                        doorThreeOpen
+                    )
+
                 );
             }
            else if (l11)
@@ -3134,7 +3122,13 @@ function checkBoundaries(e)
                 (
                     lMap[level][p.row + 1][p.col + 1] === 3 ||
                     lMap[level][p.row + 1][p.col + 1] === 4 ||
-                    lMap[level][p.row + 1][p.col + 1] === 5
+                    lMap[level][p.row + 1][p.col + 1] === 5 ||
+                    (
+                        lMap[level][p.row + 1][p.col + 1] === 15 ||
+                        lMap[level][p.row + 1][p.col + 1] === 9
+                        &&
+                        doorThreeOpen
+                    )
                 );
         }
         else if (l11)
@@ -3174,7 +3168,13 @@ function checkBoundaries(e)
                 (
                     lMap[level][p.row][p.col] === 3 ||
                     lMap[level][p.row][p.col] === 4 ||
-                    lMap[level][p.row][p.col] === 5
+                    lMap[level][p.row][p.col] === 5 ||
+                    (
+                        lMap[level][p.row][p.col] === 15 ||
+                        lMap[level][p.row][p.col] === 9
+                        &&
+                        doorThreeOpen
+                    )
                 );
         }
         else if (l11)
@@ -3214,7 +3214,13 @@ function checkBoundaries(e)
                 (
                     lMap[level][p.row + 2][p.col] === 3 ||
                     lMap[level][p.row + 2][p.col] === 4 ||
-                    lMap[level][p.row + 2][p.col] === 5
+                    lMap[level][p.row + 2][p.col] === 5 ||
+                    (
+                        lMap[level][p.row + 2][p.col]  === 15 ||
+                        lMap[level][p.row + 2][p.col] === 9
+                        &&
+                        doorThreeOpen
+                    )
                 );
         }
         else if (l11)
@@ -3305,4 +3311,65 @@ function drawL6Full()
         ctx.drawImage(statue, 790, 560);
 
     }
+}
+
+function checkActions()
+{
+    if (l2)
+    {
+        if (p.row === 7 && p.col === 22 && p.frameY === 3)
+        {
+            doorThreeOpen = true;
+            j = door3;
+            lMap[level][7][23] = 14;
+            lMap[level][6][23] = 15;
+            drawMap(0);
+            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+
+        }
+    }
+
+    if (l3)
+    {
+
+        if (leftDoorOpen === false && p.row === 7 && p.col === 4)
+        {
+            doorSound.play();
+            leftDoorOpen = true;
+            lMap[level][7][4] = 0;
+            lMap[level][6][5] = 16;
+        }
+        if (findPasscode === false && p.row ===2 && p.col ===1)
+        {
+            findPasscode = true;
+            alert("you found the passcode(temp msg)");
+        }
+        if (rightDoorOpen === false && findPasscode && p.row === 7 && p.col === 20)
+        {
+            doorSound.play();
+            rightDoorOpen = true;
+            lMap[level][7][20] = 0;
+            lMap[level][6][19] = 17;
+        }
+        if (findMap === false && p.row === 15 && p.col === 5)
+        {
+            findMap = true;
+            alert("you found the map(temp msg)");
+        }
+        if (findRollerblades === false && p.row === 5 && p.col === 20)
+        {
+            findRollerblades = true;
+            alert("you found the rollerblades(temp msg)");
+        }
+        if (findDisguise === false && p.row === 13 && p.col === 23)
+        {
+            findDisguise = true;
+            alert("you found the disguise(temp msg)");
+        }
+        if (findDisguise && findRollerblades && findMap && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+        {
+            alert("you go to street(temp msg)");
+        }
+    }
+
 }
