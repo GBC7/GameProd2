@@ -6,6 +6,9 @@ let level = 1;
 
 
 let walkingSpeed = 15;
+let dialog = false;             //For drawing dialog
+let alreadySetTimeout = false;     //For drawing dialog
+let dialogX = undefined, dialogY = undefined; //For storing position dialog started at
 
 
 let lightSwitch = 1, sewerSwitch = 1;                                 //For sewer level
@@ -14,7 +17,7 @@ let floorSpriteX = undefined, floorSet = false;                       //For sewe
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
-let pSizer = 1;                                                         //For sizing player under doors
+                                                                        //For sizing player under doors
 
 
 let timer_level3;                                                        //For checking time for level 3
@@ -118,6 +121,17 @@ let scientist = new Image();                                    //Regular player
 scientist.src = "../../0Main/images/scientist2.png";
 let sciUndWater = new Image();                                  //Image fpr player while in sewer
 sciUndWater.src = "../../2Sewer/images/scientist2.png";
+let thotBr = new Image();                                   //Thought bubble image bottom right side of player
+thotBr.src = "../../0Main/images/thotBr.png";
+let thotBl = new Image();                                   //Thought bubble image bottom left side of player
+thotBl.src = "../../0Main/images/thotBl.png";
+let thotTl = new Image();                                   //Thought bubble image top left side of player
+thotTl.src = "../../0Main/images/thotTl.png";
+let thotTr = new Image();                                   //Thought bubble image top right side of player
+thotTr.src = "../../0Main/images/thotTr.png";
+
+
+
 let wetPipe = new Image();
 wetPipe.src = "../../2Sewer/images/pipeWet.png";
 let sewerFloor = new Image();
@@ -130,6 +144,11 @@ let wallBesideDoor = new Image();
 wallBesideDoor.src = "../../2Sewer/images/wallBesideDoor.png";
 let floorAboveDoor = new Image();
 floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
+let floorClean = new Image();
+floorClean.src = "../../2Sewer/images/floorClean.png";
+let doorBare = new Image();
+doorBare.src = "../../2Sewer/images/doorBare.png";
+
 
 
 //Level6 Roof
@@ -263,6 +282,8 @@ function startGame()
         canvas.style.backgroundImage = "";
 
 
+        let wallDrain = new Image();
+        wallDrain.src = "../../2Sewer/images/wallDrain2.png";
         let wallSwamp = new Image();
         wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
         let pipe = new Image();
@@ -294,15 +315,10 @@ function startGame()
         d = sewerFloor;         //3
         e = sewerFloor;         //4
         f = sewerFloor;         //5
-        g = drain;              //6
+        g = wallDrain;          //6
         h = pipe;               //7
         i = stairs;             //8
-
-        if (doorThreeOpen)
-            j = door3;          //9
-        else
-            j = door2;          //9
-
+        j = door2;              //9
         k = wallSwamp;          //10
         l = wallCorner;         //11
         m = topSide;            //12
@@ -317,7 +333,7 @@ function startGame()
                 //                                 10                            20
                 [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
 
-                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 8],        //0
+                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 6, 13, 0, 0, 0, 0, 0, 8],        //0
                     [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //1
                     [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //2
                     [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //3
@@ -348,10 +364,6 @@ function startGame()
                     lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
                 }
             }
-
-            lMap[level][11][24] = 6;                                    //Set the drains position (Needs to be done
-                                                                        // manually like this in order to allow
-                                                                        // for randomized floor pattern
         }
 
 
@@ -382,11 +394,19 @@ function startGame()
             }
         }
 
+        if (doorThreeOpen)
+        {
+            j = door3;
+            lMap[level][7][23] = 14;
+            lMap[level][6][23] = 15;
+        }
 
         changePStartPos();
 
-        stairs.onload = function(){l2Ready=true;};
+
         //Below ensures all elements are on screen when level is drawn
+        stairs.onload = function(){l2Ready=true;};
+
 
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
@@ -1705,6 +1725,9 @@ function fillErasedMap()
         ctx.fillRect(0, 0, xPos - 80, 600);
         ctx.fillRect(0, 0, 800, yPos - 32);
     }
+
+    if (dialog)
+        displayTextBubble();
 }
 
 function changePStartPos()
@@ -2215,82 +2238,91 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             };
         }  //Go through the door to level 3
 
-        if (e === 38 && p.col === 10 && p.row === 0 && sewersDrained) //If going UP & character is under pipe
+        if (e === 38 && p.col === 10 && p.row === 0) //If going UP & character is under pipe
         {
-            removeEventListener("keydown", onKeyDown, false);
-            ctx.clearRect(320, 0, 32, 48);
-            let sizer = 0;
-            getInTheTube();
-
-            function getInTheTube()
+            if (sewersDrained)//Go through the door to level 1
             {
-                if (sizer < 10)//If is not small enough to fit through the tube..
-                {
-                    ctx.clearRect(320, 0, 32, 48);
-                    fillErasedMap();
-                    ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
-                    sizer++;
-                    setTimeout(getInTheTube, 120);
-                }       //Shrink
-                else        //Otherwise, go through door and load level 1
-                {
-                    level = 11;
-                    l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
-                    l11 = true;
-                    p.frameY = 3;
-                    ctx.clearRect(0,0,800,600);
-                    l11Ready = false;
-                    startGame(0);
-                    changePStartPos();
-                    removeEventListener("keydown", onKeyDown, false);
-                    waitForLoad();
 
-                    function waitForLoad()
+                removeEventListener("keydown", onKeyDown, false);
+                ctx.clearRect(320, 0, 32, 48);
+                let sizer = 0;
+                getInTheTube();
+
+                function getInTheTube()
+                {
+                    if (sizer < 10)//If is not small enough to fit through the tube..
                     {
-                        if (!l11Ready)
+                        ctx.clearRect(320, 0, 32, 48);
+                        fillErasedMap();
+                        ctx.drawImage(scientist, (p.srcX % 4)*32, 144, 32, 48, 320 + sizer, 5 + sizer, 32 - 2 * sizer, 48 - 4 * sizer);
+                        sizer++;
+                        setTimeout(getInTheTube, 120);
+                    }       //Shrink
+                    else        //Otherwise, go through door and load level 1
+                    {
+                        level = 11;
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
+                        l11 = true;
+                        p.frameY = 3;
+                        ctx.clearRect(0,0,800,600);
+                        l11Ready = false;
+                        startGame(0);
+                        changePStartPos();
+                        removeEventListener("keydown", onKeyDown, false);
+                        waitForLoad();
+
+                        function waitForLoad()
                         {
-                            ctx.fillStyle = '#ffffff';
-                            ctx.font="20px Arial";
-                            ctx.fillText("Loading...", 350, 290);
-                            setTimeout(waitForLoad, 10);
+                            if (!l11Ready)
+                            {
+                                ctx.fillStyle = '#ffffff';
+                                ctx.font="20px Arial";
+                                ctx.fillText("Loading...", 350, 290);
+                                setTimeout(waitForLoad, 10);
+                            }
+                            else
+                            {
+                                setTimeout(emerge, 120);
+                                drawMap();
+                            }
                         }
+
+
+                    }
+
+                    function emerge()
+                    {
+                        p.frameX++;
+                        p.srcX = p.width * (p.frameX%4);
+                        p.srcY = p.height * p.frameY;
+
+                        if (sizer > 5)
+                        {
+                            fillErasedMap();
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (2 * sizer), 389, 542 + (2 * sizer), 20, 33 - (2 * sizer));
+                            sizer--;
+                            setTimeout(emerge, 80);
+                        }
+                        else if (sizer > 0)//If is not small enough to fit through the tube..
+                        {
+                            fillErasedMap();
+                            sizer--;
+                            ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, 384 + sizer, 512 + (8 * sizer), 32 - 2 * sizer, 48 - 4 * sizer);
+                            setTimeout(emerge, 60);
+                        }       //Shrink
                         else
                         {
-                            setTimeout(emerge, 120);
-                            drawMap();
+                            addEventListener("keydown", onKeyDown, false);
                         }
                     }
-
-
                 }
 
-                function emerge()
-                {
-                    p.frameX++;
-                    p.srcX = p.width * (p.frameX%4);
-                    p.srcY = p.height * p.frameY;
-
-                    if (sizer > 5)
-                    {
-                        fillErasedMap();
-                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (2 * sizer), 389, 542 + (2 * sizer), 20, 33 - (2 * sizer));
-                        sizer--;
-                        setTimeout(emerge, 80);
-                    }
-                    else if (sizer > 0)//If is not small enough to fit through the tube..
-                    {
-                        fillErasedMap();
-                        sizer--;
-                        ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY, 32, 48, 384 + sizer, 512 + (8 * sizer), 32 - 2 * sizer, 48 - 4 * sizer);
-                        setTimeout(emerge, 60);
-                    }       //Shrink
-                    else
-                    {
-                        addEventListener("keydown", onKeyDown, false);
-                    }
-                }
             }
-        }   //Go through the door to level 1
+            else
+            {
+                dialog = true;
+            }
+        }
     }
 
     if (l3)//If it's Lvl 3
@@ -2650,6 +2682,12 @@ function onKeyDown(e)
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
      checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
+    if (l2 && p.row === 6 && p.col === 22)//Draw Bare floor so that player can appear over it but under ridge
+        // (Ridge is drawn after player -- end of this function)
+    {
+        ctx.drawImage(floorClean, 22*32, 7*32);
+    }
+
      if (e.keyCode === 37)//Left
 
      {
@@ -2803,8 +2841,21 @@ function onKeyDown(e)
                      ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (l2 && !sewersDrained)
+                     if (p.row === 7 && p.col === 22)//Draw scientist under ledge
                      {
+                         if (!sewersDrained)
+                         {
+                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
+                         }
+                         else
+                         {
+                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
+                         }
+                         ctx.drawImage(doorBare, 22*32, 7*32);
+                     }
+                     else if (l2 && !sewersDrained)
+                     {
+
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
                      }
                      else
@@ -2869,7 +2920,19 @@ function onKeyDown(e)
                      ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (l2 && !sewersDrained)
+                     if (p.row === 5 && p.col === 22)//Draw scientist under ledge
+                     {
+                         if (!sewersDrained)
+                         {
+                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 + (8 * walk)), 32, 48);
+                         }
+                         else
+                         {
+                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 + (8 * walk)), 32, 48);
+                         }
+                         ctx.drawImage(doorBare, 22*32, 7*32);
+                     }
+                     else if (l2 && !sewersDrained)
                      {
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      }
@@ -2904,7 +2967,6 @@ function onKeyDown(e)
              drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
-
              if (l2 && !sewersDrained)
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
@@ -3060,6 +3122,22 @@ function onKeyDown(e)
             ctx.drawImage(fence, 455, 545);
         }
     }
+
+    if (l2 && p.row === 6 && p.col === 22)//PNG image with only ridge to draw over player
+    {
+        if (!sewersDrained)
+        {
+            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+        }
+        else
+        {
+            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+        }
+        ctx.drawImage(doorBare, 22*32, 7*32);
+    }
+
+    if (dialog)
+        setTimeout(checkIfMoved, walkingSpeed * 10);
 }
 
 function checkBoundaries(e)
@@ -3372,4 +3450,654 @@ function checkActions()
         }
     }
 
+}
+
+function displayTextBubble()
+{
+    if (l2 && dialog && p.col === 10 && p.row === 0) //If going UP & character is under pipe but the sewer is running
+    {
+        dialogX = 10;
+        dialogY = 0;
+        ctx.font="10px Arial";
+        ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+        ctx.fillStyle = "rgba(0, 0, 0)";
+        ctx.fillText("The water is too powerful..", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+        if (!alreadySetTimeout)
+        {
+            setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+            alreadySetTimeout = true;
+        }
+    }
+
+
+
+/*                                      //This is where you put your levels thought bubble conditions
+                                        //There are 4 thought bubble (1 for each side of the player...
+                                        //     top left, bottom left, top right, bottom right
+    if (l3 && dialog &&....)
+    if (l4 && dialog &&....)
+    if (l5 && dialog &&....)
+    if (l6 && dialog &&....)
+    ...
+*/
+
+
+
+    function turnOffDialog()    //If dialog msg times out -- disappear it and redraw stuff
+    {
+        let destX = 0, destY = 0;       //define spacing for drawing empty map
+        let xPos = 0, yPos = 0;
+
+        ctx.clearRect((dialogX + 1) * 32, (dialogY + 1) * 32, 160, 96);     //clear portion of map taken up by bubble
+        for (let row = (dialogY + 1); row < ((dialogY + 1) + 3); row++)     //Draw the map that was cleared
+        {
+            for (let col = (dialogX + 1); col < ((dialogX + 1) + 5); col++)
+            {
+                switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
+                {
+                    case 0:                   //letters (a through n) are reassigned to an image upon loading each level
+                        // in order to correspond with this drawing scheme
+                        thingToDraw = a;            // set the thing that will be drawn as an image based on level
+                        break;
+                    case 1:
+                        thingToDraw = b;
+                        break;
+                    case 2:
+                        thingToDraw = c;
+                        break;
+                    case 3:
+                        floorSpriteX = 32;
+                        thingToDraw = d;
+                        break;
+                    case 4:
+                        floorSpriteX = 64;
+                        thingToDraw = e;
+                        break;
+                    case 5:
+                        floorSpriteX = 96;
+                        thingToDraw = f;
+                        break;
+                    case 6:
+                        thingToDraw = g;
+                        break;
+                    case 7:
+                        if (l2 && !sewersDrained)               //If on level 2 and the sewer is not drained (filled)
+                            thingToDraw = wetPipe;                  //draw pipe spewing liquid
+                        else                                    //Otherwise
+                            thingToDraw = h;                        //draw pipe not spewing liquid
+                        break;
+                    case 8:
+                        thingToDraw = i;
+                        break;
+                    case 9:
+                        thingToDraw = j;
+                        break;
+                    case 10:
+                        thingToDraw = k;
+                        break;
+                    case 11:
+                        thingToDraw = l;
+                        break;
+                    case 12:
+                        thingToDraw = m;
+                        break;
+                    case 13:
+                        thingToDraw = n;
+                        break;
+                    case 14:
+                        thingToDraw = o;
+                        break;
+                    case 15:
+                        thingToDraw = q;
+                        break;
+                    case 16:
+                        thingToDraw = r;
+                        break;
+                    case 17:
+                        thingToDraw = s;
+                        break;
+                    case 18:
+                        thingToDraw = t;
+                        break;
+                    case 19:
+                        thingToDraw = u;
+                        break;
+                    case 20:
+                        thingToDraw = v;
+                        break;
+                    case 21:
+                        thingToDraw = w;
+                        break;
+                    case 22:
+                        thingToDraw = x;
+                        break;
+                    case 23:
+                        thingToDraw = y;
+                        break;
+                    case 24:
+                        thingToDraw = z;
+                        break;
+                    case 25:
+                        thingToDraw = aa;
+                        break;
+                    case 26:
+                        thingToDraw = bb;
+                        break;
+                    case 27:
+                        thingToDraw = cc;
+                        break;
+                    case 28:
+                        thingToDraw = dd;
+                        break;
+                    case 29:
+                        thingToDraw = ee;
+                        break;
+                    case 30:
+                        thingToDraw = ff;
+                        break;
+                    case 31:
+                        thingToDraw = gg;
+                        break;
+                    case 32:
+                        thingToDraw = hh;
+                        break;
+                    case 33:
+                        thingToDraw = ii;
+                        break;
+                    case 34:
+                        thingToDraw = jj;
+                        break;
+                    case 35:
+                        thingToDraw = kk;
+                        break;
+                    case 36:
+                        thingToDraw = ll;
+                        break;
+                    case 37:
+                        thingToDraw = mm;
+                        break;
+                    case 38:
+                        thingToDraw = nn;
+                        break;
+                    case 39:
+                        thingToDraw = oo;
+                        break;
+                    case 40:
+                        thingToDraw = qq;
+                        break;
+                    case 41:
+                        thingToDraw = rr;
+                        break;
+                    case 42:
+                        thingToDraw = ss;
+                        break;
+                    case 43:
+                        thingToDraw = tt;
+                        break;
+                    case 44:
+                        thingToDraw = uu;
+                        break;
+                    case 45:
+                        thingToDraw = vv;
+                        break;
+                    case 46:
+                        thingToDraw = ww;
+                        break;
+                    case 47:
+                        thingToDraw = xx;
+                        break;
+                    case 48:
+                        thingToDraw = yy;
+                        break;
+                    case 49:
+                        thingToDraw = zz;
+                        break;
+                    case 50:
+                        thingToDraw = aaa;
+                        break;
+                    case 51:
+                        thingToDraw = bbb;
+                        break;
+                    case 52:
+                        thingToDraw = ccc;
+                        break;
+                    case 53:
+                        thingToDraw = ddd;
+                        break;
+                    case 54:
+                        thingToDraw = eee;
+                        break;
+                    case 55:
+                        thingToDraw = fff;
+                        break;
+                    case 56:
+                        thingToDraw = ggg;
+                        break;
+                    case 57:
+                        thingToDraw = hhh;
+                        break;
+                    case 58:
+                        thingToDraw = iii;
+                        break;
+                    case 59:
+                        thingToDraw = jjj;
+                        break;
+                    case 60:
+                        thingToDraw = kkk;
+                        break;
+                    case 61:
+                        thingToDraw = lll;
+                        break;
+                    case 62:
+                        thingToDraw = mmm;
+                        break;
+                    case 63:
+                        thingToDraw = nnn;
+                        break;
+                    case 64:
+                        thingToDraw = ooo;
+                        break;
+                    case 65:
+                        thingToDraw = qqq;
+                        break;
+                    case 66:
+                        thingToDraw = rrr;
+                        break;
+                    case 67:
+                        thingToDraw = sss;
+                        break;
+                    case 68:
+                        thingToDraw = ttt;
+                        break;
+                    case 69:
+                        thingToDraw = uuu;
+                        break;
+                    case 70:
+                        thingToDraw = vvv;
+                        break;
+                    case 71:
+                        thingToDraw = www;
+                        break;
+                    case 72:
+                        thingToDraw = xxx;
+                        break;
+                    case 73:
+                        thingToDraw = yyy;
+                        break;
+                    case 74:
+                        thingToDraw = zzz;
+                        break;
+                }
+                if (thingToDraw !== undefined) //If this space has something to draw in it
+                {
+                    if (thingToDraw === sewerFloor  && (l2 || l11)) // and that thing is flooring
+                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);// then draw it
+                    // based on sprite
+                    // sheet positions
+                    // defined earlier
+                    else                              //If its anything else
+                        ctx.drawImage(thingToDraw, (col * 32), (row * 32)); //Draw whatever it is
+                }
+                xPos = col*32;
+                yPos = row*32;
+                if (xPos !== undefined && yPos !== undefined)
+                {
+                    if (!sewersDrained && l2)//Draw the section of sewage that was erased if within the area it exists
+                    {
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
+                                                                            // on row 0 (to make water look knee level)
+
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+                            ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
+                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                            ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
+
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
+                                                                            // of the secondary rooms outer wall
+                                                                            // (to make water look knee level)
+                        else if (yPos > 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+
+                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && xPos === 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);
+                        else if (yPos > 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                    }
+
+                }
+
+                destX += 32;
+            }
+            destY += 32;
+        }
+
+        dialogX = undefined;
+        dialogY = undefined;
+        dialog = false;
+        alreadySetTimeout = false;
+    }
+}
+
+function checkIfMoved()//If player has moved - erase section of map dialog was covering and redraw whatever was there
+{
+    if ((p.row !== dialogY || p.col !== dialogX) && dialog) //If player walks away from the item that gave dialog msg
+    {
+        let destX = 0, destY = 0;       //define spacing for drawing empty map
+        let xPos = 0, yPos = 0;
+
+        ctx.clearRect((dialogX + 1) * 32, (dialogY + 1) * 32, 160, 96);     //clear portion of map taken up by bubble
+        for (let row = (dialogY + 1); row < ((dialogY + 1) + 3); row++)     //Draw the map that was cleared
+        {
+            for (let col = (dialogX + 1); col < ((dialogX + 1) + 5); col++)
+            {
+                switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
+                {
+                    case 0:                   //letters (a through n) are reassigned to an image upon loading each level
+                        // in order to correspond with this drawing scheme
+                        thingToDraw = a;            // set the thing that will be drawn as an image based on level
+                        break;
+                    case 1:
+                        thingToDraw = b;
+                        break;
+                    case 2:
+                        thingToDraw = c;
+                        break;
+                    case 3:
+                        floorSpriteX = 32;
+                        thingToDraw = d;
+                        break;
+                    case 4:
+                        floorSpriteX = 64;
+                        thingToDraw = e;
+                        break;
+                    case 5:
+                        floorSpriteX = 96;
+                        thingToDraw = f;
+                        break;
+                    case 6:
+                        thingToDraw = g;
+                        break;
+                    case 7:
+                        if (l2 && !sewersDrained)               //If on level 2 and the sewer is not drained (filled)
+                            thingToDraw = wetPipe;                  //draw pipe spewing liquid
+                        else                                    //Otherwise
+                            thingToDraw = h;                        //draw pipe not spewing liquid
+                        break;
+                    case 8:
+                        thingToDraw = i;
+                        break;
+                    case 9:
+                        thingToDraw = j;
+                        break;
+                    case 10:
+                        thingToDraw = k;
+                        break;
+                    case 11:
+                        thingToDraw = l;
+                        break;
+                    case 12:
+                        thingToDraw = m;
+                        break;
+                    case 13:
+                        thingToDraw = n;
+                        break;
+                    case 14:
+                        thingToDraw = o;
+                        break;
+                    case 15:
+                        thingToDraw = q;
+                        break;
+                    case 16:
+                        thingToDraw = r;
+                        break;
+                    case 17:
+                        thingToDraw = s;
+                        break;
+                    case 18:
+                        thingToDraw = t;
+                        break;
+                    case 19:
+                        thingToDraw = u;
+                        break;
+                    case 20:
+                        thingToDraw = v;
+                        break;
+                    case 21:
+                        thingToDraw = w;
+                        break;
+                    case 22:
+                        thingToDraw = x;
+                        break;
+                    case 23:
+                        thingToDraw = y;
+                        break;
+                    case 24:
+                        thingToDraw = z;
+                        break;
+                    case 25:
+                        thingToDraw = aa;
+                        break;
+                    case 26:
+                        thingToDraw = bb;
+                        break;
+                    case 27:
+                        thingToDraw = cc;
+                        break;
+                    case 28:
+                        thingToDraw = dd;
+                        break;
+                    case 29:
+                        thingToDraw = ee;
+                        break;
+                    case 30:
+                        thingToDraw = ff;
+                        break;
+                    case 31:
+                        thingToDraw = gg;
+                        break;
+                    case 32:
+                        thingToDraw = hh;
+                        break;
+                    case 33:
+                        thingToDraw = ii;
+                        break;
+                    case 34:
+                        thingToDraw = jj;
+                        break;
+                    case 35:
+                        thingToDraw = kk;
+                        break;
+                    case 36:
+                        thingToDraw = ll;
+                        break;
+                    case 37:
+                        thingToDraw = mm;
+                        break;
+                    case 38:
+                        thingToDraw = nn;
+                        break;
+                    case 39:
+                        thingToDraw = oo;
+                        break;
+                    case 40:
+                        thingToDraw = qq;
+                        break;
+                    case 41:
+                        thingToDraw = rr;
+                        break;
+                    case 42:
+                        thingToDraw = ss;
+                        break;
+                    case 43:
+                        thingToDraw = tt;
+                        break;
+                    case 44:
+                        thingToDraw = uu;
+                        break;
+                    case 45:
+                        thingToDraw = vv;
+                        break;
+                    case 46:
+                        thingToDraw = ww;
+                        break;
+                    case 47:
+                        thingToDraw = xx;
+                        break;
+                    case 48:
+                        thingToDraw = yy;
+                        break;
+                    case 49:
+                        thingToDraw = zz;
+                        break;
+                    case 50:
+                        thingToDraw = aaa;
+                        break;
+                    case 51:
+                        thingToDraw = bbb;
+                        break;
+                    case 52:
+                        thingToDraw = ccc;
+                        break;
+                    case 53:
+                        thingToDraw = ddd;
+                        break;
+                    case 54:
+                        thingToDraw = eee;
+                        break;
+                    case 55:
+                        thingToDraw = fff;
+                        break;
+                    case 56:
+                        thingToDraw = ggg;
+                        break;
+                    case 57:
+                        thingToDraw = hhh;
+                        break;
+                    case 58:
+                        thingToDraw = iii;
+                        break;
+                    case 59:
+                        thingToDraw = jjj;
+                        break;
+                    case 60:
+                        thingToDraw = kkk;
+                        break;
+                    case 61:
+                        thingToDraw = lll;
+                        break;
+                    case 62:
+                        thingToDraw = mmm;
+                        break;
+                    case 63:
+                        thingToDraw = nnn;
+                        break;
+                    case 64:
+                        thingToDraw = ooo;
+                        break;
+                    case 65:
+                        thingToDraw = qqq;
+                        break;
+                    case 66:
+                        thingToDraw = rrr;
+                        break;
+                    case 67:
+                        thingToDraw = sss;
+                        break;
+                    case 68:
+                        thingToDraw = ttt;
+                        break;
+                    case 69:
+                        thingToDraw = uuu;
+                        break;
+                    case 70:
+                        thingToDraw = vvv;
+                        break;
+                    case 71:
+                        thingToDraw = www;
+                        break;
+                    case 72:
+                        thingToDraw = xxx;
+                        break;
+                    case 73:
+                        thingToDraw = yyy;
+                        break;
+                    case 74:
+                        thingToDraw = zzz;
+                        break;
+                }
+                if (thingToDraw !== undefined) //If this space has something to draw in it
+                {
+                    if (thingToDraw === sewerFloor  && (l2 || l11)) // and that thing is flooring
+                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (col * 32), (row * 32), 32, 32);// then draw it
+                    // based on sprite
+                    // sheet positions
+                    // defined earlier
+                    else                              //If its anything else
+                        ctx.drawImage(thingToDraw, (col * 32), (row * 32)); //Draw whatever it is
+                }
+                xPos = col*32;
+                yPos = row*32;
+                if (xPos !== undefined && yPos !== undefined)
+                {
+                    if (!sewersDrained && l2)//Draw the section of sewage that was erased if within the area it exists
+                    {
+                        ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
+                                                                            // on row 0 (to make water look knee level)
+
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+                            ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
+                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                            ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
+
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
+                                                                            // of the secondary rooms outer wall
+                                                                            // (to make water look knee level)
+                        else if (yPos > 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+
+                        ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+                        if ((yPos === 0 && xPos !== 320) && xPos < 576)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);
+                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && xPos === 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);
+                        else if (yPos > 224 && xPos >= 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                    }
+
+                }
+
+                destX += 32;
+            }
+            destY += 32;
+        }
+
+
+
+
+
+
+
+        //Turn off the dialog stuffs
+        dialogX = undefined;
+        dialogY = undefined;
+        dialog = false;
+        alreadySetTimeout = false;
+    }
 }
