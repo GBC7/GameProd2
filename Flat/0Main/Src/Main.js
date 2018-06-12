@@ -13,7 +13,7 @@ let dialogX = undefined, dialogY = undefined; //For storing position dialog star
 
 let lightSwitch = 1, sewerSwitch = 1;                                 //For sewer level
 let lightsOn = true, sewersDrained = true;                          //For sewer level
-let floorSpriteX = undefined, floorSet = false;                       //For sewer level
+let floorSpriteX = undefined;                                     //For sewer level
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
@@ -148,6 +148,9 @@ let floorClean = new Image();
 floorClean.src = "../../2Sewer/images/floorClean.png";
 let doorBare = new Image();
 doorBare.src = "../../2Sewer/images/doorBare.png";
+
+
+
 
 
 
@@ -306,6 +309,26 @@ function startGame()
         door2.src = "../../2Sewer/images/door2.png";
         let stairs = new Image();
         stairs.src = "../../2Sewer/images/stairs.png";
+        let flameWall1 = new Image();
+        flameWall1.src = "../../2Sewer/images/flameWall1.png";
+        let flameWall2 = new Image();
+        flameWall2.src = "../../2Sewer/images/flameWall2.png";
+        let flameWall3 = new Image();
+        flameWall3.src = "../../2Sewer/images/flameWall3.png";
+        let torch = new Image();
+        torch.src = "../../2Sewer/images/torch.png";
+        let wallSwamp2 = new Image();
+        wallSwamp2.src = "../../2Sewer/images/wallSwamp2.png";
+        let topCorner2 = new Image();
+        topCorner2.src = "../../2Sewer/images/topCorner2.png";
+        let topSide2 = new Image();
+        topSide2.src = "../../2Sewer/images/topSide2.png";
+        let flameCorner1 = new Image();
+        flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
+        let flameCorner2 = new Image();
+        flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
+        let flameCorner3 = new Image();
+        flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
 
 
 
@@ -325,60 +348,47 @@ function startGame()
         n = topCorner;          //13
         o = wallBesideDoor;     //14
         q = floorAboveDoor;     //15
+        r = flameWall1;         //16
+        s = flameWall2;         //17
+        t = flameWall3;         //18
+        u = torch;              //19
+        v = wallSwamp2;         //20
+        w = topCorner2;         //21
+        x = topSide2;           //22
+        y = flameCorner1;       //23
+        z = flameCorner2;       //24
+        aa = flameCorner3;      //25
 
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
             lMap[level] =                                           //Initialize this levels map
                 //                                 10                            20
-                [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
+                [  // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
-                    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 6, 13, 0, 0, 0, 0, 0, 8],        //0
-                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //1
-                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //2
-                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //3
-                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //4
-                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //5
-                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //6
-                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 6],        //7
-                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //8
-                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //9
-                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //10
-                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //11
-                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //12
-                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //13
-                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3],        //14
-                    [4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4],        //15
-                    [5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5],        //16
-                    [2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2],        //17
-                    [3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3, 4, 5, 2, 3]         //18
+                    [ 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  0,  0,  0,  0,  0,  0,  6, 13,  0,  0,  0,  0,  0,  8],       //0
+                    [ 4,  3,  4,  4,  4,  3,  4,  3,  4,  4,  3,  4,  4,  3,  4,  3,  3,  3, 12,  5,  5,  5,  5,  5,  5],       //1
+                    [ 4,  4,  3,  4,  3,  4,  3,  3,  3,  4,  3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //2
+                    [ 3,  3,  4,  3,  3,  4,  3,  4,  3,  4,  4,  4,  4,  4,  4,  3,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //3
+                    [ 4,  3,  4,  4,  4,  3,  4,  3,  3,  4,  4,  4,  4,  3,  4,  3,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //4
+                    [ 3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4,  3,  3,  4,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //5
+                    [ 4,  4,  4,  4,  4,  3,  4,  4,  4,  3,  3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //6
+                    [ 4,  3,  4,  4,  4,  4,  3,  4,  3,  4,  3,  3,  4,  4,  4,  3,  4,  4, 23, 10, 10,  9, 10, 10, 16],       //7
+                    [ 4,  3,  3,  4,  4,  4,  3,  3,  4,  3,  4,  4,  3,  3,  3,  3,  3,  3, 19,  3,  4,  3,  3,  4, 19],       //8
+                    [ 4,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4],       //9
+                    [ 4,  3,  4,  3,  3,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4,  3,  3,  4,  4,  4,  3,  3,  3,  4,  3],       //10
+                    [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  4,  4,  4,  4,  3,  3,  4,  3,  4,  3,  4,  3,  3],       //11
+                    [ 3,  3,  4,  4,  3,  4,  4,  4,  3,  4,  3,  3,  3,  4,  4,  4,  3,  3,  3,  4,  4,  3,  3,  4,  4],       //12
+                    [ 4,  3,  4,  3, 20, 20, 20, 20, 20, 20, 20, 21,  4,  3,  3,  3,  3,  3,  3,  3,  4,  3,  3,  3,  4],       //13
+                    [ 4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  4, 22,  3,  4,  3,  4,  4,  3,  4,  4,  4,  4,  3,  4,  3],       //14
+                    [ 4,  4,  4,  3,  3,  3,  4,  3,  4,  3,  4, 22,  3,  4,  4,  4,  3,  4,  3,  3,  3,  3,  3,  3,  3],       //15
+                    [ 3,  3,  3,  4,  4,  3,  4,  3,  3,  4,  3, 22,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  3,  4,  4],       //16
+                    [ 3,  4,  4,  3,  3,  4,  3,  4,  4,  4,  3, 22,  3,  4,  3,  4,  3,  4,  3,  4,  4,  4,  4,  3,  4],       //17
+                    [ 5,  3,  4,  3,  4,  3,  4,  3,  4,  4,  4, 22,  4,  3,  4,  3,  3,  3,  3,  4,  3,  4,  3,  3,  3]        //18
                 ];
         }
 
-        if (!floorSet)
-        {
-            for (let y = 1; y < lMap[level].length; y++)                        //Randomize floor pattern
-            {
-                for (let x = 0; x < lMap[level][0].length; x++)
-                {
-                    lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
-                }
-            }
-        }
 
-
-        for (let wall = 1; wall < 7; wall++)                        //Setup locked room
-        {
-            lMap[level][wall][18] = 12;
-            lMap[level][7][wall + 17] = 10;
-            for (let tiles = 19; tiles < 25; tiles++)
-            {
-                lMap[level][wall][tiles] = 5;
-            }
-        }
-        lMap[level][7][22] = 9;
-        lMap[level][7][24] = 10;
-        lMap[level][7][18] = 11;
 
         if (lPMap[level] === undefined)
         {
@@ -394,6 +404,7 @@ function startGame()
             }
         }
 
+
         if (doorThreeOpen)
         {
             j = door3;
@@ -401,11 +412,42 @@ function startGame()
             lMap[level][6][23] = 15;
         }
 
+
+        let counter = 0;      //Temp code for burning torches
+        letItBurn();
+
+        function letItBurn()
+        {
+            counter ++;
+
+            if (counter % 3 === 0)
+            {
+                ctx.drawImage(flameCorner1, 18*32, 7*32);
+                ctx.drawImage(flameWall1, 24*32, 7*32);
+            }
+            else if (counter % 3 === 1)
+            {
+                ctx.drawImage(flameCorner2, 18*32, 7*32);
+                ctx.drawImage(flameWall2, 24*32, 7*32);
+            }
+            else if (counter % 3 === 2)
+            {
+                ctx.drawImage(flameCorner3, 18*32, 7*32);
+                ctx.drawImage(flameWall3, 24*32, 7*32);
+            }
+
+            if (l2)
+            {
+                setTimeout(letItBurn, 90);
+            }
+        }
+
+
         changePStartPos();
 
 
         //Below ensures all elements are on screen when level is drawn
-        stairs.onload = function(){l2Ready=true;};
+        torch.onload = function(){l2Ready=true;};
 
 
         addEventListener("keydown", onKeyDown, false);
@@ -1335,38 +1377,33 @@ function startGame()
                 //                                 10                            20
                 [  //0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4
 
-                    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 5, 6, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],        //0
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],        //1
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 12, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],        //2
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //3
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //4
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //5
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //6
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //7
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //8
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //9
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //10
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //11
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //12
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //13
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //14
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //15
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //16
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],        //17
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]         //18
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  5,  6,  7,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],        //0
+                    [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  8,  9, 10,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],        //1
+                    [ 1,  1,  1,  1,  1,  1, 1, 1, 1, 1, 1, 11, 12, 13, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],        //2
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],        //3
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 14,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0]         //18
                 ];
         }
 
-        if (!floorSet)
+    for (let y = 3; y < lMap[level].length; y++)                        //Randomize floor pattern
+    {
+        for (let x = 0; x < lMap[level][0].length; x++)
         {
-            for (let y = 3; y < lMap[level].length; y++)                        //Randomize floor pattern
-            {
-                for (let x = 0; x < lMap[level][0].length; x++)
-                {
-                    lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
-                }
-            }
+            lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
         }
+    }
 
 
         lMap[level][18][12] = 14;
@@ -1725,6 +1762,8 @@ function fillErasedMap()
         ctx.fillRect(0, 0, xPos - 80, 600);
         ctx.fillRect(0, 0, 800, yPos - 32);
     }
+
+
 
     if (dialog)
         displayTextBubble();
@@ -3395,14 +3434,34 @@ function checkActions()
 {
     if (l2)
     {
-        if (p.row === 7 && p.col === 22 && p.frameY === 3)
+        if (p.row === 7 && p.col === 21 && p.frameY === 3)
         {
             doorThreeOpen = true;
             j = door3;
-            lMap[level][7][23] = 14;
-            lMap[level][6][23] = 15;
+            lMap[level][7][22] = 14;
+            lMap[level][6][22] = 15;
             drawMap(0);
-            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+
+        }
+        if (p.frameY === 3)//Looking up                                                                     Needs to be finished
+        {
+            checkForTorches();
+        }
+        if (p.frameY === 2)//Looking Right
+        {
+
+        }
+        if (p.frameY === 1)//Looking Left
+        {
+
+        }
+        if (p.frameY === 0)//Looking Down
+        {
+
+        }
+        function checkForTorches()
+        {
 
         }
     }
@@ -4101,3 +4160,5 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
         alreadySetTimeout = false;
     }
 }
+
+
