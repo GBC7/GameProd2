@@ -1,7 +1,0 @@
-Credits
-Please list the file name, webpage the file is from, and media type.
-
-EX:
-background.jpg	www.backgroundsrus.com/123.html		image
-
-We need this information to be able to not get hit with any copyright issues.
