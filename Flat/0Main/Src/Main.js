@@ -22,6 +22,15 @@ let findPasscode = false;                                               //For cl
 let findMap = false;                                                     //For clothing store
 let findRollerblades = false;                                           //For clothing store
 let findDisguise = false;                                                //For clothing store
+let enemyAppearLevel3 = false;
+let detectPlayerLevel3 = false;
+
+let enemiesLevel3 = [];
+let enemyLevel3 = function() {
+    this.x = 0;
+    this.y = 0;
+    // add enemy property
+};
 
 let bgm_level3 = new Audio;
 bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
@@ -36,6 +45,8 @@ dangerous.volume = 0.2;
 
 let doorSound = new Audio();
 doorSound.src = ('../../3Store/audio/open.mp3');
+let warningSound = new Audio();
+warningSound.src = ('../../3Store/audio/warningsound.mp3');
 
 
 //level 0 is undefined as we do not have a level 0
@@ -510,9 +521,19 @@ function startGame()
 
         let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
         let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
-        let enemyAppear = false;
+
 
         timer_level3 = setInterval(appearEnemy, 1000);
+
+        function resetTimer() {
+            t=windowClose;
+            drawMap();
+            warningTime = Math.floor(Math.random() * 20 + 10);
+            findingTime = Math.floor(Math.random() * 10 + 5);
+            enemyAppearLevel3 = false;
+            dangerous.pause();
+            bgm_level3.play();
+        }
 
         function appearEnemy() {
             console.log(warningTime);
@@ -531,10 +552,10 @@ function startGame()
             if (warningTime === 0) {
                 t=windowOpen;
                 drawMap();
-                enemyAppear = true;
+                enemyAppearLevel3 = true;
 
             }
-            if (enemyAppear === true){
+            if (enemyAppearLevel3 === true){
                 findingTime--;
                 drawMap();
                 ctx.font = "30px Arial";
@@ -543,16 +564,16 @@ function startGame()
                 ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
 
                 if (findingTime === 0) {
-                    t=windowClose;
-                    drawMap();
-                    warningTime = Math.floor(Math.random() * 20 + 10);
-                    findingTime = Math.floor(Math.random() * 10 + 5);
-                    enemyAppear = false;
-                    dangerous.pause();
-                    bgm_level3.play();
+                    resetTimer();
                 }
             }
+            if (detectPlayerLevel3 === true)
+            {
+                resetTimer();
+                detectPlayerLevel3 = false;
+            }
         }
+
     }
 
     if (l4)//The Streetz
@@ -1271,13 +1292,6 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
     }
 }
-
-
-
-
-
-
-
 
 
 
@@ -2148,6 +2162,8 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             {
                 allTheStays++;                  //Increment stairs descended each time a stair is descended
 
+
+                clearLevel3();
                 ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
                 fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 ctx.drawImage(scientist, (p.srcX + allTheStays)% 4 * 32, 48, 32, 48, p.col* (20 - 6*allTheStays) , p.row*32 + (allTheStays * 12), 32- (allTheStays * 5), 48 - (allTheStays * 10));
@@ -2178,10 +2194,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             function goToStreet()//When the stairs image loads
             {
                 removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
-                clearInterval(timer_level3);
-                /*bgm_level3.pause();
-                dangerous.pause();*/
-                // cannot be changed while animating stair climbing
+                clearLevel3();
                 let staysClimbed = 0;                               //Define variable to use to count stairs climbed
 
                 walkToStreet();                                      //Start climbing stairs
@@ -2378,6 +2391,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
 }
 
+
 function onKeyDown(e)
 
 {
@@ -2461,6 +2475,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 39)//Right
@@ -2524,6 +2539,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 38)//Up
@@ -2587,6 +2603,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 40)//Down
@@ -2651,6 +2668,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 32) //Space
@@ -3050,5 +3068,29 @@ function drawL6Full()
         ctx.drawImage(statue, 710, 560);
         ctx.drawImage(statue, 790, 560);
 
+    }
+}
+
+
+
+
+//function for level3
+function clearLevel3()
+{
+    bgm_level3.pause();
+    dangerous.pause();
+    clearInterval(timer_level3);
+}
+
+function detectMovementLevel3() {
+    if (l3 && enemyAppearLevel3 === true)
+    {
+
+        warningSound.play();
+        enemiesLevel3.push(enemyLevel3);
+        setTimeout(alert("you detected by mobbists - temp msg(" + enemiesLevel3.length + "enemies in this area.)"), 1000);
+        enemyAppearLevel3 = false;
+        detectPlayerLevel3 = true;
+        // add mob, start timer again.
     }
 }
