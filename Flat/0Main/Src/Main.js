@@ -27,10 +27,21 @@ let findPasscode = false;                                               //For cl
 let findMap = false;                                                     //For clothing store
 let findRollerblades = false;                                           //For clothing store
 let findDisguise = false;                                                //For clothing store
+let enemyAppearLevel3 = false;
+let detectPlayerLevel3 = false;
+
+let enemiesLevel3 = [];
+let enemyLevel3 = function() {
+    this.x = 0;
+    this.y = 0;
+    // add enemy property
+};
 
 
 let doorSound = new Audio();
 doorSound.src = ('../../3Store/audio/open.mp3');
+let warningSound = new Audio();
+warningSound.src = ('../../3Store/audio/warningsound.mp3');
 let bgm_level3 = new Audio;
 bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
 let dangerous = new Audio;
@@ -408,12 +419,12 @@ function startGame()
         if (doorThreeOpen)
         {
             j = door3;
-            lMap[level][7][23] = 14;
-            lMap[level][6][23] = 15;
+            /*lMap[level][7][23] = 14;
+            lMap[level][6][23] = 15;*/
         }
 
 
-        let counter = 0;      //Temp code for burning torches
+        /*let counter = 0;      //Temp code for burning torches
         letItBurn();
 
         function letItBurn()
@@ -441,13 +452,13 @@ function startGame()
                 setTimeout(letItBurn, 90);
             }
         }
-
+*/
 
         changePStartPos();
 
 
         //Below ensures all elements are on screen when level is drawn
-        torch.onload = function(){l2Ready=true;};
+        flameCorner3.onload = function(){l2Ready=true;};
 
 
         addEventListener("keydown", onKeyDown, false);
@@ -611,9 +622,20 @@ function startGame()
 
         let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
         let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
-        let enemyAppear = false;
 
         timer_level3 = setInterval(appearEnemy, 1000);
+
+        function resetTimer()
+        {
+            t=windowClose;
+            drawMap();
+            warningTime = Math.floor(Math.random() * 20 + 10);
+            findingTime = Math.floor(Math.random() * 10 + 5);
+            enemyAppearLevel3 = false;
+            dangerous.pause();
+            bgm_level3.play();
+        }
+
 
         function appearEnemy() {
             console.log(warningTime);
@@ -632,10 +654,10 @@ function startGame()
             if (warningTime === 0) {
                 t=windowOpen;
                 drawMap();
-                enemyAppear = true;
+                enemyAppearLevel3 = true;
 
             }
-            if (enemyAppear === true){
+            if (enemyAppearLevel3 === true){
                 findingTime--;
                 drawMap();
                 ctx.font = "30px Arial";
@@ -644,14 +666,13 @@ function startGame()
                 ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
 
                 if (findingTime === 0) {
-                    t=windowClose;
-                    drawMap();
-                    warningTime = Math.floor(Math.random() * 20 + 10);
-                    findingTime = Math.floor(Math.random() * 10 + 5);
-                    enemyAppear = false;
-                    dangerous.pause();
-                    bgm_level3.play();
+                    resetTimer();
                 }
+            }
+            if (detectPlayerLevel3 === true)
+            {
+                resetTimer();
+                detectPlayerLevel3 = false;
             }
         }
     }
@@ -2368,7 +2389,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             function goDownStays()              //Animates player going down stairs and appearing in previous levels map
             {
                 allTheStays++;                  //Increment stairs descended each time a stair is descended
-
+                clearLevel3();
                 ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
                 fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                 ctx.drawImage(scientist, (p.srcX + allTheStays)% 4 * 32, 48, 32, 48, p.col* (20 - 6*allTheStays) , p.row*32 + (allTheStays * 12), 32- (allTheStays * 5), 48 - (allTheStays * 10));
@@ -2402,6 +2423,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             function goToStreet()//When the stairs image loads
             {
                 removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                clearLevel3();
                 clearInterval(timer_level3);
                 /*bgm_level3.pause();
                 dangerous.pause();*/
@@ -2777,6 +2799,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 39)//Right
@@ -2840,6 +2863,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 38)//Up
@@ -2919,6 +2943,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 40)//Down
@@ -2999,6 +3024,7 @@ function onKeyDown(e)
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
          }
+         detectMovementLevel3();
      }
 
      if (e.keyCode === 32) //Space
@@ -4157,4 +4183,24 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
     }
 }
 
+//function for level3
+function clearLevel3()
+{
+    bgm_level3.pause();
+    dangerous.pause();
+    clearInterval(timer_level3);
+}
 
+function detectMovementLevel3()
+{
+    if (l3 && enemyAppearLevel3 === true)
+    {
+
+        warningSound.play();
+        enemiesLevel3.push(enemyLevel3);
+        setTimeout(alert("you detected by mobbists - temp msg(" + enemiesLevel3.length + "enemies in this area.)"), 1000);
+        enemyAppearLevel3 = false;
+        detectPlayerLevel3 = true;
+        // add mob, start timer again.
+    }
+}
