@@ -1,7 +1,7 @@
 let gameOver = false;
 
 
-let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
+let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l8 = false, l11 = false;
 let level = 1;
 
 
@@ -49,8 +49,8 @@ waterRunning.volume = 0.3;
 
 //level 0 is undefined as we do not have a level 0
    // Level       0      1   2   3   4    5   6   7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
-    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 16];
+let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, 	0, undefined, undefined, 12],
+    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, 	1, undefined, undefined, 16];
 
 
 //For setting direction the character is facing when entering a new level
@@ -60,14 +60,14 @@ let startFrameY = [undefined, undefined, undefined, undefined, undefined, undefi
 
 //x and y map boundaries per level
 // Level          0       1    2    3    4    5    6    7       8           9           10       11
-let xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  undefined,  undefined,  undefined,  24],
-    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0],
-    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17],
-    yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,  undefined,  undefined,  undefined,  2];
+let xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  	24,  undefined,  undefined,  24],
+    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  	0,  undefined,  undefined,  0],
+    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  	17,  undefined,  undefined,  17],
+    yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,  	1,  undefined,  undefined,  2];
 
 
 // Level floor numbers -   0 , 1,     2,     3, 4, 5, 6, 7      8          9         10       11
-let floorNumbers = [undefined, 0, undefined, 0, 1, 2, 0, 1, undefined, undefined, undefined, undefined];
+let floorNumbers = [undefined, 0, undefined, 0, 1, 2, 0, 1, 	1, undefined, undefined, undefined];
 
 
 //level maps initialized when levels are loaded
@@ -84,7 +84,7 @@ let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, u
 
 
 //For finding out if level is ready to be drawn
-let l2Ready = false, l3Ready = false, l4Ready = false, l5Ready = false, l6Ready = false, l7Ready=false, l11Ready = false;
+let l2Ready = false, l3Ready = false, l4Ready = false, l5Ready = false, l6Ready = false, l7Ready = false, l8Ready = false, l11Ready = false;
 
 
 let canvas = document.querySelector("canvas");
@@ -1308,6 +1308,119 @@ function startGame()
         fullShelvesBottom.onload = function(){drawMap();};
         addEventListener("keydown", onKeyDown, false);
     }
+	
+	if (l8)
+    {
+        canvas.style.backgroundImage = "";
+
+
+        let floor = new Image();
+        floor.src = "../../7Lab/images/Floor.png";
+        let wall = new Image();
+        wall.src = "../../7Lab/images/Wall.png";
+        let door1 = new Image();
+        door1.src = "../../7Lab/images/door1.png";
+        let stairs = new Image();
+        stairs.src = "../../7Lab/images/stairs.png";
+        let emptyShelvesTop = new Image();
+        emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
+        let emptyShelvesBottom = new Image();
+        emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+        let lockerTop = new Image();
+        lockerTop.src = "../../7Lab/images/locker-top.png";
+        let lockerBottom = new Image();
+        lockerBottom.src = "../../7Lab/images/locker-bottom.png";
+        let computerTop = new Image();
+        computerTop.src = "../../7Lab/images/computer-top.png";
+        let computerBottom = new Image();
+        computerBottom.src = "../../7Lab/images/computer-bottom.png";
+        let metalCabinetTop = new Image();
+        metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
+        let metalCabinetBottom = new Image();
+        metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
+        let glassCabinetTop = new Image();
+        glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
+        let glassCabinetBottom = new Image();
+        glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
+        let fullShelvesTop = new Image();
+        fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
+        let fullShelvesBottom = new Image();
+        fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
+        let openWindow = new Image();
+        openWindow.src = "../../7Lab/images/openWindow.png"
+        let closedWindow = new Image();
+        closedWindow.src = "../../7Lab/images/closedWindow.png"
+
+        a = wall;				// 0
+        b = floor;				// 1
+        c = door1;				// 2
+        d = stairs;				// 3
+        e = emptyShelvesTop;	// 4
+        f = emptyShelvesBottom;	// 5
+        g = lockerTop;			// 6
+        h = lockerBottom;		// 7
+        i = computerTop;		// 8
+        j = computerBottom;		// 9
+        k = metalCabinetTop;	// 10
+        l = metalCabinetBottom;	// 11
+        m = glassCabinetTop;	// 12
+        n = glassCabinetBottom;	// 13
+        o = fullShelvesTop;		// 14
+        q = fullShelvesBottom;  // 15
+        r = openWindow;			// 16
+        s = undefined;			// 17
+
+
+        if (lMap[level] === undefined)
+            lMap[level]=
+                //                    10                  20
+                [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                    [0,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	3]
+                ];
+
+
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];
+
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 24; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+            lPMap[level][1][0] = 1;
+        }
+
+
+        changePStartPos();
+
+
+
+        fullShelvesBottom.onload = function(){drawMap();};
+        addEventListener("keydown", onKeyDown, false);
+    }
 
     if (l11)//SewerPipe Map
     {
@@ -2208,7 +2321,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else        //Otherwise, go through door and load level 1
                 {
                     level = 1;
-                    l2 = l3 = l4 = l5 = l6 = l7 = false;
+                    l2 = l3 = l4 = l5 = l6 = l7 = l8 = false;
                     l1 = true;
                     ctx.clearRect(0,0,800,600);
                     p.frameY = 0;
@@ -2252,7 +2365,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     else                            //Otherwise
                     {
                         level = 3;                              //Change level identifier appropriately
-                        l1 = l2 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l1 = l2 = l4 = l5 = l6 = l7 = l8 = false;         //Set all levels not being travelled to as false
                         l3 = true;                              //Set the one that is being travelled to to true
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -2288,7 +2401,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     else        //Otherwise, go through door and load level 1
                     {
                         level = 11;
-                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = false;
                         l11 = true;
                         p.frameY = 3;
                         ctx.clearRect(0,0,800,600);
@@ -2379,7 +2492,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 {
                     level = 2;                              //Change level identifier to appropriate level
                     changePStartPos();
-                    l1 = l3 = l4 = l5 = l6 = l7 =false;         //Set all levels false aside from new level
+                    l1 = l3 = l4 = l5 = l6 = l7 = l8 =false;         //Set all levels false aside from new level
                     l2 = true;                              //Set new level to true
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
@@ -2430,7 +2543,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     else                            //Otherwise
                     {
                         level = 4;                              //Change level identifier appropriately
-                        l1 = l2 = l3 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l1 = l2 = l3 = l5 = l6 = l7 = l8 = false;         //Set all levels not being travelled to as false
                         l4 = true;                              //Set the one that is being travelled to to true
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -2508,7 +2621,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else
                 {
                     level = 7;                  //Change level identifier appropriately
-                    l1 = l2 = l3 = l4 = l5 = l6 = l11 = false;             //Set all levels to false but the one being travelled to
+                    l1 = l2 = l3 = l4 = l5 = l6 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
                     l7 = true;                                  //Set level being travelled to as true
                     ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
                     startGame();                                //Load settings and assets for next map
@@ -2564,7 +2677,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     else                            //Otherwise
                     {
                         level = 11;                              //Change level identifier appropriately
-                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = false;         //Set all levels not being travelled to as false
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = false;         //Set all levels not being travelled to as false
                         l11 = true;                              //Set the one that is being travelled to to true
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
@@ -2610,7 +2723,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 else        //Otherwise, go through door and load level 1
                 {
                     level = 2;
-                    l1 = l3 = l4 = l5 = l6 = l7 = l11 = false;
+                    l1 = l3 = l4 = l5 = l6 = l7 = l8 = l11 = false;
                     l2 = true;
                     startX[level] = 10;
                     startY[level] = 0;
@@ -3032,7 +3145,7 @@ function onKeyDown(e)
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 1;              //Change level identifier appropriately
-         l2 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l2 = l3 = l4 = l5 = l6 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l1 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -3043,7 +3156,7 @@ function onKeyDown(e)
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 2;              //Change level identifier appropriately
-         l1 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l1 = l3 = l4 = l5 = l6 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l2 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -3054,7 +3167,7 @@ function onKeyDown(e)
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 3;              //Change level identifier appropriately
-         l1 = l2 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l4 = l5 = l6 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l3 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -3065,7 +3178,7 @@ function onKeyDown(e)
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 4;              //Change level identifier appropriately
-         l1 = l2 = l3 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l5 = l6 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l4 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -3076,7 +3189,7 @@ function onKeyDown(e)
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 5;              //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l6 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l5 = true;                                  //Set level being travelled to as true
 
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
@@ -3089,7 +3202,7 @@ function onKeyDown(e)
          walkedUpAlready = false;
          changePStartPos();
          level = 6;                  //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l5 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l1 = l2 = l3 = l4 = l5 = l7 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
          l6 = true;                                  //Set level being travelled to as true
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
          l6Ready=false;
@@ -3115,8 +3228,18 @@ function onKeyDown(e)
     {
         removeEventListener("keydown", onKeyDown, false);
         level = 7;                  //Change level identifier appropriately
-        l1 = l2 = l3 = l4 = l5 = l6 = l11 = false;             //Set all levels to false but the one being travelled to
+        l1 = l2 = l3 = l4 = l5 = l6 = l8 = l11 = false;             //Set all levels to false but the one being travelled to
         l7 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+	if (e.keyCode === 56) //8
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 8;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+        l8 = true;                                  //Set level being travelled to as true
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         startGame();                                //Load settings and assets for next map
         setTimeout(drawMap, 40);                    //Draw next map
@@ -3172,7 +3295,7 @@ function checkBoundaries(e)
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
-           if (l1 || l4 || l5 || l7)
+           if (l1 || l4 || l5 || l7 )
                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
            else if (l2)
             {
