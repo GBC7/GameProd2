@@ -2676,9 +2676,9 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     }
                     else                            //Otherwise
                     {
-                        level = 11;                              //Change level identifier appropriately
-                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = false;         //Set all levels not being travelled to as false
-                        l11 = true;                              //Set the one that is being travelled to to true
+                        level = 8;                              //Change level identifier appropriately
+                        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l11 = false;         //Set all levels not being travelled to as false
+                        l8 = true;                              //Set the one that is being travelled to to true
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
                         p.frameY = 2;                           //Change tile sheet frame to match direction being faced
