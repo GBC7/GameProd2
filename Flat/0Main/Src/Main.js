@@ -1347,9 +1347,9 @@ function startGame()
         let fullShelvesBottom = new Image();
         fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
         let openWindow = new Image();
-        openWindow.src = "../../7Lab/images/openWindow.png"
+        openWindow.src = "../../7Lab/images/openWindow.png";
         let closedWindow = new Image();
-        closedWindow.src = "../../7Lab/images/closedWindow.png"
+        closedWindow.src = "../../7Lab/images/closedWindow.png";
 
         a = wall;				// 0
         b = floor;				// 1
@@ -3295,7 +3295,7 @@ function checkBoundaries(e)
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
-           if (l1 || l4 || l5 || l7 )
+           if (l1 || l4 || l5 || l7 || l8)
                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
            else if (l2)
             {
@@ -3342,7 +3342,7 @@ function checkBoundaries(e)
     }
     if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
-        if (l1 || l4 || l5 || l7)
+        if (l1 || l4 || l5 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
         else if (l2)
         {
@@ -3388,7 +3388,7 @@ function checkBoundaries(e)
     }
     if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
-        if (l1 || l4 || l5 || l7)
+        if (l1 || l4 || l5 || l7 || l8)
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
         else if (l2)
         {
@@ -3434,7 +3434,7 @@ function checkBoundaries(e)
     }
     if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
-        if (l1 || l4 || l5 || l7)
+        if (l1 || l4 || l5 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
         else if (l2)
         {
