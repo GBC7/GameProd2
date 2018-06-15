@@ -19,6 +19,8 @@ let notWalking = true, canGoThisWay = false;                          //For boun
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
 let alreadyBeenHere = false;
+let torchesSet = false;
+let torchLit = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
 
 
 let timer_level3;                                                        //For checking time for level 3
@@ -95,9 +97,15 @@ let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, u
     //   8        9         10          11
     undefined, undefined, undefined, undefined];
 
+//For objects that need to be able to be "walked through" but not erased upon walkthrough (Eg. my torches)
+// (Do not appear as being walked through since players feet are 48 pixels below actualy position)
+let lOMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+    //   8        9         10          11
+    undefined, undefined, undefined, undefined];
+
 
 //For finding out if level is ready to be drawn
-let l2Ready = false, l3Ready = false, l4Ready = false, l5Ready = false, l6Ready = false, l7Ready=false, l11Ready = false;
+let l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l7Ready, l11Ready;
 
 
 let canvas = document.querySelector("canvas");
@@ -107,11 +115,12 @@ let ctx = canvas.getContext("2d");
 let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,qq,rr,ss,tt,uu,vv,ww,
     xx,yy,zz,aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lll,mmm,nnn,ooo,qqq,rrr,sss,ttt,uuu,vvv,www,xxx,yyy,zzz,
     thingToDraw;       //Used with global functions to pass case numbers to
-
+{
     a = b = c  = d = e = f = g = h = i = j = k = l = m = n = o = q = r = s = t = u = v = w = x = y = z =
     aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu = vv = ww = xx =
     yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll = mmm = nnn = ooo = qqq = rrr = sss
     = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+}
 
 
 let p =                                                         //PlayerObject
@@ -128,71 +137,86 @@ frameX: 0,                //Counter to use for selecting section of tile sheet b
 frameY: 0,
 };
 
-
-//Global Images
-let scientist = new Image();                                    //Regular player image
-scientist.src = "../../0Main/images/scientist2.png";
-let sciUndWater = new Image();                                  //Image fpr player while in sewer
-sciUndWater.src = "../../2Sewer/images/scientist2.png";
+//Universal Images
+let scientist = new Image();                                //Regular player image
+let sciUndWater = new Image();                              //Image fpr player while in sewer
 let thotBr = new Image();                                   //Thought bubble image bottom right side of player
-thotBr.src = "../../0Main/images/thotBr.png";
 let thotBl = new Image();                                   //Thought bubble image bottom left side of player
-thotBl.src = "../../0Main/images/thotBl.png";
 let thotTl = new Image();                                   //Thought bubble image top left side of player
-thotTl.src = "../../0Main/images/thotTl.png";
 let thotTr = new Image();                                   //Thought bubble image top right side of player
-thotTr.src = "../../0Main/images/thotTr.png";
+{
+    thotBl.src = "../../0Main/images/thotBl.png";
+    thotTl.src = "../../0Main/images/thotTl.png";
+    thotTr.src = "../../0Main/images/thotTr.png";
+    thotBr.src = "../../0Main/images/thotBr.png";
+    sciUndWater.src = "../../2Sewer/images/scientist2.png";
+    scientist.src = "../../0Main/images/scientist2.png";
+}
 
-
-
+//Sewer
 let wetPipe = new Image();
-wetPipe.src = "../../2Sewer/images/pipeWet.png";
 let sewerFloor = new Image();
-sewerFloor.src = "../../2Sewer/images/floor.png";
 let level3sprite = new Image();
-level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
 let door3 = new Image();
-door3.src = "../../2Sewer/images/door3.png";
 let wallBesideDoor = new Image();
-wallBesideDoor.src = "../../2Sewer/images/wallBesideDoor.png";
 let floorAboveDoor = new Image();
-floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
 let floorClean = new Image();
-floorClean.src = "../../2Sewer/images/floorClean.png";
 let doorBare = new Image();
-doorBare.src = "../../2Sewer/images/doorBare.png";
+let torch = new Image();
+let torchSwamp = new Image();
+let flameCorner1 = new Image();
+let flameCorner2 = new Image();
+let flameCorner3 = new Image();
+let flameWall1 = new Image();
+let flameWall2 = new Image();
+let flameWall3 = new Image();
+{
+    wetPipe.src = "../../2Sewer/images/pipeWet.png";
+    sewerFloor.src = "../../2Sewer/images/floor.png";
+    level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
+    door3.src = "../../2Sewer/images/door3.png";
+    wallBesideDoor.src = "../../2Sewer/images/wallBesideDoor.png";
+    floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
+    floorClean.src = "../../2Sewer/images/floorClean.png";
+    doorBare.src = "../../2Sewer/images/doorBare.png";
+    flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
+    flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
+    flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
+    flameWall1.src = "../../2Sewer/images/flameWall1.png";
+    flameWall2.src = "../../2Sewer/images/flameWall2.png";
+    flameWall3.src = "../../2Sewer/images/flameWall3.png";
+    torch.src = "../../2Sewer/images/torch.png";
+    torchSwamp.src = "../../2Sewer/images/torchSwamp.png";
+}
 
-
-
-
-
-
-//Level6 Roof
+//Roof
 let gate = new Image();
-gate.src = "../../6Roof/images/gate.png";
 let fence = new Image();
-fence.src = "../../6Roof/images/fence.png";
 let litWindow = new Image();
-litWindow.src = "../../6Roof/images/litWindow.png";
 let darkWindow = new Image();
-darkWindow.src = "../../6Roof/images/darkWindow.png";
 let cherryTree = new Image();
-cherryTree.src = "../../6Roof/images/cherryTree.png";
 let statue = new Image();
-statue.src = "../../6Roof/images/statue.png";
 let car = new Image();
-car.src = "../../6Roof/images/car.png";
 let ladder = new Image();
-ladder.src = "../../6Roof/images/ladder.png";
 let helipad = new Image();
-helipad.src = "../../6Roof/images/helipad.png";
 let helicopter = new Image();
-helicopter.src = "../../6Roof/images/helicopter1.png";
 let exit = new Image();
-exit.src = "../../6Roof/images/exit2.png";
 let shrub = new Image();
-shrub.src = "../../6Roof/images/shrub.png";
-//Level6 Roof
+{
+    shrub.src = "../../6Roof/images/shrub.png";
+    exit.src = "../../6Roof/images/exit2.png";
+    helicopter.src = "../../6Roof/images/helicopter1.png";
+    helipad.src = "../../6Roof/images/helipad.png";
+    ladder.src = "../../6Roof/images/ladder.png";
+    car.src = "../../6Roof/images/car.png";
+    statue.src = "../../6Roof/images/statue.png";
+    cherryTree.src = "../../6Roof/images/cherryTree.png";
+    darkWindow.src = "../../6Roof/images/darkWindow.png";
+    litWindow.src = "../../6Roof/images/litWindow.png";
+    fence.src = "../../6Roof/images/fence.png";
+    gate.src = "../../6Roof/images/gate.png";
+}
+
 
 
 startGame();
@@ -310,13 +334,6 @@ function startGame()
         let topSide2 = new Image();
         let door2 = new Image();
         let wall = new Image();
-        let flameCorner1 = new Image();
-        let flameCorner2 = new Image();
-        let flameCorner3 = new Image();
-        let flameWall1 = new Image();
-        let flameWall2 = new Image();
-        let flameWall3 = new Image();
-        let torch = new Image();
         let wallDrain = new Image();
         let wallSwamp = new Image();
         let pipe = new Image();
@@ -339,13 +356,6 @@ function startGame()
             topSide2.src = "../../2Sewer/images/topSide2.png";
             door2.src = "../../2Sewer/images/door2.png";
             wall.src = "../../2Sewer/images/upperWall.png";
-            flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
-            flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
-            flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
-            flameWall1.src = "../../2Sewer/images/flameWall1.png";
-            flameWall2.src = "../../2Sewer/images/flameWall2.png";
-            flameWall3.src = "../../2Sewer/images/flameWall3.png";
-            torch.src = "../../2Sewer/images/torch.png";
             wallDrain.src = "../../2Sewer/images/wallDrain2.png";
             wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
             pipe.src = "../../2Sewer/images/pipe.png";
@@ -357,43 +367,44 @@ function startGame()
 
 
         {
-        a = wall;               //0
-        b = door;               //1
-        c = undefined;          //2
-        d = sewerFloor;         //3
-        e = sewerFloor;         //4
-        f = sewerFloor;         //5
-        g = wallDrain;          //6
-        h = pipe;               //7
-        i = stairs;             //8
-        j = door2;              //9
-        k = wallSwamp;          //10
-        l = wallCorner;         //11
-        m = topSide;            //12
-        n = topCorner;          //13
-        o = wallBesideDoor;     //14
-        q = floorAboveDoor;     //15
-        r = flameWall1;         //16
-        s = flameWall2;         //17
-        t = flameWall3;         //18
-        u = torch;              //19
-        v = wallSwamp2;         //20
-        w = topCorner2;         //21
-        x = undefined;          //22
-        y = flameCorner1;       //23
-        z = flameCorner2;       //24
-        aa = flameCorner3;      //25
-        bb = topSide2;          //26
-        cc = leverUp;           //27
-/*        dd = internet;          //28*/
-        ee = steps;             //29
-        ff = stepsCorner;       //30
-}//Assign pictures to global letter vars
+            a = wall;               //0
+            b = door;               //1
+            c = undefined;          //2
+            d = sewerFloor;         //3
+            e = sewerFloor;         //4
+            f = sewerFloor;         //5
+            g = wallDrain;          //6
+            h = pipe;               //7
+            i = stairs;             //8
+            j = door2;              //9
+            k = wallSwamp;          //10
+            l = wallCorner;         //11
+            m = topSide;            //12
+            n = topCorner;          //13
+            o = wallBesideDoor;     //14
+            q = floorAboveDoor;     //15
+
+            s = flameWall2;         //17
+            t = flameWall3;         //18
+            u = torch;              //19
+            v = wallSwamp2;         //20
+            w = topCorner2;         //21
+            x = undefined;          //22
+
+            z = flameCorner2;       //24
+            aa = flameCorner3;      //25
+            bb = topSide2;          //26
+            cc = leverUp;           //27
+
+            ee = steps;             //29
+            ff = stepsCorner;       //30
+        }//Assign pictures to global letter vars
+
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
             lMap[level] =                                           //Initialize this levels map
-                //                                 10                            20
+                //                                            10                                      20
                 [  // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
                     [ 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  0,  0,  0,  0,  0,  0,  6, 13,  0,  0,  0,  0,  0,  8],       //0
@@ -403,8 +414,8 @@ function startGame()
                     [ 4,  3,  4,  4,  4,  3,  4,  3,  3,  4,  4,  4,  4,  3,  4,  3,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //4
                     [ 3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4,  3,  3,  4,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //5
                     [ 4,  4,  4,  4,  4,  3,  4,  4,  4,  3,  3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //6
-                    [ 4,  3,  4,  4,  4,  4,  3,  4,  3,  4,  3,  3,  4,  4,  4,  3,  4,  4, 23, 10, 10,  9, 10, 10, 16],       //7
-                    [ 4,  3,  3,  4,  4,  4,  3,  3,  4,  3,  4,  4,  3,  3,  3,  3,  3,  3, 19,  3,  4,  3,  3,  4, 19],       //8
+                    [ 4,  3,  4,  4,  4,  4,  3,  4,  3,  4,  3,  3,  4,  4,  4,  3,  4,  4,  2, 10, 10,  9, 10, 10,  2],       //7
+                    [ 4,  3,  3,  4,  4,  4,  3,  3,  4,  3,  4,  4,  3,  3,  3,  3,  3,  3,  2,  3,  4,  3,  3,  4,  2],       //8
                     [ 4,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4],       //9
                     [ 4,  3,  4,  3,  3,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4,  3,  3,  4,  4,  4,  3,  3,  3,  4,  3],       //10
                     [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  4,  4,  4,  4,  3,  3,  4,  3,  4,  3,  4,  3,  3],       //11
@@ -419,17 +430,31 @@ function startGame()
         }
 
 
-
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];                                          //Declare a player map for this level
-            for (let y = 0; y < 25; y++)                                //Initialize all indices with 0
+            for (let y = 0; y < 18; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 18; x++)
+                for (let x = 0; x < 25; x++)
                 {
                     lPMap[level][y].push(0)
+                }
+            }
+
+        }
+
+        if (lOMap[level] === undefined)             //Level Objects map
+        {
+            lOMap[level] = [];
+            for (let y = 0; y < 18; y++)
+            {
+                lOMap[level][y] = [];
+
+                for (let x = 0; x < 25; x++)
+                {
+                    lOMap[level][y].push(0)
                 }
             }
         }
@@ -438,10 +463,7 @@ function startGame()
         if (doorThreeOpen)
         {
             j = door3;
-            /*lMap[level][7][23] = 14;
-            lMap[level][6][23] = 15;*/
         }
-
 
         /*let counter = 0;      //Temp code for burning torches
         letItBurn();
@@ -477,7 +499,19 @@ function startGame()
 
 
         //Below ensures all elements are on screen when level is drawn
-        stairs.onload = function(){l2Ready=true;};
+        stairs.onload = function()
+        {
+            if (!torchesSet)
+            {
+                lOMap[level][8][18] = 1;    //Torches
+                lOMap[level][8][24] = 1;    //Torches
+                lOMap[level][7][18] = 2;     //Flame Corner 1
+                lOMap[level][7][24] = 3;     //Flame Wall 1
+                torchesSet = true;
+            }
+
+            l2Ready=true;
+        };
 
         waitTillLoaded();
 
@@ -509,79 +543,87 @@ function startGame()
         canvas.style.backgroundImage = "";
         bgm_level3.play();
 
-        let floor = new Image();
-        floor.src = "../../3Store/images/floor.png";
-        let rack1 = new Image();
-        rack1.src = "../../3Store/images/rack_1.png";
-        let rack2 = new Image();
-        rack2.src = "../../3Store/images/rack_2.png";
-        let rack3 = new Image();
-        rack3.src = "../../3Store/images/rack_3.png";
-        let display1 = new Image();
-        display1.src = "../../3Store/images/display_1.png";
-        let display2 = new Image();
-        display2.src = "../../3Store/images/display_2.png";
-        let display3 = new Image();
-        display3.src = "../../3Store/images/display_3.png";
-        let display4 = new Image();
-        display4.src = "../../3Store/images/display_4.png";
-        let counter1 = new Image();
-        counter1.src = "../../3Store/images/counter_1.png";
-        let counter2 = new Image();
-        counter2.src = "../../3Store/images/counter_2.png";
-        let counter3 = new Image();
-        counter3.src = "../../3Store/images/counter_3.png";
-        let wall = new Image();
-        wall.src = "../../3Store/images/wall_1.png";
-        let wallLeft = new Image();
-        wallLeft.src = "../../3Store/images/wall_left.png";
-        let wallRight = new Image();
-        wallRight.src = "../../3Store/images/wall_right.png";
-        let cabinet = new Image();
-        cabinet.src = "../../3Store/images/cabinet.png";
-        let stair = new Image();
-        stair.src = "../../3Store/images/downstair.png";
-        let doorOpenRight = new Image();
-        doorOpenRight.src = "../../3Store/images/door_open_right.png";
-        let doorOpenLeft = new Image();
-        doorOpenLeft.src = "../../3Store/images/door_open_left.png";
-        let windowClose = new Image();
-        windowClose.src = "../../3Store/images/window_close.png";
-        let windowOpen = new Image();
-        windowOpen.src = "../../3Store/images/window_open.png";
-        let door1 = new Image();
-        door1.src = "../../3Store/images/door_1.png";
-        let door2 = new Image();
-        door2.src = "../../3Store/images/door_2.png";
-        let chair = new Image();
-        chair.src = "../../3Store/images/chair.png";
-        let desk = new Image();
-        desk.src = "../../3Store/images/desk.png";
 
-        a = floor;         //0
-        b = rack1;         //1
-        c = rack2;         //2
-        d = rack3;         //3
-        e = display1;      //4
-        f = display2;      //5
-        g = display3;      //6
-        h = display4;      //7
-        i = counter1;      //8
-        j = counter2;      //9
-        k = counter3;      //10
-        l = wall;          //11
-        m = wallLeft;      //12
-        n = wallRight;     //13
-        o = cabinet;     //14
-        q = stair;       //15
-        r = doorOpenRight;       //16
-        s = doorOpenLeft;       //17
-        t = windowClose; //18
-        u = windowOpen;  //19
-        v = door1;       // 20
-        w = door2;       //21
-        x = desk;        //22
-        y = chair;       // 23
+        let floor = new Image();
+        let rack1 = new Image();
+        let rack2 = new Image();
+        let rack3 = new Image();
+        let display1 = new Image();
+        let display2 = new Image();
+        let display3 = new Image();
+        let display4 = new Image();
+        let counter1 = new Image();
+        let counter2 = new Image();
+        let counter3 = new Image();
+        let wall = new Image();
+        let wallLeft = new Image();
+        let wallRight = new Image();
+        let cabinet = new Image();
+        let stair = new Image();
+        let doorOpenRight = new Image();
+        let doorOpenLeft = new Image();
+        let windowClose = new Image();
+        let windowOpen = new Image();
+        let door1 = new Image();
+        let door2 = new Image();
+        let chair = new Image();
+        let desk = new Image();
+
+
+        {
+            floor.src = "../../3Store/images/floor.png";
+            rack1.src = "../../3Store/images/rack_1.png";
+            rack2.src = "../../3Store/images/rack_2.png";
+            rack3.src = "../../3Store/images/rack_3.png";
+            display1.src = "../../3Store/images/display_1.png";
+            display2.src = "../../3Store/images/display_2.png";
+            display3.src = "../../3Store/images/display_3.png";
+            display4.src = "../../3Store/images/display_4.png";
+            counter1.src = "../../3Store/images/counter_1.png";
+            counter2.src = "../../3Store/images/counter_2.png";
+            counter3.src = "../../3Store/images/counter_3.png";
+            wall.src = "../../3Store/images/wall_1.png";
+            wallLeft.src = "../../3Store/images/wall_left.png";
+            wallRight.src = "../../3Store/images/wall_right.png";
+            cabinet.src = "../../3Store/images/cabinet.png";
+            stair.src = "../../3Store/images/downstair.png";
+            doorOpenRight.src = "../../3Store/images/door_open_right.png";
+            doorOpenLeft.src = "../../3Store/images/door_open_left.png";
+            windowClose.src = "../../3Store/images/window_close.png";
+            windowOpen.src = "../../3Store/images/window_open.png";
+            door1.src = "../../3Store/images/door_1.png";
+            door2.src = "../../3Store/images/door_2.png";
+            chair.src = "../../3Store/images/chair.png";
+            desk.src = "../../3Store/images/desk.png";
+        }//Defining images src properties
+
+
+        {
+            a = floor;         //0
+            b = rack1;         //1
+            c = rack2;         //2
+            d = rack3;         //3
+            e = display1;      //4
+            f = display2;      //5
+            g = display3;      //6
+            h = display4;      //7
+            i = counter1;      //8
+            j = counter2;      //9
+            k = counter3;      //10
+            l = wall;          //11
+            m = wallLeft;      //12
+            n = wallRight;     //13
+            o = cabinet;     //14
+            q = stair;       //15
+            r = doorOpenRight;       //16
+            s = doorOpenLeft;       //17
+            t = windowClose; //18
+            u = windowOpen;  //19
+            v = door1;       // 20
+            w = door2;       //21
+            x = desk;        //22
+            y = chair;       // 23
+        }//Assigning images to global variables
 
 
         if (lMap[level] === undefined)
@@ -792,155 +834,159 @@ function startGame()
         let store4 = new Image();
 
 
-        bank1.src = "../../4Streetz/images/bank1.png";
-        bank2.src = "../../4Streetz/images/bank2.png";
-        bank3.src = "../../4Streetz/images/bank3.png";
-        bank4.src = "../../4Streetz/images/bank4.png";
-        clothingStore1.src = "../../4Streetz/images/clothingStore1.png";
-        clothingStore2.src = "../../4Streetz/images/clothingStore2.png";
-        clothingStore3.src = "../../4Streetz/images/clothingStore3.png";
-        clothingStore4.src = "../../4Streetz/images/clothingStore4.png";
-        clothingStore5.src = "../../4Streetz/images/clothingStore5.png";
-        clothingStore6.src = "../../4Streetz/images/clothingStore6.png";
-        coffee1.src = "../../4Streetz/images/coffee1.png";
-        coffee2.src = "../../4Streetz/images/coffee2.png";
-        coffee3.src = "../../4Streetz/images/coffee3.png";
-        coffee4.src = "../../4Streetz/images/coffee4.png";
-        house.src = "../../4Streetz/images/house.png";
-        machine.src = "../../4Streetz/images/machine.png";
-        mall1.src = "../../4Streetz/images/mall1.png";
-        mall2.src = "../../4Streetz/images/mall2.png";
-        mall3.src = "../../4Streetz/images/mall3.png";
-        mall4.src = "../../4Streetz/images/mall4.png";
-        mall5.src = "../../4Streetz/images/mall5.png";
-        mall6.src = "../../4Streetz/images/mall6.png";
-        mall7.src = "../../4Streetz/images/mall7.png";
-        mall8.src = "../../4Streetz/images/mall8.png";
-        mall9.src = "../../4Streetz/images/mall9.png";
-        mall10.src = "../../4Streetz/images/mall10.png";
-        mall11.src = "../../4Streetz/images/mall11.png";
-        mall12.src = "../../4Streetz/images/mall12.png";
-        market1.src = "../../4Streetz/images/market1.png";
-        market2.src = "../../4Streetz/images/market2.png";
-        market3.src = "../../4Streetz/images/market3.png";
-        market4.src = "../../4Streetz/images/market4.png";
-        market5.src = "../../4Streetz/images/market5.png";
-        market6.src = "../../4Streetz/images/market6.png";
-        market7.src = "../../4Streetz/images/market7.png";
-        market8.src = "../../4Streetz/images/market8.png";
-        market9.src = "../../4Streetz/images/market9.png";
-        momsHouse1.src = "../../4Streetz/images/momsHouse1.png";
-        momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
-        momsHouse3.src = "../../4Streetz/images/momsHouse3.png";
-        momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
-        momsHouse5.src = "../../4Streetz/images/momsHouse5.png";
-        momsHouse6.src = "../../4Streetz/images/momsHouse6.png";
-        momsHouse7.src = "../../4Streetz/images/momsHouse7.png";
-        momsHouse8.src = "../../4Streetz/images/momsHouse8.png";
-        momsHouse9.src = "../../4Streetz/images/momsHouse9.png";
-        park1.src = "../../4Streetz/images/park1.png";
-        park2.src = "../../4Streetz/images/park2.png";
-        park3.src = "../../4Streetz/images/park3.png";
-        park4.src = "../../4Streetz/images/park4.png";
-        park5.src = "../../4Streetz/images/park5.png";
-        park6.src = "../../4Streetz/images/park6.png";
-        park7.src = "../../4Streetz/images/park7.png";
-        park8.src = "../../4Streetz/images/park8.png";
-        park9.src = "../../4Streetz/images/park9.png";
-        school1.src = "../../4Streetz/images/school1.png";
-        school2.src = "../../4Streetz/images/school2.png";
-        school3.src = "../../4Streetz/images/school3.png";
-        school4.src = "../../4Streetz/images/school4.png";
-        school5.src = "../../4Streetz/images/school5.png";
-        school6.src = "../../4Streetz/images/school6.png";
-        school7.src = "../../4Streetz/images/school7.png";
-        school8.src = "../../4Streetz/images/school8.png";
-        school9.src = "../../4Streetz/images/school9.png";
-        store1.src= "../../4Streetz/images/store1.png";
-        store2.src= "../../4Streetz/images/store2.png";
-        store3.src= "../../4Streetz/images/store3.png";
-        store4.src= "../../4Streetz/images/store4.png";
-        street.src = "../../4Streetz/images/street.png";
-        house1.src= "../../4Streetz/images/house.png";
-        side.src = "../../4Streetz/images/side.png";
+        {
+            bank1.src = "../../4Streetz/images/bank1.png";
+            bank2.src = "../../4Streetz/images/bank2.png";
+            bank3.src = "../../4Streetz/images/bank3.png";
+            bank4.src = "../../4Streetz/images/bank4.png";
+            clothingStore1.src = "../../4Streetz/images/clothingStore1.png";
+            clothingStore2.src = "../../4Streetz/images/clothingStore2.png";
+            clothingStore3.src = "../../4Streetz/images/clothingStore3.png";
+            clothingStore4.src = "../../4Streetz/images/clothingStore4.png";
+            clothingStore5.src = "../../4Streetz/images/clothingStore5.png";
+            clothingStore6.src = "../../4Streetz/images/clothingStore6.png";
+            coffee1.src = "../../4Streetz/images/coffee1.png";
+            coffee2.src = "../../4Streetz/images/coffee2.png";
+            coffee3.src = "../../4Streetz/images/coffee3.png";
+            coffee4.src = "../../4Streetz/images/coffee4.png";
+            house.src = "../../4Streetz/images/house.png";
+            machine.src = "../../4Streetz/images/machine.png";
+            mall1.src = "../../4Streetz/images/mall1.png";
+            mall2.src = "../../4Streetz/images/mall2.png";
+            mall3.src = "../../4Streetz/images/mall3.png";
+            mall4.src = "../../4Streetz/images/mall4.png";
+            mall5.src = "../../4Streetz/images/mall5.png";
+            mall6.src = "../../4Streetz/images/mall6.png";
+            mall7.src = "../../4Streetz/images/mall7.png";
+            mall8.src = "../../4Streetz/images/mall8.png";
+            mall9.src = "../../4Streetz/images/mall9.png";
+            mall10.src = "../../4Streetz/images/mall10.png";
+            mall11.src = "../../4Streetz/images/mall11.png";
+            mall12.src = "../../4Streetz/images/mall12.png";
+            market1.src = "../../4Streetz/images/market1.png";
+            market2.src = "../../4Streetz/images/market2.png";
+            market3.src = "../../4Streetz/images/market3.png";
+            market4.src = "../../4Streetz/images/market4.png";
+            market5.src = "../../4Streetz/images/market5.png";
+            market6.src = "../../4Streetz/images/market6.png";
+            market7.src = "../../4Streetz/images/market7.png";
+            market8.src = "../../4Streetz/images/market8.png";
+            market9.src = "../../4Streetz/images/market9.png";
+            momsHouse1.src = "../../4Streetz/images/momsHouse1.png";
+            momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
+            momsHouse3.src = "../../4Streetz/images/momsHouse3.png";
+            momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
+            momsHouse5.src = "../../4Streetz/images/momsHouse5.png";
+            momsHouse6.src = "../../4Streetz/images/momsHouse6.png";
+            momsHouse7.src = "../../4Streetz/images/momsHouse7.png";
+            momsHouse8.src = "../../4Streetz/images/momsHouse8.png";
+            momsHouse9.src = "../../4Streetz/images/momsHouse9.png";
+            park1.src = "../../4Streetz/images/park1.png";
+            park2.src = "../../4Streetz/images/park2.png";
+            park3.src = "../../4Streetz/images/park3.png";
+            park4.src = "../../4Streetz/images/park4.png";
+            park5.src = "../../4Streetz/images/park5.png";
+            park6.src = "../../4Streetz/images/park6.png";
+            park7.src = "../../4Streetz/images/park7.png";
+            park8.src = "../../4Streetz/images/park8.png";
+            park9.src = "../../4Streetz/images/park9.png";
+            school1.src = "../../4Streetz/images/school1.png";
+            school2.src = "../../4Streetz/images/school2.png";
+            school3.src = "../../4Streetz/images/school3.png";
+            school4.src = "../../4Streetz/images/school4.png";
+            school5.src = "../../4Streetz/images/school5.png";
+            school6.src = "../../4Streetz/images/school6.png";
+            school7.src = "../../4Streetz/images/school7.png";
+            school8.src = "../../4Streetz/images/school8.png";
+            school9.src = "../../4Streetz/images/school9.png";
+            store1.src= "../../4Streetz/images/store1.png";
+            store2.src= "../../4Streetz/images/store2.png";
+            store3.src= "../../4Streetz/images/store3.png";
+            store4.src= "../../4Streetz/images/store4.png";
+            street.src = "../../4Streetz/images/street.png";
+            house1.src= "../../4Streetz/images/house.png";
+            side.src = "../../4Streetz/images/side.png";
+        }//Defining images src properties
 
-        a = side;               //0
-        b = street;             //1
-        c = clothingStore1;     //2
-        d = clothingStore2;     //3
-        e = clothingStore3;     //4
-        f = clothingStore4;     //5
-        g = clothingStore5;     //6
-        h = clothingStore6;     //7
-        i = market1;            //8
-        j = market2;            //9
-        k = market3;            //10
-        l = market4;            //11
-        m = market5;            //12
-        n = market6;            //13
-        o = market7;            //14
-        q = market8;            //15
-        r = market9;            //16
-        s = house1;             //17
-        t = machine;            //18
-        u = momsHouse1;         //19
-        v = momsHouse2;         //20
-        w = momsHouse3;         //21
-        x = momsHouse4;         //22
-        y = momsHouse5;         //23
-        z = momsHouse6;         //24
-        aa = momsHouse7;        //25
-        bb = momsHouse8;        //26
-        cc = momsHouse9;        //27
-        dd = momsHouse5;        //28
-        ee = mall1;         //29
-        ff = mall2;         //30
-        gg = mall3;         //31
-        hh = mall4;         //32
-        ii = mall5;         //33
-        jj = mall6;         //34
-        kk = mall7;         //35
-        ll = mall8;         //36
-        mm = mall9;         //37
-        nn = mall10;        //38
-        oo = mall11;        //39
-        qq = mall12;        //40
-        rr = store1;        //41
-        ss = store2;        //42
-        tt = store3;        //43
-        uu = store4;        //44
-        vv = bank1;         //45
-        ww = bank2;         //46
-        xx = bank3;         //47
-        yy = bank4;         //48
-        zz = coffee1;       //49
-        aaa = coffee2;      //50
-        bbb = coffee3;      //51
-        ccc = coffee4;      //52
-        ddd = school1;      //53
-        eee = school2;      //54
-        fff = school3;      //55
-        ggg = school4;      //56
-        hhh = school5;      //57
-        iii = school6;      //58
-        jjj = school7;      //59
-        kkk = school8;      //60
-        lll = school9;      //61
-        mmm = park1;      //62
-        nnn = park2;      //63
-        ooo = park3;      //64
-        qqq = park4;      //65
-        rrr = park5;      //66
-        sss = park6;      //67
-        ttt = park7;      //68
-        uuu = park8;      //69
-        vvv = park9;      //70
-        www = park1;      //71
-
+        {
+            a = side;               //0
+            b = street;             //1
+            c = clothingStore1;     //2
+            d = clothingStore2;     //3
+            e = clothingStore3;     //4
+            f = clothingStore4;     //5
+            g = clothingStore5;     //6
+            h = clothingStore6;     //7
+            i = market1;            //8
+            j = market2;            //9
+            k = market3;            //10
+            l = market4;            //11
+            m = market5;            //12
+            n = market6;            //13
+            o = market7;            //14
+            q = market8;            //15
+            r = market9;            //16
+            s = house1;             //17
+            t = machine;            //18
+            u = momsHouse1;         //19
+            v = momsHouse2;         //20
+            w = momsHouse3;         //21
+            x = momsHouse4;         //22
+            y = momsHouse5;         //23
+            z = momsHouse6;         //24
+            aa = momsHouse7;        //25
+            bb = momsHouse8;        //26
+            cc = momsHouse9;        //27
+            dd = momsHouse5;        //28
+            ee = mall1;         //29
+            ff = mall2;         //30
+            gg = mall3;         //31
+            hh = mall4;         //32
+            ii = mall5;         //33
+            jj = mall6;         //34
+            kk = mall7;         //35
+            ll = mall8;         //36
+            mm = mall9;         //37
+            nn = mall10;        //38
+            oo = mall11;        //39
+            qq = mall12;        //40
+            rr = store1;        //41
+            ss = store2;        //42
+            tt = store3;        //43
+            uu = store4;        //44
+            vv = bank1;         //45
+            ww = bank2;         //46
+            xx = bank3;         //47
+            yy = bank4;         //48
+            zz = coffee1;       //49
+            aaa = coffee2;      //50
+            bbb = coffee3;      //51
+            ccc = coffee4;      //52
+            ddd = school1;      //53
+            eee = school2;      //54
+            fff = school3;      //55
+            ggg = school4;      //56
+            hhh = school5;      //57
+            iii = school6;      //58
+            jjj = school7;      //59
+            kkk = school8;      //60
+            lll = school9;      //61
+            mmm = park1;      //62
+            nnn = park2;      //63
+            ooo = park3;      //64
+            qqq = park4;      //65
+            rrr = park5;      //66
+            sss = park6;      //67
+            ttt = park7;      //68
+            uuu = park8;      //69
+            vvv = park9;      //70
+            www = park1;      //71
+        }//Assigning images to global variables
 
 
 
         if (lMap[level] === undefined)
+        {
             lMap[level] =
                 [
                     //                                  10                                          20
@@ -964,6 +1010,7 @@ function startGame()
                     [65,66,	67,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0,	0,	0],
                     [68,69,	70,	0,	0,	0,	0,	0,	0,	0,	1,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0]
                 ];
+        }
 
 
         if (lPMap[level] === undefined)
@@ -985,7 +1032,6 @@ function startGame()
 
 
         changePStartPos();
-
 
 
         l4Ready = false;
@@ -1019,65 +1065,74 @@ function startGame()
         canvas.style.backgroundImage = "";
 
         let wall = new Image();
-        wall.src = "../../5MomsPlace/images/wall.png";  //0
-
         let door = new Image();
-        door.src = "../../5MomsPlace/images/door.png"; //1
-
         let floor = new Image();
-        floor.src = "../../5MomsPlace/images/floor.png";  //2
-
         let cat = new Image();
-        cat.src = "../../5MomsPlace/images/cat.png";  //3
-
         let w1 = new Image();
-        w1.src = "../../5MomsPlace/images/w1.png"; //4
-
         let w2 = new Image();
-        w2.src = "../../5MomsPlace/images/w2.png"; //5
-
         let w3 = new Image();
-        w3.src = "../../5MomsPlace/images/w3.png"; //6
-
         let w4 = new Image();
-        w4.src = "../../5MomsPlace/images/w4.png"; //7
-
         let w5 = new Image();
-        w5.src = "../../5MomsPlace/images/w5.png"; //8
-
         let granny2 = new Image();
-        granny2.src = "../../5MomsPlace/images/granny2.png"; //9
-
         let piano1 = new Image();
-        piano1.src = "../../5MomsPlace/images/piano1.png"; //10
-
         let piano2 = new Image();
-        piano2.src = "../../5MomsPlace/images/piano2.png"; //11
-
         let piano3 = new Image();
-        piano3.src = "../../5MomsPlace/images/piano3.png"; //12
-
         let piano4 = new Image();
-        piano4.src = "../../5MomsPlace/images/piano4.png"; //13
-
         let window1 = new Image();
-        window1.src = "../../5MomsPlace/images/window1.png"; //14
-
         let catPro1 = new Image();
-        catPro1.src = "../../5MomsPlace/images/catPro1.png"; //15
-
         let catPro2 = new Image();
-        catPro2.src = "../../5MomsPlace/images/catPro2.png"; //16
-
         let catPro3 = new Image();
-        catPro3.src = "../../5MomsPlace/images/catPro3.png"; //17
-
         let catPro4 = new Image();
-        catPro4.src = "../../5MomsPlace/images/catPro4.png"; //18
 
+
+        {
+            wall.src = "../../5MomsPlace/images/wall.png";  //0
+            door.src = "../../5MomsPlace/images/door.png"; //1
+            floor.src = "../../5MomsPlace/images/floor.png";  //2
+            cat.src = "../../5MomsPlace/images/cat.png";  //3
+            w1.src = "../../5MomsPlace/images/w1.png"; //4
+            w2.src = "../../5MomsPlace/images/w2.png"; //5
+            w3.src = "../../5MomsPlace/images/w3.png"; //6
+            w4.src = "../../5MomsPlace/images/w4.png"; //7
+            w5.src = "../../5MomsPlace/images/w5.png"; //8
+            granny2.src = "../../5MomsPlace/images/granny2.png"; //9
+            piano1.src = "../../5MomsPlace/images/piano1.png"; //10
+            piano2.src = "../../5MomsPlace/images/piano2.png"; //11
+            piano3.src = "../../5MomsPlace/images/piano3.png"; //12
+            piano4.src = "../../5MomsPlace/images/piano4.png"; //13
+            window1.src = "../../5MomsPlace/images/window1.png"; //14
+            catPro1.src = "../../5MomsPlace/images/catPro1.png"; //15
+            catPro2.src = "../../5MomsPlace/images/catPro2.png"; //16
+            catPro3.src = "../../5MomsPlace/images/catPro3.png"; //17
+            catPro4.src = "../../5MomsPlace/images/catPro4.png"; //18
+        }//Defining Images src properties
+
+
+        {
+            a = wall;
+            b = door;
+            c = floor;
+            d = cat;
+            e = w1;
+            f = w2;
+            g = w3;
+            h = w4;
+            i = w5;
+            j = granny2;
+            k = piano1;
+            l = piano2;
+            m = piano3;
+            n = piano4;
+            o = window1;
+            q = catPro1;
+            r = catPro2;
+            s = catPro3;
+            t = catPro4;
+        }//Assigning images to globale variables
 
 
         if (lMap[level] === undefined)
+        {
             lMap[level] =
                 //                  10                  20
                 [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
@@ -1101,27 +1156,8 @@ function startGame()
                     [2,2,12,13,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
                 ];
+        }
 
-
-        a = wall;
-        b = door;
-        c = floor;
-        d = cat;
-        e = w1;
-        f = w2;
-        g = w3;
-        h = w4;
-        i = w5;
-        j = granny2;
-        k = piano1;
-        l = piano2;
-        m = piano3;
-        n = piano4;
-        o = window1;
-        q = catPro1;
-        r = catPro2;
-        s = catPro3;
-        t = catPro4;
 
 
         if (lPMap[level] === undefined)
@@ -1139,6 +1175,7 @@ function startGame()
             }
             lPMap[level][0][0] = 1;
         }
+
 
         changePStartPos();
 
@@ -1174,30 +1211,34 @@ function startGame()
 
 
         let roof = new Image();
-        roof.src = "../../6Roof/images/shingles.jpg";
         let wall = new Image();
-        wall.src = "../../6Roof/images/wall.png";
         let shinglesEdge = new Image();
-        shinglesEdge.src = "../../6Roof/images/shinglesEdge.jpg";
         let shinglesLeft = new Image();
-        shinglesLeft.src = "../../6Roof/images/shinglesLeft.png";
         let shinglesRight = new Image();
-        shinglesRight.src = "../../6Roof/images/shinglesRight.png";
         let shinglesBRight = new Image();
-        shinglesBRight.src = "../../6Roof/images/shinglesBRight.png";
 
 
+        {
+            roof.src = "../../6Roof/images/shingles.jpg";
+            wall.src = "../../6Roof/images/wall.png";
+            shinglesEdge.src = "../../6Roof/images/shinglesEdge.jpg";
+            shinglesLeft.src = "../../6Roof/images/shinglesLeft.png";
+            shinglesRight.src = "../../6Roof/images/shinglesRight.png";
+            shinglesBRight.src = "../../6Roof/images/shinglesBRight.png";
+        }//Defining Images src properties
 
-        //Below one letter variables must be updated upon calling each level
-        a = roof;           //0
-        b = wall;           //1
-        c = undefined;      //2
-        d = undefined;      //3
-        e = shinglesEdge;   //4
-        f = shinglesLeft;   //5
-        g = shinglesRight;  //6
-        h = exit;           //7
-        i = shinglesBRight;
+        {
+            //Below one letter variables must be updated upon calling each level
+            a = roof;           //0
+            b = wall;           //1
+            c = undefined;      //2
+            d = undefined;      //3
+            e = shinglesEdge;   //4
+            f = shinglesLeft;   //5
+            g = shinglesRight;  //6
+            h = exit;           //7
+            i = shinglesBRight;
+        }//Assigning images to global variables
 
 
         if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
@@ -1253,95 +1294,103 @@ function startGame()
 
     }
 
-    if (l7)
+    if (l7)//Lab
     {
         canvas.style.backgroundImage = "";
 
 
         let floor = new Image();
-        floor.src = "../../7Lab/images/Floor.png";
         let wall = new Image();
-        wall.src = "../../7Lab/images/Wall.png";
         let door1 = new Image();
-        door1.src = "../../7Lab/images/door1.png";
         let stairs = new Image();
-        stairs.src = "../../7Lab/images/stairs.png";
         let emptyShelvesTop = new Image();
-        emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
         let emptyShelvesBottom = new Image();
-        emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
         let lockerTop = new Image();
-        lockerTop.src = "../../7Lab/images/locker-top.png";
         let lockerBottom = new Image();
-        lockerBottom.src = "../../7Lab/images/locker-bottom.png";
         let computerTop = new Image();
-        computerTop.src = "../../7Lab/images/computer-top.png";
         let computerBottom = new Image();
-        computerBottom.src = "../../7Lab/images/computer-bottom.png";
         let metalCabinetTop = new Image();
-        metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
         let metalCabinetBottom = new Image();
-        metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
         let glassCabinetTop = new Image();
-        glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
         let glassCabinetBottom = new Image();
-        glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
         let fullShelvesTop = new Image();
-        fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
         let fullShelvesBottom = new Image();
-        fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
         let openWindow = new Image();
-        openWindow.src = "../../7Lab/images/openWindow.png"
         let closedWindow = new Image();
-        closedWindow.src = "../../7Lab/images/closedWindow.png"
-
-        a = wall;				// 0
-        b = floor;				// 1
-        c = door1;				// 2
-        d = stairs;				// 3
-        e = emptyShelvesTop;	// 4
-        f = emptyShelvesBottom;	// 5
-        g = lockerTop;			// 6
-        h = lockerBottom;		// 7
-        i = computerTop;		// 8
-        j = computerBottom;		// 9
-        k = metalCabinetTop;	// 10
-        l = metalCabinetBottom;	// 11
-        m = glassCabinetTop;	// 12
-        n = glassCabinetBottom;	// 13
-        o = fullShelvesTop;		// 14
-        q = fullShelvesBottom;  // 15
-        r = openWindow;			// 16
-        s = undefined;			// 17
 
 
-        if (lMap[level] === undefined)
-            lMap[level]=
+        {
+            openWindow.src = "../../7Lab/images/openWindow.png";
+            fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
+            fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
+            glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
+            glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
+            metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
+            metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
+            computerBottom.src = "../../7Lab/images/computer-bottom.png";
+            computerTop.src = "../../7Lab/images/computer-top.png";
+            lockerBottom.src = "../../7Lab/images/locker-bottom.png";
+            lockerTop.src = "../../7Lab/images/locker-top.png";
+            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
+            stairs.src = "../../7Lab/images/stairs.png";
+            door1.src = "../../7Lab/images/door1.png";
+            wall.src = "../../7Lab/images/Wall.png";
+            floor.src = "../../7Lab/images/Floor.png";
+            closedWindow.src = "../../7Lab/images/closedWindow.png";
+        }//Defining images src property
+
+
+        {
+            a = wall;				// 0
+            b = floor;				// 1
+            c = door1;				// 2
+            d = stairs;				// 3
+            e = emptyShelvesTop;	// 4
+            f = emptyShelvesBottom;	// 5
+            g = lockerTop;			// 6
+            h = lockerBottom;		// 7
+            i = computerTop;		// 8
+            j = computerBottom;		// 9
+            k = metalCabinetTop;	// 10
+            l = metalCabinetBottom;	// 11
+            m = glassCabinetTop;	// 12
+            n = glassCabinetBottom;	// 13
+            o = fullShelvesTop;		// 14
+            q = fullShelvesBottom;  // 15
+            r = openWindow;			// 16
+            s = undefined;			// 17
+        }//Assigning images to global variables
+
+
+        if (lMap[level] === undefined) //Defining Level's Map
+        {
+            lMap[level] =
                 //                    10                  20
                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-                    [0,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	14,	14,	14,	16,	14,	10,	10,	10,	10,	6,	6,	6,	4,	0],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	15,	15,	15,	1,	15,	11,	11,	11,	11,	7,	7,	7,	5,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	3]
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 15, 15, 15, 1, 15, 11, 11, 11, 11, 7, 7, 7, 5, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3]
                 ];
+        }
 
-
-        if (lPMap[level] === undefined)
+        if (lPMap[level] === undefined) //Defining Level's Player Map
         {
             lPMap[level] = [];
 
@@ -1361,8 +1410,7 @@ function startGame()
         changePStartPos();
 
 
-
-        fullShelvesBottom.onload = function(){drawMap();};
+        closedWindow.onload = function(){l7Ready=true;};
         addEventListener("keydown", onKeyDown, false);
     }
 
@@ -1372,47 +1420,53 @@ function startGame()
 
 
         let valveTl = new Image();
-        valveTl.src = "../../2Sewer/images/valveTl.png";
         let valveTm = new Image();
-        valveTm.src = "../../2Sewer/images/valveTm.png";
         let valveTr = new Image();
-        valveTr.src = "../../2Sewer/images/valveTr.png";
         let valveMl = new Image();
-        valveMl.src = "../../2Sewer/images/valveMl.png";
         let valveMm = new Image();
-        valveMm.src = "../../2Sewer/images/valveMm.png";
         let valveMr = new Image();
-        valveMr.src = "../../2Sewer/images/valveMr.png";
         let valveBl = new Image();
-        valveBl.src = "../../2Sewer/images/valveBl.png";
         let valveBm = new Image();
-        valveBm.src = "../../2Sewer/images/valveBm.png";
         let valveBr = new Image();
-        valveBr.src = "../../2Sewer/images/valveBr.png";
         let wall = new Image();
-        wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
         let upperWall = new Image();
-        upperWall.src = "../../2Sewer/images/upperWall.png";
         let pipeTopView = new Image();
-        pipeTopView.src = "../../2Sewer/images/pipe3.png";
 
 
+        {
+            valveTm.src = "../../2Sewer/images/valveTm.png";
+            valveTl.src = "../../2Sewer/images/valveTl.png";
+            valveTr.src = "../../2Sewer/images/valveTr.png";
+            valveMl.src = "../../2Sewer/images/valveMl.png";
+            valveMm.src = "../../2Sewer/images/valveMm.png";
+            valveMr.src = "../../2Sewer/images/valveMr.png";
+            valveBl.src = "../../2Sewer/images/valveBl.png";
+            valveBm.src = "../../2Sewer/images/valveBm.png";
+            valveBr.src = "../../2Sewer/images/valveBr.png";
+            wall.src = "../../2Sewer/images/unusedWallTiles/wall.png";
+            upperWall.src = "../../2Sewer/images/upperWall.png";
+            pipeTopView.src = "../../2Sewer/images/pipe3.png";
+        }//Defining images src properties
 
-        a = undefined;           //0
-        b = wall;                //1
-        c = upperWall;           //2
-        d = sewerFloor;          //3
-        e = sewerFloor;          //4
-        f = valveTl;             //5
-        g = valveTm;             //6
-        h = valveTr;             //7
-        i = valveMl;             //8
-        j = valveMm;             //9
-        k = valveMr;             //10
-        l = valveBl;             //11
-        m = valveBm;             //12
-        n = valveBr;             //13
-        o = pipeTopView;           //14
+
+        {
+            a = undefined;           //0
+            b = wall;                //1
+            c = upperWall;           //2
+            d = sewerFloor;          //3
+            e = sewerFloor;          //4
+            f = valveTl;             //5
+            g = valveTm;             //6
+            h = valveTr;             //7
+            i = valveMl;             //8
+            j = valveMm;             //9
+            k = valveMr;             //10
+            l = valveBl;             //11
+            m = valveBm;             //12
+            n = valveBr;             //13
+            o = pipeTopView;           //14
+        }//Assigning images to global variables
+
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
@@ -1838,6 +1892,8 @@ function fillErasedMap()
 
     if (dialog)
         displayTextBubble();
+    if (lOMap[level] !== undefined)
+        drawOMap();
 }
 
 function changePStartPos()
@@ -1873,18 +1929,26 @@ function drawPMap()
             switch (lPMap[level][row][col])
             {
                 case 1:                                                 //If the element check contains the player
-
-
                     if (!sewersDrained && l2 && (p.row < 11 || p.col > 11))                           //and the sewer is filled with water
                                                                             //draw the players standing in water image
                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-                    else                                                 //and the sewer is  not filled with water
-                                                                            //draw the players regular image
+                    else                                                 //and the sewer is  not filled with water//draw the players regular image
                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
-
+                    break;
+                case 2:
+                    if (l2)
+                    {
+                        if (!sewersDrained)
+                        {
+                            ctx.drawImage(torchSwamp, 0, 0, 32, 32, destX, destY, 32, 32);
+                        }
+                        else
+                        {
+                            ctx.drawImage(torch, 0, 0, 32, 32, destX, destY, 32, 32);
+                        }
+                    }
                     break;
             }
-
             destX += 32;         //Increment column by 1 (8 is column width in ratio to the canvas width)
         }
         destX = 0;              //Start over at beginning position of array as we are at a new row
@@ -1969,6 +2033,65 @@ function drawPMap()
     else
     {
         waterRunning.volume = 0.1;
+    }
+    if (j === door3 && p.row !== 7)
+    {
+        ctx.drawImage(doorBare, 21*32, 7*32);
+
+    }
+    if (j === door3 && p.row !== 7)
+    {
+        ctx.drawImage(doorBare, 21*32, 7*32);
+
+    }
+}
+
+function drawOMap()//Object Map
+{
+    let destX = 0, destY = 0;       //Used to decide which area of map to draw
+
+    //Sets position on tile sheet to
+    // pick from when drawing player
+    p.srcX = p.width * (p.frameX % 4);
+    p.srcY = p.height * p.frameY;
+
+    for (let row = 0; row < lOMap[level].length; row++)         //Run through rows
+    {
+        for (let col = 0; col < lOMap[level][0].length; col++)      // and columns, checking each element for the player
+        {
+            switch (lOMap[level][row][col])
+            {
+                case 1:
+                    if (l2)
+                    {
+                        if (!sewersDrained)
+                        {
+                            ctx.drawImage(torchSwamp, 0, 0, 32, 32, destX, destY, 32, 32);
+                        }
+                        else
+                        {
+                            ctx.drawImage(torch, 0, 0, 32, 32, destX, destY, 32, 32);
+                        }
+                    }
+                    break;
+            }
+            destX += 32;         //Increment column by 1 (8 is column width in ratio to the canvas width)
+        }
+        destX = 0;              //Start over at beginning position of array as we are at a new row
+        destY += 32;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
+    }
+
+    if (l2)
+    {
+        let flame = (Math.floor(Math.random()*3)+1);
+        console.log(flame);
+        for (let t = 0; t < 8; t++)
+        {
+            if (torchLit[t] === true)
+            {
+                /*ctx.drawImage(flame, 0, 0, 0, 0, 0, 0, 0, 0);*/
+            }
+        }
     }
 }
 
@@ -2279,8 +2402,10 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
             ctx.fillRect(0, 0, 800, 600);
         }
     }
-    drawL6Full();
 
+    drawL6Full();
+    if (lOMap[level] !== undefined)
+        drawOMap();
     if (dontDrawP === undefined)
         setTimeout(drawPMap, 10);
 }
@@ -2816,7 +2941,6 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 }
 
 function onKeyDown(e)
-
 {
     if (!l3)
         clearInterval(timer_level3);
@@ -3011,10 +3135,10 @@ function onKeyDown(e)
 
                      if (l2)
                      {
-                         if (p.row === 7 && p.col === 22)//Draw scientist under ledge
+                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
                          {
                              ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
-                             ctx.drawImage(doorBare, 22*32, 7*32);
+                             ctx.drawImage(doorBare, 21*32, 7*32);
                          }
                          else if (underWater)
                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
@@ -3087,10 +3211,10 @@ function onKeyDown(e)
                      drawL6();
                      if (l2)
                      {
-                         if (p.row === 7 && p.col === 22)//Draw scientist under ledge
+                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
                          {
                              ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                             ctx.drawImage(doorBare, 22 * 32, 7 * 32);
+                             ctx.drawImage(doorBare, 21 * 32, 7 * 32);
                          }
                          else if (underWater)
                              ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
@@ -3295,15 +3419,14 @@ function onKeyDown(e)
         {
             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
         }
-        ctx.drawImage(doorBare, 22*32, 7*32);
     }
+
 
     if (dialog)
         setTimeout(checkIfMoved, walkingSpeed * 10);
 }
 
 function checkBoundaries(e)
-
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
