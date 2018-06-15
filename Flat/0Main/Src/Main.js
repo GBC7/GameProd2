@@ -8,16 +8,17 @@ let level = 1;
 let walkingSpeed = 15;
 let dialog = false;             //For drawing dialog
 let alreadySetTimeout = false;     //For drawing dialog
+let alreadyShivering = false;
 let dialogX = undefined, dialogY = undefined; //For storing position dialog started at
 
 
 let lightSwitch = 1, sewerSwitch = 1;                                 //For sewer level
-let lightsOn = true, sewersDrained = true;                          //For sewer level
+let lightsOn = true, sewersDrained = false;                          //For sewer level
 let floorSpriteX = undefined;                                     //For sewer level
 let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
-                                                                        //For sizing player under doors
+let alreadyBeenHere = false;
 
 
 let timer_level3;                                                        //For checking time for level 3
@@ -48,14 +49,15 @@ let dangerous = new Audio;
 dangerous.src = ("../../3Store/audio/enemyappear.mp3");
 let waterRunning = new Audio;
 waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
-
+let ratOfDeath = new Audio;
+ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
 
 bgm_level3.loop = true;
 bgm_level3.volume = 0.2;
 dangerous.loop = true;
 dangerous.volume = 0.2;
 waterRunning.loop = true;
-waterRunning.volume = 0.3;
+waterRunning.volume = 0.1;
 
 
 //level 0 is undefined as we do not have a level 0
@@ -296,53 +298,65 @@ function startGame()
         canvas.style.backgroundImage = "";
 
 
-        let wallDrain = new Image();
-        wallDrain.src = "../../2Sewer/images/wallDrain2.png";
-        let wallSwamp = new Image();
-        wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
-        let pipe = new Image();
-        pipe.src = "../../2Sewer/images/pipe.png";
-        let pillar = new Image();
-        pillar.src = "../../2Sewer/images/pillar.png";
-        let wall = new Image();
-        wall.src = "../../2Sewer/images/upperWall.png";
-        let door = new Image();
-        door.src = "../../2Sewer/images/door.png";
-        let drain = new Image();
-        drain.src = "../../2Sewer/images/drain.png";
+        let stepsCorner = new Image();
+        let steps = new Image();
+        let topSide3 = new Image();
+        let leverUp = new Image();
         let topSide = new Image();
-        topSide.src = "../../2Sewer/images/topSide.png";
         let topCorner = new Image();
-        topCorner.src = "../../2Sewer/images/topCorner.png";
         let wallCorner = new Image();
-        wallCorner.src = "../../2Sewer/images/wallCorner.png";
-        let door2 = new Image();
-        door2.src = "../../2Sewer/images/door2.png";
-        let stairs = new Image();
-        stairs.src = "../../2Sewer/images/stairs.png";
-        let flameWall1 = new Image();
-        flameWall1.src = "../../2Sewer/images/flameWall1.png";
-        let flameWall2 = new Image();
-        flameWall2.src = "../../2Sewer/images/flameWall2.png";
-        let flameWall3 = new Image();
-        flameWall3.src = "../../2Sewer/images/flameWall3.png";
-        let torch = new Image();
-        torch.src = "../../2Sewer/images/torch.png";
         let wallSwamp2 = new Image();
-        wallSwamp2.src = "../../2Sewer/images/wallSwamp2.png";
         let topCorner2 = new Image();
-        topCorner2.src = "../../2Sewer/images/topCorner2.png";
         let topSide2 = new Image();
-        topSide2.src = "../../2Sewer/images/topSide2.png";
+        let door2 = new Image();
+        let wall = new Image();
         let flameCorner1 = new Image();
-        flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
         let flameCorner2 = new Image();
-        flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
         let flameCorner3 = new Image();
-        flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
+        let flameWall1 = new Image();
+        let flameWall2 = new Image();
+        let flameWall3 = new Image();
+        let torch = new Image();
+        let wallDrain = new Image();
+        let wallSwamp = new Image();
+        let pipe = new Image();
+        let pillar = new Image();
+        let door = new Image();
+        let drain = new Image();
+        let stairs = new Image();
 
 
+        {
+            stepsCorner.src = "../../2Sewer/images/stepsCorner.png";
+            steps.src = "../../2Sewer/images/steps.png";
+            topSide3.src = "../../2Sewer/images/topSide3.png";
+            leverUp.src = "../../2Sewer/images/leverUp.png";
+            topSide.src = "../../2Sewer/images/topSide.png";
+            topCorner.src = "../../2Sewer/images/topCorner.png";
+            wallCorner.src = "../../2Sewer/images/wallCorner.png";
+            wallSwamp2.src = "../../2Sewer/images/wallSwamp2.png";
+            topCorner2.src = "../../2Sewer/images/topCorner2.png";
+            topSide2.src = "../../2Sewer/images/topSide2.png";
+            door2.src = "../../2Sewer/images/door2.png";
+            wall.src = "../../2Sewer/images/upperWall.png";
+            flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
+            flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
+            flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
+            flameWall1.src = "../../2Sewer/images/flameWall1.png";
+            flameWall2.src = "../../2Sewer/images/flameWall2.png";
+            flameWall3.src = "../../2Sewer/images/flameWall3.png";
+            torch.src = "../../2Sewer/images/torch.png";
+            wallDrain.src = "../../2Sewer/images/wallDrain2.png";
+            wallSwamp.src = "../../2Sewer/images/wallSwamp.png";
+            pipe.src = "../../2Sewer/images/pipe.png";
+            door.src = "../../2Sewer/images/door.png";
+            pillar.src = "../../2Sewer/images/pillar.png";
+            drain.src = "../../2Sewer/images/drain.png";
+            stairs.src = "../../2Sewer/images/stairs.png";
+        }//Define pictures' source files
 
+
+        {
         a = wall;               //0
         b = door;               //1
         c = undefined;          //2
@@ -365,11 +379,16 @@ function startGame()
         u = torch;              //19
         v = wallSwamp2;         //20
         w = topCorner2;         //21
-        x = topSide2;           //22
+        x = undefined;          //22
         y = flameCorner1;       //23
         z = flameCorner2;       //24
         aa = flameCorner3;      //25
-
+        bb = topSide2;          //26
+        cc = leverUp;           //27
+/*        dd = internet;          //28*/
+        ee = steps;             //29
+        ff = stepsCorner;       //30
+}//Assign pictures to global letter vars
 
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
@@ -389,13 +408,13 @@ function startGame()
                     [ 4,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4],       //9
                     [ 4,  3,  4,  3,  3,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4,  3,  3,  4,  4,  4,  3,  3,  3,  4,  3],       //10
                     [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  4,  4,  4,  4,  3,  3,  4,  3,  4,  3,  4,  3,  3],       //11
-                    [ 3,  3,  4,  4,  3,  4,  4,  4,  3,  4,  3,  3,  3,  4,  4,  4,  3,  3,  3,  4,  4,  3,  3,  4,  4],       //12
-                    [ 4,  3,  4,  3, 20, 20, 20, 20, 20, 20, 20, 21,  4,  3,  3,  3,  3,  3,  3,  3,  4,  3,  3,  3,  4],       //13
-                    [ 4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  4, 22,  3,  4,  3,  4,  4,  3,  4,  4,  4,  4,  3,  4,  3],       //14
-                    [ 4,  4,  4,  3,  3,  3,  4,  3,  4,  3,  4, 22,  3,  4,  4,  4,  3,  4,  3,  3,  3,  3,  3,  3,  3],       //15
-                    [ 3,  3,  3,  4,  4,  3,  4,  3,  3,  4,  3, 22,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  3,  4,  4],       //16
-                    [ 3,  4,  4,  3,  3,  4,  3,  4,  4,  4,  3, 22,  3,  4,  3,  4,  3,  4,  3,  4,  4,  4,  4,  3,  4],       //17
-                    [ 5,  3,  4,  3,  4,  3,  4,  3,  4,  4,  4, 22,  4,  3,  4,  3,  3,  3,  3,  4,  3,  4,  3,  3,  3]        //18
+                    [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  4,  4,  3,  3,  3,  4,  4,  3,  3,  4,  4],       //12
+                    [ 5,  5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 21,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  3,  3,  4],       //13
+                    [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  4,  4,  3,  4,  4,  3,  4,  4,  4,  4,  3,  4,  3],       //14
+                    [10, 27, 10, 10, 10, 10, 10, 10, 10,  5,  5, 26,  3,  4,  4,  4,  3,  4,  3,  3,  3,  3,  3,  3,  3],       //15
+                    [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  4,  3,  3,  4,  4,  4,  4,  4,  4,  4,  3,  4,  4],       //16
+                    [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  4,  4,  3,  4,  3,  4,  3,  4,  4,  4,  4,  3,  4],       //17
+                    [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  3,  3,  4,  3,  3,  3,  3,  4,  3,  4,  3,  3,  3]        //18
                 ];
         }
 
@@ -458,9 +477,26 @@ function startGame()
 
 
         //Below ensures all elements are on screen when level is drawn
-        flameCorner3.onload = function(){l2Ready=true;};
+        stairs.onload = function(){l2Ready=true;};
+
+        waitTillLoaded();
 
 
+        function waitTillLoaded()//Loads map after everything is loaded as long as
+        {
+            if (!l2Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitTillLoaded, 10);
+            }
+            else if (!alreadyBeenHere)
+            {
+                drawMap();                   //Draw next map
+                alreadyBeenHere=true;
+            }
+        }
         addEventListener("keydown", onKeyDown, false);
         startX[2] = startY[2] = 0;
 
@@ -1437,10 +1473,8 @@ function startGame()
 
         addEventListener("keydown", onKeyDown, false);
     }
+
 }
-
-
-
 
 
 
@@ -1729,34 +1763,62 @@ function fillErasedMap()
                     {
                         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
-                                                                            // on row 0 (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
 
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
                             ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
-                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
                             ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
-
                         else if (yPos === 224 && xPos >= 576)
-                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
-                                                                            // of the secondary rooms outer wall
-                                                                            // (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
                         ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
                             ctx.fillRect(xPos, yPos + 24, 32, 24);
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
                             ctx.fillRect(xPos, yPos, 32, 32);
-                        else if (yPos > 0 && xPos === 320)
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)
                             ctx.fillRect(xPos, yPos, 32, 32);
                         else if (yPos === 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos + 28, 32, 4);
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
                     }
-
                 }
             }
         }
@@ -1813,7 +1875,7 @@ function drawPMap()
                 case 1:                                                 //If the element check contains the player
 
 
-                    if (!sewersDrained && l2)                           //and the sewer is filled with water
+                    if (!sewersDrained && l2 && (p.row < 11 || p.col > 11))                           //and the sewer is filled with water
                                                                             //draw the players standing in water image
                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, destX, destY, p.width, p.height);
                     else                                                 //and the sewer is  not filled with water
@@ -1896,11 +1958,18 @@ function drawPMap()
                     addEventListener("keydown", onKeyDown, false);
                     alreadyDoinIt = true;
                 }
-
-                console.log(steps);
             }
 
         }
+
+    if (p.col === 10 && p.row === 0)//If in front of sewer pipe
+    {
+        waterRunning.volume = 0.5;
+    }
+    else
+    {
+        waterRunning.volume = 0.1;
+    }
 }
 
 function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling it is not neccessary) it allows
@@ -2172,16 +2241,34 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
         if (!sewersDrained) // and the sewer is turned on
         {//Draw a simulated sewer water color
             ctx.fillStyle = "rgba(47, 141, 91, 0.41)";    //Draw a green haze over portion of canvas to simulate sewer water
-            ctx.fillRect(0, 24, 320, 576);//Left
-            ctx.fillRect(320, 32, 32, 600);//Middle
-            ctx.fillRect(352, 24, 224, 576);//Right
+            ctx.fillRect(0, 24, 320, 330);//Left
+            ctx.fillRect(320, 32, 32, 322);//Middle
+            ctx.fillRect(352, 24, 32, 330);//After Pipe
+            ctx.fillRect(384, 24, 16, 360);//AboveSteps
+            ctx.fillRect(400, 24, 16, 800);//Right of Steps
+            ctx.fillRect(384, 416, 16, 800);//Below Steps
+            ctx.fillRect(416, 24, 160, 800);//Right
             ctx.fillRect(576, 252, 224, 376);//RightBottom
 
+
+            ctx.fillRect(384, 384, 5, 1);       //These two statements draw 3 pixels in total
+            ctx.fillRect(389, 384, 5, 2);       //      for the steps  (I'm !insane)
+            ctx.fillRect(394, 384, 5, 32);      //Bottom step submerged
+
             ctx.fillStyle = "rgba(98, 79, 18, 0.51)";     //Draw a brown haze over portion of canvas to simulate sewer water
-            ctx.fillRect(0, 24, 320, 576);//Left
-            ctx.fillRect(320, 32, 32, 600);//Middle
-            ctx.fillRect(352, 24, 224, 576);//Right
+            ctx.fillRect(0, 24, 320, 330);//Left
+            ctx.fillRect(320, 32, 32, 322);//Middle
+            ctx.fillRect(352, 24, 32, 330);//After Pipe
+            ctx.fillRect(384, 24, 16, 360);//AboveSteps
+            ctx.fillRect(400, 24, 16, 800);//Right of Steps
+            ctx.fillRect(384, 416, 16, 800);//Below Steps
+            ctx.fillRect(416, 24, 160, 800);//Right
             ctx.fillRect(576, 252, 224, 376);//RightBottom
+
+
+            ctx.fillRect(384, 384, 5, 1);       //These two statements draw 3 pixels in total
+            ctx.fillRect(389, 384, 5, 2);       //      for the steps  (I'm !insane)
+            ctx.fillRect(394, 384, 5, 32);      //Bottom step submerged
 
             waterRunning.play();                            //Play the water running mp3 file to simulate running water
         }
@@ -2201,7 +2288,6 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
 function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 {
     //    37 - left , 38 - up , 39 - right , 40 - down
-
     if (l1)//If it's Lvl 1
     {
 
@@ -2280,7 +2366,6 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                         p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
                         startGame();                            //Load new levels assets and settings
-                        setTimeout(drawMap, 40);                //Draw its entire map
                     }
                 }
             };
@@ -2371,6 +2456,13 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                 dialog = true;
             }
         }
+
+
+
+        if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition
+        {   //To check if character is in area where he isn't supposed to be when the light is off
+            dialog = true;
+        }
     }
 
     if (l3)//If it's Lvl 3
@@ -2405,11 +2497,20 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
                                                             // the player will be facing
+                    l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
-                    setTimeout(drawMap, 40);                //Draw its map
-                    clearInterval(timer_level3);
-                    dangerous.pause();
-                    bgm_level3.pause();
+
+                    waitTillReady();
+                    function waitTillReady()
+                    {
+                        if (!l2Ready)
+                            setTimeout(waitTillReady, 10);
+                        else
+                        {
+                            setTimeout(drawMap, 40);                //Draw its map
+                            clearLevel3();
+                        }
+                    }
                 }
             }
         }
@@ -2448,7 +2549,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     ctx.drawImage(scientist, p.srcX, p.srcY + (5 * staysClimbed), 32, 48 - (5 * staysClimbed), p.col * 32, p.row * 32 - (5 * staysClimbed), 32, 48 - (5 * staysClimbed));
 
                     if (staysClimbed !== 5)         //If player has not climbed all stairs
-                        setTimeout(walkToStreet , 500);     //Keep climbing them - Call the stair climbing function again
+                        setTimeout(walkToStreet , 120);     //Keep climbing them - Call the stair climbing function again
                     else                            //Otherwise
                     {
                         level = 4;                              //Change level identifier appropriately
@@ -2457,12 +2558,21 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
                         ctx.clearRect(0,0,800,600);             //Clear entire canvas
                         p.frameY = 2;                           //Change tile sheet frame to match direction being faced
-
+                        l4Ready = false;
                         startGame();                            //Load new levels assets and settings
-                        setTimeout(drawMap, 500);                //Draw its entire map
-                        clearInterval(timer_level3);
-                        dangerous.pause();
-                        bgm_level3.pause();
+                        waitForEverythingToLoad();
+
+                        function waitForEverythingToLoad()
+                        {
+                            if (!l4Ready)
+                                setTimeout(waitForEverythingToLoad, 10);
+                            else
+                            {
+                                drawMap();
+                                clearLevel3();
+                            }
+                        }
+
                     }
                 }
             }
@@ -2508,7 +2618,6 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     }
                     else if (stepsUp < 8)
                     {
-                        console.log(p.srcY);
                         stepsUp++;
                         ctx.clearRect(p.col * 32, (p.row * 32) - (8 * (stepsUp - 1)), p.width, p.height);//Clear portion of canvas the player was last on
                         fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
@@ -2641,7 +2750,6 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     ctx.clearRect(0,0,800,600);
                     l2Ready=false;
                     startGame(0);
-                    setTimeout(drawMap(0), 40);
                     sizer = 10;
                     removeEventListener("keydown", onKeyDown, false);
                     waitToLoad();
@@ -2746,6 +2854,7 @@ function onKeyDown(e)
              p.frameY = 1;
              p.srcY = p.height * p.frameY;
              let walk = 0;
+             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
              walkLeft();
 
@@ -2763,8 +2872,10 @@ function onKeyDown(e)
                      ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (l2 && !sewersDrained)
+                     if (l2 && underWater)
+                     {
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                     }
                      else
                          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                      setTimeout(walkLeft, walkingSpeed);
@@ -2794,7 +2905,7 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             if (l2 && !sewersDrained)
+             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -2811,6 +2922,7 @@ function onKeyDown(e)
              p.frameY = 2;
              p.srcY = p.height * p.frameY;
              let walk = 0;
+             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
              walkRight();
 
@@ -2828,8 +2940,11 @@ function onKeyDown(e)
                      ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (l2 && !sewersDrained)
+
+                     if (l2 && underWater)
+                     {
                          ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                     }
                      else
                          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
                      setTimeout(walkRight, walkingSpeed);
@@ -2858,7 +2973,7 @@ function onKeyDown(e)
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
 
-             if (l2 && !sewersDrained)
+             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -2875,6 +2990,7 @@ function onKeyDown(e)
              p.frameY = 3;
              p.srcY = p.height * p.frameY;
              let walk = 0;
+             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
              animateWalking();
 
@@ -2892,22 +3008,18 @@ function onKeyDown(e)
                      ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (p.row === 7 && p.col === 22)//Draw scientist under ledge
+
+                     if (l2)
                      {
-                         if (!sewersDrained)
-                         {
-                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
-                         }
-                         else
+                         if (p.row === 7 && p.col === 22)//Draw scientist under ledge
                          {
                              ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
+                             ctx.drawImage(doorBare, 22*32, 7*32);
                          }
-                         ctx.drawImage(doorBare, 22*32, 7*32);
-                     }
-                     else if (l2 && !sewersDrained)
-                     {
-
-                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                         else if (underWater)
+                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                         else
+                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
                      }
                      else
                      {
@@ -2938,7 +3050,7 @@ function onKeyDown(e)
              drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
-             if (l2 && !sewersDrained)
+             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -2955,6 +3067,7 @@ function onKeyDown(e)
              p.frameY = 0;
              p.srcY = p.height * p.frameY;
              let walk = 0;
+             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
              walkDown();
 
@@ -2972,21 +3085,17 @@ function onKeyDown(e)
                      ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                      drawL6();
-                     if (p.row === 5 && p.col === 22)//Draw scientist under ledge
+                     if (l2)
                      {
-                         if (!sewersDrained)
+                         if (p.row === 7 && p.col === 22)//Draw scientist under ledge
                          {
-                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 + (8 * walk)), 32, 48);
+                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                             ctx.drawImage(doorBare, 22 * 32, 7 * 32);
                          }
+                         else if (underWater)
+                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                          else
-                         {
-                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 + (8 * walk)), 32, 48);
-                         }
-                         ctx.drawImage(doorBare, 22*32, 7*32);
-                     }
-                     else if (l2 && !sewersDrained)
-                     {
-                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                      }
                      else
                      {
@@ -3019,7 +3128,7 @@ function onKeyDown(e)
              drawL6();
              p.srcX = p.width * (p.frameX % 4);
              p.srcY = p.height * (p.frameY);
-             if (l2 && !sewersDrained)
+             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                  ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
              else
                  ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -3178,7 +3287,7 @@ function onKeyDown(e)
 
     if (l2 && p.row === 6 && p.col === 22)//PNG image with only ridge to draw over player
     {
-        if (!sewersDrained)
+        if (!sewersDrained && (p.row < 11 || p.col > 11))
         {
             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
         }
@@ -3202,19 +3311,29 @@ function checkBoundaries(e)
                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
            else if (l2)
             {
-                canGoThisWay =
-                (
-                    lMap[level][p.row + 1][p.col - 1] === 3 ||
-                    lMap[level][p.row + 1][p.col - 1] === 4 ||
-                    lMap[level][p.row + 1][p.col - 1] === 5 ||
+                if (!lightsOn && p.row === 11 && p.col === 9)
+                {
+                    canGoThisWay = false;
+                }
+                else
+                {
+                    canGoThisWay =
                     (
-                        lMap[level][p.row + 1][p.col - 1] === 15 ||
-                        lMap[level][p.row + 1][p.col - 1] === 9
-                        &&
-                        doorThreeOpen
-                    )
+                        lMap[level][p.row + 1][p.col - 1] === 3 ||
+                        lMap[level][p.row + 1][p.col - 1] === 4 ||
+                        lMap[level][p.row + 1][p.col - 1] === 5 ||
+                        lMap[level][p.row + 1][p.col - 1] === 29 ||
+                        lMap[level][p.row + 1][p.col - 1] === 30 ||
+                        (
+                            lMap[level][p.row + 1][p.col - 1] === 15 ||
+                            lMap[level][p.row + 1][p.col - 1] === 9
+                            &&
+                            doorThreeOpen
+                        )
 
-                );
+                    );
+                }
+
             }
            else if (l11)
            {
@@ -3254,6 +3373,8 @@ function checkBoundaries(e)
                     lMap[level][p.row + 1][p.col + 1] === 3 ||
                     lMap[level][p.row + 1][p.col + 1] === 4 ||
                     lMap[level][p.row + 1][p.col + 1] === 5 ||
+                    lMap[level][p.row + 1][p.col + 1] === 29 ||
+                    lMap[level][p.row + 1][p.col + 1] === 30 ||
                     (
                         lMap[level][p.row + 1][p.col + 1] === 15 ||
                         lMap[level][p.row + 1][p.col + 1] === 9
@@ -3300,6 +3421,8 @@ function checkBoundaries(e)
                     lMap[level][p.row][p.col] === 3 ||
                     lMap[level][p.row][p.col] === 4 ||
                     lMap[level][p.row][p.col] === 5 ||
+                    lMap[level][p.row][p.col] === 29 ||
+                    lMap[level][p.row][p.col] === 30 ||
                     (
                         lMap[level][p.row][p.col] === 15 ||
                         lMap[level][p.row][p.col] === 9
@@ -3346,6 +3469,8 @@ function checkBoundaries(e)
                     lMap[level][p.row + 2][p.col] === 3 ||
                     lMap[level][p.row + 2][p.col] === 4 ||
                     lMap[level][p.row + 2][p.col] === 5 ||
+                    lMap[level][p.row + 2][p.col] === 29 ||
+                    lMap[level][p.row + 2][p.col] === 30 ||
                     (
                         lMap[level][p.row + 2][p.col]  === 15 ||
                         lMap[level][p.row + 2][p.col] === 9
@@ -3448,16 +3573,19 @@ function checkActions()
 {
     if (l2)
     {
-        if (p.row === 7 && p.col === 21 && p.frameY === 3)
+        if (p.row === 7 && p.col === 21 && p.frameY === 3)  //Open Locked Door
         {
             doorThreeOpen = true;
             j = door3;
             lMap[level][7][22] = 14;
             lMap[level][6][22] = 15;
             drawMap(0);
+            doorSound.play();
             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
 
         }
+
+        //For torches
         if (p.frameY === 3)//Looking up                                                                     Needs to be finished
         {
             checkForTorches();
@@ -3476,6 +3604,24 @@ function checkActions()
         }
         function checkForTorches()
         {
+
+        }
+
+        if (p.row === 15 && p.col === 1 && p.frameY === 3)
+        {
+            let leverDown = new Image();
+            leverDown.src = "../../2Sewer/images/leverDown.png";
+            cc = leverDown;
+
+
+            leverDown.onload = function()           //Draw the sewer drained
+            {
+                sewersDrained = true;
+                waterRunning.pause();
+                ctx.clearRect(0,0,800,600);
+                drawMap(0);
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            };
 
         }
     }
@@ -3525,7 +3671,7 @@ function checkActions()
 
     if (l7 && p.row === 1 && p.col === 14)
     {
-        closedWindow = new Image();
+        let closedWindow = new Image();
         closedWindow.src = "../../7Lab/images/closedWindow.png";
         r = closedWindow;
         drawMap();
@@ -3535,25 +3681,86 @@ function checkActions()
 
 function displayTextBubble()
 {
-    if (l2 && dialog && p.col === 10 && p.row === 0) //If going UP & character is under pipe but the sewer is running
+    if (l2) //If going UP & character is under pipe but the sewer is running
     {
-        dialogX = 10;
-        dialogY = 0;
-        ctx.font="10px Arial";
-        ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-        ctx.fillStyle = "rgba(0, 0, 0)";
-        ctx.fillText("The water is too powerful..", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
-        if (!alreadySetTimeout)
+        if (dialog && !lightsOn && p.row === 11 && p.col === 9)//Shiver
         {
-            setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-            alreadySetTimeout = true;
+            let shivers = 0;
+            removeEventListener("keydown", onKeyDown, false);
+            dialogX = 9;
+            dialogY = 11;
+            ctx.font="10px Arial Bold";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("Ahh! ..better light", (p.col + 2) * 32 + 10, (p.row + 3) * 32 - 4);
+            ctx.fillText("this place up first.", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+            if (!alreadyShivering)
+            {
+                shiver();
+                ratOfDeath.play();
+            }
+
+            function shiver()
+            {
+                shivers++;
+                alreadyShivering = true;
+                if (shivers !== 22)
+                {
+                    setTimeout(shiverLeft, 15);
+                }
+                else
+                {
+                    dialog = false;
+                    alreadyShivering = false;
+                    addEventListener("keydown", onKeyDown, false);
+
+                }
+                function shiverLeft()
+                {
+                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) - 1, (p.row * 32) + 0.25, 32, 48);
+                    setTimeout(shiverRight, 15);
+                }
+                function shiverRight()
+                {
+                    ctx.clearRect(p.col*32, p.row*32, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32) + 1, (p.row * 32) - 0.25, 32, 48);
+                    setTimeout(shiver, 10);
+                }
+
+            }
         }
+
+        if (dialog && p.col === 10 && p.row === 0)//No go in pipe yet
+        {
+            dialogX = 10;
+            dialogY = 0;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("The water is too powerful..", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+
     }
 
 
 
 /*                                      //This is where you put your levels thought bubble conditions
-                                        //There are 4 thought bubble (1 for each side of the player...
+                                        //There are 4 thought bubble images (1 for each side of the player...
                                         //     top left, bottom left, top right, bottom right
     if (l3 && dialog &&....)
     if (l4 && dialog &&....)
@@ -3827,32 +4034,72 @@ function displayTextBubble()
                     {
                         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
-                                                                            // on row 0 (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
 
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
                             ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
-                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
                             ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
-
                         else if (yPos === 224 && xPos >= 576)
-                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
-                                                                            // of the secondary rooms outer wall
-                                                                            // (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
                         ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
                             ctx.fillRect(xPos, yPos + 24, 32, 24);
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
                             ctx.fillRect(xPos, yPos, 32, 32);
-                        else if (yPos > 0 && xPos === 320)
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)
                             ctx.fillRect(xPos, yPos, 32, 32);
                         else if (yPos === 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos + 28, 32, 4);
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
+                    }
+
+                    if (!lightsOn && l2)                //If 'the lights are off' on level two
+                    {
+                        let xPos = (p.col + 1) * 32, yPos = p.row * 32;
+
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
+                        ctx.fillRect(xPos + 48, 0, 800, 600);
+                        ctx.fillRect(0, yPos + 96, 800, 600);
+                        ctx.fillRect(0, 0, xPos - 80, 600);
+                        ctx.fillRect(0, 0, 800, yPos - 32);
                     }
 
                 }
@@ -3861,11 +4108,12 @@ function displayTextBubble()
             }
             destY += 32;
         }
-
+        drawPMap();
         dialogX = undefined;
         dialogY = undefined;
         dialog = false;
         alreadySetTimeout = false;
+
     }
 }
 
@@ -4134,32 +4382,71 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
                     {
                         ctx.fillStyle = "rgba(47, 141, 91, 0.41)";          //Change to swamp colour green
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
-                            ctx.fillRect(xPos, yPos + 24, 32, 24);          //Draw over the bottom quarter of the tiles
-                                                                            // on row 0 (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 24, 32, 24);//Draw over the bottom quarter of the tiles on row 0 (to make water look knee level)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
 
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)    //For drawing only where the water should be
                             ctx.fillRect(xPos, yPos, 32, 32);               //^^^^^
-                        else if (yPos > 0 && xPos === 320)                  //      ^^^^^
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)                  //      ^^^^^
                             ctx.fillRect(xPos, yPos, 32, 32);               //            ^^^^^^
-
                         else if (yPos === 224 && xPos >= 576)
-                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles
-                                                                            // of the secondary rooms outer wall
-                                                                            // (to make water look knee level)
+                            ctx.fillRect(xPos, yPos + 28, 32, 4);           //Draw over the bottom eighth of the tiles// of the secondary rooms outer wall// (to make water look knee level)
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
 
                         ctx.fillStyle = "rgba(98, 79, 18, 0.51)";           //Change to swamp colour brown and do above
+
                         if ((yPos === 0 && xPos !== 320) && xPos < 576)
                             ctx.fillRect(xPos, yPos + 24, 32, 24);
-                        else if (yPos > 0 && xPos < 576 && xPos !== 320)
+                        else if (yPos === 352 && xPos < 384)
+                            ctx.fillRect(xPos, yPos, 32, 2);
+                        else if (yPos === 352 && xPos === 384)//Steps
                             ctx.fillRect(xPos, yPos, 32, 32);
-                        else if (yPos > 0 && xPos === 320)
+                        else if (yPos === 384 && xPos === 384)//Step1, 2 & 3
+                        {
+                            ctx.fillRect(xPos, yPos, 5, 1);        //These draw 3 pixels in total for the steps
+                            ctx.fillRect(xPos + 5, yPos, 5, 2);    //       (I'm !insane.. I swear)
+                            ctx.fillRect(xPos + 10, yPos, 5, 32);  //Submerged last step
+
+                            ctx.fillRect(xPos + 15, yPos, 17, 32);
+                        }
+                        else if (yPos >= 416 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos >= 352 && xPos > 352 && xPos < 576)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos < 576 && xPos !== 320)
+                            ctx.fillRect(xPos, yPos, 32, 32);
+                        else if (yPos > 0 && yPos < 352 && xPos === 320)
                             ctx.fillRect(xPos, yPos, 32, 32);
                         else if (yPos === 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos + 28, 32, 4);
                         else if (yPos > 224 && xPos >= 576)
                             ctx.fillRect(xPos, yPos, 32, 32);
+                    }
+                    if (!lightsOn && l2)                //If 'the lights are off' on level two
+                    {
+                        let xPos = (p.col + 1) * 32, yPos = p.row * 32;
+
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";     //Draw a black block over areas not 'lit by torch'
+                        ctx.fillRect(xPos + 48, 0, 800, 600);
+                        ctx.fillRect(0, yPos + 96, 800, 600);
+                        ctx.fillRect(0, 0, xPos - 80, 600);
+                        ctx.fillRect(0, 0, 800, yPos - 32);
                     }
 
                 }
@@ -4173,7 +4460,7 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
 
 
 
-
+        drawPMap();
 
         //Turn off the dialog stuffs
         dialogX = undefined;
