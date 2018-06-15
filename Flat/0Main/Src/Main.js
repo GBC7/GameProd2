@@ -1,38 +1,48 @@
 let gameOver = false;
 
 
+//Level Selecting
 let l1 = true, l2 = false, l3 = false, l4 = false, l5 = false, l6 = false, l7 = false, l11 = false;
 let level = 1;
 
 
+//Global
 let walkingSpeed = 15;
 let dialog = false;             //For drawing dialog
 let alreadySetTimeout = false;     //For drawing dialog
-let alreadyShivering = false;
 let dialogX = undefined, dialogY = undefined; //For storing position dialog started at
 
 
-let lightSwitch = 1, sewerSwitch = 1;                                 //For sewer level
-let lightsOn = true, sewersDrained = false;                          //For sewer level
-let floorSpriteX = undefined;                                     //For sewer level
-let notWalking = true, canGoThisWay = false;                          //For boundaries and walking animation
+//*****Testing only*****//
+let lightSwitch = 1, sewerSwitch = 1;                                //*****Testing only*****//
+//*****Testing only*****//
+
+
+//L2
+let lightsOn = true, sewersDrained = false;                             //For sewer level
+let floorSpriteX = undefined;                                           //For sewer level
+let notWalking = true, canGoThisWay = false;                            //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
 let alreadyBeenHere = false;
+let alreadyShivering = false;
 let torchesSet = false;
-let torchLit = [undefined, undefined, undefined, undefined, undefined, undefined, undefined];
+let torchLit = [false, false, false, false, false, false, false];
 
 
+//L3
 let timer_level3;                                                        //For checking time for level 3
 let leftDoorOpen = false;
 let rightDoorOpen = false;
 let findPasscode = false;                                               //For clothing store
-let findMap = false;                                                     //For clothing store
+let findMap = false;                                                    //For clothing store
 let findRollerblades = false;                                           //For clothing store
-let findDisguise = false;                                                //For clothing store
+let findDisguise = false;                                               //For clothing store
 let enemyAppearLevel3 = false;
 let detectPlayerLevel3 = false;
 
+
+//L3
 let enemiesLevel3 = [];
 let enemyLevel3 = function() {
     this.x = 0;
@@ -41,31 +51,35 @@ let enemyLevel3 = function() {
 };
 
 
+//Sounds
 let doorSound = new Audio();
-doorSound.src = ('../../3Store/audio/open.mp3');
 let warningSound = new Audio();
-warningSound.src = ('../../3Store/audio/warningsound.mp3');
 let bgm_level3 = new Audio;
-bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
 let dangerous = new Audio;
-dangerous.src = ("../../3Store/audio/enemyappear.mp3");
 let waterRunning = new Audio;
-waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
 let ratOfDeath = new Audio;
-ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
-
-bgm_level3.loop = true;
-bgm_level3.volume = 0.2;
-dangerous.loop = true;
-dangerous.volume = 0.2;
-waterRunning.loop = true;
-waterRunning.volume = 0.1;
+{
+    doorSound.src = ('../../3Store/audio/open.mp3');
+    warningSound.src = ('../../3Store/audio/warningsound.mp3');
+    bgm_level3.src = ("../../3Store/audio/clothingshop.mp3");
+    dangerous.src = ("../../3Store/audio/enemyappear.mp3");
+    waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
+    ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
+    bgm_level3.loop = true;
+    bgm_level3.volume = 0.2;
+    dangerous.loop = true;
+    dangerous.volume = 0.2;
+    waterRunning.loop = true;
+    waterRunning.volume = 0.1;
+}
 
 
 //level 0 is undefined as we do not have a level 0
-   // Level       0      1   2   3   4    5   6   7      8          9         10      11
-let startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12],
+let startX, startY;
+{ // Level        0      1   2   3   4    5   6   7      8          9         10      11
+    startX = [undefined, 0,  0,  1,  10,  0,  10, 0, undefined, undefined, undefined, 12];
     startY = [undefined, 5,  0,  16, 17,  0,  14, 1, undefined, undefined, undefined, 16];
+}
 
 
 //For setting direction the character is facing when entering a new level
@@ -74,34 +88,48 @@ let startFrameY = [undefined, undefined, undefined, undefined, undefined, undefi
 
 
 //x and y map boundaries per level
-// Level          0       1    2    3    4    5    6    7       8           9           10       11
-let xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  undefined,  undefined,  undefined,  24],
-    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0],
-    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17],
+
+let xMax, xMin, yMax, yMin;
+{// Level          0       1    2    3    4    5    6    7       8           9           10       11
+    xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  undefined,  undefined,  undefined,  24];
+    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  undefined,  0];
+    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  undefined,  17];
     yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,  undefined,  undefined,  undefined,  2];
+}
 
 
-// Level floor numbers -   0 , 1,     2,     3, 4, 5, 6, 7      8          9         10       11
-let floorNumbers = [undefined, 0, undefined, 0, 1, 2, 0, 1, undefined, undefined, undefined, undefined];
+let floorNumbers;
+{// Level floor numbers - 0 , 1,     2,     3, 4, 5, 6, 7      8          9         10       11
+    floorNumbers= [undefined, 0, undefined, 0, 1, 2, 0, 1, undefined, undefined, undefined, undefined];
+}
 
 
 //level maps initialized when levels are loaded
-    // Level    0          1          2          3          4          5          6         7
-let lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+let lMap;
+{   // Level    0          1          2          3          4          5          6         7
+    lMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
     //   8        9         10          11
     undefined, undefined, undefined, undefined];
+}
 
 
 //level player maps initialized when levels are loaded
-let lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
-    //   8        9         10          11
-    undefined, undefined, undefined, undefined];
+let lPMap;
+{   // Level    0          1          2          3          4          5          6         7
+    lPMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+        //   8        9         10          11
+        undefined, undefined, undefined, undefined];
+}
+
 
 //For objects that need to be able to be "walked through" but not erased upon walkthrough (Eg. my torches)
 // (Do not appear as being walked through since players feet are 48 pixels below actualy position)
-let lOMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
+let lOMap;
+{
+    lOMap = [undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined,
     //   8        9         10          11
     undefined, undefined, undefined, undefined];
+}
 
 
 //For finding out if level is ready to be drawn
@@ -137,6 +165,7 @@ frameX: 0,                //Counter to use for selecting section of tile sheet b
 frameY: 0,
 };
 
+
 //Universal Images
 let scientist = new Image();                                //Regular player image
 let sciUndWater = new Image();                              //Image fpr player while in sewer
@@ -153,6 +182,7 @@ let thotTr = new Image();                                   //Thought bubble ima
     scientist.src = "../../0Main/images/scientist2.png";
 }
 
+
 //Sewer
 let wetPipe = new Image();
 let sewerFloor = new Image();
@@ -164,13 +194,19 @@ let floorClean = new Image();
 let doorBare = new Image();
 let torch = new Image();
 let torchSwamp = new Image();
-let flameCorner1 = new Image();
-let flameCorner2 = new Image();
-let flameCorner3 = new Image();
-let flameWall1 = new Image();
-let flameWall2 = new Image();
-let flameWall3 = new Image();
+let fireWall = [new Image(), new Image(), new Image()];
+let fireCorner = [new Image(), new Image(), new Image()];
+let fireWallX = [24, undefined, undefined];
+let fireWallY = [8, undefined, undefined];
+let fireCornerX = [18, undefined, undefined];
+let fireCornerY = [8, undefined, undefined];
 {
+    fireWall[0].src = "../../2Sewer/images/flameWall1.png";
+    fireWall[1].src = "../../2Sewer/images/flameWall2.png";
+    fireWall[2].src = "../../2Sewer/images/flameWall3.png";
+    fireCorner[0].src = "../../2Sewer/images/flameCorner1.png";
+    fireCorner[1].src = "../../2Sewer/images/flameCorner2.png";
+    fireCorner[2].src = "../../2Sewer/images/flameCorner3.png";
     wetPipe.src = "../../2Sewer/images/pipeWet.png";
     sewerFloor.src = "../../2Sewer/images/floor.png";
     level3sprite.src = "../../3Store/images/ClothingStoreSprite.png";
@@ -179,15 +215,10 @@ let flameWall3 = new Image();
     floorAboveDoor.src = "../../2Sewer/images/floorAboveDoor.png";
     floorClean.src = "../../2Sewer/images/floorClean.png";
     doorBare.src = "../../2Sewer/images/doorBare.png";
-    flameCorner1.src = "../../2Sewer/images/flameCorner1.png";
-    flameCorner2.src = "../../2Sewer/images/flameCorner2.png";
-    flameCorner3.src = "../../2Sewer/images/flameCorner3.png";
-    flameWall1.src = "../../2Sewer/images/flameWall1.png";
-    flameWall2.src = "../../2Sewer/images/flameWall2.png";
-    flameWall3.src = "../../2Sewer/images/flameWall3.png";
     torch.src = "../../2Sewer/images/torch.png";
     torchSwamp.src = "../../2Sewer/images/torchSwamp.png";
 }
+
 
 //Roof
 let gate = new Image();
@@ -228,38 +259,40 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "url('../../1Home/images/city.gif')";
-        /*You could change fill style to brown or some other colour and fill a rectangle behind the house so that the
-        * background picture doesn't show through the house*/
-
 
 
         let outsideWall = new Image();
-        outsideWall.src = "../../1Home/images/outsideWall.png";
         let chimney = new Image();
-        chimney.src = "../../1Home/images/chimney.png";
         let windowTopLeft = new Image();
-        windowTopLeft.src = "../../1Home/images/windowTopLeft.png";
         let windowTopRight = new Image();
-        windowTopRight.src = "../../1Home/images/windowTopRight.png";
         let windowBottomLeft = new Image();
-        windowBottomLeft.src = "../../1Home/images/windowBottomLeft.png";
         let windowBottomRight = new Image();
-        windowBottomRight.src = "../../1Home/images/windowBottomRight.png";
         let streetLight = new Image();
-        streetLight.src = "../../1Home/images/streetLight.png";
         let roof = new Image();
-        roof.src = "../../1Home/images/shingles.jpg";
 
 
-        //Below one letter variables must be updated upon calling each level
-        a = roof;
-        b = outsideWall;
-        c = undefined;
-        d = chimney;
-        e = windowTopLeft;
-        f = windowTopRight;
-        g = windowBottomLeft;
-        h = windowBottomRight;
+        {
+            outsideWall.src = "../../1Home/images/outsideWall.png";
+            chimney.src = "../../1Home/images/chimney.png";
+            windowTopLeft.src = "../../1Home/images/windowTopLeft.png";
+            windowTopRight.src = "../../1Home/images/windowTopRight.png";
+            windowBottomLeft.src = "../../1Home/images/windowBottomLeft.png";
+            windowBottomRight.src = "../../1Home/images/windowBottomRight.png";
+            streetLight.src = "../../1Home/images/streetLight.png";
+            roof.src = "../../1Home/images/shingles.jpg";
+        }//Define SRC property of images
+
+
+        {
+            a = roof;
+            b = outsideWall;
+            c = undefined;
+            d = chimney;
+            e = windowTopLeft;
+            f = windowTopRight;
+            g = windowBottomLeft;
+            h = windowBottomRight;
+        }//Assign images to global letter variables
 
 
         if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
@@ -384,15 +417,12 @@ function startGame()
             o = wallBesideDoor;     //14
             q = floorAboveDoor;     //15
 
-            s = flameWall2;         //17
-            t = flameWall3;         //18
+
             u = torch;              //19
             v = wallSwamp2;         //20
             w = topCorner2;         //21
             x = undefined;          //22
 
-            z = flameCorner2;       //24
-            aa = flameCorner3;      //25
             bb = topSide2;          //26
             cc = leverUp;           //27
 
@@ -1913,7 +1943,7 @@ function changePStartPos()
     p.prevCol = p.col;
 }
 
-function drawPMap()
+function drawPMap()//Player Map
 {
     let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
@@ -2074,6 +2104,11 @@ function drawOMap()//Object Map
                         }
                     }
                     break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+
             }
             destX += 32;         //Increment column by 1 (8 is column width in ratio to the canvas width)
         }
