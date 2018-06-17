@@ -4,9 +4,9 @@ let gameOver = false;
 //Current Level Bool
 let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
 {
-    l1 = true;
+    l1 = false;
     l2 = false;
-    l3 = false;
+    l3 = true;
     l4 = false;
     l5 = false;
     l6 = false;
@@ -19,7 +19,7 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
 
 
 //Current Level Int
-let level = 1;
+let level = 3;
 
 
 //Global
@@ -48,24 +48,56 @@ let torchLit = [false, false, false, false, false, false, false];
 
 //L3
 let timer_level3;                                                        //For checking time for level 3
+let timer_level3_enemy;                                                  //For checking time for level 3
 let leftDoorOpen = false;
 let rightDoorOpen = false;
 let findPasscode = false;                                               //For clothing store
 let findMap = false;                                                    //For clothing store
 let findRollerblades = false;                                           //For clothing store
 let findDisguise = false;                                               //For clothing store
+let findAllLevel3 = false;
 let enemyAppearLevel3 = false;
 let detectPlayerLevel3 = false;
 
+let windowClose = new Image();
+let windowOpen = new Image();
+let door1 = new Image();
+let door2 = new Image();
+
+let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
+let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
+
 
 //L3
-let enemiesLevel3 = [];
-let enemyLevel3 = function() {
-    this.x = 0;
-    this.y = 0;
-    // add enemy property
+let enemyIndexLevel3 = 0; //global variable
+
+let enemyImg = new Image();                                    //enemy image (temp)
+enemyImg.src = "../../3Store/images/enemy2.png";
+
+let enemyLevel3 = function(row, col) {
+	this.row = row;
+	this.col = col;
+	this.width = 32;
+	this.height = 64;
+	this.sw = 1;
+	// add enemy property if need
 };
 
+// enemy initial position
+let enemy1 = new enemyLevel3(0, 6);
+let enemy2 = new enemyLevel3(1, 6);
+let enemy3 = new enemyLevel3(2, 6);
+let enemy4 = new enemyLevel3(3, 6);
+let enemy5 = new enemyLevel3(6, 6);
+let enemy6 = new enemyLevel3(7, 0);
+let enemy7 = new enemyLevel3(9, 6);
+let enemy8 = new enemyLevel3(11, 7);
+let enemy9 = new enemyLevel3(13, 0);
+let enemy10 = new enemyLevel3(15, 0);
+
+// declare enemies array
+let enemiesLevel3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10];
+let enemyArr = [];
 
 //Sounds
 let doorSound = new Audio();
@@ -120,7 +152,7 @@ let floorNumbers;
 }
 
 
-let lMap, lPMap, lOMap;2
+let lMap, lPMap, lOMap;
 {
     //level maps initialized when levels are loaded
     // Level    0          1          2          3          4          5          6         7
@@ -605,12 +637,10 @@ function startGame()
         let stair = new Image();
         let doorOpenRight = new Image();
         let doorOpenLeft = new Image();
-        let windowClose = new Image();
-        let windowOpen = new Image();
-        let door1 = new Image();
-        let door2 = new Image();
         let chair = new Image();
         let desk = new Image();
+        let doorOpen_1 = new Image();
+        let doorOpen_2 = new Image();
 
 
         {
@@ -638,6 +668,8 @@ function startGame()
             door2.src = "../../3Store/images/door_2.png";
             chair.src = "../../3Store/images/chair.png";
             desk.src = "../../3Store/images/desk.png";
+            doorOpen_1.src = "../../3Store/images/door_open_1.png";
+            doorOpen_2.src = "../../3Store/images/door_open_2.png";
         }//Defining images src properties
 
 
@@ -666,6 +698,9 @@ function startGame()
             w = door2;       //21
             x = desk;        //22
             y = chair;       // 23
+            z = doorOpen_1; //24
+            aa = doorOpen_2; //25
+
         }//Assigning images to global variables
 
 
@@ -679,7 +714,7 @@ function startGame()
                 [ 0, 0, 0,22,22,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12, 0, 0, 0, 0, 0],
                 [22,22, 0, 0,23,13, 0, 0, 0, 0, 4, 5, 0, 0, 4, 5, 0, 0, 0,12,14,14, 0,14,14],
                 [23, 0, 0, 0, 0,13, 0, 0, 0, 0, 6, 7, 0, 0, 6, 7, 0, 0, 0,12, 0, 0, 0, 0, 0],
-                [11,11,11,11,20,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,11,21,11,11,11,11],
+                [11,11,11,11,21,11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,11,20,11,11,11,11],
                 [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [ 0, 4, 5, 0, 0, 4, 5, 0, 0, 0, 1, 2, 3, 0, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0],
                 [ 0, 6, 7, 0, 0, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 0, 4, 5, 0],
@@ -736,66 +771,13 @@ function startGame()
             }
         }
 
-
         addEventListener("keydown", onKeyDown, false);
 
+        timer_level3 = setInterval(function(){
+			drawMap();
+			appearEnemy();
+		}, 1000);
 
-
-        let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
-        let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
-
-        timer_level3 = setInterval(appearEnemy, 1000);
-
-        function resetTimer()
-        {
-            t=windowClose;
-            drawMap();
-            warningTime = Math.floor(Math.random() * 20 + 10);
-            findingTime = Math.floor(Math.random() * 10 + 5);
-            enemyAppearLevel3 = false;
-            dangerous.pause();
-            bgm_level3.play();
-        }
-
-
-        function appearEnemy() {
-            console.log(warningTime);
-            console.log(findingTime);
-            warningTime--;
-            if (warningTime <= 5 && warningTime > 0) {
-                console.log(warningTime);
-                bgm_level3.pause();
-                dangerous.play();
-                drawMap();
-                ctx.font = "30px Arial";
-                ctx.fillStyle = '#FF0000';
-                ctx.fillText("Warning! Mobbist will open window!", 180, 120);
-                ctx.fillText(warningTime + " seconds left.", 280, 150);
-            }
-            if (warningTime === 0) {
-                t=windowOpen;
-                drawMap();
-                enemyAppearLevel3 = true;
-
-            }
-            if (enemyAppearLevel3 === true){
-                findingTime--;
-                drawMap();
-                ctx.font = "30px Arial";
-                ctx.fillStyle = '#FF0000';
-                ctx.fillText("Mobbists are finding you!", 230, 120);
-                ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
-
-                if (findingTime === 0) {
-                    resetTimer();
-                }
-            }
-            if (detectPlayerLevel3 === true)
-            {
-                resetTimer();
-                detectPlayerLevel3 = false;
-            }
-        }
     }
 
     else if (l4)//The Streetz
@@ -2811,66 +2793,67 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
         if (e === 38 && p.row === 0 && (p.col === 10 || p.col === 11)) //If going UP & character is right under door 2
         {
-            p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+            if (findAllLevel3){
+                p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
-            setTimeout(goToStreet, 40);
+                setTimeout(goToStreet, 40);
 
-            function goToStreet()//When the stairs image loads
-            {
-                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
-                clearLevel3();
-                clearInterval(timer_level3);
-                /*bgm_level3.pause();
-                dangerous.pause();*/
-                // cannot be changed while animating stair climbing
-                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
-
-                walkToStreet();                                      //Start climbing stairs
-
-                function walkToStreet()                  //Climbing stairs animation function
+                function goToStreet()//When the stairs image loads
                 {
-                    p.frameX ++;
-                    p.srcX = p.width * (p.frameX%4);
-                    p.srcY = p.height * p.frameY;
-                    //Count each step taken
-                    staysClimbed++;
+                    removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                    clearLevel3();
+                    clearInterval(timer_level3);
+                    let staysClimbed = 0;                               //Define variable to use to count stairs climbed
 
-                    ctx.clearRect(320, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
-                    fillErasedMap();        //Draw the map image that was cleared
+                    walkToStreet();                                      //Start climbing stairs
 
-                    //Draw scientist incrementally smaller each 'step' taken
-                    // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, p.srcX, p.srcY + (5 * staysClimbed), 32, 48 - (5 * staysClimbed), p.col * 32, p.row * 32 - (5 * staysClimbed), 32, 48 - (5 * staysClimbed));
-
-                    if (staysClimbed !== 5)         //If player has not climbed all stairs
-                        setTimeout(walkToStreet , 120);     //Keep climbing them - Call the stair climbing function again
-                    else                            //Otherwise
+                    function walkToStreet()                  //Climbing stairs animation function
                     {
-                        level = 4;                              //Change level identifier appropriately
-                        l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;        //Set all levels not being travelled to as false
-                        l4 = true;                              //Set the one that is being travelled to to true
+                        p.frameX ++;
+                        p.srcX = p.width * (p.frameX%4);
+                        p.srcY = p.height * p.frameY;
+                        //Count each step taken
+                        staysClimbed++;
 
-                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
-                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
-                        l4Ready = false;
-                        startGame();                            //Load new levels assets and settings
-                        waitForEverythingToLoad();
+                        ctx.clearRect(320, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                        fillErasedMap();        //Draw the map image that was cleared
 
-                        function waitForEverythingToLoad()
+                        //Draw scientist incrementally smaller each 'step' taken
+                        // and move player slightly up to portray movement
+                        ctx.drawImage(scientist, p.srcX, p.srcY + (5 * staysClimbed), 32, 48 - (5 * staysClimbed), p.col * 32, p.row * 32 - (5 * staysClimbed), 32, 48 - (5 * staysClimbed));
+
+                        if (staysClimbed !== 5)         //If player has not climbed all stairs
+                            setTimeout(walkToStreet , 120);     //Keep climbing them - Call the stair climbing function again
+                        else                            //Otherwise
                         {
-                            if (!l4Ready)
-                                setTimeout(waitForEverythingToLoad, 10);
-                            else
-                            {
-                                drawMap();
-                                clearLevel3();
-                            }
-                        }
+                            level = 4;                              //Change level identifier appropriately
+                            l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;        //Set all levels not being travelled to as false
+                            l4 = true;                              //Set the one that is being travelled to to true
 
+                            ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+                            l4Ready = false;
+                            startGame();                            //Load new levels assets and settings
+                            waitForEverythingToLoad();
+
+                            function waitForEverythingToLoad()
+                            {
+                                if (!l4Ready)
+                                    setTimeout(waitForEverythingToLoad, 10);
+                                else
+                                {
+                                    drawMap();
+                                    clearLevel3();
+                                }
+                            }
+
+                        }
                     }
                 }
             }
         }  //Go through the door to level 3
+
+
     }
 
     if (l4)//If it's Lvl 4
@@ -3996,9 +3979,20 @@ function checkActions()
             findDisguise = true;
             alert("you found the disguise(temp msg)");
         }
-        if (findDisguise && findRollerblades && findMap && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+        if (findDisguise && findRollerblades && findMap)
+        {
+            findAllLevel3 = true;
+            lMap[level][0][10] = 24;
+            lMap[level][0][11] = 25;
+        }
+        if (findAllLevel3 === true && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
         {
             alert("you go to street(temp msg)");
+        }
+
+        if (findDisguise === false && p.row === 9 && p.col === 10) //Not level switch condition
+        {   //To check if character is in area where he isn't supposed to be when the light is off
+            dialog = true;
         }
     }
 
@@ -4090,12 +4084,28 @@ function displayTextBubble()
 
     }
 
+    if (l3){
+        if (dialog && p.row === 9 && p.col === 10)
+        {
+            dialogX = 10;
+            dialogY = 9;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("It can't make me like girl...", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
 
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+    }
 
 /*                                      //This is where you put your levels thought bubble conditions
                                         //There are 4 thought bubble images (1 for each side of the player...
                                         //     top left, bottom left, top right, bottom right
-    if (l3 && dialog &&....)
+
     if (l4 && dialog &&....)
     if (l5 && dialog &&....)
     if (l6 && dialog &&....)
@@ -4809,18 +4819,150 @@ function clearLevel3()
     bgm_level3.pause();
     dangerous.pause();
     clearInterval(timer_level3);
+    clearInterval(timer_level3_enemy);
+	removeEventListener("keydown", enemyAttack);
 }
 
 function detectMovementLevel3()
 {
     if (l3 && enemyAppearLevel3 === true)
     {
-
+        //initial set
         warningSound.play();
-        enemiesLevel3.push(enemyLevel3);
-        setTimeout(alert("you detected by mobbists - temp msg(" + enemiesLevel3.length + "enemies in this area.)"), 1000);
+        enemiesLevel3[enemyIndexLevel3].col -= 1;
+		enemyArr.push(enemiesLevel3[enemyIndexLevel3]);
+        enemyIndexLevel3++;
+
+
+        // add mob, start timer again. alert is temp msg.
+        setTimeout(alert("you detected by mobbists - temp msg(" + enemyArr.length + " enemies in this area.)"), 1000);
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
-        // add mob, start timer again.
+
+        // reset
+		removeEventListener("keydown", enemyAttack);
+
+		clearInterval(timer_level3);
+		timer_level3 = setInterval(function(){
+            drawMap();
+            enemyLoading();
+		    appearEnemy();
+		}, 1000);
+
+		addEventListener("keydown", enemyAttack);
     }
+}
+
+function resetTimer()
+{
+	t=windowClose;
+	warningTime = Math.floor(Math.random() * 20 + 10);
+	findingTime = Math.floor(Math.random() * 10 + 5);
+	enemyAppearLevel3 = false;
+	dangerous.pause();
+	bgm_level3.play();
+}
+
+
+function appearEnemy() {
+	//console.log(warningTime);
+	//console.log(findingTime);
+	warningTime--;
+	if (warningTime <= 5 && warningTime > 0) {
+		//console.log(warningTime);
+		bgm_level3.pause();
+		dangerous.play();
+		//drawMap();
+		ctx.font = "30px Arial";
+		ctx.fillStyle = '#FF0000';
+		ctx.fillText("Warning! Mobbist will open window!", 180, 120);
+		ctx.fillText(warningTime + " seconds left.", 280, 150);
+	}
+	if (warningTime === 0) {
+		t=windowOpen;
+		//drawMap();
+		enemyAppearLevel3 = true;
+
+	}
+	if (enemyAppearLevel3 === true){
+		findingTime--;
+	   // drawMap();
+		ctx.font = "30px Arial";
+		ctx.fillStyle = '#FF0000';
+		ctx.fillText("Mobbists are finding you!", 230, 120);
+		ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
+
+		if (findingTime === 0) {
+			resetTimer();
+		}
+	}
+	if (detectPlayerLevel3 === true)
+	{
+		resetTimer();
+		detectPlayerLevel3 = false;
+	}
+}
+
+function enemyLoading(){ // draw enemies
+	for(let index=0; index < enemyArr.length; index++){
+		ctx.drawImage(enemyImg, enemyArr[index].x, 0, enemyArr[index].width, enemyArr[index].height, enemyArr[index].col * p.width, enemyArr[index].row * p.width, enemyArr[index].width, enemyArr[index].height);
+
+        if(lMap[level][enemyArr[index].row + 1][enemyArr[index].col + enemyArr[index].sw] != 0){
+            enemyArr[index].sw *= -1; // swtich direction
+        }else{
+            enemyArr[index].col += enemyArr[index].sw;
+            enemyArr[index].col = enemyArr[index].col < 0 ? 0 : enemyArr[index].col
+        }
+        enemyArr[index].x = enemyArr[index].sw > 0 ? 0 : enemyArr[index].width; // switch direction
+
+        enemyAttack(); // for detecting position when enemies meet player
+
+	}
+}
+
+function enemyAttack(){ // for detecting position when player meet enemies
+	for(let index=0; index < enemyArr.length; index++){
+		if(lPMap[level][enemyArr[index].row][enemyArr[index].col] == 1){
+			alert("Game Over!!!\nPress enter and start again. (tmp msg");
+            gameover();
+		}
+	}
+}
+
+function gameover() {
+    if (l3)
+    {
+        // finding item reset
+        leftDoorOpen = false;
+        rightDoorOpen = false;
+        findPasscode = false;
+        findMap = false;
+        findRollerblades = false;
+        findDisguise = false;
+        findAllLevel3 = false;
+
+        // enemy information reset
+        enemyArr = [];    // the number of enemies reset
+        detectPlayerLevel3 = false;
+        enemyIndexLevel3 = 0;
+        resetTimer();
+
+        // map image reset
+        lMap[level][7][4] = 21;
+        lMap[level][6][5] = 13;
+        lMap[level][7][20] = 20;
+        lMap[level][6][19] = 12;
+        lMap[level][0][10] = 20;
+        lMap[level][0][11] = 21;
+
+        // player position reset
+        lPMap[level][16][1] = 1;
+
+        // re-draw map
+        clearLevel3();
+        ctx.clearRect(0,0,800,600);
+        startGame();
+        setTimeout(drawMap, 40);
+    }
+
 }
