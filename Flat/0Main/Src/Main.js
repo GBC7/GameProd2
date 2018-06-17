@@ -66,6 +66,13 @@ let enemyLevel3 = function() {
     // add enemy property
 };
 
+//L7 & 8
+let windowClosed = false;
+let researchPaper = false;
+let researchBurned = false;
+let lighterFluid = false;
+// let noEnemies = false; Eventually going to be implemented with enemies so that you have to get rid of everyone before closing the windows
+
 
 //Sounds
 let doorSound = new Audio();
@@ -1401,8 +1408,24 @@ function startGame()
             n = glassCabinetBottom;	// 13
             o = fullShelvesTop;		// 14
             q = fullShelvesBottom;  // 15
-            r = openWindow;			// 16
-            s = undefined;			// 17
+			if (windowClosed == true)
+			{
+				r = closedWindow;	// 16
+			}
+			else
+			{
+				r = openWindow;		// 16
+			}
+            if (lighterFluid == false)
+			{
+				s = fullShelvesTop;		// 17
+				t = fullShelvesBottom;	// 18
+			}
+			else
+			{
+				s = emptyShelvesTop;	// 17
+				t = emptyShelvesBottom;	// 18
+			}
         }//Assigning images to global variables
 
 
@@ -1412,8 +1435,8 @@ function startGame()
                 //                    10                  20
                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 15, 15, 15, 1, 15, 11, 11, 11, 11, 7, 7, 7, 5, 1],
+                    [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 17, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 15, 18, 15, 1, 15, 11, 11, 11, 11, 7, 7, 7, 5, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -1480,6 +1503,7 @@ function startGame()
         let fullShelvesBottom = new Image();
         let openWindow = new Image();
         let closedWindow = new Image();
+		let trash = new Image();
 
 
         {
@@ -1501,6 +1525,7 @@ function startGame()
             fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
             openWindow.src = "../../7Lab/images/openWindow.png";
             closedWindow.src = "../../7Lab/images/closedWindow.png";
+			trash.src = "../../7Lab/images/trash.png";
         }//Defined SRC Property for all level images
 
 
@@ -1509,20 +1534,21 @@ function startGame()
             b = floor;				// 1
             c = door1;				// 2
             d = stairs;				// 3
-            e = emptyShelvesTop;	// 4
-            f = emptyShelvesBottom;	// 5
-            g = lockerTop;			// 6
-            h = lockerBottom;		// 7
-            i = computerTop;		// 8
-            j = computerBottom;		// 9
-            k = metalCabinetTop;	// 10
-            l = metalCabinetBottom;	// 11
-            m = glassCabinetTop;	// 12
-            n = glassCabinetBottom;	// 13
-            o = fullShelvesTop;		// 14
-            q = fullShelvesBottom;  // 15
-            r = openWindow;			// 16
-            s = undefined;			// 17
+			e = fullShelvesTop;		// 4
+			f = fullShelvesBottom;	// 5
+			g = emptyShelvesTop;	// 6
+			h = emptyShelvesBottom;	// 7
+			if (researchPaper == true)
+			{
+				i = emptyShelvesTop;	// 8
+				j = emptyShelvesBottom;	// 9
+			}
+			else
+			{
+				i = fullShelvesTop;		// 8
+				j = fullShelvesBottom;	// 9
+			}
+			k = trash;				// 10
         }//Assigne images to global letter variables
 
 
@@ -1531,6 +1557,8 @@ function startGame()
             lMap[level]=
                 //                    10                  20
                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
@@ -1546,9 +1574,7 @@ function startGame()
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0]
                 ];
         }
@@ -3000,7 +3026,25 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
             }
         }  //Go up stairs to level 8
     }
+	
+	if (l8)//If it's Lvl 8
+    {
+        if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
+        {
 
+            level = 7;                              //Change level identifier appropriately
+            l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+            l7 = true;                              //Set the one that is being travelled to to true
+
+            ctx.clearRect(0,0,800,600);             //Clear entire canvas
+            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+            startGame();                            //Load new levels assets and settings
+            setTimeout(drawMap, 40);                //Draw its entire map
+            
+        }  //Go up stairs to level 8
+    }
+ 
     if (l11)//Sewer map 2
     {
         if (e === 40 && p.col === 12 && p.row === 16) //If going down & character is over pipe/tube
@@ -4004,11 +4048,69 @@ function checkActions()
 
     if (l7 && p.row === 1 && p.col === 14)
     {
-        let closedWindow = new Image();
-        closedWindow.src = "../../7Lab/images/closedWindow.png";
-        r = closedWindow;
-        drawMap();
+		if (windowClosed == false)
+		{
+			let closedWindow = new Image();
+			closedWindow.src = "../../7Lab/images/closedWindow.png";
+			r = closedWindow;
+			windowClosed = true
+			drawMap();
+		}
+		else
+		{
+			// Speach bubble saying "The windows are closed" "I can now look for the research paper"
+		}
     }
+	
+	if (l7 && p.row == 2 && p.col == 12)
+	{
+		if (lighterFluid == false)
+		{
+			let emptyShelvesTop = new Image();
+			let emptyShelvesBottom = new Image();
+			emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png"
+			emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png"
+			s = emptyShelvesTop;
+			t = emptyShelvesBottom;
+			lighterFluid = true;
+			drawMap();
+			
+			dialog = true;
+		}
+	}
+	
+	if (l8 && p.row === 1 && p.col === 20)
+	{
+		if (researchPaper == false)
+		{
+			let emptyShelvesTop = new Image();
+			let emptyShelvesBottom = new Image();
+			emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png"
+			emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png"
+			i = emptyShelvesTop;
+			j = emptyShelvesBottom;
+			researchPaper = true
+			drawMap();
+		}
+		else if (lighterFluid == false)
+		{
+			// Thought bubble saying "I need to find my lighter fluid"
+		}
+	}
+	
+	if (l7 && p.row == 16 && p.col == 1 || l7 && p.row == 15 && p.col == 0)
+	{
+		if (lighterFluid == true && researchPaper == true)
+		{
+			// thought bubble saying "It's done"
+			
+			researchBurned == true;
+		}
+		else if (lighterFluid == false && researchPaper == true)
+		{
+			// thought bubble saying "I need my lighterFluid"
+		}
+	}
 
 }
 
@@ -4089,6 +4191,25 @@ function displayTextBubble()
         }
 
     }
+	
+	if (l7)
+	{
+		if (dialog && p.row === 2 && p.col === 12)
+		{
+            dialogX = 12;
+            dialogY = 2;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("The water is too powerful..", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+	}
 
 
 
