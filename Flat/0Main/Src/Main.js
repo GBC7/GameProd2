@@ -2529,8 +2529,21 @@ function onKeyDown(e)
      if (e.keyCode === 32) //Space
 
      {
-         //Character action
+
+         level = 5;              //Change level identifier appropriately
+         l1 = l2 = l3 = l4 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
+         l5 = true;   //Character action
+
+         playMusic();
+
+
      }
+
+     void PlayMusic()
+    {
+        audio.clip = "../../5MomsPlace/audio/meow.wav";
+        audio.Play();
+    }
 
      /* TEMP - for testing - TEMP */
 
