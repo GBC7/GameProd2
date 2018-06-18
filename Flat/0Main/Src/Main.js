@@ -188,6 +188,7 @@ frameY: 0,
 
 
 //Universal Images
+
 let scientist = new Image();                                //Regular player image
 let sciUndWater = new Image();                              //Image fpr player while in sewer
 let thotBr = new Image();                                   //Thought bubble image bottom right side of player
@@ -195,6 +196,7 @@ let thotBl = new Image();                                   //Thought bubble ima
 let thotTl = new Image();                                   //Thought bubble image top left side of player
 let thotTr = new Image();                                   //Thought bubble image top right side of player
 {
+	
     thotBl.src = "../../0Main/images/thotBl.png";
     thotTl.src = "../../0Main/images/thotTl.png";
     thotTr.src = "../../0Main/images/thotTr.png";
@@ -1142,7 +1144,7 @@ function startGame()
             park7.src = "../../4Streetz/images/park7.png";
             park8.src = "../../4Streetz/images/park8.png";
             park9.src = "../../4Streetz/images/park9.png";
-            school1.src = "../../4Streetz/images/school1.png";
+            school1.src = "../../4Streetz/images/moblv4.png";
             school2.src = "../../4Streetz/images/school2.png";
             school3.src = "../../4Streetz/images/school3.png";
             school4.src = "../../4Streetz/images/school4.png";
@@ -1241,25 +1243,25 @@ function startGame()
         {
             lMap[level] =
                 [
-                    [17,  0,   31,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   1,   1,  1,  1,  19,   20],    //1
+                    [17,  0,   31,  1,  1,  1,  1,  1,  53,  1,  1,  1,  1,  1,  1,  1,  1,  1,  53,   1,   1,  1,  1,  19,   20],    //1
                     [0,   0,   31,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,   1,   1,  1,  1,  21,   22],
                     [0,   0,   31,  1,  1,  36, 30,  34, 1,  1,  36, 30, 30, 30, 30, 17, 30, 30, 30,  34,  1,  1,  36, 30, 30],    
                     [29,  29,  33,  1,  1,  32, 0,  31, 1,  1,  35, 29,  0,  0,  0,  0,  17, 0,  0,   31,  1,  1,  32, 0,   0],
-                    [1,   1,   1,   1,  1,  32, 45, 46, 1,  1,  1,  1,  32, 0,  0,  0,  0,  0,  0,   31,  1,  1,  32, 45,  46],
+                    [1,   1,   1,   1,  1,  32, 45, 46, 1,  53,  1,  1,  32, 0,  0,  0,  0,  0,  0,   31,  1,  53,  32, 45,  46],
                     [1,   1,   1,   1,  1,  32, 47, 48, 1,  1,  1,  1,  32, 45, 46, 0,  0,  0,  0,   17,  1,  1,  32, 47,   48],
-                    [30,  30,  34,  1,  1,  17, 0,  0,  30, 34, 1,  1,  32, 47, 48, 0,  0,  0,  0,   31,  1,  1,  32, 0,   0],
+                    [30,  30,  34,  53,  1,  17, 0,  0,  30, 34, 1,  1,  32, 47, 48, 0,  0,  0,  0,   31,  1,  1,  32, 0,   0],
                     [0,   0,   31,  1,  1,  32, 0,  0,  17,  31, 1,  1,  32, 0,  0,  0,  0,  0,  0,   31,  1,  1,  32, 0,   0],
                     [0,   0,   31,  1,  1,  35, 29, 29, 29, 33, 1,  1,  35, 29, 29, 29,  29, 17, 0,  31,  1,  1,  32, 0,   0],
                     [0,   0,   31,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  32, 17,  31,  1,  1,  32, 0,   0],    //10
-                    [0,   17,  31,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  32, 0,   31,  1,  1,  32, 17,  0],
+                    [0,   17,  31,  1,  53,  1,  1,  1,  1,  53,  1,  1,  1,  1,  1,  1,  1,  32, 0,   31,  1,  53,  32, 17,  0],
                     [17,  0,   17,  30, 34, 1,  1,  36,  30, 34, 1,  1,  36, 30,  34, 1,  1,  32, 0,   31,  1,  1,  17, 0,   0],
                     [0,   0,   0,   0,  31, 1,  1,  45, 46, 31, 1,  1,  32, 0,  31, 1,  1,  32, 0,   31,  1,  1,  32, 17,  0],
                     [0,   0,   0,   0,  31, 1,  1,  47, 48, 31,  1,  1,  32, 0,  31, 1,  1,  35, 29,  33,  1,  1,  35, 29,  29],
-                    [0,   0,   45,  46, 31, 1,  1,  32,  0, 31, 1,  1,  32, 0,  31, 1,  1,  1,  1,   1,   1,  1,  1,  1,   1],
+                    [0,   0,   45,  46, 31, 1,  1,  32,  0, 31, 1,  1,  32, 0,  31, 53,  1,  1,  1,   1,   1,  1,  1,  1,   1],
                     [29,  29,   47,  48, 33, 1,  1,  32,  0, 31, 1,  1,  32, 0,  31, 1,  1,  1,  1,   1,   1,  1,  1,  1,   1],
                     [1,   1,   1,   1,  1,  1,  1,  32,  0, 31, 1,  1,  32, 0,  0,  30, 30,  30, 30,  34,  1,  1,  36, 30,   30],
-                    [1,   1,   1,   1,  1,  1,  1,  32,  0, 31, 1,  1,  32, 0,  0,  0,  0,  0,  0,   31,  1,  1,  32, 17,   0],
-                    [30,  30,  30,  30, 30, 30, 30,  0,  0, 31, 2,  3,  32, 0,  0,  0,  0,  0,  0,   31,  1,  1,  32, 0,   0]    //19
+                    [1,   1,   53,   1,  1,  1,  1,  32,  0, 31, 1,  1,  32, 0,  0,  0,  0,  0,  0,   31,  1,  1,  32, 17,   0],
+                    [30,  30,  30,  30, 30, 30, 30,  0,  0, 31, 2,  3,  32, 0,  0,  0,  0,  0,  0,   31,  53,  1,  32, 0,   0]    //19
                 ];
         }
 
@@ -3031,7 +3033,6 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     //Draw scientist incrementally smaller each 'step' taken
                     // and move player slightly up to portray movement
                     ctx.drawImage(scientist, p.srcX, p.srcY + (5 * staysClimbed), 32, 48 - (5 * staysClimbed), p.col * 32, p.row * 32 - (5 * staysClimbed), 32, 48 - (5 * staysClimbed));
-
                     if (staysClimbed !== 5)         //If player has not climbed all stairs
                         setTimeout(walkToStreet , 120);     //Keep climbing them - Call the stair climbing function again
                     else                            //Otherwise
