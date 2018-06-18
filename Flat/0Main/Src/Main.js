@@ -861,13 +861,43 @@ function startGame()
         let lib2= new Image();
         lib2.src = "../../5MomsPlace/images/lib2.png"; //29
 
+        let flower= new Image();
+        flower.src = "../../5MomsPlace/images/flower.png"; //30
+
+        let pan= new Image();
+        pan.src = "../../5MomsPlace/images/pan.png"; //31
+
+        let art1= new Image();
+        art1.src = "../../5MomsPlace/images/art1.png"; //32
+
+        let art2= new Image();
+        art2.src = "../../5MomsPlace/images/art2.png"; //33
+
+        let book1= new Image();
+        book1.src = "../../5MomsPlace/images/book1.png"; //34
+
+        let book2= new Image();
+        book2.src = "../../5MomsPlace/images/book2.png"; //35
+
+        let frid1= new Image();
+        frid1.src = "../../5MomsPlace/images/frid1.png"; //36
+
+        let frid2= new Image();
+        frid2.src = "../../5MomsPlace/images/frid2.png"; //37
+
+        let chop= new Image();
+       chop.src = "../../5MomsPlace/images/chop.png"; //38
+
+        let kit= new Image();
+       kit.src = "../../5MomsPlace/images/kit.png"; //39
+
 
         if (lMap[level] === undefined)
             lMap[level] =
                 //                  10                  20
                 [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
-                    [1,0,0,14,0,0,0,0,14,0,0,0,0,14,0,22,0,0,14,0,0,0,0,14,0],    //0
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,22,4,5,5,6,7,8,2,2,2],    //1
+                    [1,0,0,14,0,0,0,0,14,0,0,0,0,14,0,22,0,0,14,0,31,0,14,0,36],    //0
+                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,22,4,5,5,6,7,8,38,39,37],    //1
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,22,2,2,2,2,2,2,2,2,2],    //2
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,22,2,2,2,2,2,2,2,2,2],    //3
                     [2,2,2,2,2,2,2,2,2,2,2,2,9,2,2,22,2,2,2,2,2,2,2,2,2],    //4
@@ -877,8 +907,8 @@ function startGame()
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
                     [2,2,17,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
                     [20,20,20,20,20,20,20,20,20,20,21,2,2,2,2,24,20,20,20,20,20,20,20,20,20],    //10
-                    [19,19,19,19,19,19,19,19,19,19,19,2,2,2,2,19,19,19,19,19,19,19,19,28,28],    //11
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,16,2,2,29,29],    //12
+                    [19,35,34,19,19,32,33,19,19,19,19,2,2,2,2,19,19,19,34,35,19,19,19,28,28],    //11
+                    [30,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,30,2,16,2,2,29,29],    //12
                     [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
                     [2,2,10,11,2,16,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,15],    //14
                     [2,2,12,13,2,2,2,2,2,2,2,2,2,2,2,23,2,2,2,2,2,2,26,2,2],    //15
@@ -918,6 +948,17 @@ function startGame()
         cc = bed2;
         dd = lib1;
         ee = lib2;
+        ff = flower;
+        gg = pan;
+        hh = art1;
+        ii = art2;
+        jj = book1;
+        kk = book2;
+        ll = frid1;
+        mm = frid2;
+        nn = chop;
+        oo = kit;
+
 
 
         if (lPMap[level] === undefined)
@@ -2178,7 +2219,7 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
                     setTimeout(goDownStays, 180); //...Go down them
                 else                              //Otherwise, load level 2.
                 {
-                    level = 4;                              //Change level identifier to appropriate level
+                    level = 5;                              //Change level identifier to appropriate level
                     //         changePStartPos();
                     l1 = l3 = l4 = l2 = l6 = l7 = false;         //Set all levels false aside from new level
                     l5 = true;                              //Set new level to true
