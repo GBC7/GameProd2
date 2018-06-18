@@ -2603,7 +2603,7 @@ function onKeyDown(e)
          }
      }
 
-     if (e.keyCode === 32) //Space
+     if (e.keyCode === 32) //Space     Edit June 15-18 by Jimmy
 
      {
 
@@ -2612,6 +2612,15 @@ function onKeyDown(e)
          l5 = true;   //Character action
 
          playMus();
+
+         function playMus()                                      // This actually works!
+         {
+             var meow = new Audio('../../5MomsPlace/audio/meow.wav');
+
+             meow.play();
+         }
+
+
 
 
      }
