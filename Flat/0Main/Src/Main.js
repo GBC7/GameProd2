@@ -2151,9 +2151,45 @@ function checkLevelSwitch(e /* pass e.keyCode through this argument */)
 
     }
 
-    if (l5)//If it's Lvl 5
+    if (l5)//If it's Lvl 5                        June 18 Jimmy edit. TRying to get to the previous level
     {
 
+
+        if (e === 38 && p.col === 1 && (p.row === 1))//If going LEFT at the staircase
+        {//go back to sewer (from store)
+            removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
+
+            startX[4] = 10;                     //Set location for character to appear on map that is being travelled to
+            startY[4] = 0;                      //Set location for character to appear on map that is being travelled to
+
+            let allTheStays = 0;                //Create variable to be used for counting stairs
+
+            goUpDaStays();    //Start animation of going down stairs
+
+            function goUpDaStays()              //Animates player going down stairs and appearing in previous levels map
+            {
+                allTheStays++;                  //Increment stairs descended each time a stair is descended
+
+                ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                ctx.drawImage(scientist, (p.srcX + allTheStays) % 4 * 32, 48, 32, 48, p.col * (20 - 6 * allTheStays), p.row * 32 + (allTheStays * 12), 32 - (allTheStays * 5), 48 - (allTheStays * 10));
+
+                if (allTheStays !== 4)            //If there are stairs to go down
+                    setTimeout(goDownStays, 180); //...Go down them
+                else                              //Otherwise, load level 2.
+                {
+                    level = 4;                              //Change level identifier to appropriate level
+                    //         changePStartPos();
+                    l1 = l3 = l4 = l2 = l6 = l7 = false;         //Set all levels false aside from new level
+                    l5 = true;                              //Set new level to true
+                    ctx.clearRect(0, 0, 800, 600);             //Clear entire canvas
+                    p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
+                                                            // the player will be facing
+                    startGame();                            //Load assets and settings of the level being travelled to
+                    setTimeout(drawMap, 40);                //Draw its map
+                }
+            }
+        }
     }
 
     if (l6)//If it's Lvl 6
@@ -2534,16 +2570,12 @@ function onKeyDown(e)
          l1 = l2 = l3 = l4 = l6 = l7 = l11 = false;             //Set all levels to false but the one being travelled to
          l5 = true;   //Character action
 
-         playMusic();
+         playMus();
 
 
      }
 
-     void PlayMusic()
-    {
-        audio.clip = "../../5MomsPlace/audio/meow.wav";
-        audio.Play();
-    }
+
 
      /* TEMP - for testing - TEMP */
 
@@ -2897,3 +2929,4 @@ function drawL6Full()
 
     }
 }
+
