@@ -46,6 +46,7 @@ let alreadyShivering = false;
 let torchesMapped = false;
 let allTorchesLit = false;
 let keepDrawingFlames = true;
+let keyFound = false;
 let burning, countingFlames;
 
 
@@ -119,6 +120,7 @@ let bgm_level3 = new Audio;
 let dangerous = new Audio;
 let waterRunning = new Audio;
 let ratOfDeath = new Audio;
+let meow = new Audio;
 {
     doorSound.src = ('../../3Store/audio/open.mp3');
     warningSound.src = ('../../3Store/audio/warningsound.mp3');
@@ -126,12 +128,14 @@ let ratOfDeath = new Audio;
     dangerous.src = ("../../3Store/audio/enemyappear.mp3");
     waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
     ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
+    meow.src = ('../../5MomsPlace/audio/meow.wav');
     bgm_level3.loop = true;
     bgm_level3.volume = 0.2;
     dangerous.loop = true;
     dangerous.volume = 0.2;
     waterRunning.loop = true;
     waterRunning.volume = 0.1;
+    meow.volume = 0.3;
 }
 
 
@@ -159,9 +163,11 @@ let xMax, xMin, yMax, yMin;
 }
 
 
-let floorNumbers;
+let floorNumbers, floorObjects;
 {// Level floor numbers - 0 , 1,     2,     3, 4, 5, 6, 7  8       9         10       11
     floorNumbers= [undefined, 0, undefined, 0, 1, 2, 0, 1, 1, undefined, undefined, undefined];
+//Obj tht cn b picked up-0          1          2         3          4       5         6         7           8          9        10    11
+    floorObjects = [undefined, undefined, undefined, undefined, undefined, 40, undefined, undefined, undefined, undefined, undefined, 15];
 }
 
 
@@ -723,36 +729,6 @@ function startGame()
             j = door3;
         }
 
-        /*let counter = 0;      //Temp code for burning torches
-        letItBurn();
-
-        function letItBurn()
-        {
-            counter ++;
-
-            if (counter % 3 === 0)
-            {
-                ctx.drawImage(flameCorner1, 18*32, 7*32);
-                ctx.drawImage(flameWall1, 24*32, 7*32);
-            }
-            else if (counter % 3 === 1)
-            {
-                ctx.drawImage(flameCorner2, 18*32, 7*32);
-                ctx.drawImage(flameWall2, 24*32, 7*32);
-            }
-            else if (counter % 3 === 2)
-            {
-                ctx.drawImage(flameCorner3, 18*32, 7*32);
-                ctx.drawImage(flameWall3, 24*32, 7*32);
-            }
-
-            if (l2)
-            {
-                setTimeout(letItBurn, 90);
-            }
-        }
-*/
-
         changePStartPos();
 
 
@@ -1289,11 +1265,12 @@ function startGame()
 
         addEventListener("keydown", onKeyDown, false);
     }
-    
+
     else if (l5)//Moms House
 
     {
         canvas.style.backgroundImage = "";
+
 
         let wall = new Image();
         let door = new Image();
@@ -1314,11 +1291,34 @@ function startGame()
         let catPro2 = new Image();
         let catPro3 = new Image();
         let catPro4 = new Image();
+        let wallv2 = new Image();
+        let barrier2 = new Image();
+        let barrier3= new Image();
+        let barrier4= new Image();
+        let barrier5= new Image();
+        let barrier6= new Image();
+        let barrier7= new Image();
+        let bed1= new Image();
+        let bed2= new Image();
+        let lib1= new Image();
+        let lib2= new Image();
+        let flower= new Image();
+        let pan= new Image();
+        let art1= new Image();
+        let art2= new Image();
+        let book1= new Image();
+        let book2= new Image();
+        let paper= new Image();
+        let frid1= new Image();
+        let frid2= new Image();
+        let chop= new Image();
+        let kit= new Image();
+
 
 
         {
-            wall.src = "../../5MomsPlace/images/wall.png";  //0
             door.src = "../../5MomsPlace/images/door.png"; //1
+            wall.src = "../../5MomsPlace/images/wall.png";  //0
             floor.src = "../../5MomsPlace/images/floor.png";  //2
             cat.src = "../../5MomsPlace/images/cat.png";  //3
             w1.src = "../../5MomsPlace/images/w1.png"; //4
@@ -1336,59 +1336,103 @@ function startGame()
             catPro2.src = "../../5MomsPlace/images/catPro2.png"; //16
             catPro3.src = "../../5MomsPlace/images/catPro3.png"; //17
             catPro4.src = "../../5MomsPlace/images/catPro4.png"; //18
-        }//Defining Images src properties
+            wallv2.src = "../../5MomsPlace/images/wallv2.png"; //19
+            barrier2.src = "../../5MomsPlace/images/barrier2.png";//20
+            barrier3.src = "../../5MomsPlace/images/barrier3.png"; //21
+            barrier4.src = "../../5MomsPlace/images/barrier4.png"; //22
+            barrier5.src = "../../5MomsPlace/images/barrier5.png"; //23
+            barrier6.src = "../../5MomsPlace/images/barrier6.png"; //24
+            barrier7.src = "../../5MomsPlace/images/barrier7.png"; //25
+            bed1.src = "../../5MomsPlace/images/bed1.png"; //26
+            bed2.src = "../../5MomsPlace/images/bed2.png"; //27
+            lib1.src = "../../5MomsPlace/images/lib1.png"; //28
+            lib2.src = "../../5MomsPlace/images/lib2.png"; //29
+            flower.src = "../../5MomsPlace/images/flower.png"; //30
+            pan.src = "../../5MomsPlace/images/pan.png"; //31
+            art1.src = "../../5MomsPlace/images/art1.png"; //32
+            art2.src = "../../5MomsPlace/images/art2.png"; //33
+            book1.src = "../../5MomsPlace/images/book1.png"; //34
+            book2.src = "../../5MomsPlace/images/book2.png"; //35
+            paper.src = "../../5MomsPlace/images/paper.png"; //40
+            frid1.src = "../../5MomsPlace/images/frid1.png"; //36
+            frid2.src = "../../5MomsPlace/images/frid2.png"; //37
+            chop.src = "../../5MomsPlace/images/chop.png"; //38
+            kit.src = "../../5MomsPlace/images/kit.png"; //39
+        }//Defining src properties for image objects
 
 
         {
-            a = wall;
-            b = door;
-            c = floor;
-            d = cat;
-            e = w1;
-            f = w2;
-            g = w3;
-            h = w4;
-            i = w5;
-            j = granny2;
-            k = piano1;
-            l = piano2;
-            m = piano3;
-            n = piano4;
-            o = window1;
-            q = catPro1;
-            r = catPro2;
-            s = catPro3;
-            t = catPro4;
-        }//Assigning images to globale variables
+            a = wall;                //0
+            b = door;                //1
+            c = floor;               //2
+            d = cat;                 //3
+            e = w1;                  //4
+            f = w2;                  //5
+            g = w3;                  //6
+            h = w4;                  //7
+            i = w5;                  //8
+            j = granny2;             //9
+            k = piano1;              //10
+            l = piano2;              //11
+            m = piano3;              //12
+            n = piano4;              //13
+            o = window1;             //14
+            q = catPro1;             //15
+            r = catPro2;             //16
+            s = catPro3;             //17
+            t = catPro4;             //18
+            u = wallv2;              //19
+            v = barrier2;            //20
+            w = barrier3;            //21
+            x = barrier4;            //22
+            y = barrier5;            //23
+            z = barrier6;            //24
+            aa = barrier7;           //25
+            bb = bed1;               //26
+            cc = bed2;               //27
+            dd = lib1;               //28
+            ee = lib2;               //29
+            ff = flower;             //30
+            gg = pan;                //31
+            hh = art1;               //32
+            ii = art2;               //33
+            jj = book1;              //34
+            kk = book2;              //35
+            ll = frid1;              //36
+            mm = frid2;              //37
+            nn = chop;               //38
+            oo = kit;                //39
+            qq = paper;              //40
+        }//Assigning objects to global variables
+
 
 
         if (lMap[level] === undefined)
         {
             lMap[level] =
-                //                  10                  20
-                [  //1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5
-                    [1,0,0,14,0,0,0,0,14,0,0,0,0,14,0,0,0,0,14,0,0,0,0,14,0],    //0
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,5,5,6,7,8,2,2,2],    //1
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //2
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //3
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //4
-                    [2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,9,2,18,2,2,2,2,2,2],    //5
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //6
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,15,2,2,2,2,2,2,2,2,2,2,2],    //7
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //8
-                    [2,2,17,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //9
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //10
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,16,2,2,2,2,2,2],    //11
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //12
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //13
-                    [2,2,2,2,2,16,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,15],    //14
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //15
-                    [2,2,10,11,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2],    //16
-                    [2,2,12,13,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],    //17
-                    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]     //18
+                //                                        10                                      20
+                [  // 1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5
+                    [ 1,  0,  0,  14, 0,  0,  0,  0,  14, 0,  0,  0,  0,  14, 0,  22, 0,  0,  14, 0,  31, 0,  14, 0,  36],    //0
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  22, 4,  5,  5,  6,  7,  8,  38, 39, 37],    //1
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  22, 2,  2,  2,  2,  2,  2,  2,  2,  2],     //2
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  22, 2,  2,  2,  2,  2,  2,  2,  2,  2],     //3
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  9,  2,  2,  22, 2,  2,  2,  2,  2,  2,  2,  2,  2],     //4
+                    [ 2,  2,  3,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  25, 2,  2,  18, 2,  2,  2,  2,  2,  2],     //5
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  19, 2,  2,  2,  2,  2,  2,  2,  2,  2],     //6
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  15, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //7
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //8
+                    [ 2,  2,  17, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //9
+                    [ 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 2,  2,  2,  2,  24, 20, 20, 20, 20, 20, 20, 20, 20, 20],    //10
+                    [ 19, 35, 34, 19, 19, 32, 33, 19, 19, 19, 19, 2,  2,  2,  2,  19, 19, 19, 34, 35, 19, 19, 19, 28, 28],    //11
+                    [ 30, 2 , 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  30, 2,  16, 2,  2,  29, 29],    //12
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //13
+                    [ 2,  2,  10, 11, 2,  16, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  15],    //14
+                    [ 2,  2,  12, 13, 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  23, 2,  2,  2,  2,  2,  2,  26, 2,  2],     //15
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  3,  2,  22, 2,  2,  2,  2,  2,  2,  27, 2,  2],     //16
+                    [ 2,  2,  2,  2,  2,  2,  18, 2,  2,  2,  2,  2,  2,  2,  2,  22, 2,  2,  2,  2,  2,  2,  2,  2,  2],     //17
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  22, 2,  2,  2,  2,  2,  2,  2,  2,  2]      //18
                 ];
         }
-
 
 
         if (lPMap[level] === undefined)
@@ -1412,7 +1456,7 @@ function startGame()
 
 
         l5Ready = false;
-        catPro4.onload = function(){l5Ready=true;};
+        kit.onload = function(){l5Ready=true;};
         waitingForLoad();
 
 
@@ -1790,6 +1834,7 @@ function startGame()
         canvas.style.backgroundImage = "";
 
 
+        let key = new Image();
         let valveTl = new Image();
         let valveTm = new Image();
         let valveTr = new Image();
@@ -1805,6 +1850,7 @@ function startGame()
 
 
         {
+            key.src = "../../2Sewer/images/key.png";//Change to key image when aquired
             valveTm.src = "../../2Sewer/images/valveTm.png";
             valveTl.src = "../../2Sewer/images/valveTl.png";
             valveTr.src = "../../2Sewer/images/valveTr.png";
@@ -1835,7 +1881,8 @@ function startGame()
             l = valveBl;             //11
             m = valveBm;             //12
             n = valveBr;             //13
-            o = pipeTopView;           //14
+            o = pipeTopView;         //14
+            q = key;                 //15
         }//Assigning images to global variables
 
 
@@ -1867,15 +1914,15 @@ function startGame()
                 ];
         }
 
-    for (let y = 3; y < lMap[level].length; y++)                        //Randomize floor pattern
-    {
-        for (let x = 0; x < lMap[level][0].length; x++)
+        for (let y = 3; y < lMap[level].length; y++)                        //Randomize floor pattern
         {
-            lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3);
+            for (let x = 0; x < lMap[level][0].length; x++)
+            {
+                lMap[level][y][x] = (Math.floor(Math.random() * 2) + 3); // 3 or 4
+            }
         }
-    }
 
-
+        lMap[level][8][12] = 15;
         lMap[level][18][12] = 14;
 
 
@@ -2767,7 +2814,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
     }
 
-    if (l2)//If it's Lvl 2
+    else if (l2)//If it's Lvl 2
     {
         if (e === 38 && p.col === 0 && p.row === 0) //If going UP & character is right under door 1
         {
@@ -2949,7 +2996,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         }
     }
 
-    if (l3)//If it's Lvl 3
+    else if (l3)//If it's Lvl 3
     {
         if (e === 37 && p.col === 1 && (p.row === 16))//If going LEFT at the staircase
         {//go back to sewer (from store)
@@ -3064,17 +3111,49 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
     }
 
-    if (l4)//If it's Lvl 4
+    else if (l4)//If it's Lvl 4
     {
 
     }
 
-    if (l5)//If it's Lvl 5
+    else if (l5)//If it's Lvl 5
     {
 
+
+        if (e === 38 && p.col === 0 && p.row === 0)
+        {
+            removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
+
+            let size = 0;
+
+            throughTheDowar();
+
+            function throughTheDowar()
+            {
+                if (size < 2)//If is not small enough to fit through the door..
+                {
+                    ctx.clearRect(0, 0, 32, 48);
+                    fillErasedMap();
+                    ctx.drawImage(scientist, 0, 144, 32, 48, size*4, size*6, 28-(4*size), 42-(6*size));
+                    size++;
+                    setTimeout(throughTheDowar, 120);
+                }       //Shrink
+                else        //Otherwise, go through door and load level 1
+                {
+                    keepDrawingFlames = false;
+                    level = 4;
+                    l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;
+                    l4 = true;
+                    ctx.clearRect(0,0,800,600);
+                    p.frameY = 0;
+                    startGame();
+                    setTimeout(drawMap, 40);
+                }
+            }
+        }
     }
 
-    if (l6)//If it's Lvl 6
+    else if (l6)//If it's Lvl 6
     {
         if (e = 38 && p.row === 6 && p.col === 0)
         {
@@ -3136,7 +3215,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         }
     }
 
-    if (l7)//If it's Lvl 7
+    else if (l7)//If it's Lvl 7
     {
         if (e === 40 && p.col === 24 && p.row === 16) //If going down and above staircase
         {
@@ -3192,7 +3271,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         }  //Go up stairs to level 8
     }
 
-    if (l8)//If it's Lvl 8
+    else if (l8)//If it's Lvl 8
     {
         if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
         {
@@ -3210,7 +3289,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         }  //Go up stairs to level 8
     }
 
-    if (l11)//Sewer map 2
+    else if (l11)//Sewer map 2
     {
         if (e === 40 && p.col === 12 && p.row === 16) //If going down & character is over pipe/tube
         {
@@ -3840,16 +3919,17 @@ function onKeyDown(e)
         }
     }
 
-
     if (dialog)
         setTimeout(checkIfMoved, walkingSpeed * 10);
+
+    checkFloorObjects(e.keyCode);
 }
 
 function checkBoundaries(e)
 {
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
-           if (l1 || l4 || l5 || l7 || l8)
+           if (l1 || l4 || l7 || l8)
                canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
            else if (l2)
             {
@@ -3875,7 +3955,6 @@ function checkBoundaries(e)
 
                     );
                 }
-
             }
            else if (l11)
            {
@@ -3884,6 +3963,14 @@ function checkBoundaries(e)
                        lMap[level][p.row + 1][p.col - 1] === 3 ||
                        lMap[level][p.row + 1][p.col - 1] === 4 ||
                        lMap[level][p.row + 1][p.col - 1] === 0
+                   );
+           }
+           else if (l5)
+           {
+               canGoThisWay =
+                   (
+                       lMap[level][p.row + 1][p.col - 1] === floorNumbers[level] ||
+                       lMap[level][p.row + 1][p.col - 1] === 40
                    );
            }
            else if (l6)
@@ -3903,10 +3990,11 @@ function checkBoundaries(e)
                        lMap[level][p.row + 1][p.col - 1] === 0
                    );
            }
+
     }
     if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
-        if (l1 || l4 || l5 || l7 || l8)
+        if (l1 || l4 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
         else if (l2)
         {
@@ -3934,6 +4022,14 @@ function checkBoundaries(e)
                     lMap[level][p.row + 1][p.col + 1] === 0
                 );
         }
+        else if (l5)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 1][p.col + 1] === floorNumbers[level] ||
+                    lMap[level][p.row + 1][p.col + 1] === 40
+                );
+        }
         else if (l6)
         {
             canGoThisWay =
@@ -3954,7 +4050,7 @@ function checkBoundaries(e)
     }
     if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
-        if (l1 || l4 || l5 || l7 || l8)
+        if (l1 || l4 || l7 || l8)
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
         else if (l2)
         {
@@ -3982,6 +4078,14 @@ function checkBoundaries(e)
                     lMap[level][p.row][p.col] === 0
                 );
         }
+        else if (l5)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row][p.col] === floorNumbers[level] ||
+                    lMap[level][p.row][p.col] === 40
+                );
+        }
         else if (l6)
         {
             canGoThisWay =
@@ -4002,7 +4106,7 @@ function checkBoundaries(e)
     }
     if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
-        if (l1 || l4 || l5 || l7 || l8)
+        if (l1 || l4 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
         else if (l2)
         {
@@ -4030,6 +4134,14 @@ function checkBoundaries(e)
                     lMap[level][p.row + 2][p.col] === 0
                 );
         }
+        else if (l5)
+        {
+            canGoThisWay =
+                (
+                    lMap[level][p.row + 2][p.col] === floorNumbers[level] ||
+                    lMap[level][p.row + 2][p.col] === 40
+                );
+        }
         else if (l6)
         {
             canGoThisWay =
@@ -4050,25 +4162,107 @@ function checkBoundaries(e)
     }
 }
 
+function checkFloorObjects(e)//For picking something up when walking over it
+{
+    if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    {
+        if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
+        {
+            if (l5)
+            {
+                lMap[level][p.row + 1][p.col - 1] = 2;//Change that tile to a floor tile
+                checkIfRightPaper();
+            }
+            if (l11)
+            {
+                lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
+                keyFound = true;
+            }
+        }
+    }
+    if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
+    {
+        if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
+        {
+            if (l5)
+            {
+                lMap[level][p.row + 1][p.col + 1] = 2;//Change that tile to a floor tile
+                checkIfRightPaper();
+            }
+            if (l11)
+            {
+                lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
+                keyFound = true;
+            }
+        }
+    }
+    if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
+    {
+        if (lMap[level][p.row][p.col] === floorObjects[level])
+        {
+            if (l5)
+            {
+                lMap[level][p.row][p.col] = 2;//Change that tile to a floor tile
+                keyFound = true;
+            }
+            if (l11)
+            {
+                lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
+                keyFound = true;
+            }
+        }
+    }
+    if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
+    {
+        if (lMap[level][p.row + 2][p.col] === floorObjects[level])
+        {
+            if (l5)
+            {
+                lMap[level][p.row + 2][p.col] = 2;//Change that tile to a floor tile
+                keyFound = true;
+            }
+            if (l11)
+            {
+                lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
+                keyFound = true;
+            }
+        }
+    }
 
+
+    function checkIfRightPaper()
+    {
+        //code in here will check if the player picked up the right piece of paper
+    }
+}
 
 
 //Space bar actions
 
 function checkActions()
 {
+
+
     if (l2)
     {
         if (p.row === 7 && p.col === 21 && p.frameY === 3)  //Open Locked Door
         {
-            doorThreeOpen = true;
-            j = door3;
-            lMap[level][7][22] = 14;
-            lMap[level][6][22] = 15;
-            drawMap(0);
-            doorSound.play();
-            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-
+            if (keyFound)
+            {
+                doorThreeOpen = true;
+                j = door3;
+                lMap[level][7][22] = 14;
+                lMap[level][6][22] = 15;
+                drawMap(0);
+                doorSound.play();
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            }
+            else
+            {
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
         }
 
 
@@ -4216,7 +4410,6 @@ function checkActions()
             }
         }
     }
-
     else if (l3)
     {
 
@@ -4272,6 +4465,55 @@ function checkActions()
             drawPMap();
         }
     }
+    else if (l5)
+    {
+        // Check for cats
+        if (p.frameY === 3)//Looking up
+        {
+            //If the space above contains a cat
+            if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19))
+            {
+                meow.play();
+                if (lMap[level][p.row-1][p.col] === 2)
+                    lMap[level][p.row-1][p.col] = 40;
+            }
+        }
+        else if (p.frameY === 2)//Looking Right
+        {
+            //If the space to the right contains a cat
+            if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19))
+            {
+
+                meow.play();
+                if (lMap[level][p.row + 1][p.col + 2] === 2)
+                    lMap[level][p.row + 1][p.col + 2] = 40;
+            }
+        }
+        else if (p.frameY === 1)//Looking Left
+        {
+            //If the space to the left contains a cat
+            if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19))
+            {
+                meow.play();
+                if (lMap[level][p.row + 1][p.col - 2] === 2)
+                    lMap[level][p.row + 1][p.col - 2] = 40;
+            }
+        }
+        else if (p.frameY === 0)//Looking Down
+        {
+            //If the space below contains a cat
+            if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19))
+            {
+                meow.play();
+                if (lMap[level][p.row + 3][p.col] === 2)
+                    lMap[level][p.row + 3][p.col] = 40;
+            }
+        }
+
+        fillErasedMap();
+        drawPMap();
+    }
+
 
     else if (l7)
     {
@@ -4343,7 +4585,6 @@ function checkActions()
             }
         }
     }
-
     else if (l8)
     {
         if (p.row === 1 && p.col === 20)
