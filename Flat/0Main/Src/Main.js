@@ -3138,7 +3138,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
     if (l7)//If it's Lvl 7
     {
-        if (e === 40 && p.col === 24 && p.row === 16) //If going down and above staircase
+        if (e === 40 && p.col === 24 && p.row === 16 && windowClosed) //If going down and above staircase
         {
 
 
@@ -3194,7 +3194,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
     if (l8)//If it's Lvl 8
     {
-        if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
+        if (e === 38 && p.col === 0 && p.row === 0) //If going up and below Exit
         {
 
             level = 7;                              //Change level identifier appropriately
@@ -3207,7 +3207,21 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
             startGame();                            //Load new levels assets and settings
             setTimeout(drawMap, 40);                //Draw its entire map
 
-        }  //Go up stairs to level 8
+        }  //Go up stairs to level 7
+		else if (e === 40 && p.row === 17 && p.col === 19 && researchBurned)
+		{
+			
+			level = 6;                              //Change level identifier appropriately
+            l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+            l6 = true;                              //Set the one that is being travelled to to true
+
+            ctx.clearRect(0,0,800,600);             //Clear entire canvas
+            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+            startGame();                            //Load new levels assets and settings
+            setTimeout(drawMap, 40);                //Draw its entire map
+			
+		}
     }
 
     if (l11)//Sewer map 2
@@ -4322,24 +4336,20 @@ function checkActions()
                 drawPMap();
             }
         }
-        else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
-        {
-            if (lighterFluid && researchPaper)
-            {
-                // thought bubble saying "It's done"
-                researchBurned = true;
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-            else if (!lighterFluid && researchPaper)
-            {
-                // thought bubble saying "I need my lighterFluid"
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-        }
+		else if (p.row === 1 && p.col === 1)
+		{
+			// Thought bubble saying "You can't leave" "The mob saw you!"
+			dialog = true;
+			fillErasedMap();
+			drawPMap();
+		}
+		else if (p.row === 16 && p.col === 24)
+		{
+			// Thought bubble saying "I have to close the window first"
+			dialog = true;
+			fillErasedMap();
+			drawPMap();
+		}
     }
 
     else if (l8)
@@ -4356,12 +4366,42 @@ function checkActions()
                 j = emptyShelvesBottom;
                 researchPaper = true;
                 drawMap();
-            }
-            else if (!lighterFluid)
-            {
-                // Thought bubble saying "I need to find my lighter fluid"
+				dialog = true;
+				fillErasedMap();
+                drawPMap();
             }
         }
+		else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
+        {
+            if (lighterFluid && researchPaper)
+            {
+                // thought bubble saying "It's done"
+                researchBurned = true;	
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+            else if (!lighterFluid && researchPaper)
+            {
+                // thought bubble saying "I need my lighterFluid"
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+			else if (!researchPaper)
+			{ 
+				// Thought bubble saying "I need to find the research!"
+				dialog = true;
+				fillErasedMap();
+				drawPMap();
+			}
+        }
+		else if (p.row == 17 && p.col == 19 && !researchBurned)
+		{
+			dialog = true;
+			fillErasedMap();
+			drawPMap();
+		}
     }
 
 
@@ -4482,7 +4522,120 @@ function displayTextBubble()
                 alreadySetTimeout = true;
             }
         }
+		else if (dialog && p.row === 16 && p.col == 24)
+		{
+			dialogX = 14;
+            dialogY = 1;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTl, (p.col - 4.5) * 32, (p.row - 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I can't leave yet!", (p.col - 3) * 32 - 10, (p.row + 0) * 32 - 5);
+            ctx.fillText("The windows are open", (p.col - 4) * 32 + 10, (p.row + 0) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+		else if (dialog && p.row === 1 && p.col == 1)
+		{
+			dialogX = 1;
+            dialogY = 1;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I can't leave!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            ctx.fillText("The mob will see me!", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
     }
+	if (l8)
+	{
+		if (dialog && p.row === 1 && p.col === 20)
+		{
+			dialogX = 20;
+            dialogY = 1;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("The research!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            ctx.fillText("Now to burn it..", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+			
+			if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+		else if ((dialog && !researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
+		{
+			dialogX = 0;
+            dialogY = 15;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 0.5) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I need the research!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+			
+			if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+		else if ((dialog && !lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+		{
+			dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I need something", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+            ctx.fillText("to burn it with!", (p.col + 2) * 32 + 10, (p.row - 1.5) * 32 + 7);
+			
+			if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+		else if ((dialog && lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+		{
+			dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("It's done!", (p.col + 2) * 32 - 10, (p.row - 2) * 32 - 5);
+            ctx.fillText("Now i can leave", (p.col + 2) * 32 + 10, (p.row - 2) * 32 + 7);
+			
+			if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+		else if (dialog && p.row == 17 && p.col == 19)
+		{
+			dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I'm not done here!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+			
+			if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+		}
+	}
 
 
 /*                                      //This is where you put your levels thought bubble conditions
