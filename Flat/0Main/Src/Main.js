@@ -121,6 +121,7 @@ let bgm_level3 = new Audio;
 let dangerous = new Audio;
 let waterRunning = new Audio;
 let ratOfDeath = new Audio;
+let newsReport = new Audio;
 let meow = new Audio;
 {
     streetSound.src = "../../4Streetz/audio/happy.mp3";
@@ -131,6 +132,7 @@ let meow = new Audio;
     waterRunning.src = ('../../2Sewer/audio/waterRunning.mp3');
     ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
     meow.src = ('../../5MomsPlace/audio/meow.wav');
+    newsReport.src = ('../../1Home/audio/newsTheme.mp3');
 
     streetSound.loop = true;
     streetSound.volume = 0.05;
@@ -145,14 +147,17 @@ let meow = new Audio;
     waterRunning.volume = 0.1;
 
     meow.volume = 0.3;
+
+    newsReport.loop = true;                         //RYN
+    newsReport.volume = 0.2;                        //RYN
 }
 
 
 //level 0 is undefined as we do not have a level 0
 let startX, startY;
 { // Level        0      1   2   3   4    5   6   7  8      9         10      11
-    startX = [undefined, 0,  0,  1,  10,  0,  10, 0, 0, undefined, undefined, 12];
-    startY = [undefined, 5,  0,  16, 17,  0,  14, 1, 0, undefined, undefined, 16];
+    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 0, undefined, undefined, 12];
+    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 1, undefined, undefined, 16];
 }
 
 
@@ -165,10 +170,10 @@ let startFrameY = [undefined, undefined, undefined, undefined, undefined, undefi
 
 let xMax, xMin, yMax, yMin;
 {// Level          0       1    2    3    4    5    6    7   8      9           10       11
-    xMax =   [undefined,  9,  24,  24,  24,  24,  16,  24,  24,  undefined,  undefined,  24];
+    xMax =   [undefined,  24,  24,  24,  24,  24,  16,  24,  24,  undefined,  undefined,  24];
     xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  0];
     yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  17];
-    yMin =   [undefined,  5,   0,   0,   0,   0,   5,   1,   0,  undefined,  undefined,  2];
+    yMin =   [undefined,  0,   0,   0,   0,   0,   5,   0,   1,  undefined,  undefined,  2];
 }
 
 
@@ -206,7 +211,7 @@ let lMap, lPMap, lOMap;
 
 
 //For finding out if level is ready to be drawn
-let l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready;
+let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready;
 
 
 let canvas = document.querySelector("canvas");
@@ -460,7 +465,7 @@ let torchNum = [];                              //To hold torch objects
 }                                           //Fill it with torch objects
 
 
-//Roof
+//L6
 let gate = new Image();
 let fence = new Image();
 let litWindow = new Image();
@@ -497,68 +502,103 @@ function startGame()
     if (l1)//Home(roof)
 
     {
-        canvas.style.backgroundImage = "url('../../1Home/images/city.gif')";
+        canvas.style.backgroundImage = "";
 
+        newsReport.play();          //RYN
 
-        let outsideWall = new Image();
-        let chimney = new Image();
-        let windowTopLeft = new Image();
-        let windowTopRight = new Image();
-        let windowBottomLeft = new Image();
-        let windowBottomRight = new Image();
-        let streetLight = new Image();
-        let roof = new Image();
+        let floor = new Image();
+        let wallpaper = new Image();
+        let wallpaperWswords = new Image();
+        let wallpaperWshield = new Image();
+        let wallpaperWbigPaintingL = new Image();
+        let wallpaperWbigPaintingR = new Image();
+        let wallpaperWsmallPaining1 = new Image();
+        let bookcaseTL = new Image();
+        let bookcaseTR = new Image();
+        let bookcaseBL = new Image();
+        let bookcaseBR = new Image();
+        let bookcaseOpening1T = new Image();
+        let bookcaseOpening1B = new Image();
+        let bookcaseOpening2T = new Image();
+        let bookcaseOpening2B = new Image();
+        let bookcaseOpening3T = new Image();
+        let bookcaseOpening3B = new Image();
+
 
 
         {
-            outsideWall.src = "../../1Home/images/outsideWall.png";
-            chimney.src = "../../1Home/images/chimney.png";
-            windowTopLeft.src = "../../1Home/images/windowTopLeft.png";
-            windowTopRight.src = "../../1Home/images/windowTopRight.png";
-            windowBottomLeft.src = "../../1Home/images/windowBottomLeft.png";
-            windowBottomRight.src = "../../1Home/images/windowBottomRight.png";
-            streetLight.src = "../../1Home/images/streetLight.png";
-            roof.src = "../../1Home/images/shingles.jpg";
+            floor.src = "../../1Home/images/floor.png";
+            wallpaper.src = "../../1Home/images/wallpaper.png";
+            wallpaperWswords.src = "../../1Home/images/wallpaper2.png";
+            wallpaperWshield.src = "../../1Home/images/wallpaper3.png";
+            wallpaperWbigPaintingL.src = "../../1Home/images/wallpaper4.png";
+            wallpaperWbigPaintingR.src = "../../1Home/images/wallpaper5.png";
+            wallpaperWsmallPaining1.src = "../../1Home/images/wallpaper6.png";
+            bookcaseTL.src = "../../1Home/images/bookcaseTL.png";
+            bookcaseBL.src = "../../1Home/images/bookcaseBL.png";
+            bookcaseTR.src = "../../1Home/images/bookcaseTR.png";
+            bookcaseBR.src = "../../1Home/images/bookcaseBR.png";
+            bookcaseOpening1T.src = "../../1Home/images/bookcaseopening1T.png";
+            bookcaseOpening1B.src = "../../1Home/images/bookcaseopening1B.png";
+            bookcaseOpening2T.src = "../../1Home/images/bookcaseopening2T.png";
+            bookcaseOpening2B.src = "../../1Home/images/bookcaseopening2B.png";
+            bookcaseOpening3T.src = "../../1Home/images/bookcaseopening3T.png";
+            bookcaseOpening3B.src = "../../1Home/images/bookcaseopening3B.png";
+
+
         }//Define SRC property of images
 
 
+
+
         {
-            a = roof;
-            b = outsideWall;
+            a = floor;
+            b = wallpaper;
             c = undefined;
-            d = chimney;
-            e = windowTopLeft;
-            f = windowTopRight;
-            g = windowBottomLeft;
-            h = windowBottomRight;
+            d = wallpaperWswords;
+            e = wallpaperWshield;
+            f = wallpaperWbigPaintingL;
+            g = wallpaperWbigPaintingR;
+            h = wallpaperWsmallPaining1;
+            i = bookcaseTL;
+            j = bookcaseTR;
+            k = bookcaseBL;
+            l = bookcaseBR;
+            m = bookcaseOpening1T;
+            n = bookcaseOpening1B;
+            o = bookcaseOpening2T;
+            q = bookcaseOpening2B;
+            r = bookcaseOpening3T;
+            s = bookcaseOpening3B;
+
         }//Assign images to global letter variables
 
 
-        if (lMap[level] === undefined) //Initialize this levels map if it has not been initialized
+        if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
-            lMap[level] = //Map for level 1
-                [
-                    //0,1,2,3,4,5,6,7,8,9
+            lMap[level] =                                           //Initialize this levels map
+                //                                            10                                      20
+                [  // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
-                    [2,2,2,2,2,2,2,2,2,2],      //0
-                    [2,2,2,2,2,2,2,2,2,2],      //1
-                    [2,2,2,2,2,2,2,2,2,2],      //2
-                    [2,2,2,2,2,2,2,2,2,2],      //3
-                    [2,2,2,2,2,2,2,2,2,2],      //4
-                    [3,2,2,2,2,2,2,2,2,3],      //5
-                    [0,0,0,0,0,0,0,0,0,0],      //6
-                    [0,0,0,0,0,0,0,0,0,0],      //7
-                    [0,0,0,0,0,0,0,0,0,0],      //8
-                    [0,0,0,0,0,0,0,0,0,0],      //9
-                    [0,0,0,0,0,0,0,0,0,0],      //10
-                    [0,0,0,0,0,0,0,0,0,0],      //11
-                    [0,0,0,0,0,0,0,0,0,0],      //12
-                    [1,1,1,1,1,1,1,1,1,1],      //13
-                    [1,1,1,1,1,1,1,1,1,1],      //14
-                    [1,1,4,5,1,1,4,5,1,1],      //15
-                    [1,1,6,7,1,1,6,7,1,1],      //16
-                    [1,1,1,1,1,1,1,1,1,1],      //17
-                    [1,1,1,1,1,1,1,1,1,1]       //18
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2,  2,  2,  2,  2,  2],       //0
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2,  2,  2,  2,  2,  2],       //0
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2,  2,  2,  2,  2,  2],       //0
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2,  2,  2,  2,  2,  2],       //0
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 2, 2,  2,  2,  2,  2,  2],       //0
+                    [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1,  1,  1,  1,  1,  1,  1],       //0
+                    [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 1,  1,  1,  1,  1,  1,  1],       //0
+                    [ 1,  1,  1,  3,  4,  4,  3,  1,  5,  6,  1,  1,  1,  1,  1,  1,  7,  1, 3,  4,  4,  3,  1,  1,  1],       //0
+                    [1, 1, 1,  1,  1,  1, 1, 1,  1, 1,  1,  1,  1,  1,  1,  1,  1,  1, 1,  1,  1,  1,  1,  1,  1],       //0
+                    [ 8,    9,  8,   9,  8,  9, 8,    9,  8,   9,  8,  9,  8,    9,  8,   9,  8,  9, 8,    9,  8,   9,  8,  9,  8],       //0
+                    [ 10,  11,  10,  11,  10,  11,  10,  11,  10,  11,  10,  11,  10,  11,  10,  11,  10,  11,10,  11,  10,  11,  10,  11,  10],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
+                    [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0,  0,  0,  0,  0,  0,  0],       //0
                 ];
         }
 
@@ -566,11 +606,11 @@ function startGame()
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];                                          //Declare a player map for this level
-            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
+            for (let y = 0; y < 18; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 18; x++)
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -583,14 +623,14 @@ function startGame()
         changePStartPos();
 
 
-        roof.onload = function (){drawMap();};
+        bookcaseOpening3B.onload = function (){l1Ready = true; drawMap();};
         addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
     }
 
     else if (l2)//Sewer
 
-    {
+        {
         canvas.style.backgroundImage = "";
 
 
@@ -800,6 +840,10 @@ function startGame()
         burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
         keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
         countingFlames = setInterval(changeFlame, 120);
+
+        startX[1] = 23;
+        startY[1] = 10;
+        lPMap[1][10][23] = 1;
     }
 
     else if (l3)//Clothing Store
@@ -965,7 +1009,7 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
 
         timer_level3 = setInterval(function(){
-   /*         drawMap();*/
+            drawMap();
             appearEnemy();
         }, 1000);
 
@@ -1491,6 +1535,10 @@ function startGame()
     {
         canvas.style.backgroundImage = "url('../../6Roof/images/city.gif')";
 
+        let exit = new Image();
+        {
+            exit.src = "../../6Roof/images/exit2.png";
+        }
 
         let roof = new Image();
         let wall = new Image();
@@ -1555,11 +1603,11 @@ function startGame()
         if (lPMap[level] === undefined)
         {
             lPMap[level] = [];                                          //Declare a player map for this level
-            for (let y = 0; y < 24; y++)                                //Initialize all indices with 0
+            for (let y = 0; y < 18; y++)                                //Initialize all indices with 0
             {
                 lPMap[level][y] = [];
 
-                for (let x = 0; x < 18; x++)
+                for (let x = 0; x < 24; x++)
                 {
                     lPMap[level][y].push(0)
                 }
@@ -1576,7 +1624,131 @@ function startGame()
 
     }
 
-    else if (l7)//Lab
+    else if (l7)//Lab upper level
+    {
+        canvas.style.backgroundImage = "";
+
+
+        let floor = new Image();
+        let wall = new Image();
+        let door1 = new Image();
+        let stairs = new Image();
+        let emptyShelvesTop = new Image();
+        let emptyShelvesBottom = new Image();
+        let lockerTop = new Image();
+        let lockerBottom = new Image();
+        let computerTop = new Image();
+        let computerBottom = new Image();
+        let metalCabinetTop = new Image();
+        let metalCabinetBottom = new Image();
+        let glassCabinetTop = new Image();
+        let glassCabinetBottom = new Image();
+        let fullShelvesTop = new Image();
+        let fullShelvesBottom = new Image();
+        let openWindow = new Image();
+        let closedWindow = new Image();
+        let trash = new Image();
+
+
+        {
+            floor.src = "../../7Lab/images/Floor.png";
+            wall.src = "../../7Lab/images/Wall.png";
+            door1.src = "../../7Lab/images/door1.png";
+            stairs.src = "../../7Lab/images/stairs.png";
+            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
+            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+            lockerTop.src = "../../7Lab/images/locker-top.png";
+            lockerBottom.src = "../../7Lab/images/locker-bottom.png";
+            computerTop.src = "../../7Lab/images/computer-top.png";
+            computerBottom.src = "../../7Lab/images/computer-bottom.png";
+            metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
+            metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
+            glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
+            glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
+            fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
+            fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
+            openWindow.src = "../../7Lab/images/openWindow.png";
+            closedWindow.src = "../../7Lab/images/closedWindow.png";
+            trash.src = "../../7Lab/images/trash.png";
+        }//Defined SRC Property for all level images
+
+
+        {
+            a = wall;				// 0
+            b = floor;				// 1
+            c = door1;				// 2
+            d = stairs;				// 3
+            e = fullShelvesTop;		// 4
+            f = fullShelvesBottom;	// 5
+            g = emptyShelvesTop;	// 6
+            h = emptyShelvesBottom;	// 7
+            if (researchPaper == true)
+            {
+                i = emptyShelvesTop;	// 8
+                j = emptyShelvesBottom;	// 9
+            }
+            else
+            {
+                i = fullShelvesTop;		// 8
+                j = fullShelvesBottom;	// 9
+            }
+            k = trash;				// 10
+        }//Assigne images to global letter variables
+
+
+        if (lMap[level] === undefined)
+        {
+            lMap[level]=
+                //                    10                  20
+                [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
+                ];
+        }
+
+
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];
+
+            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 24; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+            lPMap[level][1][0] = 1;
+        }
+
+
+        changePStartPos();
+
+
+        trash.onload = function(){l7Ready=true;};
+        addEventListener("keydown", onKeyDown, false);
+    }
+
+    else if (l8)//Lab lower level
     {
         canvas.style.backgroundImage = "";
 
@@ -1708,133 +1880,11 @@ function startGame()
         changePStartPos();
 
 
-        closedWindow.onload = function(){l7Ready=true;};
-        addEventListener("keydown", onKeyDown, false);
-    }
-
-    else if (l8)
-    {
-        canvas.style.backgroundImage = "";
-
-
-        let floor = new Image();
-        let wall = new Image();
-        let door1 = new Image();
-        let stairs = new Image();
-        let emptyShelvesTop = new Image();
-        let emptyShelvesBottom = new Image();
-        let lockerTop = new Image();
-        let lockerBottom = new Image();
-        let computerTop = new Image();
-        let computerBottom = new Image();
-        let metalCabinetTop = new Image();
-        let metalCabinetBottom = new Image();
-        let glassCabinetTop = new Image();
-        let glassCabinetBottom = new Image();
-        let fullShelvesTop = new Image();
-        let fullShelvesBottom = new Image();
-        let openWindow = new Image();
-        let closedWindow = new Image();
-        let trash = new Image();
-
-
-        {
-            floor.src = "../../7Lab/images/Floor.png";
-            wall.src = "../../7Lab/images/Wall.png";
-            door1.src = "../../7Lab/images/door1.png";
-            stairs.src = "../../7Lab/images/stairs.png";
-            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
-            lockerTop.src = "../../7Lab/images/locker-top.png";
-            lockerBottom.src = "../../7Lab/images/locker-bottom.png";
-            computerTop.src = "../../7Lab/images/computer-top.png";
-            computerBottom.src = "../../7Lab/images/computer-bottom.png";
-            metalCabinetTop.src = "../../7Lab/images/metalCabinet-top.png";
-            metalCabinetBottom.src = "../../7Lab/images/metalCabinet-bottom.png";
-            glassCabinetTop.src = "../../7Lab/images/glassCabinet-top.png";
-            glassCabinetBottom.src = "../../7Lab/images/glassCabinet-bottom.png";
-            fullShelvesTop.src = "../../7Lab/images/fullShelves-top.png";
-            fullShelvesBottom.src = "../../7Lab/images/fullShelves-bottom.png";
-            openWindow.src = "../../7Lab/images/openWindow.png";
-            closedWindow.src = "../../7Lab/images/closedWindow.png";
-            trash.src = "../../7Lab/images/trash.png";
-        }//Defined SRC Property for all level images
-
-
-        {
-            a = wall;				// 0
-            b = floor;				// 1
-            c = door1;				// 2
-            d = stairs;				// 3
-            e = fullShelvesTop;		// 4
-            f = fullShelvesBottom;	// 5
-            g = emptyShelvesTop;	// 6
-            h = emptyShelvesBottom;	// 7
-            if (researchPaper == true)
-            {
-                i = emptyShelvesTop;	// 8
-                j = emptyShelvesBottom;	// 9
-            }
-            else
-            {
-                i = fullShelvesTop;		// 8
-                j = fullShelvesBottom;	// 9
-            }
-            k = trash;				// 10
-        }//Assigne images to global letter variables
-
-
-        if (lMap[level] === undefined)
-        {
-            lMap[level]=
-                //                    10                  20
-                [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0]
-                ];
-        }
-
-
-        if (lPMap[level] === undefined)
-        {
-            lPMap[level] = [];
-
-            for (let y = 0; y < 18; y++)                //Initialize all indices with 0
-            {
-                lPMap[level][y] = [];
-
-                for (let x = 0; x < 24; x++)
-                {
-                    lPMap[level][y].push(0)
-                }
-            }
-            lPMap[level][1][0] = 1;
-        }
-
-
-        changePStartPos();
-
-
         closedWindow.onload = function(){l8Ready=true;};
         addEventListener("keydown", onKeyDown, false);
     }
+
+
 
     else if (l11)//SewerPipe Map
     {
@@ -2817,7 +2867,64 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
     //    37 - left , 38 - up , 39 - right , 40 - down
     if (l1)//If it's Lvl 1
     {
+        if (e === 39 && p.col === 24 && p.row === 10)//TO lvl 2
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            level = 2;              //Change level identifier appropriately
+            l1 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
+            l2 = true;                                  //Set level being travelled to as true
 
+            ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+            l1Ready = false;
+            startGame();                                //Load settings and assets for next map
+            waitForLoad();
+
+
+            function waitForLoad()
+            {
+                if (!l2Ready)
+                {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font="20px Arial";
+                    ctx.fillText("Loading...", 350, 290);
+                    setTimeout(waitForLoad, 10);
+                }
+                else
+                {
+                    drawMap();                   //Draw next map
+                }
+            }
+        }
+        if (e === 38 && p.col === 0 && p.row === 10)
+        {
+            removeEventListener("keydown", onKeyDown, false);
+            level = 6;              //Change level identifier appropriately
+            l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
+            l6 = true;                                  //Set level being travelled to as true
+            ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+            l6Ready = false;
+            l6Ready2 = false;
+            startGame();                                //Load settings and assets for next map
+            drawL6Full();
+            waitForLoad();
+
+
+            function waitForLoad()
+            {
+                if (!l6Ready || !l6Ready2)
+                {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font="20px Arial";
+                    ctx.fillText("Loading...", 350, 290);
+                    setTimeout(waitForLoad, 10);
+                }
+                else
+                {
+                    drawMap();                   //Draw next map
+                    setTimeout(drawPMap, 100);
+                }
+            }
+        }
     }
 
     else if (l2)//If it's Lvl 2
@@ -2842,6 +2949,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 else        //Otherwise, go through door and load level 1
                 {
                     keepDrawingFlames = false;
+
                     clearInterval(burning);
                     clearInterval(countingFlames);
                     level = 1;
@@ -2849,6 +2957,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     l1 = true;
                     ctx.clearRect(0,0,800,600);
                     p.frameY = 0;
+
                     startGame();
                     setTimeout(drawMap, 40);
                 }
@@ -3320,7 +3429,82 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         }
     }
 
-    else if (l7)//If it's Lvl 7
+    else if (l7)//If it's Lvl 8
+    {
+        if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
+        {
+
+            level = 8;                              //Change level identifier appropriately
+            l1 = l2 = l3 = l4 = l5 = l6 = l7 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+            l8 = true;                              //Set the one that is being travelled to to true
+
+            ctx.clearRect(0,0,800,600);             //Clear entire canvas
+            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+            startGame();                            //Load new levels assets and settings
+            setTimeout(drawMap, 40);                //Draw its entire map
+
+        }  //Go up stairs to level 8
+
+        if (e === 40 && p.col === 19 && p.row === 16) //If going down and above staircase
+        {
+
+
+            p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
+
+            removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+            // cannot be changed while animating stair climbing
+            let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+
+            goUpALvl();                                      //Start climbing stairs
+
+            function goUpALvl()                  //Climbing stairs animation function
+            {
+                staysClimbed += 0.25;
+                p.frameX++;
+                p.srcX = p.width * (p.frameX % 4);
+                p.srcY = p.height * p.frameY;
+
+                if (staysClimbed < 5)
+                {
+                    fillErasedMap();        //Draw the map image that was cleared
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, 512 + (4 * staysClimbed), 32, 48);
+                    setTimeout(goUpALvl, 80);
+                }
+                else if (staysClimbed < 10)
+                {
+                    //Count each step taken
+                    fillErasedMap();        //Draw the map image that was cleared
+                    //Draw scientist incrementally smaller each 'step' taken
+                    // and move player slightly up to portray movement
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32 - (staysClimbed/4), 512 + (5 * staysClimbed), 32 + (staysClimbed - 3) * 3/2, 48);
+                    setTimeout(goUpALvl, 80);
+                }
+                else if (staysClimbed < 20)
+                    {
+                        fillErasedMap();
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48 - (5 * staysClimbed), p.col*32 - 10, 562 + (5 * staysClimbed), 102.5, 48);
+                        setTimeout(goUpALvl, 80);
+                    }
+                else                            //Otherwise
+                {
+                    level = 7;                              //Change level identifier appropriately
+                    l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+                    l7 = true;                              //Set the one that is being travelled to to true
+
+                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                    p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+
+                    startGame();                            //Load new levels assets and settings
+                    setTimeout(drawMap, 40);                //Draw its entire map
+                }
+            }
+        }  //Go up stairs to level 8
+    }
+
+    else if (l8)//If it's Lvl 7
     {
         if (e === 40 && p.col === 24 && p.row === 16) //If going down and above staircase
         {
@@ -3362,9 +3546,9 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 }
                 else                            //Otherwise
                 {
-                    level = 8;                              //Change level identifier appropriately
-                    l1 = l2 = l3 = l4 = l5 = l6 = l7 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
-                    l8 = true;                              //Set the one that is being travelled to to true
+                    level = 7;                              //Change level identifier appropriately
+                    l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+                    l7 = true;                              //Set the one that is being travelled to to true
 
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
@@ -3373,24 +3557,6 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     setTimeout(drawMap, 40);                //Draw its entire map
                 }
             }
-        }  //Go up stairs to level 8
-    }
-
-    else if (l8)//If it's Lvl 8
-    {
-        if (e === 38 && p.col === 0 && p.row === 0) //If going down and above Exit
-        {
-
-            level = 7;                              //Change level identifier appropriately
-            l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
-            l7 = true;                              //Set the one that is being travelled to to true
-
-            ctx.clearRect(0,0,800,600);             //Clear entire canvas
-            p.frameY = 2;                           //Change tile sheet frame to match direction being faced
-
-            startGame();                            //Load new levels assets and settings
-            setTimeout(drawMap, 40);                //Draw its entire map
-
         }  //Go up stairs to level 8
     }
 
@@ -3477,6 +3643,33 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
     {
         if (l6)
         {
+            let gate = new Image();
+            let fence = new Image();
+            let litWindow = new Image();
+            let darkWindow = new Image();
+            let cherryTree = new Image();
+            let statue = new Image();
+            let car = new Image();
+            let ladder = new Image();
+            let helipad = new Image();
+            let helicopter = new Image();
+            let exit = new Image();
+            let shrub = new Image();
+            {
+                shrub.src = "../../6Roof/images/shrub.png";
+                exit.src = "../../6Roof/images/exit2.png";
+                helicopter.src = "../../6Roof/images/helicopter1.png";
+                helipad.src = "../../6Roof/images/helipad.png";
+                ladder.src = "../../6Roof/images/ladder.png";
+                car.src = "../../6Roof/images/car.png";
+                statue.src = "../../6Roof/images/statue.png";
+                cherryTree.src = "../../6Roof/images/cherryTree.png";
+                darkWindow.src = "../../6Roof/images/darkWindow.png";
+                litWindow.src = "../../6Roof/images/litWindow.png";
+                fence.src = "../../6Roof/images/fence.png";
+                gate.src = "../../6Roof/images/gate.png";
+            }
+
             ctx.drawImage(darkWindow, 10, 427);
             ctx.drawImage(darkWindow, 60, 427);
             ctx.drawImage(darkWindow, 210, 427);
@@ -3502,11 +3695,12 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
 function onKeyDown(e)
 {
-    if (!l3)
-        clearInterval(timer_level3);
+     if (!l3)
+         clearInterval(timer_level3);
 
-    if (l6)
-    {
+
+     if (l6)
+     {
         if (p.col >= 6)
             yMin[6] = 5;
         else
@@ -3515,22 +3709,23 @@ function onKeyDown(e)
             xMin[6] = 6;
         else
             xMin[6] = 0;
-    }
+     }
 
-    p.prevCol = p.col;      //Set column to be cleared
-    p.prevRow = p.row;      //Set row to be cleared
+
+     p.prevCol = p.col;      //Set column to be cleared
+     p.prevRow = p.row;      //Set row to be cleared
+
 
      checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
      checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
-    if (l2 && p.row === 6 && p.col === 22)//Draw Bare floor so that player can appear over it but under ridge
+
+     if (l2 && p.row === 6 && p.col === 22)//Draw Bare floor so that player can appear over it but under ridge
         // (Ridge is drawn after player -- end of this function)
-    {
+     {
         ctx.drawImage(floorClean, 22*32, 7*32);
     }
-
      if (e.keyCode === 37)//Left
-
      {
          if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
          {
@@ -3596,9 +3791,7 @@ function onKeyDown(e)
          }
          detectMovementLevel3();
      }
-
      if (e.keyCode === 39)//Right
-
      {
          if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
          {
@@ -3664,9 +3857,7 @@ function onKeyDown(e)
          }
          detectMovementLevel3();
      }
-
      if (e.keyCode === 38)//Up
-
      {
          if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
          {
@@ -3741,9 +3932,7 @@ function onKeyDown(e)
          }
          detectMovementLevel3();
      }
-
      if (e.keyCode === 40)//Down
-
      {
          if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
          {
@@ -3819,41 +4008,95 @@ function onKeyDown(e)
          }
          detectMovementLevel3();
      }
-
      if (e.keyCode === 32) //Space
-
      {
          checkActions();
 
      }
 
+
+    if (sewersDrained) //If the water has been shut off
+        waterRunning.pause();           //Stop playing the noise of running water
+
+
+    function drawL6()
+    {
+        if (l6)
+        {
+            ctx.drawImage(darkWindow, 10, 427);
+            ctx.drawImage(darkWindow, 60, 427);
+            ctx.drawImage(darkWindow, 210, 427);
+            ctx.drawImage(darkWindow, 260, 427);
+            ctx.drawImage(darkWindow, 310, 427);
+            ctx.drawImage(darkWindow, 460, 427);
+            ctx.drawImage(litWindow, 110, 427);
+            ctx.drawImage(litWindow, 160, 427);
+            ctx.drawImage(litWindow, 360, 427);
+            ctx.drawImage(litWindow, 410, 427);
+            ctx.drawImage(litWindow, 510, 427);
+            ctx.drawImage(ladder, 5, 160);
+            ctx.drawImage(helipad, 5, 150);
+            ctx.drawImage(helicopter, 5, 85);
+            ctx.drawImage(exit, 309, 335);
+            ctx.drawImage(cherryTree, 385, 490);
+            ctx.drawImage(fence, 390, 545);
+            ctx.drawImage(fence, 455, 545);
+        }
+    }
+
+
+    if (l2 && p.row === 6 && p.col === 22)//PNG image with only ridge to draw over player
+    {
+        if (!sewersDrained && (p.row < 11 || p.col > 11))
+        {
+            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+        }
+        else
+        {
+            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
+        }
+    }
+
+
+    if (dialog)
+        setTimeout(checkIfMoved, walkingSpeed * 10);
+
+
+    checkFloorObjects(e.keyCode);
+
+
+
+
+
+
+
+
+
+
+
+
      /* TEMP - for testing - TEMP */
 
      if (e.keyCode === 76) //L - light
-
      {
          lightSwitch++;
          lightsOn = (lightSwitch % 2 === 0);
          drawMap();   //Drawing whole map because light/shade covers whole map
          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
      }
-
      if (e.keyCode === 83) //S - swamp
-
      {
          sewerSwitch++;
          sewersDrained = (sewerSwitch % 2 === 0);
          drawMap(); //Drawing whole map because swamp covers whole map
          ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
      }
-
      if (e.keyCode === 49) //1
      {
          removeEventListener("keydown", onKeyDown, false);
          level = 1;              //Change level identifier appropriately
          l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
          l1 = true;                                  //Set level being travelled to as true
-
          ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
          startGame();                                //Load settings and assets for next map
          setTimeout(drawMap, 40);                    //Draw next map
@@ -3930,8 +4173,8 @@ function onKeyDown(e)
          }
 
      }
-    if (e.keyCode === 55) //7
-    {
+     if (e.keyCode === 55) //7
+     {
         removeEventListener("keydown", onKeyDown, false);
         level = 7;                  //Change level identifier appropriately
         l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
@@ -3939,37 +4182,11 @@ function onKeyDown(e)
         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
         l7Ready=false;
         startGame();                                //Load settings and assets for next map
-        waitForItToLoad();
-
-        function waitForItToLoad()
-        {
-            if (!l7Ready)
-            {
-                ctx.fillStyle = '#ffffff';
-                ctx.font="20px Arial";
-                ctx.fillText("Loading...", 350, 290);
-                setTimeout(waitForItToLoad, 10);
-            }
-            else
-            {
-                drawMap();                   //Draw next map
-            }
-        }
-    }
-    if (e.keyCode === 56) //8
-    {
-    removeEventListener("keydown", onKeyDown, false);
-    level = 8;                  //Change level identifier appropriately
-    l1 = l2 = l3 = l4 = l5 = l6 = l7 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-    l8 = true;                                  //Set level being travelled to as true
-    ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-    l8Ready=false;
-    startGame();                                //Load settings and assets for next map
-    waitForTheLoading();
+        waitForTheLoading();
 
         function waitForTheLoading()
         {
-            if (!l8Ready)
+            if (!l7Ready)
             {
                 ctx.fillStyle = '#ffffff';
                 ctx.font="20px Arial";
@@ -3982,52 +4199,32 @@ function onKeyDown(e)
             }
         }
     }
+     if (e.keyCode === 56) //8
+     {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 8;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l8 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        l8Ready=false;
+        startGame();                                //Load settings and assets for next map
+        waitForItToLoad();
 
-
-     if (sewersDrained) //If the water has been shut off
-             waterRunning.pause();           //Stop playing the noise of running water
-
-    function drawL6()
-    {
-        if (l6)
+        function waitForItToLoad()
         {
-            ctx.drawImage(darkWindow, 10, 427);
-            ctx.drawImage(darkWindow, 60, 427);
-            ctx.drawImage(darkWindow, 210, 427);
-            ctx.drawImage(darkWindow, 260, 427);
-            ctx.drawImage(darkWindow, 310, 427);
-            ctx.drawImage(darkWindow, 460, 427);
-            ctx.drawImage(litWindow, 110, 427);
-            ctx.drawImage(litWindow, 160, 427);
-            ctx.drawImage(litWindow, 360, 427);
-            ctx.drawImage(litWindow, 410, 427);
-            ctx.drawImage(litWindow, 510, 427);
-            ctx.drawImage(ladder, 5, 160);
-            ctx.drawImage(helipad, 5, 150);
-            ctx.drawImage(helicopter, 5, 85);
-            ctx.drawImage(exit, 309, 335);
-            ctx.drawImage(cherryTree, 385, 490);
-            ctx.drawImage(fence, 390, 545);
-            ctx.drawImage(fence, 455, 545);
+            if (!l8Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForItToLoad, 10);
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
         }
     }
-
-    if (l2 && p.row === 6 && p.col === 22)//PNG image with only ridge to draw over player
-    {
-        if (!sewersDrained && (p.row < 11 || p.col > 11))
-        {
-            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
-        }
-        else
-        {
-            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, p.row*32, 32, 48);
-        }
-    }
-
-    if (dialog)
-        setTimeout(checkIfMoved, walkingSpeed * 10);
-
-    checkFloorObjects(e.keyCode);
 }
 
 function checkBoundaries(e)
@@ -4515,6 +4712,7 @@ function checkActions()
             }
         }
     }
+
     else if (l3)
     {
 
@@ -4618,7 +4816,6 @@ function checkActions()
         }
     }
 
-
     else if (l5)
     {
         // Check for cats
@@ -4668,8 +4865,60 @@ function checkActions()
         drawPMap();
     }
 
-
     else if (l7)
+    {
+        if (p.row === 1 && p.col === 20)
+        {
+            if (!researchPaper)
+            {
+                let emptyShelvesTop = new Image();
+                let emptyShelvesBottom = new Image();
+                emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png"
+                emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png"
+                i = emptyShelvesTop;
+                j = emptyShelvesBottom;
+                researchPaper = true;
+                console.log("it was useless");
+                /*drawMap();*/
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+        }
+        else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
+        {
+            if (!researchPaper)
+            {
+                // Thought bubble saying "I need to find the research!"
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+            else if (!lighterFluid && researchPaper)
+            {
+                // thought bubble saying "I need my lighterFluid"
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+            else if (lighterFluid && researchPaper)
+            {
+                // thought bubble saying "It's done"
+                researchBurned = true;
+                dialog = true;
+                fillErasedMap();
+                drawPMap();
+            }
+        }
+        else if (p.row === 17 && p.col === 19 && !researchBurned)
+        {
+            dialog = true;
+            fillErasedMap();
+            drawPMap();
+        }
+    }
+
+    else if (l8)
     {
         if (p.row === 1 && p.col === 14)
         {
@@ -4736,57 +4985,7 @@ function checkActions()
         }
     }
 
-    else if (l8)
-    {
-        if (p.row === 1 && p.col === 20)
-        {
-            if (!researchPaper)
-            {
-                let emptyShelvesTop = new Image();
-                let emptyShelvesBottom = new Image();
-                emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png"
-                emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png"
-                i = emptyShelvesTop;
-                j = emptyShelvesBottom;
-                researchPaper = true;
-                drawMap();
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-        }
-        else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
-        {
-            if (lighterFluid && researchPaper)
-            {
-                // thought bubble saying "It's done"
-                researchBurned = true;
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-            else if (!lighterFluid && researchPaper)
-            {
-                // thought bubble saying "I need my lighterFluid"
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-            else if (!researchPaper)
-            {
-                // Thought bubble saying "I need to find the research!"
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-        }
-        else if (p.row == 17 && p.col == 19 && !researchBurned)
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-    }
+
 
 
 
@@ -5068,6 +5267,88 @@ function displayTextBubble()
 
     else if (l7)
     {
+        if (dialog && p.row === 1 && p.col === 20)
+        {
+            dialogX = 20;
+            dialogY = 1;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("The research!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            ctx.fillText("Now to burn it..", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+        else if ((dialog && !researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogX = p.col;
+            dialogY = p.row;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 0.5) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I need the research!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+        else if ((dialog && !lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I need something", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+            ctx.fillText("to burn it with!", (p.col + 2) * 32 + 10, (p.row - 1.5) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+        else if ((dialog && lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("It's done!", (p.col + 2) * 32 - 10, (p.row - 2) * 32 - 5);
+            ctx.fillText("Now i can leave", (p.col + 2) * 32 + 10, (p.row - 2) * 32 + 7);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+        else if (dialog && p.row === 17 && p.col === 19)
+        {
+            dialogX = 1;
+            dialogY = 16;
+            ctx.font="10px Arial";
+            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
+            ctx.fillStyle = "rgba(0, 0, 0)";
+            ctx.fillText("I'm not done here!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+
+            if (!alreadySetTimeout)
+            {
+                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
+                alreadySetTimeout = true;
+            }
+        }
+    }
+
+    else if (l8)
+    {
         if (dialog && p.row === 2 && p.col === 12)
         {
             dialogX = 12;
@@ -5122,89 +5403,8 @@ function displayTextBubble()
             ctx.font="10px Arial";
             ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
             ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I can't leave!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            ctx.fillText("I go this way...", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
             ctx.fillText("The mob will see me!", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
-
-            if (!alreadySetTimeout)
-            {
-                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-                alreadySetTimeout = true;
-            }
-        }
-    }
-    else if (l8)
-    {
-        if (dialog && p.row === 1 && p.col === 20)
-        {
-            dialogX = 20;
-            dialogY = 1;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("The research!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
-            ctx.fillText("Now to burn it..", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
-
-            if (!alreadySetTimeout)
-            {
-                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-                alreadySetTimeout = true;
-            }
-        }
-        else if ((dialog && !researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogX = 0;
-            dialogY = 15;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 0.5) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I need the research!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
-
-            if (!alreadySetTimeout)
-            {
-                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-                alreadySetTimeout = true;
-            }
-        }
-        else if ((dialog && !lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I need something", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
-            ctx.fillText("to burn it with!", (p.col + 2) * 32 + 10, (p.row - 1.5) * 32 + 7);
-
-            if (!alreadySetTimeout)
-            {
-                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-                alreadySetTimeout = true;
-            }
-        }
-        else if ((dialog && lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("It's done!", (p.col + 2) * 32 - 10, (p.row - 2) * 32 - 5);
-            ctx.fillText("Now i can leave", (p.col + 2) * 32 + 10, (p.row - 2) * 32 + 7);
-
-            if (!alreadySetTimeout)
-            {
-                setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
-                alreadySetTimeout = true;
-            }
-        }
-        else if (dialog && p.row == 17 && p.col == 19)
-        {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I'm not done here!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
 
             if (!alreadySetTimeout)
             {
@@ -5224,8 +5424,10 @@ function displayTextBubble()
         ctx.clearRect((dialogX + 1) * 32, (dialogY + 1) * 32, 160, 96);     //clear portion of map taken up by bubble
         for (let row = (dialogY + 1); row < ((dialogY + 1) + 3); row++)     //Draw the map that was cleared
         {
+            if (lMap[level][row] !== undefined)
             for (let col = (dialogX + 1); col < ((dialogX + 1) + 5); col++)
             {
+                if (lMap[level][row][col] !== undefined)
                 switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
                 {
                     case 0:                   //letters (a through n) are reassigned to an image upon loading each level
@@ -5563,6 +5765,7 @@ function displayTextBubble()
         dialogY = undefined;
         dialog = false;
         alreadySetTimeout = false;
+        console.log("turn off called");
 
     }
 }
@@ -5571,14 +5774,23 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
 {
     if ((p.row !== dialogY || p.col !== dialogX) && dialog) //If player walks away from the item that gave dialog msg
     {
+        console.log("checkIf called");
         let destX = 0, destY = 0;       //define spacing for drawing empty map
         let xPos = 0, yPos = 0;
 
+
+//Anywhere it says "(dialogX + 1)", it should be replaced with a value passed in
+// based on what orientation the thought bubble was drawn using Eg. ((dialogX + x) - x being +1 or -1)
+//          ***    Same goes for (dialogY + 1)  *** ---- Also needs to be fixed in turn off dialog function as well
+    /*              This is what is causing thought bubble to not be erased sometimes               */
         ctx.clearRect((dialogX + 1) * 32, (dialogY + 1) * 32, 160, 96);     //clear portion of map taken up by bubble
+
         for (let row = (dialogY + 1); row < ((dialogY + 1) + 3); row++)     //Draw the map that was cleared
         {
+            if (lMap[level][row] !== undefined)
             for (let col = (dialogX + 1); col < ((dialogX + 1) + 5); col++)
             {
+                if (lMap[level][row][col] !== undefined)
                 switch (lMap[level][row][col])                //set the thing that will be drawn based on level settings
                 {
                     case 0:                   //letters (a through n) are reassigned to an image upon loading each level
@@ -5896,7 +6108,10 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
             }
             destY += 32;
         }
+
+
         drawOMap();
+
         if (!lightsOn && l2)                //If 'the lights are off' on level two
         {
             let xPos = (p.col + 1) * 32, yPos = p.row * 32;
@@ -5907,8 +6122,6 @@ function checkIfMoved()//If player has moved - erase section of map dialog was c
             ctx.fillRect(0, 0, xPos - 80, 600);
             ctx.fillRect(0, 0, 800, yPos - 32);
         }
-
-
 
         drawPMap();
 
@@ -6159,8 +6372,41 @@ function gameover()
 
 function drawL6Full()
 {
+    let gate = new Image();
+    let fence = new Image();
+    let litWindow = new Image();
+    let darkWindow = new Image();
+    let cherryTree = new Image();
+    let statue = new Image();
+    let car = new Image();
+    let ladder = new Image();
+    let helipad = new Image();
+    let helicopter = new Image();
+    let exit = new Image();
+    let shrub = new Image();
+    {
+        shrub.src = "../../6Roof/images/shrub.png";
+        exit.src = "../../6Roof/images/exit2.png";
+        helicopter.src = "../../6Roof/images/helicopter1.png";
+        helipad.src = "../../6Roof/images/helipad.png";
+        ladder.src = "../../6Roof/images/ladder.png";
+        car.src = "../../6Roof/images/car.png";
+        statue.src = "../../6Roof/images/statue.png";
+        cherryTree.src = "../../6Roof/images/cherryTree.png";
+        darkWindow.src = "../../6Roof/images/darkWindow.png";
+        litWindow.src = "../../6Roof/images/litWindow.png";
+        fence.src = "../../6Roof/images/fence.png";
+        gate.src = "../../6Roof/images/gate.png";
+    }
+
+    if (!l6Ready2)
+    {
+        shrub.onload = function(){l6Ready2 = true;}
+    }
     if (l6)
     {
+
+
 
         ctx.drawImage(ladder, 5, 160);
         ctx.drawImage(helipad, 5, 150);
