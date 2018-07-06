@@ -114,6 +114,8 @@ let enemiesLevel3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, ene
 let enemyArr = [];
 
 //Sounds
+let lockedDoor = new Audio;
+let aghh = new Audio;
 let streetSound = new Audio();
 let doorSound = new Audio();
 let warningSound = new Audio();
@@ -123,8 +125,10 @@ let waterRunning = new Audio;
 let ratOfDeath = new Audio;
 let newsReport = new Audio;
 let meow = new Audio;
-let lockedDoor = new Audio;
+
 {
+    aghh.src = ("../audio/aghh.mp3");
+    lockedDoor.src = ("../../2Sewer/audio/lockedDoor.mp3");
     streetSound.src = "../../4Streetz/audio/happy.mp3";
     doorSound.src = ('../../3Store/audio/open.mp3');
     warningSound.src = ('../../3Store/audio/warningsound.mp3');
@@ -134,7 +138,6 @@ let lockedDoor = new Audio;
     ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
     meow.src = ('../../5MomsPlace/audio/meow.wav');
     newsReport.src = ('../../1Home/audio/newsTheme.mp3');
-    lockedDoor.src = ("../../2Sewer/audio/lockedDoor.mp3");
 
     streetSound.loop = true;
     streetSound.volume = 0.05;
@@ -149,6 +152,7 @@ let lockedDoor = new Audio;
     waterRunning.volume = 0.1;
 
     meow.volume = 0.3;
+    lockedDoor.volume = 0.1;
 
     newsReport.loop = true;                         //RYN
     newsReport.volume = 0.2;                        //RYN
@@ -235,6 +239,8 @@ let p =                                                         //PlayerObject
 {
 row: 0,
 col: 2,
+health: 6,
+lives: 3,
 prevRow: undefined,        //Collects players previous x location to use for clearing only that section of canvas
 prevCol: undefined,        //Collects players previous y location to use for clearing only that section of canvas
 width: 32,               //The players width in the tile sheet
@@ -489,11 +495,13 @@ let enemy = [];                              //To hold torch objects
             frameY: 2,//Facing right
             dir: undefined, //Stores direction chosen to walk
             dirOK: true,
-            dead: false,
+            dead: true,
             roam: function()
             {
                 let self = this;
+                self.dead = false;
                 //Set image -- then start walking
+                let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
                 img.src = "../../2Sewer/images/rat.png";
                 img.onload = function(){walk();};
@@ -855,6 +863,24 @@ let enemy = [];                              //To hold torch objects
                         setTimeout(walk, self.scurrySpeed);
                 }
 
+                function checkIfHit()
+                {
+                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                    {
+                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                        {
+                            p.health--;
+                            aghh.play();
+                            if (p.health === 0)
+                            {
+                                self.dead = true;
+                                ctx.fillStyle = '#ff0c18';
+                                ctx.fillRect(0,0,800,600);
+                                resetLevel(self.scurrySpeed);
+                            }
+                        }
+                    }
+                }
                 //Simple walking one direction functions
                 function walkLeft()
                 {
@@ -875,10 +901,6 @@ let enemy = [];                              //To hold torch objects
                         self.lFrameSet = true;
                     }
 
-                    //Simulate walking by changing frames
-                    self.frameXCounter++;
-                    self.frameX = (self.frameXCounter % 3);
-
                     let stepsLeft = 0;
                     moveLeft();
 
@@ -888,6 +910,10 @@ let enemy = [];                              //To hold torch objects
                         stepsLeft++;
                         //Set position to be erased
                         setLastPos();
+
+                        //Simulate walking by changing frames
+                        self.frameXCounter++;
+                        self.frameX = (self.frameXCounter % 3);
 
                         //Change position
                         self.xPos -= 8;
@@ -920,10 +946,6 @@ let enemy = [];                              //To hold torch objects
                         self.rFrameSet = true;
                     }
 
-                    //Simulate walking by changing frames
-                    self.frameXCounter++;
-                    self.frameX = (self.frameXCounter % 3);
-
                     let stepsRight = 0;
                     moveRight();
 
@@ -933,6 +955,10 @@ let enemy = [];                              //To hold torch objects
                         stepsRight++;
                         //Set position to be erased
                         setLastPos();
+
+                        //Simulate walking by changing frames
+                        self.frameXCounter++;
+                        self.frameX = (self.frameXCounter % 3);
 
                         //Change position
                         self.xPos += 8;
@@ -965,10 +991,6 @@ let enemy = [];                              //To hold torch objects
                         self.dFrameSet = true;
                     }
 
-                    //Simulate walking by changing frames
-                    self.frameXCounter++;
-                    self.frameX = (self.frameXCounter % 3);
-
                     let stepsDown = 0;
                     moveDown();
 
@@ -978,6 +1000,11 @@ let enemy = [];                              //To hold torch objects
                         stepsDown++;
                         //Set position to be erased
                         setLastPos();
+
+
+                        //Simulate walking by changing frames
+                        self.frameXCounter++;
+                        self.frameX = (self.frameXCounter % 3);
 
                         //Change position
                         self.yPos += 8;
@@ -1010,10 +1037,6 @@ let enemy = [];                              //To hold torch objects
                         self.uFrameSet = true;
                     }
 
-                    //Simulate walking by changing frames
-                    self.frameXCounter++;
-                    self.frameX = (self.frameXCounter % 3);
-
                     let stepsUp = 0;
                     moveUp();
 
@@ -1023,6 +1046,10 @@ let enemy = [];                              //To hold torch objects
                         stepsUp++;
                         //Set position to be erased
                         setLastPos();
+
+                        //Simulate walking by changing frames
+                        self.frameXCounter++;
+                        self.frameX = (self.frameXCounter % 3);
 
                         //Change position
                         self.yPos -= 8;
@@ -1047,17 +1074,18 @@ let enemy = [];                              //To hold torch objects
                 //Drawing rat in new position -- called by walkLeft, walkRight .... functions (then call walk function to start over)
                 function drawIt()                           //May have to change up the drawImage command (self.img to something else)
                 {
-                    //Erase previous position
                     ctx.clearRect(self.prevX, self.prevY, 32, 32);
 
-                    //Redraw what was there before
-/*-- Maybe TEMP --*/for (let y = 15; y < 20; y++)
+                    let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
+
+                    for (let mR = ((self.yPos-remainY) / 32) - 2; mR < ((self.yPos-remainY) / 32) + 4; mR ++) //Run through all that would have been erased
                     {
-                        for (let x = 0; x < 9; x++)
+                        for (let mC = ((self.xPos-remainX) / 32) - 2; mC < ((self.xPos-remainX) / 32) + 3; mC ++)//Run through all columns that would have been erased
                         {
-                            if (lMap[level][y] !== undefined && lMap[level][y][x] !== undefined)//If the space being examined exists
+
+                            if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
                             {
-                                switch (lMap[level][y][x])//check what needs drawing based on map index
+                                switch (lMap[level][mR][mC])//check what needs drawing based on levels map index
                                 {
                                     case 0:
                                         thingToDraw = a;
@@ -1292,33 +1320,38 @@ let enemy = [];                              //To hold torch objects
                                         break;
                                 }
 
-                                if (thingToDraw !== undefined)      //If there is something to be drawn in area being examined
+                                if (thingToDraw !== undefined)//If there is something to be drawn in area being examined
                                 {
-                                    if (thingToDraw === sewerFloor && (l2 || l11))
+                                    if (thingToDraw === sewerFloor  && (l2 || l11))
                                     // If drawing the floor on level 2
-                                    // then draw based on floorSpriteX var positioning
-                                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (x * 32), (y * 32), 32, 32);
+                                    // then draw it based on floorSpriteX var positioning
+                                        ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
                                     else
                                     //Otherwise draw regularly
-                                        ctx.drawImage(thingToDraw, (x * 32), (y * 32));
+                                        ctx.drawImage(thingToDraw, (mC * 32), (mR * 32));
                                 }
                             }
                         }
                     }
 
-                    //Draw player over map that was just drawn (but under the mouse that will be drawn next)
+                    //Draw new position
+                    ctx.drawImage(img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
+
+                    //Draw player over map and mouse
                     if (notWalking)
                         drawPMap();
 
-                    //Draw new position
-                    ctx.drawImage(img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
+                    checkIfHit();
                 }
-            },
-            drawMe: function()
-            {
-                ctx.drawImage(ratImage, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
             }
         };
+
+    //Define a second function that only draws the rat (for use when rat needs to be redrawn immediately after being erased)
+    //Would not allow secondary function to be used during
+    ratSmall.drawMe = function()
+    {
+        ctx.drawImage(ratImage, this.frameX * 32, this.frameY * 32, 32, 32, this.xPos, this.yPos, 32, 32);
+    };
 
     //Push into rat array
     enemy.push(ratSmall);
@@ -1503,7 +1536,7 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "";
-
+        newsReport.pause();
 
         let stepsCorner = new Image();
         let steps = new Image();
@@ -1709,6 +1742,7 @@ function startGame()
         startX[2] = startY[2] = 0;
 
         burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
+
         keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
         countingFlames = setInterval(changeFlame, 120);
 
@@ -2407,6 +2441,8 @@ function startGame()
     {
         canvas.style.backgroundImage = "url('../../6Roof/images/city.gif')";
 
+        newsReport.pause();
+
         let exit = new Image();
         {
             exit.src = "../../6Roof/images/exit2.png";
@@ -2873,6 +2909,7 @@ function startGame()
         pipeTopView.onload = function(){l11Ready = true;};
 
         addEventListener("keydown", onKeyDown, false);
+        notWalking = true;
     }
 
 }
@@ -2881,10 +2918,10 @@ function fillErasedMap()
 //Re-draws only the section of map that was erased by the character moving over
 //  it vs. redrawing the whole map.(helps with game speed)
 {
+
     ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
 
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
+    
 
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
@@ -3226,8 +3263,7 @@ function fillErasedMap()
     }
 
 
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
+    
 
 
 
@@ -3237,8 +3273,7 @@ function fillErasedMap()
 
     if (dialog)
         displayTextBubble();
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
+    
 }
 
 function changePStartPos()
@@ -3260,6 +3295,7 @@ function changePStartPos()
 
 function drawPMap()//Player Map
 {
+
     let destX = 0, destY = 0;       //Used to decide which area of map to draw
 
     //Sets position on tile sheet to
@@ -3389,8 +3425,7 @@ function drawPMap()//Player Map
         ctx.drawImage(doorBare, 21*32, 7*32);
 
     }
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
+
 
 }
 
@@ -3429,8 +3464,6 @@ function drawOMap()//Object Map
         destX = 0;              //Start over at beginning position of array as we are at a new row
         destY += 32;             //Increment row by 1 (8 is rows height in ratio to the canvas height)
     }
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
 }
 
 function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling it is not neccessary) it allows
@@ -3699,6 +3732,10 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
 
     if (l2)//If on level 2
     {
+        if (!enemy[0].dead)
+        {
+            enemy[0].drawMe();
+        }
         if (!sewersDrained) // and the sewer is turned on
         {//Draw a simulated sewer water color
             ctx.fillStyle = "rgba(47, 141, 91, 0.41)";    //Draw a green haze over portion of canvas to simulate sewer water
@@ -3745,8 +3782,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
     drawL6Full();
     if (dontDrawP === undefined)
         setTimeout(drawPMap, 10);
-    if (!enemy[0].dead && l2)
-        enemy[0].drawMe();
+    
 }
 
 function checkLevelSwitch(e /* passes e.keyCode through argument e */)
@@ -3905,7 +3941,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         {
             if (sewersDrained)//Go through the door to level 1
             {
-
+                notWalking = false;
                 removeEventListener("keydown", onKeyDown, false);
                 ctx.clearRect(320, 0, 32, 48);
                 let sizer = 0;
@@ -3989,8 +4025,6 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 dialog = true;
             }
         }
-
-
 
         if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
         {   //To check if character is in area where he isn't supposed to be when the light is off
@@ -4582,12 +4616,11 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
 function onKeyDown(e)
 {
-     if (!l3)
-         clearInterval(timer_level3);
+    if (!l3)
+        clearInterval(timer_level3);
 
-
-     if (l6)
-     {
+    if (l6)
+    {
         if (p.col >= 6)
             yMin[6] = 5;
         else
@@ -4596,334 +4629,338 @@ function onKeyDown(e)
             xMin[6] = 6;
         else
             xMin[6] = 0;
-     }
+    }
+
+    p.prevCol = p.col;      //Set column to be cleared
+    p.prevRow = p.row;      //Set row to be cleared
 
 
-     p.prevCol = p.col;      //Set column to be cleared
-     p.prevRow = p.row;      //Set row to be cleared
+    checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
+    checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
 
 
-     checkLevelSwitch(e.keyCode);//Check if conditions for switching levels have been met and switch if true
-     checkBoundaries(e.keyCode);//Check if player can move in the direction they're going
-
-
-     if (l2 && p.row === 6 && p.col === 22)//Draw Bare floor so that player can appear over it but under ridge
-        // (Ridge is drawn after player -- end of this function)
-     {
+    if (l2 && p.row === 6 && p.col === 22)//Draw Bare floor so that player can appear over it but under ridge
+    // (Ridge is drawn after player -- end of this function)
+    {
         ctx.drawImage(floorClean, 22*32, 7*32);
     }
-     if (e.keyCode === 37)//Left
-     {
-         if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
-         {
-             //Change tile sheet frame to show player walking up
-             p.frameY = 1;
-             p.srcY = p.height * p.frameY;
-             let walk = 0;
-             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
+    if (e.keyCode === 37)//Left
+    {
+        if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
+        {
+            //Change tile sheet frame to show player walking up
+            p.frameY = 1;
+            p.srcY = p.height * p.frameY;
+            let walk = 0;
+            let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
-             walkLeft();
+            walkLeft();
 
-             function walkLeft()
-             {
-                 if (walk < 4)
-                 {
-                     notWalking = false;
-                     //Increment in order to flip through the walking tiles for this direction
-                     p.frameX ++;
-                     walk++;
-                     p.srcX = p.width * (p.frameX % 4);
-                     //Fills portion of the canvas the player was just taking up
-                     //a,b,c,d,e... are passed from movePlayer function call
-                     ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     drawL6();
-                     if (l2 && underWater)
-                     {
-                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-                     }
-                     else
-                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                     setTimeout(walkLeft, walkingSpeed);
-                 }
-                 else
-                 {
-                     //remove player from current column
-                     lPMap[level][p.row][p.col] = 0;
-                     //update player column
-                     p.col --;
-                     //add player to updated row
-                     lPMap[level][p.row][p.col] = 1;
-                     walk = 0;
-                     drawPMap();//Draws the new players position
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                 }
-             }
-         }
+            function walkLeft()
+            {
+                if (walk < 4)
+                {
+                    notWalking = false;
+                    //Increment in order to flip through the walking tiles for this direction
+                    p.frameX ++;
+                    walk++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    //Fills portion of the canvas the player was just taking up
+                    //a,b,c,d,e... are passed from movePlayer function call
+                    ctx.clearRect((p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                    drawL6();
 
-         else if (notWalking)
-         {
-             p.frameY = 1;
-             p.frameX ++;
+                    if (l2 && underWater)
+                    {
+                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
+                    }
+                    else
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
 
-             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-             drawL6();
-             p.srcX = p.width * (p.frameX % 4);
-             p.srcY = p.height * (p.frameY);
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
 
-             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             else
-                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             if (!enemy[0].dead && l2)
-                 enemy[0].drawMe();
-         }
-         detectMovementLevel3();
-     }
-     if (e.keyCode === 39)//Right
-     {
-         if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
-         {
-             //Change tile sheet frame to show player walking up
-             p.frameY = 2;
-             p.srcY = p.height * p.frameY;
-             let walk = 0;
-             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
+                    setTimeout(walkLeft, walkingSpeed);
+                }
+                else
+                {
+                    //remove player from current column
+                    lPMap[level][p.row][p.col] = 0;
+                    //update player column
+                    p.col --;
+                    //add player to updated row
+                    lPMap[level][p.row][p.col] = 1;
+                    walk = 0;
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    drawPMap();//Draws the new players position
+                }
+            }
+        }
 
-             walkRight();
+        else if (notWalking)
+        {
+            p.frameY = 1;
+            p.frameX ++;
 
-             function walkRight()
-             {
-                 if (walk < 4)
-                 {
-                     notWalking = false;
-                     //Increment in order to flip through the walking tiles for this direction
-                     p.frameX ++;
-                     walk++;
-                     p.srcX = p.width * (p.frameX % 4);
-                     //Fills portion of the canvas the player was just taking up
-                     //a,b,c,d,e... are passed from movePlayer function call
-                     ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
-                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     drawL6();
+            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            drawL6();
+            p.srcX = p.width * (p.frameX % 4);
+            p.srcY = p.height * (p.frameY);
 
-                     if (l2 && underWater)
-                     {
-                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
-                     }
-                     else
-                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                     setTimeout(walkRight, walkingSpeed);
-                 }
-                 else
-                 {
-                     //remove player from current column
-                     lPMap[level][p.row][p.col] = 0;
-                     //update player column
-                     p.col ++;
-                     //add player to updated column
-                     lPMap[level][p.row][p.col] = 1;
-                     walk = 0;
-                     drawPMap();//Draws the new players position
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                 }
-             }
-         }
-         else if (notWalking)
-         {
-             p.frameY = 2;
-             p.frameX ++;
+            if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
+                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            else
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
 
-             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-             drawL6();
-             p.srcX = p.width * (p.frameX % 4);
-             p.srcY = p.height * (p.frameY);
+        }
+        detectMovementLevel3();
+    }
+    if (e.keyCode === 39)//Right
+    {
+        if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
+        {
+            //Change tile sheet frame to show player walking up
+            p.frameY = 2;
+            p.srcY = p.height * p.frameY;
+            let walk = 0;
+            let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
-             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             else
-                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             if (!enemy[0].dead && l2)
-                 enemy[0].drawMe(); //Draw the mouse
-         }
-         detectMovementLevel3();
-     }
-     if (e.keyCode === 38)//Up
-     {
-         if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
-         {
-             //Change tile sheet frame to show player walking up
-             p.frameY = 3;
-             p.srcY = p.height * p.frameY;
-             let walk = 0;
-             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
+            walkRight();
 
-             animateWalking();
+            function walkRight()
+            {
+                if (walk < 4)
+                {
+                    notWalking = false;
+                    //Increment in order to flip through the walking tiles for this direction
+                    p.frameX ++;
+                    walk++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    //Fills portion of the canvas the player was just taking up
+                    //a,b,c,d,e... are passed from movePlayer function call
+                    ctx.clearRect((p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                    drawL6();
 
-             function animateWalking()
-             {
-                 if (walk < 4)
-                 {
-                     notWalking = false;
-                     //Increment in order to flip through the walking tiles for this direction
-                     p.frameX ++;
-                     walk++;
-                     p.srcX = p.width * (p.frameX % 4);
-                     //Fills portion of the canvas the player was just taking up
-                     //a,b,c,d,e... are passed from movePlayer function call
-                     ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
-                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     drawL6();
+                    if (l2 && underWater)
+                    {
+                        ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
+                    }
+                    else
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
 
-                     if (l2)
-                     {
-                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
-                         {
-                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
-                             ctx.drawImage(doorBare, 21*32, 7*32);
-                         }
-                         else if (underWater)
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    setTimeout(walkRight, walkingSpeed);
+                }
+                else
+                {
+                    //remove player from current column
+                    lPMap[level][p.row][p.col] = 0;
+                    //update player column
+                    p.col ++;
+                    //add player to updated column
+                    lPMap[level][p.row][p.col] = 1;
+                    walk = 0;
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    drawPMap();//Draws the new players position
+
+                }
+            }
+        }
+        else if (notWalking)
+        {
+            p.frameY = 2;
+            p.frameX ++;
+
+            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            drawL6();
+            p.srcX = p.width * (p.frameX % 4);
+            p.srcY = p.height * (p.frameY);
+
+            if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
+                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            else
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+        }
+        detectMovementLevel3();
+    }
+    if (e.keyCode === 38)//Up
+    {
+        if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
+        {
+            //Change tile sheet frame to show player walking up
+            p.frameY = 3;
+            p.srcY = p.height * p.frameY;
+            let walk = 0;
+            let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
+
+            animateWalking();
+
+            function animateWalking()
+            {
+                if (walk < 4)
+                {
+                    notWalking = false;
+                    //Increment in order to flip through the walking tiles for this direction
+                    p.frameX ++;
+                    walk++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    //Fills portion of the canvas the player was just taking up
+                    //a,b,c,d,e... are passed from movePlayer function call
+                    ctx.clearRect(p.col * 32, ((p.row*32) - (8 * walk)), 32, 48);
+                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                    drawL6();
+
+                    if (l2)
+                    {
+                        if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
+                        {
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col*32, (p.row * 32 - (8 * walk)), 32, 48);
+                            ctx.drawImage(doorBare, 21*32, 7*32);
+                        }
+                        else if (underWater)
                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
-                         else
-                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
-                         if (!enemy[0].dead)
-                             enemy[0].drawMe();
-                     }
-                     else
-                     {
-                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
-                     }
-                     setTimeout(animateWalking, walkingSpeed);
-                 }
-                 else
-                 {
-                     //remove player from current row
-                     lPMap[level][p.row][p.col] = 0;
-                     //update player row
-                     p.row --;
-                     //add player to updated row
-                     lPMap[level][p.row][p.col] = 1;
-                     walk = 0;
-                     drawPMap();//Draws the new players position
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                 }
-             }
-         }
-         else if (notWalking)
-         {
-             p.frameY = 3;
-             p.frameX ++;
+                        else
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
 
-             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-             drawL6();
-             p.srcX = p.width * (p.frameX % 4);
-             p.srcY = p.height * (p.frameY);
-             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             else
-                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             if (!enemy[0].dead && l2)
-                 enemy[0].drawMe();
-         }
-         detectMovementLevel3();
-     }
-     if (e.keyCode === 40)//Down
-     {
-         if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
-         {
-             //Change tile sheet frame to show player walking up
-             p.frameY = 0;
-             p.srcY = p.height * p.frameY;
-             let walk = 0;
-             let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
+                    }
+                    else
+                    {
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
+                    }
 
-             walkDown();
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    setTimeout(animateWalking, walkingSpeed);
+                }
+                else
+                {
+                    //remove player from current row
+                    lPMap[level][p.row][p.col] = 0;
+                    //update player row
+                    p.row --;
+                    //add player to updated row
+                    lPMap[level][p.row][p.col] = 1;
+                    walk = 0;
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    drawPMap();//Draws the new players position
+                }
+            }
+        }
+        else if (notWalking)
+        {
+            p.frameY = 3;
+            p.frameX ++;
 
-             function walkDown()
-             {
-                 if (walk < 4)
-                 {
-                     notWalking = false;
-                     //Increment in order to flip through the walking tiles for this direction
-                     p.frameX ++;
-                     walk++;
-                     p.srcX = p.width * (p.frameX % 4);
-                     //Fills portion of the canvas the player was just taking up
-                     //a,b,c,d,e... are passed from movePlayer function call
-                     ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-                     drawL6();
-                     if (l2)
-                     {
-                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
-                         {
-                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                             ctx.drawImage(doorBare, 21 * 32, 7 * 32);
-                         }
-                         else if (underWater)
-                             ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                         else
-                             ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                         if (!enemy[0].dead)
-                             enemy[0].drawMe();
-                     }
-                     else
-                     {
-                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
-                     }
-                     setTimeout(walkDown, walkingSpeed);
+            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            drawL6();
+            p.srcX = p.width * (p.frameX % 4);
+            p.srcY = p.height * (p.frameY);
+            if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
+                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            else
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
 
-                 }
-                 else
-                 {
-                     //remove player from current row
-                     lPMap[level][p.row][p.col] = 0;
-                     //update player row
-                     p.row ++;
-                     //add player to updated row
-                     lPMap[level][p.row][p.col] = 1;
-                     walk = 0;
-                     drawPMap();//Draws the new players position
-                     if (!enemy[0].dead && l2)
-                         enemy[0].drawMe();
-                 }
-             }
-         }
+        }
+        detectMovementLevel3();
+    }
+    if (e.keyCode === 40)//Down
+    {
+        if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
+        {
+            //Change tile sheet frame to show player walking up
+            p.frameY = 0;
+            p.srcY = p.height * p.frameY;
+            let walk = 0;
+            let underWater = (!sewersDrained && (p.row < 11 || p.col > 11));
 
-         else if (notWalking)
-         {
-             p.frameY = 0;
-             p.frameX ++;
+            walkDown();
 
-             ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
-             fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
-             drawL6();
-             p.srcX = p.width * (p.frameX % 4);
-             p.srcY = p.height * (p.frameY);
-             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
-                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             else
-                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-             if (!enemy[0].dead && l2)
-                 enemy[0].drawMe();
-         }
-         detectMovementLevel3();
-     }
-     if (e.keyCode === 32) //Space
-     {
-         checkActions();
-     }
+            function walkDown()
+            {
+                if (walk < 4)
+                {
+                    notWalking = false;
+                    //Increment in order to flip through the walking tiles for this direction
+                    p.frameX ++;
+                    walk++;
+                    p.srcX = p.width * (p.frameX % 4);
+                    //Fills portion of the canvas the player was just taking up
+                    //a,b,c,d,e... are passed from movePlayer function call
+                    ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                    fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                    drawL6();
 
+                    if (l2)
+                    {
+                        if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
+                        {
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                            ctx.drawImage(doorBare, 21 * 32, 7 * 32);
+                        }
+                        else if (underWater)
+                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                        else
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+
+                    }
+                    else
+                    {
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
+                    }
+
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+
+                    setTimeout(walkDown, walkingSpeed);
+
+                }
+                else
+                {
+                    //remove player from current row
+                    lPMap[level][p.row][p.col] = 0;
+                    //update player row
+                    p.row ++;
+                    //add player to updated row
+                    lPMap[level][p.row][p.col] = 1;
+                    walk = 0;
+                    if (l2 && !enemy[0].dead)
+                        enemy[0].drawMe();
+                    drawPMap();//Draws the new players position
+
+                }
+            }
+        }
+
+        else if (notWalking)
+        {
+            p.frameY = 0;
+            p.frameX ++;
+
+            ctx.clearRect(p.col * 32, p.row * 32, 32, 48);
+            fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+            drawL6();
+            p.srcX = p.width * (p.frameX % 4);
+            p.srcY = p.height * (p.frameY);
+            if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
+                ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+            else
+                ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+        }
+        detectMovementLevel3();
+    }
+    if (e.keyCode === 32) //Space
+    {
+        checkActions();
+    }
 
     if (sewersDrained) //If the water has been shut off
         waterRunning.pause();           //Stop playing the noise of running water
@@ -4980,106 +5017,106 @@ function onKeyDown(e)
 
 
 
-     /* TEMP - for testing - TEMP */
+    /* TEMP - for testing - TEMP */
 
-     if (e.keyCode === 76) //L - light
-     {
-         lightSwitch++;
-         lightsOn = (lightSwitch % 2 === 0);
-         drawMap();   //Drawing whole map because light/shade covers whole map
-         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-     }
-     if (e.keyCode === 83) //S - swamp
-     {
-         sewerSwitch++;
-         sewersDrained = (sewerSwitch % 2 === 0);
-         drawMap(); //Drawing whole map because swamp covers whole map
-         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-     }
-     if (e.keyCode === 49) //1
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         level = 1;              //Change level identifier appropriately
-         l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-         l1 = true;                                  //Set level being travelled to as true
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
-     }
-     if (e.keyCode === 50) //2
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         level = 2;              //Change level identifier appropriately
-         l1 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
-         l2 = true;                                  //Set level being travelled to as true
+    if (e.keyCode === 76) //L - light
+    {
+        lightSwitch++;
+        lightsOn = (lightSwitch % 2 === 0);
+        drawMap();   //Drawing whole map because light/shade covers whole map
+        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+    }
+    if (e.keyCode === 83) //S - swamp
+    {
+        sewerSwitch++;
+        sewersDrained = (sewerSwitch % 2 === 0);
+        drawMap(); //Drawing whole map because swamp covers whole map
+        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+    }
+    if (e.keyCode === 49) //1
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 1;              //Change level identifier appropriately
+        l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l1 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+    if (e.keyCode === 50) //2
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 2;              //Change level identifier appropriately
+        l1 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
+        l2 = true;                                  //Set level being travelled to as true
 
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
-     }
-     if (e.keyCode === 51) //3
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         level = 3;              //Change level identifier appropriately
-         l1 = l2 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-         l3 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+    if (e.keyCode === 51) //3
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 3;              //Change level identifier appropriately
+        l1 = l2 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l3 = true;                                  //Set level being travelled to as true
 
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
-     }
-     if (e.keyCode === 52) //4
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         level = 4;              //Change level identifier appropriately
-         l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-         l4 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+    if (e.keyCode === 52) //4
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 4;              //Change level identifier appropriately
+        l1 = l2 = l3 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l4 = true;                                  //Set level being travelled to as true
 
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
-     }
-     if (e.keyCode === 53) //5
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         level = 5;              //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-         l5 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+    if (e.keyCode === 53) //5
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 5;              //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l5 = true;                                  //Set level being travelled to as true
 
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         startGame();                                //Load settings and assets for next map
-         setTimeout(drawMap, 40);                    //Draw next map
-     }
-     if (e.keyCode === 54) //6
-     {
-         removeEventListener("keydown", onKeyDown, false);
-         walkedUpAlready = false;
-         changePStartPos();
-         level = 6;                  //Change level identifier appropriately
-         l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
-         l6 = true;                                  //Set level being travelled to as true
-         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-         l6Ready=false;
-         startGame();                                //Load settings and assets for next map
-         waitForLoading();
-         function waitForLoading()
-         {
-             if (!l6Ready)
-             {
-                 ctx.fillStyle = '#ffffff';
-                 ctx.font="20px Arial";
-                 ctx.fillText("Loading...", 350, 290);
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        startGame();                                //Load settings and assets for next map
+        setTimeout(drawMap, 40);                    //Draw next map
+    }
+    if (e.keyCode === 54) //6
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        walkedUpAlready = false;
+        changePStartPos();
+        level = 6;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l6 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        l6Ready=false;
+        startGame();                                //Load settings and assets for next map
+        waitForLoading();
+        function waitForLoading()
+        {
+            if (!l6Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
                 setTimeout(waitForLoading, 10);
-             }
-             else
-             {
-                 drawMap();                   //Draw next map
-             }
-         }
+            }
+            else
+            {
+                drawMap();                   //Draw next map
+            }
+        }
 
-     }
-     if (e.keyCode === 55) //7
-     {
+    }
+    if (e.keyCode === 55) //7
+    {
         removeEventListener("keydown", onKeyDown, false);
         level = 7;                  //Change level identifier appropriately
         l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
@@ -5104,8 +5141,8 @@ function onKeyDown(e)
             }
         }
     }
-     if (e.keyCode === 56) //8
-     {
+    if (e.keyCode === 56) //8
+    {
         removeEventListener("keydown", onKeyDown, false);
         level = 8;                  //Change level identifier appropriately
         l1 = l2 = l3 = l4 = l5 = l6 = l7 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
@@ -5129,6 +5166,14 @@ function onKeyDown(e)
                 drawMap();                   //Draw next map
             }
         }
+    }
+    if (e.keyCode === 82)//R -- To start rats roaming
+    {
+        enemy[0].roam();
+    }
+    if (e.keyCode === 79)//0 - Calls gameover()
+    {
+        gameover();
     }
 }
 
@@ -6688,6 +6733,7 @@ function displayTextBubble()
             drawPMap();
 
             letEmBurn();
+
             dialogX = undefined;
             dialogY = undefined;
             dialog = false;
@@ -7247,14 +7293,101 @@ function enemyAttack()
     for(let index=0; index < enemyArr.length; index++){
         if(lPMap[level][enemyArr[index].row][enemyArr[index].col] == 1){
             alert("Game Over!!!\nPress enter and start again. (tmp msg");
-            gameover();
+            resetLevel(40);
         }
     }
 }
 
-function gameover()
+function resetLevel(time = 40)
 {
-    if (l3)
+    p.lives--;
+    if (l1)
+    {
+
+    }
+    else if (l2)
+    {
+        //Turn the water back on and the lights back off
+        sewersDrained = false;
+        lightsOn = false;
+
+        //Set key back to not found
+        keyFound = false;
+
+        //Turn off the torches
+        keepDrawingFlames = false;
+        alreadySwitched = false;
+        clearInterval(burning);
+        clearInterval(countingFlames);
+        for (let t = 0; t < torchNum.length; t++)
+        {
+            torchNum[t].lit = false;
+        }
+
+        //Change functions so that flames background for torch 5 & 6 is sewer background instead of clear floor
+        torchNum[5].burn =
+            function()
+            {
+                if (!this.lit)
+                {
+                    this.lit = true;
+                    this.curFlame = new Image();
+                }
+
+                //Frame Is incremented in separate function so its not increased if this function is called more often
+                // (is called more often to draw the flame above player under certain circumstances)
+                this.flameNum = (this.frame % 3);
+
+                switch (this.flameNum)//Decide which flame to draw
+                {
+                    case 0:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame1.png";
+                        break;
+                    case 1:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame2.png";
+                        break;
+                    case 2:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame3.png";
+                        break;
+                }
+                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
+            };
+        torchNum[6].burn =
+            function()
+            {
+                if (!this.lit)
+                {
+                    this.lit = true;
+                    this.curFlame = new Image();
+                }
+
+                //Frame Is incremented in separate function so its not increased if this function is called more often
+                // (is called more often to draw the flame above player under certain circumstances)
+                this.flameNum = (this.frame % 3);
+
+                switch (this.flameNum)//Decide which flame to draw
+                {
+                    case 0:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame1.png";
+                        break;
+                    case 1:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame2.png";
+                        break;
+                    case 2:
+                        this.curFlame.src = "../../2Sewer/images/floorFlame3.png";
+                        break;
+                }
+                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
+            };
+
+        //Reset players health
+        p.health = 6;
+
+        //Set level to reload and redraw itself
+        l2Ready = false;
+        alreadyBeenHere = false;
+    }
+    else if (l3)
     {
         // finding item reset
         leftDoorOpen = false;
@@ -7285,10 +7418,50 @@ function gameover()
         // re-draw map
         clearLevel3();
         ctx.clearRect(0,0,800,600);
-        startGame();
-        setTimeout(drawMap, 40);
     }
 
+    if (p.lives > 0)
+        setTimeout(startGame, time);
+    else
+        {
+            gameover();
+        }
+}
+
+function gameover()
+{
+    removeEventListener("keydown", onKeyDown, false);
+    ctx.clearRect(0,0,800,600);
+    canvas.style.backgroundImage = "url('../images/abomb.gif')";
+
+
+    //Game over blinker counter & display function
+    let counter = 0;
+    blink();
+    function blink()
+    {
+        counter++;
+
+        if (counter % 10 === 1 || counter % 10 === 2 || counter % 10 === 3 || counter % 10 === 4 || counter % 10 === 5)
+        {
+            //Display game over message
+            ctx.fillStyle = '#ffea00';
+            ctx.font = "Bold 210px Arial";
+            ctx.fillText("GAME OVER", 195, 180, 410);
+            ctx.fillStyle = '#ff0d01';
+            ctx.font = "Bold 210px Arial";
+            ctx.fillText("GAME OVER", 195, 175, 405);
+            ctx.fillStyle = '#000000';
+            ctx.font = "200px Arial";
+            ctx.fillText("GAME OVER", 200, 170, 400);
+            setTimeout(blink, 200);
+        }
+        else
+        {
+            ctx.clearRect(0,0,800,600);
+            setTimeout(blink, 200);
+        }
+    }
 }
 
 
