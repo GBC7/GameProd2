@@ -17,7 +17,6 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
     l11 = false;
 }
 
-
 //Current Level Int
 let level = 1;
 
@@ -824,6 +823,8 @@ function startGame()
         canvas.style.backgroundImage = "";
         bgm_level3.play();
 
+        dialogText(names[1],DialogLevel3[0], "18 px", "white");
+
 
         let floor = new Image();
         let rack1 = new Image();
@@ -980,7 +981,7 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
 
         timer_level3 = setInterval(function(){
-            drawMap();
+            //drawMap();
             appearEnemy();
         }, 1000);
 
@@ -2846,7 +2847,6 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                         p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
                         startGame();                            //Load new levels assets and settings
-
                     }
                 }
             };
@@ -3640,8 +3640,10 @@ function onKeyDown(e)
 
      {
          checkActions();
+         CheckConversationAction();
 
      }
+
 
      /* TEMP - for testing - TEMP */
 
@@ -5473,7 +5475,9 @@ function detectMovementLevel3()
 
 
         // add mob, start timer again. alert is temp msg.
-        setTimeout(alert("you detected by mobbists - temp msg(" + enemyArr.length + " enemies in this area.)"), 1000);
+        dialogText(names[1], "add one enemy(temporary msg)", "25px", "red");
+        setTimeout(dialogInitialize, 3000);
+
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
 
@@ -5482,7 +5486,6 @@ function detectMovementLevel3()
 
         clearInterval(timer_level3);
         timer_level3 = setInterval(function(){
-            drawMap();
             enemyLoading();
             appearEnemy();
         }, 1000);
@@ -5494,6 +5497,7 @@ function detectMovementLevel3()
 function resetTimer()
 {
     t=windowClose;
+    drawMap();
     warningTime = Math.floor(Math.random() * 20 + 10);
     findingTime = Math.floor(Math.random() * 10 + 5);
     enemyAppearLevel3 = false;
@@ -5503,35 +5507,31 @@ function resetTimer()
 
 function appearEnemy()
 {
-    //console.log(warningTime);
-    //console.log(findingTime);
+
     warningTime--;
     if (warningTime <= 5 && warningTime > 0) {
-        //console.log(warningTime);
+
         bgm_level3.pause();
         dangerous.play();
-        //drawMap();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Warning! Mobbist will open window!", 180, 120);
-        ctx.fillText(warningTime + " seconds left.", 280, 150);
+        dialogText(names[1], SystemMSGLevel3[1] + warningTime + " second later!", "25px", "red");
+
     }
     if (warningTime === 0) {
         t=windowOpen;
-        //drawMap();
+        drawMap();
         enemyAppearLevel3 = true;
 
     }
     if (enemyAppearLevel3 === true){
         findingTime--;
-        // drawMap();
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Mobbists are finding you!", 230, 120);
-        ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
+        dialogText(names[1], SystemMSGLevel3[2] +findingTime + " seconds.", "25px", "red");
 
         if (findingTime === 0) {
             resetTimer();
+            dialogInitialize();
+
+
+
         }
     }
     if (detectPlayerLevel3 === true)
@@ -5547,7 +5547,7 @@ function enemyLoading()
         ctx.drawImage(enemyImg, enemyArr[index].x, 0, enemyArr[index].width, enemyArr[index].height, enemyArr[index].col * p.width, enemyArr[index].row * p.width, enemyArr[index].width, enemyArr[index].height);
 
         if(lMap[level][enemyArr[index].row + 1][enemyArr[index].col + enemyArr[index].sw] != 0){
-            enemyArr[index].sw *= -1; // swtich direction
+            enemyArr[index].sw *= -1; // switch direction
         }else{
             enemyArr[index].col += enemyArr[index].sw;
             enemyArr[index].col = enemyArr[index].col < 0 ? 0 : enemyArr[index].col
