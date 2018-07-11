@@ -576,7 +576,8 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "";
-
+        dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
 
         let stepsCorner = new Image();
         let steps = new Image();
@@ -823,7 +824,8 @@ function startGame()
         canvas.style.backgroundImage = "";
         bgm_level3.play();
 
-        dialogText(names[1],DialogLevel3[0], "18 px", "white");
+        dialogText(names[1],DialogLevel3[0], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
 
 
         let floor = new Image();
