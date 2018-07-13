@@ -49,7 +49,7 @@ SystemMSGLevel3[2] = "Mobbists are finding me!\nI'd rather not move ";
 
 //level4 system text
 SystemMSGLevel4[0] = ""; //initial value
-SystemMSGLevel4[1] = "Quickly! \n I have to find the key to open Mom house \nSh**! Dressing like a girl is looking more appealing right about now."; 
+SystemMSGLevel4[1] = "Quickly! \n I have to find the key to open Mom house"; 
 SystemMSGLevel4[2] = "Sh**! Dressing like a girl is looking more appealing right about now.";
 
 //level5 system text
@@ -91,7 +91,7 @@ DialogLevel3 = [
 
 //level4 Dialogue text
 DialogLevel4 = [
- ["There he is! \n We have to catch him."]
+ ["There he is!"]
 ];
 
 //level5 Dialogue text
@@ -112,8 +112,8 @@ DialogLevel7 = [];
 
 
 function dialogInitialize() {  //clear dialogue
-    CharacterName.innerHTML = names[0];
-    DialogText.innerHTML = " ";
+    CharacterName.innerText = names[0];
+    DialogText.innerText = " ";
     CharacterPortrait.style.backgroundImage = portrait[0];
     DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
@@ -125,8 +125,8 @@ function dialogText(n, t, fs, fc){
     // can use array for n and t
     // fs and fc are supposed to be "number px" or "name of color"
 
-    CharacterName.innerHTML = n;
-    DialogText.innerHTML = t;
+    CharacterName.innerText = n;
+    DialogText.innerText = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
     DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
