@@ -33,6 +33,8 @@ let dialogX = undefined, dialogY = undefined; //For storing position dialog star
 let lightSwitch = 1, sewerSwitch = 1;                                //*****Testing only*****//
 //*****Testing only*****//
 
+//L1
+let uncovered = false;
 
 //L2
 let lightsOn = false, sewersDrained = false;                             //For sewer level
@@ -280,6 +282,8 @@ let orientation = "";
 
 //Sewer
 let ratImage = new Image();
+let swampFloor = new Image();
+let cleanFloor = new Image();
 let wetPipe = new Image();
 let sewerFloor = new Image();
 let level3sprite = new Image();
@@ -291,7 +295,10 @@ let doorBare = new Image();
 let torch = new Image();
 let torchSwamp = new Image();
 
+
 {
+    swampFloor.src = "../../2Sewer/images/dirtySwampFloor.png";
+    cleanFloor.src = "../../2Sewer/images/cleanFloor.png";
     ratImage.src = "../../2Sewer/images/rat.png";
     wetPipe.src = "../../2Sewer/images/pipeWet.png";
     sewerFloor.src = "../../2Sewer/images/floor.png";
@@ -421,15 +428,31 @@ let torchNum = [];                              //To hold torch objects
                     switch (this.flameNum)//Decide which flame to draw
                     {
                         case 0:
-                            this.curFlame.src = "../../2Sewer/images/floorFlame1.png";
+                            this.curFlame.src = "../../2Sewer/images/flame01.png";
                             break;
                         case 1:
-                            this.curFlame.src = "../../2Sewer/images/floorFlame2.png";
+                            this.curFlame.src = "../../2Sewer/images/flame02.png";
                             break;
                         case 2:
-                            this.curFlame.src = "../../2Sewer/images/floorFlame3.png";
+                            this.curFlame.src = "../../2Sewer/images/flame03.png";
                             break;
                     }
+
+                    if (!sewersDrained)//Draw swamp floor tile then player over top of it
+                    {
+                        ctx.drawImage(swampFloor, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);
+                        if (notWalking && p.col === this.xPos && p.row === this.yPos - 1)
+                            ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                    }
+
+                    else//Draw clean floor tile then player over top of it
+                    {
+                        ctx.drawImage(cleanFloor, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);
+                        if (notWalking && p.col === this.xPos && p.row === this.yPos - 1)
+                            ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
+                    }
+
+                    //Then draw the flam over top of the player
                     ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
                 }
             };
@@ -4226,6 +4249,10 @@ function startGame()
         newsReport.play();          //RYN
 
         let floor = new Image();
+        let darkWindowT = new Image();
+        let darkWindowB = new Image();
+        let stairsF = new Image();
+        let stairsWall = new Image();
         let wallpaper = new Image();
         let wallpaperWswords = new Image();
         let wallpaperWshield = new Image();
@@ -4237,17 +4264,23 @@ function startGame()
         let bookcaseBL = new Image();
         let bookcaseBR = new Image();
         let bookcaseOpening1T = new Image();
-        let bookcaseOpening1B = new Image();
         let bookcaseOpening2T = new Image();
-        let bookcaseOpening2B = new Image();
         let bookcaseOpening3T = new Image();
+        let downstairs = new Image();
+        let bookcaseOpening1B = new Image();
+        let bookcaseOpening2B = new Image();
         let bookcaseOpening3B = new Image();
 
 
 
         {
             floor.src = "../../1Home/images/floor.png";
+            darkWindowT.src = "../../1Home/images/darkWindowT.png";
+            darkWindowB.src = "../../1Home/images/darkWindowB.png";
+            stairsF.src = "../../1Home/images/stairsF.png";
+            stairsWall.src = "../../1Home/images/stairsW.png";
             wallpaper.src = "../../1Home/images/wallpaper.png";
+            downstairs.src = "../../1Home/images/downstair.png";
             wallpaperWswords.src = "../../1Home/images/wallpaper2.png";
             wallpaperWshield.src = "../../1Home/images/wallpaper3.png";
             wallpaperWbigPaintingL.src = "../../1Home/images/wallpaper4.png";
@@ -4271,24 +4304,32 @@ function startGame()
 
 
         {
-            a = floor;
-            b = wallpaper;
-            c = undefined;
-            d = wallpaperWswords;
-            e = wallpaperWshield;
-            f = wallpaperWbigPaintingL;
-            g = wallpaperWbigPaintingR;
-            h = wallpaperWsmallPaining1;
-            i = bookcaseTL;
-            j = bookcaseTR;
-            k = bookcaseBL;
-            l = bookcaseBR;
-            m = bookcaseOpening1T;
-            n = bookcaseOpening1B;
-            o = bookcaseOpening2T;
-            q = bookcaseOpening2B;
-            r = bookcaseOpening3T;
-            s = bookcaseOpening3B;
+            a = floor;                          //0
+            b = wallpaper;                      //1
+            c = undefined;                      //2
+            d = wallpaperWswords;               //3
+            e = wallpaperWshield;               //4
+            f = wallpaperWbigPaintingL;         //5
+            g = wallpaperWbigPaintingR;         //6
+            h = wallpaperWsmallPaining1;        //7
+            i = bookcaseTL;                     //8
+            j = bookcaseTR;                     //9
+            k = bookcaseBL;                     //10
+            l = bookcaseBR;                     //11
+            m = bookcaseOpening1T;              //12
+            n = bookcaseOpening1B;              //13
+            o = bookcaseOpening2T;              //14
+            q = bookcaseOpening2B;              //15
+            r = bookcaseOpening3T;              //16
+            s = bookcaseOpening3B;              //17
+            t = downstairs;                     //18
+            u = darkWindowT;                    //19
+            v = darkWindowB;                    //20
+            w = stairsF;                        //21
+            //x                                 //22
+            //y                                 //23
+            z = stairsWall;                     //24
+
 
         }//Assign images to global letter variables
 
@@ -4306,10 +4347,10 @@ function startGame()
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],       //4
                     [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],       //5
                     [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],       //6
-                    [ 1,  1,  3,  4,  4,  3,  1,  1,  5,  6,  1,  1,  1,  1,  1,  1,  7,  1,  3,  4,  4,  3,  1,  1,  1],       //7
-                    [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],       //8
-                    [ 1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1],       //9
-                    [ 0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0],       //10
+                    [ 1,  1,  3,  4,  4,  3,  1,  1,  5,  6,  1,  1,  1, 19,  1,  1,  7,  1,  3,  4,  4,  3,  1,  1,  1],       //7
+                    [ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 20,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1],       //8
+                    [ 1,  9,  8,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1, 24,  1,  1,  9,  8,  1,  9,  8,  1,  9,  8,  1],       //9
+                    [ 0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0, 21,  0,  0, 11, 10,  0, 11, 10,  0, 11, 10,  0],       //10
                     [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //11
                     [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //12
                     [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //13
@@ -4477,7 +4518,6 @@ function startGame()
                     [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  3,  3,  4,  3,  3,  3,  3,  4,  3,  4,  3,  3,  3]        //18
                 ];
         }
-
 
         if (lPMap[level] === undefined)
         {
@@ -6159,6 +6199,7 @@ function drawPMap()//Player Map
 
                 if (steps < 4)
                 {
+                    drawZeeEnemy();
                     drawMap(0);
                     ctx.drawImage(scientist, (p.srcX%4) * 32, 96, 32, 48, 309 + (8 * steps), 448, 32, 48);
                     setTimeout(upTheFireEscape, walkingSpeed * 3); //Multiplying by two makes walk player slower
@@ -6170,6 +6211,7 @@ function drawPMap()//Player Map
                 }*/
                 else if (steps < 21)
                 {
+                    drawZeeEnemy();
                     drawMap(0);
                     ctx.drawImage(scientist, (p.srcX % 4) * 32, 96, 32, 48, 309 + (8 * (steps)), 448 - (8 * (steps - 3)), 32, 48);
                     setTimeout(upTheFireEscape, walkingSpeed * 3);//Multiplying by two makes walk player slower
@@ -6181,6 +6223,7 @@ function drawPMap()//Player Map
                     p.srcY = 2;
                     lPMap[level][10][15] = 1;
                     ctx.clearRect((p.col - 0.25) *32, (p.row - 0.25)*32, 32, 48);
+                    drawZeeEnemy();
                     drawMap(0);
                     ctx.drawImage(scientist, (p.srcX % 4) * 32, p.srcY * 48, 32, 48, p.col*32, p.row*32, 32, 48);
                     walkedUpAlready = true;
@@ -6493,7 +6536,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
         destY += 32;            //increment variable based on height ratio of map array elements to canvas height
     }
 
-    drawZeeEnemy();
+
 
     if (l2)//If on level 2
     {
@@ -6544,6 +6587,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
     drawL6Full();
     if (dontDrawP === undefined)
         setTimeout(drawPMap, 10);
+    drawZeeEnemy();
     
 }
 
@@ -6552,18 +6596,37 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
     //    37 - left , 38 - up , 39 - right , 40 - down
     if (l1)//If it's Lvl 1
     {
-        if (e === 39 && p.col === 24 && p.row === 10)//TO lvl 2
+        if (e === 37 && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
         {
             removeEventListener("keydown", onKeyDown, false);
-            level = 2;              //Change level identifier appropriately
-            l1 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
-            l2 = true;                                  //Set level being travelled to as true
 
-            ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-            l1Ready = false;
-            startGame();                                //Load settings and assets for next map
-            waitForLoad();
+            let numOfStairz = 0;                //Create variable to be used for counting stairs
 
+            setTimeout(goDownStays2, 120);       //Start animation of going down stairs
+
+            function goDownStays2()              //Animates player going down stairs and appearing in previous levels map
+            {
+                numOfStairz++;                  //Increment stairs descended each time a stair is descended
+                ctx.clearRect(p.col * 32, p.row * 32, p.width, p.height);//Clear portion of canvas the player was last on
+                fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
+                ctx.drawImage(scientist, ((p.srcX + numOfStairz) % 4) * 32, 48, 32, 48, p.col * 32 - (6 + 6 * numOfStairz) , p.row * 32 + (numOfStairz * 12), 32 - (numOfStairz * 5), 48 - (numOfStairz * 10));
+
+                if (numOfStairz !== 5)            //If there are stairs to go down
+                    setTimeout(goDownStays2, 180); //...Go down them
+                else                              //Otherwise, load level 2.
+                {
+                    level = 2;                              //Change level identifier to appropriate level
+                    l1 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;         //Set all levels false aside from new level
+                    l2 = true;                              //Set new level to true
+                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                    p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
+                                                            // the player will be facing
+                    l2Ready = false;
+                    startGame();                            //Load assets and settings of the level being travelled to
+
+                    waitForLoad();
+                }
+            }
 
             function waitForLoad()
             {
@@ -6580,19 +6643,75 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 }
             }
         }
-        if (e === 38 && p.col === 0 && p.row === 10)
+        if (e === 38 && p.col === 13 && p.row === 10 && notWalking)
         {
-            removeEventListener("keydown", onKeyDown, false);
-            level = 6;              //Change level identifier appropriately
-            l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
-            l6 = true;                                  //Set level being travelled to as true
-            ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-            l6Ready = false;
-            l6Ready2 = false;
-            startGame();                                //Load settings and assets for next map
-            // drawL6Full();
-            waitForLoad2();
 
+            removeEventListener("keydown", onKeyDown, false);
+            let stepsUp = 0;
+            let stepsDown = 0;
+            let pixelsAbove = 0;
+
+            goThroughWindowWithEyesClosed();
+
+
+
+            function goThroughWindowWithEyesClosed()
+            {
+                stepsUp++;
+                if (stepsUp < 12)
+                {
+                    ctx.clearRect(p.col * 32, p.row * 32 - (stepsUp * 5.3), 32, 48);
+                    drawMap(0);
+                    p.frameX++;
+                    p.srcX = (p.frameX % 4) * 32;
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - (stepsUp * 5.3), 32, 48);
+                    setTimeout(goThroughWindowWithEyesClosed, walkingSpeed * 2);
+                }
+                else if (stepsUp === 12)
+                {
+                    pixelsAbove = (stepsUp * 5.3);
+                    if (lMap[5] === undefined)
+                    {
+                        //Let the player know that theres a mob on the roof and that he shouldn't go up there right now
+                        notGoingThroughYet();
+                    }
+                    else
+                    {
+                        level = 6;              //Change level identifier appropriately
+                        l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
+                        l6 = true;                                  //Set level being travelled to as true
+                        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+                        l6Ready = false;
+                        l6Ready2 = false;
+                        startGame();                                //Load settings and assets for next map
+                        waitForLoad2();
+                    }
+                }
+            }
+
+
+
+            function notGoingThroughYet()
+            {
+                stepsDown++;
+
+                if (stepsDown === 1)//Make sure character is facing down
+                    p.srcY = 0;
+
+
+                if (stepsDown < 13 /* --- 7 plus whatever prev if statement is --- */)
+                {
+                    ctx.clearRect(p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
+                    drawMap(0);
+                    p.frameX++;
+                    p.srcX = (p.frameX % 4) * 32;
+                    ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
+                    if (stepsDown === 12)
+                        addEventListener("keydown", onKeyDown, false);
+                    else
+                        setTimeout(notGoingThroughYet, walkingSpeed * 2);
+                }
+            }
 
             function waitForLoad2()
             {
@@ -8249,8 +8368,58 @@ function checkFloorObjects(e)//For picking something up when walking over it
 function checkActions()
 {
 
+    if (l1)
+    {
+        if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
+        {
 
-    if (l2)
+            let shelFrames = 0;
+            let time = 80;
+            uncovered = true;
+            secretPassage();
+
+            function secretPassage()
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                shelFrames++;
+
+                if (shelFrames === 1)
+                {
+                    lMap[level][p.row - 1][p.col] = 12;
+                    lMap[level][p.row][p.col] = 13;
+                    drawMap();
+                    setTimeout(secretPassage, time);
+                }
+                else if (shelFrames === 2)
+                {
+                    lMap[level][p.row - 1][p.col] = 14;
+                    lMap[level][p.row][p.col] = 15;
+                    drawMap();
+                    setTimeout(secretPassage, time);
+                }
+                else if (shelFrames === 3)
+                {
+                    lMap[level][p.row - 1][p.col] = 16;
+                    lMap[level][p.row][p.col] = 17;
+                    drawMap();
+                    setTimeout(secretPassage, time);
+                }
+                else if (shelFrames === 4)
+                {
+                    lMap[level][p.row - 1][p.col] = 1;
+                    lMap[level][p.row][p.col] = 18;
+                    drawMap();
+                    setTimeout(secretPassage, time);
+                }
+                else
+                {
+                    addEventListener("keydown", onKeyDown, false);
+                }
+            }
+        }
+    }
+
+    else if (l2)
     {
         if (p.row === 7 && p.col === 21 && p.frameY === 3)  //Open Locked Door
         {
@@ -8295,66 +8464,6 @@ function checkActions()
                     ctx.clearRect(0,0,800,600);
                     drawMap(0);
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
-                    {
-                        torchNum[5].burn =
-                            function()
-                            {
-                                if (!this.lit)
-                                {
-                                    this.lit = true;
-                                    this.curFlame = new Image();
-                                }
-
-                                //Frame Is incremented in separate function so its not increased if this function is called more often
-                                // (is called more often to draw the flame above player under certain circumstances)
-                                this.flameNum = (this.frame % 3);
-
-                                switch (this.flameNum)//Decide which flame to draw
-                                {
-                                    case 0:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean1.png";
-                                        break;
-                                    case 1:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean2.png";
-                                        break;
-                                    case 2:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean3.png";
-                                        break;
-                                }
-                                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
-                            };
-                    }
-                    torchNum[5].burn();
-                    {
-                        torchNum[6].burn =
-                            function()
-                            {
-                                if (!this.lit)
-                                {
-                                    this.lit = true;
-                                    this.curFlame = new Image();
-                                }
-
-                                //Frame Is incremented in separate function so its not increased if this function is called more often
-                                // (is called more often to draw the flame above player under certain circumstances)
-                                this.flameNum = (this.frame % 3);
-
-                                switch (this.flameNum)//Decide which flame to draw
-                                {
-                                    case 0:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean1.png";
-                                        break;
-                                    case 1:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean2.png";
-                                        break;
-                                    case 2:
-                                        this.curFlame.src = "../../2Sewer/images/floorFlameClean3.png";
-                                        break;
-                                }
-                                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
-                            };
-                    }
-                    torchNum[6].burn();
                 };
 
             }
@@ -8532,7 +8641,8 @@ function checkActions()
         if (p.frameY === 3)//Looking up
         {
             //If the space above contains a cat
-            if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19))
+            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
+            if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19 && lMap[level][p.row][p.col] !== 14))
             {
                 meow.play();
                 if (lMap[level][p.row-1][p.col] === 2)
@@ -8542,7 +8652,8 @@ function checkActions()
         else if (p.frameY === 2)//Looking Right
         {
             //If the space to the right contains a cat
-            if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19))
+            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
+            if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19 && lMap[level][p.row + 1][p.col + 1] !== 14))
             {
 
                 meow.play();
@@ -8553,7 +8664,8 @@ function checkActions()
         else if (p.frameY === 1)//Looking Left
         {
             //If the space to the left contains a cat
-            if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19))
+            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
+            if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19 && lMap[level][p.row + 1][p.col - 1] !== 14))
             {
                 meow.play();
                 if (lMap[level][p.row + 1][p.col - 2] === 2)
@@ -8564,7 +8676,7 @@ function checkActions()
         {
             //If the space below contains a cat
             if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19))
+                if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19 && lMap[level][p.row + 2][p.col] !== 14))
             {
                 meow.play();
                 if (lMap[level][p.row + 3][p.col] === 2)
@@ -10079,62 +10191,6 @@ function resetLevel(time = 40)
         {
             torchNum[t].lit = false;
         }
-
-        //Change functions so that flames background for torch 5 & 6 is sewer background instead of clear floor
-        torchNum[5].burn =
-            function()
-            {
-                if (!this.lit)
-                {
-                    this.lit = true;
-                    this.curFlame = new Image();
-                }
-
-                //Frame Is incremented in separate function so its not increased if this function is called more often
-                // (is called more often to draw the flame above player under certain circumstances)
-                this.flameNum = (this.frame % 3);
-
-                switch (this.flameNum)//Decide which flame to draw
-                {
-                    case 0:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame1.png";
-                        break;
-                    case 1:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame2.png";
-                        break;
-                    case 2:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame3.png";
-                        break;
-                }
-                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
-            };
-        torchNum[6].burn =
-            function()
-            {
-                if (!this.lit)
-                {
-                    this.lit = true;
-                    this.curFlame = new Image();
-                }
-
-                //Frame Is incremented in separate function so its not increased if this function is called more often
-                // (is called more often to draw the flame above player under certain circumstances)
-                this.flameNum = (this.frame % 3);
-
-                switch (this.flameNum)//Decide which flame to draw
-                {
-                    case 0:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame1.png";
-                        break;
-                    case 1:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame2.png";
-                        break;
-                    case 2:
-                        this.curFlame.src = "../../2Sewer/images/floorFlame3.png";
-                        break;
-                }
-                ctx.drawImage(this.curFlame, 0, 0, 32, 32, this.xPos * 32, this.yPos * 32, 32, 32);//Draw the chosen flame
-            };
 
         //Reset players health
         p.health = 6;
