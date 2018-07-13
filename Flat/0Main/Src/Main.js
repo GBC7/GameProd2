@@ -500,21 +500,21 @@ let enemy = [];                              //To hold torch objects
 
                 //Walk the direction chosen if boundaries permit it
                 function walk()
-                {
-                    if (l2 && !self.dead)
-                    {
-                        //Get random walking direction
-                        self.dir = chooseDirection();
+                        {
+                            if (l2 && !self.dead)
+                            {
+                                //Get random walking direction
+                                self.dir = chooseDirection();
 
-                        //Call walking function correlating to direction chosen direction -- if ok to walk this way
-                        //      else choose another random direction
-                        if (self.dir === "left")
-                        {
-                            checkIfOk(37);//Check boundaries inputting keyCode for direction
-                        }
-                        else if (self.dir === "right")
-                        {
-                            checkIfOk(39);
+                                //Call walking function correlating to direction chosen direction -- if ok to walk this way
+                                //      else choose another random direction
+                                if (self.dir === "left")
+                                {
+                                    checkIfOk(37);//Check boundaries inputting keyCode for direction
+                                }
+                                else if (self.dir === "right")
+                                {
+                                    checkIfOk(39);
                         }
                         else if (self.dir === "up")
                         {
@@ -2235,7 +2235,16 @@ function startGame()
         let frid1= new Image();
         let frid2= new Image();
         let chop= new Image();
-        let kit= new Image();
+        let tea= new Image();
+        let shel1= new Image();
+        let shel2= new Image();
+        let shel3= new Image();
+        let alt1= new Image();
+        let alt2= new Image();
+        let chair= new Image();
+        let chair2= new Image();
+        let plant= new Image();
+
 
 
 
@@ -2281,6 +2290,17 @@ function startGame()
             frid2.src = "../../5MomsPlace/images/frid2.png"; //37
             chop.src = "../../5MomsPlace/images/chop.png"; //38
             kit.src = "../../5MomsPlace/images/kit.png"; //39
+            tea.src = "../../5MomsPlace/images/tea.png"; //40
+            shel1.src = "../../5MomsPlace/images/shel1.png"; //41
+            shel2.src = "../../5MomsPlace/images/shel2.png"; //42
+            shel3.src = "../../5MomsPlace/images/shel3.png"; //43
+            alt1.src = "../../5MomsPlace/images/alt1.png"; //44
+            alt2.src = "../../5MomsPlace/images/alt2.png"; //45
+            chair.src = "../../5MomsPlace/images/chair.png"; //46
+            chair2.src = "../../5MomsPlace/images/chair2.png"; //47
+            plant.src = "../../5MomsPlace/images/plant.png"; //48
+            //.src = "../../5MomsPlace/images/.png";
+
         }//Defining src properties for image objects
 
 
@@ -2326,6 +2346,17 @@ function startGame()
             nn = chop;               //38
             oo = kit;                //39
             qq = paper;              //40
+            rr = tea;
+            ss= shel1;
+            tt= shel2;
+            uu= shel3;
+            vv= alt1;
+            ww= alt2;
+            xx= chair;
+            yy= chair2;
+            zz= plant;
+
+
         }//Assigning objects to global variables
 
 
