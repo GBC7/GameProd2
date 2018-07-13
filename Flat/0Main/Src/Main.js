@@ -1013,7 +1013,7 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "";
-        dialogText(names[1], SystemMSGLevel4[1], "20px", "white");
+        dialogText(names[1], DialogLevel4[1], "20px", "white");
 
         streetSound.play(); 
         let street = new Image();

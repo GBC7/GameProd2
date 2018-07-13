@@ -112,8 +112,8 @@ DialogLevel7 = [];
 
 
 function dialogInitialize() {  //clear dialogue
-    CharacterName.innerText = names[0];
-    DialogText.innerText = " ";
+    CharacterName.innerHTML = names[0];
+    DialogText.innerHTML = " ";
     CharacterPortrait.style.backgroundImage = portrait[0];
     DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
@@ -125,8 +125,8 @@ function dialogText(n, t, fs, fc){
     // can use array for n and t
     // fs and fc are supposed to be "number px" or "name of color"
 
-    CharacterName.innerText = n;
-    DialogText.innerText = t;
+    CharacterName.innerHTML = n;
+    DialogText.innerHTML = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
     DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
