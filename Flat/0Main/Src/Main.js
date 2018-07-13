@@ -4760,6 +4760,7 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "";
+        dialogText(names[1],SystemMSGLevel4[1], "20 px", "white");
 
 
         streetSound.play();
