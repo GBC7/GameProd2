@@ -1013,10 +1013,11 @@ function startGame()
 
     {
         canvas.style.backgroundImage = "";
+        dialogText(names[1], SystemMSGLevel4[1], "20px", "white");
+
         streetSound.play(); 
         let street = new Image();
         let side = new Image();
-        let house1 = new Image();
         let bank1 = new Image();
         let bank2 = new Image();
         let bank3 = new Image();

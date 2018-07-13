@@ -49,7 +49,7 @@ SystemMSGLevel3[2] = "Mobbists are finding me!\nI'd rather not move ";
 
 //level4 system text
 SystemMSGLevel4[0] = ""; //initial value
-SystemMSGLevel4[1] = "Quickly! \n I have to find the key to open Mom house"; 
+SystemMSGLevel4[1] = "Quickly! \n I have to find the key to open Mom house \nSh**! Dressing like a girl is looking more appealing right about now."; 
 SystemMSGLevel4[2] = "Sh**! Dressing like a girl is looking more appealing right about now.";
 
 //level5 system text
