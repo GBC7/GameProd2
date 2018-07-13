@@ -2520,6 +2520,16 @@ function startGame()
         let openWindow = new Image();
         let closedWindow = new Image();
         let trash = new Image();
+		let wire = new Image();
+		let table = new Image();
+		let tableBlood = new Image();
+		let tableBlue = new Image();
+		let tableRed = new Image();
+		let tableTop = new Image();
+		let tableBottom = new Image();
+		let screen = new Image();
+		let screenLeft = new Image();
+		let screenRight = new Image();
 
 
         {
@@ -2542,6 +2552,16 @@ function startGame()
             openWindow.src = "../../7Lab/images/openWindow.png";
             closedWindow.src = "../../7Lab/images/closedWindow.png";
             trash.src = "../../7Lab/images/trash.png";
+			wire.src = "../../7Lab/images/wire.png";
+			table.src = "../../7Lab/images/table.png";
+			tableBlood.src = "../../7Lab/images/table-blood.png";
+			tableBlue.src = "../../7Lab/images/table-blue.png";
+			tableRed.src = "../../7Lab/images/table-red.png";
+			tableTop.src = "../../7Lab/images/table-top.png";
+			tableBottom.src = "../../7Lab/images/table-bottom.png";
+			screen.src = "../../7Lab/images/screen.png";
+			screenLeft.src = "../../7Lab/images/screen-left.png";
+			screenRight.src = "../../7Lab/images/screen-right.png";
         }//Defined SRC Property for all level images
 
 
@@ -2565,6 +2585,16 @@ function startGame()
                 j = fullShelvesBottom;	// 9
             }
             k = trash;				// 10
+			l = wire;				// 11
+			m = table;				// 12
+			n = tableBlood; 		// 13
+			o = tableBlue;			// 14
+			q = tableRed;			// 15
+			r = tableTop;			// 16
+			s = tableBottom;		// 17
+			t = screen;				// 18
+			u = screenLeft;			// 19
+			v = screenRight;		// 20
         }//Assigne images to global letter variables
 
 
@@ -2573,24 +2603,24 @@ function startGame()
             lMap[level]=
                 //                    10                  20
                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9,	1,	1,	1,	1],
+                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	6,	8,	8,	8,	8,	6,	6,	8,	6,	1,	8,	8,	8,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	7,	9,	9,	9,	9,	7,	7,	9,	7,	11,	9,	9,	9,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	12,	13,	12,	12,	12,	12,	1,	1,	1,	12,	12,	12,	15,	12,	12,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	16,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                    [1,	1,	1,	1,	12,	12,	14,	13,	12,	15,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                    [1,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	12,	12,	13,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                    [1,	1,	1,	1,	12,	12,	14,	15,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [1,	1,	1,	1,	12,	12,	12,	13,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                     [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
                 ];
         }
@@ -2643,6 +2673,17 @@ function startGame()
         let fullShelvesBottom = new Image();
         let openWindow = new Image();
         let closedWindow = new Image();
+		let trash = new Image();
+		let wire = new Image();
+		let table = new Image();
+		let tableBlood = new Image();
+		let tableBlue = new Image();
+		let tableRed = new Image();
+		let tableTop = new Image();
+		let tableBottom = new Image();
+		let screen = new Image();
+		let screenLeft = new Image();
+		let screenRight = new Image();
 
 
         {
@@ -2664,6 +2705,18 @@ function startGame()
             wall.src = "../../7Lab/images/Wall.png";
             floor.src = "../../7Lab/images/Floor.png";
             closedWindow.src = "../../7Lab/images/closedWindow.png";
+			trash.src = "../../7Lab/images/trash.png";
+			wire.src = "../../7Lab/images/wire.png";
+			table.src = "../../7Lab/images/table.png";
+			tableBlood.src = "../../7Lab/images/table-blood.png";
+			tableBlue.src = "../../7Lab/images/table-blue.png";
+			tableRed.src = "../../7Lab/images/table-red.png";
+			tableTop.src = "../../7Lab/images/table-top.png";
+			tableBottom.src = "../../7Lab/images/table-bottom.png";
+			screen.src = "../../7Lab/images/screen.png";
+			screenLeft.src = "../../7Lab/images/screen-left.png";
+			screenRight.src = "../../7Lab/images/screen-right.png";
+			
         }//Defining images src property
 
 
@@ -2702,6 +2755,23 @@ function startGame()
                 s = emptyShelvesTop;	// 17
                 t = emptyShelvesBottom;	// 18
             }
+			u = wire; 					// 19
+			v = table; 					// 20
+			w = tableBlood; 			// 21
+			x = tableBlue; 				// 22
+			y = tableRed; 				// 23
+			z = tableTop; 				// 24
+			aa = tableBottom; 			// 25
+			bb = screen; 				// 26
+			cc = screenLeft; 			// 27
+			dd = screenRight; 			// 28
+			ee = undefined;
+			ff = undefined;
+			gg = undefined;
+			hh = undefined;
+			ii = undefined;
+			jj = undefined;
+			kk = undefined;
         }//Assigning images to global variables
 
 
@@ -2711,21 +2781,21 @@ function startGame()
                 //                    10                  20
                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
                     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 17, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
+                    [0, 2, 0, 27, 28, 0, 0, 27, 28, 0, 0, 14, 17, 14, 16, 14, 10, 10, 10, 10, 6, 6, 6, 4, 0],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 15, 18, 15, 1, 15, 11, 11, 11, 11, 7, 7, 7, 5, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9],
+                    [1, 1, 1, 1, 1, 20, 20, 20, 20, 20, 20, 1, 1, 19, 20, 20, 20, 22, 23, 21, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 20, 20, 21, 20, 22, 23, 1, 1, 1, 20, 20, 20, 20, 20, 20, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 19, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 20, 20, 20, 20, 20, 20, 1, 1, 1, 20, 20, 20, 20, 20, 19, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 20, 20, 20, 23, 20, 20, 1, 1, 1, 20, 22, 20, 20, 20, 20, 1, 1, 1, 1, 1],
+                    [1, 1, 19, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3]
