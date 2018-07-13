@@ -4622,6 +4622,9 @@ function startGame()
         startY[1] = 10;
         if (lPMap[1] !== undefined)
             lPMap[1][10][23] = 1;
+
+        startX[1] = 6;
+        startY[1] = 9;
     }
 
     else if (l3)//Clothing Store
@@ -6087,12 +6090,6 @@ function fillErasedMap()
     }
 
 
-    
-
-
-
-
-
     letEmBurn();
 
     if (dialog)
@@ -6760,7 +6757,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;
                     l1 = true;
                     ctx.clearRect(0,0,800,600);
-                    p.frameY = 0;
+                    p.frameY = 2;
 
                     startGame();
                     setTimeout(drawMap, 40);
@@ -7833,7 +7830,8 @@ function onKeyDown(e)
     }
     if (e.keyCode === 32) //Space
     {
-        checkActions();
+        if (notWalking)
+            checkActions();
     }
 
     if (sewersDrained) //If the water has been shut off
