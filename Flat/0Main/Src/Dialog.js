@@ -49,7 +49,7 @@ SystemMSGLevel3[2] = "Mobbists are finding me!\nI'd rather not move ";
 
 //level4 system text
 SystemMSGLevel4[0] = " "; //initial value
-
+SystemMSGLevel4[1] = "There is he! We have to catch up that famous scientist...";
 
 //level5 system text
 SystemMSGLevel5[0] = " "; //initial value
@@ -109,8 +109,8 @@ DialogLevel7 = [];
 
 
 function dialogInitialize() {  //clear dialogue
-    CharacterName.innerText = names[0];
-    DialogText.innerText = " ";
+    CharacterName.innerHTML = names[0];
+    DialogText.innerHTML = " ";
     CharacterPortrait.style.backgroundImage = portrait[0];
     DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
@@ -122,8 +122,8 @@ function dialogText(n, t, fs, fc){
     // can use array for n and t
     // fs and fc are supposed to be "number px" or "name of color"
 
-    CharacterName.innerText = n;
-    DialogText.innerText = t;
+    CharacterName.innerHTML = n;
+    DialogText.innerHTML = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
     DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
@@ -166,9 +166,9 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
         currentSpeaker = sn2;
         speakerPortrait = sp2;
     }
-    CharacterName.innerText = currentSpeaker;
+    CharacterName.innerHTML = currentSpeaker;
     CharacterPortrait.style.backgroundImage = speakerPortrait;
-    DialogText.innerText = d[dialogIndex];
+    DialogText.innerHTML = d[dialogIndex];
 
     DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
     dialogIndex++;
