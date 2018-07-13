@@ -2,7 +2,7 @@ let gameOver = false;
 
 
 //Current Level Bool
-let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
+let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
 {
     l1 = true;
     l2 = false;
@@ -15,6 +15,7 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
     l9 = false;
     l10 = false;
     l11 = false;
+    l12 = false;
 }
 
 
@@ -227,7 +228,7 @@ let lMap, lPMap, lOMap;
 
 
 //For finding out if level is ready to be drawn
-let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready;
+let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready, l12Ready;
 
 
 let canvas = document.querySelector("canvas");
@@ -526,6 +527,11 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             frameY: 2,//Facing right
             dir: undefined, //Stores direction chosen to walk
             dirOK: true,
+            fov: 3,         //Number of tiles that the enemy can see in direction they are facing
+            rangeOV: 2,     //Number of tiles that the enemy can see to the left or right of the direction they are facing
+            sighted: false,
+            width: 32,
+            height: 32,
             dead: true,
             roam: function()
             {
@@ -577,66 +583,86 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Initialize bools to false
                     xChosen = yChosen = up = down = left = right = false;
 
-                    //To use to decide whether to travel x or y axis
-                    let xOrY = (Math.floor(Math.random()*2) + 1);
+                    directionChosen = checkFOV();
 
-                    //Set axis chosen to true and and initialize variable to chose which way on axis
-                    switch (xOrY)
+                    if (self.sighted && directionChosen !== undefined)
                     {
-                        case 1:
-                            xChosen = true;
-                            xDir = (Math.floor(Math.random()*2) + 1);
-                            break;
-                        case 2:
-                            yChosen = true;
-                            yDir = (Math.floor(Math.random()*2) + 1);
-                            break;
+                        self.scurrySpeed = 90;
+                        return directionChosen;
                     }
-
-                    //Chose a direction on the axis chosen
-                    if (yChosen)
+                    else
                     {
-                        switch (yDir)//Decide if going up or down
+                        if (directionChosen === undefined)
                         {
-                            case 1:
-                                up = true;
-                                break;
-                            case 2:
-                                down = true;
-                                break;
+                            //To use to decide whether to travel x or y axis
+                            let xOrY = (Math.floor(Math.random()*2) + 1);
+
+                            //Set axis chosen to true and and initialize variable to chose which way on axis
+                            switch (xOrY)
+                            {
+                                case 1:
+                                    xChosen = true;
+                                    xDir = (Math.floor(Math.random()*2) + 1);
+                                    break;
+                                case 2:
+                                    yChosen = true;
+                                    yDir = (Math.floor(Math.random()*2) + 1);
+                                    break;
+                            }
+
+                            //Chose a direction on the axis chosen
+                            if (yChosen)
+                            {
+                                switch (yDir)//Decide if going up or down
+                                {
+                                    case 1:
+                                        up = true;
+                                        break;
+                                    case 2:
+                                        down = true;
+                                        break;
+                                }
+                            }
+                            else if (xChosen)
+                            {
+                                switch (xDir)//Decide if going left or right
+                                {
+                                    case 1:
+                                        left = true;
+                                        break;
+                                    case 2:
+                                        right = true;
+                                        break;
+                                }
+                            }
+
+                            //Set direction chosen to return to variable that called it
+                            if (left)
+                            {
+                                directionChosen = "left";
+                            }
+                            else if (right)
+                            {
+                                directionChosen = "right";
+                            }
+                            else if (up)
+                            {
+                                directionChosen = "up";
+                            }
+                            else if (down)
+                            {
+                                directionChosen = "down";
+                            }
+                            self.scurrySpeed = 180;
                         }
-                    }
-                    else if (xChosen)
-                    {
-                        switch (xDir)//Decide if going left or right
+                        else
                         {
-                            case 1:
-                                left = true;
-                                break;
-                            case 2:
-                                right = true;
-                                break;
+                            self.scurrySpeed = 90;
                         }
+
+                        return directionChosen;
                     }
 
-                    //Set direction chosen to return to variable that called it
-                    if (left)
-                    {
-                        directionChosen = "left";
-                    }
-                    else if (right)
-                    {
-                        directionChosen = "right";
-                    }
-                    else if (up)
-                    {
-                        directionChosen = "up";
-                    }
-                    else if (down)
-                    {
-                        directionChosen = "down";
-                    }
-                    return directionChosen;
                 }
 
                 //Check boundaries (ONLY lMap -- not lPMap or lOMap)
@@ -896,9 +922,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                 function checkIfHit()
                 {
-                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                    if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                     {
-                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                        if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
                         {
                             p.health--;
                             aghh.play();
@@ -910,6 +936,80 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                                 resetLevel(self.scurrySpeed);
                             }
                         }
+                    }
+                }
+
+                function checkFOV()
+                {
+                    if (self.frameY === 0)//Looking down
+                    {
+                        //Check if in field of view
+                        if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ < (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
+                        {
+                            return checkRange("Down");
+                        }
+                    }
+                    else if (self.frameY === 1)//Looking left
+                    {
+                        //Check if in field of view
+                        if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) > (self.xPos - self.fov * 32))
+                        {
+                            return checkRange("Left");
+                        }
+                    }
+                    else if (self.frameY === 2)//Looking right
+                    {
+                        //Check if in field of view
+                        if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ < (self.xPos + self.width + self.fov * 32))
+                        {
+                            return checkRange("Right");
+                        }
+                    }
+                    else if (self.frameY === 3)//Looking up
+                    {
+                        //Check if in field of view
+                        if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) > (self.yPos/*topOfEnemy*/ - self.fov  * 32))
+                        {
+                            return checkRange("Up");
+                        }
+                    }
+                    else return undefined;
+
+                    function checkRange(facing)
+                    {
+                        if (facing === "Down")
+                        {
+                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
+                            {
+                                self.sighted = true;
+                                return "down";
+                            }
+                        }
+                        else if (facing === "Left")
+                        {
+                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                            {
+                                self.sighted = true;
+                                return "left";
+                            }
+                        }
+                        else if (facing === "Right")
+                        {
+                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                            {
+                                self.sighted = true;
+                                return "right";
+                            }
+                        }
+                        else if (facing === "Up")
+                        {
+                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
+                            {
+                                self.sighted = true;
+                                return "up";
+                            }
+                        }
+                        else return undefined;
                     }
                 }
                 //Simple walking one direction functions
@@ -1772,9 +1872,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                 function checkIfHit()
                 {
-                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                    if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                     {
-                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                        if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
                         {
                             p.health--;
                             aghh.play();
@@ -2707,9 +2807,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                 function checkIfHit()
                 {
-                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                    if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                     {
-                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                        if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
                         {
                             p.health--;
                             aghh.play();
@@ -3640,9 +3740,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                 function checkIfHit()
                 {
-                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                    if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                     {
-                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                        if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
                         {
                             p.health--;
                             aghh.play();
@@ -4411,6 +4511,9 @@ function startGame()
         canvas.style.backgroundImage = "";
         newsReport.pause();
 
+        dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
+
         let stepsCorner = new Image();
         let steps = new Image();
         let topSide3 = new Image();
@@ -4615,6 +4718,7 @@ function startGame()
 
         burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
 
+
         keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
         countingFlames = setInterval(changeFlame, 120);
 
@@ -4633,6 +4737,8 @@ function startGame()
 
         canvas.style.backgroundImage = "";
         bgm_level3.play();
+        dialogText(names[1],DialogLevel3[0], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
 
 
         let floor = new Image();
@@ -5737,6 +5843,11 @@ function startGame()
 
         addEventListener("keydown", onKeyDown, false);
         notWalking = true;
+    }
+
+    else if (l12)
+    {
+
     }
 
 }
@@ -7831,7 +7942,11 @@ function onKeyDown(e)
     if (e.keyCode === 32) //Space
     {
         if (notWalking)
+        {
             checkActions();
+            CheckConversationAction();
+        }
+
     }
 
     if (sewersDrained) //If the water has been shut off
@@ -8047,6 +8162,16 @@ function onKeyDown(e)
     {
         gameover();
     }
+    if (e.keyCode === 72)//H - Calls helo level()
+    {
+        level = 12;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l12 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        // l8Ready=false;
+        startGame();                                //Load settings and assets for next map
+    }
+
 }
 
 function checkBoundaries(e)
@@ -9071,31 +9196,6 @@ function displayTextBubble()
             }
         }
 
-
-
-        //SYSTEM MESSAGES
-/*
-
-        if (dialog && warningTime < 6 && warningTime > 0)
-        {
-            ctx.font = "13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "#FF0000";
-            ctx.fillText("They're getting ", (p.col + 2) * 32 + 3, (p.row + 3) * 32 - 7);
-            ctx.fillText("close to the window.", (p.col + 2) * 32 -3, (p.row + 3) * 32 + 5);
-        }
-
-        if (dialog && enemyAppearLevel3)
-        {
-            ctx.font = "14px Arial Bold";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "#FF0000";
-            ctx.fillText("They're looking ", (p.col + 2) * 32 + 3, (p.row + 3) * 32 - 7);
-            ctx.fillText("through the window!!", (p.col + 2) * 32 -9, (p.row + 3) * 32 + 5);
-
-        }
-*/
-
     }
 
     else if (l7)
@@ -10033,7 +10133,8 @@ function detectMovementLevel3()
 
 
         // add mob, start timer again. alert is temp msg.
-        setTimeout(alert("you detected by mobbists - temp msg(" + enemyArr.length + " enemies in this area.)"), 1000);
+        dialogText(names[1], "add one enemy(temporary msg)", "25px", "red");
+        setTimeout(dialogInitialize, 3000);
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
 
@@ -10042,7 +10143,6 @@ function detectMovementLevel3()
 
         clearInterval(timer_level3);
         timer_level3 = setInterval(function(){
-            drawMap();
             enemyLoading();
             appearEnemy();
         }, 1000);
@@ -10062,6 +10162,7 @@ function resetTimer()
                     lMap[level][y][x] = 18;
             }
     }
+    drawMap();
     warningTime = Math.floor(Math.random() * 20 + 10);
     findingTime = Math.floor(Math.random() * 10 + 5);
     enemyAppearLevel3 = false;
@@ -10069,10 +10170,11 @@ function resetTimer()
     bgm_level3.play();
 }
 
+
 function appearEnemy()
 {
     warningTime--;
-    if (warningTime < 6 && warningTime > 0)
+    if (warningTime <=5 && warningTime > 0)
     {
         bgm_level3.pause();
         dangerous.play();
@@ -10083,26 +10185,22 @@ function appearEnemy()
         drawPMap();
         */
 
-
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Warning! Mobbist will open window!", 180, 120);
-        ctx.fillText(warningTime + " seconds left.", 280, 150);
+        dialogText(names[1], SystemMSGLevel3[1] + warningTime + " second later!", "25px", "red");
 
     }
     else if (warningTime === 0) {
         if (lMap[level] !== undefined)
 
-        for (let y = 0; y < lMap[level].length; y++)//Change the map so that the closed windows are now opened
-        {
-            if (lMap[level][y] !== undefined)
-            for (let x = 0; x < lMap[level][y].length; x++)
+            for (let y = 0; y < lMap[level].length; y++)//Change the map so that the closed windows are now opened
             {
-                if (lMap[level][y][x] === 18)
-                    lMap[level][y][x] = 19;
+                if (lMap[level][y] !== undefined)
+                    for (let x = 0; x < lMap[level][y].length; x++)
+                    {
+                        if (lMap[level][y][x] === 18)
+                            lMap[level][y][x] = 19;
+                    }
             }
-        }
-
+        drawMap();
         enemyAppearLevel3 = true;
 
     }
@@ -10118,15 +10216,13 @@ function appearEnemy()
         */
 
 
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Mobbists are finding you!", 230, 120);
-        ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
+        dialogText(names[1], SystemMSGLevel3[2] +findingTime + " seconds.", "25px", "red");
 
 
         if (findingTime === 0)
         {
             resetTimer();
+            dialogInitialize();
         }
     }
     if (detectPlayerLevel3)

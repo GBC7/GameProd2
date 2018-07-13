@@ -4,6 +4,13 @@ html
     background-color: #3c3c3c;
 }
 
+#holder
+{
+    width: 800px;
+    height: 772px;
+    margin: 0 auto;
+}
+
 #center
 
 {
