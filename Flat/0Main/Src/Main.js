@@ -4297,15 +4297,6 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
     // __--__ Called with "enemy[level][slot].roam();" depending how many enemies put into it
 }
 
-/*
-
-p.col
-1
-p.row
-16
-
-*/
-
 
 //L6
 let gate = new Image();
@@ -4341,6 +4332,8 @@ startGame();
 
 function startGame()
 {
+    pauseSounds();
+
     if (l1)//Home(roof)
 
     {
@@ -5368,7 +5361,7 @@ function startGame()
 
         let roof = new Image();
         let wall = new Image();
-        let shinglesEdge = new Image();;
+        let shinglesEdge = new Image();
         let shinglesRight = new Image();
         let shinglesBRight = new Image();
 
@@ -5845,11 +5838,26 @@ function startGame()
         notWalking = true;
     }
 
-    else if (l12)
+    else if (l12)//Copter
     {
-
+        initializeCopterLevel();
     }
 
+
+    function pauseSounds()
+    {
+        meow.pause();
+        newsReport.pause();
+        ratOfDeath.pause();
+        waterRunning.pause();
+        dangerous.pause();
+        bgm_level3.pause();
+        warningSound.pause();
+        doorSound.pause();
+        streetSound.pause();
+        aghh.pause();
+        lockedDoor.pause();
+    }
 }
 
 function fillErasedMap()
@@ -6758,6 +6766,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
             let stepsUp = 0;
             let stepsDown = 0;
             let pixelsAbove = 0;
+            lPMap[level][p.row][p.col] = 0;
 
             goThroughWindowWithEyesClosed();
 
@@ -6785,6 +6794,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     }
                     else
                     {
+                        lPMap[level][p.row][p.col] = 1;
                         level = 6;              //Change level identifier appropriately
                         l1 = l2 = l3 = l4 = l5 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
                         l6 = true;                                  //Set level being travelled to as true
@@ -6815,7 +6825,10 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     p.srcX = (p.frameX % 4) * 32;
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
                     if (stepsDown === 12)
+                    {
+                        lPMap[level][p.row][p.col] = 0;
                         addEventListener("keydown", onKeyDown, false);
+                    }
                     else
                         setTimeout(notGoingThroughYet, walkingSpeed * 2);
                 }
@@ -7661,14 +7674,14 @@ function onKeyDown(e)
                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                     drawL6();
 
+                    drawZeeEnemy();
+
                     if (l2 && underWater)
                     {
                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
                     }
                     else
                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 - (8 * walk)), p.row * 32, 32, 48);
-
-                    drawZeeEnemy();
 
                     setTimeout(walkLeft, walkingSpeed);
                 }
@@ -7697,6 +7710,8 @@ function onKeyDown(e)
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
+
+            drawZeeEnemy();
 
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -7733,6 +7748,8 @@ function onKeyDown(e)
                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                     drawL6();
 
+                    drawZeeEnemy();
+
                     if (l2 && underWater)
                     {
                         ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
@@ -7740,7 +7757,6 @@ function onKeyDown(e)
                     else
                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, (p.col * 32 + (8 * walk)), p.row * 32, 32, 48);
 
-                    drawZeeEnemy();
                     setTimeout(walkRight, walkingSpeed);
                 }
                 else
@@ -7768,6 +7784,8 @@ function onKeyDown(e)
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
+
+            drawZeeEnemy();
 
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
@@ -7803,6 +7821,8 @@ function onKeyDown(e)
                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                     drawL6();
 
+                    drawZeeEnemy();
+
                     if (l2)
                     {
                         if (p.row === 7 && p.col === 21 && j === door3)//Draw scientist under ledge
@@ -7821,7 +7841,6 @@ function onKeyDown(e)
                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 - (8 * walk)), 32, 48);
                     }
 
-                    drawZeeEnemy();
                     setTimeout(animateWalking, walkingSpeed);
                 }
                 else
@@ -7848,6 +7867,9 @@ function onKeyDown(e)
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
+
+            drawZeeEnemy();
+
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
             else
@@ -7882,6 +7904,7 @@ function onKeyDown(e)
                     ctx.clearRect(p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                     fillErasedMap(a, b, c, d, e, f, g, h, i, j, k, l, m, n);
                     drawL6();
+                    drawZeeEnemy();
 
                     if (l2)
                     {
@@ -7900,8 +7923,6 @@ function onKeyDown(e)
                     {
                         ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, (p.row * 32 + (8 * walk)), 32, 48);
                     }
-
-                    drawZeeEnemy();
 
                     setTimeout(walkDown, walkingSpeed);
 
@@ -7932,6 +7953,10 @@ function onKeyDown(e)
             drawL6();
             p.srcX = p.width * (p.frameX % 4);
             p.srcY = p.height * (p.frameY);
+
+            drawZeeEnemy();
+
+
             if (l2 && !sewersDrained && (p.row < 11 || p.col > 11))
                 ctx.drawImage(sciUndWater, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
             else
@@ -8487,7 +8512,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
 
 
 //Space bar actions
-
 function checkActions()
 {
 
@@ -8934,7 +8958,6 @@ function checkActions()
 
 
 //Thought / Speach Bubbles
-
 function displayTextBubble()
 {
     if (l2) //If going UP & character is under pipe but the sewer is running
@@ -10370,9 +10393,19 @@ function gameover()
     }
 }
 
+//Is already placed where it needs to be to have the enemy players drawn properly
+function drawZeeEnemy()
+{
+    for (let b = 0; b < enemy[level].length; b++)
+    {
+        if (!enemy[level][b].dead)
+        {
+            enemy[level][b].drawMe();
+        }
+    }
+}
 
 //L6
-
 function drawL6Full()
 {
     l6Ready2 = false;
@@ -10466,13 +10499,3 @@ function drawL6Full()
     }
 }
 
-function drawZeeEnemy()
-{
-    for (let b = 0; b < enemy[level].length; b++)
-    {
-        if (!enemy[level][b].dead)
-        {
-            enemy[level][b].drawMe();
-        }
-    }
-}
