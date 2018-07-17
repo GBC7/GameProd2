@@ -29,6 +29,7 @@ let alreadySetTimeout = false;     //For drawing dialog
 let dialogX = undefined, dialogY = undefined; //For storing position dialog started at
 
 
+
 //*****Testing only*****//
 let lightSwitch = 1, sewerSwitch = 1;                                //*****Testing only*****//
 //*****Testing only*****//
@@ -289,16 +290,8 @@ let p =                                                         //PlayerObject
 //Universal Images
 let scientist = new Image();                                //Regular player image
 let sciUndWater = new Image();                              //Image fpr player while in sewer
-let thotBr = new Image();                                   //Thought bubble image bottom right side of player
-let thotBl = new Image();                                   //Thought bubble image bottom left side of player
-let thotTl = new Image();                                   //Thought bubble image top left side of player
-let thotTr = new Image();                                   //Thought bubble image top right side of player
 let orientation = "";
 {
-    thotBl.src = "../../0Main/images/thotBl.png";
-    thotTl.src = "../../0Main/images/thotTl.png";
-    thotTr.src = "../../0Main/images/thotTr.png";
-    thotBr.src = "../../0Main/images/thotBr.png";
     sciUndWater.src = "../../2Sewer/images/scientist2.png";
     scientist.src = "../../0Main/images/scientist2.png";
 }
@@ -7891,15 +7884,6 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
     // __--__ Called with "enemy[level][slot].roam();" depending how many enemies put into it
 }
 
-/*
-
-p.col
-1
-p.row
-16
-
-*/
-
 
 //L6
 let gate = new Image();
@@ -7938,9 +7922,12 @@ function startGame()
     if (l1)//Home(roof)
 
     {
-        canvas.style.backgroundImage = "";
 
+
+
+        canvas.style.backgroundImage = "";
         newsReport.play();          //RYN
+
 
         let floor = new Image();
         let darkWindowT = new Image();
@@ -8068,8 +8055,6 @@ function startGame()
         }//Define SRC property of images
 
 
-
-
         {
             a = floor;                          //0
             b = wallpaper;                      //1
@@ -8138,6 +8123,8 @@ function startGame()
         }//Assign images to global letter variables
 
 
+
+
         if (lMap[level] === undefined)                              //Stops map from recreating itself on second visit
         {
             lMap[level] =                                           //Initialize this levels map
@@ -8202,6 +8189,9 @@ function startGame()
             else
             {
                 drawMap();                   //Draw next map
+                initializeTutorialLV1();
+                /*dialogText(names[4], TutorialL1[1], "20 px", "white");
+                setTimeout(dialogInitialize, 7000);*/
             }
         }
 
@@ -8209,6 +8199,8 @@ function startGame()
 
         addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
+       //dialogText(names[3], DialogNews[1], "20 px", "white");
+        //setTimeout(dialogInitialize, 3000);
     }
 
     else if (l2)//Sewer
@@ -8216,6 +8208,9 @@ function startGame()
     {
         canvas.style.backgroundImage = "";
         newsReport.pause();
+
+        dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
 
         let stepsCorner = new Image();
         let steps = new Image();
@@ -8439,6 +8434,8 @@ function startGame()
 
         canvas.style.backgroundImage = "";
         bgm_level3.play();
+        dialogText(names[1],DialogLevel3[0], "20 px", "white");
+        setTimeout(dialogInitialize, 5000);
 
 
         let floor = new Image();
@@ -11642,8 +11639,10 @@ function onKeyDown(e)
     }
     if (e.keyCode === 32) //Space
     {
-        if (notWalking)
-            checkActions();
+        checkActions();
+        CheckConversationAction();
+       /* if (notWalking)
+            checkActions();*/
     }
 
     if (sewersDrained) //If the water has been shut off
@@ -12633,10 +12632,9 @@ function displayTextBubble()
             dialogX = 9;
             dialogY = 11;
             ctx.font="10px Arial Bold";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("Ahh! ..better light", (p.col + 2) * 32 + 10, (p.row + 3) * 32 - 4);
-            ctx.fillText("this place up first.", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+
+            dialogText(names[1], SystemMSGLevel2[2], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12684,12 +12682,10 @@ function displayTextBubble()
 
         if (dialog && p.col === 10 && p.row === 0)//No go in pipe yet
         {
-            dialogX = 10;
-            dialogY = 0;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("The water is too powerful..", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel2[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+
+
 
             if (!alreadySetTimeout)
             {
@@ -12700,13 +12696,8 @@ function displayTextBubble()
 
         if (dialog && p.row === 7 && p.col === 21 && p.frameY === 3)//Under locked door
         {
-            dialogX = 21;
-            dialogY = 7;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBl, (p.col - 4) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("It's locked..", (p.col - 2) * 32 - 10, (p.row + 3) * 32 - 5);
-            orientation = "bl";
+            dialogText(names[1], SystemMSGLevel2[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12727,12 +12718,8 @@ function displayTextBubble()
                 (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
                 (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
         {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="11px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("Rather not dress like a girl...", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12741,12 +12728,9 @@ function displayTextBubble()
             }
         }
         if (dialog && p.row === 15 && p.col === 18){
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="15px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("This will do!", (p.col + 2) * 32 - 2, (p.row + 3) * 32 - 2);
+
+            dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
             findDisguise = true;
 
             if (!alreadySetTimeout)
@@ -12757,15 +12741,11 @@ function displayTextBubble()
         }
 
         if (dialog && p.row ===2 && p.col ===1){
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="15px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I found passcode!", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
             findPasscode = true;
 
-            if (!alreadySetTimeout)
+             if (!alreadySetTimeout)
             {
                 setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
                 alreadySetTimeout = true;
@@ -12773,12 +12753,8 @@ function displayTextBubble()
         }
 
         if (dialog && findPasscode === false && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3))){
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("nothing...", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12789,12 +12765,8 @@ function displayTextBubble()
 
         if (dialog && findPasscode === false && p.row === 7 && p.col === 20)
         {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I need passcode", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12805,12 +12777,8 @@ function displayTextBubble()
 
         if (dialog && findRollerblades === false && p.row === 5 && p.col === 20)
         {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="15px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I found rollerblades!", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
             findRollerblades = true;
 
             if (!alreadySetTimeout)
@@ -12824,12 +12792,8 @@ function displayTextBubble()
             (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
             (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
         {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("It's all useless...", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[9], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12839,12 +12803,8 @@ function displayTextBubble()
         }
 
         if (dialog && findMap === false && p.row === 15 && (p.col > 0 || p.col < 5 || p.col === 6)) {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font = "13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("Better look for a map", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout) {
                 setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
@@ -12854,13 +12814,10 @@ function displayTextBubble()
 
 
         if (dialog && findMap === false && p.row === 15 && p.col === 5) {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font = "15px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I found map!", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
             findMap = true;
+
 
             if (!alreadySetTimeout) {
                 setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
@@ -12869,58 +12826,24 @@ function displayTextBubble()
         }
 
         if (dialog && findAllLevel3 === false && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11))){
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font = "13px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("It's not time to go out.", (p.col + 2) * 32 - 16, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
             findMap = true;
+
 
             if (!alreadySetTimeout) {
                 setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds
                 alreadySetTimeout = true;
             }
         }
-
-
-
-        //SYSTEM MESSAGES
-        /*
-
-                if (dialog && warningTime < 6 && warningTime > 0)
-                {
-                    ctx.font = "13px Arial";
-                    ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-                    ctx.fillStyle = "#FF0000";
-                    ctx.fillText("They're getting ", (p.col + 2) * 32 + 3, (p.row + 3) * 32 - 7);
-                    ctx.fillText("close to the window.", (p.col + 2) * 32 -3, (p.row + 3) * 32 + 5);
-                }
-
-                if (dialog && enemyAppearLevel3)
-                {
-                    ctx.font = "14px Arial Bold";
-                    ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-                    ctx.fillStyle = "#FF0000";
-                    ctx.fillText("They're looking ", (p.col + 2) * 32 + 3, (p.row + 3) * 32 - 7);
-                    ctx.fillText("through the window!!", (p.col + 2) * 32 -9, (p.row + 3) * 32 + 5);
-
-                }
-        */
-
     }
 
     else if (l7)
     {
         if (dialog && p.row === 1 && p.col === 20)
         {
-            dialogX = 20;
-            dialogY = 1;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("The research!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
-            ctx.fillText("Now to burn it..", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+            dialogText(names[1], SystemMSGLevel7[1], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12930,12 +12853,8 @@ function displayTextBubble()
         }
         else if ((dialog && !researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
         {
-            dialogX = p.col;
-            dialogY = p.row;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 0.5) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I need the research!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel7[2], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12945,13 +12864,8 @@ function displayTextBubble()
         }
         else if ((dialog && !lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
         {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I need something", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
-            ctx.fillText("to burn it with!", (p.col + 2) * 32 + 10, (p.row - 1.5) * 32 + 7);
+            dialogText(names[1], SystemMSGLevel7[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12961,13 +12875,9 @@ function displayTextBubble()
         }
         else if ((dialog && lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
         {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("It's done!", (p.col + 2) * 32 - 10, (p.row - 2) * 32 - 5);
-            ctx.fillText("Now i can leave", (p.col + 2) * 32 + 10, (p.row - 2) * 32 + 7);
+
+            dialogText(names[1], SystemMSGLevel7[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -12977,12 +12887,9 @@ function displayTextBubble()
         }
         else if (dialog && p.row === 17 && p.col === 19)
         {
-            dialogX = 1;
-            dialogY = 16;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTr, (p.col + 1) * 32, (p.row - 3) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I'm not done here!", (p.col + 2) * 32 - 10, (p.row - 1.5) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+
 
             if (!alreadySetTimeout)
             {
@@ -12996,12 +12903,8 @@ function displayTextBubble()
     {
         if (dialog && p.row === 2 && p.col === 12)
         {
-            dialogX = 12;
-            dialogY = 2;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("Lighter fluid!", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
+            dialogText(names[1], SystemMSGLevel8[1], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -13011,13 +12914,8 @@ function displayTextBubble()
         }
         else if (p.row === 1 && p.col === 14)
         {
-            dialogX = 14;
-            dialogY = 1;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("Windows closed now.", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
-            ctx.fillText("Now for that research..", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+            dialogText(names[1], SystemMSGLevel8[2], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -13027,13 +12925,8 @@ function displayTextBubble()
         }
         else if (dialog && p.row === 16 && p.col == 24)
         {
-            dialogX = 14;
-            dialogY = 1;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotTl, (p.col - 4.5) * 32, (p.row - 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I can't leave yet!", (p.col - 3) * 32 - 10, (p.row + 0) * 32 - 5);
-            ctx.fillText("The windows are open", (p.col - 4) * 32 + 10, (p.row + 0) * 32 + 7);
+            dialogText(names[1], SystemMSGLevel8[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -13043,13 +12936,8 @@ function displayTextBubble()
         }
         else if (dialog && p.row === 1 && p.col == 1)
         {
-            dialogX = 1;
-            dialogY = 1;
-            ctx.font="10px Arial";
-            ctx.drawImage(thotBr, (p.col + 1) * 32, (p.row + 1) * 32);
-            ctx.fillStyle = "rgba(0, 0, 0)";
-            ctx.fillText("I go this way...", (p.col + 2) * 32 - 10, (p.row + 3) * 32 - 5);
-            ctx.fillText("The mob will see me!", (p.col + 2) * 32 + 10, (p.row + 3) * 32 + 7);
+            dialogText(names[1], SystemMSGLevel8[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
 
             if (!alreadySetTimeout)
             {
@@ -13845,7 +13733,9 @@ function detectMovementLevel3()
 
 
         // add mob, start timer again. alert is temp msg.
-        setTimeout(alert("you detected by mobbists - temp msg(" + enemyArr.length + " enemies in this area.)"), 1000);
+        dialogText(names[1], "add one enemy (temporary msg)", "25px", "red");
+        setTimeout(dialogInitialize, 3000);
+
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
 
@@ -13854,7 +13744,6 @@ function detectMovementLevel3()
 
         clearInterval(timer_level3);
         timer_level3 = setInterval(function(){
-            drawMap();
             enemyLoading();
             appearEnemy();
         }, 1000);
@@ -13896,10 +13785,7 @@ function appearEnemy()
         */
 
 
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Warning! Mobbist will open window!", 180, 120);
-        ctx.fillText(warningTime + " seconds left.", 280, 150);
+        dialogText(names[1], SystemMSGLevel3[1]+warningTime+ " second later!", "25px", "red");
 
     }
     else if (warningTime === 0) {
@@ -13915,6 +13801,7 @@ function appearEnemy()
                     }
             }
 
+        drawMap();
         enemyAppearLevel3 = true;
 
     }
@@ -13930,15 +13817,13 @@ function appearEnemy()
         */
 
 
-        ctx.font = "30px Arial";
-        ctx.fillStyle = '#FF0000';
-        ctx.fillText("Mobbists are finding you!", 230, 120);
-        ctx.fillText("Don't move for " + findingTime + " seconds.", 220, 150);
+       dialogText(names[1], SystemMSGLevel3[2]+findingTime+" seconds.", "25px", "red");
 
 
         if (findingTime === 0)
         {
             resetTimer();
+            dialogInitialize();
         }
     }
     if (detectPlayerLevel3)
