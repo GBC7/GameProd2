@@ -1,10 +1,3 @@
-let tutorialLV1bool = false;
-let arrowUpTutorialLV1 = false;
-let arrowDownTutorialLV1 = false;
-let arrowLeftTutorialLV1 = false;
-let arrowRightTutorialLV1 = false;
-let interactionWithButler = false;
-let interactionWithObject = false;
 
 
 
@@ -20,26 +13,27 @@ function initializeTutorialLV1()
 function startChecks()
 {
     addEventListener("keydown", leftCheck, false);
+    addEventListener("keydown", onKeyDown, false);
+
 
 }
 
 function leftCheck(e)
 {
-
+    addEventListener("keydown", onKeyDown, false);
         if(e.keyCode === 37) //Left
         {
 
-            arrowLeftTutorialLV1 = true;
             dialogText(names[4], TutorialL1[8], "20 px", "white");
             removeEventListener("keydown", leftCheck, false);
             addEventListener("keydown", rightCheck, false);
+
         }
         else
         {
             dialogText(names[4], TutorialL1[7], "20 px", "white");
-
-
-
+            removeEventListener("keydown", onKeyDown, false);
+            addEventListener("keydown", onKeyDown, false);
         }
 
 
@@ -48,11 +42,11 @@ function leftCheck(e)
 
 function rightCheck(e)
 {
+    addEventListener("keydown", onKeyDown, false);
 
         if(e.keyCode === 39) //Right
         {
 
-            arrowRightTutorialLV1 = true;
             dialogText(names[4], TutorialL1[2], "20 px", "white");
             removeEventListener("keydown", rightCheck, false);
             addEventListener("keydown", upCheck, false);
@@ -60,6 +54,8 @@ function rightCheck(e)
         else
         {
             dialogText(names[4], TutorialL1[7], "20 px", "white");
+            removeEventListener("keydown", onKeyDown, false);
+            addEventListener("keydown", onKeyDown, false);
 
 
 
@@ -72,13 +68,11 @@ function rightCheck(e)
 function upCheck(e)
 {
 
-
+    addEventListener("keydown", onKeyDown, false);
 
     if(e.keyCode === 38) //Up
     {
 
-        arrowUpTutorialLV1 = true;
-        console.log("j");
         dialogText(names[4], TutorialL1[9], "20 px", "white");
         removeEventListener("keydown", upCheck, false);
         addEventListener("keydown", downCheck, false);
@@ -86,6 +80,8 @@ function upCheck(e)
     else
     {
         dialogText(names[4], TutorialL1[7], "20 px", "white");
+        removeEventListener("keydown", onKeyDown, false);
+        addEventListener("keydown", onKeyDown, false);
 
 
 
@@ -97,10 +93,10 @@ function upCheck(e)
 
 function downCheck(e)
 {
+    addEventListener("keydown", onKeyDown, false);
     if(e.keyCode === 40) //Down
     {
 
-        arrowDownTutorialLV1 = true;
         dialogText(names[4], TutorialL1[5], "20 px", "white");
         setTimeout(startChecks, 1000);
         removeEventListener("keydown", downCheck, false);
@@ -109,6 +105,8 @@ function downCheck(e)
     else
     {
         dialogText(names[4], TutorialL1[7], "20 px", "white");
+        removeEventListener("keydown", onKeyDown, false);
+        addEventListener("keydown", onKeyDown, false);
 
 
 
@@ -118,17 +116,18 @@ function downCheck(e)
 function spaceObjectCheck(e)
 {
 
-    if(e.keyCode === 38) //Up
+    if(e.keyCode === 32) //Up
     {
-
-        interactionWithObject = true;
-        dialogText(names[4], TutorialL1[6], "20 px", "white");
+        console.log("Y1");
+        dialogText(names[4], TutorialL1[3], "20 px", "white");
         removeEventListener("keydown", spaceObjectCheck, false);
         addEventListener("keydown", spaceButlerCheck, false);
     }
     else
     {
         dialogText(names[4], TutorialL1[4], "20 px", "white");
+        removeEventListener("keydown", onKeyDown, false);
+        addEventListener("keydown", onKeyDown, false);
 
 
 
@@ -147,16 +146,23 @@ function spaceObjectCheck(e)
 function spaceButlerCheck(e)
 {
 
-        if(e.keyCode === 38) //Up
+        if(e.keyCode === 32) //Up
         {
-            interactionWithButler = true;
-            dialogText(names[4], TutorialL1[2], "20 px", "white");
+            console.log("Y2");
+            dialogText(names[4], TutorialL1[6], "20 px", "white");
             removeEventListener("keydown", spaceButlerCheck, false);
+            removeEventListener("keydown", leftCheck, false);
+            removeEventListener("keydown", rightCheck, false);
+            removeEventListener("keydown", upCheck, false);
+            removeEventListener("keydown", downCheck, false);
+            removeEventListener("keydown", spaceObjectCheck, false);
             addEventListener("keydown", onKeyDown, false);
         }
         else
         {
             dialogText(names[4], TutorialL1[7], "20 px", "white");
+            removeEventListener("keydown", onKeyDown, false);
+            addEventListener("keydown", onKeyDown, false);
 
         }
 

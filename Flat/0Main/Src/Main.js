@@ -8195,8 +8195,7 @@ function startGame()
             {
                 drawMap();                   //Draw next map
                 initializeTutorialLV1();
-                /*dialogText(names[4], TutorialL1[1], "20 px", "white");
-                setTimeout(dialogInitialize, 7000);*/
+
             }
         }
 
