@@ -134,13 +134,15 @@ DialogLevel7 = [];
 
 //Tutorial text
 TutorialL1[0] = "";
-TutorialL1[1] = "Welcome to Survive the Mob.  Let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left and right.";
-TutorialL1[2] = "Now up and down.";
+TutorialL1[1] = "Welcome to Survive the Mob.  Let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
+TutorialL1[2] = "Now up.";
 TutorialL1[3] = "Great!\nNow try interacting with me, the butler, as I walk around the screen by pressing the space bar.";
 TutorialL1[4] = "Does that look like me?  Or even a person for that face? Try again.";
-TutorialL1[5] = "Perfect. You know what a human actually looks like.\nNow try interacting with one of the arcade games, since you can interact with objects too.";
+TutorialL1[5] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
 TutorialL1[6] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
-
+TutorialL1[7] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
+TutorialL1[8] = "Now right.";
+TutorialL1[9] = "Now down.";
 
 
 

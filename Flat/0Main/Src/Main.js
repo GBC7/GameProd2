@@ -118,6 +118,10 @@ let roofEnemy6 = new Image();
     roofEnemy6.src = "../../6Roof/images/roofEnemy6.png";
 }
 
+let tv = new Image();
+{
+    tv.src = "../../1Home/images/tv.png";
+}
 //6
 let alreadyDoinIt = false;
 
@@ -7989,6 +7993,7 @@ function startGame()
         let stairsB1 = new Image();
         let stairsB2 = new Image();
         let stairsB3 = new Image();
+
 
 
         {

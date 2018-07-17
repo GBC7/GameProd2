@@ -17,7 +17,7 @@
       <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="439">
               <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
             </state>
           </provider>
@@ -26,19 +26,27 @@
       <file leaf-file-name="Dialog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="141" column="129" selection-start-line="141" selection-start-column="129" selection-end-line="141" selection-end-column="129" />
+            <state relative-caret-position="255">
+              <caret line="144" column="25" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="9987" column="40" selection-start-line="9987" selection-start-column="33" selection-end-line="9987" selection-end-column="40" />
+            <state relative-caret-position="402">
+              <caret line="8196" column="37" selection-start-line="8196" selection-start-column="16" selection-end-line="8196" selection-end-column="37" />
               <folding>
                 <element signature="e#641#667#0" />
+                <element signature="e#2861#2916#0" />
+                <element signature="e#2948#3009#0" />
+                <element signature="e#3040#3101#0" />
+                <element signature="e#3132#3193#0" />
+                <element signature="e#3224#3285#0" />
+                <element signature="e#3316#3377#0" />
+                <element signature="e#3408#3469#0" />
+                <element signature="e#3494#3502#0" />
                 <element signature="e#5816#6067#0" />
                 <element signature="e#6355#6823#0" />
                 <element signature="e#6858#7320#0" />
@@ -50,7 +58,6 @@
                 <element signature="e#12654#20278#0" />
                 <element signature="e#20455#360033#0" />
                 <element signature="e#360386#361005#0" />
-                <element signature="e#363485#367465#0" />
                 <element signature="e#367509#370798#0" />
                 <element signature="e#371190#373829#0" />
                 <element signature="e#373891#374413#0" />
@@ -60,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="53" />
+            <state relative-caret-position="524">
+              <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
             </state>
           </provider>
         </entry>
@@ -110,6 +117,7 @@
       <find>thotT</find>
       <find>DialogLevel3</find>
       <find>keydown</find>
+      <find>enemy</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -117,8 +125,8 @@
       <list>
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.css" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
-        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
       </list>
     </option>
@@ -132,7 +140,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="952" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -197,6 +205,7 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\rynel\Documents\GitHub\GameProd2\Flat\1Home\images" />
+      <recent name="C:\Users\rynel\Documents\GitHub\GameProd2\Flat\0Main\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -224,21 +233,21 @@
       <workItem from="1531455127316" duration="2937000" />
       <workItem from="1531484560414" duration="2149000" />
       <workItem from="1531487146325" duration="509000" />
-      <workItem from="1531707300261" duration="21980000" />
+      <workItem from="1531707300261" duration="31309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34986000" />
+    <option name="totallyTimeSpent" value="44315000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.37418514" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14648438" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32914925" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -265,24 +274,24 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>2692</line>
+          <line>2696</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Dialog.js</url>
-          <line>164</line>
+          <line>166</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>8436</line>
+          <line>8441</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12635</line>
+          <line>12640</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -294,43 +303,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12743</line>
+          <line>12748</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12779</line>
+          <line>12784</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12844</line>
+          <line>12849</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12856</line>
+          <line>12861</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12878</line>
+          <line>12883</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12938</line>
+          <line>12943</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>8131</line>
+          <line>8136</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="18" />
         </line-breakpoint>
@@ -443,6 +452,14 @@
           <caret line="1317" column="13" selection-end-line="7388" selection-end-column="1" />
           <folding>
             <element signature="e#641#667#0" />
+            <element signature="e#2861#2916#0" />
+            <element signature="e#2948#3009#0" />
+            <element signature="e#3040#3101#0" />
+            <element signature="e#3132#3193#0" />
+            <element signature="e#3224#3285#0" />
+            <element signature="e#3316#3377#0" />
+            <element signature="e#3408#3469#0" />
+            <element signature="e#3494#3502#0" />
             <element signature="e#5816#6067#0" />
             <element signature="e#6355#6823#0" />
             <element signature="e#6858#7320#0" />
@@ -454,7 +471,6 @@
             <element signature="e#12654#20278#0" />
             <element signature="e#20455#360033#0" />
             <element signature="e#360386#361005#0" />
-            <element signature="e#363485#367465#0" />
             <element signature="e#367509#370798#0" />
             <element signature="e#371190#373829#0" />
             <element signature="e#373891#374413#0" />
@@ -497,33 +513,20 @@
     <entry file="file://$PROJECT_DIR$/0Main/images/Portrait_Butler.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="141" column="129" selection-start-line="141" selection-start-column="129" selection-end-line="141" selection-end-column="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="9987" column="40" selection-start-line="9987" selection-start-column="33" selection-end-line="9987" selection-end-column="40" />
+        <state relative-caret-position="402">
+          <caret line="8196" column="37" selection-start-line="8196" selection-start-column="16" selection-end-line="8196" selection-end-column="37" />
           <folding>
             <element signature="e#641#667#0" />
+            <element signature="e#2861#2916#0" />
+            <element signature="e#2948#3009#0" />
+            <element signature="e#3040#3101#0" />
+            <element signature="e#3132#3193#0" />
+            <element signature="e#3224#3285#0" />
+            <element signature="e#3316#3377#0" />
+            <element signature="e#3408#3469#0" />
+            <element signature="e#3494#3502#0" />
             <element signature="e#5816#6067#0" />
             <element signature="e#6355#6823#0" />
             <element signature="e#6858#7320#0" />
@@ -535,12 +538,32 @@
             <element signature="e#12654#20278#0" />
             <element signature="e#20455#360033#0" />
             <element signature="e#360386#361005#0" />
-            <element signature="e#363485#367465#0" />
             <element signature="e#367509#370798#0" />
             <element signature="e#371190#373829#0" />
             <element signature="e#373891#374413#0" />
             <element signature="e#375085#385283#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="144" column="25" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="524">
+          <caret line="145" lean-forward="true" selection-start-line="145" selection-end-line="145" />
         </state>
       </provider>
     </entry>
