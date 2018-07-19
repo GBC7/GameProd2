@@ -164,6 +164,7 @@ let waterRunning = new Audio;
 let ratOfDeath = new Audio;
 let newsReport = new Audio;
 let meow = new Audio;
+let arcadeNoise = new Audio;
 
 {
     aghh.src = ("../audio/aghh.mp3");
@@ -177,6 +178,7 @@ let meow = new Audio;
     ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
     meow.src = ('../../5MomsPlace/audio/meow.wav');
     newsReport.src = ('../../1Home/audio/newsTheme.mp3');
+    arcadeNoise.src = ("../../1Home/audio/arcadeNoise.wav");
 
     streetSound.loop = true;
     streetSound.volume = 0.05;
@@ -194,7 +196,9 @@ let meow = new Audio;
     lockedDoor.volume = 0.1;
 
     newsReport.loop = true;                         //RYN
-    newsReport.volume = 0.2;                        //RYN
+    newsReport.volume = 0.1;                        //RYN
+
+    arcadeNoise.volume = 0.4;
 }
 
 
@@ -12183,6 +12187,10 @@ function checkActions()
 
     if (l1)
     {
+        if(p.col ===1 && p.row === 10)
+        {
+            arcadeNoise.play();
+        }
         if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
         {
 

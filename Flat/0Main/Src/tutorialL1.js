@@ -1,8 +1,6 @@
 
 
 
-
-
 function initializeTutorialLV1()
 {
     removeEventListener("keydown", onKeyDown, false);
@@ -28,6 +26,7 @@ function leftCheck(e)
             removeEventListener("keydown", leftCheck, false);
             addEventListener("keydown", rightCheck, false);
 
+
         }
         else
         {
@@ -50,6 +49,7 @@ function rightCheck(e)
             dialogText(names[4], TutorialL1[2], "20 px", "white");
             removeEventListener("keydown", rightCheck, false);
             addEventListener("keydown", upCheck, false);
+
         }
         else
         {
@@ -76,6 +76,7 @@ function upCheck(e)
         dialogText(names[4], TutorialL1[9], "20 px", "white");
         removeEventListener("keydown", upCheck, false);
         addEventListener("keydown", downCheck, false);
+
     }
     else
     {
@@ -100,7 +101,8 @@ function downCheck(e)
         dialogText(names[4], TutorialL1[5], "20 px", "white");
         setTimeout(startChecks, 1000);
         removeEventListener("keydown", downCheck, false);
-        addEventListener("keydown", spaceObjectCheck, false);
+
+        addEventListener("keydown", checkWalk, false);
     }
     else
     {
@@ -113,34 +115,32 @@ function downCheck(e)
     }
 }
 
+function checkWalk(e)
+{
+    addEventListener("keydown", onKeyDown, false);
+    if (p.row === 11 && p.col === 1)
+    {
+        addEventListener("keydown", spaceObjectCheck, false);
+    }
+}
+
 function spaceObjectCheck(e)
 {
-
-    if(e.keyCode === 32) //Up
+    addEventListener("keydown", onKeyDown, false);
+    if(e.keyCode === 32) //Space
     {
+        checkActions();
         console.log("Y1");
         dialogText(names[4], TutorialL1[3], "20 px", "white");
         removeEventListener("keydown", spaceObjectCheck, false);
         addEventListener("keydown", spaceButlerCheck, false);
     }
-    else
-    {
+    else {
         dialogText(names[4], TutorialL1[4], "20 px", "white");
         removeEventListener("keydown", onKeyDown, false);
         addEventListener("keydown", onKeyDown, false);
 
-
-
     }
-   /* else if
-    {
-        dialogText(names[7], TutorialL1[4], "20 px", "white");
-        setTimeout(dialogInitialize, 3000);
-
-
-    }*/
-
-
 }
 
 function spaceButlerCheck(e)
@@ -148,6 +148,7 @@ function spaceButlerCheck(e)
 
         if(e.keyCode === 32) //Up
         {
+            checkActions();
             console.log("Y2");
             dialogText(names[4], TutorialL1[6], "20 px", "white");
             removeEventListener("keydown", spaceButlerCheck, false);
