@@ -55,7 +55,6 @@ let burning, countingFlames;
 
 //L3
 let timer_level3;                                                        //For checking time for level 3
-let timer_level3_enemy;                                                  //For checking time for level 3
 let leftDoorOpen = false;
 let rightDoorOpen = false;
 let findPasscode = false;                                               //For clothing store
@@ -18897,7 +18896,6 @@ function clearLevel3()
     bgm_level3.pause();
     dangerous.pause();
     clearInterval(timer_level3);
-    clearInterval(timer_level3_enemy);
 }
 
 function detectMovementLevel3()
@@ -19044,6 +19042,7 @@ function resetLevel(time = 40)
         // enemy information reset
         detectPlayerLevel3 = false;
         enemyIndexLevel3 = 0;
+        enemy[3].splice(0, enemy[3].length);
         resetTimer();
 
         // map image reset
