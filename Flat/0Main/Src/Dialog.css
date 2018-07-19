@@ -1,7 +1,7 @@
 #dialog
 {
     width: 800px;
-    height: 200px;
+    height: 162px;
     margin: 4px auto;
     background-image: none;
 }
@@ -9,7 +9,7 @@
 #portrait
 {
     width: 150px;
-    height: 200px;
+    height: 162px;
     position:absolute;
     background-image: none;
 }
