@@ -8199,13 +8199,11 @@ function startGame()
             {
                 drawMap();                   //Draw next map
                 initializeTutorialLV1();
-
             }
         }
 
         enemy[1][0].roam();
 
-        addEventListener("keydown", onKeyDown, false);
         waterRunning.pause();
        //dialogText(names[3], DialogNews[1], "20 px", "white");
         //setTimeout(dialogInitialize, 3000);
