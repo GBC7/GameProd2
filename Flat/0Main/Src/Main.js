@@ -8198,7 +8198,8 @@ function startGame()
             else
             {
                 drawMap();                   //Draw next map
-                initializeTutorialLV1();
+                //initializeTutorialLV1();
+                addEventListener("keydown", onKeyDown, false);
             }
         }
 
@@ -9183,6 +9184,16 @@ function startGame()
         let openWindow = new Image();
         let closedWindow = new Image();
         let trash = new Image();
+        let wire = new Image();
+        let table = new Image();
+        let tableBlood = new Image();
+        let tableBlue = new Image();
+        let tableRed = new Image();
+        let tableTop = new Image();
+        let tableBottom = new Image();
+        let screen = new Image();
+        let screenLeft = new Image();
+        let screenRight = new Image();
 
 
         {
@@ -9205,58 +9216,86 @@ function startGame()
             openWindow.src = "../../7Lab/images/openWindow.png";
             closedWindow.src = "../../7Lab/images/closedWindow.png";
             trash.src = "../../7Lab/images/trash.png";
-        }//Defined SRC Property for all level images
-
-
-        {
-            a = wall;				// 0
-            b = floor;				// 1
-            c = door1;				// 2
-            d = stairs;				// 3
-            e = fullShelvesTop;		// 4
-            f = fullShelvesBottom;	// 5
-            g = emptyShelvesTop;	// 6
-            h = emptyShelvesBottom;	// 7
-            if (researchPaper == true)
-            {
-                i = emptyShelvesTop;	// 8
-                j = emptyShelvesBottom;	// 9
-            }
-            else
-            {
-                i = fullShelvesTop;		// 8
-                j = fullShelvesBottom;	// 9
-            }
-            k = trash;				// 10
-        }//Assigne images to global letter variables
-
-
-        if (lMap[level] === undefined)
-        {
-            lMap[level]=
-                //                    10                  20
-                [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-                    [3,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	8,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	9,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [10,1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                    [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
-                ];
+            wire.src = "../../7Lab/images/wire.png";
+            table.src = "../../7Lab/images/table.png";
+            tableBlood.src = "../../7Lab/images/table-blood.png";
+            tableBlue.src = "../../7Lab/images/table-blue.png";
+            tableRed.src = "../../7Lab/images/table-red.png";
+            tableTop.src = "../../7Lab/images/table-top.png";
+            tableBottom.src = "../../7Lab/images/table-bottom.png";
+            screen.src = "../../7Lab/images/screen.png";
+            screenLeft.src = "../../7Lab/images/screen-left.png";
+            screenRight.src = "../../7Lab/images/screen-right.png";
         }
+
+             {
+                 a = wall;				// 0
+                 b = floor;				// 1
+                 c = door1;				// 2
+                 d = stairs;				// 3
+                 e = fullShelvesTop;		// 4
+                 f = fullShelvesBottom;	// 5
+                 g = emptyShelvesTop;	// 6
+                 h = emptyShelvesBottom;	// 7
+                 if (researchPaper == true)
+                 {
+                     i = emptyShelvesTop;	// 8
+                     j = emptyShelvesBottom;	// 9
+                 }
+                 else
+                 {
+                     i = fullShelvesTop;		// 8
+                     j = fullShelvesBottom;	// 9
+                 }
+                 k = trash;				// 10
+                 l = wire;				// 11
+                 m = table;				// 12
+                 n = tableBlood; 		// 13
+                 o = tableBlue;			// 14
+                 q = tableRed;			// 15
+                 r = tableTop;			// 16
+                 s = tableBottom;		// 17
+                 t = screen;				// 18
+                 u = screenLeft;			// 19
+                 v = table; 					// 20
+                 w = tableBlood; 			// 21
+                 x = tableBlue; 				// 22
+                 y = tableRed; 				// 23
+                 z = tableTop; 				// 24
+                 aa = tableBottom; 			// 25
+                 bb = screen; 				// 26
+                 cc = screenLeft; 			// 27
+                 dd = screenRight; 			// 28
+
+             }//Assigne images to global letter variables
+
+
+             if (lMap[level] === undefined)
+             {
+                 lMap[level]=
+                     //                    10                  20
+                     [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                         [3,	1,	1,	1,	1,	1,	1,	1,	1,	6,	8,	8,	8,	8,	6,	6,	8,	6,	1,	8,	8,	8,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	7,	9,	9,	9,	9,	7,	7,	9,	7,	11,	9,	9,	9,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	12,	13,	12,	12,	12,	12,	1,	1,	1,	12,	12,	12,	15,	12,	12,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	16,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                         [1,	1,	1,	1,	12,	12,	14,	13,	12,	15,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                         [1,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	12,	12,	13,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                         [1,	1,	1,	1,	12,	12,	14,	15,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	12,	12,	12,	13,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                         [10,  1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                         [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
+                     ];
+             }
 
 
         if (lPMap[level] === undefined)
