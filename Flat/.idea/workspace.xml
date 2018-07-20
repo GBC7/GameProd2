@@ -27,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="616">
-              <caret line="1185" lean-forward="true" selection-start-line="1185" selection-end-line="1185" />
+              <caret line="1185" selection-start-line="1185" selection-end-line="1185" />
             </state>
           </provider>
         </entry>
@@ -44,8 +44,8 @@
       <file leaf-file-name="Dialog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+            <state relative-caret-position="492">
+              <caret line="258" selection-start-line="258" selection-end-line="258" />
             </state>
           </provider>
         </entry>
@@ -54,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+              <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -62,17 +62,14 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="824" column="123" selection-start-line="824" selection-start-column="20" selection-end-line="824" selection-end-column="123" />
+            <state relative-caret-position="213">
+              <caret line="3369" column="33" selection-start-line="3369" selection-start-column="28" selection-end-line="3369" selection-end-column="33" />
               <folding>
                 <element signature="e#60052#60166#0" />
-                <element signature="e#60197#99286#0" />
                 <element signature="e#99328#99441#0" />
-                <element signature="e#99537#142618#0" />
+                <element signature="e#102637#145802#0" />
                 <element signature="e#142662#142778#0" />
-                <element signature="e#142874#185953#0" />
                 <element signature="e#185996#186112#0" />
-                <element signature="e#186208#229287#0" />
                 <element signature="e#229330#229446#0" />
                 <element signature="e#229542#272621#0" />
                 <element signature="e#272664#272780#0" />
@@ -95,7 +92,7 @@
       <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="643">
+            <state relative-caret-position="608">
               <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
             </state>
           </provider>
@@ -113,10 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>thotBR</find>
-      <find>SystemMSGLevel</find>
-      <find>dialogInitialize</find>
-      <find>dialogText</find>
       <find>SystemMSGLevel2</find>
       <find>thotB</find>
       <find>thotT</find>
@@ -140,20 +133,24 @@
       <find>names[4],</find>
       <find>lMap[level][p.row + 3][p.col] = 20;</find>
       <find>goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);</find>
-      <find>if (l1 || l4 || l7 || l8)</find>
-      <find>if (e === 38 &amp;&amp; lMap[level][yPos] !== undefined &amp;&amp; lMap[level][yPos][xPos] !== undefined)//Up</find>
       <find>if (e === 40 &amp;&amp; lMap[level][yPos + 2] !== undefined &amp;&amp; lMap[level][yPos + 2][xPos] !== undefined)//Down</find>
+      <find>if (e === 38 &amp;&amp; lMap[level][yPos] !== undefined &amp;&amp; lMap[level][yPos][xPos] !== undefined)//Up</find>
+      <find>if(p.row === 4 &amp;&amp; p.col === 12) // test for conversation between two characters</find>
+      <find>let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;</find>
+      <find>if (l1 || l4 || l7 || l8)</find>
+      <find>if (e === 37)</find>
+      <find>function checkIfHit()</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.css" />
-        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.css" />
-        <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
       </list>
     </option>
@@ -169,8 +166,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="952" />
+    <option name="y" value="2" />
     <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="height" value="1035" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -254,10 +252,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72204000" />
+    <option name="totallyTimeSpent" value="75085000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <frame x="762" y="2" width="781" height="828" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19426337" />
@@ -300,7 +298,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>2789</line>
+          <line>2817</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -310,12 +308,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17331</line>
+          <line>17965</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21645</line>
+          <line>22287</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -325,42 +323,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21753</line>
+          <line>22395</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21789</line>
+          <line>22431</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21854</line>
+          <line>22496</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21866</line>
+          <line>22508</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21888</line>
+          <line>22530</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21948</line>
+          <line>22590</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17023</line>
+          <line>17657</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21146</line>
+          <line>21788</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -370,7 +368,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17739</line>
+          <line>18373</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
@@ -508,14 +506,7 @@
     <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -533,33 +524,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="616">
-          <caret line="1185" lean-forward="true" selection-start-line="1185" selection-end-line="1185" />
+          <caret line="1185" selection-start-line="1185" selection-end-line="1185" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="258" selection-start-line="258" selection-end-line="258" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="824" column="123" selection-start-line="824" selection-start-column="20" selection-end-line="824" selection-end-column="123" />
+        <state relative-caret-position="213">
+          <caret line="3369" column="33" selection-start-line="3369" selection-start-column="28" selection-end-line="3369" selection-end-column="33" />
           <folding>
             <element signature="e#60052#60166#0" />
-            <element signature="e#60197#99286#0" />
             <element signature="e#99328#99441#0" />
-            <element signature="e#99537#142618#0" />
+            <element signature="e#102637#145802#0" />
             <element signature="e#142662#142778#0" />
-            <element signature="e#142874#185953#0" />
             <element signature="e#185996#186112#0" />
-            <element signature="e#186208#229287#0" />
             <element signature="e#229330#229446#0" />
             <element signature="e#229542#272621#0" />
             <element signature="e#272664#272780#0" />

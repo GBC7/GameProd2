@@ -884,26 +884,62 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     {
                         if (e === 37)
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -911,6 +947,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     else
                         setTimeout(walk, self.scurrySpeed);
                 }
+
 
                 function checkIfHit()
                 {
@@ -931,79 +968,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                 }
 
-                function checkFOV()
-                {
-                    if (self.frameY === 0)//Looking down
-                    {
-                        //Check if in field of view
-                        if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ < (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
-                        {
-                            return checkRange("Down");
-                        }
-                    }
-                    else if (self.frameY === 1)//Looking left
-                    {
-                        //Check if in field of view
-                        if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) > (self.xPos - self.fov * 32))
-                        {
-                            return checkRange("Left");
-                        }
-                    }
-                    else if (self.frameY === 2)//Looking right
-                    {
-                        //Check if in field of view
-                        if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ < (self.xPos + self.width + self.fov * 32))
-                        {
-                            return checkRange("Right");
-                        }
-                    }
-                    else if (self.frameY === 3)//Looking up
-                    {
-                        //Check if in field of view
-                        if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) > (self.yPos/*topOfEnemy*/ - self.fov  * 32))
-                        {
-                            return checkRange("Up");
-                        }
-                    }
-                    else return undefined;
 
-                    function checkRange(facing)
-                    {
-                        if (facing === "Down")
-                        {
-                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
-                            {
-                                self.sighted = true;
-                                return "down";
-                            }
-                        }
-                        else if (facing === "Left")
-                        {
-                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
-                            {
-                                self.sighted = true;
-                                return "left";
-                            }
-                        }
-                        else if (facing === "Right")
-                        {
-                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
-                            {
-                                self.sighted = true;
-                                return "right";
-                            }
-                        }
-                        else if (facing === "Up")
-                        {
-                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
-                            {
-                                self.sighted = true;
-                                return "up";
-                            }
-                        }
-                        else return undefined;
-                    }
-                }
                 //Simple walking one direction functions
                 function walkLeft()
                 {
@@ -1481,6 +1446,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 400,//X axis position
             yPos: 400,//Y axis position
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -1842,35 +1809,57 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                    else if (e === 39)//Right
+                    {
+                        if (self.xPos + 32 + self.width < 600)
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
-                            else
-                                setTimeout(walk, self.scurrySpeed);
-                        }
-                        else if (e === 39)
-                        {
-                            if (self.xPos + 40 < 288)
+                            if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                            {
                                 walkRight();
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+                    }
+                    else if (e === 38)//Up
+                    {
+                        if (self.yPos - 32 > 0)
                         {
-                            walkUp();
+                            if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                            {
+                                walkUp();
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 40)
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+
+                    }
+                    else if (e === 40)//Down
+                    {
+                        if (self.yPos + 32 + self.height < 800)
                         {
-                            if (self.yPos + 40 < 800)
+                            if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                            {
                                 walkDown();
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+                    }
                     }
                     else
                         setTimeout(walk, self.scurrySpeed);
                 }
+
 
 
                 //Simple walking one direction functions
@@ -2498,8 +2487,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2604,8 +2594,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2655,8 +2646,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2711,28 +2703,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -3218,9 +3246,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     drawL6();
 
-                    function drawL6()
+                    if (p.row * 32 < self.yPos)//If player is above (behind) the enemy .. draw player first
                     {
-                        if (l6)
+                        /*if (l6)
                         {
                             let gate = new Image();
                             let fence = new Image();
@@ -3268,21 +3296,28 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                             ctx.drawImage(fence, 390, 545);
                             ctx.drawImage(fence, 455, 545);
                         }
+                    }*/
+                        if(notWalking)
+                        {
+                        drawPMap();
+                        }
                     }
 
 
                     //Draw new position
                     ctx.drawImage(img, self.frameX * 32, self.frameY * 48, 32, 48, self.xPos, self.yPos, 32, 48);
-
+                    else
+                    {
+                        ctx.drawImage(img, self.frameX * 32, self.frameY * 48, 32, 48, self.xPos, self.yPos, 32, 48);
+                        if(notWalking)
+                        {
+                            drawPMap();
+                        }
+                    }
 
                     drawZeeEnemy();
 
-                    //Draw player over map and mouse
-                    if (notWalking)
-                        drawPMap();
 
-
-                    checkIfHit();
                 }
             }
         };
@@ -3438,8 +3473,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3545,7 +3581,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3595,8 +3633,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3651,28 +3690,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -4375,8 +4450,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4481,8 +4557,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4532,8 +4609,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4588,28 +4666,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -5312,8 +5426,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5418,8 +5533,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5469,8 +5585,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5525,28 +5642,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -6249,8 +6402,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6355,8 +6509,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6406,8 +6561,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6462,28 +6618,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -7186,8 +7378,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7292,8 +7485,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7343,8 +7537,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7399,28 +7594,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -8123,8 +8354,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8175,8 +8407,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8226,8 +8459,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8277,8 +8511,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8332,28 +8567,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -8999,8 +9270,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9051,8 +9323,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9212,28 +9485,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -9879,8 +10188,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9931,8 +10241,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10090,28 +10401,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -10757,8 +11104,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10809,8 +11157,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10969,28 +11318,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -10998,6 +11383,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     else
                         setTimeout(walk, self.scurrySpeed);
                 }
+
 
                 function checkIfHit()
                 {
@@ -11636,8 +12022,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -11688,8 +12075,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -11848,28 +12236,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -12515,8 +12939,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -12567,8 +12992,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -12727,28 +13153,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -13394,8 +13856,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -13446,8 +13909,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -13606,28 +14070,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -14274,7 +14774,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -14325,8 +14827,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -14485,28 +14988,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -15153,7 +15692,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -15205,7 +15746,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -15364,28 +15907,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -16032,7 +16611,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -16084,7 +16665,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -16243,28 +16826,64 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     if (self.dirOk)
                     {
-                        if (e === 37)
+                        if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                                walkLeft();
+                            if (self.xPos - 32 > 0)
+                            {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkLeft();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)
+                        else if (e === 39)//Right
                         {
-                            if (self.xPos + 40 < 288)
-                                walkRight();
+                            if (self.xPos + 32 + self.width < 600)
+                            {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
+                                {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 38)
+                        else if (e === 38)//Up
                         {
-                            walkUp();
+                            if (self.yPos - 32 > 0)
+                            {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+
                         }
-                        else if (e === 40)
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 40 < 800)
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800)
+                            {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
+                                {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
+                            }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
@@ -20823,7 +21442,9 @@ function checkBoundaries(e)
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
         if (l1 || l4 || l7 || l8)
+        {
             canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
+        }
         else if (l2)
         {
             if (!lightsOn && p.row === 11 && p.col === 9)
@@ -20888,7 +21509,9 @@ function checkBoundaries(e)
     if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
         if (l1 || l4 || l7 || l8)
+        {
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
+        }
         else if (l2)
         {
             canGoThisWay =
@@ -20944,7 +21567,9 @@ function checkBoundaries(e)
     if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
         if (l1 || l4 || l7 || l8)
+        {
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
+        }
         else if (l2)
         {
             canGoThisWay =
@@ -21000,7 +21625,9 @@ function checkBoundaries(e)
     if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
         if (l1 || l4 || l7 || l8)
-            canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
+        {
+            anGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
+        }
         else if (l2)
         {
             canGoThisWay =

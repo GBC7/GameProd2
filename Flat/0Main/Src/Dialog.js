@@ -253,35 +253,8 @@ function CheckConversationAction() {
 
     if (l5)
     {
-        if(p.row === 4 && p.col === 12) // test for conversation between two characters
+        if(p.row === 5 && p.col ===16) // test for conversation between two characters // test for conversation between two characters
             Conversation(DialogLevel5[0], names[1], portrait[1], names[2], portrait[2]);
     }
-    if (l12)
-    {
-        if(helaIntro)//Intro
-        {
-            dialogText(names[4], DialogLevel12[0], "20 px", "white");
-        }
-        else if (leftAndRight)//Rotate
-        {
-            dialogText(names[4], DialogLevel12[1], "20 px", "white");
-        }
-        else if(upAndDown)//Climb
-        {
-            dialogText(names[4], DialogLevel12[2], "20 px", "white");
-        }
-        else if(whew)//Climb
-        {
-            dialogText(names[4], DialogLevel12[3], "20 px", "white");
-        }
-        else if (pilotHadTo)
-        {
-            dialogText(names[4], DialogLevel12[4], "20 px", "white");
-        }
-        else if (doneTheTut)
-        {
-            dialogText(names[4], DialogLevel12[5], "20 px", "white");
-        }
 
-    }
 }
