@@ -27,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="643">
-              <caret line="711" lean-forward="true" selection-start-line="711" selection-end-line="711" />
+              <caret line="1231" lean-forward="true" selection-start-line="1231" selection-end-line="1231" />
             </state>
           </provider>
         </entry>
@@ -62,8 +62,8 @@
       <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="114" column="1" lean-forward="true" selection-start-line="114" selection-start-column="1" selection-end-line="114" selection-end-column="1" />
+            <state relative-caret-position="1587">
+              <caret line="189" column="1" lean-forward="true" selection-start-line="189" selection-start-column="1" selection-end-line="189" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -71,13 +71,27 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="258">
+              <caret line="21451" column="61" selection-start-line="21451" selection-start-column="61" selection-end-line="21451" selection-end-column="61" />
               <folding>
+                <element signature="e#19370#62863#0" />
+                <element signature="e#60052#60166#0" />
+                <element signature="e#60197#99286#0" />
+                <element signature="e#99328#99441#0" />
+                <element signature="e#99537#142618#0" />
+                <element signature="e#142662#142778#0" />
+                <element signature="e#142874#185953#0" />
+                <element signature="e#185996#186112#0" />
+                <element signature="e#186208#229287#0" />
+                <element signature="e#229330#229446#0" />
+                <element signature="e#229542#272621#0" />
+                <element signature="e#272664#272780#0" />
+                <element signature="e#272876#315955#0" />
+                <element signature="e#315998#316114#0" />
+                <element signature="e#316210#359289#0" />
+                <element signature="e#359093#359209#0" />
                 <element signature="e#374713#385024#0" />
                 <element signature="e#375579#376820#0" />
-                <element signature="e#385064#392063#0" />
-                <element signature="e#392100#402506#0" />
                 <element signature="e#402542#412308#0" />
                 <element signature="e#403961#406682#0" />
                 <element signature="e#406736#408459#0" />
@@ -100,15 +114,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>checkIfHit</find>
-      <find>l1</find>
-      <find>aa</find>
-      <find>21</find>
-      <find>stairsF</find>
-      <find>else if (l3)</find>
-      <find>setTimeout(turnOffDialog, 2000);//Disappear it after 2 seconds</find>
-      <find>walkdown</find>
-      <find>dialog</find>
       <find>lockedDoor.play();</find>
       <find>if (!researchPaper)</find>
       <find>DialogNews</find>
@@ -130,6 +135,15 @@
       <find>removeEventListener(&quot;keydown&quot;, onKeyDown, false);</find>
       <find>names[4],</find>
       <find>portrait[4]</find>
+      <find>//Simple walking one direction functions</find>
+      <find>//Simulate walking by changing frames</find>
+      <find>if (l6 &amp;&amp; !self.dead)</find>
+      <find>findAllLevel3 = true;</find>
+      <find>lMap[level][p.row-1][p.col] = 40;</find>
+      <find>lMap[level][p.row + 1][p.col + 2] = 40;</find>
+      <find>lMap[level][p.row + 1][p.col - 2] = 40;</find>
+      <find>lMap[level][p.row + 3][p.col] = 40;</find>
+      <find>if (lMap[level][p.row + 1][p.col + 2] === 2)</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -192,19 +206,13 @@
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="1Home" type="462c0819:PsiDirectoryNode" />
+              <item name="4Streetz" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="1Home" type="462c0819:PsiDirectoryNode" />
+              <item name="4Streetz" type="462c0819:PsiDirectoryNode" />
               <item name="audio" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="1Home" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -218,6 +226,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rynel\Documents\GitHub\GameProd2\Flat\4Streetz\audio" />
       <recent name="C:\Users\rynel\Documents\GitHub\GameProd2\Flat\0Main\images" />
       <recent name="C:\Users\rynel\Documents\GitHub\GameProd2\Flat\1Home\images" />
     </key>
@@ -252,13 +261,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63161000" />
+    <option name="totallyTimeSpent" value="71112000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2464146" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19426337" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32914925" />
@@ -298,7 +307,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>2692</line>
+          <line>2775</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -308,12 +317,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>8437</line>
+          <line>17305</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12678</line>
+          <line>21619</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -323,57 +332,57 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12786</line>
+          <line>21727</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12822</line>
+          <line>21763</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12887</line>
+          <line>21828</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12899</line>
+          <line>21840</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12921</line>
+          <line>21862</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12981</line>
+          <line>21922</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>8132</line>
+          <line>16997</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>12220</line>
+          <line>21120</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/tutorialL1.js</url>
-          <line>94</line>
+          <line>155</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>8835</line>
+          <line>17713</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="28" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -512,8 +521,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="114" column="1" lean-forward="true" selection-start-line="114" selection-start-column="1" selection-end-line="114" selection-end-column="1" />
+        <state relative-caret-position="1587">
+          <caret line="189" column="1" lean-forward="true" selection-start-line="189" selection-start-column="1" selection-end-line="189" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -534,7 +543,7 @@
     <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="643">
-          <caret line="711" lean-forward="true" selection-start-line="711" selection-end-line="711" />
+          <caret line="1231" lean-forward="true" selection-start-line="1231" selection-end-line="1231" />
         </state>
       </provider>
     </entry>
@@ -547,13 +556,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="258">
+          <caret line="21451" column="61" selection-start-line="21451" selection-start-column="61" selection-end-line="21451" selection-end-column="61" />
           <folding>
+            <element signature="e#19370#62863#0" />
+            <element signature="e#60052#60166#0" />
+            <element signature="e#60197#99286#0" />
+            <element signature="e#99328#99441#0" />
+            <element signature="e#99537#142618#0" />
+            <element signature="e#142662#142778#0" />
+            <element signature="e#142874#185953#0" />
+            <element signature="e#185996#186112#0" />
+            <element signature="e#186208#229287#0" />
+            <element signature="e#229330#229446#0" />
+            <element signature="e#229542#272621#0" />
+            <element signature="e#272664#272780#0" />
+            <element signature="e#272876#315955#0" />
+            <element signature="e#315998#316114#0" />
+            <element signature="e#316210#359289#0" />
+            <element signature="e#359093#359209#0" />
             <element signature="e#374713#385024#0" />
             <element signature="e#375579#376820#0" />
-            <element signature="e#385064#392063#0" />
-            <element signature="e#392100#402506#0" />
             <element signature="e#402542#412308#0" />
             <element signature="e#403961#406682#0" />
             <element signature="e#406736#408459#0" />
