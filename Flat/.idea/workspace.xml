@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="3242" column="13" selection-start-line="3242" selection-start-column="13" selection-end-line="3242" selection-end-column="13" />
+            <state relative-caret-position="918">
+              <caret line="3273" column="9" selection-start-line="3273" selection-start-column="9" selection-end-line="3273" selection-end-column="9" />
               <folding>
                 <element signature="e#5354#5605#0" />
                 <element signature="e#5893#6361#0" />
@@ -92,7 +92,7 @@
       <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
+            <state relative-caret-position="578">
               <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
             </state>
           </provider>
@@ -101,8 +101,8 @@
       <file leaf-file-name="level1.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="277" selection-start-line="277" selection-end-line="277" />
+            <state relative-caret-position="34">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
               <folding>
                 <element signature="e#175#297#0" />
               </folding>
@@ -140,19 +140,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level6.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level6.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="226" column="1" selection-start-line="226" selection-start-column="1" selection-end-line="226" selection-end-column="1" />
-              <folding>
-                <element signature="n#!!block;n#initializeLV6#0" />
-                <element signature="n#!!block;n#drawL6Full#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="level7.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level7.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -174,6 +161,13 @@
                 <element signature="n#!!block;n#initializeLV8#0" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1737" />
           </provider>
         </entry>
       </file>
@@ -214,10 +208,10 @@
       <find>anGoThisWay</find>
       <find>checkBoun</find>
       <find>goToS</find>
-      <find>enemiesLevel3</find>
       <find>goToSt</find>
       <find>add on</find>
       <find>add one enemy</find>
+      <find>enemiesLevel3</find>
       <find>checkAc</find>
     </findStrings>
     <replaceStrings>
@@ -243,9 +237,9 @@
         <option value="$PROJECT_DIR$/0Main/Src/level2.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
         <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level3.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
       </list>
     </option>
   </component>
@@ -350,18 +344,18 @@
       <workItem from="1531707300261" duration="47497000" />
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
-      <workItem from="1532100492835" duration="8826000" />
+      <workItem from="1532100492835" duration="9990000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90739000" />
+    <option name="totallyTimeSpent" value="91903000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38020834" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18880208" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32827586" />
@@ -426,9 +420,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/7Lab/images/fullShelves-top.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/7Lab/images/glassCabinet-bottom.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -727,16 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="n#!!block;n#initializeLV8#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125033">
@@ -777,16 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="277" selection-start-line="277" selection-end-line="277" />
-          <folding>
-            <element signature="e#175#297#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -807,17 +778,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="n#!!block;n#initializeLV8#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
+        <state relative-caret-position="578">
           <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding>
+            <element signature="e#175#297#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="3242" column="13" selection-start-line="3242" selection-start-column="13" selection-end-line="3242" selection-end-column="13" />
+        <state relative-caret-position="918">
+          <caret line="3273" column="9" selection-start-line="3273" selection-start-column="9" selection-end-line="3273" selection-end-column="9" />
           <folding>
             <element signature="e#5354#5605#0" />
             <element signature="e#5893#6361#0" />
@@ -847,6 +838,11 @@
             <element signature="e#1051533#1052555#0" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1737" />
       </provider>
     </entry>
   </component>
