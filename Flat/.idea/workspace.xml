@@ -14,13 +14,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+            <state relative-caret-position="401">
+              <caret line="21357" column="5" selection-start-line="21357" selection-start-column="5" selection-end-line="21357" selection-end-column="5" />
               <folding>
-                <element signature="e#95#275#0" />
                 <element signature="e#6396#6858#0" />
                 <element signature="e#6885#8106#0" />
                 <element signature="e#8669#9113#0" />
@@ -35,104 +34,155 @@
                 <element signature="e#21296#21366#0" />
                 <element signature="e#21421#21491#0" />
                 <element signature="e#21661#24107#0" />
+                <element signature="e#867237#873343#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level5.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level5.js">
+      <file leaf-file-name="Dialog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="636">
+              <caret line="304" column="5" lean-forward="true" selection-start-line="304" selection-start-column="5" selection-end-line="304" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level4.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level4.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level7n8.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level7n8.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="140" selection-start-line="5" selection-start-column="140" selection-end-line="5" selection-end-column="140" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level6.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level6.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level3.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="59" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level2.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="25" column="59" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
-              <folding>
-                <element signature="e#96#122#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-              <folding>
-                <element signature="e#51#96#0" />
-                <element signature="e#128#250#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemies.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-              <folding>
-                <element signature="e#28#83#0" />
-                <element signature="e#115#176#0" />
-                <element signature="e#207#268#0" />
-                <element signature="e#299#360#0" />
-                <element signature="e#391#452#0" />
-                <element signature="e#483#544#0" />
-                <element signature="e#575#636#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelicopterLevel.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HelicopterLevel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20145">
-              <caret line="1185" selection-start-line="1185" selection-end-line="1185" />
+            <state relative-caret-position="421">
+              <caret line="452" column="5" selection-start-line="452" selection-start-column="5" selection-end-line="452" selection-end-column="5" />
+              <folding>
+                <element signature="n#!!block;n#initializeCopterLevel#0" />
+                <element signature="e#518#17658#0" />
+                <element signature="e#731#967#0" />
+                <element signature="e#1014#1449#0" />
+                <element signature="e#1490#2582#0" />
+                <element signature="e#2672#9029#0" />
+                <element signature="e#2758#6818#0" />
+                <element signature="e#4079#6799#0" />
+                <element signature="e#4146#5456#0" />
+                <element signature="e#4273#4677#0" />
+                <element signature="e#5572#5757#0" />
+                <element signature="e#5823#6099#0" />
+                <element signature="e#6175#6776#0" />
+                <element signature="e#6964#7338#0" />
+                <element signature="e#7395#8916#0" />
+                <element signature="e#7451#7921#0" />
+                <element signature="e#7985#8107#0" />
+                <element signature="e#8167#8327#0" />
+                <element signature="e#8365#8489#0" />
+                <element signature="e#8975#9019#0" />
+                <element signature="e#9075#17652#0" />
+                <element signature="e#9129#17641#0" />
+                <element signature="e#9178#17586#0" />
+                <element signature="e#10033#17564#0" />
+                <element signature="e#10108#15253#0" />
+                <element signature="e#10425#14155#0" />
+                <element signature="e#10521#11209#0" />
+                <element signature="e#11246#11945#0" />
+                <element signature="e#11982#12671#0" />
+                <element signature="e#12708#13397#0" />
+                <element signature="e#13434#14121#0" />
+                <element signature="e#14881#15075#0" />
+                <element signature="e#15380#16035#0" />
+                <element signature="e#16126#16714#0" />
+                <element signature="e#16268#16684#0" />
+                <element signature="e#16418#16650#0" />
+                <element signature="e#16796#17007#0" />
+                <element signature="e#16887#16977#0" />
+                <element signature="e#17091#17537#0" />
+                <element signature="e#17693#17829#0" />
+                <element signature="e#18542#28397#0" />
+                <element signature="e#18641#18728#0" />
+                <element signature="e#18955#19639#0" />
+                <element signature="e#19221#19629#0" />
+                <element signature="e#19712#19988#0" />
+                <element signature="e#19766#19843#0" />
+                <element signature="e#19898#19977#0" />
+                <element signature="e#20027#20181#0" />
+                <element signature="e#20254#22060#0" />
+                <element signature="e#20290#20975#0" />
+                <element signature="e#21016#21697#0" />
+                <element signature="e#21815#22050#0" />
+                <element signature="e#21971#22035#0" />
+                <element signature="e#22152#28391#0" />
+                <element signature="e#22359#24746#0" />
+                <element signature="e#22408#23206#0" />
+                <element signature="e#22676#22793#0" />
+                <element signature="e#23259#24056#0" />
+                <element signature="e#23527#23644#0" />
+                <element signature="e#24094#24732#0" />
+                <element signature="e#24504#24714#0" />
+                <element signature="e#24797#26550#0" />
+                <element signature="e#24845#25106#0" />
+                <element signature="e#25155#25787#0" />
+                <element signature="e#25437#25769#0" />
+                <element signature="e#25845#26536#0" />
+                <element signature="e#26169#26517#0" />
+                <element signature="e#26241#26495#0" />
+                <element signature="e#26594#28006#0" />
+                <element signature="e#26688#26845#0" />
+                <element signature="e#26894#27991#0" />
+                <element signature="e#27408#27973#0" />
+                <element signature="e#27478#27759#0" />
+                <element signature="e#27813#27950#0" />
+                <element signature="e#28057#28230#0" />
+                <element signature="e#28121#28216#0" />
+                <element signature="e#28282#28381#0" />
+                <element signature="e#28480#29983#0" />
+                <element signature="e#28554#28862#0" />
+                <element signature="e#28719#28852#0" />
+                <element signature="e#28962#29289#0" />
+                <element signature="e#29017#29132#0" />
+                <element signature="e#29191#29279#0" />
+                <element signature="e#29329#29977#0" />
+                <element signature="e#30009#30659#0" />
+                <element signature="e#30275#30653#0" />
+                <element signature="n#!!block;n#startRotating#0" />
+                <element signature="n#!!block;n#makeItMove#0" />
+                <element signature="e#31064#31676#0" />
+                <element signature="e#31701#32310#0" />
+                <element signature="e#32332#32340#0" />
+                <element signature="e#32364#32372#0" />
+                <element signature="e#32396#32620#0" />
+                <element signature="n#!!block;n#checkChickens#0" />
+                <element signature="e#32685#40234#0" />
+                <element signature="e#32782#40106#0" />
+                <element signature="e#33505#40092#0" />
+                <element signature="e#33564#38125#0" />
+                <element signature="e#33841#37155#0" />
+                <element signature="e#33956#34572#0" />
+                <element signature="e#34601#35228#0" />
+                <element signature="e#35257#35874#0" />
+                <element signature="e#35903#36520#0" />
+                <element signature="e#36549#37164#0" />
+                <element signature="e#37801#37979#0" />
+                <element signature="e#38228#38795#0" />
+                <element signature="e#38870#39378#0" />
+                <element signature="e#38996#39356#0" />
+                <element signature="e#39130#39330#0" />
+                <element signature="e#39444#39615#0" />
+                <element signature="e#39519#39593#0" />
+                <element signature="e#39683#40073#0" />
+                <element signature="e#40249#40421#0" />
+                <element signature="e#40309#40415#0" />
+                <element signature="e#40358#40405#0" />
+                <element signature="n#!!block;n#checkCrash#0" />
+                <element signature="e#40504#40540#0" />
+                <element signature="e#40597#40633#0" />
+                <element signature="e#40683#40719#0" />
+                <element signature="e#40774#40810#0" />
+                <element signature="n#!!block;n#moveCanvas#0" />
+                <element signature="n#!!block;n#input#0" />
+                <element signature="e#41121#41373#0" />
+                <element signature="e#41429#41503#0" />
+                <element signature="n#!!block;n#lackOfInput#0" />
+                <element signature="e#41588#41844#0" />
+                <element signature="e#41912#41987#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,8 +236,6 @@
       <list>
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.css" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.css" />
-        <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
         <option value="$USER_HOME$/Downloads/GameProd2-master/Flat/0Main/Src/Main.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
@@ -199,7 +247,9 @@
         <option value="$PROJECT_DIR$/0Main/Src/level2.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level4.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level5.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
       </list>
     </option>
   </component>
@@ -213,16 +263,15 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="x" value="951" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,6 +305,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,17 +347,18 @@
       <workItem from="1531707300261" duration="47497000" />
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
+      <workItem from="1532100492835" duration="539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81913000" />
+    <option name="totallyTimeSpent" value="82452000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <frame x="761" y="0" width="782" height="831" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38070405" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.38020834" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32914925" />
@@ -337,68 +388,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>2772</line>
+          <line>4559</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Dialog.js</url>
-          <line>190</line>
+          <line>210</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17872</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22194</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Dialog.js</url>
           <line>48</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22302</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22338</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22403</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22415</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22437</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>22497</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17564</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21695</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/tutorialL1.js</url>
@@ -407,12 +408,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>18280</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>1756</line>
+          <line>3541</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
@@ -513,16 +509,7 @@
     <entry file="file://$PROJECT_DIR$/0Main/images/Portrait_Mom.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/images/Portrait_Butler.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4386">
-          <caret line="258" selection-start-line="258" selection-end-line="258" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/images/Portrait_Butler.png" />
     <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3587">
@@ -555,91 +542,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
+    <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level7n8.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level6.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level4.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level5.js" />
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="e#28#83#0" />
-            <element signature="e#115#176#0" />
-            <element signature="e#207#268#0" />
-            <element signature="e#299#360#0" />
-            <element signature="e#391#452#0" />
-            <element signature="e#483#544#0" />
-            <element signature="e#575#636#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20145">
-          <caret line="1185" selection-start-line="1185" selection-end-line="1185" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level7n8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="140" selection-start-line="5" selection-start-column="140" selection-end-line="5" selection-end-column="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level6.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="59" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="25" column="59" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
-          <folding>
-            <element signature="e#96#122#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-          <folding>
-            <element signature="e#51#96#0" />
-            <element signature="e#128#250#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level4.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="636">
+          <caret line="304" column="5" lean-forward="true" selection-start-line="304" selection-start-column="5" selection-end-line="304" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+        <state relative-caret-position="401">
+          <caret line="21357" column="5" selection-start-line="21357" selection-start-column="5" selection-end-line="21357" selection-end-column="5" />
           <folding>
-            <element signature="e#95#275#0" />
             <element signature="e#6396#6858#0" />
             <element signature="e#6885#8106#0" />
             <element signature="e#8669#9113#0" />
@@ -654,6 +576,143 @@
             <element signature="e#21296#21366#0" />
             <element signature="e#21421#21491#0" />
             <element signature="e#21661#24107#0" />
+            <element signature="e#867237#873343#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="452" column="5" selection-start-line="452" selection-start-column="5" selection-end-line="452" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!block;n#initializeCopterLevel#0" />
+            <element signature="e#518#17658#0" />
+            <element signature="e#731#967#0" />
+            <element signature="e#1014#1449#0" />
+            <element signature="e#1490#2582#0" />
+            <element signature="e#2672#9029#0" />
+            <element signature="e#2758#6818#0" />
+            <element signature="e#4079#6799#0" />
+            <element signature="e#4146#5456#0" />
+            <element signature="e#4273#4677#0" />
+            <element signature="e#5572#5757#0" />
+            <element signature="e#5823#6099#0" />
+            <element signature="e#6175#6776#0" />
+            <element signature="e#6964#7338#0" />
+            <element signature="e#7395#8916#0" />
+            <element signature="e#7451#7921#0" />
+            <element signature="e#7985#8107#0" />
+            <element signature="e#8167#8327#0" />
+            <element signature="e#8365#8489#0" />
+            <element signature="e#8975#9019#0" />
+            <element signature="e#9075#17652#0" />
+            <element signature="e#9129#17641#0" />
+            <element signature="e#9178#17586#0" />
+            <element signature="e#10033#17564#0" />
+            <element signature="e#10108#15253#0" />
+            <element signature="e#10425#14155#0" />
+            <element signature="e#10521#11209#0" />
+            <element signature="e#11246#11945#0" />
+            <element signature="e#11982#12671#0" />
+            <element signature="e#12708#13397#0" />
+            <element signature="e#13434#14121#0" />
+            <element signature="e#14881#15075#0" />
+            <element signature="e#15380#16035#0" />
+            <element signature="e#16126#16714#0" />
+            <element signature="e#16268#16684#0" />
+            <element signature="e#16418#16650#0" />
+            <element signature="e#16796#17007#0" />
+            <element signature="e#16887#16977#0" />
+            <element signature="e#17091#17537#0" />
+            <element signature="e#17693#17829#0" />
+            <element signature="e#18542#28397#0" />
+            <element signature="e#18641#18728#0" />
+            <element signature="e#18955#19639#0" />
+            <element signature="e#19221#19629#0" />
+            <element signature="e#19712#19988#0" />
+            <element signature="e#19766#19843#0" />
+            <element signature="e#19898#19977#0" />
+            <element signature="e#20027#20181#0" />
+            <element signature="e#20254#22060#0" />
+            <element signature="e#20290#20975#0" />
+            <element signature="e#21016#21697#0" />
+            <element signature="e#21815#22050#0" />
+            <element signature="e#21971#22035#0" />
+            <element signature="e#22152#28391#0" />
+            <element signature="e#22359#24746#0" />
+            <element signature="e#22408#23206#0" />
+            <element signature="e#22676#22793#0" />
+            <element signature="e#23259#24056#0" />
+            <element signature="e#23527#23644#0" />
+            <element signature="e#24094#24732#0" />
+            <element signature="e#24504#24714#0" />
+            <element signature="e#24797#26550#0" />
+            <element signature="e#24845#25106#0" />
+            <element signature="e#25155#25787#0" />
+            <element signature="e#25437#25769#0" />
+            <element signature="e#25845#26536#0" />
+            <element signature="e#26169#26517#0" />
+            <element signature="e#26241#26495#0" />
+            <element signature="e#26594#28006#0" />
+            <element signature="e#26688#26845#0" />
+            <element signature="e#26894#27991#0" />
+            <element signature="e#27408#27973#0" />
+            <element signature="e#27478#27759#0" />
+            <element signature="e#27813#27950#0" />
+            <element signature="e#28057#28230#0" />
+            <element signature="e#28121#28216#0" />
+            <element signature="e#28282#28381#0" />
+            <element signature="e#28480#29983#0" />
+            <element signature="e#28554#28862#0" />
+            <element signature="e#28719#28852#0" />
+            <element signature="e#28962#29289#0" />
+            <element signature="e#29017#29132#0" />
+            <element signature="e#29191#29279#0" />
+            <element signature="e#29329#29977#0" />
+            <element signature="e#30009#30659#0" />
+            <element signature="e#30275#30653#0" />
+            <element signature="n#!!block;n#startRotating#0" />
+            <element signature="n#!!block;n#makeItMove#0" />
+            <element signature="e#31064#31676#0" />
+            <element signature="e#31701#32310#0" />
+            <element signature="e#32332#32340#0" />
+            <element signature="e#32364#32372#0" />
+            <element signature="e#32396#32620#0" />
+            <element signature="n#!!block;n#checkChickens#0" />
+            <element signature="e#32685#40234#0" />
+            <element signature="e#32782#40106#0" />
+            <element signature="e#33505#40092#0" />
+            <element signature="e#33564#38125#0" />
+            <element signature="e#33841#37155#0" />
+            <element signature="e#33956#34572#0" />
+            <element signature="e#34601#35228#0" />
+            <element signature="e#35257#35874#0" />
+            <element signature="e#35903#36520#0" />
+            <element signature="e#36549#37164#0" />
+            <element signature="e#37801#37979#0" />
+            <element signature="e#38228#38795#0" />
+            <element signature="e#38870#39378#0" />
+            <element signature="e#38996#39356#0" />
+            <element signature="e#39130#39330#0" />
+            <element signature="e#39444#39615#0" />
+            <element signature="e#39519#39593#0" />
+            <element signature="e#39683#40073#0" />
+            <element signature="e#40249#40421#0" />
+            <element signature="e#40309#40415#0" />
+            <element signature="e#40358#40405#0" />
+            <element signature="n#!!block;n#checkCrash#0" />
+            <element signature="e#40504#40540#0" />
+            <element signature="e#40597#40633#0" />
+            <element signature="e#40683#40719#0" />
+            <element signature="e#40774#40810#0" />
+            <element signature="n#!!block;n#moveCanvas#0" />
+            <element signature="n#!!block;n#input#0" />
+            <element signature="e#41121#41373#0" />
+            <element signature="e#41429#41503#0" />
+            <element signature="n#!!block;n#lackOfInput#0" />
+            <element signature="e#41588#41844#0" />
+            <element signature="e#41912#41987#0" />
           </folding>
         </state>
       </provider>

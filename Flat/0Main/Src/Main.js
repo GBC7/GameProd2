@@ -2,7 +2,7 @@ let gameOver = false;
 
 
 //Current Level Bool
-let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
+let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
 {
     l1 = true;
     l2 = false;
@@ -15,6 +15,7 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
     l9 = false;
     l10 = false;
     l11 = false;
+    l12 = false;
 }
 
 
@@ -242,7 +243,7 @@ let lMap, lPMap, lOMap;
 
 
 //For finding out if level is ready to be drawn
-let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready;
+let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready, l12Ready;
 
 
 let canvas = document.querySelector("canvas");
@@ -17606,7 +17607,7 @@ function startGame()
 
         changePStartPos();
 
-        bookcaseOpening3B.onload = function(){l1Ready=true;};
+        stairsB3.onload = function(){l1Ready=true;};
         waitForLoading2();
 
 
@@ -18509,7 +18510,7 @@ function startGame()
 
         let roof = new Image();
         let wall = new Image();
-        let shinglesEdge = new Image();;
+        let shinglesEdge = new Image();
         let shinglesRight = new Image();
         let shinglesBRight = new Image();
 
@@ -18757,7 +18758,7 @@ function startGame()
         changePStartPos();
 
 
-        trash.onload = function(){l7Ready=true;};
+        screenRight.onload = function(){l7Ready=true;};
         level7NotReady();
 
         function level7NotReady()
@@ -19025,7 +19026,10 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
         notWalking = true;
     }
-
+    else if (l12)//SewerPipe Map
+           {
+               initializeCopterLevel();
+        }
 }
 
 function fillErasedMap()
@@ -21341,6 +21345,16 @@ function onKeyDown(e)
     if (e.keyCode === 79)//0 - Calls gameover()
     {
         gameover();
+    }
+    if (e.keyCode === 72)//H - calls helo level
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 12;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l12 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        l12Ready=false;
+        startGame();                                //Load settings and assets for next map
     }
 }
 
