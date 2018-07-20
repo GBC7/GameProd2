@@ -154,6 +154,7 @@ function spaceButlerCheck(e)//Allow player to walk around freely and continuousl
                 //Setup for actual level
                 removeEventListener("keydown", spaceButlerCheck, false);
                 addEventListener("keydown", onKeyDown, false);
+                dialogInitialize();
             }
         }
         else
