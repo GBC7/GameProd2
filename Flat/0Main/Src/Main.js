@@ -2520,9 +2520,7 @@ function checkBoundaries(e)
     if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
         if (l1 || l4 || l7 || l8)
-        {
             canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
-        }
         else if (l2)
         {
             if (!lightsOn && p.row === 11 && p.col === 9)
@@ -2587,9 +2585,7 @@ function checkBoundaries(e)
     if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
         if (l1 || l4 || l7 || l8)
-        {
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
-        }
         else if (l2)
         {
             canGoThisWay =
@@ -2645,9 +2641,7 @@ function checkBoundaries(e)
     if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
         if (l1 || l4 || l7 || l8)
-        {
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
-        }
         else if (l2)
         {
             canGoThisWay =
@@ -2703,9 +2697,7 @@ function checkBoundaries(e)
     if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
         if (l1 || l4 || l7 || l8)
-        {
-            anGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
-        }
+            canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
         else if (l2)
         {
             canGoThisWay =

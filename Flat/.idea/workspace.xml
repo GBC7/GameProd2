@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="3115" column="9" selection-start-line="3115" selection-start-column="9" selection-end-line="3115" selection-end-column="9" />
+            <state relative-caret-position="234">
+              <caret line="2752" column="1" selection-start-line="2752" selection-start-column="1" selection-end-line="2752" selection-end-column="1" />
               <folding>
                 <element signature="e#5354#5605#0" />
                 <element signature="e#5893#6361#0" />
@@ -44,6 +44,7 @@
                 <element signature="e#894590#905847#0" />
                 <element signature="e#905920#948456#0" />
                 <element signature="e#970222#978187#0" />
+                <element signature="e#109420#111201#0" />
                 <element signature="e#978266#981266#0" />
                 <element signature="e#981333#983008#0" />
                 <element signature="e#983031#986817#0" />
@@ -91,7 +92,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -198,9 +199,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if (lMap[level][p.row + 1][p.col + 2] === 2)</find>
-      <find>if (lMap[level][p.row + 1][p.col - 2] === 2)</find>
-      <find>names[4],</find>
       <find>lMap[level][p.row + 3][p.col] = 20;</find>
       <find>goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);</find>
       <find>if (e === 40 &amp;&amp; lMap[level][yPos + 2] !== undefined &amp;&amp; lMap[level][yPos + 2][xPos] !== undefined)//Down</find>
@@ -228,6 +226,9 @@
       <find>SystemMSGLeve</find>
       <find>SystemMSGLevel3</find>
       <find>checkAc</find>
+      <find>checkBou</find>
+      <find>anGoThisWay</find>
+      <find>checkBoun</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -359,12 +360,12 @@
       <workItem from="1531707300261" duration="47497000" />
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
-      <workItem from="1532100492835" duration="6513000" />
+      <workItem from="1532100492835" duration="7007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88426000" />
+    <option name="totallyTimeSpent" value="88920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -798,13 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -832,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="565">
-          <caret line="3115" column="9" selection-start-line="3115" selection-start-column="9" selection-end-line="3115" selection-end-column="9" />
+        <state relative-caret-position="234">
+          <caret line="2752" column="1" selection-start-line="2752" selection-start-column="1" selection-end-line="2752" selection-end-column="1" />
           <folding>
             <element signature="e#5354#5605#0" />
             <element signature="e#5893#6361#0" />
@@ -859,11 +853,19 @@
             <element signature="e#894590#905847#0" />
             <element signature="e#905920#948456#0" />
             <element signature="e#970222#978187#0" />
+            <element signature="e#109420#111201#0" />
             <element signature="e#978266#981266#0" />
             <element signature="e#981333#983008#0" />
             <element signature="e#983031#986817#0" />
             <element signature="e#1051533#1052555#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
         </state>
       </provider>
     </entry>
