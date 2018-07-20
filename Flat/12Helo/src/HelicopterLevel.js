@@ -438,7 +438,6 @@ function initializeCopterLevel()
 }
 
 
-
 //Probably the starting point for the level
 function start()
 {
@@ -820,31 +819,6 @@ function startRotating()
     if (tutorialPart)
         setTimeout(startRotating, chopper.rotateSpeed);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Warning! This function contains actual MATH. Enter at own risk.
 function makeItMove()

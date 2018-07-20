@@ -11,6 +11,7 @@ html
     margin: 0 auto;
 }
 
+
 #center
 
 {
@@ -22,7 +23,6 @@ html
 }
 
 #HeloCanvas
-
 {
     position: absolute;
     left: 0;
@@ -31,8 +31,7 @@ html
 }
 
 #regular
-
-{
+ {
     position: absolute;
     left: 0;
     right: 0;
