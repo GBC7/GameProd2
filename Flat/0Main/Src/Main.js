@@ -2,7 +2,7 @@ let gameOver = false;
 
 
 //Current Level Bool
-let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
+let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
 {
     l1 = true;
     l2 = false;
@@ -15,6 +15,7 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11;
     l9 = false;
     l10 = false;
     l11 = false;
+    l12 = false;
 }
 
 
@@ -55,7 +56,6 @@ let burning, countingFlames;
 
 //L3
 let timer_level3;                                                        //For checking time for level 3
-let timer_level3_enemy;                                                  //For checking time for level 3
 let leftDoorOpen = false;
 let rightDoorOpen = false;
 let findPasscode = false;                                               //For clothing store
@@ -260,7 +260,7 @@ let lMap, lPMap, lOMap;
 
 
 //For finding out if level is ready to be drawn
-let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready;
+let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready, l12Ready;
 
 
 let canvas = document.querySelector("canvas");
@@ -539,6 +539,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 32,//X axis position 32
             yPos: 512,//Y axis position 512
+            width: 32,
+            height: 32,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -2367,6 +2369,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 32,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -2509,7 +2513,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2563,8 +2583,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2615,7 +2648,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -2666,7 +2716,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3344,7 +3410,6 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             }
         };
 
-
     roofEnemy01.drawMe = function()
     {
         ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
@@ -3354,6 +3419,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 64,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -3496,7 +3563,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3550,8 +3633,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3602,7 +3698,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -3653,7 +3766,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4340,6 +4469,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 96,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -4482,7 +4613,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4536,8 +4683,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4588,7 +4748,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -4639,7 +4816,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5326,6 +5519,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 96,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -5468,7 +5663,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5522,8 +5733,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5574,7 +5798,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -5625,7 +5866,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6312,6 +6569,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 96,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -6454,7 +6713,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6508,8 +6783,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6560,7 +6848,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -6611,7 +6916,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7298,6 +7619,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
         {
             xPos: 96,//X axis position 32
             yPos: 192,//Y axis position 512
+            width: 32,
+            height: 48,
             scurrySpeed: 180,
             prevX: undefined,
             prevY: undefined,
@@ -7440,7 +7763,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos - 32 > enemy[level][i].xPos + enemy[level][i].width  //Moving left one space doesn't create overlap
+                                            || self.xPos + self.width < enemy[level][i].xPos//Already on the left of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7494,8 +7833,21 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         if (l1 || l4 || l7 || l8)
                         {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
-                        }
 
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.xPos + 32 + self.width < enemy[level][i].xPos /*+ enemy[level][i].width*/  //Moving right one space doesn't create overlap
+                                            || self.xPos > enemy[level][i].xPos + enemy[level][i].width//Already on the right of the other NPCs
+                                            || self.yPos <= enemy[level][i].yPos - self.height//Above player in y axis
+                                            || self.yPos >= enemy[level][i].yPos + self.height//Below player in y axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7546,7 +7898,24 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos - 32 > enemy[level][i].yPos + enemy[level][i].height  //Moving up one space doesn't create overlap
+                                            || self.yPos + self.height < enemy[level][i].yPos //Already above of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -7597,7 +7966,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+
+                            if (goodToGo)//If not already blocked by environment, check enemies
+                            {
+                                for (let i = 0; i < enemy[level].length; i++)
+                                {
+                                    goodToGo =
+                                        (
+                                            self.yPos + self.height + 32 < enemy[level][i].yPos //Moving down one space doesn't create overlap
+                                            || self.yPos > enemy[level][i].yPos + enemy[level][i].height //Already below of the other NPCs
+                                            || self.xPos + self.width <= enemy[level][i].xPos//To the left of the player in x axis
+                                            || self.xPos >= enemy[level][i].xPos + enemy[level][i].width /*+ 32*///To the right of the  player in x axis
+                                        );
+                                }
+                            }
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8333,9 +8718,6 @@ function startGame()
     if (l1)//Home(roof)
 
     {
-
-
-
         canvas.style.backgroundImage = "";
         newsReport.play();          //RYN
 
@@ -8585,7 +8967,7 @@ function startGame()
 
         changePStartPos();
 
-        bookcaseOpening3B.onload = function(){l1Ready=true;};
+        stairsB3.onload = function(){l1Ready=true;};
         waitForLoading2();
 
 
@@ -9475,7 +9857,7 @@ function startGame()
 
         let roof = new Image();
         let wall = new Image();
-        let shinglesEdge = new Image();;
+        let shinglesEdge = new Image();
         let shinglesRight = new Image();
         let shinglesBRight = new Image();
 
@@ -9631,74 +10013,74 @@ function startGame()
             screenRight.src = "../../7Lab/images/screen-right.png";
         }
 
+         {
+             a = wall;				// 0
+             b = floor;				// 1
+             c = door1;				// 2
+             d = stairs;				// 3
+             e = fullShelvesTop;		// 4
+             f = fullShelvesBottom;	// 5
+             g = emptyShelvesTop;	// 6
+             h = emptyShelvesBottom;	// 7
+             if (researchPaper)
              {
-                 a = wall;				// 0
-                 b = floor;				// 1
-                 c = door1;				// 2
-                 d = stairs;				// 3
-                 e = fullShelvesTop;		// 4
-                 f = fullShelvesBottom;	// 5
-                 g = emptyShelvesTop;	// 6
-                 h = emptyShelvesBottom;	// 7
-                 if (researchPaper == true)
-                 {
-                     i = emptyShelvesTop;	// 8
-                     j = emptyShelvesBottom;	// 9
-                 }
-                 else
-                 {
-                     i = fullShelvesTop;		// 8
-                     j = fullShelvesBottom;	// 9
-                 }
-                 k = trash;				// 10
-                 l = wire;				// 11
-                 m = table;				// 12
-                 n = tableBlood; 		// 13
-                 o = tableBlue;			// 14
-                 q = tableRed;			// 15
-                 r = tableTop;			// 16
-                 s = tableBottom;		// 17
-                 t = screen;				// 18
-                 u = screenLeft;			// 19
-                 v = table; 					// 20
-                 w = tableBlood; 			// 21
-                 x = tableBlue; 				// 22
-                 y = tableRed; 				// 23
-                 z = tableTop; 				// 24
-                 aa = tableBottom; 			// 25
-                 bb = screen; 				// 26
-                 cc = screenLeft; 			// 27
-                 dd = screenRight; 			// 28
-
-             }//Assigne images to global letter variables
-
-
-             if (lMap[level] === undefined)
-             {
-                 lMap[level]=
-                     //                    10                  20
-                     [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
-                         [3,	1,	1,	1,	1,	1,	1,	1,	1,	6,	8,	8,	8,	8,	6,	6,	8,	6,	1,	8,	8,	8,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	7,	9,	9,	9,	9,	7,	7,	9,	7,	11,	9,	9,	9,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	12,	13,	12,	12,	12,	12,	1,	1,	1,	12,	12,	12,	15,	12,	12,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	16,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
-                         [1,	1,	1,	1,	12,	12,	14,	13,	12,	15,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
-                         [1,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	12,	12,	13,	12,	12,	12,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
-                         [1,	1,	1,	1,	12,	12,	14,	15,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	12,	12,	12,	13,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
-                         [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                         [10,  1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1],
-                         [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
-                     ];
+                 i = emptyShelvesTop;	// 8
+                 j = emptyShelvesBottom;	// 9
              }
+             else
+             {
+                 i = fullShelvesTop;		// 8
+                 j = fullShelvesBottom;	// 9
+             }
+             k = trash;				// 10
+             l = wire;				// 11
+             m = table;				// 12
+             n = tableBlood; 		// 13
+             o = tableBlue;			// 14
+             q = tableRed;			// 15
+             r = tableTop;			// 16
+             s = tableBottom;		// 17
+             t = screen;				// 18
+             u = screenLeft;			// 19
+             v = table; 					// 20
+             w = tableBlood; 			// 21
+             x = tableBlue; 				// 22
+             y = tableRed; 				// 23
+             z = tableTop; 				// 24
+             aa = tableBottom; 			// 25
+             bb = screen; 				// 26
+             cc = screenLeft; 			// 27
+             dd = screenRight; 			// 28
+
+         }//Assign images to global letter variables
+
+
+         if (lMap[level] === undefined)
+         {
+             lMap[level]=
+                 //                    10                  20
+                 [  //0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4,	5,	6,	7,	8,	9,	0,	1,	2,	3,	4
+                     [3,	1,	1,	1,	1,	1,	1,	1,	1,	6,	8,	8,	8,	8,	6,	6,	8,	6,	1,	8,	8,	8,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	7,	9,	9,	9,	9,	7,	7,	9,	7,	11,	9,	9,	9,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	12,	13,	12,	12,	12,	12,	1,	1,	1,	12,	12,	12,	15,	12,	12,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	16,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                     [1,	1,	1,	1,	12,	12,	14,	13,	12,	15,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                     [1,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	12,	12,	13,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	16,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	17,	1,	1],
+                     [1,	1,	1,	1,	12,	12,	14,	15,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	12,	12,	12,	13,	12,	12,	1,	1,	1,	12,	12,	12,	12,	12,	12,	1,	1,	1,	1,	1,	1],
+                     [1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                     [10,  1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1],
+                     [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
+                 ];
+         }
 
 
         if (lPMap[level] === undefined)
@@ -9721,7 +10103,7 @@ function startGame()
         changePStartPos();
 
 
-        trash.onload = function(){l7Ready=true;};
+        screenRight.onload = function(){l7Ready=true;};
         level7NotReady();
 
         function level7NotReady()
@@ -9870,8 +10252,6 @@ function startGame()
         addEventListener("keydown", onKeyDown, false);
     }
 
-
-
     else if (l11)//SewerPipe Map
     {
         canvas.style.backgroundImage = "";
@@ -9988,6 +10368,11 @@ function startGame()
 
         addEventListener("keydown", onKeyDown, false);
         notWalking = true;
+    }
+
+    else if (l12)//SewerPipe Map
+    {
+        initializeCopterLevel();
     }
 
 }
@@ -12316,6 +12701,16 @@ function onKeyDown(e)
     if (e.keyCode === 79)//0 - Calls gameover()
     {
         gameover();
+    }
+    if (e.keyCode === 72)//H - calls helo level
+    {
+        removeEventListener("keydown", onKeyDown, false);
+        level = 12;                  //Change level identifier appropriately
+        l1 = l2 = l3 = l4 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;             //Set all levels to false but the one being travelled to
+        l12 = true;                                  //Set level being travelled to as true
+        ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
+        l12Ready=false;
+        startGame();                                //Load settings and assets for next map
     }
 }
 

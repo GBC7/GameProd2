@@ -451,7 +451,6 @@ function start()
     {
         //This draws a thing at a location
         ctx.drawImage(startBuilding, 0, 0, 300, 198, 0, 402, 300, 198);
-        ctx.drawImage(pigs, 0, 0);
 
         //Assign the variable self to this in the chopper so that functions will actually work
         chopper.selfAssign();
