@@ -16850,7 +16850,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             //Set image -- then start walking
             let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
             let img = new Image();
-            img.src = "../../6Roof/images/roofEnemy2.png";
+            img.src = "../../6Roof/images/roofEnemy2.png";  //CHANGE HERE!!! *****
             img.onload = function(){walk();};
 
             //Walk the direction chosen if boundaries permit it
