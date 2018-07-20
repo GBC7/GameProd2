@@ -1,6 +1,9 @@
-let heliCanvas, ctx2, left, down, right, up, climbing, chopper, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
+let heliCanvas, ctx2, left, down, right, up, climbing, chopper, chicken, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
     canvasY, checkMoving, tutorialPart, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
-    tutClimb, tutFall, pilotHadTo, doneTheTut;
+    tutClimb, tutFall, pilotHadTo, doneTheTut, chickens;
+
+let pigs = new Image();
+pigs.src = "../../12Helo/images/FlyingPig.png";
 
 
 //This probably initializes the level
@@ -68,6 +71,9 @@ function initializeCopterLevel()
             //Dialog bools
             helaIntro = leftAndRight = upAndDown = whew = pilotHadTo = false;
 
+            //Enemy array
+            chickens = [];
+
             //Put Canvas in starting position
             moveCanvas(canvasX, canvasY);
         }
@@ -106,6 +112,11 @@ function initializeCopterLevel()
                     //Things that tell the computer if it's still doing what its doing
                     setup: false,
                     crashed: false,
+                    crashSetup: false,
+                    timeOutCleared: false,
+
+                    //Health stat(s)
+                    health: 3,
 
                     //The thing that gets things done
                     takeOffEh: function()
@@ -152,6 +163,10 @@ function initializeCopterLevel()
                             canvasY += self.fallSpeed;
                             moveCanvas(canvasX, canvasY);
                             drawTheChopper();
+
+
+                            //Check for crash
+                            checkCrash();
                         }
 
                         function drawTheChopper()
@@ -161,8 +176,11 @@ function initializeCopterLevel()
 
                             //Draw the chopper where it's at
                             ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.actualWidth, self.actualHeight);
+                            if (!self.crashed)
+                                setTimeout(spinDeBlades, self.rotateSpeed);
+                            else
+                                self.timeOutCleared = true;
 
-                            setTimeout(spinDeBlades, self.rotateSpeed);
                         }
 
                     }
@@ -178,11 +196,236 @@ function initializeCopterLevel()
                 //Draw the chopper where it's at .. just .. smaller
                 ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
             };
+            chopper.drawCrash = function()
+            {
+                if (!self.crashSetup)
+                {
+                    removeEventListener("keydown", input, false);
+                    removeEventListener("keydown", lackOfInput, false);
+                    clearInterval(checkMoving);
+                    self.counter = 0;
+                    self.crashed = true;
+                    self.frame = 0;
+                    self.srcX = ((self.frame % 6) * self.actualWidth);
+                    self.srcY = 2;
+                    self.crashSetup = true;
+                }
+                else if (!self.timeOutCleared)
+                {
+                    setTimeout(chopper.drawCrash, 10);
+                    self.timeOutCleared = true;
+                }
+                else if (self.counter < 7)
+                {
+                    self.counter++;
+                    self.frame++;
+                    self.srcX = ((self.frame % 6) * self.actualWidth);
+                }
+                else
+                {
+                    self.frame++;
+                    self.srcX = ((self.frame % 5) * self.actualWidth);
+                }
+
+
+                //Erase EVERYTHING.. on the secondary canvas anyway
+                ctx2.clearRect(0, 0, 360, 360);
+
+                //Draw the chopper where it's at .. just .. smaller
+                ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
+                setTimeout(chopper.drawCrash, 120);
+            };
 
             chopper.selfAssign = function()
             {
                 self = this;
             }
+        }
+
+        //Flying chickes? Why not..
+        {
+            for (let i = 0; i < 5; i++)
+            {
+                chicken =
+
+                    {
+                        width: undefined,
+                        height: undefined,
+                        availY: undefined,
+
+                        yPos: undefined,
+                        xPos: 801,
+                        timeOutTime: 80,
+
+                        frame: 0,
+                        numOfFrames: undefined,
+                        srcX: 0,
+                        srcY: 0,
+
+                        leftSide: undefined,
+                        rightSide: undefined,
+                        topSide: undefined,
+                        bottomSide: undefined,
+
+                        setup: false,
+                        myImage: undefined,
+                        numOfChoices: 5,
+                        chosenImage: undefined,
+                        atEnd: false,
+
+                        fly: function()
+                        {
+                            if (!this.setup)
+                            {
+                                self = this;
+
+                                //Set var as image and choose which image
+                                self.myImage = new Image();
+                                self.chosenImage = Math.floor(Math.random()%(self.numOfChoices) + 1);
+
+                                switch (self.chosenImage)
+                                {
+                                    case 1:
+                                        //Set this objects properties based on the randomly chosen non-flying flying character
+                                        self.width = 31;
+                                        self.height = 43;
+                                        self.numOfFrames = 3;
+
+                                        //Set where in the tilesheet the character is facing left
+                                        self.srcY = 5 * self.height;
+
+                                        //Set it's image property
+                                        self.myImage.src = "../../12Helo/images/Flittens.png";
+                                        break;
+                                    case 2:
+                                        //Set this objects properties based on the randomly chosen non-flying flying character
+                                        self.width = 36;
+                                        self.height = 36;
+                                        self.numOfFrames = 3;
+
+                                        //Set where in the tilesheet the character is facing left
+                                        self.srcY = 5 * self.height;
+
+                                        //Set it's image property
+                                        self.myImage.src = "../../12Helo/images/FlittensandSphinxes.png";
+                                        break;
+                                    case 3:
+                                        //Set this objects properties based on the randomly chosen non-flying flying character
+                                        self.width = 37;
+                                        self.height = 37;
+                                        self.numOfFrames = 3;
+
+                                        //Set where in the tilesheet the character is facing left
+                                        self.srcY = 1 * self.height;
+
+                                        //Set it's image property
+                                        self.myImage.src = "../../12Helo/images/Flyingfox.png";
+                                        break;
+                                    case 4:
+                                        //Set this objects properties based on the randomly chosen non-flying flying character
+                                        self.width = 39;
+                                        self.height = 39;
+                                        self.numOfFrames = 3;
+
+                                        //Set where in the tilesheet the character is facing left
+                                        self.srcY = 1 * self.height;
+
+                                        //Set it's image property
+                                        self.myImage.src = "../../12Helo/images/FlyingPig.png";
+                                        break;
+                                    case 5:
+                                        //Set this objects properties based on the randomly chosen non-flying flying character
+                                        self.width = 58;
+                                        self.height = 58;
+                                        self.numOfFrames = 3;
+
+                                        //Set where in the tilesheet the character is facing left
+                                        self.srcY = 1 * self.height;
+
+                                        //Set it's image property
+                                        self.myImage.src = "../../12Helo/images/Wolfset.png";
+                                        break;
+                                }
+                                //Set the flying chicken to appear at a random yPos
+                                self.availY = 600 - self.height;
+                                self.yPos = Math.floor(Math.random() * self.availY) + 1;
+
+                                //Set constant hit detect variables
+                                self.topSide = self.yPos;
+                                self.bottomSide = self.yPos + self.height;
+
+                                console.log("made it");
+                                //Give a bird a fly.. it eats for one day. Tell the computer to redraw it each frame... it usually does
+                                self.drawMeNow = function()
+                                {
+                                    ctx.drawImage(this.myImage, this.srcX, this.srcY, this.width, this.height, this.xPos, this.yPos, this.width, this.height);
+                                };
+
+                                //Finished setup
+                                self.setup = true;
+
+                                whenWeFly();
+                            }
+
+                            //Fly across screen
+                            function whenWeFly()
+                            {
+
+                                //Cycle through frames
+                                self.frame++;
+                                self.srcX = ((self.frame % self.numOfFrames) * self.width);
+
+                                //Move the object left across the screen
+                                self.xPos-= 10;
+
+                                //Setup hit detect vars that change
+                                self.leftSide = self.xPos;
+                                self.rightSide = self.xPos + self.width;
+
+                                //Draw me doin ma thang
+                                drawMeLikeThis();
+                            }
+
+                            function checkIfIHitTheChopper()
+                            {
+                                if (self.leftSide < chopper.rightSide && self.rightSide > chopper.leftSide)
+                                {
+                                    if (self.bottomSide < chopper.topSide && self.topSide > chopper.bottomSide)
+                                    {
+                                        chopper.health--;
+
+                                        if (chopper.health === 0)
+                                            chopper.crashed = true;
+                                    }
+                                }
+                            }
+
+                            function checkIfAtEnd()
+                            {
+                                if (self.rightSide <= 0)
+                                {
+                                    self.atEnd = true;
+                                }
+                            }
+
+                            function drawMeLikeThis()
+                            {
+                                checkIfIHitTheChopper();
+                                checkIfAtEnd();
+
+                                //Draw
+                                ctx.drawImage(self.myImage, self.srcX, self.srcY, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
+
+                                //Do gen
+                                setTimeout(whenWeFly, self.timeOutTime);
+                            }
+
+                        }
+                    };
+
+                chickens[i] = chicken;
+            }
+
         }
     }
 
@@ -208,6 +451,7 @@ function start()
     {
         //This draws a thing at a location
         ctx.drawImage(startBuilding, 0, 0, 300, 198, 0, 402, 300, 198);
+        ctx.drawImage(pigs, 0, 0);
 
         //Assign the variable self to this in the chopper so that functions will actually work
         chopper.selfAssign();
@@ -218,6 +462,11 @@ function start()
     else//Probably where all side scrolling objects go to be animated
     {
         ctx.clearRect(0, 0, 800, 600);
+        for (let i = 0; i < chickens.length; i++)
+        {
+            if (chickens[i].setup)
+                chickens[i].drawMeNow();
+        }
         //This draws a thing at a location
         if (distanceTravelled <= 300)
             ctx.drawImage(startBuilding, 0, 0, 300, 198, -distanceTravelled, 402, 300, 198);
@@ -228,7 +477,7 @@ function start()
             CheckConversationAction();
 
             //Set controls dialog to start after 5 seconds of reading
-            setTimeout(startRotTut, 7000);
+            setTimeout(startRotTut, 5000);
 
 
             function startRotTut()
@@ -553,13 +802,13 @@ function start()
 
             //Check for movement interval
             checkMoving = setInterval(makeItMove, 10);
+            setInterval(checkChickens, 60);
         }
     }
 
 }
 
 function startRotating()
-
 {
     //Change frames
     chopper.frame++;
@@ -646,6 +895,231 @@ function makeItMove()
         canvasX += climbSpeed * Math.sin(angle * Math.PI / 180);
         moveCanvas(canvasX, canvasY);
         chopper.drawIt();
+
+        checkCrash();
+    }
+}
+
+
+function checkChickens()
+{
+    if (chickens.length < 5)
+    {
+        let length = chickens.length;
+        //Create a chicken
+        chicken =
+            {
+                width: undefined,
+                height: undefined,
+                availY: undefined,
+
+                yPos: undefined,
+                xPos: 801,
+                timeOutTime: 80,
+
+                frame: 0,
+                numOfFrames: undefined,
+                srcX: 0,
+                srcY: 0,
+
+                leftSide: undefined,
+                rightSide: undefined,
+                topSide: undefined,
+                bottomSide: undefined,
+
+                setup: false,
+                myImage: undefined,
+                numOfChoices: 5,
+                chosenImage: undefined,
+                choseRandom: false,
+                atEnd: false,
+
+                fly: function()
+                {
+                    if (!this.setup)
+                    {
+                        self = this;
+
+                        //Set var as image and choose which image
+                        self.myImage = new Image();
+                        self.chosenImage = Math.floor(Math.random()%(self.numOfChoices) + 1);
+
+                        switch (self.chosenImage)
+                        {
+                            case 1:
+                                //Set this objects properties based on the randomly chosen non-flying flying character
+                                self.width = 31;
+                                self.height = 43;
+                                self.numOfFrames = 3;
+
+                                //Set where in the tilesheet the character is facing left
+                                self.srcY = 5 * self.height;
+
+                                //Set it's image property
+                                self.myImage.src = "../../12Helo/images/Flittens.png";
+                                break;
+                            case 2:
+                                //Set this objects properties based on the randomly chosen non-flying flying character
+                                self.width = 36;
+                                self.height = 36;
+                                self.numOfFrames = 3;
+
+                                //Set where in the tilesheet the character is facing left
+                                self.srcY = 5 * self.height;
+
+                                //Set it's image property
+                                self.myImage.src = "../../12Helo/images/FlittensandSphinxes.png";
+                                break;
+                            case 3:
+                                //Set this objects properties based on the randomly chosen non-flying flying character
+                                self.width = 37;
+                                self.height = 37;
+                                self.numOfFrames = 3;
+
+                                //Set where in the tilesheet the character is facing left
+                                self.srcY = 1 * self.height;
+
+                                //Set it's image property
+                                self.myImage.src = "../../12Helo/images/Flyingfox.png";
+                                break;
+                            case 4:
+                                //Set this objects properties based on the randomly chosen non-flying flying character
+                                self.width = 39;
+                                self.height = 39;
+                                self.numOfFrames = 3;
+
+                                //Set where in the tilesheet the character is facing left
+                                self.srcY = 1 * self.height;
+
+                                //Set it's image property
+                                self.myImage.src = "../../12Helo/images/FlyingPig.png";
+                                break;
+                            case 5:
+                                //Set this objects properties based on the randomly chosen non-flying flying character
+                                self.width = 58;
+                                self.height = 58;
+                                self.numOfFrames = 3;
+
+                                //Set where in the tilesheet the character is facing left
+                                self.srcY = 1 * self.height;
+
+                                //Set it's image property
+                                self.myImage.src = "../../12Helo/images/Wolfset.png";
+                                break;
+                        }
+                        //Set the flying chicken to appear at a random yPos
+                        self.availY = 600 - self.height;
+                        self.yPos = Math.floor(Math.random() * self.availY) + 1;
+
+                        //Set constant hit detect variables
+                        self.topSide = self.yPos;
+                        self.bottomSide = self.yPos + self.height;
+
+                        console.log("made it");
+                        //Give a bird a fly.. it eats for one day. Tell the computer to redraw it each frame... it usually does
+                        self.drawMeNow = function()
+                        {
+                            ctx.drawImage(this.myImage, this.srcX, this.srcY, this.width, this.height, this.xPos, this.yPos, this.width, this.height);
+                        };
+
+                        //Finished setup
+                        self.setup = true;
+
+                        whenWeFly();
+                    }
+
+                    //Fly across screen
+                    function whenWeFly()
+                    {
+
+                        //Cycle through frames
+                        self.frame++;
+                        self.srcX = ((self.frame % self.numOfFrames) * self.width);
+
+                        //Move the object left across the screen
+                        self.xPos-= 10;
+
+                        //Setup hit detect vars that change
+                        self.leftSide = self.xPos;
+                        self.rightSide = self.xPos + self.width;
+
+                        //Draw me doin ma thang
+                        drawMeLikeThis();
+                    }
+
+                    function checkIfIHitTheChopper()
+                    {
+                        if (self.leftSide < chopper.rightSide && self.rightSide > chopper.leftSide)
+                        {
+                            if (self.bottomSide < chopper.topSide && self.topSide > chopper.bottomSide)
+                            {
+                                chopper.health--;
+
+                                if (chopper.health === 0)
+                                    chopper.crashed = true;
+                            }
+                        }
+                    }
+
+                    function checkIfAtEnd()
+                    {
+                        if (self.rightSide <= 0)
+                        {
+                            self.atEnd = true;
+                        }
+                    }
+
+                    function drawMeLikeThis()
+                    {
+                        checkIfIHitTheChopper();
+                        checkIfAtEnd();
+
+                        //Draw
+                        ctx.drawImage(self.myImage, self.srcX, self.srcY, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
+
+                        //Do gen
+                        setTimeout(whenWeFly, self.timeOutTime);
+                    }
+
+                }
+            };
+
+        //Put it in the array
+        chickens[length] = chicken;
+
+        //Set it off
+        chickens[length].fly();
+    }
+
+    else
+    {
+        for (let i = 0; i < chickens.length; i++)
+        {
+            if (chickens[i].atEnd)
+            {
+                chickens.pop();
+            }
+        }
+    }
+}
+
+function checkCrash()
+{
+    if (canvasX + chopper.rightSide >= 800)//Right
+    {
+        chopper.drawCrash();
+    }
+    else if (canvasX + chopper.leftSide <= 0)//Left
+    {
+        chopper.drawCrash();
+    }
+    else if (canvasY + chopper.topSide <= 0)
+    {
+        chopper.drawCrash();
+    }
+    else if (canvasY + chopper.bottomSide >= 600)
+    {
+        chopper.drawCrash();
     }
 }
 
