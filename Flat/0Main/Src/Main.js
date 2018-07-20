@@ -3030,28 +3030,82 @@ function checkActions()
 
     else if (l3)
     {
+        if (!findDisguise &&
+            ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
+                (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
+                (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) || (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) ||
+                (p.row === 13 && p.col === 18) || (p.row === 13 && p.col === 19) || (p.row === 15 && p.col === 19) || (p.row === 15 && p.col === 20) ||
+                (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
+                (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
+        {
+            dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        if (p.row === 15 && p.col === 18){
 
+            dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findDisguise = true;
+        }
+
+        if (p.row ===2 && p.col ===1){
+            dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findPasscode = true;
+        }
+
+        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3))){
+            dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
+        if (findPasscode === false && p.row === 7 && p.col === 20)
+        {
+            dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
+        if (findRollerblades === false && p.row === 5 && p.col === 20)
+        {
+            dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findRollerblades = true;
+        }
+
+        if (findRollerblades === false && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
+            (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
+            (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
+        {
+            dialogText(names[1], SystemMSGLevel3[9], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
+        if (findMap === false && p.row === 15 && (p.col > 0 || p.col < 5 || p.col === 6)) {
+            dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+
+        }
+
+
+        if (findMap === false && p.row === 15 && p.col === 5) {
+            dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findMap = true;
+        }
+
+        if (findAllLevel3 === false && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11))){
+            dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findMap = true;
+        }
         if (!leftDoorOpen && p.row === 7 && p.col === 4)
         {
             doorSound.play();
             leftDoorOpen = true;
             lMap[level][7][4] = 0;
             lMap[level][6][5] = 16;
+            drawMap();
         }
-        if (!findPasscode && p.row ===2 && p.col ===1)
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
         if (!rightDoorOpen && p.row === 7 && p.col === 20)
         {
             if (findPasscode)
@@ -3060,74 +3114,15 @@ function checkActions()
                 rightDoorOpen = true;
                 lMap[level][7][20] = 0;
                 lMap[level][6][19] = 17;
-            }
-            else {
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
+                drawMap();
             }
         }
-        if (!findMap && p.row === 15 && p.col === 5)
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findRollerblades && p.row === 5 && p.col === 20)
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
-            (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
-            (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findDisguise && p.row === 15 && p.col === 18)
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
         if (findDisguise && findRollerblades && findMap)
         {
             findAllLevel3 = true;
             lMap[level][0][10] = 24;
             lMap[level][0][11] = 25;
-        }
-
-        if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findDisguise && ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) ||
-            (p.row === 9 && p.col === 15) || (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) ||
-            (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) || (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) ||
-            (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) || (p.row === 13 && p.col === 18) || (p.row === 13 && p.col === 19) ||
-            (p.row === 15 && p.col === 19) || (p.row === 15 && p.col === 20) || (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) ||
-            (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) || (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
-        }
-
-        if (!findMap && p.row === 15 && (p.col >= 1 || p.col <= 4 || p.col === 6))
-        {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
+            drawMap();
         }
     }
     else if (l4) {

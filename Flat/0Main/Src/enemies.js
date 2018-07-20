@@ -1,5 +1,4 @@
 
-
 //LV1
 let jeffery = new Image();
 {
@@ -49,7 +48,7 @@ let roofEnemy6 = new Image();
 
 //OBJECTS & ARRAY
 let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              //To hold torch objects
-{
+
     //Create rat object
     let ratSmall =                     //Define rat object -- push into rat array
         {
@@ -8563,7 +8562,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy1.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy2 =
@@ -9481,7 +9480,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy2.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy3 =
@@ -10397,7 +10396,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy3.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy4 =
@@ -11315,7 +11314,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy4.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy5 =
@@ -12232,7 +12231,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy5.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy6 =
@@ -13149,7 +13148,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy6.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy7 =
@@ -14066,7 +14065,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy7.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy8 =
@@ -14984,7 +14983,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy8.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy9 =
@@ -15903,7 +15902,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy9.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     let clothingStoreEnemy10 =
@@ -16822,7 +16821,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
     clothingStoreEnemy10.drawMe = function()
     {
-        ctx.drawImage(roofEnemy, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
+        ctx.drawImage(roofEnemy1, this.frameX * 32, this.frameY * 48, 32, 48, this.xPos, this.yPos, 32, 48);
     };
 
     //Push into rat array
@@ -16835,20 +16834,27 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
     enemy[6].push(roofEnemy06);
     enemy[1].push(jeffery01);
 
-    enemiesLevel3[0] = clothingStoreEnemy1;
-    enemiesLevel3[1] = clothingStoreEnemy2;
-    enemiesLevel3[2] = clothingStoreEnemy3;
-    enemiesLevel3[3] = clothingStoreEnemy4;
-    enemiesLevel3[4] = clothingStoreEnemy5;
-    enemiesLevel3[5] = clothingStoreEnemy6;
-    enemiesLevel3[6] = clothingStoreEnemy7;
-    enemiesLevel3[7] = clothingStoreEnemy8;
-    enemiesLevel3[8] = clothingStoreEnemy9;
-    enemiesLevel3[9] = clothingStoreEnemy10;
+
+
+ /*   enemy[3].push(clothingStoreEnemy1);
+    enemy[3].push(clothingStoreEnemy2);
+    enemy[3].push(clothingStoreEnemy3);
+    enemy[3].push(clothingStoreEnemy4);
+    enemy[3].push(clothingStoreEnemy5);
+    enemy[3].push(clothingStoreEnemy6);
+    enemy[3].push(clothingStoreEnemy7);
+    enemy[3].push(clothingStoreEnemy8);
+    enemy[3].push(clothingStoreEnemy9);
+    enemy[3].push(clothingStoreEnemy10);*/
+
+
+
 
 
     // __--__ Called with "enemy[level][slot].roam();" depending how many enemies put into it
-}
+
+
+
 
 function drawZeeEnemy()
 {

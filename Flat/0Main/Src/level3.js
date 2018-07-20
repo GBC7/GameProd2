@@ -1,4 +1,5 @@
 //L3
+// enemy initial position
 let timer_level3;                                                        //For checking time for level 3
 let timer_level3_enemy;                                                  //For checking time for level 3
 let leftDoorOpen = false;
@@ -11,7 +12,51 @@ let findAllLevel3 = false;
 let enemyAppearLevel3 = false;
 let detectPlayerLevel3 = false;
 let enemyIndexLevel3 = 0; //global variable
-let enemiesLevel3 = [];//Enemy Array Level 3
+
+let enemyLevel3 = function(row, col) {
+    this.row = row;
+    this.col = col;
+    this.width = 32;
+    this.height = 64;
+    this.sw = 1;
+    // add enemy property if need
+};
+
+let enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10;
+{
+    enemy1 = new enemyLevel3(0, 6);
+    enemy2 = new enemyLevel3(1, 6);
+    enemy3 = new enemyLevel3(2, 6);
+    enemy4 = new enemyLevel3(3, 6);
+    enemy5 = new enemyLevel3(6, 6);
+    enemy6 = new enemyLevel3(7, 0);
+    enemy7 = new enemyLevel3(9, 6);
+    enemy8 = new enemyLevel3(11, 7);
+    enemy9 = new enemyLevel3(13, 0);
+    enemy10 = new enemyLevel3(15, 0);
+}
+
+let enemiesLevel3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10];
+let enemyArr = [];
+
+enemiesLevel3[0] = clothingStoreEnemy1;
+enemiesLevel3[1] = clothingStoreEnemy2;
+enemiesLevel3[2] = clothingStoreEnemy3;
+enemiesLevel3[3] = clothingStoreEnemy4;
+enemiesLevel3[4] = clothingStoreEnemy5;
+enemiesLevel3[5] = clothingStoreEnemy6;
+enemiesLevel3[6] = clothingStoreEnemy7;
+enemiesLevel3[7] = clothingStoreEnemy8;
+enemiesLevel3[8] = clothingStoreEnemy9;
+enemiesLevel3[9] = clothingStoreEnemy10;
+
+
+
+
+
+
+
+
 
 
 //Images
@@ -246,32 +291,28 @@ function detectMovementLevel3()
     {
         //initial set
         warningSound.play();
-        enemyArr.push(enemiesLevel3[enemyIndexLevel3]);
+        enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
         enemy[3][enemyIndexLevel3].roam();
         drawZeeEnemy();
         enemyIndexLevel3++;
 
-
         // add mob, start timer again. alert is temp msg.
-        dialogText(names[1], "add one enemy (temporary msg)", "25px", "red");
+        dialogText(names[1], "add one enemy(temporary msg)", "25px", "red");
         setTimeout(dialogInitialize, 3000);
-
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
 
-
+        // reset
 
         clearInterval(timer_level3);
-        if(enemyIndexLevel3<10){
+        if (enemyIndexLevel3<10){
             timer_level3 = setInterval(function(){
                 appearEnemy();
             }, 1000);
         }
 
         else if (enemyIndexLevel3 === 10)
-        {
             resetTimer();
-        }
     }
 }
 
@@ -411,6 +452,34 @@ function resetLevel(time = 40)
     else
     {
         gameover();
+    }
+}
+
+function enemyLoading()
+{ // draw enemies
+    for(let index=0; index < enemyArr.length; index++){
+        ctx.drawImage(enemyImg, enemyArr[index].x, 0, enemyArr[index].width, enemyArr[index].height, enemyArr[index].col * p.width, enemyArr[index].row * p.width, enemyArr[index].width, enemyArr[index].height);
+
+        if(lMap[level][enemyArr[index].row + 1][enemyArr[index].col + enemyArr[index].sw] !== 0){
+            enemyArr[index].sw *= -1; // switch direction
+        }else{
+            enemyArr[index].col += enemyArr[index].sw;
+            enemyArr[index].col = enemyArr[index].col < 0 ? 0 : enemyArr[index].col
+        }
+        enemyArr[index].x = enemyArr[index].sw > 0 ? 0 : enemyArr[index].width; // switch direction
+
+        enemyAttack(); // for detecting position when enemies meet player
+
+    }
+}
+
+function enemyAttack()
+{ // for detecting position when player meet enemies
+    for(let index=0; index < enemyArr.length; index++){
+        if(lPMap[level][enemyArr[index].row][enemyArr[index].col] === 1){
+            alert("Game Over!!!\nPress enter and start again. (tmp msg");
+            resetLevel(40);
+        }
     }
 }
 
