@@ -276,6 +276,7 @@ function initializeLV1()
 
     changePStartPos();
 
+
     stairsB3.onload = function(){l1Ready=true;};
     waitForLoading2();
 

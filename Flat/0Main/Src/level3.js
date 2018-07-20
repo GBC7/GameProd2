@@ -276,15 +276,6 @@ function initializeLV3()
 
 }
 
-function clearLevel3()
-{
-    bgm_level3.pause();
-    dangerous.pause();
-    clearInterval(timer_level3);
-    clearInterval(timer_level3_enemy);
-    removeEventListener("keydown", enemyAttack);
-}
-
 function detectMovementLevel3()
 {
     if (l3 && enemyAppearLevel3 === true)
@@ -297,7 +288,7 @@ function detectMovementLevel3()
         enemyIndexLevel3++;
 
         // add mob, start timer again. alert is temp msg.
-        dialogText(names[1], "add one enemy(temporary msg)", "25px", "red");
+      
         setTimeout(dialogInitialize, 3000);
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;
@@ -327,6 +318,8 @@ function resetTimer()
                     lMap[level][y][x] = 18;
             }
     }
+    drawMap();
+
     warningTime = Math.floor(Math.random() * 20 + 10);
     findingTime = Math.floor(Math.random() * 10 + 5);
     enemyAppearLevel3 = false;
@@ -334,15 +327,15 @@ function resetTimer()
     bgm_level3.play();
 }
 
+
 function appearEnemy()
 {
     warningTime--;
-    if (warningTime < 6 && warningTime > 0)
+    if (warningTime <=5 && warningTime > 0)
     {
         bgm_level3.pause();
         dangerous.play();
-
-        dialogText(names[1], SystemMSGLevel3[1]+warningTime+ " second later!", "25px", "red");
+        dialogText(names[1], SystemMSGLevel3[1] + warningTime + " second later!", "25px", "red");
 
     }
     else if (warningTime === 0) {
@@ -357,7 +350,6 @@ function appearEnemy()
                             lMap[level][y][x] = 19;
                     }
             }
-
         drawMap();
         enemyAppearLevel3 = true;
 
@@ -365,8 +357,7 @@ function appearEnemy()
     else if (enemyAppearLevel3)
     {
         findingTime--;
-
-        dialogText(names[1], SystemMSGLevel3[2]+findingTime+" seconds.", "25px", "red");
+        dialogText(names[1], SystemMSGLevel3[2] +findingTime + " seconds.", "25px", "red");
 
 
         if (findingTime === 0)
@@ -426,9 +417,10 @@ function resetLevel(time = 40)
         findDisguise = false;
         findAllLevel3 = false;
 
-
+        // enemy information reset
         detectPlayerLevel3 = false;
         enemyIndexLevel3 = 0;
+        enemy[3].splice(0, enemy[3].length);
         resetTimer();
 
         // map image reset
@@ -455,31 +447,11 @@ function resetLevel(time = 40)
     }
 }
 
-function enemyLoading()
-{ // draw enemies
-    for(let index=0; index < enemyArr.length; index++){
-        ctx.drawImage(enemyImg, enemyArr[index].x, 0, enemyArr[index].width, enemyArr[index].height, enemyArr[index].col * p.width, enemyArr[index].row * p.width, enemyArr[index].width, enemyArr[index].height);
-
-        if(lMap[level][enemyArr[index].row + 1][enemyArr[index].col + enemyArr[index].sw] !== 0){
-            enemyArr[index].sw *= -1; // switch direction
-        }else{
-            enemyArr[index].col += enemyArr[index].sw;
-            enemyArr[index].col = enemyArr[index].col < 0 ? 0 : enemyArr[index].col
-        }
-        enemyArr[index].x = enemyArr[index].sw > 0 ? 0 : enemyArr[index].width; // switch direction
-
-        enemyAttack(); // for detecting position when enemies meet player
-
-    }
-}
-
-function enemyAttack()
-{ // for detecting position when player meet enemies
-    for(let index=0; index < enemyArr.length; index++){
-        if(lPMap[level][enemyArr[index].row][enemyArr[index].col] === 1){
-            alert("Game Over!!!\nPress enter and start again. (tmp msg");
-            resetLevel(40);
-        }
-    }
+function clearLevel3()
+{
+    bgm_level3.pause();
+    dangerous.pause();
+    clearInterval(timer_level3);
+    dialogInitialize();
 }
 

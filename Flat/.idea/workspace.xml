@@ -17,8 +17,8 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="2752" column="1" selection-start-line="2752" selection-start-column="1" selection-end-line="2752" selection-end-column="1" />
+            <state relative-caret-position="216">
+              <caret line="1431" column="32" selection-start-line="1431" selection-start-column="27" selection-end-line="1431" selection-end-column="32" />
               <folding>
                 <element signature="e#5354#5605#0" />
                 <element signature="e#5893#6361#0" />
@@ -27,12 +27,6 @@
                 <element signature="e#8669#9113#0" />
                 <element signature="e#9199#9985#0" />
                 <element signature="e#10207#10327#0" />
-                <element signature="e#797224#811368#0" />
-                <element signature="e#811399#821710#0" />
-                <element signature="e#821750#829020#0" />
-                <element signature="e#5639#5655#0" />
-                <element signature="e#5707#5723#0" />
-                <element signature="e#5776#5792#0" />
                 <element signature="e#5848#5864#0" />
                 <element signature="e#5920#5936#0" />
                 <element signature="e#5993#6009#0" />
@@ -42,7 +36,6 @@
                 <element signature="e#888352#892777#0" />
                 <element signature="e#892811#894384#0" />
                 <element signature="e#894590#905847#0" />
-                <element signature="e#905920#948456#0" />
                 <element signature="e#970222#978187#0" />
                 <element signature="e#109420#111201#0" />
                 <element signature="e#978266#981266#0" />
@@ -92,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
@@ -104,11 +97,10 @@
       <file leaf-file-name="level1.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="89">
+              <caret line="277" selection-start-line="277" selection-end-line="277" />
               <folding>
                 <element signature="e#175#297#0" />
-                <element signature="n#!!block;n#initializeLV1#0" />
               </folding>
             </state>
           </provider>
@@ -117,12 +109,11 @@
       <file leaf-file-name="level2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+            <state relative-caret-position="-762">
+              <caret line="285" column="8" lean-forward="true" selection-start-line="285" selection-start-column="8" selection-end-line="285" selection-end-column="14" />
               <folding>
                 <element signature="e#1508#2200#0" />
                 <element signature="e#2361#9985#0" />
-                <element signature="n#!!block;n#initalizeLV2#0" />
                 <element signature="e#19662#20107#0" />
                 <element signature="e#20132#20218#0" />
               </folding>
@@ -130,21 +121,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level3.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="level3.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="457" column="21" selection-start-line="457" selection-start-column="9" selection-end-line="457" selection-end-column="21" />
+            <state relative-caret-position="514">
+              <caret line="454" column="23" selection-start-line="454" selection-start-column="23" selection-end-line="454" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1155#1344#0" />
                 <element signature="n#!!block;n#f#0" />
-                <element signature="n#!!block;n#clearLevel3#0" />
-                <element signature="n#!!block;n#detectMovementLevel3#0" />
-                <element signature="n#!!block;n#resetTimer#0" />
-                <element signature="n#!!block;n#appearEnemy#0" />
-                <element signature="n#!!block;n#resetLevel#0" />
-                <element signature="e#14784#15085#0" />
+                <element signature="e#12248#13849#0" />
               </folding>
             </state>
           </provider>
@@ -199,8 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lMap[level][p.row + 3][p.col] = 20;</find>
-      <find>goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);</find>
       <find>if (e === 40 &amp;&amp; lMap[level][yPos + 2] !== undefined &amp;&amp; lMap[level][yPos + 2][xPos] !== undefined)//Down</find>
       <find>if (e === 38 &amp;&amp; lMap[level][yPos] !== undefined &amp;&amp; lMap[level][yPos][xPos] !== undefined)//Up</find>
       <find>if(p.row === 4 &amp;&amp; p.col === 12) // test for conversation between two characters</find>
@@ -220,7 +204,6 @@
       <find>http://localhost:63342/Flat/2Sewer/images/flameWall2Dark.png?_ijt=4ovst5mv8k0msio5l2bcl3kash</find>
       <find>let enemyArr = [];</find>
       <find>roofEnemy,</find>
-      <find>enemiesLevel3</find>
       <find>checka</find>
       <find>SystemMSGLevel3[4]</find>
       <find>SystemMSGLeve</find>
@@ -229,6 +212,9 @@
       <find>checkBou</find>
       <find>anGoThisWay</find>
       <find>checkBoun</find>
+      <find>goToSt</find>
+      <find>goToS</find>
+      <find>enemiesLevel3</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -244,7 +230,6 @@
         <option value="$PROJECT_DIR$/0Main/Src/level7n8.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level4.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level5.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level7.js" />
@@ -254,8 +239,9 @@
         <option value="$PROJECT_DIR$/0Main/Src/level2.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
         <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/level3.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/level3.js" />
       </list>
     </option>
   </component>
@@ -360,12 +346,12 @@
       <workItem from="1531707300261" duration="47497000" />
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
-      <workItem from="1532100492835" duration="7007000" />
+      <workItem from="1532100492835" duration="7898000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88920000" />
+    <option name="totallyTimeSpent" value="89811000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -432,7 +418,7 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="43" />
+      <option name="time" value="44" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -716,31 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#175#297#0" />
-            <element signature="n#!!block;n#initializeLV1#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="e#1508#2200#0" />
-            <element signature="e#2361#9985#0" />
-            <element signature="n#!!block;n#initalizeLV2#0" />
-            <element signature="e#19662#20107#0" />
-            <element signature="e#20132#20218#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/level6.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
@@ -806,28 +767,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="457" column="21" selection-start-line="457" selection-start-column="9" selection-end-line="457" selection-end-column="21" />
+        <state relative-caret-position="405">
+          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-762">
+          <caret line="285" column="8" lean-forward="true" selection-start-line="285" selection-start-column="8" selection-end-line="285" selection-end-column="14" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1155#1344#0" />
-            <element signature="n#!!block;n#f#0" />
-            <element signature="n#!!block;n#clearLevel3#0" />
-            <element signature="n#!!block;n#detectMovementLevel3#0" />
-            <element signature="n#!!block;n#resetTimer#0" />
-            <element signature="n#!!block;n#appearEnemy#0" />
-            <element signature="n#!!block;n#resetLevel#0" />
-            <element signature="e#14784#15085#0" />
+            <element signature="e#1508#2200#0" />
+            <element signature="e#2361#9985#0" />
+            <element signature="e#19662#20107#0" />
+            <element signature="e#20132#20218#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="2752" column="1" selection-start-line="2752" selection-start-column="1" selection-end-line="2752" selection-end-column="1" />
+        <state relative-caret-position="216">
+          <caret line="1431" column="32" selection-start-line="1431" selection-start-column="27" selection-end-line="1431" selection-end-column="32" />
           <folding>
             <element signature="e#5354#5605#0" />
             <element signature="e#5893#6361#0" />
@@ -836,12 +799,6 @@
             <element signature="e#8669#9113#0" />
             <element signature="e#9199#9985#0" />
             <element signature="e#10207#10327#0" />
-            <element signature="e#797224#811368#0" />
-            <element signature="e#811399#821710#0" />
-            <element signature="e#821750#829020#0" />
-            <element signature="e#5639#5655#0" />
-            <element signature="e#5707#5723#0" />
-            <element signature="e#5776#5792#0" />
             <element signature="e#5848#5864#0" />
             <element signature="e#5920#5936#0" />
             <element signature="e#5993#6009#0" />
@@ -851,7 +808,6 @@
             <element signature="e#888352#892777#0" />
             <element signature="e#892811#894384#0" />
             <element signature="e#894590#905847#0" />
-            <element signature="e#905920#948456#0" />
             <element signature="e#970222#978187#0" />
             <element signature="e#109420#111201#0" />
             <element signature="e#978266#981266#0" />
@@ -862,10 +818,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Main.html">
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="34" column="34" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        <state relative-caret-position="89">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
+          <folding>
+            <element signature="e#175#297#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="454" column="23" selection-start-line="454" selection-start-column="23" selection-end-line="454" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1155#1344#0" />
+            <element signature="n#!!block;n#f#0" />
+            <element signature="e#12248#13849#0" />
+          </folding>
         </state>
       </provider>
     </entry>
