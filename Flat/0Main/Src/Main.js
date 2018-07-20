@@ -534,48 +534,42 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             dir: undefined, //Stores direction chosen to walk
             dirOK: true,
             dead: true,
-            roam: function()
-            {
+            roam: function () {
                 let self = this;
                 self.dead = false;
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
                 img.src = "../../2Sewer/images/rat.png";
-                img.onload = function(){walk();};
+                img.onload = function () {
+                    walk();
+                };
 
                 //Walk the direction chosen if boundaries permit it
-                function walk()
-                {
-                    if (l2 && !self.dead)
-                    {
+                function walk() {
+                    if (l2 && !self.dead) {
                         //Get random walking direction
                         self.dir = chooseDirection();
 
                         //Call walking function correlating to direction chosen direction -- if ok to walk this way
                         //      else choose another random direction
-                        if (self.dir === "left")
-                        {
+                        if (self.dir === "left") {
                             checkIfOk(37);//Check boundaries inputting keyCode for direction
                         }
-                        else if (self.dir === "right")
-                        {
+                        else if (self.dir === "right") {
                             checkIfOk(39);
                         }
-                        else if (self.dir === "up")
-                        {
+                        else if (self.dir === "up") {
                             checkIfOk(38);
                         }
-                        else if (self.dir === "down")
-                        {
+                        else if (self.dir === "down") {
                             checkIfOk(40);
                         }
                     }
                 }
 
                 //Simple AI to choose direction to travel -- returns direction to go
-                function chooseDirection()
-                {
+                function chooseDirection() {
                     let directionChosen;
 
                     //Setup variables to choose direction to get with
@@ -585,24 +579,22 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     xChosen = yChosen = up = down = left = right = false;
 
                     //To use to decide whether to travel x or y axis
-                    let xOrY = (Math.floor(Math.random()*2) + 1);
+                    let xOrY = (Math.floor(Math.random() * 2) + 1);
 
                     //Set axis chosen to true and and initialize variable to chose which way on axis
-                    switch (xOrY)
-                    {
+                    switch (xOrY) {
                         case 1:
                             xChosen = true;
-                            xDir = (Math.floor(Math.random()*2) + 1);
+                            xDir = (Math.floor(Math.random() * 2) + 1);
                             break;
                         case 2:
                             yChosen = true;
-                            yDir = (Math.floor(Math.random()*2) + 1);
+                            yDir = (Math.floor(Math.random() * 2) + 1);
                             break;
                     }
 
                     //Chose a direction on the axis chosen
-                    if (yChosen)
-                    {
+                    if (yChosen) {
                         switch (yDir)//Decide if going up or down
                         {
                             case 1:
@@ -613,8 +605,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                                 break;
                         }
                     }
-                    else if (xChosen)
-                    {
+                    else if (xChosen) {
                         switch (xDir)//Decide if going left or right
                         {
                             case 1:
@@ -627,28 +618,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
 
                     //Set direction chosen to return to variable that called it
-                    if (left)
-                    {
+                    if (left) {
                         directionChosen = "left";
                     }
-                    else if (right)
-                    {
+                    else if (right) {
                         directionChosen = "right";
                     }
-                    else if (up)
-                    {
+                    else if (up) {
                         directionChosen = "up";
                     }
-                    else if (down)
-                    {
+                    else if (down) {
                         directionChosen = "down";
                     }
                     return directionChosen;
                 }
 
                 //Check boundaries (ONLY lMap -- not lPMap or lOMap)
-                function checkIfOk(e)
-                {
+                function checkIfOk(e) {
                     //Bool value to store answer of whether rat can travel this way
                     let goodToGo = false;
 
@@ -662,8 +648,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
                         }
 
@@ -717,8 +702,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
                         }
 
@@ -771,8 +755,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
                         }
                         else if (l2) {
@@ -824,8 +807,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
                         }
                         else if (l2) {
@@ -880,88 +862,78 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     self.dirOk = goodToGo;
 
 
-                    if (self.dirOk)
-                    {
-                        if (e === 37)
-                        {
-                            if (self.xPos - 32 > 0)
-                            {
-                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
-                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
-                                {
+                    if (self.dirOk) {
+                        if (e === 37) {
+                            if (self.xPos - 32 > 0) {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32 || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32) {
                                     walkLeft();
                                 }
-                                else
-                                    setTimeout(walk, self.scurrySpeed);
                             }
-                            else
-                                setTimeout(walk, self.scurrySpeed);
                         }
-                        else if (e === 39)//Right
-                        {
-                            if (self.xPos + 32 + self.width < 600)
-                            {
-                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
-                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
-                                {
-                                    walkRight();
-                                }
-                                else
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else
-                                setTimeout(walk, self.scurrySpeed);
-                        }
-                        else if (e === 38)//Up
-                        {
-                            if (self.yPos - 32 > 0)
-                            {
-                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
-                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
-                                {
-                                    walkUp();
-                                }
-                                else
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else
-                                setTimeout(walk, self.scurrySpeed);
-
-                        }
-                        else if (e === 40)//Down
-                        {
-                            if (self.yPos + 32 + self.height < 800)
-                            {
-                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
-                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
-                                {
-                                    walkDown();
-                                }
-                                else
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else
-                                setTimeout(walk, self.scurrySpeed);
+                        else {
+                            setTimeout(walk, self.scurrySpeed);
                         }
                     }
+                    /*else
+                    {
+                        setTimeout(walk, self.scurrySpeed);
+                    }*/
+
+                    else if (e === 39)//Right
+                    {
+                        if (self.xPos + 32 + self.width < 600) {
+                            if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32) {
+                                walkRight();
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+                        }
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+                    }
+                    else if (e === 38)//Up
+                    {
+                        if (self.yPos - 32 > 0) {
+                            if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32) {
+                                walkUp();
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+                        }
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+
+                    }
+                    else if (e === 40)//Down
+                    {
+                        if (self.yPos + 32 + self.height < 800) {
+                            if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32) {
+                                walkDown();
+                            }
+                            else
+                                setTimeout(walk, self.scurrySpeed);
+                        }
+                        else
+                            setTimeout(walk, self.scurrySpeed);
+                    }
+
                     else
                         setTimeout(walk, self.scurrySpeed);
                 }
 
 
-                function checkIfHit()
-                {
-                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
-                    {
-                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
-                        {
+                function checkIfHit() {
+                    if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48)) {
+                        if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48)) {
                             p.health--;
                             aghh.play();
-                            if (p.health === 0)
-                            {
+                            if (p.health === 0) {
                                 self.dead = true;
                                 ctx.fillStyle = '#ff0c18';
-                                ctx.fillRect(0,0,800,600);
+                                ctx.fillRect(0, 0, 800, 600);
                                 resetLevel(self.scurrySpeed);
                             }
                         }
@@ -970,16 +942,14 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
 
                 //Simple walking one direction functions
-                function walkLeft()
-                {
+                function walkLeft() {
 
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsLeft = (Math.floor(Math.random() * 4) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
-                    if (!self.lFrameSet)
-                    {
+                    if (!self.lFrameSet) {
                         self.frameXCounter = 0;
                         self.frameX = 0;
                         self.frameY = 1;//Facing left
@@ -993,8 +963,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     moveLeft();
 
                     //Move character by 1/4 of a tile for however many random steps selected
-                    function moveLeft()
-                    {
+                    function moveLeft() {
                         stepsLeft++;
                         //Set position to be erased
                         setLastPos();
@@ -1016,15 +985,14 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     }
                 }
-                function walkRight()
-                {
+
+                function walkRight() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsRight = (Math.floor(Math.random() * 4) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
-                    if (!self.rFrameSet)
-                    {
+                    if (!self.rFrameSet) {
                         self.frameXCounter = 0;
                         self.frameX = 0;
                         self.frameY = 2;//Facing right
@@ -1038,8 +1006,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     moveRight();
 
                     //Move character by 1/4 of a tile for however many random steps selected
-                    function moveRight()
-                    {
+                    function moveRight() {
                         stepsRight++;
                         //Set position to be erased
                         setLastPos();
@@ -1061,15 +1028,14 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     }
                 }
-                function walkDown()
-                {
+
+                function walkDown() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsDown = (Math.floor(Math.random() * 4) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
-                    if (!self.dFrameSet)
-                    {
+                    if (!self.dFrameSet) {
                         self.frameXCounter = 0;
                         self.frameX = 0;
                         self.frameY = 0;//Facing down
@@ -1083,8 +1049,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     moveDown();
 
                     //Move character by 1/4 of a tile for however many random steps selected
-                    function moveDown()
-                    {
+                    function moveDown() {
                         stepsDown++;
                         //Set position to be erased
                         setLastPos();
@@ -1107,15 +1072,14 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     }
                 }
-                function walkUp()
-                {
+
+                function walkUp() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsUp = (Math.floor(Math.random() * 4) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
-                    if (!self.uFrameSet)
-                    {
+                    if (!self.uFrameSet) {
                         self.frameXCounter = 0;
                         self.frameX = 0;
                         self.frameY = 3;//Facing Up
@@ -1129,8 +1093,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     moveUp();
 
                     //Move character by 1/4 of a tile for however many random steps selected
-                    function moveUp()
-                    {
+                    function moveUp() {
                         stepsUp++;
                         //Set position to be erased
                         setLastPos();
@@ -1153,8 +1116,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                 }
 
                 //Set last position for erasing map
-                function setLastPos()
-                {
+                function setLastPos() {
                     self.prevX = self.xPos;
                     self.prevY = self.yPos;
                 }
@@ -1166,9 +1128,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
 
-                    for (let mR = ((self.yPos-remainY) / 32) - 2; mR < ((self.yPos-remainY) / 32) + 4; mR ++) //Run through all that would have been erased
+                    for (let mR = ((self.yPos - remainY) / 32) - 2; mR < ((self.yPos - remainY) / 32) + 4; mR++) //Run through all that would have been erased
                     {
-                        for (let mC = ((self.xPos-remainX) / 32) - 2; mC < ((self.xPos-remainX) / 32) + 3; mC ++)//Run through all columns that would have been erased
+                        for (let mC = ((self.xPos - remainX) / 32) - 2; mC < ((self.xPos - remainX) / 32) + 3; mC++)//Run through all columns that would have been erased
                         {
 
                             if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
@@ -1410,7 +1372,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                                 if (thingToDraw !== undefined)//If there is something to be drawn in area being examined
                                 {
-                                    if (thingToDraw === sewerFloor  && (l2 || l11))
+                                    if (thingToDraw === sewerFloor && (l2 || l11))
                                     // If drawing the floor on level 2
                                     // then draw it based on floorSpriteX var positioning
                                         ctx.drawImage(thingToDraw, floorSpriteX, 0, 32, 32, (mC * 32), (mR * 32), 32, 32);
@@ -1431,14 +1393,14 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
                     checkIfHit();
                 }
+
             }
         };
 
     //Define a second function that only draws the rat (for use when rat needs to be redrawn immediately after being erased)
     //Would not allow secondary function to be used during
 
-    ratSmall.drawMe = function()
-    {
+    ratSmall.drawMe = function () {
         ctx.drawImage(ratImage, this.frameX * 32, this.frameY * 32, 32, 32, this.xPos, this.yPos, 32, 32);
     };
 
@@ -1461,48 +1423,42 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
             dir: undefined, //Stores direction chosen to walk
             dirOK: true,
             dead: true,
-            roam: function()
-            {
+            roam: function () {
                 let self = this;
                 self.dead = false;
                 //Set image -- then start walking
                 let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                 let img = new Image();
                 img.src = "../../1Home/images/jeffery.png";
-                img.onload = function(){walk();};
+                img.onload = function () {
+                    walk();
+                };
 
                 //Walk the direction chosen if boundaries permit it
-                function walk()
-                {
-                    if (l1 && !self.dead)
-                    {
+                function walk() {
+                    if (l1 && !self.dead) {
                         //Get random walking direction
                         self.dir = chooseDirection();
 
                         //Call walking function correlating to direction chosen direction -- if ok to walk this way
                         //      else choose another random direction
-                        if (self.dir === "left")
-                        {
+                        if (self.dir === "left") {
                             checkIfOk(37);//Check boundaries inputting keyCode for direction
                         }
-                        else if (self.dir === "right")
-                        {
+                        else if (self.dir === "right") {
                             checkIfOk(39);
                         }
-                        else if (self.dir === "up")
-                        {
+                        else if (self.dir === "up") {
                             checkIfOk(38);
                         }
-                        else if (self.dir === "down")
-                        {
+                        else if (self.dir === "down") {
                             checkIfOk(40);
                         }
                     }
                 }
 
                 //Simple AI to choose direction to travel -- returns direction to go
-                function chooseDirection()
-                {
+                function chooseDirection() {
                     let directionChosen;
 
                     //Setup variables to choose direction to get with
@@ -1512,24 +1468,22 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     xChosen = yChosen = up = down = left = right = false;
 
                     //To use to decide whether to travel x or y axis
-                    let xOrY = (Math.floor(Math.random()*2) + 1);
+                    let xOrY = (Math.floor(Math.random() * 2) + 1);
 
                     //Set axis chosen to true and and initialize variable to chose which way on axis
-                    switch (xOrY)
-                    {
+                    switch (xOrY) {
                         case 1:
                             xChosen = true;
-                            xDir = (Math.floor(Math.random()*2) + 1);
+                            xDir = (Math.floor(Math.random() * 2) + 1);
                             break;
                         case 2:
                             yChosen = true;
-                            yDir = (Math.floor(Math.random()*2) + 1);
+                            yDir = (Math.floor(Math.random() * 2) + 1);
                             break;
                     }
 
                     //Chose a direction on the axis chosen
-                    if (yChosen)
-                    {
+                    if (yChosen) {
                         switch (yDir)//Decide if going up or down
                         {
                             case 1:
@@ -1540,8 +1494,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                                 break;
                         }
                     }
-                    else if (xChosen)
-                    {
+                    else if (xChosen) {
                         switch (xDir)//Decide if going left or right
                         {
                             case 1:
@@ -1554,28 +1507,23 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
 
                     //Set direction chosen to return to variable that called it
-                    if (left)
-                    {
+                    if (left) {
                         directionChosen = "left";
                     }
-                    else if (right)
-                    {
+                    else if (right) {
                         directionChosen = "right";
                     }
-                    else if (up)
-                    {
+                    else if (up) {
                         directionChosen = "up";
                     }
-                    else if (down)
-                    {
+                    else if (down) {
                         directionChosen = "down";
                     }
                     return directionChosen;
                 }
 
                 //Check boundaries (ONLY lMap -- not lPMap or lOMap)
-                function checkIfOk(e)
-                {
+                function checkIfOk(e) {
                     //Bool value to store answer of whether rat can travel this way
                     let goodToGo = false;
 
@@ -1589,8 +1537,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     //Check level map (Not level player map or level object map) for boundaries to see if ok to go this way
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
                         }
                         else if (l2) {
@@ -1643,8 +1590,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
                         }
 
@@ -1697,8 +1643,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
                         }
                         else if (l2) {
@@ -1750,8 +1695,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                        {
+                        if (l1 || l4 || l7 || l8) {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
                         }
 
@@ -1807,62 +1751,80 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     self.dirOk = goodToGo;
 
 
-                    if (self.dirOk)
-                    {
-                    else if (e === 39)//Right
-                    {
-                        if (self.xPos + 32 + self.width < 600)
+                    if (self.dirOk) {
+                        if (e === 37)//Left
                         {
-                            if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
-                                || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32)
-                            {
-                                walkRight();
+                            if (self.xPos - 32 > 0) {
+                                if (self.xPos - 32 > p.col * 32 + p.width || self.xPos + self.width < p.col * 32
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32) {
+                                    walkLeft();
+                                }
+                                else {
+                                    setTimeout(walk, self.scurrySpeed);
+                                }
+                            }
+                            else {
+                                setTimeout(walk, self.scurrySpeed);
+                            }
+                        }
+                        else if (e === 39)//Right
+                        {
+                            if (self.xPos + 32 + self.width < 600) {
+                                if (self.xPos + 32 + self.width < p.col * 32 || self.xPos > p.col * 32 + p.width
+                                    || self.yPos <= (p.row - 1) * 32 || self.yPos >= (p.row + 1) * 32) {
+                                    walkRight();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
                             }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else
-                            setTimeout(walk, self.scurrySpeed);
-                    }
-                    else if (e === 38)//Up
-                    {
-                        if (self.yPos - 32 > 0)
+                        else if (e === 38)//Up
                         {
-                            if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
-                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
-                            {
-                                walkUp();
+                            if (self.yPos - 32 > 0) {
+                                if (self.yPos - 32 > p.row * 32 + p.height || self.yPos + self.height < p.row * 32
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32) {
+                                    walkUp();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
                             }
-                            else
+                            else {
                                 setTimeout(walk, self.scurrySpeed);
-                        }
-                        else
-                            setTimeout(walk, self.scurrySpeed);
+                            }
 
-                    }
-                    else if (e === 40)//Down
-                    {
-                        if (self.yPos + 32 + self.height < 800)
+                        }
+                        else if (e === 40)//Down
                         {
-                            if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
-                                || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32)
-                            {
-                                walkDown();
+                            if (self.yPos + 32 + self.height < 800) {
+                                if (self.yPos + 32 + self.height < p.row * 32 || self.yPos > p.row * 32 + p.height
+                                    || self.xPos + self.width <= (p.col - 1) * 32 || self.xPos >= (p.col + 1) * 32) {
+                                    walkDown();
+                                }
+                                else
+                                    setTimeout(walk, self.scurrySpeed);
                             }
                             else
                                 setTimeout(walk, self.scurrySpeed);
                         }
-                        else
-                            setTimeout(walk, self.scurrySpeed);
                     }
-                    }
-                    else
+                    else {
+
                         setTimeout(walk, self.scurrySpeed);
+                    }
                 }
 
 
 
-                //Simple walking one direction functions
+
+
+
+
+
+
+
+            //Simple walking one direction functions
                 function walkLeft()
                 {
 
@@ -2315,15 +2277,8 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                         }
                     }
 
-
-
-
-
-
                     //Draw new position
                     ctx.drawImage(img, self.frameX * 32, self.frameY * 48, 32, 48, self.xPos, self.yPos, 32, 48);
-
-
                     drawZeeEnemy();
 
                     //Draw player over map and mouse
@@ -3244,59 +3199,11 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     ctx.drawImage(helipad, 5, 150);
                     ctx.drawImage(helicopter, 5, 85);
 
-                    drawL6();
+                    drawL6Full();
 
                     if (p.row * 32 < self.yPos)//If player is above (behind) the enemy .. draw player first
                     {
-                        /*if (l6)
-                        {
-                            let gate = new Image();
-                            let fence = new Image();
-                            let litWindow = new Image();
-                            let darkWindow = new Image();
-                            let cherryTree = new Image();
-                            let statue = new Image();
-                            let car = new Image();
-                            let ladder = new Image();
-                            let helipad = new Image();
-                            let helicopter = new Image();
-                            let exit = new Image();
-                            let shrub = new Image();
-                            {
-                                shrub.src = "../../6Roof/images/shrub.png";
-                                exit.src = "../../6Roof/images/exit2.png";
-                                helicopter.src = "../../6Roof/images/helicopter1.png";
-                                helipad.src = "../../6Roof/images/helipad.png";
-                                ladder.src = "../../6Roof/images/ladder.png";
-                                car.src = "../../6Roof/images/car.png";
-                                statue.src = "../../6Roof/images/statue.png";
-                                cherryTree.src = "../../6Roof/images/cherryTree.png";
-                                darkWindow.src = "../../6Roof/images/darkWindow.png";
-                                litWindow.src = "../../6Roof/images/litWindow.png";
-                                fence.src = "../../6Roof/images/fence.png";
-                                gate.src = "../../6Roof/images/gate.png";
-                            }
 
-                            ctx.drawImage(darkWindow, 10, 427);
-                            ctx.drawImage(darkWindow, 60, 427);
-                            ctx.drawImage(darkWindow, 210, 427);
-                            ctx.drawImage(darkWindow, 260, 427);
-                            ctx.drawImage(darkWindow, 310, 427);
-                            ctx.drawImage(darkWindow, 460, 427);
-                            ctx.drawImage(litWindow, 110, 427);
-                            ctx.drawImage(litWindow, 160, 427);
-                            ctx.drawImage(litWindow, 360, 427);
-                            ctx.drawImage(litWindow, 410, 427);
-                            ctx.drawImage(litWindow, 510, 427);
-                            ctx.drawImage(ladder, 5, 160);
-                            ctx.drawImage(helipad, 5, 150);
-                            ctx.drawImage(helicopter, 5, 85);
-                            ctx.drawImage(exit, 309, 335);
-                            ctx.drawImage(cherryTree, 385, 490);
-                            ctx.drawImage(fence, 390, 545);
-                            ctx.drawImage(fence, 455, 545);
-                        }
-                    }*/
                         if(notWalking)
                         {
                         drawPMap();
@@ -3305,7 +3212,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
 
 
                     //Draw new position
-                    ctx.drawImage(img, self.frameX * 32, self.frameY * 48, 32, 48, self.xPos, self.yPos, 32, 48);
+
                     else
                     {
                         ctx.drawImage(img, self.frameX * 32, self.frameY * 48, 32, 48, self.xPos, self.yPos, 32, 48);
