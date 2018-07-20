@@ -153,7 +153,7 @@ let rock = new Audio;
     rock.volume = true;
 
     streetSound.loop = true;
-    streetSound.volume = 0.05;
+    streetSound.volume = 0.01;
 
     bgm_level3.loop = true;
     bgm_level3.volume = 0.2;
@@ -4848,7 +4848,7 @@ function startGame()
             market7.src = "../../4Streetz/images/market7.png";
             market8.src = "../../4Streetz/images/market8.png";
             market9.src = "../../4Streetz/images/market9.png";
-            momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
+            momsHouse2.src = "../../4Streetz/images/momkey.png";
             momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
             park1.src = "../../4Streetz/images/park1.png";
             park2.src = "../../4Streetz/images/park2.png";
@@ -4889,6 +4889,7 @@ function startGame()
 
             v = momsHouse2;         //20
             x = momsHouse4;         //22
+            
             ee = mall1;             //29
             ff = mall2;             //30
             gg = mall3;             //31
@@ -4902,7 +4903,8 @@ function startGame()
             vv = bank1;             //45
             ww = bank2;             //46
             xx = bank3;             //47
-            yy = bank4;             //48
+            yy = bank4;  			//48
+
             zz = coffee1;           //49
             aaa = coffee2;          //50
             bbb = coffee3;          //51
@@ -8545,7 +8547,7 @@ function checkActions()
             {
               	rock.play();
                 if (lMap[level][p.row-1][p.col] === 2)
-                    lMap[level][p.row-1][p.col] = 40;
+                    lMap[level][p.row-1][p.col] = 20;
             }
         }
         else if (p.frameY === 2)//Looking Right
@@ -8556,7 +8558,7 @@ function checkActions()
 
                 rock.play();
                 if (lMap[level][p.row + 1][p.col + 2] === 2)
-                    lMap[level][p.row + 1][p.col + 2] = 40;
+                    lMap[level][p.row + 1][p.col + 2] = 20;
             }
         }
         else if (p.frameY === 1)//Looking Left
@@ -8566,7 +8568,7 @@ function checkActions()
             {
                 rock.play();
                 if (lMap[level][p.row + 1][p.col - 2] === 2)
-                    lMap[level][p.row + 1][p.col - 2] = 40;
+                    lMap[level][p.row + 1][p.col - 2] = 20;
             }
         }
         else if (p.frameY === 0)//Looking Down
@@ -8577,7 +8579,7 @@ function checkActions()
             {
                 rock.play();
                 if (lMap[level][p.row + 3][p.col] === 2)
-                    lMap[level][p.row + 3][p.col] = 40;
+                    lMap[level][p.row + 3][p.col] = 20;
             }
         }
 
