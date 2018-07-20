@@ -79,14 +79,6 @@ enemyImg.src = "../../3Store/images/enemy2.png";//enemy image (temp)
 let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
 let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
 
-let enemyLevel3 = function(row, col) {
-    this.row = row;
-    this.col = col;
-    this.width = 32;
-    this.height = 64;
-    this.sw = 1;
-    // add enemy property if need
-};
 
 let jeffery = new Image();
 {
