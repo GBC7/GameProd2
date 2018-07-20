@@ -288,7 +288,7 @@ function detectMovementLevel3()
         enemyIndexLevel3++;
 
         // add mob, start timer again. alert is temp msg.
-      
+
         setTimeout(dialogInitialize, 3000);
         enemyAppearLevel3 = false;
         detectPlayerLevel3 = true;

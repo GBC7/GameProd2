@@ -3233,43 +3233,46 @@ function checkActions()
                 i = emptyShelvesTop;
                 j = emptyShelvesBottom;
                 researchPaper = true;
-                /*drawMap();*/
-                dialog = true;
                 fillErasedMap();
                 drawPMap();
             }
         }
         else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
         {
-            if (!researchPaper)
+            if (lighterFluid && researchPaper)
             {
-                // Thought bubble saying "I need to find the research!"
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-            else if (!lighterFluid && researchPaper)
-            {
-                // thought bubble saying "I need my lighterFluid"
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-            }
-            else if (lighterFluid && researchPaper)
-            {
-                // thought bubble saying "It's done"
                 researchBurned = true;
-                dialog = true;
                 fillErasedMap();
                 drawPMap();
             }
         }
-        else if (p.row === 17 && p.col === 19 && !researchBurned)
+
+        if (p.row === 1 && p.col === 20)
         {
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
+            dialogText(names[1], SystemMSGLevel7[1], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
         }
+        else if ((!researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogText(names[1], SystemMSGLevel7[2], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        else if ((!lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogText(names[1], SystemMSGLevel7[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        else if ((lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
+        {
+            dialogText(names[1], SystemMSGLevel7[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        else if (p.row === 17 && p.col === 19)
+        {
+            dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
     }
 
     else if (l8)
