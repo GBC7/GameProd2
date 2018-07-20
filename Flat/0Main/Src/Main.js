@@ -134,8 +134,9 @@ startGame();
 
 function startGame()
 {
-    if (l1)//Home(roof)
+    pauseSounds();//Pauses all sounds when switching levels
 
+    if (l1)//Home(roof)
     {
         l1Ready = false;
         initializeLV1();
@@ -143,35 +144,30 @@ function startGame()
     }
 
     else if (l2)//Sewer
-
     {
         l2Ready = false;
         initializeLV2();
     }
 
     else if (l3)//Clothing Store
-
     {
         l3Ready = false;
        initializeLV3()
     }
 
     else if (l4)//The Streetz
-
     {
         l4Ready = false;
         initializeLV4();
     }
 
     else if (l5)//Moms House
-
     {
         l5Ready = false;
         initializeLV5();
     }
 
     else if (l6)//Roof (Home)
-
     {
         l6Ready = false;
         l6Ready2 = false;
@@ -190,17 +186,31 @@ function startGame()
         initializeLV8();
     }
 
-
-
     else if (l11)//SewerPipe Map
     {
         l11Ready = false;
         initializeLV11();
     }
+
     else if (l12)//SewerPipe Map
-           {
-               initializeCopterLevel();
-        }
+    {
+        initializeCopterLevel();
+    }
+
+    function pauseSounds()
+    {
+        meow.pause();
+        newsReport.pause();
+        ratOfDeath.pause();
+        waterRunning.pause();
+        dangerous.pause();
+        bgm_level3.pause();
+        warningSound.pause();
+        doorSound.pause();
+        streetSound.pause();
+        aghh.pause();
+        lockedDoor.pause();
+    }
 }
 
 function fillErasedMap()
