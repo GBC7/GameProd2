@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-let heliCanvas, ctx2, left, down, right, up, climbing, chopper, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
-    canvasY, checkMoving, tutorialPart, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
-    tutClimb, tutFall, pilotHadTo, doneTheTut;
-=======
 let heliCanvas, ctx2, left, down, right, up, climbing, chopper, chicken, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
     canvasY, checkMoving, tutorialPart, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
     tutClimb, tutFall, pilotHadTo, doneTheTut, chickens;
 
 let pigs = new Image();
 pigs.src = "../../12Helo/images/FlyingPig.png";
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 
 
 //This probably initializes the level
@@ -77,12 +71,9 @@ function initializeCopterLevel()
             //Dialog bools
             helaIntro = leftAndRight = upAndDown = whew = pilotHadTo = false;
 
-<<<<<<< HEAD
-=======
             //Enemy array
             chickens = [];
 
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
             //Put Canvas in starting position
             moveCanvas(canvasX, canvasY);
         }
@@ -121,14 +112,11 @@ function initializeCopterLevel()
                     //Things that tell the computer if it's still doing what its doing
                     setup: false,
                     crashed: false,
-<<<<<<< HEAD
-=======
                     crashSetup: false,
                     timeOutCleared: false,
 
                     //Health stat(s)
                     health: 3,
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 
                     //The thing that gets things done
                     takeOffEh: function()
@@ -175,13 +163,10 @@ function initializeCopterLevel()
                             canvasY += self.fallSpeed;
                             moveCanvas(canvasX, canvasY);
                             drawTheChopper();
-<<<<<<< HEAD
-=======
 
 
                             //Check for crash
                             checkCrash();
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
                         }
 
                         function drawTheChopper()
@@ -191,16 +176,11 @@ function initializeCopterLevel()
 
                             //Draw the chopper where it's at
                             ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.actualWidth, self.actualHeight);
-<<<<<<< HEAD
-
-                            setTimeout(spinDeBlades, self.rotateSpeed);
-=======
                             if (!self.crashed)
                                 setTimeout(spinDeBlades, self.rotateSpeed);
                             else
                                 self.timeOutCleared = true;
 
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
                         }
 
                     }
@@ -216,8 +196,6 @@ function initializeCopterLevel()
                 //Draw the chopper where it's at .. just .. smaller
                 ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
             };
-<<<<<<< HEAD
-=======
             chopper.drawCrash = function()
             {
                 if (!self.crashSetup)
@@ -257,15 +235,12 @@ function initializeCopterLevel()
                 ctx2.drawImage(helo, self.srcX, self.srcY * self.actualHeight, self.actualWidth, self.actualHeight, self.xPos, self.yPos, self.startWidth, self.startHeight);
                 setTimeout(chopper.drawCrash, 120);
             };
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 
             chopper.selfAssign = function()
             {
                 self = this;
             }
         }
-<<<<<<< HEAD
-=======
 
         //Flying chickes? Why not..
         {
@@ -452,7 +427,6 @@ function initializeCopterLevel()
             }
 
         }
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
     }
 
 
@@ -477,10 +451,7 @@ function start()
     {
         //This draws a thing at a location
         ctx.drawImage(startBuilding, 0, 0, 300, 198, 0, 402, 300, 198);
-<<<<<<< HEAD
-=======
         ctx.drawImage(pigs, 0, 0);
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 
         //Assign the variable self to this in the chopper so that functions will actually work
         chopper.selfAssign();
@@ -491,14 +462,11 @@ function start()
     else//Probably where all side scrolling objects go to be animated
     {
         ctx.clearRect(0, 0, 800, 600);
-<<<<<<< HEAD
-=======
         for (let i = 0; i < chickens.length; i++)
         {
             if (chickens[i].setup)
                 chickens[i].drawMeNow();
         }
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
         //This draws a thing at a location
         if (distanceTravelled <= 300)
             ctx.drawImage(startBuilding, 0, 0, 300, 198, -distanceTravelled, 402, 300, 198);
@@ -509,11 +477,7 @@ function start()
             CheckConversationAction();
 
             //Set controls dialog to start after 5 seconds of reading
-<<<<<<< HEAD
-            setTimeout(startRotTut, 7000);
-=======
             setTimeout(startRotTut, 5000);
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 
 
             function startRotTut()
@@ -838,20 +802,13 @@ function start()
 
             //Check for movement interval
             checkMoving = setInterval(makeItMove, 10);
-<<<<<<< HEAD
-=======
             setInterval(checkChickens, 60);
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
         }
     }
 
 }
 
 function startRotating()
-<<<<<<< HEAD
-
-=======
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
 {
     //Change frames
     chopper.frame++;
@@ -938,8 +895,6 @@ function makeItMove()
         canvasX += climbSpeed * Math.sin(angle * Math.PI / 180);
         moveCanvas(canvasX, canvasY);
         chopper.drawIt();
-<<<<<<< HEAD
-=======
 
         checkCrash();
     }
@@ -1165,7 +1120,6 @@ function checkCrash()
     else if (canvasY + chopper.bottomSide >= 600)
     {
         chopper.drawCrash();
->>>>>>> b2a858570febb88ca5aa6b35d2a92c3befb5ddd5
     }
 }
 

@@ -26,8 +26,8 @@
       <file leaf-file-name="HelicopterLevel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="643">
-              <caret line="1231" lean-forward="true" selection-start-line="1231" selection-end-line="1231" />
+            <state relative-caret-position="616">
+              <caret line="1185" lean-forward="true" selection-start-line="1185" selection-end-line="1185" />
             </state>
           </provider>
         </entry>
@@ -59,22 +59,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1587">
-              <caret line="189" column="1" lean-forward="true" selection-start-line="189" selection-start-column="1" selection-end-line="189" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="21451" column="61" selection-start-line="21451" selection-start-column="61" selection-end-line="21451" selection-end-column="61" />
+            <state relative-caret-position="214">
+              <caret line="824" column="123" selection-start-line="824" selection-start-column="20" selection-end-line="824" selection-end-column="123" />
               <folding>
-                <element signature="e#19370#62863#0" />
                 <element signature="e#60052#60166#0" />
                 <element signature="e#60197#99286#0" />
                 <element signature="e#99328#99441#0" />
@@ -102,6 +92,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="643">
+              <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -114,12 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lockedDoor.play();</find>
-      <find>if (!researchPaper)</find>
-      <find>DialogNews</find>
-      <find>detectMovementLevel3()</find>
-      <find>if (l3 &amp;&amp; enemyAppearLevel3 === true)</find>
-      <find>else if (enemyAppearLevel3)</find>
       <find>thotBR</find>
       <find>SystemMSGLevel</find>
       <find>dialogInitialize</find>
@@ -133,7 +126,6 @@
       <find>checkac</find>
       <find>tut</find>
       <find>removeEventListener(&quot;keydown&quot;, onKeyDown, false);</find>
-      <find>names[4],</find>
       <find>portrait[4]</find>
       <find>//Simple walking one direction functions</find>
       <find>//Simulate walking by changing frames</find>
@@ -144,17 +136,24 @@
       <find>lMap[level][p.row + 1][p.col - 2] = 40;</find>
       <find>lMap[level][p.row + 3][p.col] = 40;</find>
       <find>if (lMap[level][p.row + 1][p.col + 2] === 2)</find>
+      <find>if (lMap[level][p.row + 1][p.col - 2] === 2)</find>
+      <find>names[4],</find>
+      <find>lMap[level][p.row + 3][p.col] = 20;</find>
+      <find>goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);</find>
+      <find>if (l1 || l4 || l7 || l8)</find>
+      <find>if (e === 38 &amp;&amp; lMap[level][yPos] !== undefined &amp;&amp; lMap[level][yPos][xPos] !== undefined)//Up</find>
+      <find>if (e === 40 &amp;&amp; lMap[level][yPos + 2] !== undefined &amp;&amp; lMap[level][yPos + 2][xPos] !== undefined)//Down</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.css" />
-        <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
-        <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.css" />
+        <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
       </list>
     </option>
@@ -190,12 +189,6 @@
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
@@ -261,7 +254,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71112000" />
+    <option name="totallyTimeSpent" value="72204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="762" y="0" width="781" height="830" extended-state="0" />
@@ -307,7 +300,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>2775</line>
+          <line>2789</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -317,12 +310,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17305</line>
+          <line>17331</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21619</line>
+          <line>21645</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -332,52 +325,52 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21727</line>
+          <line>21753</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21763</line>
+          <line>21789</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21828</line>
+          <line>21854</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21840</line>
+          <line>21866</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21862</line>
+          <line>21888</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21922</line>
+          <line>21948</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>16997</line>
+          <line>17023</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>21120</line>
+          <line>21146</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/tutorialL1.js</url>
-          <line>155</line>
+          <line>115</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Main.js</url>
-          <line>17713</line>
+          <line>17739</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
@@ -519,13 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1587">
-          <caret line="189" column="1" lean-forward="true" selection-start-line="189" selection-start-column="1" selection-end-line="189" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="635">
@@ -540,13 +526,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="1231" lean-forward="true" selection-start-line="1231" selection-end-line="1231" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
@@ -554,12 +533,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/tutorialL1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="643">
+          <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/HelicopterLevel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="1185" lean-forward="true" selection-start-line="1185" selection-end-line="1185" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="21451" column="61" selection-start-line="21451" selection-start-column="61" selection-end-line="21451" selection-end-column="61" />
+        <state relative-caret-position="214">
+          <caret line="824" column="123" selection-start-line="824" selection-start-column="20" selection-end-line="824" selection-end-column="123" />
           <folding>
-            <element signature="e#19370#62863#0" />
             <element signature="e#60052#60166#0" />
             <element signature="e#60197#99286#0" />
             <element signature="e#99328#99441#0" />

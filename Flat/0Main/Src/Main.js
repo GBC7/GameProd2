@@ -663,7 +663,10 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -769,7 +772,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -820,7 +825,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -1616,7 +1623,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -1722,7 +1731,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -1773,7 +1784,10 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
+                        {
                             goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
+
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8213,7 +8227,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
                         else if (l2) {
                             goodToGo =
                                 (
@@ -8264,7 +8278,7 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9089,7 +9103,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9140,7 +9156,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -9964,8 +9982,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10015,8 +10034,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10841,7 +10861,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -10891,8 +10913,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -11717,7 +11740,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -11767,8 +11792,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -12593,7 +12619,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -12643,8 +12671,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -13469,7 +13498,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -13519,8 +13550,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -14345,7 +14377,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -14395,8 +14429,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -15221,7 +15256,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -15271,8 +15308,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -16097,7 +16135,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                     {
                         if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos][p.col] === floorNumbers[level]);
+                        {
+                            goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
@@ -16147,8 +16187,9 @@ let enemy = [[],[],[],[],[],[],[],[],[],[],[],[]];                              
                     }
                     if (e === 40 && lMap[level][yPos + 2] !== undefined && lMap[level][yPos + 2][xPos] !== undefined)//Down
                     {
-                        if (l1 || l4 || l7 || l8)
-                            goodToGo = (lMap[level][yPos + 2][p.col] === floorNumbers[level]);
+                        if (l1 || l4 || l7 || l8) {
+                            goodToGo = (lMap[level][yPos + 2][xPos] === floorNumbers[level]);
+                        }
                         else if (l2) {
                             goodToGo =
                                 (
