@@ -133,6 +133,7 @@ let waterRunning = new Audio;
 let ratOfDeath = new Audio;
 let newsReport = new Audio;
 let meow = new Audio;
+let rock = new Audio;
 
 {
     aghh.src = ("../audio/aghh.mp3");
@@ -146,6 +147,10 @@ let meow = new Audio;
     ratOfDeath.src = ('../../2Sewer/audio/ratOfDeath.mp3');
     meow.src = ('../../5MomsPlace/audio/meow.wav');
     newsReport.src = ('../../1Home/audio/newsTheme.mp3');
+    rock.src = ("../../4Streetz/audio/rocksound.mp3") ;
+
+
+    rock.volume = true;
 
     streetSound.loop = true;
     streetSound.volume = 0.05;
@@ -8529,6 +8534,55 @@ function checkActions()
             fillErasedMap();
             drawPMap();
         }
+    }
+    else if (l4)
+    {
+        // Check for rocks
+        if (p.frameY === 3)//Looking up
+        {
+            //If the space above contains a cat
+            if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19))
+            {
+              	rock.play();
+                if (lMap[level][p.row-1][p.col] === 2)
+                    lMap[level][p.row-1][p.col] = 40;
+            }
+        }
+        else if (p.frameY === 2)//Looking Right
+        {
+            //If the space to the right contains a cat
+            if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19))
+            {
+
+                rock.play();
+                if (lMap[level][p.row + 1][p.col + 2] === 2)
+                    lMap[level][p.row + 1][p.col + 2] = 40;
+            }
+        }
+        else if (p.frameY === 1)//Looking Left
+        {
+            //If the space to the left contains a cat
+            if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19))
+            {
+                rock.play();
+                if (lMap[level][p.row + 1][p.col - 2] === 2)
+                    lMap[level][p.row + 1][p.col - 2] = 40;
+            }
+        }
+        else if (p.frameY === 0)//Looking Down
+        {
+            //If the space below contains a cat
+            if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
+                if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19))
+            {
+                rock.play();
+                if (lMap[level][p.row + 3][p.col] === 2)
+                    lMap[level][p.row + 3][p.col] = 40;
+            }
+        }
+
+        fillErasedMap();
+        drawPMap();
     }
 
     else if (l5)
