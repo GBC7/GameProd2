@@ -4816,7 +4816,7 @@ function startGame()
         let school2 = new Image();
         let school3 = new Image();
         let school4 = new Image();
-
+        let momkey = new Image();
 
         {
 
@@ -4848,7 +4848,7 @@ function startGame()
             market7.src = "../../4Streetz/images/market7.png";
             market8.src = "../../4Streetz/images/market8.png";
             market9.src = "../../4Streetz/images/market9.png";
-            momsHouse2.src = "../../4Streetz/images/momkey.png";
+            momsHouse2.src = "../../4Streetz/images/momsHouse2.png";
             momsHouse4.src = "../../4Streetz/images/momsHouse4.png";
             park1.src = "../../4Streetz/images/park1.png";
             park2.src = "../../4Streetz/images/park2.png";
@@ -4865,6 +4865,7 @@ function startGame()
             house1.src= "../../4Streetz/images/house.png";
             side.src = "../../4Streetz/images/side.png";
             school4.src = "../../4Streetz/images/school4.png";
+            momkey.src = "../../4Streetz/images/momkey.png";
         }//Defining images src properties
 
 
@@ -4873,6 +4874,7 @@ function startGame()
             b = street;             //1
             c = clothingStore1;     //2
             d = clothingStore2;     //3
+            e = momkey				//4
 
 
 
@@ -8187,6 +8189,11 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
         {
+        	 if (l4)
+            {
+                lMap[level][p.row + 1][p.col - 1] = 1;//Change that tile to a floor tile
+                checkIfRightPaper();
+            }
             if (l5)
             {
                 lMap[level][p.row + 1][p.col - 1] = 2;//Change that tile to a floor tile
@@ -8203,6 +8210,11 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
         {
+        	if (l4)
+            {
+                lMap[level][p.row + 1][p.col + 1] = 1;//Change that tile to a floor tile
+                checkIfRightPaper();
+            }
             if (l5)
             {
                 lMap[level][p.row + 1][p.col + 1] = 2;//Change that tile to a floor tile
@@ -8219,6 +8231,11 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row][p.col] === floorObjects[level])
         {
+        	if (l4)
+            {
+                lMap[level][p.row][p.col] = 1;//Change that tile to a floor tile
+                keyFound = true;
+            }
             if (l5)
             {
                 lMap[level][p.row][p.col] = 2;//Change that tile to a floor tile
@@ -8235,7 +8252,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 2][p.col] === floorObjects[level])
         {
-            if (l5)
+            
+            if (l4)
+            {
+                lMap[level][p.row + 2][p.col] = 1;//Change that tile to a floor tile
+                keyFound = true;
+            }if (l5)
             {
                 lMap[level][p.row + 2][p.col] = 2;//Change that tile to a floor tile
                 keyFound = true;
@@ -8542,44 +8564,44 @@ function checkActions()
         // Check for rocks
         if (p.frameY === 3)//Looking up
         {
-            //If the space above contains a cat
+            //If the space above contains a rock
             if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19))
             {
               	rock.play();
-                if (lMap[level][p.row-1][p.col] === 2)
-                    lMap[level][p.row-1][p.col] = 20;
+                if (lMap[level][p.row-1][p.col] === 1)
+                    lMap[level][p.row-1][p.col] = 4;
             }
         }
         else if (p.frameY === 2)//Looking Right
         {
-            //If the space to the right contains a cat
+            //If the space to the right contains a rock
             if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19))
             {
 
                 rock.play();
-                if (lMap[level][p.row + 1][p.col + 2] === 2)
-                    lMap[level][p.row + 1][p.col + 2] = 20;
+                if (lMap[level][p.row + 1][p.col + 2] === 1)
+                    lMap[level][p.row + 1][p.col + 2] = 4;
             }
         }
         else if (p.frameY === 1)//Looking Left
         {
-            //If the space to the left contains a cat
+            //If the space to the left contains a rock
             if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19))
             {
                 rock.play();
-                if (lMap[level][p.row + 1][p.col - 2] === 2)
-                    lMap[level][p.row + 1][p.col - 2] = 20;
+                if (lMap[level][p.row + 1][p.col - 2] === 1)
+                    lMap[level][p.row + 1][p.col - 2] = 4;
             }
         }
         else if (p.frameY === 0)//Looking Down
         {
-            //If the space below contains a cat
+            //If the space below contains a rock
             if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
                 if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19))
             {
                 rock.play();
-                if (lMap[level][p.row + 3][p.col] === 2)
-                    lMap[level][p.row + 3][p.col] = 20;
+                if (lMap[level][p.row + 3][p.col] === 1)
+                    lMap[level][p.row + 3][p.col] = 4;
             }
         }
 
