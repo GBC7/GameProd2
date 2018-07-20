@@ -89,6 +89,7 @@ SystemMSGLevel7[3] = "I need to find something to burn this with...";
 SystemMSGLevel7[4] = "It's done....Now I can go to the publisher's office.";
 SystemMSGLevel7[5] = "I'm not done here yet. I still have more to accomplish!";
 
+
 //level8 system text
 SystemMSGLevel8[0] = " "; //initial value
 SystemMSGLevel8[1] = "Lighter fluid! That will work!";

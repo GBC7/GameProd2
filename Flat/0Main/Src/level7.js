@@ -168,6 +168,7 @@ function initializeLV7()
     screenRight.onload = function(){l7Ready=true;};
     level7NotReady();
 
+
     function level7NotReady()
     {
         if (!l7Ready)
@@ -176,4 +177,5 @@ function initializeLV7()
             drawMap();
     }
     addEventListener("keydown", onKeyDown, false);
+
 }

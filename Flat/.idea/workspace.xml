@@ -51,20 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dialog.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="enemies.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="enemies.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125033">
-              <caret line="16823" column="33" selection-start-line="16823" selection-start-column="33" selection-end-line="16823" selection-end-column="33" />
+            <state relative-caret-position="327">
+              <caret line="17799" column="28" selection-start-line="17799" selection-start-column="28" selection-end-line="17799" selection-end-column="28" />
               <folding>
                 <element signature="e#934#41922#0" />
                 <element signature="e#42289#83150#0" />
@@ -81,8 +72,24 @@
                 <element signature="e#308006#308122#0" />
                 <element signature="e#308218#353448#0" />
                 <element signature="e#353491#353607#0" />
+                <element signature="e#353648#395731#0" />
                 <element signature="e#354267#395721#0" />
                 <element signature="e#395938#438068#0" />
+                <element signature="e#438275#480358#0" />
+                <element signature="e#480566#522676#0" />
+                <element signature="e#522884#564993#0" />
+                <element signature="e#565044#565160#0" />
+                <element signature="e#565201#607310#0" />
+                <element signature="e#607361#607477#0" />
+                <element signature="e#607518#649626#0" />
+                <element signature="e#649677#649793#0" />
+                <element signature="e#649834#691967#0" />
+                <element signature="e#692018#692134#0" />
+                <element signature="e#692175#734332#0" />
+                <element signature="e#734383#734499#0" />
+                <element signature="e#734541#776698#0" />
+                <element signature="e#776750#776866#0" />
+                <element signature="e#776966#822196#0" />
                 <element signature="n#!!block;n#drawZeeEnemy#0" />
               </folding>
             </state>
@@ -128,8 +135,8 @@
       <file leaf-file-name="level3.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="290" selection-start-line="290" selection-end-line="290" />
+            <state relative-caret-position="352">
+              <caret line="337" column="8" lean-forward="true" selection-start-line="337" selection-start-column="8" selection-end-line="337" selection-end-column="97" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1155#1344#0" />
@@ -140,34 +147,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Dialog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1717">
+              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="level7.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/level7.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" selection-end-column="24" />
-              <folding>
-                <element signature="n#!!block;n#initializeLV7#0" />
-              </folding>
+            <state relative-caret-position="1891">
+              <caret line="169" selection-start-line="169" selection-end-line="169" />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level8.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/level8.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-              <folding>
-                <element signature="n#!!block;n#initializeLV8#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1737" />
           </provider>
         </entry>
       </file>
@@ -210,9 +204,9 @@
       <find>goToS</find>
       <find>goToSt</find>
       <find>add on</find>
+      <find>checkAc</find>
       <find>add one enemy</find>
       <find>enemiesLevel3</find>
-      <find>checkAc</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -226,20 +220,20 @@
         <option value="$PROJECT_DIR$/0Main/Src/tutorialL1.js" />
         <option value="$USER_HOME$/Downloads/GameProd2-master/Flat/0Main/Src/Main.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level7n8.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/HelicopterLevel.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level4.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level5.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/level7.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level6.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level11.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level8.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level2.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.html" />
-        <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level3.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Main.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/level7.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
       </list>
     </option>
   </component>
@@ -344,12 +338,12 @@
       <workItem from="1531707300261" duration="47497000" />
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
-      <workItem from="1532100492835" duration="9990000" />
+      <workItem from="1532100492835" duration="10501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91903000" />
+    <option name="totallyTimeSpent" value="92414000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -390,7 +384,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/0Main/Src/Dialog.js</url>
-          <line>210</line>
+          <line>211</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -416,7 +410,7 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="45" />
+      <option name="time" value="47" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -708,43 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level7.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!block;n#initializeLV7#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125033">
-          <caret line="16823" column="33" selection-start-line="16823" selection-start-column="33" selection-end-line="16823" selection-end-column="33" />
-          <folding>
-            <element signature="e#934#41922#0" />
-            <element signature="e#42289#83150#0" />
-            <element signature="e#83192#83305#0" />
-            <element signature="e#83401#125998#0" />
-            <element signature="e#126042#126158#0" />
-            <element signature="e#126254#171508#0" />
-            <element signature="e#171551#171667#0" />
-            <element signature="e#171763#216993#0" />
-            <element signature="e#217036#217152#0" />
-            <element signature="e#217248#262478#0" />
-            <element signature="e#262521#262637#0" />
-            <element signature="e#262733#307963#0" />
-            <element signature="e#308006#308122#0" />
-            <element signature="e#308218#353448#0" />
-            <element signature="e#353491#353607#0" />
-            <element signature="e#354267#395721#0" />
-            <element signature="e#395938#438068#0" />
-            <element signature="n#!!block;n#drawZeeEnemy#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/level2.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-762">
@@ -754,36 +711,6 @@
             <element signature="e#2361#9985#0" />
             <element signature="e#19662#20107#0" />
             <element signature="e#20132#20218#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="290" selection-start-line="290" selection-end-line="290" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1155#1344#0" />
-            <element signature="n#!!block;n#f#0" />
-            <element signature="e#12248#13849#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/level8.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <element signature="n#!!block;n#initializeLV8#0" />
           </folding>
         </state>
       </provider>
@@ -843,6 +770,86 @@
     <entry file="file://$PROJECT_DIR$/0Main/Src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1737" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="n#!!block;n#initializeLV8#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="337" column="8" lean-forward="true" selection-start-line="337" selection-start-column="8" selection-end-line="337" selection-end-column="97" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1155#1344#0" />
+            <element signature="n#!!block;n#f#0" />
+            <element signature="e#12248#13849#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/Dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1717">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/level7.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1891">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="17799" column="28" selection-start-line="17799" selection-start-column="28" selection-end-line="17799" selection-end-column="28" />
+          <folding>
+            <element signature="e#934#41922#0" />
+            <element signature="e#42289#83150#0" />
+            <element signature="e#83192#83305#0" />
+            <element signature="e#83401#125998#0" />
+            <element signature="e#126042#126158#0" />
+            <element signature="e#126254#171508#0" />
+            <element signature="e#171551#171667#0" />
+            <element signature="e#171763#216993#0" />
+            <element signature="e#217036#217152#0" />
+            <element signature="e#217248#262478#0" />
+            <element signature="e#262521#262637#0" />
+            <element signature="e#262733#307963#0" />
+            <element signature="e#308006#308122#0" />
+            <element signature="e#308218#353448#0" />
+            <element signature="e#353491#353607#0" />
+            <element signature="e#353648#395731#0" />
+            <element signature="e#354267#395721#0" />
+            <element signature="e#395938#438068#0" />
+            <element signature="e#438275#480358#0" />
+            <element signature="e#480566#522676#0" />
+            <element signature="e#522884#564993#0" />
+            <element signature="e#565044#565160#0" />
+            <element signature="e#565201#607310#0" />
+            <element signature="e#607361#607477#0" />
+            <element signature="e#607518#649626#0" />
+            <element signature="e#649677#649793#0" />
+            <element signature="e#649834#691967#0" />
+            <element signature="e#692018#692134#0" />
+            <element signature="e#692175#734332#0" />
+            <element signature="e#734383#734499#0" />
+            <element signature="e#734541#776698#0" />
+            <element signature="e#776750#776866#0" />
+            <element signature="e#776966#822196#0" />
+            <element signature="n#!!block;n#drawZeeEnemy#0" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

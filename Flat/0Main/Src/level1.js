@@ -25,8 +25,6 @@ arcadeNoise.volume = 0.4;
 
 function initializeLV1()
 {
-
-
     canvas.style.backgroundImage = "";
     newsReport.play();          //RYN
 
