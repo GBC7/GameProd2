@@ -117,7 +117,7 @@ function initializeLV4()
         house1.src= "../../4Streetz/images/house.png";
         side.src = "../../4Streetz/images/side.png";
         school4.src = "../../4Streetz/images/school4.png";
-        momkey.src = "../../4Streetz/images/momkey.png";
+        momkey.src = "../../4Streetz/images/side.png";
     }//Defining images src properties
 
 
@@ -126,7 +126,7 @@ function initializeLV4()
         b = street;             //1
         c = clothingStore1;     //2
         d = clothingStore2;     //3
-        e = momkey				//4
+        e = momkey;				//4
 
 
         i = market1;            //8

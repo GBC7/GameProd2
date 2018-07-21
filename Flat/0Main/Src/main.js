@@ -1,5 +1,7 @@
 let gameOver = false;
 
+//Current Level Int
+let level = 1;
 
 //Current Level Bool
 let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
@@ -18,48 +20,10 @@ let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
     l12 = false;
 }
 
+//For finding out if level is ready to be drawn
+let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready, l12Ready;
 
-//Current Level Int
-let level = 1;
-
-
-//Global
-let walkingSpeed = 15;
-
-//Sounds
-let aghh = new Audio;
-{
-    aghh.src = ("../audio/aghh.mp3");
-}
-
-
-//level 0 is undefined as we do not have a level 0
-let startX, startY;
-{ // Level        0      1   2   3   4    5   6   7  8      9         10      11
-    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 0, undefined, undefined, 12];
-    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 1, undefined, undefined, 16];
-}
-
-
-//x and y map boundaries per level
-
-let xMax, xMin, yMax, yMin;
-{// Level          0       1    2    3    4    5    6    7   8      9           10       11
-    xMax =   [undefined,  24,  24,  24,  24,  24,  16,  24,  24,  undefined,  undefined,  24];
-    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  0];
-    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  17];
-    yMin =   [undefined,  0,   0,   0,   0,   0,   5,   0,   1,  undefined,  undefined,  2];
-}
-
-
-let floorNumbers, floorObjects;
-{// Level floor numbers - 0 , 1,     2,     3, 4, 5, 6, 7  8       9         10       11
-    floorNumbers= [undefined, 0, undefined, 0, 1, 2, 0, 1, 1, undefined, undefined, undefined];
-//Obj tht cn b picked up-0          1          2         3          4       5         6         7           8          9        10    11
-    floorObjects = [undefined, undefined, undefined, undefined, undefined, 40, undefined, undefined, undefined, undefined, undefined, 15];
-}
-
-
+//Arrays holding map layouts
 let lMap, lPMap, lOMap;
 {
     //level maps initialized when levels are loaded
@@ -84,26 +48,51 @@ let lMap, lPMap, lOMap;
         undefined, undefined, undefined, undefined];
 }
 
-
-//For finding out if level is ready to be drawn
-let l1Ready, l2Ready, l3Ready, l4Ready, l5Ready, l6Ready, l6Ready2, l7Ready, l8Ready, l9Ready, l10Ready, l11Ready, l12Ready;
-
-
-let canvas = document.querySelector("canvas");
-let ctx = canvas.getContext("2d");
-
-
-let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,qq,rr,ss,tt,uu,vv,ww,
-    xx,yy,zz,aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lll,mmm,nnn,ooo,qqq,rrr,sss,ttt,uuu,vvv,www,xxx,yyy,zzz,
-    thingToDraw;       //Used with global functions to pass case numbers to
-{
-    a = b = c  = d = e = f = g = h = i = j = k = l = m = n = o = q = r = s = t = u = v = w = x = y = z =
-        aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu = vv = ww = xx =
-            yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll = mmm = nnn = ooo = qqq = rrr = sss
-                = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+//The number used to represent the floor tiles in the level if only one was used
+let floorNumbers, floorObjects;
+{// Level floor numbers - 0 , 1,     2,     3, 4, 5, 6, 7  8       9         10       11
+    floorNumbers= [undefined, 0, undefined, 0, 1, 2, 0, 1, 1, undefined, undefined, undefined];
+//Obj tht cn b picked up-0          1          2         3          4       5         6         7           8          9        10    11
+    floorObjects = [undefined, undefined, undefined, undefined, undefined, 40, undefined, undefined, undefined, undefined, undefined, 15];
 }
 
+//level 0 is undefined as we do not have a level 0
+let startX, startY;
+{ // Level        0      1   2   3   4    5   6   7  8      9         10      11
+    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 0, undefined, undefined, 12];
+    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 1, undefined, undefined, 16];
+}
 
+//x and y map boundaries per level
+let xMax, xMin, yMax, yMin;
+{// Level          0       1    2    3    4    5    6    7   8      9           10       11
+    xMax =   [undefined,  24,  24,  24,  24,  24,  16,  24,  24,  undefined,  undefined,  24];
+    xMin =   [undefined,  0,   0,   0,   0,   0,   0,   0,   0,  undefined,  undefined,  0];
+    yMax =   [undefined, 17,  17,  17,  17,  17,  17,  17,  17,  undefined,  undefined,  17];
+    yMin =   [undefined,  0,   0,   0,   0,   0,   5,   0,   1,  undefined,  undefined,  2];
+}
+
+//For transporting local variables to global draw
+let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
+    aa,bb,cc,dd,ee,ff,gg,hh,ii,jj,kk,ll,mm,nn,oo,qq,rr,ss,tt,uu,vv,ww,xx,yy,zz,
+    aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lll,mmm,nnn,ooo,qqq,rrr,sss,ttt,uuu,vvv,www,xxx,yyy,zzz,
+    thingToDraw;       //Used with global functions to
+{
+    a = b = c  = d = e = f = g = h = i = j = k = l = m = n = o = q = r = s = t = u = v = w = x = y = z =
+        aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu =
+            vv = ww = xx = yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll =
+                mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+}//Initializes these to undefined
+
+//Player image & hurt sound
+let scientist = new Image();//   Both defined right
+let aghh = new Audio;//          below this one.
+{
+    scientist.src = "../../0Main/images/scientist2.png";
+    aghh.src = ("../audio/aghh.mp3");
+}
+
+//Player object
 let p =                                                         //PlayerObject
     {
         row: 0,
@@ -120,27 +109,17 @@ let p =                                                         //PlayerObject
         frameY: 0,
     };
 
-
-//Universal Images
-let scientist = new Image();                                //Regular player image
-                             //Image fpr player while in sewer
-{
-    scientist.src = "../../0Main/images/scientist2.png";
-}
-
-
-startGame();
-
+//Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
+let walkingSpeed = 15;
 
 function startGame()
 {
-    pauseSounds();//Pauses all sounds when switching levels
+    resetSomeThings();//Pauses all sounds when switching levels
 
     if (l1)//Home(roof)
     {
         l1Ready = false;
         initializeLV1();
-
     }
 
     else if (l2)//Sewer
@@ -197,19 +176,30 @@ function startGame()
         initializeCopterLevel();
     }
 
-    function pauseSounds()
+    function resetSomeThings()
     {
-        meow.pause();
-        newsReport.pause();
-        ratOfDeath.pause();
-        waterRunning.pause();
-        dangerous.pause();
-        bgm_level3.pause();
-        warningSound.pause();
-        doorSound.pause();
-        streetSound.pause();
-        aghh.pause();
-        lockedDoor.pause();
+        //Pause all sounds to ensure they do not continue to play upon emerging into next level
+        {
+            meow.pause();
+            newsReport.pause();
+            ratOfDeath.pause();
+            waterRunning.pause();
+            dangerous.pause();
+            bgm_level3.pause();
+            warningSound.pause();
+            doorSound.pause();
+            streetSound.pause();
+            aghh.pause();
+            lockedDoor.pause();
+        }
+
+        //Reset all global variables.. hopefully to avoid "Uncaught TypeError: Type error" error
+        {
+            a = b = c  = d = e = f = g = h = i = j = k = l = m = n = o = q = r = s = t = u = v = w = x = y = z =
+            aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu =
+            vv = ww = xx = yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll =
+            mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+        }
     }
 }
 
@@ -1000,8 +990,6 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
         destY += 32;            //increment variable based on height ratio of map array elements to canvas height
     }
 
-
-
     if (l2)//If on level 2
     {
 
@@ -1055,7 +1043,7 @@ function drawMap(dontDrawP)//Leave the "don't draw player" argument in (Filling 
 
 }
 
-function checkLevelSwitch(e /* passes e.keyCode through argument e */)
+function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 {
     //    37 - left , 38 - up , 39 - right , 40 - down
     if (l1)//If it's Lvl 1
@@ -1063,6 +1051,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
         if (e === 37 && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
         {
             removeEventListener("keydown", onKeyDown, false);
+            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
 
             let numOfStairz = 0;                //Create variable to be used for counting stairs
 
@@ -1107,16 +1096,16 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 }
             }
         }
-        if ((e === 38 && p.col === 13 && p.row === 11 && notWalking)||
-            (e === 38 && p.col === 14 && p.row === 11 && notWalking)||
-            (e === 38 && p.col === 15 && p.row === 11 && notWalking))
+        if (e === 38 && (p.col === 13 && p.row === 11 && notWalking)
+            ||(e === 38 && p.col === 14 && p.row === 11 && notWalking)
+            ||(e === 38 && p.col === 15 && p.row === 11 && notWalking))
         {
-
             removeEventListener("keydown", onKeyDown, false);
+            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
+
             let stepsUp = 0;
             let stepsDown = 0;
             let pixelsAbove = 0;
-            lPMap[level][p.row][p.col] = 0;
 
             goThroughWindowWithEyesClosed();
 
@@ -1139,6 +1128,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                     pixelsAbove = (stepsUp * 5.3);
                     if (lMap[5] === undefined)
                     {
+                        // DialogNeeded
                         //Let the player know that theres a mob on the roof and that he shouldn't go up there right now
                         notGoingThroughYet();
                     }
@@ -1164,19 +1154,25 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
                 stepsDown++;
 
                 if (stepsDown === 1)//Make sure character is facing down
+                {
+                    p.frameY = 0;
                     p.srcY = 0;
+                }
+                console.log(p.srcY);
 
 
-                if (stepsDown < 13 /* --- 7 plus whatever prev if statement is --- */)
+                if (stepsDown < 13)
                 {
                     ctx.clearRect(p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
                     drawMap(0);
+                    p.srcY = 0;
                     p.frameX++;
                     p.srcX = (p.frameX % 4) * 32;
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32 - pixelsAbove + (stepsDown * 5.3), 32, 48);
                     if (stepsDown === 12)
                     {
-                        lPMap[level][p.row][p.col] = 0;
+                        lPMap[level][p.row][p.col] = 1;
+                        ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
                         addEventListener("keydown", onKeyDown, false);
                     }
                     else
@@ -1291,7 +1287,7 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
         if (e === 38 && p.col === 10 && p.row === 0) //If going UP & character is under pipe
         {
-            if (sewersDrained)//Go through the door to level 1
+            if (sewersDrained)//Go through the door to level 11 (Sewer map 2)
             {
                 notWalking = false;
                 removeEventListener("keydown", onKeyDown, false);
@@ -1373,14 +1369,12 @@ function checkLevelSwitch(e /* passes e.keyCode through argument e */)
 
             }
             else
-            {
-                dialog = true;
-            }
+                CheckConversationAction();
         }
 
         if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
         {   //To check if character is in area where he isn't supposed to be when the light is off
-            dialog = true;
+            CheckConversationAction();
         }
     }
 
@@ -2927,7 +2921,7 @@ function checkActions()
 
     else if (l2)
     {
-        if (p.row === 7 && p.col === 21 && p.frameY === 3)  //Open Locked Door
+        if (p.row === 7 && p.col === 21 && p.frameY === 3 && !doorThreeOpen)  //Open Locked Door
         {
             if (keyFound)
             {
@@ -2935,21 +2929,21 @@ function checkActions()
                 j = door3;
                 lMap[level][7][22] = 14;
                 lMap[level][6][22] = 15;
-                drawMap(0);
                 doorSound.play();
+                drawMap(0);
                 ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
             }
             else
             {
                 //Play locked door sound
                 lockedDoor.play();
-                dialog = true;
+                CheckConversationAction();
                 fillErasedMap();
                 drawPMap();
             }
         }
 
-        if (p.frameY === 3)//Looking up                                                                     Needs to be finished
+        if (p.frameY === 3)//Looking up
         {
             if (lOMap[level][p.row] !== undefined && lOMap[level][p.row][p.col] !== undefined)
                 if (lOMap[level][p.row][p.col] === 2)//If torch is located here
@@ -2961,7 +2955,6 @@ function checkActions()
                 let leverDown = new Image();
                 leverDown.src = "../../2Sewer/images/leverDown.png";
                 cc = leverDown;
-
 
                 leverDown.onload = function()           //Draw the sewer drained
                 {
@@ -2998,8 +2991,6 @@ function checkActions()
                     checkForTorches(0,-2);
                 }
         }
-
-
 
         function checkForTorches(x, y)
         {
@@ -3040,74 +3031,7 @@ function checkActions()
 
     else if (l3)
     {
-        if (!findDisguise &&
-            ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
-                (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
-                (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) || (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) ||
-                (p.row === 13 && p.col === 18) || (p.row === 13 && p.col === 19) || (p.row === 15 && p.col === 19) || (p.row === 15 && p.col === 20) ||
-                (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
-                (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
-        {
-            dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-        if (p.row === 15 && p.col === 18){
-
-            dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-            findDisguise = true;
-        }
-
-        if (p.row ===2 && p.col ===1){
-            dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-            findPasscode = true;
-        }
-
-        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3))){
-            dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-
-        if (findPasscode === false && p.row === 7 && p.col === 20)
-        {
-            dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-
-        if (findRollerblades === false && p.row === 5 && p.col === 20)
-        {
-            dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-            findRollerblades = true;
-        }
-
-        if (findRollerblades === false && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
-            (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
-            (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
-        {
-            dialogText(names[1], SystemMSGLevel3[9], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-
-        if (findMap === false && p.row === 15 && (p.col > 0 || p.col < 5 || p.col === 6)) {
-            dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-
-        }
-
-
-        if (findMap === false && p.row === 15 && p.col === 5) {
-            dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-            findMap = true;
-        }
-
-        if (findAllLevel3 === false && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11))){
-            dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-            findMap = true;
-        }
+        //Doors
         if (!leftDoorOpen && p.row === 7 && p.col === 4)
         {
             doorSound.play();
@@ -3126,6 +3050,82 @@ function checkActions()
                 lMap[level][6][19] = 17;
                 drawMap();
             }
+            else
+            {
+                dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+            }
+        }
+
+        //Distguise
+        if (!findDisguise &&
+            ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
+                (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
+                (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) || (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) ||
+                (p.row === 13 && p.col === 18) || (p.row === 13 && p.col === 19) || (p.row === 15 && p.col === 19) || (p.row === 15 && p.col === 20) ||
+                (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
+                (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
+        {
+            dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        if (!findDisguise && p.row === 15 && p.col === 18)
+        {
+
+            dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findDisguise = true;
+        }
+
+        //Pass code
+        if (!findPasscode && p.row ===2 && p.col ===1)
+        {
+            dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findPasscode = true;
+        }
+        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
+        {
+            dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
+
+        //Rollerblades
+        if (!findRollerblades && p.row === 5 && p.col === 20)
+        {
+            dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findRollerblades = true;
+        }
+        if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
+            (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
+            (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
+        {
+            dialogText(names[1], SystemMSGLevel3[9], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+
+        //Map
+        if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
+        {
+            dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+        }
+        if (findMap === false && p.row === 15 && p.col === 5)
+        {
+            dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findMap = true;
+        }
+
+
+        //Found all
+        if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+        {
+            dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
+            setTimeout(dialogInitialize, 3000);
+            findMap = true;
         }
         if (findDisguise && findRollerblades && findMap)
         {
@@ -3135,13 +3135,18 @@ function checkActions()
             drawMap();
         }
     }
-    else if (l4) {
+
+    else if (l4)
+    {
         // Check for rocks
         if (p.frameY === 3)//Looking up
         {
             //If the space above contains a rock
-            if (lMap[level][p.row][p.col] === 3 || (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19)) {
+            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
+            if (lMap[level][p.row][p.col] === 53 || (lMap[level][p.row][p.col] === 54))
+            {
                 rock.play();
+
                 if (lMap[level][p.row - 1][p.col] === 1)
                     lMap[level][p.row - 1][p.col] = 4;
             }
@@ -3149,7 +3154,9 @@ function checkActions()
         else if (p.frameY === 2)//Looking Right
         {
             //If the space to the right contains a rock
-            if (lMap[level][p.row + 1][p.col + 1] === 3 || (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19)) {
+            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
+            if (lMap[level][p.row + 1][p.col + 1] === 53 || (lMap[level][p.row + 1][p.col + 1] === 54))
+            {
 
                 rock.play();
                 if (lMap[level][p.row + 1][p.col + 2] === 1)
@@ -3159,7 +3166,8 @@ function checkActions()
         else if (p.frameY === 1)//Looking Left
         {
             //If the space to the left contains a rock
-            if (lMap[level][p.row + 1][p.col - 1] === 3 || (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19)) {
+            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
+            if (lMap[level][p.row + 1][p.col - 1] === 53 || (lMap[level][p.row + 1][p.col - 1] === 54)) {
                 rock.play();
                 if (lMap[level][p.row + 1][p.col - 2] === 1)
                     lMap[level][p.row + 1][p.col - 2] = 4;
@@ -3169,12 +3177,13 @@ function checkActions()
         {
             //If the space below contains a rock
             if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if (lMap[level][p.row + 2][p.col] === 3 || (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19)) {
+                if (lMap[level][p.row + 2][p.col] === 53 || (lMap[level][p.row + 2][p.col] === 54)) {
                     rock.play();
                     if (lMap[level][p.row + 3][p.col] === 1)
                         lMap[level][p.row + 3][p.col] = 4;
                 }
         }
+        // ChangeNeeded
     }
 
     else if (l5)
@@ -3228,61 +3237,65 @@ function checkActions()
 
         fillErasedMap();
         drawPMap();
+
+        // ChangeNeeded
     }
 
     else if (l7)
     {
-        if (p.row === 1 && p.col === 20)
-        {
-            if (!researchPaper && windowClosed)
-            {
-                let emptyShelvesTop = new Image();
-                let emptyShelvesBottom = new Image();
-                emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-                emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
-                i = emptyShelvesTop;
-                j = emptyShelvesBottom;
-                researchPaper = true;
-                fillErasedMap();
-                drawPMap();
-            }
-        }
-        else if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
+        if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
         {
             if (lighterFluid && researchPaper)
             {
+                // DialogNeeded
                 researchBurned = true;
                 fillErasedMap();
                 drawPMap();
             }
+
+            if (!researchPaper)
+            {
+                dialogText(names[1], SystemMSGLevel7[2], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+            }
+            else if (!lighterFluid && researchPaper)
+            {
+                dialogText(names[1], SystemMSGLevel7[3], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+            }
+            else if (lighterFluid && researchPaper)
+            {
+                researchBurned = true;
+                dialogText(names[1], SystemMSGLevel7[4], "20 px", "white");
+                setTimeout(dialogInitialize, 3000);
+            }
         }
 
-        if (p.row === 1 && p.col === 20)
+        else if (p.row === 1 && p.col === 20 && !researchPaper)
         {
+            let emptyShelvesTop = new Image();
+            let emptyShelvesBottom = new Image();
+
+            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
+            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+
+            i = emptyShelvesTop;
+            j = emptyShelvesBottom;
+
+            researchPaper = true;
+
+            fillErasedMap();
+            drawPMap();
+
             dialogText(names[1], SystemMSGLevel7[1], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-        else if ((!researchPaper && p.row === 16 && p.col === 1) || (dialog && !researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogText(names[1], SystemMSGLevel7[2], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-        else if ((!lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && !lighterFluid && researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogText(names[1], SystemMSGLevel7[3], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-        else if ((lighterFluid && researchPaper && p.row === 16 && p.col === 1) || (dialog && lighterFluid && researchPaper && p.row === 15 && p.col === 0))
-        {
-            dialogText(names[1], SystemMSGLevel7[4], "20 px", "white");
-            setTimeout(dialogInitialize, 3000);
-        }
-        else if (p.row === 17 && p.col === 19)
+
+        else if (p.row === 17 && p.col === 19 && !researchBurned)
         {
             dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-
     }
 
     else if (l8)
@@ -3292,63 +3305,52 @@ function checkActions()
             if (!windowClosed)
             {
                 let closedWindow = new Image();
-                closedWindow.src = "../../7Lab/images/closedWindow.png";
+                    closedWindow.src = "../../7Lab/images/closedWindow.png";
                 r = closedWindow;
+
                 windowClosed = true;
-                drawMap();
-                closedWindow.onload = function()
+
+                closedWindow.onload = function()//Draw the changes
                 {
-                    dialog = true;
                     fillErasedMap();
                     drawPMap();
                 };
             }
-            else
+            if (!researchPaper)
             {
-                dialog = true;
-                fillErasedMap();
-                drawPMap();
-                // Speech bubble saying "The windows are closed" "I can now look for the research paper"
+                // DialogNeeded saying "The windows are closed. I can look for the research paper now."
             }
         }
-        else if (p.row === 2 && p.col === 12)
+        else if (p.row === 2 && p.col === 12 && !lighterFluid)
         {
-            if (!lighterFluid)
+            let emptyShelvesTop = new Image();
+            let emptyShelvesBottom = new Image();
+
+            emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
+            emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
+
+            s = emptyShelvesTop;
+            t = emptyShelvesBottom;
+
+            // DialogNeeded
+
+            emptyShelvesBottom.onload = function()
             {
-                let emptyShelvesTop = new Image();
-                let emptyShelvesBottom = new Image();
-                emptyShelvesTop.src = "../../7Lab/images/emptyShelves-top.png";
-                emptyShelvesBottom.src = "../../7Lab/images/emptyShelves-bottom.png";
-                s = emptyShelvesTop;
-                t = emptyShelvesBottom;
-                dialog = true;
-                emptyShelvesBottom.onload = function()
-                {
-                    fillErasedMap();
-                    drawPMap();
-                };
-                lighterFluid = true;
-            }
-            else if (lighterFluid)
-            {
-                dialog = true;
                 fillErasedMap();
                 drawPMap();
-            }
+            };
+
+            lighterFluid = true;
         }
         else if (p.row === 1 && p.col === 1)
         {
-            // Thought bubble saying "You can't leave" "The mob saw you!"
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
+            // DialogNeeded
+            // Thought bubble saying "You can't leave that way! The mob saw you come in"
         }
         else if (p.row === 16 && p.col === 24)
         {
+            // DialogNeeded
             // Thought bubble saying "I have to close the window first"
-            dialog = true;
-            fillErasedMap();
-            drawPMap();
         }
     }
 
@@ -3391,4 +3393,5 @@ function gameover()
     }
 }
 
-
+//Needs to be last so we know that the computer has had time to read through all scripts all the way
+scriptsLoaded = true;

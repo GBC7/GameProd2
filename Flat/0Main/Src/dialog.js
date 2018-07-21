@@ -271,12 +271,29 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
 
 function CheckConversationAction() {
 
-    if (l5)
+    if (l2)
+    {
+        if (p.col === 10 && p.row === 0 && p.frameY === 3 && !sewersDrained)
+        {
+            //Too powerful
+        }
+        else if (p.row === 11 && p.col === 9 && p.frameY === 1 && !lightsOn)
+        {
+            //Better light this place up first
+        }
+        else if (p.row === 7 && p.col === 21 && p.frameY === 3 && !keyFound)
+        {
+            //Doors locked ... wonder if there's a key down here
+        }
+    }
+
+    else if (l5)
     {
         if(p.row === 5 && p.col ===16) // test for conversation between two characters // test for conversation between two characters
             Conversation(DialogLevel5[0], names[1], portrait[1], names[2], portrait[2]);
     }
-    if (l12)
+
+    else if (l12)
     {
         if(helaIntro)//Intro
         {
@@ -302,7 +319,6 @@ function CheckConversationAction() {
         {
             dialogText(names[4], DialogLevel12[5], "20 px", "white");
         }
-
     }
 
 }
