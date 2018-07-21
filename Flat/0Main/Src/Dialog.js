@@ -9,11 +9,11 @@ let tog = 2;
 let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler"];  //Speaker's name, [0] is initial value
 let portrait = [];
 portrait[0] = "none";
-portrait[1] = "url('../../0Main/images/Portrait_Scientist.png')";
-portrait[2] = "url('../../0Main/images/Portrait_Mom.png')";
-portrait[3] = "url('../../0Main/images/Portrait_newsanchor.png')";
-portrait[4] = "url('../../0Main/images/Portrait_Pilot.png')";
-portrait[5] = "url('../../0Main/images/Portrait_Butler.png')";
+portrait[1] = "url('0Main/images/Portrait_Scientist.png')";
+portrait[2] = "url('0Main/images/Portrait_Mom.png')";
+portrait[3] = "url('0Main/images/Portrait_newsanchor.png')";
+portrait[4] = "url('0Main/images/Portrait_Pilot.png')";
+portrait[5] = "url('0Main/images/Portrait_Butler.png')";
 
 
 let SystemMSGLevel1 = [];
@@ -88,6 +88,7 @@ SystemMSGLevel7[2] = "I need to find the research!";
 SystemMSGLevel7[3] = "I need to find something to burn this with...";
 SystemMSGLevel7[4] = "It's done....Now I can go to the publisher's office.";
 SystemMSGLevel7[5] = "I'm not done here yet. I still have more to accomplish!";
+
 
 //level8 system text
 SystemMSGLevel8[0] = " "; //initial value
@@ -207,7 +208,7 @@ function dialogText(n, t, fs, fc){
     DialogText.innerText = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
 
     // to change portrait
     if (n === names[0]) {
@@ -258,7 +259,7 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
     CharacterPortrait.style.backgroundImage = speakerPortrait;
     DialogText.innerText = d[dialogIndex];
 
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
     dialogIndex++;
 
     if (dialogIndex > d.length){
@@ -270,12 +271,25 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
 
 function CheckConversationAction() {
 
-    if (l5)
+    if (l2)
+    {
+        if (p.col === 10 && p.row === 0 && p.frameY === 3 && !sewersDrained)
+        {
+            //Too powerful
+        }
+        else if (p.row === 11 && p.col === 9 && p.frameY === 1 && !lightsOn)
+        {
+            //Better light this place up first
+        }
+    }
+
+    else if (l5)
     {
         if(p.row === 5 && p.col ===16) // test for conversation between two characters // test for conversation between two characters
             Conversation(DialogLevel5[0], names[1], portrait[1], names[2], portrait[2]);
     }
-    if (l12)
+
+    else if (l12)
     {
         if(helaIntro)//Intro
         {
@@ -301,7 +315,6 @@ function CheckConversationAction() {
         {
             dialogText(names[4], DialogLevel12[5], "20 px", "white");
         }
-
     }
 
 }
