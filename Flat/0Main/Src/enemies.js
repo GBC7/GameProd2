@@ -14,28 +14,52 @@ function createEnemies()
         {
             let ratSmallLab =
                 {
+                    //////////////////////////////
+                    // Set these for each enemy //
+                    //////////////////////////////
+
+                    hostile: true,     //Tell the code if your enemy is hostile
+                    width: 32,          //Width of each frame in the sprite sheet
+                    height: 32,         //Height of each frame in the sprite sheet
+                    fov: 6,             //Number of tiles that the enemy can see in direction they are facing
+                    rangeOV: 3,         //Number of tiles that the enemy can see to the left or right of the direction they are facing
+                    imagePath: "2Sewer/images/rat.png",      //The path to the image used for your enemy
+                    numOfHFrames: 3,    //Number of horizontal frames (Should be at least 3)
+                    scurrySpeed: 180,   //Length of time between each movement in milliseconds (lower the number, enemy gets quicker)
+                    sightedSpeed: 60,   //Speed the enemy travels when player is in view
+
+                    /////////////////
+                    // Leave these //
+                    /////////////////
+
+                    //For positioning character on screen
                     xPos: 32,//X axis position 32
                     yPos: 512,//Y axis position 512
-                    width: 32,
-                    height: 32,
-                    scurrySpeed: 180,
+                    //Enemy state variables
+                    sighted: false,//Tells enemy if they should continue walking current direction (if player is in FOV)
+                    dead: true,//If this enemy has been turned on or off (this is how it's turned off when switching levels
+                    destroyed: false,//If this enemy has actually been destroyed & should not come back
+                    setup: false,//Ensures certain values are only set once
+                    originalSpeed: undefined,//For storing enemies originally set "scurrySpeed" in order to reset after !sighter
+                    //To capture last position so we know where to erase
                     prevX: undefined,
                     prevY: undefined,
-                    rFrameSet: false,//For resetting
-                    lFrameSet: false,// values when
-                    uFrameSet: false,// when switching
-                    dFrameSet: false,// directions
+                    //For resetting frame values so player isn't mid step when facing a new direction
+                    rFrameSet: false,
+                    lFrameSet: false,
+                    uFrameSet: false,
+                    dFrameSet: false,
+                    //For animating walking
                     frameXCounter: 0,
-                    frameX: 1,//Stationary position
-                    frameY: 2,//Facing right
+                    frameX: 1,//The pose in their direction
+                    frameY: 2,//Facing direction
+                    //For
                     dir: undefined, //Stores direction chosen to walk
                     dirOK: true,
-                    dead: true,
-                    destroyed: false,
-                    setup: false,
+                    //For drawing enemies image and maps images respectively
                     img: undefined,
                     thingToDraw: undefined,
-
+                    //Main function .. creates a secondary global function in its setup function
                     roam: function ()
                     {
                         let self = this;
@@ -43,10 +67,11 @@ function createEnemies()
                         if (!this.setup)
                         {
                             self.dead = false;
+                            self.originalSpeed = self.scurrySpeed;
                             //Set image -- then start walking
                             self.thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
                             self.img = new Image();
-                            self.img.src = "2Sewer/images/rat.png";
+                            self.img.src = self.imagePath;
                             self.drawMe = function ()//Public function
                             {
                                 ctx.drawImage(this.img, this.frameX * 32, this.frameY * 32, 32, 32, this.xPos, this.yPos, 32, 32);
@@ -98,66 +123,87 @@ function createEnemies()
                             //Initialize bools to false
                             xChosen = yChosen = up = down = left = right = false;
 
-                            //To use to decide whether to travel x or y axis
-                            let xOrY = (Math.floor(Math.random() * 2) + 1);
+                            if (self.hostile)
+                                directionChosen = checkFOV();
 
-                            //Set axis chosen to true and and initialize variable to chose which way on axis
-                            switch (xOrY)
+                            if (self.sighted && directionChosen !== undefined)
                             {
-                                case 1:
-                                    xChosen = true;
-                                    xDir = (Math.floor(Math.random() * 2) + 1);
-                                    break;
-                                case 2:
-                                    yChosen = true;
-                                    yDir = (Math.floor(Math.random() * 2) + 1);
-                                    break;
+                                self.scurrySpeed = self.sightedSpeed;
+                                return directionChosen;
                             }
-
-                            //Chose a direction on the axis chosen
-                            if (yChosen)
+                            else
                             {
-                                switch (yDir)//Decide if going up or down
+                                if (directionChosen === undefined)
                                 {
-                                    case 1:
-                                        up = true;
-                                        break;
-                                    case 2:
-                                        down = true;
-                                        break;
+                                    //To use to decide whether to travel x or y axis
+                                    let xOrY = (Math.floor(Math.random()*2) + 1);
+
+                                    //Set axis chosen to true and and initialize variable to chose which way on axis
+                                    switch (xOrY)
+                                    {
+                                        case 1:
+                                            xChosen = true;
+                                            xDir = (Math.floor(Math.random()*2) + 1);
+                                            break;
+                                        case 2:
+                                            yChosen = true;
+                                            yDir = (Math.floor(Math.random()*2) + 1);
+                                            break;
+                                    }
+
+                                    //Chose a direction on the axis chosen
+                                    if (yChosen)
+                                    {
+                                        switch (yDir)//Decide if going up or down
+                                        {
+                                            case 1:
+                                                up = true;
+                                                break;
+                                            case 2:
+                                                down = true;
+                                                break;
+                                        }
+                                    }
+                                    else if (xChosen)
+                                    {
+                                        switch (xDir)//Decide if going left or right
+                                        {
+                                            case 1:
+                                                left = true;
+                                                break;
+                                            case 2:
+                                                right = true;
+                                                break;
+                                        }
+                                    }
+
+                                    //Set direction chosen to return to variable that called it
+                                    if (left)
+                                    {
+                                        directionChosen = "left";
+                                    }
+                                    else if (right)
+                                    {
+                                        directionChosen = "right";
+                                    }
+                                    else if (up)
+                                    {
+                                        directionChosen = "up";
+                                    }
+                                    else if (down)
+                                    {
+                                        directionChosen = "down";
+                                    }
+                                    self.scurrySpeed = self.originalSpeed;
                                 }
-                            }
-                            else if (xChosen)
-                            {
-                                switch (xDir)//Decide if going left or right
+                                else
                                 {
-                                    case 1:
-                                        left = true;
-                                        break;
-                                    case 2:
-                                        right = true;
-                                        break;
+                                    self.scurrySpeed = 90;
                                 }
+
+                                return directionChosen;
                             }
 
-                            //Set direction chosen to return to variable that called it
-                            if (left)
-                            {
-                                directionChosen = "left";
-                            }
-                            else if (right)
-                            {
-                                directionChosen = "right";
-                            }
-                            else if (up)
-                            {
-                                directionChosen = "up";
-                            }
-                            else if (down)
-                            {
-                                directionChosen = "down";
-                            }
-                            return directionChosen;
                         }
 
                         //Check boundaries (ONLY lMap -- not lPMap or lOMap)
@@ -417,7 +463,7 @@ function createEnemies()
                                 }
                                 else if (e === 39)//Right
                                 {
-                                    if (self.xPos + 8 + self.width < 600)
+                                    if (self.xPos + 8 + self.width < 800)
                                     {
                                         walkRight();
                                     }
@@ -434,7 +480,7 @@ function createEnemies()
                                 }
                                 else if (e === 40)//Down
                                 {
-                                    if (self.yPos + 8 + self.height < 800) {
+                                    if (self.yPos + 8 + self.height < 600) {
                                         walkDown();
                                     }
                                     else
@@ -688,23 +734,116 @@ function createEnemies()
                             }
                         }
 
-                        function checkIfHit()
+                        function checkIfHit()//Maybe use lOMap to check if hit instead... lOMap[level][yPos - remainY][xPos - remainX]
                         {
-                            if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                            // if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
+                            // {
+                            //     if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
+                            //     {
+                            //         p.health--;
+                            //         aghh.play();
+                            //
+                            //         if (p.health === 0)
+                            //         {
+                            //             self.dead = true;
+                            //             ctx.fillStyle = '#ff0c18';
+                            //             ctx.fillRect(0, 0, 800, 600);
+                            //             resetLevel(self.scurrySpeed);
+                            //         }
+                            //     }
+                            // }
+
+                            if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                             {
-                                if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48)) {
+                                if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
+                                {
                                     p.health--;
                                     aghh.play();
-                                    if (p.health === 0) {
+                                    if (p.health === 0)
+                                    {
                                         self.dead = true;
                                         ctx.fillStyle = '#ff0c18';
-                                        ctx.fillRect(0, 0, 800, 600);
+                                        ctx.fillRect(0,0,800,600);
                                         resetLevel(self.scurrySpeed);
                                     }
                                 }
                             }
+
                         }
 
+                        function checkFOV()
+                        {
+                            if (self.frameY === 0)//Looking down
+                            {
+                                //Check if in field of view
+                                if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ < (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
+                                {
+                                    return checkRange("Down");
+                                }
+                            }
+                            else if (self.frameY === 1)//Looking left
+                            {
+                                //Check if in field of view
+                                if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) > (self.xPos - self.fov * 32))
+                                {
+                                    return checkRange("Left");
+                                }
+                            }
+                            else if (self.frameY === 2)//Looking right
+                            {
+                                //Check if in field of view
+                                if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ < (self.xPos + self.width + self.fov * 32))
+                                {
+                                    return checkRange("Right");
+                                }
+                            }
+                            else if (self.frameY === 3)//Looking up
+                            {
+                                //Check if in field of view
+                                if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) > (self.yPos/*topOfEnemy*/ - self.fov  * 32))
+                                {
+                                    return checkRange("Up");
+                                }
+                            }
+                            else return undefined;
+
+                            function checkRange(facing)
+                            {
+                                if (facing === "Down")
+                                {
+                                    if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "down";
+                                    }
+                                }
+                                else if (facing === "Left")
+                                {
+                                    if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "left";
+                                    }
+                                }
+                                else if (facing === "Right")
+                                {
+                                    if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "right";
+                                    }
+                                }
+                                else if (facing === "Up")
+                                {
+                                    if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "up";
+                                    }
+                                }
+                                else return undefined;
+                            }
+                        }
 
                         //Simple walking one direction functions
                         function walkLeft()
@@ -737,7 +876,7 @@ function createEnemies()
 
                                 //Simulate walking by changing frames
                                 self.frameXCounter++;
-                                self.frameX = (self.frameXCounter % 3);
+                                self.frameX = (self.frameXCounter % self.numOfHFrames);
 
                                 //Change position
                                 self.xPos -= 8;
@@ -789,7 +928,7 @@ function createEnemies()
 
                                 //Simulate walking by changing frames
                                 self.frameXCounter++;
-                                self.frameX = (self.frameXCounter % 3);
+                                self.frameX = (self.frameXCounter % self.numOfHFrames);
 
                                 //Change position
                                 self.xPos += 8;
@@ -841,7 +980,7 @@ function createEnemies()
 
                                 //Simulate walking by changing frames
                                 self.frameXCounter++;
-                                self.frameX = (self.frameXCounter % 3);
+                                self.frameX = (self.frameXCounter % self.numOfHFrames);
 
                                 //Change position
                                 self.yPos += 8;
@@ -892,7 +1031,7 @@ function createEnemies()
 
                                 //Simulate walking by changing frames
                                 self.frameXCounter++;
-                                self.frameX = (self.frameXCounter % 3);
+                                self.frameX = (self.frameXCounter % self.numOfHFrames);
 
                                 //Change position
                                 self.yPos -= 8;
@@ -1194,7 +1333,8 @@ function createEnemies()
                                 drawZeeEnemy();
                             }
 
-                            checkIfHit();
+                            if (self.hostile)
+                                checkIfHit();
                         }
 
                     }
@@ -1203,7 +1343,7 @@ function createEnemies()
             //Define a second function that only draws the rat (for use when rat needs to be redrawn immediately after being erased)
             //Would not allow secondary function to be used during
             ratSmallLab.xPos = i * Math.floor(Math.random() + 2) * 32;
-            ratSmallLab.yPos = i * Math.floor(Math.random() + 2) * 32 + 96;
+            ratSmallLab.yPos = i * Math.floor(Math.random() + 2) * 32 + 160;
             enemy[8].push(ratSmallLab);
         }
 
