@@ -120,7 +120,7 @@ function createEnemies()
                             //Setup variables to choose direction to get with
                             let xDir, yDir, xChosen, yChosen, up, down, left, right;
 
-                            //Initialize bools to false
+                            //Initialize booleans to false
                             xChosen = yChosen = up = down = left = right = false;
 
                             if (self.hostile)
@@ -203,7 +203,6 @@ function createEnemies()
 
                                 return directionChosen;
                             }
-
                         }
 
                         //Check boundaries (ONLY lMap -- not lPMap or lOMap)
@@ -736,23 +735,6 @@ function createEnemies()
 
                         function checkIfHit()//Maybe use lOMap to check if hit instead... lOMap[level][yPos - remainY][xPos - remainX]
                         {
-                            // if (self.xPos > ((p.col * 32) - 16) && (self.xPos + 32) < ((p.col * 32) + 48))
-                            // {
-                            //     if ((self.yPos + 20) > ((p.row * 32) + 32) && (self.yPos + 12) < ((p.row * 32) + 48))
-                            //     {
-                            //         p.health--;
-                            //         aghh.play();
-                            //
-                            //         if (p.health === 0)
-                            //         {
-                            //             self.dead = true;
-                            //             ctx.fillStyle = '#ff0c18';
-                            //             ctx.fillRect(0, 0, 800, 600);
-                            //             resetLevel(self.scurrySpeed);
-                            //         }
-                            //     }
-                            // }
-
                             if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
                             {
                                 if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
@@ -768,7 +750,6 @@ function createEnemies()
                                     }
                                 }
                             }
-
                         }
 
                         function checkFOV()
@@ -776,33 +757,49 @@ function createEnemies()
                             if (self.frameY === 0)//Looking down
                             {
                                 //Check if in field of view
-                                if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ < (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
+                                if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ <= (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
                                 {
                                     return checkRange("Down");
+                                }
+                                else if (p.row * 32/*topOfPlayer*/ === (self.yPos + self.height/*bottomOfEnemy*/))
+                                {
+                                    return checkWhereToTurn("Down");
                                 }
                             }
                             else if (self.frameY === 1)//Looking left
                             {
                                 //Check if in field of view
-                                if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) > (self.xPos - self.fov * 32))
+                                if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) >= (self.xPos - self.fov * 32))
                                 {
                                     return checkRange("Left");
+                                }
+                                else if ((p.col * 32 + p.width/*rightSideOfPlayer*/) === self.xPos)
+                                {
+                                    return checkWhereToTurn("Left");
                                 }
                             }
                             else if (self.frameY === 2)//Looking right
                             {
                                 //Check if in field of view
-                                if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ < (self.xPos + self.width + self.fov * 32))
+                                if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ <= (self.xPos + self.width + self.fov * 32))
                                 {
                                     return checkRange("Right");
+                                }
+                                else if ((p.col * 32 /*leftSideOfPlayer*/) === (self.xPos + self.width))
+                                {
+                                    return checkWhereToTurn("Right");
                                 }
                             }
                             else if (self.frameY === 3)//Looking up
                             {
                                 //Check if in field of view
-                                if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) > (self.yPos/*topOfEnemy*/ - self.fov  * 32))
+                                if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) >= (self.yPos/*topOfEnemy*/ - self.fov  * 32))
                                 {
                                     return checkRange("Up");
+                                }
+                                else if ((p.row * 32 + 48/*bottomOfPlayer*/) === (self.yPos/*topOfEnemy*/))
+                                {
+                                    return checkWhereToTurn("Up");
                                 }
                             }
                             else return undefined;
@@ -811,6 +808,7 @@ function createEnemies()
                             {
                                 if (facing === "Down")
                                 {
+
                                     if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
                                     {
                                         self.sighted = true;
@@ -842,6 +840,52 @@ function createEnemies()
                                     }
                                 }
                                 else return undefined;
+                            }
+                            function checkWhereToTurn(currentlyChosenDir)
+                            {
+                                if (currentlyChosenDir === "Left" || currentlyChosenDir === "Right")
+                                {
+                                    //If enemy's above the player
+                                    if (self.yPos + self.height < (p.row + 1) * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "down";
+                                    }
+                                    //If enemy's below the player
+                                    else if (self.yPos > (p.row + 1) * 32 + 32)
+                                    {
+                                        self.sighted = true;
+                                        return "up";
+                                    }
+                                    //If enemy is on the character
+                                    else
+                                    {
+                                        console.log("shouldn't happen1");
+                                        return undefined;
+                                    }
+
+                                }
+                                else if (currentlyChosenDir === "Up" || currentlyChosenDir === "Down")
+                                {
+                                    //If enemy's to the left of the player
+                                    if (self.xPos + self.width < p.col * 32)
+                                    {
+                                        self.sighted = true;
+                                        return "right";
+                                    }
+                                    //If enemy's to the right of the player
+                                    else if (self.xPos > p.col * 32 + p.width)
+                                    {
+                                        self.sighted = true;
+                                        return "left";
+                                    }
+                                    //If enemy is on the character
+                                    else
+                                    {
+                                        console.log("shouldn't happen3");
+                                        return undefined;
+                                    }
+                                }
                             }
                         }
 
