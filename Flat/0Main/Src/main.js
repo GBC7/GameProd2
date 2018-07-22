@@ -3391,6 +3391,97 @@ function checkActions()//Gets called when pressing space
 
 }
 
+function resetLevel(time = 40)
+{
+    //Decrement lives
+    p.lives--;
+
+
+                            /* ChangeNeeded */
+    /* <------- Everyone needs to do this part for their level -------> */
+
+    //Make sure you walk through your level and complete all lock and key features in it before testing the function
+
+    //You can call "resetLevel();" from the console to test out the function.
+
+    //If anything doesn't look proper, it means you're forgetting to reset
+    // one of the variables for your level -- take a look at the "else if (l2)..." function if you're not sure
+    // what kinds of things to reset.
+
+    //Your level should look exactly how it looks when you first emerge into it after calling this function
+    //  unless it's been called 3 times already, in which case you'll see the gameOver screen (nuclear explosion GIF)
+
+    if (l1)
+    {
+
+    }
+    else if (l2)
+    {
+        //Turn the water back on and the lights back off
+        sewersDrained = false;
+        lightsOn = false;
+
+        //Set key back to not found
+        keyFound = false;
+
+        //Turn off the torches
+        keepDrawingFlames = false;
+        alreadySwitched = false;
+        clearInterval(burning);
+        clearInterval(countingFlames);
+        for (let t = 0; t < torchNum.length; t++)
+        {
+            torchNum[t].lit = false;
+        }
+
+        //Reset players health
+        p.health = 6;
+
+        //Set level to reload and redraw itself
+        l2Ready = false;
+        alreadyBeenHere = false;
+    }
+    else if (l3)
+    {
+        // finding item reset
+        leftDoorOpen = false;
+        rightDoorOpen = false;
+        findPasscode = false;
+        findMap = false;
+        findRollerblades = false;
+        findDisguise = false;
+        findAllLevel3 = false;
+
+        // enemy information reset
+        detectPlayerLevel3 = false;
+        enemyIndexLevel3 = 0;
+        enemy[3].splice(0, enemy[3].length);
+        resetTimer();
+
+        // map image reset
+        lMap[level][7][4] = 21;
+        lMap[level][6][5] = 13;
+        lMap[level][7][20] = 20;
+        lMap[level][6][19] = 12;
+        lMap[level][0][10] = 20;
+        lMap[level][0][11] = 21;
+
+        // player position reset
+        lPMap[level][16][1] = 1;
+
+        // re-draw map
+        clearLevel3();
+        ctx.clearRect(0,0,800,600);
+    }
+
+
+        //If not out of live start the level again
+    if (p.lives > 0)
+        setTimeout(startGame, time);
+        //Otherwise display gameOver screen
+    else
+        gameover();
+}
 
 function gameover()
 {

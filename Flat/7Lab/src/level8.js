@@ -132,6 +132,10 @@ function initializeLV8()
     changePStartPos();
 
 
-    closedWindow.onload = function(){l8Ready=true;};
+    closedWindow.onload = function(){
+        l8Ready=true;
+        for (let i = 0; i < enemy[level].length; i++)
+        enemy[level][i].roam();
+    };
     addEventListener("keydown", onKeyDown, false);
 }
