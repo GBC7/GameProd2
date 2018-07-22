@@ -1424,6 +1424,9 @@ function createEnemies()
 
 
 
+
+
+
 function drawZeeEnemy()
 {
     for (let b = 0; b < enemy[level].length; b++)
