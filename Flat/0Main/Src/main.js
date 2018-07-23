@@ -3564,11 +3564,57 @@ function healthInventory()
     ctx3.drawImage(characterImage, 4, 470, 105, 110);
 
     let hearts = new Image();
-    
+    hearts.src = "0Main/images/heart.png";
+
+    if(p.health === 6)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
+        ctx3.drawImage(hearts, 50, 75, 32, 32);
+        ctx3.drawImage(hearts, 90, 75, 32, 32);
+        ctx3.drawImage(hearts, 10, 125, 32, 32);
+        ctx3.drawImage(hearts, 50, 125, 32, 32);
+        ctx3.drawImage(hearts, 90, 125, 32, 32);
+
+    }
+    else if(p.health === 5)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
+        ctx3.drawImage(hearts, 50, 75, 32, 32);
+        ctx3.drawImage(hearts, 90, 75, 32, 32);
+        ctx3.drawImage(hearts, 10, 125, 32, 32);
+        ctx3.drawImage(hearts, 50, 125, 32, 32);
+
+    }
+    else if(p.health === 4)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
+        ctx3.drawImage(hearts, 50, 75, 32, 32);
+        ctx3.drawImage(hearts, 90, 75, 32, 32);
+        ctx3.drawImage(hearts, 10, 125, 32, 32);
+
+    }
+    else if(p.health === 3)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
+        ctx3.drawImage(hearts, 50, 75, 32, 32);
+        ctx3.drawImage(hearts, 90, 75, 32, 32);
+
+    }
+    else if(p.health === 2)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
+        ctx3.drawImage(hearts, 50, 75, 32, 32);
+
+    }
+    else if(p.health === 1)
+    {
+        ctx3.drawImage(hearts, 10, 75, 32, 32); 
+
+    }
 
     ctx3.font = "30px Arial";
     ctx3.fillStyle = "red";
-    ctx3.fillText("Lives: ", 10, 45);
+    ctx3.fillText("Lives: ", 10, 55);
 
     if(lighterTrigger === true)
     {
