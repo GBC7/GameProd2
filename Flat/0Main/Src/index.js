@@ -311,7 +311,11 @@ function controlsPage()
     canvas = document.getElementById("regular");                    //For testing, to enable
     ctx = canvas.getContext("2d");                                  //skipping through the
     ctx.clearRect(0, 0, 800, 600);                                  //title, controls, and warning
-                                                                    //pages to save time
+
+    let statsCanvas = document.getElementById("statusInventory");
+    let ctx3 = statsCanvas.getContext("2d");
+
+
     waitForTheScriptsToLoad();
 
     function waitForTheScriptsToLoad()

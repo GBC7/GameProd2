@@ -90,7 +90,7 @@ let cane = new Image();
 let disguise = new Image();
 let key = new Image();
 let lighter = new Image();
-let lighterFluid = new Image();
+let lighterFluidInv = new Image();
 let mapV = new Image();
 let passcode = new Image();
 let publishersAddress = new Image();
@@ -104,10 +104,10 @@ let aghh = new Audio;//          below this one.
     disguise.src = "0Main/images/inventory/disguise.png";
     key.src = "0Main/images/inventory/key.png";
     lighter.src = "0Main/images/inventory/lighter.png";
-    lighterFluid.src = "0Main/images/inventory/lighterFluid.png";
-    mapV.src = "0Main/images/inventory/mapV.png";
+    lighterFluidInv.src = "0Main/images/inventory/lighterFluid.png";
+    mapV.src = "0Main/images/inventory/map.png";
     passcode.src = "0Main/images/inventory/passcode.png";
-    publishersAddress.src = "0Main/images/inventory/publisherAddress.png";
+    publishersAddress.src = "0Main/images/inventory/publishersAddress.png";
     research.src = "0Main/images/inventory/research.png";
     rollerblades.src = "0Main/images/inventory/rollerblades.png";
 
@@ -133,8 +133,20 @@ let p =                                                         //PlayerObject
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
 
+let caneTrigger = true;
+let disguiseTrigger = true;
+let keyTrigger = true;
+let lighterTrigger = true;
+let ligherFluidTrigger = true;
+let mapVTrigger = true;
+let passcodeTrigger = true;
+let publishersAddressTrigger = true;
+let researchTrigger = true;
+let rollerbladesTrigger = true;
+
 function startGame()
 {
+    healthInventory();
     resetSomeThings();//Pauses all sounds when switching levels
 
     if (l1)//Home(roof)
@@ -3543,5 +3555,65 @@ function gameover()
     }
 }
 
+
+function healthInventory()
+{
+
+    let characterImage = new Image();
+    characterImage.src = "0Main/images/Portrait_Scientist.png";
+    ctx3.drawImage(characterImage, 4, 470, 105, 110);
+
+    let hearts = new Image();
+    
+
+    ctx3.font = "30px Arial";
+    ctx3.fillStyle = "red";
+    ctx3.fillText("Lives: ", 10, 45);
+
+    if(lighterTrigger === true)
+    {
+        ctx3.drawImage(lighter, 15, 202, 40, 32);
+    }
+    if(keyTrigger === true)
+    {
+        ctx3.drawImage(key, 67, 200, 32, 32);
+    }
+    if(passcodeTrigger === true)
+    {
+        ctx3.drawImage(passcode, 15, 254, 32, 32);
+    }
+    if(disguiseTrigger === true)
+    {
+        ctx3.drawImage(disguise, 63, 254, 32, 32);
+    }
+    if(rollerbladesTrigger === true)
+    {
+        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
+    }
+    if(mapVTrigger === true)
+    {
+        ctx3.drawImage(mapV, 63, 306, 32, 32);
+    }
+    if(caneTrigger === true)
+    {
+        ctx3.drawImage(cane, 15, 358, 32, 32);
+    }
+    if(publishersAddressTrigger === true)
+    {
+        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
+    }
+    if(researchTrigger === true)
+    {
+        ctx3.drawImage(research, 15, 410, 32, 32);
+    }
+    if(ligherFluidTrigger === true)
+    {
+        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+    }
+
+
+}
+
 //Needs to be last so we know that the computer has had time to read through all scripts all the way
 scriptsLoaded = true;
+
