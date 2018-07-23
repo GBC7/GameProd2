@@ -6,13 +6,14 @@ let DialogBG = document.getElementById("dialog");
 let dialogIndex = 0;
 let tog = 2;
 
-let names = [" ", "Scientist", "Mom", "News Anchor", "Butler"];  //Speaker's name, [0] is initial value
+let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler"];  //Speaker's name, [0] is initial value
 let portrait = [];
 portrait[0] = "none";
-portrait[1] = "url('../../0Main/images/Portrait_Scientist.png')";
-portrait[2] = "url('../../0Main/images/Portrait_Mom.png')";
-portrait[3] = "url('../../0Main/images/Portrait_newsanchor.png')";
-portrait[4] = "url('../../0Main/images/Portrait_Butler.png')";
+portrait[1] = "url('0Main/images/Portrait_Scientist.png')";
+portrait[2] = "url('0Main/images/Portrait_Mom.png')";
+portrait[3] = "url('0Main/images/Portrait_newsanchor.png')";
+portrait[4] = "url('0Main/images/Portrait_Pilot.png')";
+portrait[5] = "url('0Main/images/Portrait_Butler.png')";
 
 
 let SystemMSGLevel1 = [];
@@ -33,6 +34,7 @@ let DialogLevel5 = [];
 let DialogLevel6 = [];
 let DialogLevel7 = [];
 let DialogLevel8 = [];
+let DialogLevel12 = [];
 
 let TutorialL1 = [];
 
@@ -87,6 +89,7 @@ SystemMSGLevel7[3] = "I need to find something to burn this with...";
 SystemMSGLevel7[4] = "It's done....Now I can go to the publisher's office.";
 SystemMSGLevel7[5] = "I'm not done here yet. I still have more to accomplish!";
 
+
 //level8 system text
 SystemMSGLevel8[0] = " "; //initial value
 SystemMSGLevel8[1] = "Lighter fluid! That will work!";
@@ -108,7 +111,26 @@ DialogLevel1 = [
 ];
 
 //level2 Dialogue text
-DialogLevel2 = [];
+DialogLevel12 =
+   [
+           ["Hey .. Glad you could make it! It wasn't looking so hot for a minute there.\n\n " +
+           "Anyway, you're going to need to know how to fly this baby so listen up."],
+
+             ["First things first.. You're going to need to angle this thing in order to avoid all the birds.\n" +
+             "You can rotate the chopper using the left and right arrow keys... Give it a try now."],
+
+             ["Quick!!!! Press the space bar!"],
+
+             ["Ok. Looks like you've got the hang of things now. The space bar makes the chopper climb.. which is important" +
+             ".. if you don't want to plummet to your death, that is."],
+
+             ["WOOOAHHH!! You trying to kill us?!\nYou have to press space to keep this thing in the air!" +
+             "\nLet's try this again. This time you keep us in the air."],
+
+             ["It's been over 72 hours since I've slept now so, you're going to have to fly the rest of the way " +
+             "without any training wheels..\n Good luck and try not to get us both killed.\n" +
+             "Press space to take over."]
+     ];
 
 //level3 Dialogue text
 DialogLevel3 = [
@@ -131,6 +153,28 @@ DialogLevel6 = [];
 
 //level7 Dialogue text
 DialogLevel7 = [];
+
+//level12 Dialogue text
+DialogLevel12 = [
+
+    ["Hey .. Glad you could make it! It wasn't looking so hot for a minute there.\n\n " +
+    "Anyway, you're going to need to know how to fly this baby so listen up."],
+
+    ["First things first.. You're going to need to angle this thing in order to avoid all the birds.\n" +
+    "You can rotate the chopper using the left and right arrow keys... Give it a try now."],
+
+    ["Quick!!!! Press the space bar!"],
+
+    ["Ok. Looks like you've got the hang of things now. The space bar makes the chopper climb.. which is important" +
+    ".. if you don't want to plummet to your death, that is."],
+
+    ["WOOOAHHH!! You trying to kill us?!\nYou have to press space to keep this thing in the air!" +
+    "\nLet's try this again. This time you keep us in the air."],
+
+    ["It's been over 72 hours since I've slept now so, you're going to have to fly the rest of the way " +
+    "without any training wheels..\n Good luck and try not to get us both killed.\n" +
+     "Press space to take over."]
+   ];
 
 //Tutorial text
 TutorialL1[0] = "";
@@ -164,7 +208,7 @@ function dialogText(n, t, fs, fc){
     DialogText.innerText = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
 
     // to change portrait
     if (n === names[0]) {
@@ -185,6 +229,10 @@ function dialogText(n, t, fs, fc){
     }
     else if (n === names[4]){
         CharacterPortrait.style.backgroundImage = portrait[4];
+    }
+    else if (n === names[5])
+    {
+        CharacterPortrait.style.backgroundImage = portrait[5];
     }
 
 }
@@ -211,7 +259,7 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
     CharacterPortrait.style.backgroundImage = speakerPortrait;
     DialogText.innerText = d[dialogIndex];
 
-    DialogBG.style.backgroundImage = "url('../../0Main/images/dialogueBG.png')";
+    DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
     dialogIndex++;
 
     if (dialogIndex > d.length){
@@ -223,10 +271,50 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
 
 function CheckConversationAction() {
 
-    if (l5)
+    if (l2)
     {
-        if(p.row === 5 && p.col ===16) // test for conversation between two characters
+        if (p.col === 10 && p.row === 0 && p.frameY === 3 && !sewersDrained)
+        {
+            //Too powerful
+        }
+        else if (p.row === 11 && p.col === 9 && p.frameY === 1 && !lightsOn)
+        {
+            //Better light this place up first
+        }
+    }
+
+    else if (l5)
+    {
+        if(p.row === 5 && p.col ===16) // test for conversation between two characters // test for conversation between two characters
             Conversation(DialogLevel5[0], names[1], portrait[1], names[2], portrait[2]);
+    }
+
+    else if (l12)
+    {
+        if(helaIntro)//Intro
+        {
+            dialogText(names[4], DialogLevel12[0], "20 px", "white");
+        }
+        else if (leftAndRight)//Rotate
+        {
+            dialogText(names[4], DialogLevel12[1], "20 px", "white");
+        }
+        else if(upAndDown)//Climb
+        {
+            dialogText(names[4], DialogLevel12[2], "20 px", "white");
+        }
+        else if(whew)//Climb
+        {
+            dialogText(names[4], DialogLevel12[3], "20 px", "white");
+        }
+        else if (pilotHadTo)
+        {
+            dialogText(names[4], DialogLevel12[4], "20 px", "white");
+        }
+        else if (doneTheTut)
+        {
+            dialogText(names[4], DialogLevel12[5], "20 px", "white");
+        }
     }
 
 }
