@@ -303,7 +303,9 @@ function controlsPage()
             "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
             "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
             "\n" +
+            "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
             "    </div>";
+
 
     }   //   <------ Removes extra div and over-sized canvas
     canvas = document.getElementById("regular");                    //For testing, to enable
