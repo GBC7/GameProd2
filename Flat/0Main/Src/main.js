@@ -86,10 +86,31 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
 
 //Player image & hurt sound
 let scientist = new Image();//   Both defined right
+let cane = new Image();
+let disguise = new Image();
+let key = new Image();
+let lighter = new Image();
+let lighterFluid = new Image();
+let mapV = new Image();
+let passcode = new Image();
+let publishersAddress = new Image();
+let research = new Image();
+let rollerblades = new Image();
 let aghh = new Audio;//          below this one.
 {
     scientist.src = "0Main/images/scientist2.png";
     aghh.src = ("0Main/audio/aghh.mp3");
+    cane.src = "0Main/images/inventory/cane.png";
+    disguise.src = "0Main/images/inventory/disguise.png";
+    key.src = "0Main/images/inventory/key.png";
+    lighter.src = "0Main/images/inventory/lighter.png";
+    lighterFluid.src = "0Main/images/inventory/lighterFluid.png";
+    mapV.src = "0Main/images/inventory/mapV.png";
+    passcode.src = "0Main/images/inventory/passcode.png";
+    publishersAddress.src = "0Main/images/inventory/publisherAddress.png";
+    research.src = "0Main/images/inventory/research.png";
+    rollerblades.src = "0Main/images/inventory/rollerblades.png";
+
 }
 
 //Player object
