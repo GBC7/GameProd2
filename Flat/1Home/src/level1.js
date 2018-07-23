@@ -2,11 +2,8 @@
 let uncovered = false;
 
 
-//Images
-let tv = new Image();
-{
-    tv.src = "1Home/images/tv.png";
-}
+
+
 
 
 //Audio
@@ -25,10 +22,13 @@ arcadeNoise.volume = 0.4;
 
 function initializeLV1()
 {
-    canvas.style.backgroundImage = "";
+    canvas.style.backgroundImage = "url('1Home/images/breakingNews.gif')";
+    canvas.style.backgroundPositionX = "492px";
+    canvas.style.backgroundPositionY = "445px";
+
     newsReport.play();          //RYN
 
-
+    //Images
     let floor = new Image();
     let darkWindowT = new Image();
     let darkWindowB = new Image();
@@ -89,6 +89,11 @@ function initializeLV1()
     let stairsB1 = new Image();
     let stairsB2 = new Image();
     let stairsB3 = new Image();
+    let tvTL = new Image();
+    let tvTR = new Image();
+    let tvBL = new Image();
+    let tvBR = new Image();
+
 
 
 
@@ -153,6 +158,10 @@ function initializeLV1()
         stairsB1.src = "1Home/images/stairsB1.png";
         stairsB2.src = "1Home/images/stairsB2.png";
         stairsB3.src = "1Home/images/stairsB3.png";
+        tvTL.src = "1Home/images/tvTL.png";
+        tvTR.src = "1Home/images/tvTR.png";
+        tvBL.src = "1Home/images/tvBL.png";
+        tvBR.src = "1Home/images/tvBR.png";
     }//Define SRC property of images
 
 
@@ -219,6 +228,10 @@ function initializeLV1()
         jjj = stairsB1;                     //59
         kkk = stairsB2;                     //60
         lll = stairsB3;                     //61
+        mmm = tvTL;                         //62
+        nnn = tvTR;                         //63
+        ooo = tvBL;                         //64
+        qqq = tvBR;                         //65
 
 
     }//Assign images to global letter variables
@@ -245,8 +258,8 @@ function initializeLV1()
                 [11, 50, 50, 50, 11, 10,  0,  0, 50, 50, 50, 11, 10, 56, 57, 58, 11, 10,  0, 11, 10,  0, 11, 10,  0],       //10
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 59, 60, 61,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //11
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //12
-                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 25, 26, 27, 35,  0],       //13
-                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 28, 29, 30,  0,  0],       //14
+                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0, 62,  63,  0,  0, 34, 25, 26, 27, 35,  0],       //13
+                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0, 64,  65,  0,  0,  0, 28, 29, 30,  0,  0],       //14
                 [ 0,  0,  0, 44, 45, 46, 48,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 31, 32, 33,  0,  0],       //15
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //16
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //17
@@ -275,8 +288,11 @@ function initializeLV1()
     changePStartPos();
 
 
-    stairsB3.onload = function(){l1Ready=true;};
+    tvBR.onload = function(){l1Ready=true;};
     waitForLoading2();
+
+
+
 
 
     function waitForLoading2()
