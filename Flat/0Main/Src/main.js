@@ -1,19 +1,19 @@
 let gameOver = false;
 
 //Current Level Int
-let level = 1;
+let level = 8;
 
 //Current Level Bool
 let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
 {
-    l1 = true;
+    l1 = false;
     l2 = false;
     l3 = false;
     l4 = false;
     l5 = false;
     l6 = false;
     l7 = false;
-    l8 = false;
+    l8 = true;
     l9 = false;
     l10 = false;
     l11 = false;
@@ -703,7 +703,11 @@ function drawOMap()//Object Map
                 {
                     switch (lOMap[level][row][col])
                     {
+                        //DO NOT SET 0 or 1 as anything!
                         case 1:
+                            //Do not set any objects to 1 in the lOMap as this is for
+                            // enemy positioning and enemies should not be drawn with
+                            //  this function.
                             break;
                         case 2:
                             if (l2)
@@ -1976,6 +1980,8 @@ function onKeyDown(e)
     {
         ctx.drawImage(floorClean, 22*32, 7*32);
     }
+
+
     if (e.keyCode === 37)//Left
     {
         if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -3487,7 +3493,7 @@ function gameover()
 {
     removeEventListener("keydown", onKeyDown, false);
     ctx.clearRect(0,0,800,600);
-    canvas.style.backgroundImage = "url('../images/abomb.gif')";
+    canvas.style.backgroundImage = "url('0Main/images/abomb.gif')";
 
 
     //Game over blinker counter & display function

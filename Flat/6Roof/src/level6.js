@@ -116,6 +116,19 @@ function initializeLV6()
         lPMap[level][14][10] = 1; //Putting the player (scientist) into the player map for this level
     }
 
+    if (lOMap[level] === undefined)             //Level Objects map
+    {
+        lOMap[level] = [];
+        for (let y = 0; y < 18; y++)
+        {
+            lOMap[level][y] = [];
+
+            for (let x = 0; x < 25; x++)
+            {
+                lOMap[level][y].push(0)
+            }
+        }
+    }
 
     changePStartPos();
 
