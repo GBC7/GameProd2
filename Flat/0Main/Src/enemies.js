@@ -10,8 +10,30 @@ function createEnemies()
 {
     if (scriptsLoaded)
     {
+        ///////////////////////////////////////////////////////
+        // **** HOW TO USE THE SUPER SIMPLE CONSTRUCTOR **** //
+        ///////////////////////////////////////////////////////
 
-        //A few examples for everyone..
+        //Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY)
+        //canAttack -> Tell the code if your enemy is hostile
+        //wid -> Width of each frame in the sprite sheet
+        //hei -> Height of each frame in the sprite sheet
+        //fOV -> Number of tiles that the enemy can see in direction they are facing
+        //range -> Number of tiles that the enemy can see to the left or right of the direction they are facing
+        //imgPath -> The path to the image used for your enemy
+        //hFrames -> Number of horizontal frames (Should be at least 3)
+        //regSpeed -> Length of time between each movement in milliseconds (lower the number, enemy gets quicker)
+        //runSpeed - >Speed the enemy travels when player is in view
+        //lvl -> Sets the level array to use for positioning the enemy in for collision detection
+        //strideLength -> Number of pixels traveled in a direction per frame
+        //minX -> farthest you can see left on the x-Axis that isn't completely covered in objects
+        //maxX -> farthest you can see right on the x-Axis that isn't completely covered in objects
+        //minY -> farthest you can see up on the y-Axis that isn't completely covered in objects
+        //maxY -> farthest you can see down on the y-Axis that isn't completely covered in objects
+
+
+        //Aaaaand a few examples....
+
 
         //L8 Enemies ( 6 of them )
         for (let numOf = 0; numOf !== 6; numOf++)
