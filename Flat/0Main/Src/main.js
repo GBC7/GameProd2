@@ -3614,7 +3614,7 @@ function healthInventory()
 
     ctx3.font = "30px Arial";
     ctx3.fillStyle = "red";
-    ctx3.fillText("Lives: ", 10, 55);
+    ctx3.fillText("Lives: " + p.lives, 10, 55);
 
     if(lighterTrigger === true)
     {
