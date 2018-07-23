@@ -4,27 +4,32 @@
 let enemy = [[],[],[],[],[],[],[],[],[],[],[],[],[]];
 let doneCreating = false;
 
-/*createEnemies();*/
+createEnemies();
 
 function createEnemies()
 {
     if (scriptsLoaded)
     {
 
+/*
         for (let numOf = 0; numOf < 100; numOf++)
         {
             Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
         }
+*/
 
-
-
-
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
 
 
         justWait();
         function justWait()
         {
-            if (enemy[8].length === 100)
+            if (enemy[6].length === 1)
             {
                 doneCreating = true;
             }
@@ -62,6 +67,7 @@ function createEnemies()
 
 
 
+
 function drawZeeEnemy()
 {
     for (let b = 0; b < enemy[level].length; b++)
@@ -73,13 +79,14 @@ function drawZeeEnemy()
     }
 }
 
-function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY)
-{
+function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY) {
+
+    //Enemy blueprint
     let thisEnemy =
         {
-            //////////////////////////////
-            // Set these for each enemy //
-            //////////////////////////////
+            //////////////////////////////////
+            // These are set for each enemy //
+            //////////////////////////////////
 
             hostile: false,     //Tell the code if your enemy is hostile
             width: 32,          //Width of each frame in the sprite sheet
@@ -93,9 +100,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             myLevel: 8,         //Sets the level array to use for positioning the enemy in for collision detection
             travelDist: 8,        //Number of pixels traveled in a direction per frame
 
-            /////////////////
-            // Leave these //
-            /////////////////
+            ///////////////////////////////////////
+            // These are the same for each enemy //
+            ///////////////////////////////////////
 
             //For positioning character on screen
             xPos: 32,//X axis position 32
@@ -131,13 +138,12 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             img: undefined,
             thingToDraw: undefined,
             //Main function .. creates a secondary global function in its setup function
-            roam: function ()
-            {
-                console.log("well shit..");
+            roam: function () {
+                console.log("enemy " + this.indexNum + " started roaming");
+
                 let self = this;
 
-                if (!this.setup)
-                {
+                if (!this.setup) {
                     self.dead = false;
                     self.originalSpeed = self.scurrySpeed;
                     //Set image -- then start walking
@@ -146,21 +152,19 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.img.src = self.imagePath;
                     self.drawMe = function ()//Public function
                     {
-                        if (p.row * 32 + p.height < self.yPos + self.height)//If player is behind enemy.. draw player first
+                        if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy.. draw player first
                         {
-                            if (notWalking)
-                            {
+                            if (notWalking) {
                                 drawPMap();
                             }
                             //Draw new position
-                            ctx.drawImage(self.img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
+                            ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
                         }
                         else//Otherwise draw enemy first
                         {
                             //Draw new position
-                            ctx.drawImage(self.img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
-                            if (notWalking)
-                            {
+                            ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
+                            if (notWalking) {
                                 drawPMap();
                             }
                         }
@@ -170,44 +174,36 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.rightSide = self.xPos + self.width;
                     self.bottomSide = self.yPos + self.height;
                     self.setup = true;
-                    self.img.onload = function ()
-                    {
+                    self.img.onload = function () {
                         walk();
                     };
                 }
 
                 //Walk the direction chosen if boundaries permit it
-                function walk()
-                {
-                    if (!self.dead && !self.destroyed)
-                    {
+                function walk() {
+                    if (!self.dead && !self.destroyed) {
                         //Get random walking direction
                         self.dir = chooseDirection();
 
                         //Call walking function correlating to direction chosen direction -- if ok to walk this way
                         //      else choose another random direction
-                        if (self.dir === "left")
-                        {
+                        if (self.dir === "left") {
                             checkIfOk(37);//Check boundaries inputting keyCode for direction
                         }
-                        else if (self.dir === "right")
-                        {
+                        else if (self.dir === "right") {
                             checkIfOk(39);
                         }
-                        else if (self.dir === "up")
-                        {
+                        else if (self.dir === "up") {
                             checkIfOk(38);
                         }
-                        else if (self.dir === "down")
-                        {
+                        else if (self.dir === "down") {
                             checkIfOk(40);
                         }
                     }
                 }
 
                 //Simple AI to choose direction to travel -- returns direction to go
-                function chooseDirection()
-                {
+                function chooseDirection() {
                     let directionChosen;
 
                     //Setup variables to choose direction to get with
@@ -219,34 +215,29 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     if (self.hostile && self.dir !== undefined)
                         directionChosen = checkFOV();
 
-                    if (self.sighted && directionChosen !== undefined)
-                    {
+                    if (self.sighted && directionChosen !== undefined) {
                         self.scurrySpeed = self.sightedSpeed;
                         return directionChosen;
                     }
-                    else
-                    {
-                        if (directionChosen === undefined)
-                        {
+                    else {
+                        if (directionChosen === undefined) {
                             //To use to decide whether to travel x or y axis
-                            let xOrY = (Math.floor(Math.random()*2) + 1);
+                            let xOrY = (Math.floor(Math.random() * 2) + 1);
 
                             //Set axis chosen to true and and initialize variable to chose which way on axis
-                            switch (xOrY)
-                            {
+                            switch (xOrY) {
                                 case 1:
                                     xChosen = true;
-                                    xDir = (Math.floor(Math.random()*2) + 1);
+                                    xDir = (Math.floor(Math.random() * 2) + 1);
                                     break;
                                 case 2:
                                     yChosen = true;
-                                    yDir = (Math.floor(Math.random()*2) + 1);
+                                    yDir = (Math.floor(Math.random() * 2) + 1);
                                     break;
                             }
 
                             //Chose a direction on the axis chosen
-                            if (yChosen)
-                            {
+                            if (yChosen) {
                                 switch (yDir)//Decide if going up or down
                                 {
                                     case 1:
@@ -257,8 +248,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                         break;
                                 }
                             }
-                            else if (xChosen)
-                            {
+                            else if (xChosen) {
                                 switch (xDir)//Decide if going left or right
                                 {
                                     case 1:
@@ -271,26 +261,21 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                             }
 
                             //Set direction chosen to return to variable that called it
-                            if (left)
-                            {
+                            if (left) {
                                 directionChosen = "left";
                             }
-                            else if (right)
-                            {
+                            else if (right) {
                                 directionChosen = "right";
                             }
-                            else if (up)
-                            {
+                            else if (up) {
                                 directionChosen = "up";
                             }
-                            else if (down)
-                            {
+                            else if (down) {
                                 directionChosen = "down";
                             }
                             self.scurrySpeed = self.originalSpeed;
                         }
-                        else
-                        {
+                        else {
                             self.scurrySpeed = 90;
                         }
 
@@ -299,8 +284,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 }
 
                 //Check boundaries (ONLY lMap -- not lPMap or lOMap)
-                function checkIfOk(e)
-                {
+                function checkIfOk(e) {
                     //Bool value to store answer of whether rat can travel this way
                     let goodToGo = false;
 
@@ -316,13 +300,11 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     {
                         if (e === 37 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos - 1] !== undefined)//Left
                         {
-                            if (l1 || l4 || l7 || l8)
-                            {
+                            if (l1 || l4 || l7 || l8) {
                                 goodToGo = (lMap[level][yPos + 1][xPos - 1] === floorNumbers[level]);
                             }
 
-                            else if (l2)
-                            {
+                            else if (l2) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos + 1][xPos - 1] === 3 ||
@@ -339,8 +321,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                                     );
                             }
-                            else if (l11)
-                            {
+                            else if (l11) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos + 1][xPos - 1] === 3 ||
@@ -348,24 +329,21 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                         lMap[level][yPos + 1][xPos - 1] === 0
                                     );
                             }
-                            else if (l5)
-                            {
+                            else if (l5) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos + 1][xPos - 1] === floorNumbers[level] ||
                                         lMap[level][yPos + 1][xPos - 1] === 40
                                     );
                             }
-                            else if (l6)
-                            {
+                            else if (l6) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos + 1][xPos - 1] === 0 ||
                                         lMap[level][yPos + 1][xPos - 1] === 4
                                     );
                             }
-                            else if (l3)
-                            {
+                            else if (l3) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos + 1][xPos - 1] === 16 ||
@@ -376,8 +354,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         if (e === 39 && lMap[level][yPos + 1] !== undefined && lMap[level][yPos + 1][xPos + 1] !== undefined)//Right
                         {
-                            if (l1 || l4 || l7 || l8)
-                            {
+                            if (l1 || l4 || l7 || l8) {
                                 goodToGo = (lMap[level][yPos + 1][xPos + 1] === floorNumbers[level]);
                             }
 
@@ -430,12 +407,10 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         if (e === 38 && lMap[level][yPos] !== undefined && lMap[level][yPos][xPos] !== undefined)//Up
                         {
-                            if (l1 || l4 || l7 || l8)
-                            {
+                            if (l1 || l4 || l7 || l8) {
                                 goodToGo = (lMap[level][yPos][xPos] === floorNumbers[level]);
                             }
-                            else if (l2)
-                            {
+                            else if (l2) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos][xPos] === 3 ||
@@ -451,8 +426,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                         )
                                     );
                             }
-                            else if (l11)
-                            {
+                            else if (l11) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos][xPos] === 3 ||
@@ -460,24 +434,21 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                         lMap[level][yPos][xPos] === 0
                                     );
                             }
-                            else if (l5)
-                            {
+                            else if (l5) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos][xPos] === floorNumbers[level] ||
                                         lMap[level][yPos][xPos] === 40
                                     );
                             }
-                            else if (l6)
-                            {
+                            else if (l6) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos][xPos] === 0 ||
                                         lMap[level][yPos][xPos] === 4
                                     );
                             }
-                            else if (l3)
-                            {
+                            else if (l3) {
                                 goodToGo =
                                     (
                                         lMap[level][yPos][xPos] === 16 ||
@@ -549,12 +520,10 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.dirOk = goodToGo;
 
 
-                    if (self.dirOk)
-                    {
+                    if (self.dirOk) {
                         if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
-                            {
+                            if (self.xPos - 8 > 0) {
                                 walkLeft();
                             }
                             else
@@ -562,8 +531,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (e === 39)//Right
                         {
-                            if (self.xPos + 8 + self.width < 800)
-                            {
+                            if (self.xPos + 8 + self.width < 800) {
                                 walkRight();
                             }
                             else
@@ -588,15 +556,13 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         else
                             setTimeout(walk, self.scurrySpeed);
                     }
-                    else
-                    {
+                    else {
                         setTimeout(walk, self.scurrySpeed);
                     }
 
                 }
 
-                function checkIfOk2(e)
-                {
+                function checkIfOk2(e) {
                     //Bool value to store answer of whether rat can travel this way
                     let goodToGo = false;
 
@@ -829,23 +795,19 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     self.dirOK = goodToGo;
 
-                    if (self.dirOk)
-                    {
+                    if (self.dirOk) {
                         return true;
                     }
-                    else
-                    {
+                    else {
                         setTimeout(walk, self.scurrySpeed);
                     }
                 }
 
-                function checkForOthers(e)
-                {
+                function checkForOthers(e) {
                     let direction = 0, vOrH;
                     let canGoThatWay = true;
 
-                    switch (e)
-                    {
+                    switch (e) {
                         case 37://left
                             vOrH = "h";
                             direction = -8;
@@ -866,35 +828,29 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     //Do nothing if not overlapping another enemy
                     // otherwise set canGoThatWay to false and return it after done
-                    if (vOrH === "v")
-                    {
+                    if (vOrH === "v") {
                         //For each enemy
-                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
-                        {
+                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++) {
 
-                            if (thisGuy === self.indexNum)
-                            {
+                            if (thisGuy === self.indexNum) {
                                 continue;
                             }
                             //if trying to go up
                             if (direction === -8)//Up
                             {
-                                if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide))
-                                {}
-                                else
-                                {
+                                if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide)) {
+                                }
+                                else {
                                     canGoThatWay = false;
                                     break;
                                 }
                             }
                             else if (direction === 8)//Down
                             {
-                                if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide))
-                                {
+                                if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide)) {
 
                                 }
-                                else
-                                {
+                                else {
                                     canGoThatWay = false;
                                     break;
                                 }
@@ -902,32 +858,27 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         }
                     }
-                    else if (vOrH === "h")
-                    {
+                    else if (vOrH === "h") {
                         //For each enemy
-                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
-                        {
-                            if (thisGuy === self.indexNum)
-                            {
+                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++) {
+                            if (thisGuy === self.indexNum) {
                                 continue;
                             }
                             //if trying to go up
                             if (direction === -8)//Left
                             {
-                                if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide))
-                                {}
-                                else
-                                {
+                                if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide)) {
+                                }
+                                else {
                                     canGoThatWay = false;
                                     break;
                                 }
                             }
                             else if (direction === 8)//Right
                             {
-                                if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide))
-                                {}
-                                else
-                                {
+                                if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide)) {
+                                }
+                                else {
                                     canGoThatWay = false;
                                     break;
                                 }
@@ -936,8 +887,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
 
                     //Allow enemy to start walking a new direction because this one is blocked
-                    if (!canGoThatWay)
-                    {
+                    if (!canGoThatWay) {
                         self.sighted = false;
                         self.dir = undefined;
                     }
@@ -946,30 +896,27 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                 }
 
-                function checkIfHit()
-                {
-                    if (self.xPos/*leftSide*/ < ((p.col * 32/*leftSide*/) + 32/*width*/) && (self.xPos + 32) > (p.col * 32))
+                function checkIfHit() {
+                    if (self.leftSide < ((p.col * 32) + p.width) && self.rightSide > (p.col * 32))
                     {
-                        if (self.yPos/*top*/ < ((p.row * 32/*top*/) + 48/*height*/) && (self.yPos + 32) > (p.row * 32))
-                        {
+                        if (self.topSide < ((p.row * 32) + p.height) && (self.bottomSide) > (p.row * 32)) {
                             p.health--;
                             aghh.play();
                             if (p.health === 0)
                             {
                                 ctx.fillStyle = '#ff0c18';
-                                ctx.fillRect(0,0,800,600);
+                                ctx.fillRect(0, 0, 800, 600);
                                 resetLevel(self.scurrySpeed);
                             }
                         }
                     }
                 }
 
-                function checkFOV()
-                {
+                function checkFOV() {
                     if (self.frameY === 0)//Looking down
                     {
                         //Check if in field of view
-                        if (p.row * 32/*topOfPlayer*/ > (self.yPos + self.height/*bottomOfEnemy*/) && p.row * 32/*top*/ <= (self.yPos + self.height/*bottomOfEnemy*/ + self.fov * 32))
+                        if (p.row * 32/*topOfPlayer*/ > (self.bottomSide) && p.row * 32/*top*/ <= (self.bottomSide + self.fov * 32))
                         {
                             return checkRange("Down");
                         }
@@ -981,7 +928,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     else if (self.frameY === 1)//Looking left
                     {
                         //Check if in field of view
-                        if ((p.col * 32 + 32/*rightSideOfPlayer*/) < self.xPos && (p.col * 32 + 32/*rightSideOfPlayer*/) >= (self.xPos - self.fov * 32))
+                        if ((p.col * 32 + p.width) < self.leftSide && (p.col * 32 + p.width) >= (self.leftSide - self.fov * 32))
                         {
                             return checkRange("Left");
                         }
@@ -993,11 +940,11 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     else if (self.frameY === 2)//Looking right
                     {
                         //Check if in field of view
-                        if ((p.col * 32 /*leftSideOfPlayer*/) > (self.xPos + self.width) && p.col * 32 /*leftSideOfPlayer*/ <= (self.xPos + self.width + self.fov * 32))
+                        if ((p.col * 32 /*leftSideOfPlayer*/) > (self.rightSide) && p.col * 32 /*leftSideOfPlayer*/ <= (self.rightSide + self.fov * 32))
                         {
                             return checkRange("Right");
                         }
-                        else if ((p.col * 32 /*leftSideOfPlayer*/) === (self.xPos + self.width))
+                        else if ((p.col * 32 /*leftSideOfPlayer*/) === (self.rightSide))
                         {
                             return checkWhereToTurn("Right");
                         }
@@ -1005,11 +952,11 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     else if (self.frameY === 3)//Looking up
                     {
                         //Check if in field of view
-                        if ((p.row * 32 + 48/*bottomOfPlayer*/) < (self.yPos/*topOfEnemy*/) && (p.row * 32 + 48/*bottomOfPlayer*/) >= (self.yPos/*topOfEnemy*/ - self.fov  * 32))
+                        if ((p.row * 32 + p.height) < (self.topSide) && (p.row * 32 + p.height) >= (self.topSide - self.fov * 32))
                         {
                             return checkRange("Up");
                         }
-                        else if ((p.row * 32 + 48/*bottomOfPlayer*/) === (self.yPos/*topOfEnemy*/))
+                        else if ((p.row * 32 + p.height) === (self.topSide))
                         {
                             return checkWhereToTurn("Up");
                         }
@@ -1021,7 +968,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         if (facing === "Down")
                         {
 
-                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
+                            if ((p.col * 32) > self.leftSide - self.rangeOV * 32 && (p.col * 32 + p.width) < self.rightSide + self.rangeOV * 32)
                             {
                                 self.sighted = true;
                                 return "down";
@@ -1029,7 +976,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (facing === "Left")
                         {
-                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                            if ((p.row * 32 + p.height) > self.topSide - self.rangeOV * 32 && (p.row * 32) < self.bottomSide + self.rangeOV * 32)
                             {
                                 self.sighted = true;
                                 return "left";
@@ -1037,7 +984,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (facing === "Right")
                         {
-                            if ((p.row * 32 + 48) > self.yPos - self.rangeOV * 32 && (p.row * 32) < self.yPos + self.height + self.rangeOV * 32)
+                            if ((p.row * 32 + p.height) > self.topSide - self.rangeOV * 32 && (p.row * 32) < self.bottomSide + self.rangeOV * 32)
                             {
                                 self.sighted = true;
                                 return "right";
@@ -1045,26 +992,26 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (facing === "Up")
                         {
-                            if ((p.col * 32) > self.xPos - self.rangeOV * 32 && (p.col * 32 + 32) < self.xPos + self.width + self.rangeOV * 32)
-                            {
+                            if ((p.col * 32) > self.leftSide - self.rangeOV * 32 && (p.col * 32 + p.width) < self.rightSide + self.rangeOV * 32) {
                                 self.sighted = true;
                                 return "up";
                             }
                         }
                         else return undefined;
                     }
+
                     function checkWhereToTurn(currentlyChosenDir)
                     {
                         if (currentlyChosenDir === "Left" || currentlyChosenDir === "Right")
                         {
                             //If enemy's above the player
-                            if (self.yPos + self.height < (p.row + 1) * 32)
+                            if (self.bottomSide < (p.row + 1) * 32)
                             {
                                 self.sighted = true;
                                 return "down";
                             }
                             //If enemy's below the player
-                            else if (self.yPos > (p.row + 1) * 32 + 32)
+                            else if (self.topSide > (p.row + 1) * 32 + p.height)
                             {
                                 self.sighted = true;
                                 return "up";
@@ -1079,13 +1026,13 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         else if (currentlyChosenDir === "Up" || currentlyChosenDir === "Down")
                         {
                             //If enemy's to the left of the player
-                            if (self.xPos + self.width < p.col * 32)
+                            if (self.rightSide < p.col * 32)
                             {
                                 self.sighted = true;
                                 return "right";
                             }
                             //If enemy's to the right of the player
-                            else if (self.xPos > p.col * 32 + p.width)
+                            else if (self.leftSide > p.col * 32 + p.width)
                             {
                                 self.sighted = true;
                                 return "left";
@@ -1100,15 +1047,13 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 }
 
                 //Simple walking one direction functions
-                function walkLeft()
-                {
+                function walkLeft() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsLeft = (Math.floor(Math.random() * 4) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
-                    if (!self.lFrameSet)
-                    {
+                    if (!self.lFrameSet) {
                         self.frameXCounter = 0;
                         self.frameX = 0;
                         self.frameY = 1;//Facing left
@@ -1122,8 +1067,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     moveLeft();
 
                     //Move character by 1/4 of a tile for however many random steps selected
-                    function moveLeft()
-                    {
+                    function moveLeft() {
                         stepsLeft++;
                         //Set position to be erased
                         setLastPos();
@@ -1141,10 +1085,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsLeft < numOfStepsLeft - 1)
-                        {
-                            if (checkIfOk2(37))
-                            {
+                        if (stepsLeft < numOfStepsLeft - 1) {
+                            if (checkIfOk2(37)) {
                                 setTimeout(moveLeft, self.scurrySpeed);
                             }
                             else//Start again
@@ -1158,8 +1100,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
                 }
 
-                function walkRight()
-                {
+                function walkRight() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsRight = (Math.floor(Math.random() * 4) + 1);
 
@@ -1195,13 +1136,10 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         updateLRTBSide();
 
 
-
                         //Draw new position
                         drawIt();
-                        if (stepsRight < numOfStepsRight - 1)
-                        {
-                            if (checkIfOk2(39))
-                            {
+                        if (stepsRight < numOfStepsRight - 1) {
+                            if (checkIfOk2(39)) {
                                 setTimeout(moveRight, self.scurrySpeed);
                             }
                             else//Start again
@@ -1214,8 +1152,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
                 }
 
-                function walkDown()
-                {
+                function walkDown() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsDown = (Math.floor(Math.random() * 4) + 1);
 
@@ -1253,10 +1190,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsDown < numOfStepsDown - 1)
-                        {
-                            if (checkIfOk2(40))
-                            {
+                        if (stepsDown < numOfStepsDown - 1) {
+                            if (checkIfOk2(40)) {
                                 setTimeout(moveDown, self.scurrySpeed);
                             }
                             else//Start again
@@ -1269,8 +1204,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
                 }
 
-                function walkUp()
-                {
+                function walkUp() {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsUp = (Math.floor(Math.random() * 4) + 1);
 
@@ -1308,10 +1242,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsUp < numOfStepsUp - 1)
-                        {
-                            if (checkIfOk2(38))
-                            {
+                        if (stepsUp < numOfStepsUp - 1) {
+                            if (checkIfOk2(38)) {
                                 setTimeout(moveUp, self.scurrySpeed);
                             }
                             else//Start again
@@ -1323,8 +1255,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
                 }
 
-                function updateLRTBSide()
-                {
+                function updateLRTBSide() {
                     self.topSide = self.yPos;
                     self.leftSide = self.xPos;
                     self.rightSide = self.xPos + self.width;
@@ -1332,8 +1263,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 }
 
                 //Set last position for erasing map
-                function setLastPos()
-                {
+                function setLastPos() {
                     self.prevX = self.xPos;
                     self.prevY = self.yPos;
                 }
@@ -1341,7 +1271,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 //Drawing rat in new position -- called by walkLeft, walkRight .... functions (then call walk function to start over)
                 function drawIt()                           //May have to change up the drawImage command (self.img to something else)
                 {
-                    ctx.clearRect(self.prevX, self.prevY, 32, 32);
+                    ctx.clearRect(self.prevX, self.prevY, self.width, self.height);
+
+                    drawL6Full();
 
                     let remainX = (self.xPos % 32), remainY = (self.yPos % 32);
 
@@ -1602,30 +1534,27 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     }
 
 
-
                     //Draw player over map and mouse
-                    if (p.row * 32 + p.height < self.yPos + self.height)//If player is behind enemy.. draw player first
+                    if (p.row * 32 + p.height < self.bottomSide)//If player is behind enemy.. draw player first
                     {
                         if (notWalking)
                         {
                             drawPMap();
                         }
                         //Draw new position
-                        ctx.drawImage(self.img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
+                        ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
                         drawZeeEnemy();
                     }
                     else//Otherwise draw enemy first
                     {
                         //Draw new position
-                        ctx.drawImage(self.img, self.frameX * 32, self.frameY * 32, 32, 32, self.xPos, self.yPos, 32, 32);
+                        ctx.drawImage(self.img, self.frameX * self.width, self.frameY * self.height, self.width, self.height, self.xPos, self.yPos, self.width, self.height);
                         drawZeeEnemy();
-                        if (notWalking)
-                        {
+                        if (notWalking) {
                             drawPMap();
                         }
 
                     }
-
 
 
                     if (self.hostile)
@@ -1636,63 +1565,133 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         };
 
 
-    thisEnemy.hostile = canAttack;
-    thisEnemy.width = wid;
-    thisEnemy.height = hei;
-    thisEnemy.fov = fOV;
-    thisEnemy.rangeOV = range;
-    thisEnemy.imagePath = imgPath;
-    thisEnemy.numOfHFrames = hFrames;
-    thisEnemy.scurrySpeed = regSpeed;
-    thisEnemy.sightedSpeed = runSpeed;
-    thisEnemy.myLevel = lvl;
-    thisEnemy.travelDist = strideLength;
-    thisEnemy.indexNum = enemy[lvl].length;
+    //Uses constructor to set blueprint values as given values
+    {
+        thisEnemy.hostile = canAttack;
+        thisEnemy.width = wid;
+        thisEnemy.height = hei;
+        thisEnemy.fov = fOV;
+        thisEnemy.rangeOV = range;
+        thisEnemy.imagePath = imgPath;
+        thisEnemy.numOfHFrames = hFrames;
+        thisEnemy.scurrySpeed = regSpeed;
+        thisEnemy.sightedSpeed = runSpeed;
+        thisEnemy.myLevel = lvl;
+        thisEnemy.travelDist = strideLength;
+        thisEnemy.indexNum = enemy[lvl].length;
+    }
 
 
-    let maximumX = maxX - wid;
-    let maximumY = maxY - hei;
-
-    thisEnemy.xPos = Math.ceil(Math.random() * (maximumX - minX)/strideLength + minX/strideLength);
-    thisEnemy.yPos = Math.ceil(Math.random() * (maximumY - minY)/strideLength + minY/strideLength);
-
-
-    thisEnemy.xPos *= strideLength;
-    thisEnemy.yPos *= strideLength;
-
-
-
-
+    //Sets random position for enemy and ensures it is not taken by another enemy
     setItsPosition();
+
 
     function setItsPosition()
     {
-        //Set random start positions
+        //Uses constructor values to set the last allowed position on the canvas - accounting for the enemies width
+        let maximumX = maxX - wid;
+        let maximumY = maxY - hei;
 
+        //Sets random x and y based on min and max values (which are divided by the stride length) provided in constructor
         thisEnemy.xPos = Math.ceil(Math.random() * (maximumX - minX)/strideLength + minX/strideLength);
         thisEnemy.yPos = Math.ceil(Math.random() * (maximumY - minY)/strideLength + minY/strideLength);
 
+        //Re-multiplies by stride length to ensure the values are multiples of stride length
+        // (ex. if stride length is 8, enemies will only appear at very left of tile, 1/4 way
+        // through, 1/2 way through, 3/4 way through or on the next tile at the beginning)
         thisEnemy.xPos *= strideLength;
         thisEnemy.yPos *= strideLength;
 
-        let isNewPosition = true;
+        let isNewPosition = true, cannotGoHere = false;
 
-        for (let thisOne = 0; thisOne < enemy[lvl].length; thisOne ++)
+        let theX = thisEnemy.xPos, theY = thisEnemy.yPos;
+
+        //Check to make sure that the position the enemy is landing in doesn't have any environment objects
+        if (lMap[lvl] !== undefined && lMap[lvl][theY] !== undefined && lMap[lvl][theY][theX] !== undefined)//Left
         {
-            if (thisEnemy.xPos === enemy[lvl][thisOne].xPos)
+            if (l1 || l4 || l7 || l8)
+                cannotGoHere = (lMap[lvl][theY][theX] !== floorNumbers[lvl]);
+            else if (l2)
             {
-                if (thisEnemy.yPos === enemy[thisEnemy.myLevel][thisOne].yPos)
-                {
-                    isNewPosition = false;
-                }
+                cannotGoHere =
+                    (
+                        lMap[lvl][theY][theX] !== 3 ||
+                        lMap[lvl][theY][theX] !== 4 ||
+                        lMap[lvl][theY][theX] !== 5 ||
+                        lMap[lvl][theY][theX] !== 29 ||
+                        lMap[lvl][theY][theX] !== 30 ||
+                        (
+                            lMap[lvl][theY][theX] !== 15 ||
+                            lMap[lvl][theY][theX] !== 9
+                            &&
+                            doorThreeOpen
+                        )
+
+                    );
+
+            }
+            else if (l3)
+            {
+                cannotGoHere =
+                    (
+                        lMap[lvl][theY][theX] !== 16 ||
+                        lMap[lvl][theY][theX] !== 17 ||
+                        lMap[lvl][theY][theX] !== 0
+                    );
+            }
+            else if (l5)
+            {
+                cannotGoHere =
+                    (
+                        lMap[lvl][theY][theX] !== floorNumbers[lvl] ||
+                        lMap[lvl][theY][theX] !== 40
+                    );
+            }
+            else if (l6)
+            {
+                cannotGoHere =
+                    (
+                        lMap[lvl][theY][theX] !== 0 ||
+                        lMap[lvl][theY][theX] !== 4
+                    );
+            }
+            else if (l11)
+            {
+                cannotGoHere =
+                    (
+                        lMap[lvl][theY][theX] !== 3 ||
+                        lMap[lvl][theY][theX] !== 4 ||
+                        lMap[lvl][theY][theX] !== 0
+                    );
             }
         }
 
-        if (!isNewPosition)
+        //If it does .. set new positions
+        if (cannotGoHere)
         {
             setItsPosition();
         }
-    }
+        //If not.. make sure no other enemy has been placed here
+        else
+        {
+            for (let thisOne = 0; thisOne < enemy[lvl].length; thisOne ++)
+            {
+                if (thisEnemy.xPos === enemy[lvl][thisOne].xPos)
+                {
+                    if (thisEnemy.yPos === enemy[thisEnemy.myLevel][thisOne].yPos)
+                    {
+                        isNewPosition = false;
+                        break;
+                    }
+                }
+            }
 
-    enemy[lvl].push(thisEnemy);
+            if (!isNewPosition)
+            {
+                setItsPosition();
+            }
+            else
+                enemy[lvl].push(thisEnemy);
+        }
+    }
 }

@@ -1,19 +1,19 @@
 let gameOver = false;
 
 //Current Level Int
-let level = 8;
+let level = 1;
 
 //Current Level Bool
 let l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12;
 {
-    l1 = false;
+    l1 = true;
     l2 = false;
     l3 = false;
     l4 = false;
     l5 = false;
     l6 = false;
     l7 = false;
-    l8 = true;
+    l8 = false;
     l9 = false;
     l10 = false;
     l11 = false;

@@ -15,6 +15,7 @@ let helipad = new Image();
 let helicopter = new Image();
 let exit = new Image();
 let shrub = new Image();
+
 {
     shrub.src = "6Roof/images/shrub.png";
     exit.src = "6Roof/images/exit2.png";
@@ -34,7 +35,6 @@ let shrub = new Image();
 function initializeLV6()
 {
     canvas.style.backgroundImage = "url('6Roof/images/city.gif')";
-    drawL6Full();
 
     newsReport.pause();
 
@@ -134,53 +134,15 @@ function initializeLV6()
 
     alreadyDoinIt = false;
 
-    shinglesBRight.onload = function(){l6Ready=true;};
+    shinglesBRight.onload = function(){l6Ready=true;
+    drawL6Full();};
     addEventListener("keydown", onKeyDown, false);
-
-
-    for (let i = 0; i < enemy[6].length; i++)
-    {
-        enemy[6][i].roam();
-    }
 
 
 }
 
 function drawL6Full()
 {
-    l6Ready2 = false;
-
-    let gate = new Image();
-    let fence = new Image();
-    let litWindow = new Image();
-    let darkWindow = new Image();
-    let cherryTree = new Image();
-    let statue = new Image();
-    let car = new Image();
-    let ladder = new Image();
-    let helipad = new Image();
-    let helicopter = new Image();
-    let exit = new Image();
-    let shrub = new Image();
-    {
-        exit.src = "6Roof/images/exit2.png";
-        helicopter.src = "6Roof/images/helicopter1.png";
-        helipad.src = "6Roof/images/helipad.png";
-        ladder.src = "6Roof/images/ladder.png";
-        car.src = "6Roof/images/car.png";
-        statue.src = "6Roof/images/statue.png";
-        cherryTree.src = "6Roof/images/cherryTree.png";
-        darkWindow.src = "6Roof/images/darkWindow.png";
-        litWindow.src = "6Roof/images/litWindow.png";
-        fence.src = "6Roof/images/fence.png";
-        gate.src = "6Roof/images/gate.png";
-        shrub.src = "6Roof/images/shrub.png";
-    }
-
-    if (!l6Ready2)
-    {
-        shrub.onload = function(){l6Ready2 = true;}
-    }
     if (l6)
     {
         ctx.drawImage(ladder, 5, 160);
@@ -235,6 +197,11 @@ function drawL6Full()
         ctx.drawImage(gate, 700, 520);
         ctx.drawImage(statue, 710, 560);
         ctx.drawImage(statue, 790, 560);
+
+        for (let i = 0; i < enemy[6].length; i++)
+        {
+            enemy[6][i].roam();
+        }
 
     }
 }
