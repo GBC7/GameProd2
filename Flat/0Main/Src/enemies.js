@@ -10,7 +10,7 @@ function createEnemies()
     if (scriptsLoaded)
     {
         //Level 8
-        for (let i = 0; i < 7; i++)
+        for (let i = 0; i < 3; i++)
         {
             let ratSmallLab =
                 {

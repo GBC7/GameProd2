@@ -29,6 +29,7 @@ function initializeLV7()
     let openWindow = new Image();
     let closedWindow = new Image();
     let trash = new Image();
+	let trashFire = new Image();
     let wire = new Image();
     let table = new Image();
     let tableBlood = new Image();
@@ -61,6 +62,7 @@ function initializeLV7()
         openWindow.src = "7Lab/images/openWindow.png";
         closedWindow.src = "7Lab/images/closedWindow.png";
         trash.src = "7Lab/images/trash.png";
+		trashFire.src = "7Lab/images/trash-fire.png"
         wire.src = "7Lab/images/wire.png";
         table.src = "7Lab/images/table.png";
         tableBlood.src = "7Lab/images/table-blood.png";
@@ -92,7 +94,14 @@ function initializeLV7()
             i = fullShelvesTop;		// 8
             j = fullShelvesBottom;	// 9
         }
-        k = trash;				// 10
+        if (researchBurned)
+		{
+			k = trashFire; 		// 10
+		}
+		else
+		{
+			k = trash; 			// 10
+		}
         l = wire;				// 11
         m = table;				// 12
         n = tableBlood; 		// 13
