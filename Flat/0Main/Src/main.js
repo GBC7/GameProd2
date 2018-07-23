@@ -96,6 +96,7 @@ let passcode = new Image();
 let publishersAddress = new Image();
 let research = new Image();
 let rollerblades = new Image();
+let researchBurnt = new Image();
 let aghh = new Audio;//          below this one.
 {
     scientist.src = "0Main/images/scientist2.png";
@@ -110,6 +111,7 @@ let aghh = new Audio;//          below this one.
     publishersAddress.src = "0Main/images/inventory/publishersAddress.png";
     research.src = "0Main/images/inventory/research.png";
     rollerblades.src = "0Main/images/inventory/rollerblades.png";
+    researchBurnt.src = "0Main/images/inventory/researchBurnt.png";
 
 }
 
@@ -135,9 +137,8 @@ let walkingSpeed = 15;
 
 let caneTrigger = false;
 let lighterTrigger = true;
-let lighterFluidTrigger = false;
 let publishersAddressTrigger = false;
-let researchTrigger = false;
+
 
 function startGame()
 {
@@ -3649,13 +3650,18 @@ function healthInventory()
     {
         ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
     }
-    if(researchTrigger === true)
+    if(researchPaper === true)
     {
         ctx3.drawImage(research, 15, 410, 32, 32);
     }
-    if(lighterFluidTrigger === true)
+    if(lighterFluid === true)
     {
         ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+    }
+    if(researchBurned === true)
+    {
+        ctx.clearRect(10, 409, 100, 35);
+        ctx3.drawImage(research, 15, 410, 32, 32);
     }
 
 

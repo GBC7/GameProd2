@@ -17,8 +17,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="3623" column="15" selection-start-line="3623" selection-start-column="7" selection-end-line="3623" selection-end-column="15" />
+            <state relative-caret-position="616">
+              <caret line="3650" column="23" selection-start-line="3650" selection-start-column="23" selection-end-line="3650" selection-end-column="23" />
               <folding>
                 <element signature="e#135#332#0" />
                 <element signature="e#561#1782#0" />
@@ -34,10 +34,14 @@
                 <element signature="e#3563#4007#0" />
                 <element signature="e#5241#6027#0" />
                 <element signature="e#41328#83349#0" />
+                <element signature="e#41416#48051#0" />
+                <element signature="e#48089#56149#0" />
+                <element signature="e#56187#62507#0" />
+                <element signature="e#62545#67792#0" />
+                <element signature="e#67830#69132#0" />
+                <element signature="e#69170#72009#0" />
                 <element signature="e#83373#105672#0" />
-                <element signature="e#105725#115152#0" />
                 <element signature="e#111828#113609#0" />
-                <element signature="e#113699#115143#0" />
                 <element signature="e#120031#123773#0" />
                 <element signature="e#123796#128136#0" />
                 <element signature="e#128159#130174#0" />
@@ -46,16 +50,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="level1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1Home/src/level1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="309" column="36" selection-start-line="309" selection-start-column="36" selection-end-line="309" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="level5.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
+      <file leaf-file-name="dialog.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="629">
+              <caret line="196" column="104" selection-start-line="196" selection-start-column="104" selection-end-line="196" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tutorialL1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1Home/src/tutorialL1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2856">
+              <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -72,10 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>enemyArr</find>
-      <find>http://localhost:63342/Flat/2Sewer/images/flameWall2Dark.png?_ijt=4ovst5mv8k0msio5l2bcl3kash</find>
-      <find>let enemyArr = [];</find>
-      <find>roofEnemy,</find>
       <find>checka</find>
       <find>SystemMSGLevel3[4]</find>
       <find>SystemMSGLeve</find>
@@ -102,6 +120,10 @@
       <find>paper</find>
       <find>pub</find>
       <find>keyFound</find>
+      <find>researchBurn</find>
+      <find>researchBurned</find>
+      <find>inivializeTutorial</find>
+      <find>initializeTutorialLV1()</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -128,7 +150,6 @@
         <option value="$PROJECT_DIR$/0Main/Src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/Dialog.js" />
         <option value="$PROJECT_DIR$/0Main/Src/level7.js" />
-        <option value="$PROJECT_DIR$/1Home/src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
         <option value="$PROJECT_DIR$/6Roof/src/level6.js" />
         <option value="$PROJECT_DIR$/12Helo/src/HelicopterLevel.js" />
@@ -140,6 +161,9 @@
         <option value="$PROJECT_DIR$/2Sewer/src/level11.js" />
         <option value="$PROJECT_DIR$/5MomsPlace/src/level5.js" />
         <option value="$PROJECT_DIR$/0Main/Src/main.js" />
+        <option value="$PROJECT_DIR$/1Home/src/level1.js" />
+        <option value="$PROJECT_DIR$/1Home/src/tutorialL1.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/dialog.js" />
       </list>
     </option>
   </component>
@@ -178,23 +202,17 @@
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
               <item name="Src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="5MomsPlace" type="462c0819:PsiDirectoryNode" />
+              <item name="1Home" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="5MomsPlace" type="462c0819:PsiDirectoryNode" />
+              <item name="1Home" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -244,12 +262,12 @@
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
       <workItem from="1532100492835" duration="10501000" />
-      <workItem from="1532292607045" duration="19098000" />
+      <workItem from="1532292607045" duration="21827000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111595000" />
+    <option name="totallyTimeSpent" value="114324000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -314,29 +332,10 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="47" />
+      <option name="time" value="48" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/healthBar/basic/background.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/images/heart.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/healthBar/health_bar/health_bar.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2Sewer/src/level2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2132">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
-          <folding>
-            <element signature="e#3999#5696#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/2Sewer/src/level11.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
@@ -487,10 +486,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/7Lab/src/level7.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="3623" column="15" selection-start-line="3623" selection-start-column="7" selection-end-line="3623" selection-end-column="15" />
+        <state relative-caret-position="616">
+          <caret line="3650" column="23" selection-start-line="3650" selection-start-column="23" selection-end-line="3650" selection-end-column="23" />
           <folding>
             <element signature="e#135#332#0" />
             <element signature="e#561#1782#0" />
@@ -506,10 +508,14 @@
             <element signature="e#3563#4007#0" />
             <element signature="e#5241#6027#0" />
             <element signature="e#41328#83349#0" />
+            <element signature="e#41416#48051#0" />
+            <element signature="e#48089#56149#0" />
+            <element signature="e#56187#62507#0" />
+            <element signature="e#62545#67792#0" />
+            <element signature="e#67830#69132#0" />
+            <element signature="e#69170#72009#0" />
             <element signature="e#83373#105672#0" />
-            <element signature="e#105725#115152#0" />
             <element signature="e#111828#113609#0" />
-            <element signature="e#113699#115143#0" />
             <element signature="e#120031#123773#0" />
             <element signature="e#123796#128136#0" />
             <element signature="e#128159#130174#0" />
@@ -517,8 +523,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/1Home/src/level1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="309" column="36" selection-start-line="309" selection-start-column="36" selection-end-line="309" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1Home/src/tutorialL1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2856">
+          <caret line="168" column="26" selection-start-line="168" selection-start-column="26" selection-end-line="168" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="196" column="104" selection-start-line="196" selection-start-column="104" selection-end-line="196" selection-end-column="104" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
