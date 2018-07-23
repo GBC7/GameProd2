@@ -10,7 +10,7 @@ function createEnemies()
     if (scriptsLoaded)
     {
         //Level 8
-        for (let i = 0; i < 7; i++)
+        for (let i = 0; i < 1; i++)
         {
             let ratSmallLab =
                 {
@@ -1386,9 +1386,11 @@ function createEnemies()
 
             //Define a second function that only draws the rat (for use when rat needs to be redrawn immediately after being erased)
             //Would not allow secondary function to be used during
-            ratSmallLab.xPos = i * Math.floor(Math.random() + 2) * 32;
-            ratSmallLab.yPos = i * Math.floor(Math.random() + 2) * 32 + 160;
-            enemy[8].push(ratSmallLab);
+            /*ratSmallLab.xPos = i * Math.floor(Math.random() + 2) * 32;
+            ratSmallLab.yPos = i * Math.floor(Math.random() + 2) * 32 + 160;*/
+            ratSmallLab.xPos = 400;
+            ratSmallLab.yPos = 500;
+            enemy[6].push(ratSmallLab);
         }
 
     }

@@ -180,6 +180,9 @@ function startGame()
     {
         //Pause all sounds to ensure they do not continue to play upon emerging into next level
         {
+            canvas.style.backgroundImage = "";
+            canvas.style.backgroundPositionX = "0px";
+            canvas.style.backgroundPositionY = "0px";
             meow.pause();
             newsReport.pause();
             ratOfDeath.pause();
