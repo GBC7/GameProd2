@@ -11,13 +11,16 @@ function createEnemies()
     if (scriptsLoaded)
     {
 
-/*
-        for (let numOf = 0; numOf < 100; numOf++)
+        //A few examples for everyone..
+
+        //L8 Enemies ( 6 of them )
+        for (let numOf = 0; numOf !== 6; numOf++)
         {
             Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
         }
-*/
 
+
+        //L6 enemies ( 6 of them )
         Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
         Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
         Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
@@ -78,6 +81,7 @@ function drawZeeEnemy()
         }
     }
 }
+
 
 function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY) {
 
