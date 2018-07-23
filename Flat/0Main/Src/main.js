@@ -133,16 +133,11 @@ let p =                                                         //PlayerObject
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
 
-let caneTrigger = true;
-let disguiseTrigger = true;
-let keyTrigger = true;
+let caneTrigger = false;
 let lighterTrigger = true;
-let ligherFluidTrigger = true;
-let mapVTrigger = true;
-let passcodeTrigger = true;
-let publishersAddressTrigger = true;
-let researchTrigger = true;
-let rollerbladesTrigger = true;
+let lighterFluidTrigger = false;
+let publishersAddressTrigger = false;
+let researchTrigger = false;
 
 function startGame()
 {
@@ -2546,6 +2541,8 @@ function onKeyDown(e)
         l12Ready=false;
         startGame();                                //Load settings and assets for next map
     }
+
+    healthInventory();
 }
 
 function checkBoundaries(e)//Gets called each step
@@ -2856,6 +2853,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
             {
                 lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
                 keyFound = true;
+
             }
         }
     }
@@ -2928,6 +2926,8 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         //code in here will check if the player picked up the right piece of paper
     }
+
+
 }
 
 
@@ -3425,6 +3425,8 @@ function checkActions()//Gets called when pressing space
         }
     }
 
+    healthInventory();
+
 }
 
 function resetLevel(time = 40)
@@ -3608,8 +3610,7 @@ function healthInventory()
     }
     else if(p.health === 1)
     {
-        ctx3.drawImage(hearts, 10, 75, 32, 32); 
-
+        ctx3.drawImage(hearts, 10, 75, 32, 32);
     }
 
     ctx3.font = "30px Arial";
@@ -3620,23 +3621,23 @@ function healthInventory()
     {
         ctx3.drawImage(lighter, 15, 202, 40, 32);
     }
-    if(keyTrigger === true)
+    if(keyFound === true)
     {
         ctx3.drawImage(key, 67, 200, 32, 32);
     }
-    if(passcodeTrigger === true)
+    if(findPasscode === true)
     {
         ctx3.drawImage(passcode, 15, 254, 32, 32);
     }
-    if(disguiseTrigger === true)
+    if(findDisguise === true)
     {
         ctx3.drawImage(disguise, 63, 254, 32, 32);
     }
-    if(rollerbladesTrigger === true)
+    if(findRollerblades === true)
     {
         ctx3.drawImage(rollerblades, 15, 306, 32, 32);
     }
-    if(mapVTrigger === true)
+    if(findMap === true)
     {
         ctx3.drawImage(mapV, 63, 306, 32, 32);
     }
@@ -3652,7 +3653,7 @@ function healthInventory()
     {
         ctx3.drawImage(research, 15, 410, 32, 32);
     }
-    if(ligherFluidTrigger === true)
+    if(lighterFluidTrigger === true)
     {
         ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
     }
