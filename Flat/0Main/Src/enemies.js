@@ -34,22 +34,16 @@ function createEnemies()
 
         //Aaaaand a few examples....
 
+        //L1
         Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600);
 
-        //L8 Enemies ( 6 of them )
-        for (let numOf = 0; numOf !== 25; numOf++)
+        //L2
+        for (let rats = 0; rats !== 10; rats ++)
         {
-            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
+            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 4, 180, 70, 2, 8, 0, 800, 32, 600);
         }
 
 
-        //L6 enemies ( 6 of them )
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
 
 
         //L5
@@ -66,6 +60,20 @@ function createEnemies()
         Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat10.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
         //Mom
         Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 60, 5, 8, 0, 800, 32, 600);
+
+        //L6 enemies ( 6 of them )
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+
+        //L8 Enemies ( 6 of them )
+        for (let numOf = 0; numOf !== 25; numOf++)
+        {
+            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
+        }
 
 
         justWait();
@@ -122,7 +130,8 @@ function drawZeeEnemy()
 }
 
 
-function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY) {
+function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY)
+{
 
     //Enemy blueprint
   /*  let thisEnemy =
@@ -1815,6 +1824,10 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             sightedSpeed: 60,   //Speed the enemy travels when player is in view
             myLevel: 8,         //Sets the level array to use for positioning the enemy in for collision detection
             travelDist: 8,        //Number of pixels traveled in a direction per frame
+            minX: 0,
+            maxX: 800,
+            minY: 32,
+            maxY: 600,
 
             /////////////////
             // Leave these //
@@ -1848,6 +1861,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             frameX: 1,//The pose in their direction
             frameY: 2,//Facing direction
             //For
+            travFrames: undefined,
             dir: undefined, //Stores direction chosen to walk
             dirOK: true,
             //For drawing enemies image and maps images respectively
@@ -1892,6 +1906,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.leftSide = self.xPos;
                     self.rightSide = self.xPos + self.width;
                     self.bottomSide = self.yPos + self.height;
+                    self.travFrames = 32 / self.travelDist;
                     self.setup = true;
                     self.img.onload = function ()
                     {
@@ -2276,7 +2291,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     {
                         if (e === 37)//Left
                         {
-                            if (self.xPos - 8 > 0)
+                            if (self.leftSide - self.travelDist > self.minX)
                             {
                                 walkLeft();
                             }
@@ -2285,7 +2300,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (e === 39)//Right
                         {
-                            if (self.xPos + 8 + self.width < 800)
+                            if (self.rightSide + self.travelDist < self.maxX)
                             {
                                 walkRight();
                             }
@@ -2294,7 +2309,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (e === 38)//Up
                         {
-                            if (self.yPos - 8 > 0) {
+                            if (self.topSide - self.travelDist > minY) {
                                 walkUp();
                             }
                             else
@@ -2302,7 +2317,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         }
                         else if (e === 40)//Down
                         {
-                            if (self.yPos + 8 + self.height < 600) {
+                            if (self.bottomSide + self.travelDist < self.maxY) {
                                 walkDown();
                             }
                             else
@@ -2571,19 +2586,19 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     {
                         case 37://left
                             vOrH = "h";
-                            direction = -8;
+                            direction = -self.travelDist;
                             break;
                         case 39://right
                             vOrH = "h";
-                            direction = 8;
+                            direction = self.travelDist;
                             break;
                         case 38://up
                             vOrH = "v";
-                            direction = -8;
+                            direction = -self.travelDist;
                             break;
                         case 40://down
                             vOrH = "v";
-                            direction = 8;
+                            direction = self.travelDist;
                             break;
                     }
 
@@ -2600,7 +2615,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 continue;
                             }
                             //if trying to go up
-                            if (direction === -8)//Up
+                            if (direction === -self.travelDist)//Up
                             {
                                 if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide))
                                 {}
@@ -2610,7 +2625,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                     break;
                                 }
                             }
-                            else if (direction === 8)//Down
+                            else if (direction === self.travelDist)//Down
                             {
                                 if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide))
                                 {
@@ -2635,7 +2650,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 continue;
                             }
                             //if trying to go up
-                            if (direction === -8)//Left
+                            if (direction === -self.travelDist)//Left
                             {
                                 if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide))
                                 {}
@@ -2645,7 +2660,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                     break;
                                 }
                             }
-                            else if (direction === 8)//Right
+                            else if (direction === self.travelDist)//Right
                             {
                                 if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide))
                                 {}
@@ -2826,7 +2841,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 function walkLeft()
                 {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
-                    let numOfStepsLeft = (Math.floor(Math.random() * 4) + 1);
+                    let numOfStepsLeft = (Math.floor(Math.random() * self.travFrames) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
@@ -2884,7 +2899,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 function walkRight()
                 {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
-                    let numOfStepsRight = (Math.floor(Math.random() * 4) + 1);
+                    let numOfStepsRight = (Math.floor(Math.random() * self.travFrames) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
@@ -2940,7 +2955,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 function walkDown()
                 {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
-                    let numOfStepsDown = (Math.floor(Math.random() * 4) + 1);
+                    let numOfStepsDown = (Math.floor(Math.random() * self.travFrames) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
@@ -2995,7 +3010,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                 function walkUp()
                 {
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
-                    let numOfStepsUp = (Math.floor(Math.random() * 4) + 1);
+                    let numOfStepsUp = (Math.floor(Math.random() * self.travFrames) + 1);
 
                     //Reset walking position so that rat is not mid step when changing direction
                     // && Reset other walking directions set values so that each change of dir does this
