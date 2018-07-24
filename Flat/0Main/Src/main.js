@@ -171,6 +171,7 @@ function startGame()
 
         else if (l8)//Lab lower level
         {
+            p.attackSpace *= 1.75;
             l8Ready = false;
             initializeLV8();
         }
@@ -193,6 +194,11 @@ function startGame()
         //Clear the canvas
         {
             ctx.clearRect(0, 0, 800, 600);
+        }
+
+        //Set players attack space back to its usual, in case a level has changed it
+        {
+            p.attackSpace = 32;
         }
 
         //Pause all sounds to ensure they do not continue to play upon emerging into next level
@@ -2850,16 +2856,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 1][p.col - 1] = 1;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 1][p.col - 1] = 2;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
             if (l11)
             {
                 lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
@@ -2871,16 +2867,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 1][p.col + 1] = 1;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 1][p.col + 1] = 2;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
             if (l11)
             {
                 lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
@@ -2892,16 +2878,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row][p.col] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row][p.col] = 1;//Change that tile to a floor tile
-                keyFound = true;
-            }
-            if (l5)
-            {
-                lMap[level][p.row][p.col] = 2;//Change that tile to a floor tile
-                keyFound = true;
-            }
             if (l11)
             {
                 lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
@@ -2913,28 +2889,12 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 2][p.col] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 2][p.col] = 1;//Change that tile to a floor tile
-                keyFound = true;
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 2][p.col] = 2;//Change that tile to a floor tile
-                keyFound = true;
-            }
             if (l11)
             {
                 lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
                 keyFound = true;
             }
         }
-    }
-
-
-    function checkIfRightPaper()
-    {
-        //code in here will check if the player picked up the right piece of paper
     }
 }
 
@@ -2943,15 +2903,13 @@ function checkFloorObjects(e)//For picking something up when walking over it
 
 function checkActions()//Gets called when pressing space
 {
-    checkAttack();
-
     if (l1)
     {
         if(p.col ===1 && p.row === 10)
         {
             arcadeNoise.play();
         }
-        if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
+        else if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
         {
 
             let shelFrames = 0;
@@ -2998,6 +2956,8 @@ function checkActions()//Gets called when pressing space
                 }
             }
         }
+        else
+            checkAttackSelect();
     }
 
     else if (l2)
@@ -3022,15 +2982,14 @@ function checkActions()//Gets called when pressing space
                 setTimeout(dialogInitialize, 3000);
             }
         }
-
-        if (p.frameY === 3)//Looking up
+        else if (p.frameY === 3)//Looking up
         {
             if (lOMap[level][p.row] !== undefined && lOMap[level][p.row][p.col] !== undefined)
                 if (lOMap[level][p.row][p.col] === 2)//If torch is located here
                 {
                     checkForTorches(0,0);
                 }
-            if (p.row === 15 && p.col === 1)//Under lever
+            else if (p.row === 15 && p.col === 1)//Under lever
             {
                 let leverDown = new Image();
                 leverDown.src = "2Sewer/images/leverDown.png";
@@ -3044,8 +3003,9 @@ function checkActions()//Gets called when pressing space
                     drawMap(0);
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
                 };
-
             }
+            else
+                    checkAttackSelect();
         }
         else if (p.frameY === 2)//Looking Right
         {
@@ -3054,6 +3014,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(-1, -1);
                 }
+                else
+                    checkAttackSelect();
         }
         else if (p.frameY === 1)//Looking Left
         {
@@ -3062,6 +3024,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(1, -1);
                 }
+                else
+                    checkAttackSelect();
         }
         else if (p.frameY === 0)//Looking Down
         {
@@ -3070,6 +3034,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(0,-2);
                 }
+                else
+                    checkAttackSelect();
         }
 
         function checkForTorches(x, y)
@@ -3120,7 +3086,7 @@ function checkActions()//Gets called when pressing space
             lMap[level][6][5] = 16;
             drawMap();
         }
-        if (!rightDoorOpen && p.row === 7 && p.col === 20)
+        else if (!rightDoorOpen && p.row === 7 && p.col === 20)
         {
             if (findPasscode)
             {
@@ -3139,7 +3105,7 @@ function checkActions()//Gets called when pressing space
         }
 
         //Disguise
-        if (!findDisguise &&
+        else if (!findDisguise &&
             ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
                 (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
                 (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) || (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) ||
@@ -3150,7 +3116,7 @@ function checkActions()//Gets called when pressing space
             dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-        if (!findDisguise && p.row === 15 && p.col === 18)
+        else if (!findDisguise && p.row === 15 && p.col === 18)
         {
 
             dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
@@ -3159,13 +3125,13 @@ function checkActions()//Gets called when pressing space
         }
 
         //Pass code
-        if (!findPasscode && p.row ===2 && p.col ===1)
+        else if (!findPasscode && p.row ===2 && p.col ===1)
         {
             dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findPasscode = true;
         }
-        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
+        else if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
         {
             dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
@@ -3173,13 +3139,13 @@ function checkActions()//Gets called when pressing space
 
 
         //Rollerblades
-        if (!findRollerblades && p.row === 5 && p.col === 20)
+        else if (!findRollerblades && p.row === 5 && p.col === 20)
         {
             dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findRollerblades = true;
         }
-        if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
+        else if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
             (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
             (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
         {
@@ -3188,12 +3154,12 @@ function checkActions()//Gets called when pressing space
         }
 
         //Map
-        if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
+        else if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
         {
             dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-        if (findMap === false && p.row === 15 && p.col === 5)
+        else if (findMap === false && p.row === 15 && p.col === 5)
         {
             dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
@@ -3202,124 +3168,27 @@ function checkActions()//Gets called when pressing space
 
 
         //Found all
-        if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+        else if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
         {
             dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
-        if (findDisguise && findRollerblades && findMap)
+        else if (findDisguise && findRollerblades && findMap)
         {
             findAllLevel3 = true;
             lMap[level][0][10] = 24;
             lMap[level][0][11] = 25;
             drawMap();
         }
-    }
-
-    else if (l4)
-    {
-        // Check for rocks
-        if (p.frameY === 3)//Looking up
-        {
-            //If the space above contains a rock
-            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
-            if (lMap[level][p.row][p.col] === 53 || (lMap[level][p.row][p.col] === 54))
-            {
-                rock.play();
-
-                if (lMap[level][p.row - 1][p.col] === 1)
-                    lMap[level][p.row - 1][p.col] = 4;
-            }
-        }
-        else if (p.frameY === 2)//Looking Right
-        {
-            //If the space to the right contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
-            if (lMap[level][p.row + 1][p.col + 1] === 53 || (lMap[level][p.row + 1][p.col + 1] === 54))
-            {
-
-                rock.play();
-                if (lMap[level][p.row + 1][p.col + 2] === 1)
-                    lMap[level][p.row + 1][p.col + 2] = 4;
-            }
-        }
-        else if (p.frameY === 1)//Looking Left
-        {
-            //If the space to the left contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
-            if (lMap[level][p.row + 1][p.col - 1] === 53 || (lMap[level][p.row + 1][p.col - 1] === 54)) {
-                rock.play();
-                if (lMap[level][p.row + 1][p.col - 2] === 1)
-                    lMap[level][p.row + 1][p.col - 2] = 4;
-            }
-        }
-        else if (p.frameY === 0)//Looking Down
-        {
-            //If the space below contains a rock
-            if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if (lMap[level][p.row + 2][p.col] === 53 || (lMap[level][p.row + 2][p.col] === 54)) {
-                    rock.play();
-                    if (lMap[level][p.row + 3][p.col] === 1)
-                        lMap[level][p.row + 3][p.col] = 4;
-                }
-        }
-        // ChangeNeeded
+        else
+            checkAttackSelect();
     }
 
     else if (l5)
     {
-        // Check for cats
-        if (p.frameY === 3)//Looking up
-        {
-            //If the space above contains a rock
-            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
-                if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19 && lMap[level][p.row][p.col] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row-1][p.col] === 1)
-                        lMap[level][p.row-1][p.col] = 4;
-                }
-        }
-        else if (p.frameY === 2)//Looking Right
-        {
-            //If the space to the right contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
-                if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19 && lMap[level][p.row + 1][p.col + 1] !== 14))
-                {
-
-                    meow.play();
-                    if (lMap[level][p.row + 1][p.col + 2] === 1)
-                        lMap[level][p.row + 1][p.col + 2] = 4;
-                }
-        }
-        else if (p.frameY === 1)//Looking Left
-        {
-            //If the space to the left contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
-                if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19 && lMap[level][p.row + 1][p.col - 1] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row + 1][p.col - 2] === 1)
-                        lMap[level][p.row + 1][p.col - 2] = 4;
-                }
-        }
-        else if (p.frameY === 0)//Looking Down
-        {
-            //If the space below contains a rock
-            if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19 && lMap[level][p.row + 2][p.col] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row + 3][p.col] === 1)
-                        lMap[level][p.row + 3][p.col] = 4;
-                }
-        }
-
-        fillErasedMap();
-        drawPMap();
-
-        // ChangeNeeded
+        //Add piano interaction
+        checkAttackSelect();
     }
 
     else if (l7)
@@ -3377,6 +3246,9 @@ function checkActions()//Gets called when pressing space
             dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
+
+        else
+            checkAttackSelect();
     }
 
     else if (l8)
@@ -3433,14 +3305,16 @@ function checkActions()//Gets called when pressing space
             // DialogNeeded
             // Thought bubble saying "I have to close the window first"
         }
+        else
+            checkAttackSelect();
     }
-
 }
 
-function checkAttack()
+function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
 {
     for (let enem = 0; enem < enemy[level].length; enem++)
     {
+
         //Check if an NPC is within range of attack/selection
         switch (p.frameY)
         {
@@ -3466,6 +3340,13 @@ function checkAttack()
                 break;
         }
 
+        /////////////////////
+        // ** Main Part ** //
+        //-----------------//
+        //     | | |       //
+        //     v v v       //
+        /////////////////////
+
         //If so, check what to do based on the level and or type of enemy
         function doAllChecks()
         {
@@ -3483,11 +3364,23 @@ function checkAttack()
             }
         }
 
+        /////////////////////
+        //     ^ ^ ^       //
+        //     | | |       //
+        //-----------------//
+        // ** Main Part ** //
+        /////////////////////
 
         //Destroy enemies
         function goneThem()
         {
+            //Play attack sound
+
+            //Set enemy to dead so it stops its recursive roam function
             enemy[level][enem].dead = true;
+            //Set enemy to destroyed so it does not set dead to true again upon level re-entry
+            enemy[level][enem].destroyed = true;
+            //Draw map after giving the enemy the exact amount of time it should need to finish its current action
             setTimeout(drawMap, enemy[level][enem].scurrySpeed);
         }
         //Check cats for objects and check if mother is feral
@@ -3520,8 +3413,6 @@ function checkAttack()
             }
         }
     }
-
-
 }
 
 function turnOnEnemies()
