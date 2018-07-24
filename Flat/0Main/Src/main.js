@@ -3445,47 +3445,12 @@ function checkAttack()
         switch (p.frameY)
         {
             case 0://Down
-                if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide )
-                {
-                    if ((enemy[level][enem].rightSide >= (p.col * 32 - (p.attackSpace/4))) && (enemy[level][enem].leftSide <= (p.col * 32 + p.width + (p.attackSpace/4))))
+                if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide)
+                    if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
                     {//If the NPC is facing the player and NPC is in players FOV
 
-                        //If the NPC is an enemy
-                        if (!enemy[level][enem].dead  && !enemy[level][enem].destroyed && enemy[level][enem].hostile)
-                        {
-                            enemy[level][enem].dead = true;
-                            setTimeout(goneThem, enemy[level][enem].scurrySpeed);
-                        }
-                        //If the NPC is a cat
-                        else if (l5)
-                        {
-                            if (enemy[level][enem].cat)
-                            {
-                                catsKicked++;
-                                meow.play();
-
-                                //If the NPC is the cat that has the publishers paper
-                                if (enemy[level][enem].hasPaper && !publishersPaper)
-                                {
-                                    let thisX = Math.round(enemy[level][enem].xPos / 32);
-                                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.floor(enemy[level][enem].height/32);
-
-                                    if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2)
-                                        lMap[level][thisY][thisX] = 40;//Change that tile to a floor tile
-                                    /*publishersPaper = true;*/
-                                }
-                                if (catsKicked === 3)
-                                {
-                                    enemy[level][enemy[level].length - 1].hostile = true;
-                                    enemy[level][enemy[level].length - 1].sighted = true;
-                                    enemy[level][enemy[level].length - 1].fov = 100;
-                                    enemy[level][enemy[level].length - 1].rangeOV = 100;
-                                }
-                            }
-                        }
-
+                        doAllChecks();
                     }
-                }
                 break;
             case 1://Left
 
@@ -3494,16 +3459,68 @@ function checkAttack()
 
                 break;
             case 3://Up
-
+                if ((enemy[level][enem].bottomSide < ((p.row * 32) + p.height)) && (enemy[level][enem].topSide > ((p.row * 32) - p.attackSpace)))
+                    if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
+                    {
+                        doAllChecks();
+                    }
                 break;
 
 
 
         }
 
+
+        //Checks all conditions to look for
+        function doAllChecks()
+        {
+            //If the NPC is an enemy
+            if (!enemy[level][enem].dead  && !enemy[level][enem].destroyed && enemy[level][enem].hostile && !l5)
+            {
+                //Destroy the enemy
+                goneThem();
+            }
+            //If the NPC is a cat
+            else if (l5)
+            {
+                //Check cats for objects and check if mother is feral
+                level5Checks();
+            }
+        }
+        //Destroy enemies
         function goneThem()
         {
+            enemy[level][enem].dead = true;
             setTimeout(drawMap, enemy[level][enem].scurrySpeed);
+        }
+        //Check cats for objects and check if mother is feral
+        function level5Checks()
+        {
+            if (enemy[level][enem].cat)
+            {
+                catsKicked++;
+                meow.play();
+
+                //If the NPC is the cat that has the publishers paper
+                if (enemy[level][enem].hasPaper && !publishersPaper)
+                {
+                    let thisX = Math.round(enemy[level][enem].xPos / 32);
+                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.floor(enemy[level][enem].height/32);
+
+                    if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2)
+                        lMap[level][thisY][thisX] = 40;//Change that tile to a floor tile
+                    /*publishersPaper = true;*/
+                }
+
+                if (catsKicked === 3)
+                {
+                    //Set mom as hostile, triple her speed, and give her full vision of the map
+                    enemy[level][enemy[level].length - 1].hostile = true;
+                    enemy[level][enemy[level].length - 1].fov = 100;
+                    enemy[level][enemy[level].length - 1].rangeOV = 100;
+                    enemy[level][enemy[level].length - 1].sighted = true;
+                }
+            }
         }
     }
 
