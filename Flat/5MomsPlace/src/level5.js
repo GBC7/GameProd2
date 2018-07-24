@@ -1,5 +1,6 @@
 //LV5
 
+let publishersPaper = false;
 
 
 

@@ -18,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="214">
-              <caret line="3674" column="19" selection-start-line="3674" selection-start-column="19" selection-end-line="3674" selection-end-column="19" />
+              <caret line="3676" column="26" selection-start-line="3676" selection-start-column="23" selection-end-line="3676" selection-end-column="26" />
               <folding>
                 <element signature="e#135#332#0" />
                 <element signature="e#561#1782#0" />
@@ -61,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -78,17 +78,29 @@
       <file leaf-file-name="level7.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/7Lab/src/level7.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
+            <state relative-caret-position="85">
+              <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level8.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="level5.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="level8.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/7Lab/src/level8.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="126" column="5" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+            <state relative-caret-position="380">
+              <caret line="146" column="89" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
+              <caret line="147" column="89" selection-start-line="147" selection-start-column="89" selection-end-line="147" selection-end-column="89" />
+              <caret line="148" column="89" selection-start-line="148" selection-start-column="89" selection-end-line="148" selection-end-column="89" />
+              <caret line="149" column="89" selection-start-line="149" selection-start-column="89" selection-end-line="149" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -169,7 +181,6 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/0Main/Src/healthInventory.css" />
         <option value="$PROJECT_DIR$/0Main/Src/index.js" />
-        <option value="$PROJECT_DIR$/5MomsPlace/src/level5.js" />
         <option value="$PROJECT_DIR$/1Home/src/level1.js" />
         <option value="$PROJECT_DIR$/0Main/Src/dialog.js" />
         <option value="$PROJECT_DIR$/1Home/src/tutorialL1.js" />
@@ -177,6 +188,7 @@
         <option value="$PROJECT_DIR$/7Lab/src/level7.js" />
         <option value="$PROJECT_DIR$/0Main/Src/main.js" />
         <option value="$PROJECT_DIR$/7Lab/src/level8.js" />
+        <option value="$PROJECT_DIR$/5MomsPlace/src/level5.js" />
       </list>
     </option>
   </component>
@@ -190,8 +202,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="901" />
-    <option name="width" value="1028" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -216,6 +228,17 @@
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
               <item name="Src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="5MomsPlace" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="5MomsPlace" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
@@ -278,18 +301,18 @@
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
       <workItem from="1532100492835" duration="10501000" />
-      <workItem from="1532292607045" duration="31017000" />
+      <workItem from="1532292607045" duration="31970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123514000" />
+    <option name="totallyTimeSpent" value="124467000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="721" y="0" width="822" height="830" extended-state="0" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29826733" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31421122" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32827586" />
@@ -478,13 +501,6 @@
     <entry file="file://$PROJECT_DIR$/5MomsPlace/images/pan.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/1Home/src/level1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -506,9 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/2Sewer/src/level11.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="422">
@@ -516,17 +529,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/7Lab/src/level8.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="146" column="89" selection-start-line="146" selection-start-column="89" selection-end-line="146" selection-end-column="89" />
+          <caret line="147" column="89" selection-start-line="147" selection-start-column="89" selection-end-line="147" selection-end-column="89" />
+          <caret line="148" column="89" selection-start-line="148" selection-start-column="89" selection-end-line="148" selection-end-column="89" />
+          <caret line="149" column="89" selection-start-line="149" selection-start-column="89" selection-end-line="149" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/7Lab/src/level7.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="98" selection-end-column="8" />
+        <state relative-caret-position="85">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
-          <caret line="3674" column="19" selection-start-line="3674" selection-start-column="19" selection-end-line="3674" selection-end-column="19" />
+          <caret line="3676" column="26" selection-start-line="3676" selection-start-column="23" selection-end-line="3676" selection-end-column="26" />
           <folding>
             <element signature="e#135#332#0" />
             <element signature="e#561#1782#0" />
@@ -568,12 +591,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/7Lab/src/level8.js">
+    <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="126" column="5" selection-start-line="126" selection-start-column="5" selection-end-line="126" selection-end-column="5" />
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
