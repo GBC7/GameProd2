@@ -272,6 +272,10 @@ function initializeLV3()
         else
         {
             drawMap();                   //Draw next map
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
         }
     }
 
@@ -286,11 +290,6 @@ function initializeLV3()
 
     else if (enemyIndexLevel3 === 10)
         resetTimer();
-
-    for (let i = 0; i < enemy[3].length; i++)
-    {
-        enemy[3][i].roam();
-    }
 
 }
 

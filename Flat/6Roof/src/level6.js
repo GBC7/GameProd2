@@ -198,9 +198,9 @@ function drawL6Full()
         ctx.drawImage(statue, 710, 560);
         ctx.drawImage(statue, 790, 560);
 
-        for (let i = 0; i < enemy[6].length; i++)
+        for (let i = 0; i < enemy[level].length; i++)
         {
-            enemy[6][i].roam();
+            enemy[level][i].roam();
         }
 
     }

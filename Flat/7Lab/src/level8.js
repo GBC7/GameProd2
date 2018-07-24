@@ -146,18 +146,12 @@ function initializeLV8()
 
     closedWindow.onload = function(){
         l8Ready=true;
-        turnOnObjects();
 
-        function turnOnObjects()
+        for (let i = 0; i < enemy[8].length; i++)
         {
-            if (!doneCreating)
-                setTimeout(turnOnObjects, 10);
-            else
-            {
-                for (let i = 0; i < enemy[level].length; i++)
-                    enemy[level][i].roam();
-            }
+            enemy[level][i].roam();
         }
+
 
     };
 

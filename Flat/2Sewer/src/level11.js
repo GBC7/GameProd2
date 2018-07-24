@@ -1,5 +1,5 @@
 //LV11 (second half of sewer)
-
+let alreadyBeenHereL11 = false;
 
 
 function initializeLV11()
@@ -118,8 +118,32 @@ function initializeLV11()
     }
 
     changePStartPos();
-    key.onload = function(){l11Ready = true;};
 
-    addEventListener("keydown", onKeyDown, false);
-    notWalking = true;
+    if (alreadyBeenHereL11)
+    {
+        drawMap();
+        for (let i = 0; i < enemy[level].length; i++)
+        {
+            enemy[level][i].roam();
+        }
+        addEventListener("keydown", onKeyDown, false);
+        notWalking = true;
+    }
+    else
+    {
+        key.onload = function()
+        {
+            drawMap();
+            alreadyBeenHereL11 = true;
+            l11Ready = true;
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
+            addEventListener("keydown", onKeyDown, false);
+            notWalking = true;
+        };
+    }
+
+
 }

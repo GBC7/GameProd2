@@ -112,72 +112,85 @@ let p =                                                         //PlayerObject
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
 
+let theyIsOff = false;
+
 function startGame()
 {
-    resetSomeThings();//Pauses all sounds when switching levels
+    theyIsOff = false;
+    resetSomeThings();//Pauses all sounds, resets global image variables, turns off all enemy's
 
-    if (l1)//Home(roof)
+    function doTheSwich()// <----------------------------------------------   HEY! .... THE LEVELS ARE IN THIS FUNCTION
     {
-        l1Ready = false;
-        initializeLV1();
-    }
 
-    else if (l2)//Sewer
-    {
-        l2Ready = false;
-        initializeLV2();
-    }
+        if (l1)//Home(roof)
+        {
+            l1Ready = false;
+            initializeLV1();
+        }
 
-    else if (l3)//Clothing Store
-    {
-        l3Ready = false;
-       initializeLV3()
-    }
+        else if (l2)//Sewer
+        {
+            l2Ready = false;
+            initializeLV2();
+        }
 
-    else if (l4)//The Streetz
-    {
-        l4Ready = false;
-        initializeLV4();
-    }
+        else if (l3)//Clothing Store
+        {
+            l3Ready = false;
+            initializeLV3()
+        }
 
-    else if (l5)//Moms House
-    {
-        l5Ready = false;
-        initializeLV5();
-    }
+        else if (l4)//The Streetz
+        {
+            l4Ready = false;
+            initializeLV4();
+        }
 
-    else if (l6)//Roof (Home)
-    {
-        l6Ready = false;
-        l6Ready2 = false;
-        initializeLV6();
-    }
+        else if (l5)//Moms House
+        {
+            l5Ready = false;
+            initializeLV5();
+        }
 
-    else if (l7)//Lab upper level
-    {
-        l7Ready = false;
-        initializeLV7();
-    }
+        else if (l6)//Roof (Home)
+        {
+            l6Ready = false;
+            l6Ready2 = false;
+            initializeLV6();
+        }
 
-    else if (l8)//Lab lower level
-    {
-        l8Ready = false;
-        initializeLV8();
-    }
+        else if (l7)//Lab upper level
+        {
+            l7Ready = false;
+            initializeLV7();
+        }
 
-    else if (l11)//SewerPipe Map
-    {
-        l11Ready = false;
-        initializeLV11();
-    }
+        else if (l8)//Lab lower level
+        {
+            l8Ready = false;
+            initializeLV8();
+        }
 
-    else if (l12)//SewerPipe Map
-    {
-        initializeCopterLevel();
+        else if (l11)//SewerPipe Map
+        {
+            l11Ready = false;
+            initializeLV11();
+        }
+
+        else if (l12)//SewerPipe Map
+        {
+            initializeCopterLevel();
+        }
+
     }
 
     function resetSomeThings()
     {
+        //Clear the canvas
+        {
+            ctx.clearRect(0, 0, 800, 600);
+        }
+
         //Pause all sounds to ensure they do not continue to play upon emerging into next level
         {
             meow.pause();
@@ -199,6 +212,24 @@ function startGame()
             aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu =
             vv = ww = xx = yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll =
             mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+        }
+
+        //Turn off all enemies, then load the level (Doing this last because everything should be loaded by this time)
+        {
+            for (let levs = 0; levs < enemy.length; levs++)
+            {
+                for (let ens = 0; ens < enemy[levs].length; ens++)
+                {
+                    enemy[levs][ens].dead = true;
+                }
+
+                //Once they're all off
+                if (levs === (enemy.length - 1))
+                {
+                    //Actually load the level
+                    setTimeout(doTheSwich, 200);//Should be set to the slowest moving enemy's "scurry speed" or slower
+                }
+            }
         }
     }
 }
@@ -1057,12 +1088,20 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
     {
         if (e === 37 && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
         {
-            removeEventListener("keydown", onKeyDown, false);
-            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
-
             let numOfStairz = 0;                //Create variable to be used for counting stairs
 
-            setTimeout(goDownStays2, 120);       //Start animation of going down stairs
+            if (alreadyBeenHereL2)
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                lPMap[level][p.row][p.col] = 0; //Remove the player from the map
+                setTimeout(goDownStays2, 120);       //Start animation of going down stairs
+            }
+            else
+            {
+                removeEventListener("keydown", onKeyDown, false);
+                lPMap[level][p.row][p.col] = 0; //Remove the player from the map
+                setTimeout(goDownStays2, 120);       //Start animation of going down stairs
+            }
 
             function goDownStays2()              //Animates player going down stairs and appearing in previous levels map
             {
@@ -1084,7 +1123,10 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
 
-                    waitForLoad();
+                    if (!alreadyBeenHereL2)
+                        waitForLoad();
+                    else
+                        drawMap();
                 }
             }
 
@@ -1102,6 +1144,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     drawMap();                   //Draw next map
                 }
             }
+
         }
         if (e === 38 && (p.col === 13 && p.row === 11 && notWalking)
             ||(e === 38 && p.col === 14 && p.row === 11 && notWalking)
@@ -1326,7 +1369,13 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                         startGame();
                         changePStartPos();
                         removeEventListener("keydown", onKeyDown, false);
-                        waitForLoad();
+                        if (alreadyBeenHereL11)
+                        {
+                            setTimeout(emerge, 120);
+                            drawMap();
+                        }
+                        else
+                            waitForLoad();
 
                         function waitForLoad()
                         {
@@ -1343,8 +1392,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                                 drawMap();
                             }
                         }
-
-
                     }
 
                     function emerge()
@@ -1377,12 +1424,12 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             }
             else
                 CheckConversationAction();
-        }
+        }  //Go through the pipe to l11 (second sewer map)
 
         if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
         {   //To check if character is in area where he isn't supposed to be when the light is off
             CheckConversationAction();
-        }
+        }   //
     }
 
     else if (l3)//If it's Lvl 3
@@ -1860,23 +1907,8 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     startGame(0);
                     sizer = 10;
                     removeEventListener("keydown", onKeyDown, false);
-                    waitToLoad();
-                    function waitToLoad()
-                    {
-                        if (!l2Ready)
-                        {
-                            ctx.fillStyle = '#ffffff';
-                            ctx.font="20px Arial";
-                            ctx.fillText("Loading...", 350, 290);
-                            setTimeout(waitToLoad, 10);
-                        }
-                        else
-                        {
-                            setTimeout(crawlOut, 80);
-                            drawMap(0);
-                        }
-                    }
-
+                    setTimeout(crawlOut, 80);
+                    drawMap(0);
                 }
 
                 function crawlOut()//crawl out the other side

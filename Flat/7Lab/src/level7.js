@@ -188,7 +188,14 @@ function initializeLV7()
         if (!l7Ready)
             setTimeout(level7NotReady, 1);
         else
+        {
             drawMap();
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
+        }
+
     }
     addEventListener("keydown", onKeyDown, false);
 

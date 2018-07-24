@@ -1,6 +1,6 @@
 //L1
 let uncovered = false;
-
+let alreadyBeenHereL1 = false;
 
 //Images
 let tv = new Image();
@@ -288,9 +288,28 @@ function initializeLV1()
 
     changePStartPos();
 
+    if (alreadyBeenHereL1)
+    {
+        drawMap();                   //Draw next map
+        //initializeTutorialLV1();
+        for (let i = 0; i < enemy[level].length; i++)
+        {
+            enemy[level][i].roam();
+        }
+        addEventListener("keydown", onKeyDown, false);
+    }
+    else
+    {
+        stairsB3.onload = function()
+        {
+            l1Ready=true;
+            alreadyBeenHereL1 = true;
+        };
 
-    stairsB3.onload = function(){l1Ready=true;};
-    waitForLoading2();
+        waitForLoading2();
+    }
+
+
 
 
     function waitForLoading2()
@@ -306,6 +325,10 @@ function initializeLV1()
         {
             drawMap();                   //Draw next map
             //initializeTutorialLV1();
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
             addEventListener("keydown", onKeyDown, false);
             // enemy[1][0].roam();
         }

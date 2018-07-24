@@ -9,7 +9,7 @@ let floorSpriteX = undefined;                                           //For se
 let notWalking = true, canGoThisWay = false;                            //For boundaries and walking animation
 let walkedUpAlready = false;                                            //For animating walking up fire escaped (l6)
 let doorThreeOpen = false;                                              //For allowing walking through doorway (l2)
-let alreadyBeenHere = false;
+let alreadyBeenHereL2 = false;
 let alreadyShivering = false;
 let torchesMapped = false;
 let allTorchesLit = false;
@@ -261,7 +261,6 @@ let torchNum = [];                              //To hold torch objects
 function initializeLV2()
 {
     canvas.style.backgroundImage = "";
-    newsReport.pause();
 
     if (!lightsOn)
     {
@@ -414,43 +413,68 @@ function initializeLV2()
 
     changePStartPos();
 
-
-    //Below ensures all elements are on screen when level is drawn
-    stairs.onload = function()
+    if (alreadyBeenHereL2)
     {
-        if (!torchesMapped)
+        drawMap();                   //Draw next map
+        for (let i = 0; i < enemy[level].length; i++)
         {
-
-            //Place torches in object map so they r !drawn over ..
-            //(Would place in player map but they would get erased when walked over)
-            lOMap[level][8][24] = 2;    //Torch Base for wall torch                 0
-            lOMap[level][1][3] = 2;     //Torch Base for dark wall torch            1
-            lOMap[level][1][8] = 2;     //Torch Base for wall torch                 2
-            lOMap[level][1][12] = 2;    //Torch Base for wall torch                 3
-            lOMap[level][1][16] = 2;    //Torch Base for wall torch                 4
-            lOMap[level][11][12] = 2;   //Torch Base for floor torch                5
-            lOMap[level][14][12] = 2;   //Torch Base for floor torch                6
-            lOMap[level][8][18] = 2;    //Torch Base for corner torch               7
-
-
-            //Sets torches locations
-            torchNum[0].xPos = 24;  torchNum[0].yPos = 7;      //Wall torch         0
-            torchNum[1].xPos = 3;  torchNum[1].yPos = 0;       //dark wall torch    1
-            torchNum[2].xPos = 8;  torchNum[2].yPos = 0;       //dark wall torch    2
-            torchNum[3].xPos = 12;  torchNum[3].yPos = 0;      //dark wall torch    3
-            torchNum[4].xPos = 16;  torchNum[4].yPos = 0;      //dark wall torch    4
-            torchNum[5].xPos = 12;  torchNum[5].yPos = 10;     //floor torch        5
-            torchNum[6].xPos = 12;  torchNum[6].yPos = 13;     //floor torch        6
-            torchNum[7].xPos = 18;  torchNum[7].yPos = 7;      //corner Torch       7
-
-
-            torchesMapped = true;
+            enemy[level][i].roam();
         }
+        alreadyBeenHereL2=true;
+        keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
+        burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
+        countingFlames = setInterval(changeFlame, 120);
+        addEventListener("keydown", onKeyDown, false);
+    }
+    else
+    //Below ensures all elements are on screen when level is drawn
+    {
+        stairs.onload = function()
+        {
+            if (!torchesMapped)
+            {
 
-        l2Ready=true;
-    };
+                //Place torches in object map so they r !drawn over ..
+                //(Would place in player map but they would get erased when walked over)
+                lOMap[level][8][24] = 2;    //Torch Base for wall torch                 0
+                lOMap[level][1][3] = 2;     //Torch Base for dark wall torch            1
+                lOMap[level][1][8] = 2;     //Torch Base for wall torch                 2
+                lOMap[level][1][12] = 2;    //Torch Base for wall torch                 3
+                lOMap[level][1][16] = 2;    //Torch Base for wall torch                 4
+                lOMap[level][11][12] = 2;   //Torch Base for floor torch                5
+                lOMap[level][14][12] = 2;   //Torch Base for floor torch                6
+                lOMap[level][8][18] = 2;    //Torch Base for corner torch               7
 
-    waitTillLoaded();
+
+                //Sets torches locations
+                torchNum[0].xPos = 24;  torchNum[0].yPos = 7;      //Wall torch         0
+                torchNum[1].xPos = 3;  torchNum[1].yPos = 0;       //dark wall torch    1
+                torchNum[2].xPos = 8;  torchNum[2].yPos = 0;       //dark wall torch    2
+                torchNum[3].xPos = 12;  torchNum[3].yPos = 0;      //dark wall torch    3
+                torchNum[4].xPos = 16;  torchNum[4].yPos = 0;      //dark wall torch    4
+                torchNum[5].xPos = 12;  torchNum[5].yPos = 10;     //floor torch        5
+                torchNum[6].xPos = 12;  torchNum[6].yPos = 13;     //floor torch        6
+                torchNum[7].xPos = 18;  torchNum[7].yPos = 7;      //corner Torch       7
+
+
+                torchesMapped = true;
+            }
+
+            l2Ready=true;
+        };
+
+        waitTillLoaded();
+    }
+
+
+    startX[2] = startY[2] = 0;
+
+    if (lPMap[1] !== undefined)
+        lPMap[1][9][6] = 1;
+
+    startX[1] = 6;
+    startY[1] = 9;
+
 
 
     function waitTillLoaded()//Loads map after everything is loaded as long as
@@ -462,27 +486,20 @@ function initializeLV2()
             ctx.fillText("Loading...", 350, 290);
             setTimeout(waitTillLoaded, 10);
         }
-        else if (!alreadyBeenHere)
+        else if (!alreadyBeenHereL2)
         {
             drawMap();                   //Draw next map
-            alreadyBeenHere=true;
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
+            alreadyBeenHereL2 = true;
+            keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
+            burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
+            countingFlames = setInterval(changeFlame, 120);
+            addEventListener("keydown", onKeyDown, false);
         }
     }
-    addEventListener("keydown", onKeyDown, false);
-    startX[2] = startY[2] = 0;
-
-    burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
-
-    keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
-    countingFlames = setInterval(changeFlame, 120);
-
-    startX[1] = 23;
-    startY[1] = 10;
-    if (lPMap[1] !== undefined)
-        lPMap[1][10][23] = 1;
-
-    startX[1] = 6;
-    startY[1] = 9;
 }
 
 function letEmBurn()

@@ -257,6 +257,11 @@ function initializeLV4()
         else
         {
             drawMap();                   //Draw next map
+            for (let i = 0; i < enemy[level].length; i++)
+            {
+                enemy[level][i].roam();
+            }
+            addEventListener("keydown", onKeyDown, false);
         }
     }
 
