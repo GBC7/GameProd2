@@ -84,6 +84,9 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
                 mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
 }//Initializes these to undefined
 
+let publishersPaper = false;
+let catsKicked = 0;
+
 //Player image & hurt sound
 let scientist = new Image();//   Both defined right
 let aghh = new Audio;//          below this one.
@@ -107,6 +110,7 @@ let p =                                                         //PlayerObject
         srcY: 0,                 //Y location on tile sheet that current player image is coming from
         frameX: 0,                //Counter to use for selecting section of tile sheet based on steps
         frameY: 0,
+        attackSpace: 32
     };
 
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
@@ -2548,6 +2552,8 @@ function onKeyDown(e)
         l12Ready=false;
         startGame();                                //Load settings and assets for next map
     }
+
+    drawZeeEnemy();
 }
 
 function checkBoundaries(e)//Gets called each step
@@ -2937,6 +2943,8 @@ function checkFloorObjects(e)//For picking something up when walking over it
 
 function checkActions()//Gets called when pressing space
 {
+    checkAttack();
+
     if (l1)
     {
         if(p.col ===1 && p.row === 10)
@@ -3427,6 +3435,90 @@ function checkActions()//Gets called when pressing space
         }
     }
 
+}
+
+function checkAttack()
+{
+    for (let enem = 0; enem < enemy[level].length; enem++)
+    {
+
+        switch (p.frameY)
+        {
+            case 0://Down
+                if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide )
+                {
+                    if ((enemy[level][enem].rightSide >= (p.col * 32 - (p.attackSpace/4))) && (enemy[level][enem].leftSide <= (p.col * 32 + p.width + (p.attackSpace/4))))
+                    {//If the NPC is facing the player and NPC is in players FOV
+
+                        //If the NPC is an enemy
+                        if (!enemy[level][enem].dead  && !enemy[level][enem].destroyed && enemy[level][enem].hostile)
+                        {
+                            enemy[level][enem].dead = true;
+                            setTimeout(goneThem, enemy[level][enem].scurrySpeed);
+                        }
+                        //If the NPC is a cat
+                        else if (l5)
+                        {
+                            if (enemy[level][enem].cat)
+                            {
+                                catsKicked++;
+                                meow.play();
+
+                                //If the NPC is the cat that has the publishers paper
+                                if (enemy[level][enem].hasPaper && !publishersPaper)
+                                {
+                                    let thisX = Math.round(enemy[level][enem].xPos / 32);
+                                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.floor(enemy[level][enem].height/32);
+
+                                    if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2)
+                                        lMap[level][thisY][thisX] = 40;//Change that tile to a floor tile
+                                    /*publishersPaper = true;*/
+                                }
+                                if (catsKicked === 3)
+                                {
+                                    enemy[level][enemy[level].length - 1].hostile = true;
+                                    enemy[level][enemy[level].length - 1].sighted = true;
+                                    enemy[level][enemy[level].length - 1].fov = 100;
+                                    enemy[level][enemy[level].length - 1].rangeOV = 100;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                break;
+            case 1://Left
+
+                break;
+            case 2://Right
+
+                break;
+            case 3://Up
+
+                break;
+
+
+
+        }
+
+        function goneThem()
+        {
+            setTimeout(drawMap, enemy[level][enem].scurrySpeed);
+        }
+    }
+
+
+}
+
+function turnOnEnemies()
+{
+    for (let num = 0; num < enemy[leve].length; num++)
+    {
+        if (!enemy[level][num].destroyed)
+        {
+            enemy[level][num].roam();
+        }
+    }
 }
 
 function resetLevel(time = 40)

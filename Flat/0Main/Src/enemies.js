@@ -48,18 +48,29 @@ function createEnemies()
 
         //L5
         //Cats
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat1.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat2.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat3.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat4.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat5.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat6.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat7.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat8.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat9.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat10.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat1.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //0
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat2.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //1
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat3.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //2
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat4.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //3
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat5.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //4
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat6.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //5
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat7.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //6
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat8.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //7
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat9.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //8
+        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat10.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);   //9
+
+        //Set identifier to determine if cat
+        for (let allCats = 0; allCats < 10; allCats++)
+        {
+            enemy[5][allCats].cat = true;
+        }
+        //Set one of the cats to have the paper
+        enemy[5][Math.floor(Math.random() * 10)]. hasPaper = true;
+
+
         //Mom
-        Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 60, 5, 8, 0, 800, 32, 600);
+        Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 20, 5, 8, 0, 800, 32, 600);
+        enemy[5][10].cat = false;
 
         //L6 enemies ( 6 of them )
         Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
@@ -70,7 +81,7 @@ function createEnemies()
         Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
 
         //L8 Enemies ( 6 of them )
-        for (let numOf = 0; numOf !== 25; numOf++)
+        for (let numOf = 0; numOf !== 6; numOf++)
         {
             Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
         }
@@ -133,8 +144,8 @@ function drawZeeEnemy()
 function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY)
 {
 
-    //Enemy blueprint
-  /*  let thisEnemy =
+    /*//Enemy blueprint
+    let thisEnemy =
         {
             //////////////////////////////////
             // These are set for each enemy //
@@ -650,27 +661,25 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 continue;
                             }
                             //if trying to go up
-                            if (direction === (-self.travelDist))//Up
+                            else if (direction === -self.travelDist)//Up
                             {
-                                if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide) || (self.leftSide >= enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide <= enemy[self.myLevel][thisGuy].leftSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide))
-                                {
-
-                                }
+                                if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up"))
+                                {}
                                 else
                                 {
-                                    canGoThatWay = self.dirOK = false;
+                                    canGoThatWay = false;
                                     break;
                                 }
                             }
                             else if (direction === self.travelDist)//Down
                             {
-                                if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide >= enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide <= enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide))
+                                if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down"))
                                 {
 
                                 }
                                 else
                                 {
-                                    canGoThatWay = self.dirOK = false;
+                                    canGoThatWay = false;
                                     break;
                                 }
                             }
@@ -687,28 +696,27 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 continue;
                             }
                             //if trying to go up
-                            if (direction === (-self.travelDist))//Left
+                            else if (direction === -self.travelDist)//Left
                             {
-                                if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide) || (self.topSide >= enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide <= enemy[self.myLevel][thisGuy].topSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide))
-                                {
-                                }
+                                if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left"))
+                                {}
                                 else
                                 {
-                                    canGoThatWay = self.dirOK = false;
+                                    canGoThatWay = false;
                                     break;
                                 }
                             }
                             else if (direction === self.travelDist)//Right
                             {
-                                if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide >= enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide <= enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide))
-                                {
-                                }
+                                if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right"))
+                                {}
                                 else
                                 {
-                                    canGoThatWay = self.dirOK = false;
+                                    canGoThatWay = false;
                                     break;
                                 }
                             }
+
                         }
                     }
 
@@ -889,6 +897,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                 //Simple walking one direction functions
                 function walkLeft() {
+
+                    console.log(self.indexNum + " walkLeft");
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsLeft = (Math.floor(Math.random() * 4) + 1);
 
@@ -909,6 +919,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     //Move character by 1/4 of a tile for however many random steps selected
                     function moveLeft() {
+                        console.log(self.indexNum + " moveLeft");
                         stepsLeft++;
                         //Set position to be erased
                         setLastPos();
@@ -936,6 +947,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         function checkIfOk2()
                         {
+                            console.log(self.indexNum + " checkIfOk2Left");
                             //Bool value to store answer of whether rat can travel this way
                             let goodToGo = false;
 
@@ -1002,50 +1014,58 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                             );
                                     }
                                 }
-                            }
 
-                            if (goodToGo)
-                            {
-                                if (self.xPos - self.travelDist > self.minX)
-                                    checkForOthers();
-                                else if (!self.dead)
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else if (!self.dead)
-                                setTimeout(walk, self.scurrySpeed);
-
-
-                            function checkForOthers()
-                            {
-                                let direction = (-self.travelDist);
-                                let canGoThatWay = true;
-
-                                for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                if (goodToGo)
                                 {
-                                    if (thisGuy === self.indexNum)
-                                    {}
-                                    if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide) || (self.topSide >= enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide <= enemy[self.myLevel][thisGuy].topSide) || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide))
+                                    if (self.xPos - self.travelDist > self.minX)
+                                        checkForOthers();
+                                    else if (!self.dead)
+                                        setTimeout(walk, self.scurrySpeed);
+
+
+                                    function checkForOthers()//Left
                                     {
-                                    }
-                                    else
-                                    {
-                                        canGoThatWay = self.dirOK = false;
-                                        break;
+                                        console.log(self.indexNum + " checkForOthersLeft");
+                                        let direction = (-self.travelDist);
+                                        let canGoThatWay = true;
+
+                                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                        {
+                                            if (thisGuy === self.indexNum)
+                                            {}
+                                            else if ((self.leftSide + direction > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left"))
+                                            {}
+                                            else
+                                            {
+                                                canGoThatWay = false;
+                                                break;
+                                            }
+
+                                            if (thisGuy === enemy[self.myLevel].length - 1)
+                                            {
+                                                if (canGoThatWay)
+                                                {
+                                                    setTimeout(moveLeft, self.scurrySpeed);
+                                                }
+                                                else if (!self.dead)
+                                                    setTimeout(walk, self.scurrySpeed);
+                                            }
+                                        }
+                                        if (!canGoThatWay && !self.dead)
+                                            setTimeout(walk, self.scurrySpeed);
                                     }
                                 }
-
-                                if (canGoThatWay)
-                                {
-                                    setTimeout(moveLeft, self.scurrySpeed);
-                                }
                                 else if (!self.dead)
+                                {
                                     setTimeout(walk, self.scurrySpeed);
+                                }
                             }
                         }
                     }
                 }
 
                 function walkRight() {
+                    console.log(self.indexNum + " walkRight");
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsRight = (Math.floor(Math.random() * 4) + 1);
 
@@ -1066,6 +1086,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     //Move character by 1/4 of a tile for however many random steps selected
                     function moveRight() {
+                        console.log(self.indexNum + " moveRight");
                         stepsRight++;
                         //Set position to be erased
                         setLastPos();
@@ -1092,6 +1113,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                             setTimeout(walk, self.scurrySpeed);
 
                         function checkIfOk2() {
+                            console.log(self.indexNum + " checkIfOk2Right");
                             //Bool value to store answer of whether rat can travel this way
                             let goodToGo = false;
 
@@ -1157,49 +1179,57 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                             );
                                     }
                                 }
-                            }
-
-                            self.dirOK = goodToGo; // ???
-
-                            if (goodToGo)
-                            {
-                                if (self.rightSide + self.travelDist < self.maxX)
-                                    checkForOthers();
-                                else if (!self.dead)
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else if (!self.dead)
-                                setTimeout(walk, self.scurrySpeed);
-
-                            function checkForOthers()
-                            {
-                                let direction = self.travelDist;
-                                let canGoThatWay = true;
-
-                                for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                if (goodToGo)
                                 {
-                                    if (thisGuy === self.indexNum)
-                                    {}
-                                    else if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide) || (self.topSide >= enemy[self.myLevel][thisGuy].bottomSide) || (self.bottomSide <= enemy[self.myLevel][thisGuy].topSide) || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide))
-                                    {}
-                                    else
+                                    if (self.rightSide + self.travelDist < self.maxX)
+                                        checkForOthers();
+                                    else if (!self.dead)
+                                        setTimeout(walk, self.scurrySpeed);
+
+                                    function checkForOthers()//Right
                                     {
-                                        canGoThatWay = self.dirOK = false;
-                                        break;
+                                        console.log(self.indexNum + " checkForOthersRight");
+                                        let direction = self.travelDist;
+                                        let canGoThatWay = true;
+
+                                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                        {
+                                            if (thisGuy === self.indexNum)
+                                            {}
+                                            else if ((self.rightSide + direction < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right"))
+                                            {}
+                                            else
+                                            {
+                                                canGoThatWay = false;
+                                                break;
+                                            }
+
+                                            if (thisGuy === enemy[self.myLevel].length - 1)
+                                            {
+                                                if (canGoThatWay)
+                                                {
+                                                    setTimeout(moveRight, self.scurrySpeed);
+                                                }
+                                                else if (!self.dead)
+                                                    setTimeout(walk, self.scurrySpeed);
+                                            }
+                                        }
+                                        if (!canGoThatWay && !self.dead)
+                                            setTimeout(walk, self.scurrySpeed);
                                     }
                                 }
-                                if (canGoThatWay)
-                                {
-                                    setTimeout(moveRight, self.scurrySpeed);
-                                }
                                 else if (!self.dead)
+                                {
                                     setTimeout(walk, self.scurrySpeed);
+                                }
                             }
+                            self.dirOK = goodToGo;
                         }
                     }
                 }
 
                 function walkDown() {
+                    console.log(self.indexNum + " walkDown");
                     //Enemy can go at least up to four steps since the next boundary is 4 * 8px(space take each step) away
                     let numOfStepsDown = (Math.floor(Math.random() * 4) + 1);
 
@@ -1246,6 +1276,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
 
                         function checkIfOk2() {
+                            console.log(self.indexNum + " checkIfOk2Down");
                             //Bool value to store answer of whether rat can travel this way
                             let goodToGo = false;
 
@@ -1310,39 +1341,47 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                             );
                                     }
                                 }
-                            }
-
-                            if (goodToGo)
-                            {
-                                if (self.bottomSide + self.travelDist < self.maxY)
-                                    checkForOthers();
-                                else if (!self.dead)
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else if (!self.dead)
-                                setTimeout(walk, self.scurrySpeed);
-
-                            function checkForOthers()
-                            {
-                                let direction = self.travelDist;
-                                let canGoThatWay = true;
-
-                                for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                if (goodToGo)
                                 {
-                                    if (thisGuy === self.indexNum)
-                                    {}
-                                    else if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide) || (self.leftSide >= enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide <= enemy[self.myLevel][thisGuy].leftSide) || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide))
-                                    {}
-                                    else
+                                    if (self.bottomSide + self.travelDist < self.maxY)
+                                        checkForOthers();
+                                    else if (!self.dead)
+                                        setTimeout(walk, self.scurrySpeed);
+
+                                    function checkForOthers()//Down
                                     {
-                                        canGoThatWay = self.dirOK = false;
-                                        break;
+                                        console.log(self.indexNum + " checkForOthersDown");
+                                        let direction = self.travelDist;
+                                        let canGoThatWay = true;
+
+                                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                        {
+                                            if (thisGuy === self.indexNum)
+                                            {}
+                                            else if ((self.bottomSide + direction < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.topSide > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down"))
+                                            {}
+                                            else
+                                            {
+                                                canGoThatWay = false;
+                                                break;
+                                            }
+
+                                            if (thisGuy === enemy[self.myLevel].length - 1)
+                                            {
+                                                if (canGoThatWay)
+                                                    setTimeout(moveDown, self.scurrySpeed);
+                                                else if (!self.dead)
+                                                    setTimeout(walk, self.scurrySpeed);
+                                            }
+                                        }
+                                        if (!canGoThatWay && !self.dead)
+                                            setTimeout(walk, self.scurrySpeed);
                                     }
                                 }
-                                if (canGoThatWay)
-                                    setTimeout(moveDown, self.scurrySpeed);
                                 else if (!self.dead)
+                                {
                                     setTimeout(walk, self.scurrySpeed);
+                                }
                             }
                         }
                     }
@@ -1369,6 +1408,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     //Move character by 1/4 of a tile for however many random steps selected
                     function moveUp() {
+                        console.log(self.indexNum + " moveUp");
                         stepsUp++;
                         //Set position to be erased
                         setLastPos();
@@ -1395,6 +1435,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                             setTimeout(walk, self.scurrySpeed);
 
                         function checkIfOk2() {
+                            console.log(self.indexNum + " checkIfOk2Up");
                             //Bool value to store answer of whether rat can travel this way
                             let goodToGo = false;
 
@@ -1459,41 +1500,48 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                             );
                                     }
                                 }
-                            }
-
-                            if (goodToGo)
-                            {
-                                if (self.yPos - self.travelDist > self.minY)
-                                    checkForOthers();
-                                else if (!self.dead)
-                                    setTimeout(walk, self.scurrySpeed);
-                            }
-                            else if (!self.dead)
-                                setTimeout(walk, self.scurrySpeed);
-
-                            function checkForOthers()
-                            {
-                                let direction = (-self.travelDist);
-                                let canGoThatWay = true;
-
-                                for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                if (goodToGo)
                                 {
-                                    if (thisGuy === self.indexNum)
-                                    {}
-                                    else if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide) || (self.leftSide >= enemy[self.myLevel][thisGuy].rightSide) || (self.rightSide <= enemy[self.myLevel][thisGuy].leftSide) || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide))
-                                    {}
-                                    else
+                                    if (self.yPos - self.travelDist > self.minY)
+                                        checkForOthers();
+                                    else if (!self.dead)
+                                        setTimeout(walk, self.scurrySpeed);
+
+                                    function checkForOthers()//Up
                                     {
-                                        canGoThatWay = self.dirOK = false;
-                                        break;
+                                        console.log(self.indexNum + " checkForOthersUp");
+                                        let direction = (-self.travelDist);
+                                        let canGoThatWay = true;
+
+                                        for (let thisGuy = 0; thisGuy < enemy[self.myLevel].length; thisGuy++)
+                                        {
+                                            if (thisGuy === self.indexNum)
+                                            {}
+                                            else if ((self.topSide + direction > enemy[self.myLevel][thisGuy].bottomSide && enemy[self.myLevel].dir !== "down") || (self.leftSide > enemy[self.myLevel][thisGuy].rightSide && enemy[self.myLevel].dir !== "right") || (self.rightSide < enemy[self.myLevel][thisGuy].leftSide && enemy[self.myLevel].dir !== "left") || (self.bottomSide < enemy[self.myLevel][thisGuy].topSide && enemy[self.myLevel].dir !== "up"))
+                                            {}
+                                            else
+                                            {
+                                                canGoThatWay = false;
+                                                break;
+                                            }
+
+                                            if (thisGuy === enemy[self.myLevel].length - 1)
+                                            {
+                                                if (canGoThatWay)
+                                                    setTimeout(moveUp, self.scurrySpeed);
+                                                else if (!self.dead)
+                                                    setTimeout(walk, self.scurrySpeed);
+                                            }
+                                        }
+                                        if (!canGoThatWay && !self.dead)
+                                            setTimeout(walk, self.scurrySpeed);
                                     }
                                 }
-                                if (canGoThatWay)
-                                    setTimeout(moveUp, self.scurrySpeed);
                                 else if (!self.dead)
+                                {
                                     setTimeout(walk, self.scurrySpeed);
+                                }
                             }
-
                         }
                     }
                 }
@@ -2879,7 +2927,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsLeft < numOfStepsLeft - 1)
+                        if (stepsLeft < numOfStepsLeft - 1 && !self.dead)
                         {
                             if (checkIfOk2(37))
                             {
@@ -2936,7 +2984,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsRight < numOfStepsRight - 1)
+                        if (stepsRight < numOfStepsRight - 1 && !self.dead)
                         {
                             if (checkIfOk2(39))
                             {
@@ -2991,7 +3039,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsDown < numOfStepsDown - 1)
+                        if (stepsDown < numOfStepsDown - 1  && !self.dead)
                         {
                             if (checkIfOk2(40))
                             {
@@ -3046,7 +3094,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                         //Draw new position
                         drawIt();
-                        if (stepsUp < numOfStepsUp - 1)
+                        if (stepsUp < numOfStepsUp - 1  && !self.dead)
                         {
                             if (checkIfOk2(38))
                             {
