@@ -3441,37 +3441,32 @@ function checkAttack()
 {
     for (let enem = 0; enem < enemy[level].length; enem++)
     {
-
+        //Check if an NPC is within range of attack/selection
         switch (p.frameY)
         {
             case 0://Down
                 if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide)
                     if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
-                    {//If the NPC is facing the player and NPC is in players FOV
-
                         doAllChecks();
-                    }
                 break;
             case 1://Left
-
+                if (enemy[level][enem].rightSide < p.col * 32 + p.width && enemy[level][enem].leftSide >= p.col * 32 - p.attackSpace)
+                    if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
+                        doAllChecks();
                 break;
             case 2://Right
-
+                if (enemy[level][enem].leftSide > p.col * 32 && enemy[level][enem].rightSide <= p.col * 32 + p.width + p.attackSpace)
+                    if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
+                        doAllChecks();
                 break;
             case 3://Up
                 if ((enemy[level][enem].bottomSide < ((p.row * 32) + p.height)) && (enemy[level][enem].topSide > ((p.row * 32) - p.attackSpace)))
                     if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
-                    {
                         doAllChecks();
-                    }
                 break;
-
-
-
         }
 
-
-        //Checks all conditions to look for
+        //If so, check what to do based on the level and or type of enemy
         function doAllChecks()
         {
             //If the NPC is an enemy
@@ -3487,6 +3482,8 @@ function checkAttack()
                 level5Checks();
             }
         }
+
+
         //Destroy enemies
         function goneThem()
         {
