@@ -59,8 +59,8 @@ let floorNumbers, floorObjects;
 //level 0 is undefined as we do not have a level 0
 let startX, startY;
 { // Level        0      1   2   3   4    5   6   7  8      9         10      11
-    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 0, undefined, undefined, 12];
-    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 1, undefined, undefined, 16];
+    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 24, undefined, undefined, 12];
+    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 16, undefined, undefined, 16];
 }
 
 //x and y map boundaries per level
@@ -1834,7 +1834,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     level = 7;                              //Change level identifier appropriately
                     l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
                     l7 = true;                              //Set the one that is being travelled to to true
-
+                    startX[7] = startY[7] = 0;
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
@@ -3315,12 +3315,15 @@ function checkActions()//Gets called when pressing space
 
     else if (l7)
     {
-        if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
+        if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))//If the player is next to the trash can
         {
             if (lighterFluid && researchPaper)
             {
                 // DialogNeeded
                 researchBurned = true;
+                let trashFire = new Image();
+                trashFire.src = "7Lab/images/trash-fire.png";
+                k = trashFire;
                 fillErasedMap();
                 drawPMap();
             }
@@ -3343,7 +3346,7 @@ function checkActions()//Gets called when pressing space
             }
         }
 
-        else if (p.row === 1 && p.col === 20 && !researchPaper)
+        else if (p.row === 1 && p.col === 20 && lighterFluid && windowClosed && !researchPaper)
         {
             let emptyShelvesTop = new Image();
             let emptyShelvesBottom = new Image();
@@ -3512,6 +3515,29 @@ function resetLevel(time = 40)
         clearLevel3();
         ctx.clearRect(0,0,800,600);
     }
+    else if (l7 || l8)
+    {
+        //Reset lock and key features
+        windowClosed = false;
+        researchPaper = false;
+        researchBurned = false;
+        lighterFluid = false;
+
+        //Reset starting position
+        startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 24, undefined, undefined, 12];
+        startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 16, undefined, undefined, 16];
+
+        level = 7;
+
+        l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+
+        l7 = true;                              //Set the one that is being travelled to to true
+
+        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+        startGame();                            //Load new levels assets and settings
+        setTimeout(drawMap, 40);                //Draw its entire map
+    }
 
 
         //If not out of live start the level again
@@ -3646,7 +3672,7 @@ function healthInventory()
     {
         ctx3.drawImage(cane, 15, 358, 32, 32);
     }
-    if(publishersAddressTrigger === true)
+    if(publishersPaper === true)
     {
         ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
     }
