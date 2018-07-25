@@ -137,7 +137,7 @@ let walkingSpeed = 15;
 
 let caneTrigger = false;
 let lighterTrigger = true;
-let publishersAddressTrigger = false;
+
 
 
 function startGame()
@@ -581,6 +581,7 @@ function fillErasedMap()
         ctx.fillRect(0, yPos + 96, 800, 600);
         ctx.fillRect(0, 0, xPos - 80, 600);
         ctx.fillRect(0, 0, 800, yPos - 32);
+
     }
 
 

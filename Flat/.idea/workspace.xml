@@ -17,8 +17,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="3676" column="26" selection-start-line="3676" selection-start-column="23" selection-end-line="3676" selection-end-column="26" />
+            <state relative-caret-position="284">
+              <caret line="578" column="98" lean-forward="true" selection-start-line="578" selection-start-column="98" selection-end-line="578" selection-end-column="98" />
               <folding>
                 <element signature="e#135#332#0" />
                 <element signature="e#561#1782#0" />
@@ -69,8 +69,8 @@
       <file leaf-file-name="level2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/2Sewer/src/level2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="437" column="114" lean-forward="true" selection-start-line="437" selection-start-column="114" selection-end-line="437" selection-end-column="114" />
+            <state relative-caret-position="242">
+              <caret line="443" column="94" selection-start-line="443" selection-start-column="94" selection-end-line="443" selection-end-column="94" />
               <folding>
                 <element signature="e#3999#5696#0" />
               </folding>
@@ -99,7 +99,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SystemMSGLevel3</find>
       <find>checkBou</find>
       <find>anGoThisWay</find>
       <find>checkBoun</find>
@@ -129,6 +128,7 @@
       <find>checkActions()</find>
       <find>resetLe</find>
       <find>pub</find>
+      <find>light</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -168,9 +168,9 @@
         <option value="$PROJECT_DIR$/1Home/src/tutorialL1.js" />
         <option value="$PROJECT_DIR$/2Sewer/src/level11.js" />
         <option value="$PROJECT_DIR$/7Lab/src/level7.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/main.js" />
         <option value="$PROJECT_DIR$/7Lab/src/level8.js" />
         <option value="$PROJECT_DIR$/5MomsPlace/src/level5.js" />
+        <option value="$PROJECT_DIR$/0Main/Src/main.js" />
         <option value="$PROJECT_DIR$/2Sewer/src/level2.js" />
       </list>
     </option>
@@ -205,6 +205,12 @@
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="2Sewer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="2Sewer" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
@@ -274,12 +280,12 @@
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
       <workItem from="1532100492835" duration="10501000" />
-      <workItem from="1532292607045" duration="37404000" />
+      <workItem from="1532292607045" duration="41154000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129901000" />
+    <option name="totallyTimeSpent" value="133651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -509,10 +515,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2Sewer/src/level11.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-96">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="3676" column="26" selection-start-line="3676" selection-start-column="23" selection-end-line="3676" selection-end-column="26" />
+        <state relative-caret-position="284">
+          <caret line="578" column="98" lean-forward="true" selection-start-line="578" selection-start-column="98" selection-end-line="578" selection-end-column="98" />
           <folding>
             <element signature="e#135#332#0" />
             <element signature="e#561#1782#0" />
@@ -554,27 +577,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/5MomsPlace/src/level5.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/2Sewer/src/level11.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/2Sewer/src/level2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="437" column="114" lean-forward="true" selection-start-line="437" selection-start-column="114" selection-end-line="437" selection-end-column="114" />
+        <state relative-caret-position="242">
+          <caret line="443" column="94" selection-start-line="443" selection-start-column="94" selection-end-line="443" selection-end-column="94" />
           <folding>
             <element signature="e#3999#5696#0" />
           </folding>

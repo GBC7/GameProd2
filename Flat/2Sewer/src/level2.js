@@ -310,6 +310,12 @@ function initializeLV2()
     let barrelPile2B3 = new Image();
     let sidewaysBarrelFloor = new Image();
     let uprightBarrel = new Image();
+    let brokenWheelChair = new Image();
+    let destroyedBedT = new Image();
+    let destroyedBedB = new Image();
+    let floorBarrel = new Image();
+    let floorDualBarrel = new Image();
+    let floorSidewaysBarrel = new Image();
 
 
     {
@@ -355,6 +361,12 @@ function initializeLV2()
         barrelPile2B3.src = "2Sewer/images/barrelpile2B3.png";
         sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
         uprightBarrel.src = "2Sewer/images/uprightBarrel.png";
+        brokenWheelChair.src = "2Sewer/images/brokenWheelChair.png";
+        destroyedBedT.src = "2Sewer/images/destroyedBedT.png";
+        destroyedBedB.src = "2Sewer/images/destroyedBedB.png";
+        floorBarrel.src = "2Sewer/images/floorCleanBarrel.png";
+        floorDualBarrel.src = "2Sewer/images/floorCleanDualBarrel.png";
+        floorSidewaysBarrel.src = "2Sewer/images/floorCleanSidewaysBarrel.png";
 
     }//Define pictures' source files
 
@@ -413,6 +425,12 @@ function initializeLV2()
         aaa = barrelPile2B3;     //50
         bbb = sidewaysBarrelFloor; //51
         ccc = uprightBarrel;        //52
+        ddd = brokenWheelChair;     //53
+        eee = destroyedBedT;        //54
+        fff = destroyedBedB;         //55
+        ggg = floorBarrel;          //56
+        hhh = floorDualBarrel;      //57
+        iii = floorSidewaysBarrel;  //58
     }//Assign pictures to global letter vars
 
 
@@ -423,24 +441,24 @@ function initializeLV2()
             [  // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
                 [ 1, 31,  6,  0, 31,  0,  6,  0,  0, 31,   7,  0,  0,  6, 31,  0,  0,  6, 13,  0,  0,  0,  0,  0,  8],       //0
-                [ 4, 32,  4,  2, 32,  3,  4,  3,  2, 32,   3,  3,  2,  3, 32,  3,  2,  3, 12,  5,  5,  5,  5,  5,  5],       //1
-                [ 4,  4,  3,  4, 51,  4,  3,  3,  3, 51,   3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //2
+                [ 4, 32,  4,  2, 32,  3,  4,  3,  2, 32,   3,  3,  2,  3, 32,  3,  2,  3, 12, 56,  5, 58,  5,  5,  5],       //1
+                [ 4,  4,  3,  4, 51,  4,  3,  3,  3, 51,   3,  4,  3,  3,  4,  4,  4,  4, 12, 58, 57,  5,  5,  5,  5],       //2
                 [ 3,  3,  4, 52,  3,  4,  3,  4,  3,  4,  52, 33, 34, 35,  3,  3,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //3
-                [ 4, 33, 34, 35,  4,  3,  42, 43, 44,  4,  4, 36, 37, 38, 42, 43, 44,  4, 12,  5,  5,  5,  5,  5,  5],       //4
-                [ 3, 36, 37, 38,  3,  3,  45, 46, 47,  3,  3, 39, 40, 41, 45, 46, 47,  4, 12,  5,  5,  5,  5,  5,  5],       //5
-                [ 4, 39, 40, 41,  4,  3,  48, 49, 50,  3,  3,  4, 51,  3, 48, 49, 50,  4, 12,  5,  5,  5,  5,  5,  5],       //6
+                [ 4, 33, 34, 35,  4,  3,  42, 43, 44,  4,  4, 36, 37, 38, 42, 43, 44,  4, 12, 58,  5,  5,  5,  5, 58],       //4
+                [ 3, 36, 37, 38,  3,  3,  45, 46, 47,  3,  3, 39, 40, 41, 45, 46, 47,  4, 12, 57,  5,  5,  5,  5, 57],       //5
+                [ 4, 39, 40, 41,  4,  3,  48, 49, 50,  3,  3,  4, 51,  3, 48, 49, 50,  4, 12, 56,  5,  5,  5, 58,  5],       //6
                 [ 4,  3, 42, 43, 44,  4,  3, 33, 34, 35,   3,  3,  4,  4,  4,  3,  4,  4, 11, 10, 10,  9, 10, 10, 10],       //7
                 [ 4,  3, 45, 46, 47,  4,  3, 36, 37, 38,   4,  4,  3,  3,  3,  3,  3,  3, 16, 52, 51,  3, 51, 52, 16],       //8
                 [ 4,  3, 48, 49, 50,  3,  3, 39, 40, 41,   3,  4,  4, 33, 34, 35,  3,  4,  3,  3,  4,  3,  3, 52,  4],       //9
                 [ 4,  3,  4,  3,  3,  4, 52,  4,  3,  3,   4, 52, 51, 36, 37, 38, 51,  4,  4,  4,  3,  3,  3,  4,  4],       //10
                 [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  20,  2, 39, 40, 41, 52,  3, 33, 34, 35,  3,  4,  3, 52],       //11
-                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  52,  42, 43, 44, 36, 37, 38,  3, 42, 43, 44],       //12
+                [53,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  52,  42, 43, 44, 36, 37, 38,  3, 42, 43, 44],       //12
                 [ 5,  5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 21,  3,  3,  3,  45, 46, 47, 39, 40, 41,  3,  45, 46, 47],       //13
                 [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  2,  4,  3,  48, 49, 50, 42, 43, 44,  4,  48, 49, 50],       //14
                 [10, 27, 10, 10, 10, 10, 10, 10, 10,  5,  5, 26, 51,  4,  4,  4,  3,  4,  45, 46, 47, 3,  3,  52, 51],       //15
-                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 33, 34, 35,  4,  4,  4,  48, 49, 50, 4,  33, 34, 35],       //16
+                [12,  5,  5,  5, 54, 55,  5,  5,  5,  5,  5, 26, 33, 34, 35,  4,  4,  4,  48, 49, 50, 4,  33, 34, 35],       //16
                 [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 36, 37, 38,  4, 51,  4,  3,  4,  4,  4,  36, 37, 38],       //17
-                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 39, 40, 41,  3, 52,  3,  3,  4,  3,  4,  39, 40, 41]        //18
+                [12, 54, 55,  5,  5,  5,  5, 54, 55,  5, 58, 26, 39, 40, 41,  3, 52,  3,  3,  4,  3,  4,  39, 40, 41]        //18
             ];
     }
 
@@ -483,7 +501,7 @@ function initializeLV2()
 
 
     //Below ensures all elements are on screen when level is drawn
-    stairs.onload = function()
+    uprightBarrel.onload = function()
     {
         if (!torchesMapped)
         {
