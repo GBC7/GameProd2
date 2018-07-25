@@ -288,6 +288,28 @@ function initializeLV2()
     let door = new Image();
     let drain = new Image();
     let stairs = new Image();
+    let pipeInWallT = new Image();
+    let pipeInWallB = new Image();
+    let barrelPileT1 = new Image();
+    let barrelPileT2 = new Image();
+    let barrelPileT3 = new Image();
+    let barrelPileM1 = new Image();
+    let barrelPileM2 = new Image();
+    let barrelPileM3 = new Image();
+    let barrelPileB1 = new Image();
+    let barrelPileB2 = new Image();
+    let barrelPileB3 = new Image();
+    let barrelPile2T1 = new Image();
+    let barrelPile2T2 = new Image();
+    let barrelPile2T3 = new Image();
+    let barrelPile2M1 = new Image();
+    let barrelPile2M2 = new Image();
+    let barrelPile2M3 = new Image();
+    let barrelPile2B1 = new Image();
+    let barrelPile2B2 = new Image();
+    let barrelPile2B3 = new Image();
+    let sidewaysBarrelFloor = new Image();
+    let uprightBarrel = new Image();
 
 
     {
@@ -311,6 +333,29 @@ function initializeLV2()
         pillar.src = "2Sewer/images/pillar.png";
         drain.src = "2Sewer/images/drain.png";
         stairs.src = "2Sewer/images/stairs.png";
+        pipeInWallT.src = "2Sewer/images/pipewwallnfloorT.png";
+        pipeInWallB.src = "2Sewer/images/pipewwallnfloorB.png";
+        barrelPileT1.src = "2Sewer/images/barrelpileT1.png";
+        barrelPileT2.src = "2Sewer/images/barrelpileT2.png";
+        barrelPileT3.src = "2Sewer/images/barrelpileT3.png";
+        barrelPileM1.src = "2Sewer/images/barrelpileM1.png";
+        barrelPileM2.src = "2Sewer/images/barrelpileM2.png";
+        barrelPileM3.src = "2Sewer/images/barrelpileM3.png";
+        barrelPileB1.src = "2Sewer/images/barrelpileB1.png";
+        barrelPileB2.src = "2Sewer/images/barrelpileB2.png";
+        barrelPileB3.src = "2Sewer/images/barrelpileB3.png";
+        barrelPile2T1.src = "2Sewer/images/barrelpile2T1.png";
+        barrelPile2T2.src = "2Sewer/images/barrelpile2T2.png";
+        barrelPile2T3.src = "2Sewer/images/barrelpile2T3.png";
+        barrelPile2M1.src = "2Sewer/images/barrelpile2M1.png";
+        barrelPile2M2.src = "2Sewer/images/barrelpile2M2.png";
+        barrelPile2M3.src = "2Sewer/images/barrelpile2M3.png";
+        barrelPile2B1.src = "2Sewer/images/barrelpile2B1.png";
+        barrelPile2B2.src = "2Sewer/images/barrelpile2B2.png";
+        barrelPile2B3.src = "2Sewer/images/barrelpile2B3.png";
+        sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
+        uprightBarrel.src = "2Sewer/images/uprightBarrel.png";
+
     }//Define pictures' source files
 
 
@@ -346,6 +391,28 @@ function initializeLV2()
         dd = undefined;         //28
         ee = steps;             //29
         ff = stepsCorner;       //30
+        gg = pipeInWallT;       //31
+        hh = pipeInWallB;       //32
+        ii = barrelPileT1;      //33
+        jj = barrelPileT2;      //34
+        kk = barrelPileT3;      //35
+        ll = barrelPileM1;      //36
+        mm = barrelPileM2;      //37
+        nn = barrelPileM3;      //38
+        oo = barrelPileB1;      //39
+        qq = barrelPileB2;      //40
+        rr = barrelPileB3;      //41
+        ss = barrelPile2T1;     //42
+        tt = barrelPile2T2;     //43
+        uu = barrelPile2T3;     //44
+        vv = barrelPile2M1;     //45
+        ww = barrelPile2M2;     //46
+        xx = barrelPile2M3;     //47
+        yy = barrelPile2B1;     //48
+        zz = barrelPile2B2;     //49
+        aaa = barrelPile2B3;     //50
+        bbb = sidewaysBarrelFloor; //51
+        ccc = uprightBarrel;        //52
     }//Assign pictures to global letter vars
 
 
@@ -355,25 +422,25 @@ function initializeLV2()
             //                                            10                                      20
             [  // 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  0,  1,  2,  3,  4
 
-                [ 1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  7,  0,  0,  0,  0,  0,  0,  6, 13,  0,  0,  0,  0,  0,  8],       //0
-                [ 4,  3,  4,  2,  4,  3,  4,  3,  2,  3,  3,  3,  2,  3,  4,  3,  2,  3, 12,  5,  5,  5,  5,  5,  5],       //1
-                [ 4,  4,  3,  4,  3,  4,  3,  3,  3,  4,  3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //2
-                [ 3,  3,  4,  3,  3,  4,  3,  4,  3,  4,  4,  4,  4,  4,  4,  3,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //3
-                [ 4,  3,  4,  4,  4,  3,  4,  3,  3,  4,  4,  4,  4,  3,  4,  3,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //4
-                [ 3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4,  3,  3,  4,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //5
-                [ 4,  4,  4,  4,  4,  3,  4,  4,  4,  3,  3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //6
-                [ 4,  3,  4,  4,  4,  4,  3,  4,  3,  4,  3,  3,  4,  4,  4,  3,  4,  4, 11, 10, 10,  9, 10, 10, 10],       //7
-                [ 4,  3,  3,  4,  4,  4,  3,  3,  4,  3,  4,  4,  3,  3,  3,  3,  3,  3, 16,  3,  4,  3,  3,  4, 16],       //8
-                [ 4,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  4,  4,  3,  4,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4],       //9
-                [ 4,  3,  4,  3,  3,  4,  3,  4,  3,  3,  4,  3,  3,  4,  4,  3,  3,  4,  4,  4,  3,  3,  3,  4,  3],       //10
-                [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  2,  4,  4,  4,  3,  3,  4,  3,  4,  3,  4,  3,  3],       //11
-                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  4,  4,  3,  3,  3,  4,  4,  3,  3,  4,  4],       //12
-                [ 5,  5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 21,  3,  3,  3,  3,  3,  3,  3,  3,  4,  3,  3,  3,  4],       //13
-                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  2,  4,  3,  4,  4,  3,  4,  4,  4,  4,  3,  4,  3],       //14
-                [10, 27, 10, 10, 10, 10, 10, 10, 10,  5,  5, 26,  3,  4,  4,  4,  3,  4,  3,  3,  3,  3,  3,  3,  3],       //15
-                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  4,  3,  3,  4,  4,  4,  4,  4,  4,  4,  3,  4,  4],       //16
-                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  4,  4,  3,  4,  3,  4,  3,  4,  4,  4,  4,  3,  4],       //17
-                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  3,  3,  4,  3,  3,  3,  3,  4,  3,  4,  3,  3,  3]        //18
+                [ 1, 31,  6,  0, 31,  0,  6,  0,  0, 31,   7,  0,  0,  6, 31,  0,  0,  6, 13,  0,  0,  0,  0,  0,  8],       //0
+                [ 4, 32,  4,  2, 32,  3,  4,  3,  2, 32,   3,  3,  2,  3, 32,  3,  2,  3, 12,  5,  5,  5,  5,  5,  5],       //1
+                [ 4,  4,  3,  4, 51,  4,  3,  3,  3, 51,   3,  4,  3,  3,  4,  4,  4,  4, 12,  5,  5,  5,  5,  5,  5],       //2
+                [ 3,  3,  4, 52,  3,  4,  3,  4,  3,  4,  52, 33, 34, 35,  3,  3,  3,  4, 12,  5,  5,  5,  5,  5,  5],       //3
+                [ 4, 33, 34, 35,  4,  3,  42, 43, 44,  4,  4, 36, 37, 38, 42, 43, 44,  4, 12,  5,  5,  5,  5,  5,  5],       //4
+                [ 3, 36, 37, 38,  3,  3,  45, 46, 47,  3,  3, 39, 40, 41, 45, 46, 47,  4, 12,  5,  5,  5,  5,  5,  5],       //5
+                [ 4, 39, 40, 41,  4,  3,  48, 49, 50,  3,  3,  4, 51,  3, 48, 49, 50,  4, 12,  5,  5,  5,  5,  5,  5],       //6
+                [ 4,  3, 42, 43, 44,  4,  3, 33, 34, 35,   3,  3,  4,  4,  4,  3,  4,  4, 11, 10, 10,  9, 10, 10, 10],       //7
+                [ 4,  3, 45, 46, 47,  4,  3, 36, 37, 38,   4,  4,  3,  3,  3,  3,  3,  3, 16, 52, 51,  3, 51, 52, 16],       //8
+                [ 4,  3, 48, 49, 50,  3,  3, 39, 40, 41,   3,  4,  4, 33, 34, 35,  3,  4,  3,  3,  4,  3,  3, 52,  4],       //9
+                [ 4,  3,  4,  3,  3,  4, 52,  4,  3,  3,   4, 52, 51, 36, 37, 38, 51,  4,  4,  4,  3,  3,  3,  4,  4],       //10
+                [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,  20,  2, 39, 40, 41, 52,  3, 33, 34, 35,  3,  4,  3, 52],       //11
+                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 30,  4,  52,  42, 43, 44, 36, 37, 38,  3, 42, 43, 44],       //12
+                [ 5,  5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 21,  3,  3,  3,  45, 46, 47, 39, 40, 41,  3,  45, 46, 47],       //13
+                [ 5,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26,  2,  4,  3,  48, 49, 50, 42, 43, 44,  4,  48, 49, 50],       //14
+                [10, 27, 10, 10, 10, 10, 10, 10, 10,  5,  5, 26, 51,  4,  4,  4,  3,  4,  45, 46, 47, 3,  3,  52, 51],       //15
+                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 33, 34, 35,  4,  4,  4,  48, 49, 50, 4,  33, 34, 35],       //16
+                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 36, 37, 38,  4, 51,  4,  3,  4,  4,  4,  36, 37, 38],       //17
+                [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 39, 40, 41,  3, 52,  3,  3,  4,  3,  4,  39, 40, 41]        //18
             ];
     }
 
