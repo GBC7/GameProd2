@@ -46,44 +46,22 @@ function createEnemies()
 
 
 
-        //L5
-        //Cats
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat1.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //0
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat2.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //1
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat3.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //2
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat4.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //3
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat5.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //4
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat6.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //5
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat7.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //6
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat8.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //7
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat9.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);    //8
-        Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat10.png", 3, 270, 60, 5, 8, 0, 800, 32, 600);   //9
-
-        //Set identifier to determine if cat
-        for (let allCats = 0; allCats < 10; allCats++)
-        {
-            enemy[5][allCats].cat = true;
-        }
-        //Set one of the cats to have the paper
-        enemy[5][Math.floor(Math.random() * 10)]. hasPaper = true;
 
 
-        //Mom
-        Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 20, 5, 8, 0, 800, 32, 600);
-        enemy[5][10].cat = false;
+
 
         //L6 enemies ( 6 of them )
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
-        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy1.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy2.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy3.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy4.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy5.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy6.png", 4, 180, 60, 6, 8, 0, 352, 192, 320, 2000);
 
         //L8 Enemies ( 6 of them )
         for (let numOf = 0; numOf !== 6; numOf++)
         {
-            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568);
+            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 8, 8, 0, 768, 96, 568, 1000);
         }
 
 
@@ -141,7 +119,7 @@ function drawZeeEnemy()
 }
 
 
-function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY)
+function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runSpeed, lvl, strideLength, minX, maxX, minY, maxY, attTimeOut)
 {
 
     /*//Enemy blueprint
@@ -1876,6 +1854,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             maxX: 800,
             minY: 32,
             maxY: 600,
+            attackTimeout: 5000, //Milliseconds enemy has to wait between attacks
 
             /////////////////
             // Leave these //
@@ -2738,13 +2717,51 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     {
                         if (self.topSide < ((p.row * 32/*top*/) + p.height) && (self.bottomSide) > (p.row * 32))
                         {
-                            p.health--;
-                            aghh.play();
-                            if (p.health === 0)
+                            let isntWaiting = true;
+
+                            for (let index = 0; index < p.indNums.length; index++)
                             {
-                                ctx.fillStyle = '#ff0c18';
-                                ctx.fillRect(0,0,800,600);
-                                resetLevel(self.scurrySpeed);
+                                if (self.indexNum === p.indNums[index])
+                                {
+                                    isntWaiting = false;
+                                }
+                            }
+
+                            if (isntWaiting)
+                            {
+                                aghh.play();
+                                p.health--;
+                                ctx3.clearRect(10, 75, 112, 82);//Clear hearts
+                                healthInventory();
+
+                                if (p.health === 0)
+                                {
+                                    ctx.fillStyle = '#ff0c18';
+                                    ctx.fillRect(0,0,800,600);
+                                    setTimeout(resetLevel, self.scurrySpeed);
+                                }
+
+                                //Push into first element of array
+                                p.indNums.push(self.indexNum);
+
+                                //Set the number to be removed from the array after their timeout period
+                                setTimeout(resetIsWaiting, self.attackTimeout)
+                            }
+                            else
+                            {
+                                console.log("waiting to attack");
+                            }
+
+                            function resetIsWaiting()
+                            {
+                                for (let index2 = 0; index2 < p.indNums.length; index2++)
+                                {
+                                    if (self.indexNum === p.indNums[index2])
+                                    {
+                                        //Set it's slot to undefined
+                                        p.indNums[index2] = undefined;
+                                    }
+                                }
                             }
                         }
                     }
@@ -3435,6 +3452,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         thisEnemy.myLevel = lvl;
         thisEnemy.travelDist = strideLength;
         thisEnemy.indexNum = enemy[lvl].length;
+        thisEnemy.attackTimeout = attTimeOut;
     }
 
 
@@ -3463,24 +3481,26 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         let isNewPosition = true, cannotGoHere = false;
 
         let theX = thisEnemy.xPos/32, theY = thisEnemy.yPos/32;//Used to compare tiles
+        console.log("theX = " + theX);
+        console.log("theY = " + theY);
 
         //Check to make sure that the position the enemy is landing in doesn't have any environment objects
         if (lMap[lvl] !== undefined && lMap[lvl][theY] !== undefined && lMap[lvl][theY][theX] !== undefined)//Left
         {
             if (l1 || l4 || l7 || l8)
-                cannotGoHere = (lMap[lvl][theY][theX] !== floorNumbers[lvl]);
+                cannotGoHere = (lMap[lvl][theY][theX] === floorNumbers[lvl]);
             else if (l2)
             {
                 cannotGoHere =
                     (
-                        lMap[lvl][theY][theX] !== 3 ||
-                        lMap[lvl][theY][theX] !== 4 ||
-                        lMap[lvl][theY][theX] !== 5 ||
-                        lMap[lvl][theY][theX] !== 29 ||
-                        lMap[lvl][theY][theX] !== 30 ||
+                        lMap[lvl][theY][theX] === 3 &&
+                        lMap[lvl][theY][theX] === 4 &&
+                        lMap[lvl][theY][theX] === 5 &&
+                        lMap[lvl][theY][theX] === 29 &&
+                        lMap[lvl][theY][theX] === 30 &&
                         (
-                            lMap[lvl][theY][theX] !== 15 ||
-                            lMap[lvl][theY][theX] !== 9
+                            lMap[lvl][theY][theX] === 15 &&
+                            lMap[lvl][theY][theX] === 9
                             &&
                             doorThreeOpen
                         )
@@ -3492,16 +3512,16 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             {
                 cannotGoHere =
                     (
-                        lMap[lvl][theY][theX] !== 16 ||
-                        lMap[lvl][theY][theX] !== 17 ||
-                        lMap[lvl][theY][theX] !== 0
+                        lMap[lvl][theY][theX] === 16 &&
+                        lMap[lvl][theY][theX] === 17 &&
+                        lMap[lvl][theY][theX] === 0
                     );
             }
             else if (l5)
             {
                 cannotGoHere =
                     (
-                        lMap[lvl][theY][theX] !== floorNumbers[lvl] ||
+                        lMap[lvl][theY][theX] !== floorNumbers[lvl] &&
                         lMap[lvl][theY][theX] !== 40
                     );
             }
@@ -3509,17 +3529,17 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             {
                 cannotGoHere =
                     (
-                        lMap[lvl][theY][theX] !== 0 ||
-                        lMap[lvl][theY][theX] !== 4
+                        lMap[lvl][theY][theX] === 0 &&
+                        lMap[lvl][theY][theX] === 4
                     );
             }
             else if (l11)
             {
                 cannotGoHere =
                     (
-                        lMap[lvl][theY][theX] !== 3 ||
-                        lMap[lvl][theY][theX] !== 4 ||
-                        lMap[lvl][theY][theX] !== 0
+                        lMap[lvl][theY][theX] === 3 &&
+                        lMap[lvl][theY][theX] === 4 &&
+                        lMap[lvl][theY][theX] === 0
                     );
             }
         }
@@ -3532,6 +3552,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         //If not.. make sure no other enemy has been placed here
         else
         {
+            console.log("pushed");
             for (let thisOne = 0; thisOne < enemy[lvl].length; thisOne ++)
             {
                 if (thisEnemy.xPos === enemy[lvl][thisOne].xPos)

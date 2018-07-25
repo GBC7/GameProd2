@@ -136,12 +136,13 @@ let p =                                                         //PlayerObject
         srcY: 0,                 //Y location on tile sheet that current player image is coming from
         frameX: 0,                //Counter to use for selecting section of tile sheet based on steps
         frameY: 0,
-        attackSpace: 32
+        attackSpace: 32,
+        indNums: []
     };
 
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
-
+let droppedPaper = false;
 let theyIsOff = false;
 let caneTrigger = true;
 let lighterTrigger = true;
@@ -3426,24 +3427,48 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
                 meow.play();
 
                 //If the NPC is the cat that has the publishers paper
-                if (enemy[level][enem].hasPaper && !publishersPaper)
+                if (enemy[level][enem].hasPaper/* && !droppedPaper*/)
                 {
                     let thisX = Math.round(enemy[level][enem].xPos / 32);
-                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.floor(enemy[level][enem].height/32);
+                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.ceil(enemy[level][enem].height/32);
 
-                    if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2)
-                        lMap[level][thisY][thisX] = 40;//Change that tile to a floor tile
-                    /*publishersPaper = true;*/
+                    //Check the space on the other side of the cat
+                    if (p.frameY === 0)//Down
+                        if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2/*if it is a floor tile*/)
+                        {
+                            lMap[level][thisY][thisX] = 40;
+                            droppedPaper = true;
+                        }//Change that tile to a paper tile
+                    if (p.frameY === 1)//Left
+                        if (lMap[level][thisY] !== undefined && lMap[level][thisY - 1][thisX - 1] !== undefined && lMap[level][thisY - 1][thisX - 1] === 2/*if it is a floor tile*/)
+                        {
+                            lMap[level][thisY - 1][thisX - 1] = 40;
+                            droppedPaper = true;
+                        }//Change that tile to a paper tile
+                    if (p.frameY === 2)//Right
+                        if (lMap[level][thisY] !== undefined && lMap[level][thisY - 1][thisX + 1] !== undefined && lMap[level][thisY - 1][thisX + 1] === 2/*if it is a floor tile*/)
+                        {
+                            lMap[level][thisY - 1][thisX + 1] = 40;
+                            droppedPaper = true;
+                        }//Change that tile to a paper tile
+                    if (p.frameY === 3)//Up
+                        if (lMap[level][thisY - Math.ceil(enemy[level][enem].height/32) - 1] !== undefined && lMap[level][thisY - Math.ceil(enemy[level][enem].height/32) - 1][thisX] !== undefined && lMap[level][thisY - Math.ceil(enemy[level][enem].height/32) - 1][thisX] === 2/*if it is a floor tile*/)
+                        {
+                            lMap[level][thisY  - Math.ceil(enemy[level][enem].height/32) - 1][thisX] = 40;
+                            droppedPaper = true;
+                        }//Change that tile to a paper tile
+
+
                 }
 
-                if (catsKicked === 3)
+               /* if (catsKicked === 3)
                 {
                     //Set mom as hostile, triple her speed, and give her full vision of the map
                     enemy[level][enemy[level].length - 1].hostile = true;
                     enemy[level][enemy[level].length - 1].fov = 100;
                     enemy[level][enemy[level].length - 1].rangeOV = 100;
                     enemy[level][enemy[level].length - 1].sighted = true;
-                }
+                }*/
             }
         }
     }
@@ -3476,7 +3501,7 @@ function healthInventory()
 
     hearts.src = "0Main/images/heart.png";
 
-    ctx.clearRect(10, 75, 112, 82);//Clear hearts
+
     switch (p.health)
     {
         case 6:
@@ -3557,7 +3582,7 @@ function healthInventory()
     }
     if(researchBurned)
     {
-        ctx.clearRect(10, 409, 100, 35);
+        ctx3.clearRect(10, 409, 100, 35);
         ctx3.drawImage(research, 15, 410, 32, 32);
     }
 
