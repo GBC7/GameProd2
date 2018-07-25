@@ -37,11 +37,11 @@ function createEnemies()
         //L1
         Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600);
 
-        //L2
+        /*//L2
         for (let rats = 0; rats !== 10; rats ++)
         {
             Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 4, 180, 70, 2, 8, 0, 800, 32, 600);
-        }
+        }*/
 
 
 

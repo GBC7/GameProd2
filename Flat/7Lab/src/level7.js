@@ -39,6 +39,7 @@ function initializeLV7()
     let screen = new Image();
     let screenLeft = new Image();
     let screenRight = new Image();
+    let trashFire = new Image();
 
 
     {
@@ -71,6 +72,7 @@ function initializeLV7()
         screen.src = "7Lab/images/screen.png";
         screenLeft.src = "7Lab/images/screen-left.png";
         screenRight.src = "7Lab/images/screen-right.png";
+        trashFire.src = "7Lab/images/trash-fire.png"
     }
 
     {
@@ -92,7 +94,15 @@ function initializeLV7()
             i = fullShelvesTop;		// 8
             j = fullShelvesBottom;	// 9
         }
-        k = trash;				// 10
+
+        if (researchBurned)
+        {
+        		k = trashFire; 		// 10
+        }
+        else
+        {
+        	k = trash; 			// 10
+        }
         l = wire;				// 11
         m = table;				// 12
         n = tableBlood; 		// 13
@@ -161,20 +171,6 @@ function initializeLV7()
         lPMap[level][1][0] = 1;
     }
 
-    if (lOMap[level] === undefined)             //Level Objects map
-    {
-        lOMap[level] = [];
-        for (let y = 0; y < 18; y++)
-        {
-            lOMap[level][y] = [];
-
-            for (let x = 0; x < 25; x++)
-            {
-                lOMap[level][y].push(0)
-            }
-        }
-    }
-
 
     changePStartPos();
 
@@ -190,10 +186,7 @@ function initializeLV7()
         else
         {
             drawMap();
-            for (let i = 0; i < enemy[level].length; i++)
-            {
-                enemy[level][i].roam();
-            }
+            turnOnEnemies();
         }
 
     }

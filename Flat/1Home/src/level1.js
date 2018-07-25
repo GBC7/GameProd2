@@ -1,12 +1,9 @@
 //L1
 let uncovered = false;
-let alreadyBeenHereL1 = false;
 
-//Images
-let tv = new Image();
-{
-    tv.src = "1Home/images/tv.png";
-}
+
+
+
 
 
 //Audio
@@ -25,10 +22,13 @@ arcadeNoise.volume = 0.4;
 
 function initializeLV1()
 {
-    canvas.style.backgroundImage = "";
+    canvas.style.backgroundImage = "url('1Home/images/breakingNews.gif')";
+    canvas.style.backgroundPositionX = "492px";
+    canvas.style.backgroundPositionY = "445px";
+
     newsReport.play();          //RYN
 
-
+    //Images
     let floor = new Image();
     let darkWindowT = new Image();
     let darkWindowB = new Image();
@@ -89,6 +89,13 @@ function initializeLV1()
     let stairsB1 = new Image();
     let stairsB2 = new Image();
     let stairsB3 = new Image();
+    let tvTL = new Image();
+    let tvTR = new Image();
+    let tvBL = new Image();
+    let tvBR = new Image();
+    let couchL = new Image();
+    let couchR = new Image();
+
 
 
 
@@ -153,6 +160,12 @@ function initializeLV1()
         stairsB1.src = "1Home/images/stairsB1.png";
         stairsB2.src = "1Home/images/stairsB2.png";
         stairsB3.src = "1Home/images/stairsB3.png";
+        tvTL.src = "1Home/images/tvTL.png";
+        tvTR.src = "1Home/images/tvTR.png";
+        tvBL.src = "1Home/images/tvBL.png";
+        tvBR.src = "1Home/images/tvBR.png";
+        couchL.src = "1Home/images/couchL.png";
+        couchR.src = "1Home/images/couchR.png";
     }//Define SRC property of images
 
 
@@ -219,6 +232,12 @@ function initializeLV1()
         jjj = stairsB1;                     //59
         kkk = stairsB2;                     //60
         lll = stairsB3;                     //61
+        mmm = tvTL;                         //62
+        nnn = tvTR;                         //63
+        ooo = tvBL;                         //64
+        qqq = tvBR;                         //65
+        rrr = couchL;                       //66
+        sss = couchR;                       //67
 
 
     }//Assign images to global letter variables
@@ -245,11 +264,11 @@ function initializeLV1()
                 [11, 50, 50, 50, 11, 10,  0,  0, 50, 50, 50, 11, 10, 56, 57, 58, 11, 10,  0, 11, 10,  0, 11, 10,  0],       //10
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 59, 60, 61,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //11
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //12
-                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 25, 26, 27, 35,  0],       //13
-                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 28, 29, 30,  0,  0],       //14
+                [ 0,  0,  0, 36, 37, 38, 39,  0,  0,  0,  0,  0,  0,  0,  0, 62,  63,  0,  0, 34, 25, 26, 27, 35,  0],       //13
+                [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0, 64,  65,  0,  0,  0, 28, 29, 30,  0,  0],       //14
                 [ 0,  0,  0, 44, 45, 46, 48,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 31, 32, 33,  0,  0],       //15
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //16
-                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //17
+                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 66, 67, 35,  0,  0,  0,  0,  0,  0,  0],       //17
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //18
             ];
     }
@@ -271,43 +290,13 @@ function initializeLV1()
         lPMap[level][5][0] = 1; //Putting the player (scientist) into the player map for this level
     }
 
-    if (lOMap[level] === undefined)             //Level Objects map
-    {
-        lOMap[level] = [];
-        for (let y = 0; y < 18; y++)
-        {
-            lOMap[level][y] = [];
-
-            for (let x = 0; x < 25; x++)
-            {
-                lOMap[level][y].push(0)
-            }
-        }
-    }
-
 
     changePStartPos();
 
-    if (alreadyBeenHereL1)
-    {
-        drawMap();                   //Draw next map
-        //initializeTutorialLV1();
-        for (let i = 0; i < enemy[level].length; i++)
-        {
-            enemy[level][i].roam();
-        }
-        addEventListener("keydown", onKeyDown, false);
-    }
-    else
-    {
-        stairsB3.onload = function()
-        {
-            l1Ready=true;
-            alreadyBeenHereL1 = true;
-        };
 
-        waitForLoading2();
-    }
+    tvBR.onload = function(){l1Ready=true;};
+    waitForLoading2();
+
 
 
 
@@ -324,13 +313,8 @@ function initializeLV1()
         else
         {
             drawMap();                   //Draw next map
-            //initializeTutorialLV1();
-            for (let i = 0; i < enemy[level].length; i++)
-            {
-                enemy[level][i].roam();
-            }
+            initializeTutorialLV1();
             addEventListener("keydown", onKeyDown, false);
-            // enemy[1][0].roam();
         }
     }
 

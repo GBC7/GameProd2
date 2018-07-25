@@ -9,6 +9,8 @@ pigs.src = "12Helo/images/FlyingPig.png";
 //This probably initializes the level
 function initializeCopterLevel()
 {
+    canvas.style.backgroundPositionX = "0px";
+    canvas.style.backgroundPositionY = "120px";
     //The stuff that's gotta be done before doing stuff
     {
         //Stop input for tutorial portion of level

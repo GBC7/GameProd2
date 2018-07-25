@@ -223,19 +223,6 @@ function initializeLV4()
         lPMap[level][0][0] = 1;                             //Set the players starting position
     }
 
-    if (lOMap[level] === undefined)             //Level Objects map
-    {
-        lOMap[level] = [];
-        for (let y = 0; y < 18; y++)
-        {
-            lOMap[level][y] = [];
-
-            for (let x = 0; x < 25; x++)
-            {
-                lOMap[level][y].push(0)
-            }
-        }
-    }
 
     changePStartPos();
 
@@ -257,11 +244,7 @@ function initializeLV4()
         else
         {
             drawMap();                   //Draw next map
-            for (let i = 0; i < enemy[level].length; i++)
-            {
-                enemy[level][i].roam();
-            }
-            addEventListener("keydown", onKeyDown, false);
+            turnOnEnemies();
         }
     }
 

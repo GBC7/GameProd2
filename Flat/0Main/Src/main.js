@@ -59,8 +59,8 @@ let floorNumbers, floorObjects;
 //level 0 is undefined as we do not have a level 0
 let startX, startY;
 { // Level        0      1   2   3   4    5   6   7  8      9         10      11
-    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 0, undefined, undefined, 12];
-    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 1, undefined, undefined, 16];
+    startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 24, undefined, undefined, 12];
+    startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 16, undefined, undefined, 16];
 }
 
 //x and y map boundaries per level
@@ -84,8 +84,34 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
                 mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
 }//Initializes these to undefined
 
-let publishersPaper = false;
 let catsKicked = 0;
+
+//im guz
+let cane = new Image();
+let disguise = new Image();
+let key = new Image();
+let lighter = new Image();
+let lighterFluidInv = new Image();
+let mapV = new Image();
+let passcode = new Image();
+let publishersAddress = new Image();
+let research = new Image();
+let rollerblades = new Image();
+let researchBurnt = new Image();
+{
+    cane.src = "0Main/images/inventory/cane.png";
+    disguise.src = "0Main/images/inventory/disguise.png";
+    key.src = "0Main/images/inventory/key.png";
+    lighter.src = "0Main/images/inventory/lighter.png";
+    lighterFluidInv.src = "0Main/images/inventory/lighterFluid.png";
+    mapV.src = "0Main/images/inventory/map.png";
+    passcode.src = "0Main/images/inventory/passcode.png";
+    publishersAddress.src = "0Main/images/inventory/publishersAddress.png";
+    research.src = "0Main/images/inventory/research.png";
+    rollerblades.src = "0Main/images/inventory/rollerblades.png";
+    researchBurnt.src = "0Main/images/inventory/researchBurnt.png";
+
+}
 
 //Player image & hurt sound
 let scientist = new Image();//   Both defined right
@@ -117,6 +143,8 @@ let p =                                                         //PlayerObject
 let walkingSpeed = 15;
 
 let theyIsOff = false;
+let caneTrigger = true;
+let lighterTrigger = true;
 
 function startGame()
 {
@@ -191,9 +219,17 @@ function startGame()
 
     function resetSomeThings()
     {
-        //Clear the canvas
+        //Reset the canvas
         {
             ctx.clearRect(0, 0, 800, 600);
+            canvas.style.backgroundImage = "";
+            canvas.style.backgroundPositionX = "0px";
+            canvas.style.backgroundPositionY = "0px";
+        }
+
+        //Call inventory function
+        {
+            healthInventory();
         }
 
         //Set players attack space back to its usual, in case a level has changed it
@@ -1100,18 +1136,9 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
         {
             let numOfStairz = 0;                //Create variable to be used for counting stairs
 
-            if (alreadyBeenHereL2)
-            {
-                removeEventListener("keydown", onKeyDown, false);
-                lPMap[level][p.row][p.col] = 0; //Remove the player from the map
-                setTimeout(goDownStays2, 120);       //Start animation of going down stairs
-            }
-            else
-            {
-                removeEventListener("keydown", onKeyDown, false);
-                lPMap[level][p.row][p.col] = 0; //Remove the player from the map
-                setTimeout(goDownStays2, 120);       //Start animation of going down stairs
-            }
+            removeEventListener("keydown", onKeyDown, false);
+            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
+            setTimeout(goDownStays2, 120);       //Start animation of going down stairs
 
             function goDownStays2()              //Animates player going down stairs and appearing in previous levels map
             {
@@ -1133,10 +1160,8 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
 
-                    if (!alreadyBeenHereL2)
-                        waitForLoad();
-                    else
-                        drawMap();
+
+                    waitForLoad();
                 }
             }
 
@@ -1862,7 +1887,9 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 {
                     level = 7;                              //Change level identifier appropriately
                     l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
-                    l7 = true;                              //Set the one that is being travelled to to true
+                    l7 = true;//Set the one that is being travelled to to true
+
+                    startX[7] = startY[7] = 0;
 
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
@@ -2560,6 +2587,7 @@ function onKeyDown(e)
     }
 
     drawZeeEnemy();
+    healthInventory();
 }
 
 function checkBoundaries(e)//Gets called each step
@@ -2898,9 +2926,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
     }
 }
 
-
 //Space bar actions
-
 function checkActions()//Gets called when pressing space
 {
     if (l1)
@@ -3193,14 +3219,20 @@ function checkActions()//Gets called when pressing space
 
     else if (l7)
     {
-        if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))
+        if ((p.row === 16 && p.col === 1) || (p.row === 15 && p.col === 0))//If the player is next to the trash can
         {
             if (lighterFluid && researchPaper)
             {
                 // DialogNeeded
                 researchBurned = true;
-                fillErasedMap();
-                drawPMap();
+                let trashFire = new Image();
+                trashFire.src = "7Lab/images/trash-fire.png";
+                k = trashFire;
+                trashFire.onload = function()
+                {
+                    fillErasedMap();
+                    drawPMap();
+                };
             }
 
             if (!researchPaper)
@@ -3221,7 +3253,7 @@ function checkActions()//Gets called when pressing space
             }
         }
 
-        else if (p.row === 1 && p.col === 20 && !researchPaper)
+        else if (p.row === 1 && p.col === 20 && lighterFluid && windowClosed && !researchPaper)
         {
             let emptyShelvesTop = new Image();
             let emptyShelvesBottom = new Image();
@@ -3308,6 +3340,8 @@ function checkActions()//Gets called when pressing space
         else
             checkAttackSelect();
     }
+
+    healthInventory();
 }
 
 function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
@@ -3417,13 +3451,117 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
 
 function turnOnEnemies()
 {
-    for (let num = 0; num < enemy[leve].length; num++)
+    for (let num = 0; num < enemy[level].length; num++)
     {
         if (!enemy[level][num].destroyed)
         {
             enemy[level][num].roam();
         }
     }
+}
+
+function healthInventory()
+{
+
+    let characterImage = new Image();
+    characterImage.src = "0Main/images/Portrait_Scientist.png";
+    ctx3.drawImage(characterImage, 4, 470, 105, 110);
+
+    let hearts = new Image();
+
+
+    ctx3.font = "30px Arial";
+    ctx3.fillStyle = "red";
+    ctx3.fillText("Lives: " + p.lives, 10, 55);
+
+    hearts.src = "0Main/images/heart.png";
+
+    ctx.clearRect(10, 75, 112, 82);//Clear hearts
+    switch (p.health)
+    {
+        case 6:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            ctx3.drawImage(hearts, 50, 125, 32, 32);
+            ctx3.drawImage(hearts, 90, 125, 32, 32);
+            break;
+        case 5:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            ctx3.drawImage(hearts, 50, 125, 32, 32);
+            break;
+        case 4:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            break;
+        case 3:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            break;
+        case 2:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            break;
+        case 1:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            break;
+    }
+
+
+    if(lighterTrigger === true)
+    {
+        ctx3.drawImage(lighter, 15, 202, 40, 32);
+    }
+    if(keyFound)
+    {
+        ctx3.drawImage(key, 67, 200, 32, 32);
+    }
+    if(findPasscode)
+    {
+        ctx3.drawImage(passcode, 15, 254, 32, 32);
+    }
+    if(findDisguise)
+    {
+        ctx3.drawImage(disguise, 63, 254, 32, 32);
+    }
+    if(findRollerblades)
+    {
+        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
+    }
+    if(findMap)
+    {
+        ctx3.drawImage(mapV, 63, 306, 32, 32);
+    }
+    if(caneTrigger === true)
+    {
+        ctx3.drawImage(cane, 15, 358, 32, 32);
+    }
+    if(publishersPaper)
+    {
+        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
+    }
+    if(researchPaper)
+    {
+        ctx3.drawImage(research, 15, 410, 32, 32);
+    }
+    if(lighterFluid)
+    {
+        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+    }
+    if(researchBurned)
+    {
+        ctx.clearRect(10, 409, 100, 35);
+        ctx3.drawImage(research, 15, 410, 32, 32);
+    }
+
+
 }
 
 function resetLevel(time = 40)
@@ -3474,7 +3612,6 @@ function resetLevel(time = 40)
 
         //Set level to reload and redraw itself
         l2Ready = false;
-        alreadyBeenHere = false;
     }
     else if (l3)
     {
@@ -3507,6 +3644,30 @@ function resetLevel(time = 40)
         // re-draw map
         clearLevel3();
         ctx.clearRect(0,0,800,600);
+    }
+
+    else if (l7 || l8)
+    {
+        //Reset lock and key features
+        windowClosed = false;
+        researchPaper = false;
+        researchBurned = false;
+        lighterFluid = false;
+
+        //Reset starting position
+        startX = [undefined, 1,  0,  1,  10,  0,  10, 19, 24, undefined, undefined, 12];
+        startY = [undefined, 16,  0,  16, 17,  0,  14, 16, 16, undefined, undefined, 16];
+
+        level = 7;
+
+        l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+
+        l7 = true;                              //Set the one that is being travelled to to true
+
+        ctx.clearRect(0,0,800,600);             //Clear entire canvas
+        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+        startGame();                            //Load new levels assets and settings
+        setTimeout(drawMap, 40);                //Draw its entire map
     }
 
 
