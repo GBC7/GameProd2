@@ -168,7 +168,7 @@ function initializeLV5 ()
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 19,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //6
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //7
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //8
-                    [ 2,  2, 17,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //9
+                    [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //9
                     [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21,  2,  2,  2,  2, 24, 20, 20, 20, 20, 20, 20, 20, 20, 20],    //10
                     [19, 35, 34, 19, 19, 32, 33, 19, 19, 19, 19,  2,  2,  2,  2, 19, 19, 19, 34, 35, 19, 19, 19, 28, 28],    //11
                     [30,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 30,  2,  2,  2,  2, 29, 29],    //12
@@ -179,6 +179,8 @@ function initializeLV5 ()
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 22,  2,  2,  2,  2,  2,  2,  2,  2,  2],     //17
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 22,  2,  2,  2,  2,  2,  2,  2,  2,  2]      //18
                 ];
+            //L5
+            //Cats
         }
 
 
@@ -198,11 +200,34 @@ function initializeLV5 ()
             lPMap[level][0][0] = 1;
         }
 
+        //Enemies
+        {
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat1.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //0
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat2.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //1
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat3.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //2
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat4.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //3
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat5.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //4
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat6.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //5
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat7.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //6
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat8.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //7
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat9.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //8
+            Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat10.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);   //9
+            //Set identifier to determine if cat
+            for (let allCats = 0; allCats < 10; allCats++)
+            {
+                enemy[5][allCats].cat = true;
+            }
+            //Set one of the cats to have the paper
+            enemy[5][Math.floor(Math.random() * 10)]. hasPaper = true;
+            //Mom
+            Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 20, 5, 8, 0, 800, 32, 600, 1000);
+            enemy[5][10].cat = false;
+        }
+
+
 
         changePStartPos();
 
-
-        l5Ready = false;
         kit.onload = function(){l5Ready=true;};
         waitingForLoad();
 
