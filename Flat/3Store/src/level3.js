@@ -258,6 +258,7 @@ function initializeLV3()
         else
         {
             drawMap();                   //Draw next map
+            turnOnEnemies();
         }
     }
 

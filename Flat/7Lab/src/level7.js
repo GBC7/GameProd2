@@ -184,7 +184,11 @@ function initializeLV7()
         if (!l7Ready)
             setTimeout(level7NotReady, 1);
         else
+        {
             drawMap();
+            turnOnEnemies();
+        }
+
     }
     addEventListener("keydown", onKeyDown, false);
 

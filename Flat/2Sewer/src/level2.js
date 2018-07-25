@@ -550,6 +550,7 @@ function initializeLV2()
         else if (!alreadyBeenHere)
         {
             drawMap();                   //Draw next map
+            turnOnEnemies();
             alreadyBeenHere=true;
         }
     }

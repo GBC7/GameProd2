@@ -3,13 +3,14 @@ let keyPressCount = 0;
 
 function initializeTutorialLV1()
 {
+    turnOnEnemies();
     removeEventListener("keydown", onKeyDown, false);
     dialogText(names[5], TutorialL1[1], "20 px", "white");
     setTimeout(dialogText, 1000);
     dialogText(names[5], TutorialL1[2], "20 px", "white");
     setTimeout(dialogText, 1000);
     dialogText(names[5], TutorialL1[3], "20 px", "white");
-    setTimeout(dialogText, 1000);    
+    setTimeout(dialogText, 1000);
     dialogText(names[5], TutorialL1[4], "20 px", "white");
     setTimeout(startChecks, 1000);
 }

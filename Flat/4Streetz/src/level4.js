@@ -244,6 +244,7 @@ function initializeLV4()
         else
         {
             drawMap();                   //Draw next map
+            turnOnEnemies();
         }
     }
 

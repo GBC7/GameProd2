@@ -123,7 +123,7 @@ function initializeLV6()
 
     alreadyDoinIt = false;
 
-    shinglesBRight.onload = function(){l6Ready=true; enemy[6][0].roam();};
+    shinglesBRight.onload = function(){l6Ready=true;turnOnEnemies();};
     addEventListener("keydown", onKeyDown, false);
 
 

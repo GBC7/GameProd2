@@ -84,8 +84,9 @@ let a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,q,r,s,t,u,v,w,x,y,z,
                 mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
 }//Initializes these to undefined
 
-//Player image & hurt sound
-let scientist = new Image();//   Both defined right
+let catsKicked = 0;
+
+//im guz
 let cane = new Image();
 let disguise = new Image();
 let key = new Image();
@@ -97,10 +98,7 @@ let publishersAddress = new Image();
 let research = new Image();
 let rollerblades = new Image();
 let researchBurnt = new Image();
-let aghh = new Audio;//          below this one.
 {
-    scientist.src = "0Main/images/scientist2.png";
-    aghh.src = ("0Main/audio/aghh.mp3");
     cane.src = "0Main/images/inventory/cane.png";
     disguise.src = "0Main/images/inventory/disguise.png";
     key.src = "0Main/images/inventory/key.png";
@@ -113,6 +111,14 @@ let aghh = new Audio;//          below this one.
     rollerblades.src = "0Main/images/inventory/rollerblades.png";
     researchBurnt.src = "0Main/images/inventory/researchBurnt.png";
 
+}
+
+//Player image & hurt sound
+let scientist = new Image();//   Both defined right
+let aghh = new Audio;//          below this one.
+{
+    scientist.src = "0Main/images/scientist2.png";
+    aghh.src = ("0Main/audio/aghh.mp3");
 }
 
 //Player object
@@ -130,88 +136,109 @@ let p =                                                         //PlayerObject
         srcY: 0,                 //Y location on tile sheet that current player image is coming from
         frameX: 0,                //Counter to use for selecting section of tile sheet based on steps
         frameY: 0,
+        attackSpace: 32
     };
 
 //Sets the timeout period in the walk animation for the player (increasing this number makes the player walk slower)
 let walkingSpeed = 15;
 
-let caneTrigger = false;
+let theyIsOff = false;
+let caneTrigger = true;
 let lighterTrigger = true;
-
-
 
 function startGame()
 {
-    healthInventory();
-    resetSomeThings();//Pauses all sounds when switching levels
+    theyIsOff = false;
+    resetSomeThings();//Pauses all sounds, resets global image variables, turns off all enemy's
 
-    if (l1)//Home(roof)
+    function doTheSwich()// <----------------------------------------------   HEY! .... THE LEVELS ARE IN THIS FUNCTION
     {
-        l1Ready = false;
-        initializeLV1();
-    }
 
-    else if (l2)//Sewer
-    {
-        l2Ready = false;
-        initializeLV2();
-    }
+        if (l1)//Home(roof)
+        {
+            l1Ready = false;
+            initializeLV1();
+        }
 
-    else if (l3)//Clothing Store
-    {
-        l3Ready = false;
-       initializeLV3()
-    }
+        else if (l2)//Sewer
+        {
+            l2Ready = false;
+            initializeLV2();
+        }
 
-    else if (l4)//The Streetz
-    {
-        l4Ready = false;
-        initializeLV4();
-    }
+        else if (l3)//Clothing Store
+        {
+            l3Ready = false;
+            initializeLV3()
+        }
 
-    else if (l5)//Moms House
-    {
-        l5Ready = false;
-        initializeLV5();
-    }
+        else if (l4)//The Streetz
+        {
+            l4Ready = false;
+            initializeLV4();
+        }
 
-    else if (l6)//Roof (Home)
-    {
-        l6Ready = false;
-        l6Ready2 = false;
-        initializeLV6();
-    }
+        else if (l5)//Moms House
+        {
+            l5Ready = false;
+            initializeLV5();
+        }
 
-    else if (l7)//Lab upper level
-    {
-        l7Ready = false;
-        initializeLV7();
-    }
+        else if (l6)//Roof (Home)
+        {
+            l6Ready = false;
+            l6Ready2 = false;
+            initializeLV6();
+        }
 
-    else if (l8)//Lab lower level
-    {
-        l8Ready = false;
-        initializeLV8();
-    }
+        else if (l7)//Lab upper level
+        {
+            l7Ready = false;
+            initializeLV7();
+        }
 
-    else if (l11)//SewerPipe Map
-    {
-        l11Ready = false;
-        initializeLV11();
-    }
+        else if (l8)//Lab lower level
+        {
+            p.attackSpace *= 1.75;
+            l8Ready = false;
+            initializeLV8();
+        }
 
-    else if (l12)//SewerPipe Map
-    {
-        initializeCopterLevel();
+        else if (l11)//SewerPipe Map
+        {
+            l11Ready = false;
+            initializeLV11();
+        }
+
+        else if (l12)//SewerPipe Map
+        {
+            initializeCopterLevel();
+        }
+
     }
 
     function resetSomeThings()
     {
-        //Pause all sounds to ensure they do not continue to play upon emerging into next level
+        //Reset the canvas
         {
+            ctx.clearRect(0, 0, 800, 600);
             canvas.style.backgroundImage = "";
             canvas.style.backgroundPositionX = "0px";
             canvas.style.backgroundPositionY = "0px";
+        }
+
+        //Call inventory function
+        {
+            healthInventory();
+        }
+
+        //Set players attack space back to its usual, in case a level has changed it
+        {
+            p.attackSpace = 32;
+        }
+
+        //Pause all sounds to ensure they do not continue to play upon emerging into next level
+        {
             meow.pause();
             newsReport.pause();
             ratOfDeath.pause();
@@ -231,6 +258,24 @@ function startGame()
             aa = bb = cc = dd = ee = ff = gg = hh = ii = jj = kk = ll = mm = nn = oo = qq = rr = ss = tt = uu =
             vv = ww = xx = yy = zz = aaa = bbb = ccc = ddd = eee = fff = ggg = hhh = iii = jjj = kkk = lll =
             mmm = nnn = ooo = qqq = rrr = sss = ttt = uuu = vvv = www = xxx = yyy = zzz = thingToDraw = undefined;
+        }
+
+        //Turn off all enemies, then load the level (Doing this last because everything should be loaded by this time)
+        {
+            for (let levs = 0; levs < enemy.length; levs++)
+            {
+                for (let ens = 0; ens < enemy[levs].length; ens++)
+                {
+                    enemy[levs][ens].dead = true;
+                }
+
+                //Once they're all off
+                if (levs === (enemy.length - 1))
+                {
+                    //Actually load the level
+                    setTimeout(doTheSwich, 200);//Should be set to the slowest moving enemy's "scurry speed" or slower
+                }
+            }
         }
     }
 }
@@ -581,7 +626,6 @@ function fillErasedMap()
         ctx.fillRect(0, yPos + 96, 800, 600);
         ctx.fillRect(0, 0, xPos - 80, 600);
         ctx.fillRect(0, 0, 800, yPos - 32);
-
     }
 
 
@@ -736,7 +780,11 @@ function drawOMap()//Object Map
                 {
                     switch (lOMap[level][row][col])
                     {
+                        //DO NOT SET 0 or 1 as anything!
                         case 1:
+                            //Do not set any objects to 1 in the lOMap as this is for
+                            // enemy positioning and enemies should not be drawn with
+                            //  this function.
                             break;
                         case 2:
                             if (l2)
@@ -1086,11 +1134,10 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
     {
         if (e === 37 && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
         {
-            removeEventListener("keydown", onKeyDown, false);
-            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
-
             let numOfStairz = 0;                //Create variable to be used for counting stairs
 
+            removeEventListener("keydown", onKeyDown, false);
+            lPMap[level][p.row][p.col] = 0; //Remove the player from the map
             setTimeout(goDownStays2, 120);       //Start animation of going down stairs
 
             function goDownStays2()              //Animates player going down stairs and appearing in previous levels map
@@ -1113,6 +1160,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
 
+
                     waitForLoad();
                 }
             }
@@ -1131,6 +1179,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     drawMap();                   //Draw next map
                 }
             }
+
         }
         if (e === 38 && (p.col === 13 && p.row === 11 && notWalking)
             ||(e === 38 && p.col === 14 && p.row === 11 && notWalking)
@@ -1355,7 +1404,13 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                         startGame();
                         changePStartPos();
                         removeEventListener("keydown", onKeyDown, false);
-                        waitForLoad();
+                        if (alreadyBeenHereL11)
+                        {
+                            setTimeout(emerge, 120);
+                            drawMap();
+                        }
+                        else
+                            waitForLoad();
 
                         function waitForLoad()
                         {
@@ -1372,8 +1427,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                                 drawMap();
                             }
                         }
-
-
                     }
 
                     function emerge()
@@ -1406,12 +1459,12 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             }
             else
                 CheckConversationAction();
-        }
+        }  //Go through the pipe to l11 (second sewer map)
 
         if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
         {   //To check if character is in area where he isn't supposed to be when the light is off
             CheckConversationAction();
-        }
+        }   //
     }
 
     else if (l3)//If it's Lvl 3
@@ -1834,8 +1887,10 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 {
                     level = 7;                              //Change level identifier appropriately
                     l1 = l2 = l3 = l4 = l5 = l6 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
-                    l7 = true;                              //Set the one that is being travelled to to true
+                    l7 = true;//Set the one that is being travelled to to true
+
                     startX[7] = startY[7] = 0;
+
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
@@ -1889,23 +1944,8 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     startGame(0);
                     sizer = 10;
                     removeEventListener("keydown", onKeyDown, false);
-                    waitToLoad();
-                    function waitToLoad()
-                    {
-                        if (!l2Ready)
-                        {
-                            ctx.fillStyle = '#ffffff';
-                            ctx.font="20px Arial";
-                            ctx.fillText("Loading...", 350, 290);
-                            setTimeout(waitToLoad, 10);
-                        }
-                        else
-                        {
-                            setTimeout(crawlOut, 80);
-                            drawMap(0);
-                        }
-                    }
-
+                    setTimeout(crawlOut, 80);
+                    drawMap(0);
                 }
 
                 function crawlOut()//crawl out the other side
@@ -2009,6 +2049,8 @@ function onKeyDown(e)
     {
         ctx.drawImage(floorClean, 22*32, 7*32);
     }
+
+
     if (e.keyCode === 37)//Left
     {
         if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
@@ -2544,6 +2586,7 @@ function onKeyDown(e)
         startGame();                                //Load settings and assets for next map
     }
 
+    drawZeeEnemy();
     healthInventory();
 }
 
@@ -2841,21 +2884,10 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 1][p.col - 1] = 1;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 1][p.col - 1] = 2;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
             if (l11)
             {
                 lMap[level][p.row + 1][p.col - 1] = 4;//Change that tile to a floor tile
                 keyFound = true;
-
             }
         }
     }
@@ -2863,16 +2895,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 1][p.col + 1] = 1;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 1][p.col + 1] = 2;//Change that tile to a floor tile
-                checkIfRightPaper();
-            }
             if (l11)
             {
                 lMap[level][p.row + 1][p.col + 1] = 4;//Change that tile to a floor tile
@@ -2884,16 +2906,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row][p.col] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row][p.col] = 1;//Change that tile to a floor tile
-                keyFound = true;
-            }
-            if (l5)
-            {
-                lMap[level][p.row][p.col] = 2;//Change that tile to a floor tile
-                keyFound = true;
-            }
             if (l11)
             {
                 lMap[level][p.row][p.col] = 4;//Change that tile to a floor tile
@@ -2905,16 +2917,6 @@ function checkFloorObjects(e)//For picking something up when walking over it
     {
         if (lMap[level][p.row + 2][p.col] === floorObjects[level])
         {
-            if (l4)
-            {
-                lMap[level][p.row + 2][p.col] = 1;//Change that tile to a floor tile
-                keyFound = true;
-            }
-            if (l5)
-            {
-                lMap[level][p.row + 2][p.col] = 2;//Change that tile to a floor tile
-                keyFound = true;
-            }
             if (l11)
             {
                 lMap[level][p.row + 2][p.col] = 4;//Change that tile to a floor tile
@@ -2922,19 +2924,9 @@ function checkFloorObjects(e)//For picking something up when walking over it
             }
         }
     }
-
-
-    function checkIfRightPaper()
-    {
-        //code in here will check if the player picked up the right piece of paper
-    }
-
-
 }
 
-
 //Space bar actions
-
 function checkActions()//Gets called when pressing space
 {
     if (l1)
@@ -2943,7 +2935,7 @@ function checkActions()//Gets called when pressing space
         {
             arcadeNoise.play();
         }
-        if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
+        else if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
         {
 
             let shelFrames = 0;
@@ -2990,6 +2982,8 @@ function checkActions()//Gets called when pressing space
                 }
             }
         }
+        else
+            checkAttackSelect();
     }
 
     else if (l2)
@@ -3014,15 +3008,14 @@ function checkActions()//Gets called when pressing space
                 setTimeout(dialogInitialize, 3000);
             }
         }
-
-        if (p.frameY === 3)//Looking up
+        else if (p.frameY === 3)//Looking up
         {
             if (lOMap[level][p.row] !== undefined && lOMap[level][p.row][p.col] !== undefined)
                 if (lOMap[level][p.row][p.col] === 2)//If torch is located here
                 {
                     checkForTorches(0,0);
                 }
-            if (p.row === 15 && p.col === 1)//Under lever
+            else if (p.row === 15 && p.col === 1)//Under lever
             {
                 let leverDown = new Image();
                 leverDown.src = "2Sewer/images/leverDown.png";
@@ -3036,8 +3029,9 @@ function checkActions()//Gets called when pressing space
                     drawMap(0);
                     ctx.drawImage(scientist, p.srcX, p.srcY, 32, 48, p.col * 32, p.row * 32, 32, 48);
                 };
-
             }
+            else
+                    checkAttackSelect();
         }
         else if (p.frameY === 2)//Looking Right
         {
@@ -3046,6 +3040,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(-1, -1);
                 }
+                else
+                    checkAttackSelect();
         }
         else if (p.frameY === 1)//Looking Left
         {
@@ -3054,6 +3050,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(1, -1);
                 }
+                else
+                    checkAttackSelect();
         }
         else if (p.frameY === 0)//Looking Down
         {
@@ -3062,6 +3060,8 @@ function checkActions()//Gets called when pressing space
                 {
                     checkForTorches(0,-2);
                 }
+                else
+                    checkAttackSelect();
         }
 
         function checkForTorches(x, y)
@@ -3112,7 +3112,7 @@ function checkActions()//Gets called when pressing space
             lMap[level][6][5] = 16;
             drawMap();
         }
-        if (!rightDoorOpen && p.row === 7 && p.col === 20)
+        else if (!rightDoorOpen && p.row === 7 && p.col === 20)
         {
             if (findPasscode)
             {
@@ -3131,7 +3131,7 @@ function checkActions()//Gets called when pressing space
         }
 
         //Disguise
-        if (!findDisguise &&
+        else if (!findDisguise &&
             ((p.row === 9 && p.col === 10) || (p.row === 9 && p.col === 12) || (p.row === 9 && p.col === 14) || (p.row === 9 && p.col === 15) ||
                 (p.row === 11 && p.col === 11) || (p.row === 11 && p.col === 12) || (p.row === 11 && p.col === 14) || (p.row === 11 && p.col === 16) ||
                 (p.row === 13 && p.col === 10) || (p.row === 13 && p.col === 11) || (p.row === 13 && p.col === 14) || (p.row === 13 && p.col === 16) ||
@@ -3142,7 +3142,7 @@ function checkActions()//Gets called when pressing space
             dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-        if (!findDisguise && p.row === 15 && p.col === 18)
+        else if (!findDisguise && p.row === 15 && p.col === 18)
         {
 
             dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
@@ -3151,13 +3151,13 @@ function checkActions()//Gets called when pressing space
         }
 
         //Pass code
-        if (!findPasscode && p.row ===2 && p.col ===1)
+        else if (!findPasscode && p.row ===2 && p.col ===1)
         {
             dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findPasscode = true;
         }
-        if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
+        else if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
         {
             dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
@@ -3165,13 +3165,13 @@ function checkActions()//Gets called when pressing space
 
 
         //Rollerblades
-        if (!findRollerblades && p.row === 5 && p.col === 20)
+        else if (!findRollerblades && p.row === 5 && p.col === 20)
         {
             dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findRollerblades = true;
         }
-        if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
+        else if (!findRollerblades && ((p.row === 5 && p.col === 21) || (p.row === 5 && p.col === 23) || (p.row === 5 && p.col === 24) ||
             (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
             (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
         {
@@ -3180,12 +3180,12 @@ function checkActions()//Gets called when pressing space
         }
 
         //Map
-        if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
+        else if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
         {
             dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
-        if (findMap === false && p.row === 15 && p.col === 5)
+        else if (findMap === false && p.row === 15 && p.col === 5)
         {
             dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
@@ -3194,124 +3194,27 @@ function checkActions()//Gets called when pressing space
 
 
         //Found all
-        if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
+        else if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
         {
             dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
-        if (findDisguise && findRollerblades && findMap)
+        else if (findDisguise && findRollerblades && findMap)
         {
             findAllLevel3 = true;
             lMap[level][0][10] = 24;
             lMap[level][0][11] = 25;
             drawMap();
         }
-    }
-
-    else if (l4)
-    {
-        // Check for rocks
-        if (p.frameY === 3)//Looking up
-        {
-            //If the space above contains a rock
-            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
-            if (lMap[level][p.row][p.col] === 53 || (lMap[level][p.row][p.col] === 54))
-            {
-                rock.play();
-
-                if (lMap[level][p.row - 1][p.col] === 1)
-                    lMap[level][p.row - 1][p.col] = 4;
-            }
-        }
-        else if (p.frameY === 2)//Looking Right
-        {
-            //If the space to the right contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
-            if (lMap[level][p.row + 1][p.col + 1] === 53 || (lMap[level][p.row + 1][p.col + 1] === 54))
-            {
-
-                rock.play();
-                if (lMap[level][p.row + 1][p.col + 2] === 1)
-                    lMap[level][p.row + 1][p.col + 2] = 4;
-            }
-        }
-        else if (p.frameY === 1)//Looking Left
-        {
-            //If the space to the left contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
-            if (lMap[level][p.row + 1][p.col - 1] === 53 || (lMap[level][p.row + 1][p.col - 1] === 54)) {
-                rock.play();
-                if (lMap[level][p.row + 1][p.col - 2] === 1)
-                    lMap[level][p.row + 1][p.col - 2] = 4;
-            }
-        }
-        else if (p.frameY === 0)//Looking Down
-        {
-            //If the space below contains a rock
-            if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if (lMap[level][p.row + 2][p.col] === 53 || (lMap[level][p.row + 2][p.col] === 54)) {
-                    rock.play();
-                    if (lMap[level][p.row + 3][p.col] === 1)
-                        lMap[level][p.row + 3][p.col] = 4;
-                }
-        }
-        // ChangeNeeded
+        else
+            checkAttackSelect();
     }
 
     else if (l5)
     {
-        // Check for cats
-        if (p.frameY === 3)//Looking up
-        {
-            //If the space above contains a rock
-            if (lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)
-                if (lMap[level][p.row][p.col] === 3 ||  (lMap[level][p.row][p.col] > 13 && lMap[level][p.row][p.col] < 19 && lMap[level][p.row][p.col] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row-1][p.col] === 1)
-                        lMap[level][p.row-1][p.col] = 4;
-                }
-        }
-        else if (p.frameY === 2)//Looking Right
-        {
-            //If the space to the right contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)
-                if (lMap[level][p.row + 1][p.col + 1] === 3 ||  (lMap[level][p.row + 1][p.col + 1] > 13 && lMap[level][p.row + 1][p.col + 1] < 19 && lMap[level][p.row + 1][p.col + 1] !== 14))
-                {
-
-                    meow.play();
-                    if (lMap[level][p.row + 1][p.col + 2] === 1)
-                        lMap[level][p.row + 1][p.col + 2] = 4;
-                }
-        }
-        else if (p.frameY === 1)//Looking Left
-        {
-            //If the space to the left contains a rock
-            if (lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)
-                if (lMap[level][p.row + 1][p.col - 1] === 3 ||  (lMap[level][p.row + 1][p.col - 1] > 13 && lMap[level][p.row + 1][p.col - 1] < 19 && lMap[level][p.row + 1][p.col - 1] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row + 1][p.col - 2] === 1)
-                        lMap[level][p.row + 1][p.col - 2] = 4;
-                }
-        }
-        else if (p.frameY === 0)//Looking Down
-        {
-            //If the space below contains a rock
-            if (lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)
-                if  (lMap[level][p.row + 2][p.col] === 3 ||  (lMap[level][p.row + 2][p.col] > 13 && lMap[level][p.row + 2][p.col] < 19 && lMap[level][p.row + 2][p.col] !== 14))
-                {
-                    meow.play();
-                    if (lMap[level][p.row + 3][p.col] === 1)
-                        lMap[level][p.row + 3][p.col] = 4;
-                }
-        }
-
-        fillErasedMap();
-        drawPMap();
-
-        // ChangeNeeded
+        //Add piano interaction
+        checkAttackSelect();
     }
 
     else if (l7)
@@ -3325,8 +3228,11 @@ function checkActions()//Gets called when pressing space
                 let trashFire = new Image();
                 trashFire.src = "7Lab/images/trash-fire.png";
                 k = trashFire;
-                fillErasedMap();
-                drawPMap();
+                trashFire.onload = function()
+                {
+                    fillErasedMap();
+                    drawPMap();
+                };
             }
 
             if (!researchPaper)
@@ -3372,6 +3278,9 @@ function checkActions()//Gets called when pressing space
             dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
+
+        else
+            checkAttackSelect();
     }
 
     else if (l8)
@@ -3428,9 +3337,230 @@ function checkActions()//Gets called when pressing space
             // DialogNeeded
             // Thought bubble saying "I have to close the window first"
         }
+        else
+            checkAttackSelect();
     }
 
     healthInventory();
+}
+
+function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
+{
+    for (let enem = 0; enem < enemy[level].length; enem++)
+    {
+
+        //Check if an NPC is within range of attack/selection
+        switch (p.frameY)
+        {
+            case 0://Down
+                if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide)
+                    if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
+                        doAllChecks();
+                break;
+            case 1://Left
+                if (enemy[level][enem].rightSide < p.col * 32 + p.width && enemy[level][enem].leftSide >= p.col * 32 - p.attackSpace)
+                    if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
+                        doAllChecks();
+                break;
+            case 2://Right
+                if (enemy[level][enem].leftSide > p.col * 32 && enemy[level][enem].rightSide <= p.col * 32 + p.width + p.attackSpace)
+                    if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
+                        doAllChecks();
+                break;
+            case 3://Up
+                if ((enemy[level][enem].bottomSide < ((p.row * 32) + p.height)) && (enemy[level][enem].topSide > ((p.row * 32) - p.attackSpace)))
+                    if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
+                        doAllChecks();
+                break;
+        }
+
+        /////////////////////
+        // ** Main Part ** //
+        //-----------------//
+        //     | | |       //
+        //     v v v       //
+        /////////////////////
+
+        //If so, check what to do based on the level and or type of enemy
+        function doAllChecks()
+        {
+            //If the NPC is an enemy
+            if (!enemy[level][enem].dead  && !enemy[level][enem].destroyed && enemy[level][enem].hostile && !l5)
+            {
+                //Destroy the enemy
+                goneThem();
+            }
+            //If the NPC is a cat
+            else if (l5)
+            {
+                //Check cats for objects and check if mother is feral
+                level5Checks();
+            }
+        }
+
+        /////////////////////
+        //     ^ ^ ^       //
+        //     | | |       //
+        //-----------------//
+        // ** Main Part ** //
+        /////////////////////
+
+        //Destroy enemies
+        function goneThem()
+        {
+            //Play attack sound
+
+            //Set enemy to dead so it stops its recursive roam function
+            enemy[level][enem].dead = true;
+            //Set enemy to destroyed so it does not set dead to true again upon level re-entry
+            enemy[level][enem].destroyed = true;
+            //Draw map after giving the enemy the exact amount of time it should need to finish its current action
+            setTimeout(drawMap, enemy[level][enem].scurrySpeed);
+        }
+        //Check cats for objects and check if mother is feral
+        function level5Checks()
+        {
+            if (enemy[level][enem].cat)
+            {
+                catsKicked++;
+                meow.play();
+
+                //If the NPC is the cat that has the publishers paper
+                if (enemy[level][enem].hasPaper && !publishersPaper)
+                {
+                    let thisX = Math.round(enemy[level][enem].xPos / 32);
+                    let thisY = Math.round(enemy[level][enem].yPos / 32) + Math.floor(enemy[level][enem].height/32);
+
+                    if (lMap[level][thisY] !== undefined && lMap[level][thisY][thisX] !== undefined && lMap[level][thisY][thisX] === 2)
+                        lMap[level][thisY][thisX] = 40;//Change that tile to a floor tile
+                    /*publishersPaper = true;*/
+                }
+
+                if (catsKicked === 3)
+                {
+                    //Set mom as hostile, triple her speed, and give her full vision of the map
+                    enemy[level][enemy[level].length - 1].hostile = true;
+                    enemy[level][enemy[level].length - 1].fov = 100;
+                    enemy[level][enemy[level].length - 1].rangeOV = 100;
+                    enemy[level][enemy[level].length - 1].sighted = true;
+                }
+            }
+        }
+    }
+}
+
+function turnOnEnemies()
+{
+    for (let num = 0; num < enemy[level].length; num++)
+    {
+        if (!enemy[level][num].destroyed)
+        {
+            enemy[level][num].roam();
+        }
+    }
+}
+
+function healthInventory()
+{
+
+    let characterImage = new Image();
+    characterImage.src = "0Main/images/Portrait_Scientist.png";
+    ctx3.drawImage(characterImage, 4, 470, 105, 110);
+
+    let hearts = new Image();
+
+
+    ctx3.font = "30px Arial";
+    ctx3.fillStyle = "red";
+    ctx3.fillText("Lives: " + p.lives, 10, 55);
+
+    hearts.src = "0Main/images/heart.png";
+
+    ctx.clearRect(10, 75, 112, 82);//Clear hearts
+    switch (p.health)
+    {
+        case 6:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            ctx3.drawImage(hearts, 50, 125, 32, 32);
+            ctx3.drawImage(hearts, 90, 125, 32, 32);
+            break;
+        case 5:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            ctx3.drawImage(hearts, 50, 125, 32, 32);
+            break;
+        case 4:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            ctx3.drawImage(hearts, 10, 125, 32, 32);
+            break;
+        case 3:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            ctx3.drawImage(hearts, 90, 75, 32, 32);
+            break;
+        case 2:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            ctx3.drawImage(hearts, 50, 75, 32, 32);
+            break;
+        case 1:
+            ctx3.drawImage(hearts, 10, 75, 32, 32);
+            break;
+    }
+
+
+    if(lighterTrigger === true)
+    {
+        ctx3.drawImage(lighter, 15, 202, 40, 32);
+    }
+    if(keyFound)
+    {
+        ctx3.drawImage(key, 67, 200, 32, 32);
+    }
+    if(findPasscode)
+    {
+        ctx3.drawImage(passcode, 15, 254, 32, 32);
+    }
+    if(findDisguise)
+    {
+        ctx3.drawImage(disguise, 63, 254, 32, 32);
+    }
+    if(findRollerblades)
+    {
+        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
+    }
+    if(findMap)
+    {
+        ctx3.drawImage(mapV, 63, 306, 32, 32);
+    }
+    if(caneTrigger === true)
+    {
+        ctx3.drawImage(cane, 15, 358, 32, 32);
+    }
+    if(publishersPaper)
+    {
+        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
+    }
+    if(researchPaper)
+    {
+        ctx3.drawImage(research, 15, 410, 32, 32);
+    }
+    if(lighterFluid)
+    {
+        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+    }
+    if(researchBurned)
+    {
+        ctx.clearRect(10, 409, 100, 35);
+        ctx3.drawImage(research, 15, 410, 32, 32);
+    }
+
 
 }
 
@@ -3482,7 +3612,6 @@ function resetLevel(time = 40)
 
         //Set level to reload and redraw itself
         l2Ready = false;
-        alreadyBeenHere = false;
     }
     else if (l3)
     {
@@ -3516,6 +3645,7 @@ function resetLevel(time = 40)
         clearLevel3();
         ctx.clearRect(0,0,800,600);
     }
+
     else if (l7 || l8)
     {
         //Reset lock and key features
@@ -3553,7 +3683,7 @@ function gameover()
 {
     removeEventListener("keydown", onKeyDown, false);
     ctx.clearRect(0,0,800,600);
-    canvas.style.backgroundImage = "url('../images/abomb.gif')";
+    canvas.style.backgroundImage = "url('0Main/images/abomb.gif')";
 
 
     //Game over blinker counter & display function
@@ -3585,115 +3715,5 @@ function gameover()
     }
 }
 
-
-function healthInventory()
-{
-
-    let characterImage = new Image();
-    characterImage.src = "0Main/images/Portrait_Scientist.png";
-    ctx3.drawImage(characterImage, 4, 470, 105, 110);
-
-    let hearts = new Image();
-    hearts.src = "0Main/images/heart.png";
-
-    if(p.health === 6)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-        ctx3.drawImage(hearts, 50, 75, 32, 32);
-        ctx3.drawImage(hearts, 90, 75, 32, 32);
-        ctx3.drawImage(hearts, 10, 125, 32, 32);
-        ctx3.drawImage(hearts, 50, 125, 32, 32);
-        ctx3.drawImage(hearts, 90, 125, 32, 32);
-
-    }
-    else if(p.health === 5)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-        ctx3.drawImage(hearts, 50, 75, 32, 32);
-        ctx3.drawImage(hearts, 90, 75, 32, 32);
-        ctx3.drawImage(hearts, 10, 125, 32, 32);
-        ctx3.drawImage(hearts, 50, 125, 32, 32);
-
-    }
-    else if(p.health === 4)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-        ctx3.drawImage(hearts, 50, 75, 32, 32);
-        ctx3.drawImage(hearts, 90, 75, 32, 32);
-        ctx3.drawImage(hearts, 10, 125, 32, 32);
-
-    }
-    else if(p.health === 3)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-        ctx3.drawImage(hearts, 50, 75, 32, 32);
-        ctx3.drawImage(hearts, 90, 75, 32, 32);
-
-    }
-    else if(p.health === 2)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-        ctx3.drawImage(hearts, 50, 75, 32, 32);
-
-    }
-    else if(p.health === 1)
-    {
-        ctx3.drawImage(hearts, 10, 75, 32, 32);
-    }
-
-    ctx3.font = "30px Arial";
-    ctx3.fillStyle = "red";
-    ctx3.fillText("Lives: " + p.lives, 10, 55);
-
-    if(lighterTrigger === true)
-    {
-        ctx3.drawImage(lighter, 15, 202, 40, 32);
-    }
-    if(keyFound === true)
-    {
-        ctx3.drawImage(key, 67, 200, 32, 32);
-    }
-    if(findPasscode === true)
-    {
-        ctx3.drawImage(passcode, 15, 254, 32, 32);
-    }
-    if(findDisguise === true)
-    {
-        ctx3.drawImage(disguise, 63, 254, 32, 32);
-    }
-    if(findRollerblades === true)
-    {
-        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
-    }
-    if(findMap === true)
-    {
-        ctx3.drawImage(mapV, 63, 306, 32, 32);
-    }
-    if(caneTrigger === true)
-    {
-        ctx3.drawImage(cane, 15, 358, 32, 32);
-    }
-    if(publishersPaper === true)
-    {
-        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
-    }
-    if(researchPaper === true)
-    {
-        ctx3.drawImage(research, 15, 410, 32, 32);
-    }
-    if(lighterFluid === true)
-    {
-        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
-    }
-    if(researchBurned === true)
-    {
-        ctx.clearRect(10, 409, 100, 35);
-        ctx3.drawImage(research, 15, 410, 32, 32);
-    }
-
-
-}
-
 //Needs to be last so we know that the computer has had time to read through all scripts all the way
 scriptsLoaded = true;
-

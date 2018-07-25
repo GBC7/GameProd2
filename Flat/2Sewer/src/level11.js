@@ -184,7 +184,7 @@ function initializeLV11()
     }
 
     changePStartPos();
-    pipeInWallB.onload = function(){l11Ready = true;};
+    pipeInWallB.onload = function(){l11Ready = true;turnOnEnemies();};
 
     addEventListener("keydown", onKeyDown, false);
     notWalking = true;

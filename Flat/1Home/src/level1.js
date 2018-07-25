@@ -315,7 +315,6 @@ function initializeLV1()
             drawMap();                   //Draw next map
             initializeTutorialLV1();
             addEventListener("keydown", onKeyDown, false);
-            // enemy[1][0].roam();
         }
     }
 
