@@ -17,18 +17,28 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="743">
-              <caret line="40" column="25" lean-forward="true" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+            <state relative-caret-position="192">
+              <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="credit.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Flat/credit.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-779">
-              <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+            <state relative-caret-position="19">
+              <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -37,8 +47,8 @@
       <file leaf-file-name="enemies.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="8571" column="0" lean-forward="true" selection-start-line="8571" selection-start-column="0" selection-end-line="8571" selection-end-column="0" />
+            <state relative-caret-position="2489">
+              <caret line="8571" column="0" lean-forward="false" selection-start-line="8571" selection-start-column="0" selection-end-line="8571" selection-end-column="0" />
               <folding>
                 <element signature="e#890#41872#0" expanded="false" />
                 <element signature="e#42239#83094#0" expanded="false" />
@@ -118,6 +128,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -129,19 +140,12 @@
             <path>
               <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
               <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GameProd2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GameProd2" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
-              <item name="Src" type="462c0819:PsiDirectoryNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -181,11 +185,12 @@
       <workItem from="1532112666378" duration="14000" />
       <workItem from="1532186036912" duration="706000" />
       <workItem from="1532527634031" duration="290000" />
+      <workItem from="1532545310577" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1662000" />
+    <option name="totallyTimeSpent" value="1714000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="118" y="11" width="1797" height="985" extended-state="0" />
@@ -223,6 +228,51 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="40" column="25" lean-forward="true" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162849">
+          <caret line="8571" column="0" lean-forward="true" selection-start-line="8571" selection-start-column="0" selection-end-line="8571" selection-end-column="0" />
+          <folding>
+            <element signature="e#890#41872#0" expanded="false" />
+            <element signature="e#42239#83094#0" expanded="false" />
+            <element signature="e#83345#125936#0" expanded="false" />
+            <element signature="e#126192#171368#0" expanded="false" />
+            <element signature="e#171623#216775#0" expanded="false" />
+            <element signature="e#217030#262182#0" expanded="false" />
+            <element signature="e#262437#307589#0" expanded="false" />
+            <element signature="e#307844#352996#0" expanded="false" />
+            <element signature="e#353262#392012#0" expanded="false" />
+            <element signature="e#392257#433817#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/3Store/src/level3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -289,8 +339,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/enemies.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="8571" column="0" lean-forward="true" selection-start-line="8571" selection-start-column="0" selection-end-line="8571" selection-end-column="0" />
+        <state relative-caret-position="2489">
+          <caret line="8571" column="0" lean-forward="false" selection-start-line="8571" selection-start-column="0" selection-end-line="8571" selection-end-column="0" />
           <folding>
             <element signature="e#890#41872#0" expanded="false" />
             <element signature="e#42239#83094#0" expanded="false" />
@@ -310,22 +360,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-817">
           <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="16" column="35" lean-forward="false" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="743">
-          <caret line="40" column="25" lean-forward="true" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="25" />
+        <state relative-caret-position="192">
+          <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
+    <entry file="file://$PROJECT_DIR$/Flat/credit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-779">
-          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+        <state relative-caret-position="173">
+          <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding />
         </state>
       </provider>
