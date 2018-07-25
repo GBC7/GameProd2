@@ -93,6 +93,8 @@ function initializeLV1()
     let tvTR = new Image();
     let tvBL = new Image();
     let tvBR = new Image();
+    let couchL = new Image();
+    let couchR = new Image();
 
 
 
@@ -162,6 +164,8 @@ function initializeLV1()
         tvTR.src = "1Home/images/tvTR.png";
         tvBL.src = "1Home/images/tvBL.png";
         tvBR.src = "1Home/images/tvBR.png";
+        couchL.src = "1Home/images/couchL.png";
+        couchR.src = "1Home/images/couchR.png";
     }//Define SRC property of images
 
 
@@ -232,6 +236,8 @@ function initializeLV1()
         nnn = tvTR;                         //63
         ooo = tvBL;                         //64
         qqq = tvBR;                         //65
+        rrr = couchL;                       //66
+        sss = couchR;                       //67
 
 
     }//Assign images to global letter variables
@@ -262,7 +268,7 @@ function initializeLV1()
                 [ 0,  0,  0, 40, 41, 42, 43,  0,  0,  0,  0,  0,  0,  0,  0, 64,  65,  0,  0,  0, 28, 29, 30,  0,  0],       //14
                 [ 0,  0,  0, 44, 45, 46, 48,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 31, 32, 33,  0,  0],       //15
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //16
-                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //17
+                [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 66, 67,  0,  0,  0,  0,  0,  0,  0,  0],       //17
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //18
             ];
     }
