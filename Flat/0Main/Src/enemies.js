@@ -35,7 +35,7 @@ function createEnemies()
         //Aaaaand a few examples....
 
         //L1
-        Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600);
+        Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600, undefined);
 
         /*//L2
         for (let rats = 0; rats !== 10; rats ++)
@@ -1897,7 +1897,6 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
             //Main function .. creates a secondary global function in its setup function
             roam: function ()
             {
-                console.log("well shit..");
                 let self = this;
 
                 if (!this.setup)
@@ -2747,10 +2746,6 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                                 //Set the number to be removed from the array after their timeout period
                                 setTimeout(resetIsWaiting, self.attackTimeout)
                             }
-                            else
-                            {
-                                console.log("waiting to attack");
-                            }
 
                             function resetIsWaiting()
                             {
@@ -2943,7 +2938,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
 
                         //Draw new position
-                        drawIt();
+                        if (!self.dead)
+                            drawIt();
                         if (stepsLeft < numOfStepsLeft - 1 && !self.dead)
                         {
                             if (checkIfOk2(37))
@@ -3000,7 +2996,8 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
 
                         //Draw new position
-                        drawIt();
+                        if (!self.dead)
+                            drawIt();
                         if (stepsRight < numOfStepsRight - 1 && !self.dead)
                         {
                             if (checkIfOk2(39))
@@ -3055,7 +3052,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                         updateLRTBSide();
 
                         //Draw new position
-                        drawIt();
+                        if (!self.dead)
+                            drawIt();
+
                         if (stepsDown < numOfStepsDown - 1  && !self.dead)
                         {
                             if (checkIfOk2(40))
@@ -3110,7 +3109,9 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
 
                         //Draw new position
-                        drawIt();
+                        if (!self.dead)
+                            drawIt();
+
                         if (stepsUp < numOfStepsUp - 1  && !self.dead)
                         {
                             if (checkIfOk2(38))
@@ -3150,7 +3151,7 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
 
                     for (let mR = ((self.yPos - remainY) / 32) - 2; mR < ((self.yPos - remainY) / 32) + 4; mR++) //Run through all that would have been erased
                     {
-                        for (let mC = ((self.xPos - remainX) / 32) - 2; mC < ((self.xPos - remainX) / 32) + 3; mC++)//Run through all columns that would have been erased
+                        for (let mC = ((self.xPos - remainX) / 32) - 2; mC < ((self.xPos - remainX) / 32) + 4; mC++)//Run through all columns that would have been erased
                         {
 
                             if (lMap[level][mR] !== undefined && lMap[level][mR][mC] !== undefined)//If the space being examined exists
@@ -3481,8 +3482,6 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         let isNewPosition = true, cannotGoHere = false;
 
         let theX = thisEnemy.xPos/32, theY = thisEnemy.yPos/32;//Used to compare tiles
-        console.log("theX = " + theX);
-        console.log("theY = " + theY);
 
         //Check to make sure that the position the enemy is landing in doesn't have any environment objects
         if (lMap[lvl] !== undefined && lMap[lvl][theY] !== undefined && lMap[lvl][theY][theX] !== undefined)//Left
@@ -3552,7 +3551,6 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
         //If not.. make sure no other enemy has been placed here
         else
         {
-            console.log("pushed");
             for (let thisOne = 0; thisOne < enemy[lvl].length; thisOne ++)
             {
                 if (thisEnemy.xPos === enemy[lvl][thisOne].xPos)

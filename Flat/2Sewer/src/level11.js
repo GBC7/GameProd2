@@ -6,8 +6,6 @@ function initializeLV11()
 {
     canvas.style.backgroundImage = "";
 
-
-
     let valveTl = new Image();
     let valveTm = new Image();
     let valveTr = new Image();
@@ -46,8 +44,6 @@ function initializeLV11()
 
 
     {
-
-
         valveTm.src = "2Sewer/images/valveTm.png";
         valveTl.src = "2Sewer/images/valveTl.png";
         valveTr.src = "2Sewer/images/valveTr.png";
@@ -83,11 +79,6 @@ function initializeLV11()
         sidewaysBarrelFloor.src = "2Sewer/images/sidewaysBarrel.png";
         pipeInWallT.src = "2Sewer/images/pipewwallnfloorT.png";
         pipeInWallB.src = "2Sewer/images/pipewwallnfloorB.png";
-
-
-
-
-
     }//Defining images src properties
 
 
@@ -131,7 +122,6 @@ function initializeLV11()
         mm = sidewaysBarrelFloor;   //37
         nn = pipeInWallT;           //38
         oo = pipeInWallB;           //39
-
     }//Assigning images to global variables
 
 
@@ -147,7 +137,7 @@ function initializeLV11()
             [ 24,  25,  26,  37,  33,  34,  35,   4,  37,  24,  25,  26,  37,  30,  31,  32,   4,  37,  33,  34,  35,   4,  19,  20,  21],
             [ 36,  27,  28,  29,   4,  16,  17,  18,  36,  36,   3,   3,   4,  33,  34,  35,  37,   4,   3,   3,   4,  37,  24,  25,  26],
             [  3,  30,  31,  32,  37,  19,  20,  21,   4,   3,   3,   3,   3,   3,   4,   3,   4,   4,   3,   4,  37,   4,   4,   3,   3],
-            [  4,  33,  34,  35,   3,  24,  25,  26,   4,   3,   3,   3,  15,   4,   4,   3,   4,   4,   4,  36,  36,  36,  36,  36,  36],
+            [  4,  33,  34,  35,   3,  24,  25,  26,   4,   3,   3,   3,   3,   4,   4,   3,   4,   4,   4,  36,  36,  36,  36,  36,  36],
             [ 27,  28,  29,   3,   4,   4,   4,   3,   4,   4,   4,   4,   4,   3,   4,   4,   3,   4,   4,   4,   3,  27,  28,  29,   3],
             [ 30,  31,  32,   3,   4,   3,   3,   4,   3,   4,   3,   3,   3,   3,   4,   4,   3,   3,   3,   4,   3,  30,  31,  32,   3],
             [ 33,  34,  35,   3,   3,   3,   4,   4,   3,   4,   3,   3,   3,   4,   4,   4,   3,   3,   4,   3,   3,  33,  34,  35,   4],
@@ -158,16 +148,12 @@ function initializeLV11()
             [  3,  19,  20,  21,   3,   3,   3,   3,   4,   3,   4,   4,   4,   3,   3,   3,   4,   4,   3,   4,   3,   3,  16,  17,  18],
             [  3,  24,  25,  26,   4,   4,   4,   3,   3,   3,   3,   3,   4,   3,   4,   3,   4,   3,   4,   4,   3,   3,  19,  20,  21],
             [  3,   3,   3,  37,   3,   3,   3,   4,   4,   4,   4,   3,  14,   4,   3,   4,   4,   4,   4,   3,   4,   3,  24,  25,  26]
-
-      ]
-
+      ];
+        Enemy(true, 96, 96, 4, 2, "2Sewer/images/bossRat.png", 4, 180, 120, 11, 8, 0, 800, 96, 600, 500);
+        enemy[11][0].xPos = 400; enemy[11][0].yPos = 400;
     }
 
-    if (!keyFound)
-        lMap[level][8][12] = 15;//Key
-
     lMap[level][18][12] = 14;//PipeTopView
-
 
     if (lPMap[level] === undefined)
     {
@@ -184,7 +170,13 @@ function initializeLV11()
     }
 
     changePStartPos();
-    pipeInWallB.onload = function(){l11Ready = true;turnOnEnemies();};
+
+    pipeInWallB.onload = function()
+    {
+        l11Ready = true;
+        drawMap();
+        turnOnEnemies();
+    };
 
     addEventListener("keydown", onKeyDown, false);
     notWalking = true;

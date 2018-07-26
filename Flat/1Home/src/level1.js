@@ -294,7 +294,7 @@ function initializeLV1()
     changePStartPos();
 
 
-    tvBR.onload = function(){l1Ready=true;};
+    couchR.onload = function(){l1Ready=true;};
     waitForLoading2();
 
 
@@ -314,6 +314,15 @@ function initializeLV1()
         {
             drawMap();                   //Draw next map
             /*initializeTutorialLV1();*/
+
+            ////////////////
+            // ** TEMP ** //
+            ////////////////
+            turnOnEnemies();
+            ////////////////
+            // ** TEMP ** //
+            ////////////////
+
             addEventListener("keydown", onKeyDown, false);
         }
     }
