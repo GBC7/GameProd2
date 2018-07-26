@@ -1,6 +1,6 @@
 let heliCanvas, ctx2, left, down, right, up, climbing, chopper, chicken, helo, startBuilding, angle, rotAngle, climbSpeed, canvasX,
     canvasY, checkMoving, tutorialPart, distanceTravelled, tutSpeed, helaIntro, leftAndRight, upAndDown, whew, tutTurns,
-    tutClimb, tutFall, pilotHadTo, doneTheTut, chickens;
+    tutClimb, tutFall, pilotHadTo, doneTheTut, chickens, canvPosY;
 
 let pigs = new Image();
 pigs.src = "12Helo/images/FlyingPig.png";
@@ -23,7 +23,6 @@ function initializeCopterLevel()
         {
             //Get reference to that second canvas
             heliCanvas = document.getElementById("HeloCanvas");
-
 
             //Setup its context to use with helicopter image
             ctx2 = heliCanvas.getContext("2d");
@@ -60,6 +59,9 @@ function initializeCopterLevel()
 
             //Current Angle
             angle = 0;
+
+            //Canvas start pos
+            canvPosY = 120;
 
             //Amount the helicopter rotates by when rotating .. not when not rotating
             rotAngle = 2.5;
@@ -163,6 +165,7 @@ function initializeCopterLevel()
                         function fall()
                         {
                             canvasY += self.fallSpeed;
+
                             moveCanvas(canvasX, canvasY);
                             drawTheChopper();
 
@@ -493,6 +496,8 @@ function start()
                 tutTurns = setInterval(rotatingTut, 10);
             }
         }
+        canvas.style.backgroundRepeat = "repeat-x";
+        canvas.style.backgroundPositionX = (-distanceTravelled) + "px";
 
 
         //Temp event listeners
@@ -700,7 +705,7 @@ function start()
                         if (canvasY !== 21)
                         {
                             canvasY -= (climbSpeed * Math.cos(angle * Math.PI / 180));
-                            moveCanvas(canvasX, canvasY);
+                            (canvasX, canvasY);
                             chopper.drawIt();
                             setTimeout(pilotTakesControl, 10);
                         }
@@ -868,6 +873,7 @@ function makeItMove()
     {
         canvasY -= climbSpeed * Math.cos(angle * Math.PI / 180);
         canvasX += climbSpeed * Math.sin(angle * Math.PI / 180);
+
         moveCanvas(canvasX, canvasY);
         chopper.drawIt();
 
@@ -1104,6 +1110,8 @@ function moveCanvas(x, y)
     //This looks like it does something important
     heliCanvas.style.left = x + "px";
     heliCanvas.style.top = y + "px";
+
+    canvas.style.backgroundPositionY = canvPosY + "px";
 }
 
 //Event listeners
