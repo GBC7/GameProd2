@@ -134,7 +134,8 @@ DialogLevel12 =
 
 //level3 Dialogue text
 DialogLevel3 = [
-    ["Hey, a clothing store! Lucky the sewer’s staircase leads here. \nClosed mid-day too. Not odd at all.. Time to find a disguise."]
+    ["I'm going to need to look for some sort of disguise, a map and something that will help me get away a little quicker..."],
+    ["Looks like there's a few stragglers walking passed the windows every once in a while. I better make sure I don't move when they're walking by."]
 ];
 
 
