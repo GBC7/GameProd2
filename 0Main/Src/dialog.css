@@ -17,10 +17,11 @@
 
 #name
 {
-    margin-left: 160px;
-    font-size: 25px;
+    margin-left: 165px;
+    font-size: 30px;
     color : white;
     margin-top:3px;
+    margin-bottom: 0;
 
 }
 
@@ -29,4 +30,6 @@
     margin-left: 160px;
     font-size: 20px;
     color : white;
+    margin-top:5px;
+    margin-bottom: 0;
 }
