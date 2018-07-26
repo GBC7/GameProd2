@@ -39,6 +39,7 @@ function initializeLV7()
     let screen = new Image();
     let screenLeft = new Image();
     let screenRight = new Image();
+    let trashFire = new Image();
 
 
     {
@@ -71,6 +72,7 @@ function initializeLV7()
         screen.src = "7Lab/images/screen.png";
         screenLeft.src = "7Lab/images/screen-left.png";
         screenRight.src = "7Lab/images/screen-right.png";
+        trashFire.src = "7Lab/images/trash-fire.png"
     }
 
     {
@@ -92,7 +94,15 @@ function initializeLV7()
             i = fullShelvesTop;		// 8
             j = fullShelvesBottom;	// 9
         }
-        k = trash;				// 10
+
+        if (researchBurned)
+        {
+        		k = trashFire; 		// 10
+        }
+        else
+        {
+        	k = trash; 			// 10
+        }
         l = wire;				// 11
         m = table;				// 12
         n = tableBlood; 		// 13
@@ -174,7 +184,11 @@ function initializeLV7()
         if (!l7Ready)
             setTimeout(level7NotReady, 1);
         else
+        {
             drawMap();
+            turnOnEnemies();
+        }
+
     }
     addEventListener("keydown", onKeyDown, false);
 

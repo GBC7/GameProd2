@@ -33,6 +33,8 @@ let shrub = new Image();
 
 function initializeLV6()
 {
+    canvas.style.backgroundPositionX = "0px";
+    canvas.style.backgroundPositionY = "120px";
     canvas.style.backgroundImage = "url('6Roof/images/city.gif')";
     drawL6Full();
 
@@ -121,7 +123,7 @@ function initializeLV6()
 
     alreadyDoinIt = false;
 
-    shinglesBRight.onload = function(){l6Ready=true;};
+    shinglesBRight.onload = function(){l6Ready=true;turnOnEnemies();};
     addEventListener("keydown", onKeyDown, false);
 
 

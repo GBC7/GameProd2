@@ -242,9 +242,13 @@ function detectMovementLevel3()
     {
         //initial set
         warningSound.play();
-        enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
-        enemy[3][enemyIndexLevel3].roam();
-        drawZeeEnemy();
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy1.png", 4, 180, 60, 3, 8, 200, 500, 50, 600);
+        createEnemies();
+        enemy[3][enemy[3].length-1].roam();
+
+        //enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
+        //enemy[3][enemyIndexLevel3].roam();
+        //drawZeeEnemy();
         enemyIndexLevel3++;
 
         // add mob, start timer again. alert is temp msg.

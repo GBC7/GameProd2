@@ -179,21 +179,23 @@ DialogLevel12 = [
 
 //Tutorial text
 TutorialL1[0] = "";
-TutorialL1[1] = "Welcome to Survive the Mob.  Let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
-TutorialL1[2] = "Now up.";
-TutorialL1[3] = "Great!\nNow try interacting with me, the butler, as I walk around the screen by pressing the space bar.";
-TutorialL1[4] = "Does that look like me?  Or even a person for that face? Try again.";
-TutorialL1[5] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
-TutorialL1[6] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
-TutorialL1[7] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
-TutorialL1[8] = "Now right.";
-TutorialL1[9] = "Now down.";
+TutorialL1[1] = "Welcome Sir...let me get you up to speed on what has happened since you laid down for your nap.";
+TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world is flat needed to be published.";
+TutorialL1[3] = "I know, I know...Grave mistake.  Now the local population is in an uproar and is out to kill you.";
+TutorialL1[4] = "Just in case you don't remember how to walk around or interact with things, let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
+TutorialL1[5] = "Now right.";
+TutorialL1[6] = "Now up.";
+TutorialL1[7] = "Now down.";
+TutorialL1[8] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
+TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
+TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
+TutorialL1[11] = "Does that look like me?  Or even a person for that face? Try again.";
 
 
 
 function dialogInitialize() {  //clear dialogue
-    CharacterName.innerText = names[0];
-    DialogText.innerText = " ";
+    CharacterName.innerHTML = names[0];
+    DialogText.innerHTML = " ";
     CharacterPortrait.style.backgroundImage = portrait[0];
     DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
@@ -205,8 +207,8 @@ function dialogText(n, t, fs, fc){
     // can use array for n and t
     // fs and fc are supposed to be "number px" or "name of color"
 
-    CharacterName.innerText = n;
-    DialogText.innerText = t;
+    CharacterName.innerHTML = n;
+    DialogText.innerHTML = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
     DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
@@ -256,9 +258,9 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
         currentSpeaker = sn2;
         speakerPortrait = sp2;
     }
-    CharacterName.innerText = currentSpeaker;
+    CharacterName.innerHTML = currentSpeaker;
     CharacterPortrait.style.backgroundImage = speakerPortrait;
-    DialogText.innerText = d[dialogIndex];
+    DialogText.innerHTML = d[dialogIndex];
 
     DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
     dialogIndex++;
@@ -281,10 +283,6 @@ function CheckConversationAction() {
         else if (p.row === 11 && p.col === 9 && p.frameY === 1 && !lightsOn)
         {
             //Better light this place up first
-        }
-        else if (p.row === 7 && p.col === 21 && p.frameY === 3 && !keyFound)
-        {
-            //Doors locked ... wonder if there's a key down here
         }
     }
 

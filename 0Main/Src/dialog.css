@@ -1,7 +1,7 @@
 
 #dialog
 {
-    width: 800px;
+    width: 960px;
     height: 162px;
     margin: 4px auto;
     background-image: none;
@@ -17,19 +17,17 @@
 
 #name
 {
-    margin-left: 165px;
-    font-size: 30px;
+    margin-left: 160px;
+    font-size: 25px;
     color : white;
     margin-top:3px;
-    margin-bottom: 0;
 
 }
 
 #output
 {
+    width: 630px;
     margin-left: 160px;
     font-size: 20px;
     color : white;
-    margin-top:5px;
-    margin-bottom: 0;
 }
