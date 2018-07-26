@@ -1,7 +1,7 @@
 //LV5
 
 let publishersPaper = false;
-
+let catWithPaper = undefined;
 
 
 //Sounds
@@ -217,8 +217,10 @@ function initializeLV5 ()
             {
                 enemy[5][allCats].cat = true;
             }
+
+            catWithPaper = Math.floor(Math.random() * 10);
             //Set one of the cats to have the paper
-            enemy[5][Math.floor(Math.random() * 10)]. hasPaper = true;
+            enemy[5][catWithPaper]. hasPaper = true;
             //Mom
             Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 20, 5, 8, 0, 800, 32, 600, 1000);
             enemy[5][10].cat = false;
