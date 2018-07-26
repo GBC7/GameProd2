@@ -89,12 +89,13 @@ function initializeLV1()
     let stairsB1 = new Image();
     let stairsB2 = new Image();
     let stairsB3 = new Image();
+    let couchL = new Image();
+    let couchR = new Image();
     let tvTL = new Image();
     let tvTR = new Image();
     let tvBL = new Image();
     let tvBR = new Image();
-    let couchL = new Image();
-    let couchR = new Image();
+
 
 
 
@@ -160,12 +161,13 @@ function initializeLV1()
         stairsB1.src = "1Home/images/stairsB1.png";
         stairsB2.src = "1Home/images/stairsB2.png";
         stairsB3.src = "1Home/images/stairsB3.png";
+        couchL.src = "1Home/images/couchL.png";
+        couchR.src = "1Home/images/couchR.png";
         tvTL.src = "1Home/images/tvTL.png";
         tvTR.src = "1Home/images/tvTR.png";
         tvBL.src = "1Home/images/tvBL.png";
         tvBR.src = "1Home/images/tvBR.png";
-        couchL.src = "1Home/images/couchL.png";
-        couchR.src = "1Home/images/couchR.png";
+
     }//Define SRC property of images
 
 
@@ -294,7 +296,7 @@ function initializeLV1()
     changePStartPos();
 
 
-    couchR.onload = function(){l1Ready=true;};
+    tvBR.onload = function(){l1Ready=true;};
     waitForLoading2();
 
 
