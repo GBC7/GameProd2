@@ -160,7 +160,10 @@ function startGame(dontDrawP)
         if (l1)//Home(roof)
         {
             l1Ready = false;
-            initializeLV1();
+            if (lMap[2] === undefined)
+                initializeLV1();
+            else
+                initializeLV1();
         }
 
         else if (l2)//Sewer
