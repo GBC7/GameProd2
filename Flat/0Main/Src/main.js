@@ -144,8 +144,8 @@ let p =                                                         //PlayerObject
 let walkingSpeed = 15;
 let droppedPaper = false;
 let theyIsOff = false;
-let caneTrigger = true;
-let lighterTrigger = true;
+let caneTrigger = false;
+let lighterTrigger = false;
 
 function startGame(dontDrawP)
 {
@@ -665,14 +665,12 @@ function waitForLoading(dontDrawP)
                 drawMap();
 
                 ////TEMP////
-                turnOnEnemies();
+                /*turnOnEnemies();*/
                 ////TEMP////
 
                 //// PERM /////
-                //initializeTutorialLV1();
+                initializeTutorialLV1();
                 //// PERM /////
-
-                addEventListener("keydown", onKeyDown, false);
             }
             break;
         case 2:
@@ -849,7 +847,7 @@ function drawPMap()//Player Map
             if (p.col === 10 && p.row === 0)
             {
                 waterRunning.volume = 0.5;
-                dialogText(names[1], SystemMSGLevel2[3], "20 px", "white");
+                dialogText(names[1], DialogLevel2[3], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
             else
@@ -1376,7 +1374,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     p.frameY = 0;
                     p.srcY = 0;
                 }
-                console.log(p.srcY);
 
 
                 if (stepsDown < 13)
@@ -2779,7 +2776,7 @@ function checkBoundaries(e)//Gets called each step
             let shivers = 0;
             removeEventListener("keydown", onKeyDown, false);
 
-            dialogText(names[1], SystemMSGLevel2[2], "20 px", "white");
+            dialogText(names[1], DialogLevel2[2], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
 
             if (!alreadyShivering)
@@ -2885,7 +2882,7 @@ function checkActions()//Gets called when pressing space
         {
             arcadeNoise.play();
         }
-        else if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered)
+        else if (p.col === 5 && p.row === 10 && p.frameY === 3 && !uncovered && lighterTrigger)
         {
 
             let shelFrames = 0;
@@ -2954,7 +2951,7 @@ function checkActions()//Gets called when pressing space
             {
                 //Play locked door sound
                 lockedDoor.play();
-                dialogText(names[1], SystemMSGLevel2[4], "20 px", "white");
+                dialogText(names[1], DialogLevel2[4], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
         }
@@ -3074,7 +3071,7 @@ function checkActions()//Gets called when pressing space
             }
             else
             {
-                dialogText(names[1], SystemMSGLevel3[7], "20 px", "white");
+                dialogText(names[1], DialogLevel3[7], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
                 lockedDoor.play();
             }
@@ -3089,13 +3086,13 @@ function checkActions()//Gets called when pressing space
                 (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
                 (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
         {
-            dialogText(names[1], SystemMSGLevel3[3], "20 px", "white");
+            dialogText(names[1], DialogLevel3[4], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
         else if (!findDisguise && p.row === 15 && p.col === 18)
         {
 
-            dialogText(names[1], SystemMSGLevel3[4], "20 px", "white");
+            dialogText(names[1], DialogLevel3[3], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findDisguise = true;
         }
@@ -3103,13 +3100,13 @@ function checkActions()//Gets called when pressing space
         //Pass code
         else if (!findPasscode && p.row ===2 && p.col ===1)
         {
-            dialogText(names[1], SystemMSGLevel3[5], "20 px", "white");
+            dialogText(names[1], DialogLevel3[6], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findPasscode = true;
         }
         else if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
         {
-            dialogText(names[1], SystemMSGLevel3[6], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
@@ -3117,7 +3114,7 @@ function checkActions()//Gets called when pressing space
         //Rollerblades
         else if (!findRollerblades && p.row === 5 && p.col === 20)
         {
-            dialogText(names[1], SystemMSGLevel3[8], "20 px", "white");
+            dialogText(names[1], DialogLevel3[8], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findRollerblades = true;
         }
@@ -3125,19 +3122,19 @@ function checkActions()//Gets called when pressing space
             (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
             (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
         {
-            dialogText(names[1], SystemMSGLevel3[9], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
         //Map
         else if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
         {
-            dialogText(names[1], SystemMSGLevel3[10], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
         else if (findMap === false && p.row === 15 && p.col === 5)
         {
-            dialogText(names[1], SystemMSGLevel3[11], "20 px", "white");
+            dialogText(names[1], DialogLevel3[2], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
@@ -3146,7 +3143,7 @@ function checkActions()//Gets called when pressing space
         //Found all
         else if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
         {
-            dialogText(names[1], SystemMSGLevel3[12], "20 px", "white");
+            dialogText(names[1], DialogLevel3[10], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
@@ -3192,18 +3189,18 @@ function checkActions()//Gets called when pressing space
 
             if (!researchPaper)
             {
-                dialogText(names[1], SystemMSGLevel7[2], "20 px", "white");
+                dialogText(names[1], DialogLevel7[1], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
             else if (!lighterFluid && researchPaper)
             {
-                dialogText(names[1], SystemMSGLevel7[3], "20 px", "white");
+                dialogText(names[1], DialogLevel7[3], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
             else if (lighterFluid && researchPaper)
             {
                 researchBurned = true;
-                dialogText(names[1], SystemMSGLevel7[4], "20 px", "white");
+                dialogText(names[1], DialogLevel7[4], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
         }
@@ -3224,13 +3221,13 @@ function checkActions()//Gets called when pressing space
             fillErasedMap();
             drawPMap();
 
-            dialogText(names[1], SystemMSGLevel7[1], "20 px", "white");
+            dialogText(names[1], DialogLevel7[1], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
         else if (p.row === 17 && p.col === 19 && !researchBurned)
         {
-            dialogText(names[1], SystemMSGLevel7[5], "20 px", "white");
+            dialogText(names[1], DialogLevel7[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
@@ -3314,10 +3311,8 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             case 0://Down
                 if (p.row * 32 <  enemy[level][enem].topSide && (p.row * 32 + p.height + p.attackSpace) >= enemy[level][enem].topSide)
                 {
-                    console.log("1true");
                     if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
                     {
-                        console.log("2true");
                         doAllChecks();
                     }
                 }
@@ -3325,10 +3320,8 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             case 1://Left
                 if (enemy[level][enem].rightSide < p.col * 32 + p.width && enemy[level][enem].leftSide >= p.col * 32 - p.attackSpace)
                 {
-                    console.log("1true");
                     if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
                     {
-                        console.log("2true");
                         doAllChecks();
                     }
                 }
@@ -3336,10 +3329,8 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             case 2://Right
                 if (enemy[level][enem].leftSide > p.col * 32 && enemy[level][enem].rightSide <= p.col * 32 + p.width + p.attackSpace)
                 {
-                    console.log("1true");
                     if ((enemy[level][enem].bottomSide >= (p.row * 32 + (p.height/2))) && (enemy[level][enem].topSide <= (p.row * 32 + (p.height/2))))
                     {
-                        console.log("2true");
                         doAllChecks();
                     }
                 }
@@ -3347,10 +3338,8 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
             case 3://Up
                 if ((enemy[level][enem].bottomSide < ((p.row * 32) + p.height)) && (enemy[level][enem].topSide > ((p.row * 32) - p.attackSpace)))
                 {
-                    console.log("1true");
                     if ((enemy[level][enem].rightSide >= (p.col * 32 + (p.width/2))) && (enemy[level][enem].leftSide <= (p.col * 32 + (p.width/2))))
                     {
-                        console.log("2true");
                         doAllChecks();
                     }
                 }
@@ -3636,11 +3625,8 @@ function resetLevel(time = 40)
     //Your level should look exactly how it looks when you first emerge into it after calling this function
     //  unless it's been called 3 times already, in which case you'll see the gameOver screen (nuclear explosion GIF)
 
-    if (l1)
-    {
 
-    }
-    else if (l2)
+    if (l2)
     {
         //Turn the water back on and the lights back off
         sewersDrained = false;
@@ -3661,9 +3647,6 @@ function resetLevel(time = 40)
 
         //Reset players health
         p.health = 6;
-
-        //Set level to reload and redraw itself
-        l2Ready = false;
     }
     else if (l3)
     {
@@ -3733,13 +3716,8 @@ function resetLevel(time = 40)
 
     function resetTheEnsArray()//Pull the enemies out of the array so that we can put them back in
     {
-        for (let theEns = 0; theEns < enemy[level].length; theEns++)
-        {
-            enemy[level].pop();
-
-            if (theEns === enemy[level].length - 1 && p.lives !== 0)
-                putEmBack()
-        }
+            enemy[level] = [];
+            putEmBack();
     }
     function putEmBack()
     {

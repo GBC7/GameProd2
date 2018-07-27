@@ -305,6 +305,7 @@ function initializeLV1()
     waitForLoading();//Universal.. ish
 
 
+
     //dialogText(names[3], DialogNews[1], "20 px", "white");
     //setTimeout(dialogInitialize, 3000);
 }

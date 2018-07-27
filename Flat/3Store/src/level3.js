@@ -94,8 +94,7 @@ bgm_level3.volume = 0.2;
 dangerous.loop = true;
 dangerous.volume = 0.2;
 
-
-let warningTime = Math.floor(Math.random() * 20 + 10); // generate time to move 5~20
+let warningTime = Math.floor(Math.random() * 20 + 15); // generate time to move 15~20
 let findingTime = Math.floor(Math.random() * 10 + 5);  // generate time to wait 5~10
 
 function initializeLV3()
@@ -104,7 +103,10 @@ function initializeLV3()
     bgm_level3.play();
     if(findAllLevel3 === false){
         dialogText(names[1],DialogLevel3[0], "20 px", "white");
-        setTimeout(dialogInitialize, 5000);
+        setTimeout(function(){
+                dialogText(names[1],DialogLevel3[1], "20 px", "white");}
+            , 4000);
+        setTimeout(dialogInitialize, 8000);
     }
 
 
@@ -261,9 +263,12 @@ function detectMovementLevel3()
     {
         //initial set
         warningSound.play();
-        enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
-        enemy[3][enemyIndexLevel3].roam();
-        drawZeeEnemy();
+        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy1.png", 4, 180, 60, 3, 8, 200, 500, 50, 600);
+        enemy[3][enemy[3].length-1].roam();
+
+        //enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
+        //enemy[3][enemyIndexLevel3].roam();
+        //drawZeeEnemy();
         enemyIndexLevel3++;
 
         // add mob, start timer again. alert is temp msg.

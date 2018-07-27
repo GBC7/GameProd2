@@ -104,21 +104,27 @@ DialogNews[1] = "Last night we received a tip from a source who wishes to remain
 //Tutorial text
 TutorialL1[0] = "";
 TutorialL1[1] = "Welcome Sir...let me get you up to speed on what has happened since you laid down for your nap.";
-TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world is flat needed to be published.";
+TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world being flat needed to be published.";
 TutorialL1[3] = "I know, I know...Grave mistake.  Now the local population is in an uproar and is out to kill you.";
 TutorialL1[4] = "Just in case you don't remember how to walk around or interact with things, let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
 TutorialL1[5] = "Now right.";
 TutorialL1[6] = "Now up.";
 TutorialL1[7] = "Now down.";
-TutorialL1[8] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
+TutorialL1[8] = "Now try interacting with the arcade game directly above you.  Use space bar to do that.";
 TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
 TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
+TutorialL1[11] = "Some of the angry mob has somehow made their way to the roof. Fortunately the previous owners mentioned there was a secret entrance to the sewer somewhere around here.";
+TutorialL1[12] = "Feel free to walk around. Come on over and take this lighter when you're ready to set out.";
 
 
 //level1 Dialogue text
 DialogLevel1[0] = "";
 DialogLevel1[1] = "Sir...You should watch the TV.  There is something you should see."; //Butler to Scientist
 DialogLevel1[2] = "Mother!"; //Scientist
+DialogLevel1[3] = "You know how she can be, Sir."; //Butler to Scientist
+DialogLevel1[4] = "I need to get to her house to get that publisher's address."; //Scientist
+DialogLevel1[5] = "You can't take the helicopter, Sir.  There is a mob of people on the roof at the moment.  You could try to find the secret passage out of the house that the previous owner put in one of the bookcases.";  //Butler to Scientist
+DialogLevel1[6] = "Sir, take this lighter.  You may need it for light down there."; //Butler to Scientist
 
 /*    ["Hey son. I don’t know if you’ve heard yet, I called a publisher about that evidence you discovered.",
         "Ya, no sh**. Thanks for the heads up.",
@@ -126,6 +132,11 @@ DialogLevel1[2] = "Mother!"; //Scientist
         "I can’t talk right now mom, I have to go destroy the evidence."]
 ];*/
 
+DialogLevel2[0] = " "; //initial value
+DialogLevel2[1] = "Wow....its so dark in here. Thank god for the lighter from Jeffery.  There has to be some way to brighten it up in here.";
+DialogLevel2[2] = "Ahhhhh! What is that?! I better light this place up first!";
+DialogLevel2[3] = "The water is too powerful...Maybe there is a way to turn it off.";
+DialogLevel2[4] = "Damn! It's locked!";
 
 
 //level3 Dialogue text
@@ -140,6 +151,8 @@ DialogLevel3[7] = "It's locked...";
 DialogLevel3[8] = "Rollerblades?! I guess these will work...";
 DialogLevel3[9] = "It's locked...";
 DialogLevel3[10] = "I can't leave yet...I need supplies to make it past the mob!";
+DialogLevel3[11] = "I heard something.  The mob is trying to open the window.";
+DialogLevel3[12] = "The mob is looking into the store.  I better not move or they will see me.";
 
 
 
@@ -148,9 +161,14 @@ DialogLevel5[0] = "";
 DialogLevel5[1] = "Mom....*panting*....where did you put the address to the Publisher?,"; //Scientist to Mom
 DialogLevel5[2] = "What?! Why are you here?";                                             //Mom to Scientist
 DialogLevel5[3] = "Are you serious? I just rollerbladed across town in a disguise because you decided that 'My Work' just had to be published!"; //Scientist to Mom
-DialogLevel5[4] = "Well...my baby deserves recognition. But if you insist.  The address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
-DialogLevel5[5] = "Remind me which cat that is?"; //Scientist to Mom
-DialogLevel5[6] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
+DialogLevel5[4] = "Well...my baby deserves recognition. And I only gave him a copy.  I gave the originals to your assistant."; //Mom to Scientist
+DialogLevel5[5] = "I told the publisher not to publish the story.  But he is anyways.  If you insist on stopping him, the address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
+DialogLevel5[6] = "Remind me which cat that is?"; //Scientist to Mom
+DialogLevel5[7] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
+DialogLevel5[8] = "There it is...but you can't rollerblade all the way to the lab.  You are going to have to take the helicopter.";  //Mom to Scientist
+DialogLevel5[9] = "There are people on my roof or I would have flown here already and not rollerbladed across town."; //Scientist to Mom
+DialogLevel5[10] = "Here...Take my cane.  You can use it as a weapon."; //Mom to Scientist
+DialogLevel5[11] = "Thank you.  Guess I am heading back home to get the helicopter."; //Scientist ***Leave
 
 
 //level6 Dialogue text
@@ -172,11 +190,11 @@ DialogLevel7[8] = "Good thing I still have the copy that your mother gave me."; 
 DialogLevel7[9] = "Give that to me!"; //Scientist to Publisher ***FIGHT!
 
 //level8 Dialogue text
-DialogLevel8[0] = "";
-DialogLevel8[1] = "Yes! That's it! I found lighter fluid.";
-DialogLevel8[2] = "No....not here";
-DialogLevel8[3] = "Now where did my assistant put the research?  Maybe I should check in the Main Lab.";
-
+DialogLevel8[1] = "Why is the window open?! I better close it before the mob sees me in here!";
+DialogLevel8[2] = "Yes! That's it! I found lighter fluid.";
+DialogLevel8[3] = "No....not here";
+DialogLevel8[4] = "Now where did my assistant put the research?  Maybe I should check in the Main Lab.";
+DialogLevel8[5] = "If I go this way, the mob will see.";
 
 
 
@@ -206,8 +224,8 @@ DialogLevel12 = [
 
 
 function dialogInitialize() {  //clear dialogue
-    CharacterName.innerText = names[0];
-    DialogText.innerText = " ";
+    CharacterName.innerHTML = names[0];
+    DialogText.innerHTML = " ";
     CharacterPortrait.style.backgroundImage = portrait[0];
     DialogBG.style.backgroundImage = "none";
     DialogText.style.fontSize = "20px";
@@ -219,8 +237,8 @@ function dialogText(n, t, fs, fc){
     // can use array for n and t
     // fs and fc are supposed to be "number px" or "name of color"
 
-    CharacterName.innerText = n;
-    DialogText.innerText = t;
+    CharacterName.innerHTML = n;
+    DialogText.innerHTML = t;
     DialogText.style.fontSize = fs;
     DialogText.style.color = fc;
     DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
@@ -270,9 +288,9 @@ function Conversation(d, sn1, sp1, sn2, sp2) {
         currentSpeaker = sn2;
         speakerPortrait = sp2;
     }
-    CharacterName.innerText = currentSpeaker;
+    CharacterName.innerHTML = currentSpeaker;
     CharacterPortrait.style.backgroundImage = speakerPortrait;
-    DialogText.innerText = d[dialogIndex];
+    DialogText.innerHTML = d[dialogIndex];
 
     DialogBG.style.backgroundImage = "url('0Main/images/dialogueBG.png')";
     dialogIndex++;
