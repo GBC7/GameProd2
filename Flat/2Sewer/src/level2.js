@@ -265,7 +265,7 @@ function initializeLV2()
 
     if (!lightsOn)
     {
-        dialogText(names[1], SystemMSGLevel2[1], "20 px", "white");
+        dialogText(names[1], DialogLevel2[1], "20 px", "white");
         setTimeout(dialogInitialize, 5000);
     }
 

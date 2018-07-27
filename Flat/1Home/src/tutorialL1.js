@@ -36,7 +36,7 @@ function leftCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[5], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -47,7 +47,7 @@ function rightCheck(e)
         onKeyDown(e);//Move Right
 
         //New dialog message
-        dialogText(names[5], TutorialL1[2], "20 px", "white");
+        dialogText(names[5], TutorialL1[6], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", rightCheck, false);
@@ -56,7 +56,7 @@ function rightCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[5], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -67,7 +67,7 @@ function upCheck(e)
         onKeyDown(e);//Move Up
 
         //New dialog message
-        dialogText(names[5], TutorialL1[9], "20 px", "white");
+        dialogText(names[5], TutorialL1[7], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", upCheck, false);
@@ -77,7 +77,7 @@ function upCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[5], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -88,7 +88,7 @@ function downCheck(e)
         onKeyDown(e);//Move Down
 
         //New dialog message
-        dialogText(names[5], TutorialL1[5], "20 px", "white");
+        dialogText(names[5], TutorialL1[8], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", downCheck, false);
@@ -97,7 +97,7 @@ function downCheck(e)
     else
     {
         //Incorrect input dialog
-        dialogText(names[5], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 }
 
@@ -112,7 +112,7 @@ function checkWalk(e)//Allow player to walk up to the arcade game
     else
     {
         //Incorrect input dialog
-        dialogText(names[5], TutorialL1[7], "20 px", "white");
+        dialogText(names[5], TutorialL1[10], "20 px", "white");
     }
 
     if(keyPressCount === 6)
@@ -130,7 +130,7 @@ function spaceObjectCheck(e)//Allow player to select the arcade game
         onKeyDown(e);//Will call check actions
 
         //New dialog message
-        dialogText(names[5], TutorialL1[3], "20 px", "white");
+        dialogText(names[5], TutorialL1[9], "20 px", "white");
 
         //Move on
         removeEventListener("keydown", spaceObjectCheck, false);
