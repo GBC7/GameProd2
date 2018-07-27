@@ -1647,6 +1647,12 @@ function Enemy(canAttack, wid, hei, fOV, range, imgPath, hFrames, regSpeed, runS
                     self.leftSide = self.xPos;
                     self.rightSide = self.xPos + self.width;
                     self.bottomSide = self.yPos + self.height;
+
+                    if (l3)
+                    {
+                        enemyPosX[self.indexNum] = self.xPos;
+                        enemyPosY[self.indexNum] = self.yPos;
+                    }
                 }
 
                 //Set last position for erasing map

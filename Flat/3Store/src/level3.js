@@ -13,49 +13,7 @@ let enemyAppearLevel3 = false;
 let detectPlayerLevel3 = false;
 let enemyIndexLevel3 = 0; //global variable
 
-/*
-
-let enemyLevel3 = function(row, col) {
-    this.row = row;
-    this.col = col;
-    this.width = 32;
-    this.height = 64;
-    this.sw = 1;
-    // add enemy property if need
-};
-
-let enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10;
-{
-    enemy1 = new enemyLevel3(0, 6);
-    enemy2 = new enemyLevel3(1, 6);
-    enemy3 = new enemyLevel3(2, 6);
-    enemy4 = new enemyLevel3(3, 6);
-    enemy5 = new enemyLevel3(6, 6);
-    enemy6 = new enemyLevel3(7, 0);
-    enemy7 = new enemyLevel3(9, 6);
-    enemy8 = new enemyLevel3(11, 7);
-    enemy9 = new enemyLevel3(13, 0);
-    enemy10 = new enemyLevel3(15, 0);
-}
-
-let enemiesLevel3 = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8, enemy9, enemy10];
-let enemyArr = [];
-
-enemiesLevel3[0] = clothingStoreEnemy1;
-enemiesLevel3[1] = clothingStoreEnemy2;
-enemiesLevel3[2] = clothingStoreEnemy3;
-enemiesLevel3[3] = clothingStoreEnemy4;
-enemiesLevel3[4] = clothingStoreEnemy5;
-enemiesLevel3[5] = clothingStoreEnemy6;
-enemiesLevel3[6] = clothingStoreEnemy7;
-enemiesLevel3[7] = clothingStoreEnemy8;
-enemiesLevel3[8] = clothingStoreEnemy9;
-enemiesLevel3[9] = clothingStoreEnemy10;
-
-*/
-
-
-
+let enemyPosX = [], enemyPosY = [];
 
 
 
@@ -263,8 +221,10 @@ function detectMovementLevel3()
     {
         //initial set
         warningSound.play();
-        Enemy(true, 32, 48, 3, 1, "6Roof/images/roofEnemy1.png", 4, 180, 60, 3, 8, 200, 500, 50, 600);
+        Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 120, 40, 3, 8, 200, 500, 50, 600, 1000);
+        enemy[3][enemy[3].length-1].yPos = 0; enemy[3][enemy[3].length-1].xPos = 320;
         enemy[3][enemy[3].length-1].roam();
+
 
         //enemy[3].push(enemiesLevel3[enemyIndexLevel3]);
         //enemy[3][enemyIndexLevel3].roam();
@@ -319,7 +279,7 @@ function appearEnemy()
     {
         bgm_level3.pause();
         dangerous.play();
-        dialogText(names[1], SystemMSGLevel3[1] + warningTime + " second later!", "25px", "red");
+        dialogText(names[1], DialogLevel3[11] + ".. better hold still!", "25px", "red");
 
     }
     else if (warningTime === 0) {

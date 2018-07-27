@@ -6,7 +6,7 @@ let DialogBG = document.getElementById("dialog");
 let dialogIndex = 0;
 let tog = 2;
 
-let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler"];  //Speaker's name, [0] is initial value
+let names = [" ", "Scientist", "Mom", "News Anchor", "Pilot", "Butler", "GAME OVER"];  //Speaker's name, [0] is initial value
 let portrait = [];
 portrait[0] = "none";
 portrait[1] = "url('0Main/images/Portrait_Scientist.png')";
@@ -14,7 +14,6 @@ portrait[2] = "url('0Main/images/Portrait_Mom.png')";
 portrait[3] = "url('0Main/images/Portrait_newsanchor.png')";
 portrait[4] = "url('0Main/images/Portrait_Pilot.png')";
 portrait[5] = "url('0Main/images/Portrait_Butler.png')";
-
 
 let SystemMSGLevel1 = [];
 let SystemMSGLevel2 = [];
@@ -26,6 +25,7 @@ let SystemMSGLevel7 = [];
 let SystemMSGLevel8 = [];
 
 let DialogNews = [];
+let DialogLevel0 = [];
 let DialogLevel1 = [];
 let DialogLevel2 = [];
 let DialogLevel3 = [];
@@ -116,6 +116,8 @@ TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys righ
 TutorialL1[11] = "Some of the angry mob has somehow made their way to the roof. Fortunately the previous owners mentioned there was a secret entrance to the sewer somewhere around here.";
 TutorialL1[12] = "Feel free to walk around. Come on over and take this lighter when you're ready to set out.";
 
+//Game Over
+DialogLevel0[0] = "Press the space bar to restart.";
 
 //level1 Dialogue text
 DialogLevel1[0] = "";
@@ -151,7 +153,7 @@ DialogLevel3[7] = "It's locked...";
 DialogLevel3[8] = "Rollerblades?! I guess these will work...";
 DialogLevel3[9] = "It's locked...";
 DialogLevel3[10] = "I can't leave yet...I need supplies to make it past the mob!";
-DialogLevel3[11] = "I heard something.  The mob is trying to open the window.";
+DialogLevel3[11] = "I hear something... One of the mob members is looking through the window.";
 DialogLevel3[12] = "The mob is looking into the store.  I better not move or they will see me.";
 
 
@@ -266,6 +268,11 @@ function dialogText(n, t, fs, fc){
     else if (n === names[5])
     {
         CharacterPortrait.style.backgroundImage = portrait[5];
+    }
+    else if (n === names[6])//Game over
+    {
+        CharacterPortrait.style.backgroundImage = "url('0Main/images/deadSmiley.jpg')";
+        //don't erase the canvas' background
     }
 
 }

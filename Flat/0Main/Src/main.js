@@ -3625,7 +3625,7 @@ function resetLevel(time = 40)
     //Your level should look exactly how it looks when you first emerge into it after calling this function
     //  unless it's been called 3 times already, in which case you'll see the gameOver screen (nuclear explosion GIF)
 
-
+    ctx3.clearRect(0, 0, 200, 800);
     if (l2)
     {
         //Turn the water back on and the lights back off
@@ -3644,9 +3644,6 @@ function resetLevel(time = 40)
         {
             torchNum[t].lit = false;
         }
-
-        //Reset players health
-        p.health = 6;
     }
     else if (l3)
     {
@@ -3680,7 +3677,10 @@ function resetLevel(time = 40)
         clearLevel3();
         ctx.clearRect(0,0,800,600);
     }
+    else if (l5)
+    {
 
+    }
     else if (l7 || l8)
     {
         //Reset lock and key features
@@ -3708,7 +3708,11 @@ function resetLevel(time = 40)
 
         //If not out of live start the level again
     if (p.lives > 0)
+    {
+        //Reset players health
+        p.health = 6;
         setTimeout(startGame, time);
+    }
         //Otherwise display gameOver screen
     else
         gameover();
@@ -3730,14 +3734,13 @@ function resetLevel(time = 40)
         }
         else if (l3)
         {
-            // to be
-        }
-        else if (l7)
-        {
-            for (let numOf = 0; numOf !== 6; numOf++)
+            //Don't need enemies to re-appear since they appear based on time in the store
+            /*for (let i = 0; i < enemyPosX.length; i++)
             {
-                Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 7, 8, 0, 768, 96, 568, 1000);
-            }
+                Enemy(true, 32, 48, 6, 3, "6Roof/images/roofEnemy1.png", 4, 120, 40, 3, 8, 200, 500, 50, 600, 1000);
+                enemy[3][i].xPos = enemyPosX[i];
+                enemy[3][i].yPos = enemyPosY[i];
+            }*/
         }
         else if (l5)
         {
@@ -3766,6 +3769,13 @@ function resetLevel(time = 40)
             enemy[5][10].cat = false;
 
         }
+        else if (l7)
+        {
+            for (let numOf = 0; numOf !== 6; numOf++)
+            {
+                Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 7, 8, 0, 768, 96, 568, 1000);
+            }
+        }
         else if (l8)
         {
             for (let numOf = 0; numOf !== 6; numOf++)
@@ -3780,9 +3790,12 @@ function resetLevel(time = 40)
 function gameover()
 {
     removeEventListener("keydown", onKeyDown, false);
+    addEventListener("keydown", startOver, false);
     ctx.clearRect(0,0,800,600);
+    canvas.style.backgroundPositionY = "0px";
+    canvas.style.backgroundPositionX = "0px";
     canvas.style.backgroundImage = "url('0Main/images/abomb.gif')";
-
+    dialogText(names[6], DialogLevel0[0], "20 px", "white");
 
     //Game over blinker counter & display function
     let counter = 0;
@@ -3809,6 +3822,15 @@ function gameover()
         {
             ctx.clearRect(0,0,800,600);
             setTimeout(blink, 200);
+        }
+    }
+
+
+    function startOver(e)
+    {
+        if (e.keyCode === 32)
+        {
+            location.reload();
         }
     }
 
