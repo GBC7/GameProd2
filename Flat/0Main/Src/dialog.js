@@ -88,13 +88,14 @@ DialogLevel5[0] = "";
 DialogLevel5[1] = "Mom....*panting*....where did you put the address to the Publisher?,"; //Scientist to Mom
 DialogLevel5[2] = "What?! Why are you here?";                                             //Mom to Scientist
 DialogLevel5[3] = "Are you serious? I just rollerbladed across town in a disguise because you decided that 'My Work' just had to be published!"; //Scientist to Mom
-DialogLevel5[4] = "Well...my baby deserves recognition. But if you insist.  The address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
-DialogLevel5[5] = "Remind me which cat that is?"; //Scientist to Mom
-DialogLevel5[6] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
-DialogLevel5[7] = "There it is...but you can't rollerblade all the way to the lab.  You are going to have to take the helicopter.";  //Mom to Scientist
-DialogLevel5[8] = "There are people on my roof or I would have flown here already and not rollerbladed across town."; //Scientist to Mom
-DialogLevel5[9] = "Here...Take my cane.  You can use it as a weapon."; //Mom to Scientist
-DialogLevel5[10] = "Thank you.  Guess I am heading back home to get the helicopter."; //Scientist ***Leave
+DialogLevel5[4] = "Well...my baby deserves recognition. And I only gave him a copy.  I gave the originals to your assistant."; //Mom to Scientist
+DialogLevel5[5] = "I told the publisher not to publish the story.  But he is anyways.  If you insist on stopping him, the address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
+DialogLevel5[6] = "Remind me which cat that is?"; //Scientist to Mom
+DialogLevel5[7] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
+DialogLevel5[8] = "There it is...but you can't rollerblade all the way to the lab.  You are going to have to take the helicopter.";  //Mom to Scientist
+DialogLevel5[9] = "There are people on my roof or I would have flown here already and not rollerbladed across town."; //Scientist to Mom
+DialogLevel5[10] = "Here...Take my cane.  You can use it as a weapon."; //Mom to Scientist
+DialogLevel5[11] = "Thank you.  Guess I am heading back home to get the helicopter."; //Scientist ***Leave
 
 
 //level6 Dialogue text

@@ -17,8 +17,8 @@
       <file leaf-file-name="dialog.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-204">
-              <caret line="123" column="54" selection-start-line="123" selection-start-column="54" selection-end-line="123" selection-end-column="54" />
+            <state relative-caret-position="153">
+              <caret line="90" column="126" selection-start-line="90" selection-start-column="126" selection-end-line="90" selection-end-column="126" />
               <folding>
                 <element signature="e#8899#9938#0" />
                 <element signature="e#9985#10721#0" />
@@ -125,7 +125,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -152,6 +152,11 @@
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
               <item name="Src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Flat" type="462c0819:PsiDirectoryNode" />
+              <item name="1Home" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -205,12 +210,12 @@
       <workItem from="1532093658171" duration="1856000" />
       <workItem from="1532095929808" duration="1945000" />
       <workItem from="1532100492835" duration="10501000" />
-      <workItem from="1532292607045" duration="52599000" />
+      <workItem from="1532292607045" duration="53299000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145096000" />
+    <option name="totallyTimeSpent" value="145796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -506,8 +511,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="123" column="54" selection-start-line="123" selection-start-column="54" selection-end-line="123" selection-end-column="54" />
+        <state relative-caret-position="153">
+          <caret line="90" column="126" selection-start-line="90" selection-start-column="126" selection-end-line="90" selection-end-column="126" />
           <folding>
             <element signature="e#8899#9938#0" />
             <element signature="e#9985#10721#0" />
