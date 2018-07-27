@@ -17,8 +17,8 @@ let arcadeNoise = new Audio;
 
 newsReport.loop = true;                         //RYN
 newsReport.volume = 0.1;                        //RYN
-
 arcadeNoise.volume = 0.4;
+
 
 function initializeLV1()
 {
@@ -60,7 +60,6 @@ function initializeLV1()
     let bedTC = new Image();
     let bedTR = new Image();
     let bedTL = new Image();
-    let LNightstand = new Image();
     let RNightstand = new Image();
     let poolTableT1 = new Image();
     let poolTableT2 = new Image();
@@ -95,6 +94,7 @@ function initializeLV1()
     let tvTR = new Image();
     let tvBL = new Image();
     let tvBR = new Image();
+    let LNightstand = new Image();
 
 
 
@@ -132,7 +132,6 @@ function initializeLV1()
         bedTC.src = "1Home/images/bedTC.png";
         bedTR.src = "1Home/images/bedTR.png";
         bedTL.src = "1Home/images/bedTL.png";
-        LNightstand.src = "1Home/images/LNightstand.png";
         RNightstand.src = "1Home/images/RNightstand.png";
         poolTableT1.src = "1Home/images/poolTableT1.png";
         poolTableT2.src = "1Home/images/poolTableT2.png";
@@ -167,6 +166,7 @@ function initializeLV1()
         tvTR.src = "1Home/images/tvTR.png";
         tvBL.src = "1Home/images/tvBL.png";
         tvBR.src = "1Home/images/tvBR.png";
+        LNightstand.src = "1Home/images/LNightstand.png";
 
     }//Define SRC property of images
 
@@ -206,7 +206,6 @@ function initializeLV1()
         gg = bedBL;                         //31
         hh = bedBC;                         //32
         ii = bedBR;                         //33
-        jj = LNightstand;                   //34
         kk = RNightstand;                   //35
         ll = poolTableT1;                   //36
         mm = poolTableT2;                   //37
@@ -242,6 +241,9 @@ function initializeLV1()
         sss = couchR;                       //67
 
 
+
+        jj = LNightstand;                   //34        //I put this here for fun... or was there a reason... :S
+
     }//Assign images to global letter variables
 
 
@@ -273,6 +275,8 @@ function initializeLV1()
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 34, 66, 67, 35,  0,  0,  0,  0,  0,  0,  0],       //17
                 [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],       //18
             ];
+        //L1
+        Enemy(false, 32, 48, 6, 3, "1Home/images/jeffery.png", 3, 180, 60, 1, 8, 0, 800, 352, 600, undefined);
     }
 
 
@@ -283,7 +287,7 @@ function initializeLV1()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }
@@ -296,7 +300,7 @@ function initializeLV1()
     changePStartPos();
 
 
-    tvBR.onload = function(){l1Ready=true;};
+    LNightstand.onload = function(){l1Ready=true;};
     waitForLoading2();
 
 
@@ -328,7 +332,6 @@ function initializeLV1()
             addEventListener("keydown", onKeyDown, false);
         }
     }
-
 
 
     //dialogText(names[3], DialogNews[1], "20 px", "white");

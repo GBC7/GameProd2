@@ -101,58 +101,84 @@ DialogNews[0] = ""; //initial value
 DialogNews[1] = "Last night we received a tip from a source who wishes to remain anonymous stating that he has scientific proof that the world is actually flat. Mobs of enraged scientists have formed outside his house.";
 
 
+//Tutorial text
+TutorialL1[0] = "";
+TutorialL1[1] = "Welcome Sir...let me get you up to speed on what has happened since you laid down for your nap.";
+TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world is flat needed to be published.";
+TutorialL1[3] = "I know, I know...Grave mistake.  Now the local population is in an uproar and is out to kill you.";
+TutorialL1[4] = "Just in case you don't remember how to walk around or interact with things, let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
+TutorialL1[5] = "Now right.";
+TutorialL1[6] = "Now up.";
+TutorialL1[7] = "Now down.";
+TutorialL1[8] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
+TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
+TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
+
 
 //level1 Dialogue text
-DialogLevel1 = [
-    ["Hey son. I don’t know if you’ve heard yet, I called a publisher about that evidence you discovered.",
+DialogLevel1[0] = "";
+DialogLevel1[1] = "Sir...You should watch the TV.  There is something you should see."; //Butler to Scientist
+DialogLevel1[2] = "Mother!"; //Scientist
+
+/*    ["Hey son. I don’t know if you’ve heard yet, I called a publisher about that evidence you discovered.",
         "Ya, no sh**. Thanks for the heads up.",
         "I figured my son deserves to be recognized for his hard work!",
         "I can’t talk right now mom, I have to go destroy the evidence."]
-];
+];*/
 
-//level2 Dialogue text
-DialogLevel12 =
-   [
-           ["Hey .. Glad you could make it! It wasn't looking so hot for a minute there.\n\n " +
-           "Anyway, you're going to need to know how to fly this baby so listen up."],
 
-             ["First things first.. You're going to need to angle this thing in order to avoid all the birds.\n" +
-             "You can rotate the chopper using the left and right arrow keys... Give it a try now."],
-
-             ["Quick!!!! Press the space bar!"],
-
-             ["Ok. Looks like you've got the hang of things now. The space bar makes the chopper climb.. which is important" +
-             ".. if you don't want to plummet to your death, that is."],
-
-             ["WOOOAHHH!! You trying to kill us?!\nYou have to press space to keep this thing in the air!" +
-             "\nLet's try this again. This time you keep us in the air."],
-
-             ["It's been over 72 hours since I've slept now so, you're going to have to fly the rest of the way " +
-             "without any training wheels..\n Good luck and try not to get us both killed.\n" +
-             "Press space to take over."]
-     ];
 
 //level3 Dialogue text
-DialogLevel3 = [
-    ["Hey, a clothing store! Lucky the sewer’s staircase leads here. \nClosed mid-day too. Not odd at all.. Time to find a disguise."]
-];
+DialogLevel3[0] = "";
+DialogLevel3[1] = "Hey! A clothing store?! Wow...Lucky the sewer’s staircase leads here! And its closed mid-day too? Not odd at all...Let's see what I can salvage from the store to escape the mob.";
+DialogLevel3[2] = "A map of the city! Excellent!";
+DialogLevel3[3] = "Yes! This disguise will do.  I will blend with the locals!";
+DialogLevel3[4] = "No...I don't want to look like a girl.";
+DialogLevel3[5] = "No...this just won't do.";
+DialogLevel3[6] = "A passcode? I wonder what this is for...";
+DialogLevel3[7] = "It's locked...";
+DialogLevel3[8] = "Rollerblades?! I guess these will work...";
+DialogLevel3[9] = "It's locked...";
+DialogLevel3[10] = "I can't leave yet...I need supplies to make it past the mob!";
 
 
-//level4 Dialogue text
-DialogLevel4 = [];
 
 //level5 Dialogue text
-DialogLevel5 = [
-    ["Hi, mom.",
-        "What are you doing here???",
-        "I'm looking for papers. Do you know where it is?"]
-];
+DialogLevel5[0] = "";
+DialogLevel5[1] = "Mom....*panting*....where did you put the address to the Publisher?,"; //Scientist to Mom
+DialogLevel5[2] = "What?! Why are you here?";                                             //Mom to Scientist
+DialogLevel5[3] = "Are you serious? I just rollerbladed across town in a disguise because you decided that 'My Work' just had to be published!"; //Scientist to Mom
+DialogLevel5[4] = "Well...my baby deserves recognition. But if you insist.  The address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
+DialogLevel5[5] = "Remind me which cat that is?"; //Scientist to Mom
+DialogLevel5[6] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
+
 
 //level6 Dialogue text
-DialogLevel6 = [];
+DialogLevel6[0] = "";
+DialogLevel6[1] = "God! Jeffery was right! There is so many angry people up here.  I got to get to that helicopter somehow..."; //Scientist thought
+DialogLevel6[2] = "Sorry Sir, but we can't take off with all those people on the roof.  Deal with them."; //Pilot to Scientist
+DialogLevel6[3] = "Ready for takeoff Sir?"; //Pilot to Scientist
 
 //level7 Dialogue text
-DialogLevel7 = [];
+DialogLevel7[0] = "";
+DialogLevel7[1] = "I wonder where my assistant put the research papers....first, let's find an accelerant.  I think there's lighter fluid in the other lab.";
+DialogLevel7[2] = "No....not here";
+DialogLevel7[3] = "There they are....I wonder why he put them here.  I digress.  Now to burn them.  Maybe I could use the trashcan?";
+DialogLevel7[4] = "The evidence is burnt.  Now to stop that Publisher.";
+DialogLevel7[5] = "Aghhhh.....What are you doing here?!"; //Scientist to the Publisher
+DialogLevel7[6] = "To get the evidence...This is big money, you know?"; //Publisher to Scientist
+DialogLevel7[7] = "You're too late...I burnt it....All of it."; //Scientist to Publisher
+DialogLevel7[8] = "Good thing I still have the copy that your mother gave me."; //Publisher to Scientist
+DialogLevel7[9] = "Give that to me!"; //Scientist to Publisher ***FIGHT!
+
+//level8 Dialogue text
+DialogLevel8[0] = "";
+DialogLevel8[1] = "Yes! That's it! I found lighter fluid.";
+DialogLevel8[2] = "No....not here";
+DialogLevel8[3] = "Now where did my assistant put the research?  Maybe I should check in the Main Lab.";
+
+
+
 
 //level12 Dialogue text
 DialogLevel12 = [
@@ -176,19 +202,6 @@ DialogLevel12 = [
      "Press space to take over."]
    ];
 
-//Tutorial text
-TutorialL1[0] = "";
-TutorialL1[1] = "Welcome Sir...let me get you up to speed on what has happened since you laid down for your nap.";
-TutorialL1[2] = "Your Mother, in all her wisdom, felt that your research concerning the world is flat needed to be published.";
-TutorialL1[3] = "I know, I know...Grave mistake.  Now the local population is in an uproar and is out to kill you.";
-TutorialL1[4] = "Just in case you don't remember how to walk around or interact with things, let's go through some basics.\nTo move your character, use the arrow keys.  Go ahead and move left.";
-TutorialL1[5] = "Now right.";
-TutorialL1[6] = "Now up.";
-TutorialL1[7] = "Now down.";
-TutorialL1[8] = "Now try interacting with the arcade games on the far left.  Use space bar to do that.";
-TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to move, space bar to interact with people and things.";
-TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
-TutorialL1[11] = "Does that look like me?  Or even a person for that face? Try again.";
 
 
 

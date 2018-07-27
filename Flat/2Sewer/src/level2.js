@@ -34,34 +34,16 @@ let ratOfDeath = new Audio;
 }
 
 //Images
-let ratImage = new Image();
+let sewerFloor = new Image();
+let wetPipe = new Image();
+let torchSwamp = new Image();
+let sciUndWater = new Image();
+let door3 = new Image();
+let torch = new Image();
 let swampFloor = new Image();
 let cleanFloor = new Image();
-let wetPipe = new Image();
-let sewerFloor = new Image();
-let wallBesideDoor = new Image();
-let floorAboveDoor = new Image();
-let floorClean = new Image();
 let doorBare = new Image();
-let torch = new Image();
-let torchSwamp = new Image();
-let door3 = new Image();
-let sciUndWater = new Image();
-{
-    swampFloor.src = "2Sewer/images/dirtySwampFloor.png";
-    cleanFloor.src = "2Sewer/images/cleanFloor.png";
-    ratImage.src = "2Sewer/images/rat.png";
-    wetPipe.src = "2Sewer/images/pipeWet.png";
-    sewerFloor.src = "2Sewer/images/floor.png";
-    door3.src = "2Sewer/images/door3.png";
-    wallBesideDoor.src = "2Sewer/images/wallBesideDoor.png";
-    floorAboveDoor.src = "2Sewer/images/floorAboveDoor.png";
-    floorClean.src = "2Sewer/images/floorClean.png";
-    doorBare.src = "2Sewer/images/doorBare.png";
-    torchSwamp.src = "2Sewer/images/torchSwamp.png";
-    torch.src = "2Sewer/images/torch.png";
-    sciUndWater.src = "2Sewer/images/scientist2.png";
-}
+
 
 let torchNum = [];                              //To hold torch objects
 {
@@ -269,25 +251,24 @@ function initializeLV2()
         setTimeout(dialogInitialize, 5000);
     }
 
-    let stepsCorner = new Image();
-    let steps = new Image();
-    let topSide3 = new Image();
-    let leverUp = new Image();
+    let wall = new Image();
+    let door = new Image();
+    let wallDrain = new Image();
+    let pipe = new Image();
+    let stairs = new Image();
+    let door2 = new Image();
+    let wallSwamp = new Image();
+    let wallCorner = new Image();
     let topSide = new Image();
     let topCorner = new Image();
-    let wallCorner = new Image();
+    let wallBesideDoor = new Image();
+    let floorAboveDoor = new Image();
     let wallSwamp2 = new Image();
     let topCorner2 = new Image();
     let topSide2 = new Image();
-    let door2 = new Image();
-    let wall = new Image();
-    let wallDrain = new Image();
-    let wallSwamp = new Image();
-    let pipe = new Image();
-    let pillar = new Image();
-    let door = new Image();
-    let drain = new Image();
-    let stairs = new Image();
+    let leverUp = new Image();
+    let steps = new Image();
+    let stepsCorner = new Image();
     let pipeInWallT = new Image();
     let pipeInWallB = new Image();
     let barrelPileT1 = new Image();
@@ -319,26 +300,37 @@ function initializeLV2()
 
 
     {
+        //Not used to define global images in this function
+        sewerFloor.src = "2Sewer/images/floor.png";
+        wetPipe.src = "2Sewer/images/pipeWet.png";
+        torchSwamp.src = "2Sewer/images/torchSwamp.png";
+        sciUndWater.src = "2Sewer/images/scientist2.png";
+        door3.src = "2Sewer/images/door3.png";
         torch.src = "2Sewer/images/torch.png";
-        stepsCorner.src = "2Sewer/images/stepsCorner.png";
-        steps.src = "2Sewer/images/steps.png";
-        topSide3.src = "2Sewer/images/topSide3.png";
-        leverUp.src = "2Sewer/images/leverUp.png";
+        swampFloor.src = "2Sewer/images/dirtySwampFloor.png";
+        cleanFloor.src = "2Sewer/images/cleanFloor.png";
+        doorBare.src = "2Sewer/images/doorBare.png";
+
+
+        //Are
+        wall.src = "2Sewer/images/upperWall.png";
+        door.src = "2Sewer/images/door.png";
+        wallDrain.src = "2Sewer/images/wallDrain2.png";
+        pipe.src = "2Sewer/images/pipe.png";
+        stairs.src = "2Sewer/images/stairs.png";
+        door2.src = "2Sewer/images/door2.png";
+        wallSwamp.src = "2Sewer/images/wallSwamp.png";
+        wallCorner.src = "2Sewer/images/wallCorner.png";
         topSide.src = "2Sewer/images/topSide.png";
         topCorner.src = "2Sewer/images/topCorner.png";
-        wallCorner.src = "2Sewer/images/wallCorner.png";
+        wallBesideDoor.src = "2Sewer/images/wallBesideDoor.png";
+        floorAboveDoor.src = "2Sewer/images/floorAboveDoor.png";
         wallSwamp2.src = "2Sewer/images/wallSwamp2.png";
         topCorner2.src = "2Sewer/images/topCorner2.png";
         topSide2.src = "2Sewer/images/topSide2.png";
-        door2.src = "2Sewer/images/door2.png";
-        wall.src = "2Sewer/images/upperWall.png";
-        wallDrain.src = "2Sewer/images/wallDrain2.png";
-        wallSwamp.src = "2Sewer/images/wallSwamp.png";
-        pipe.src = "2Sewer/images/pipe.png";
-        door.src = "2Sewer/images/door.png";
-        pillar.src = "2Sewer/images/pillar.png";
-        drain.src = "2Sewer/images/drain.png";
-        stairs.src = "2Sewer/images/stairs.png";
+        leverUp.src = "2Sewer/images/leverUp.png";
+        steps.src = "2Sewer/images/steps.png";
+        stepsCorner.src = "2Sewer/images/stepsCorner.png";
         pipeInWallT.src = "2Sewer/images/pipewwallnfloorT.png";
         pipeInWallB.src = "2Sewer/images/pipewwallnfloorB.png";
         barrelPileT1.src = "2Sewer/images/barrelpileT1.png";
@@ -367,6 +359,8 @@ function initializeLV2()
         floorBarrel.src = "2Sewer/images/floorCleanBarrel.png";
         floorDualBarrel.src = "2Sewer/images/floorCleanDualBarrel.png";
         floorSidewaysBarrel.src = "2Sewer/images/floorCleanSidewaysBarrel.png";
+
+
 
     }//Define pictures' source files
 
@@ -460,6 +454,11 @@ function initializeLV2()
                 [12,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, 26, 36, 37, 38,  4, 51,  4,  3,  4,  4,  4,  36, 37, 38],       //17
                 [12, 54, 55,  5,  5,  5,  5, 54, 55,  5, 58, 26, 39, 40, 41,  3, 52,  3,  3,  4,  3,  4,  39, 40, 41]        //18
             ];
+
+        for (let rats = 0; rats !== 10; rats ++)
+        {
+            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 70, 2, 8, 0, 800, 32, 600, 1000);
+        }
     }
 
     if (lPMap[level] === undefined)
@@ -501,7 +500,7 @@ function initializeLV2()
 
 
     //Below ensures all elements are on screen when level is drawn
-    uprightBarrel.onload = function()
+    floorSidewaysBarrel.onload = function()
     {
         if (!torchesMapped)
         {

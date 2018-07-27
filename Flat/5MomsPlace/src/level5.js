@@ -1,17 +1,18 @@
 //LV5
 
 let publishersPaper = false;
-let catWithPaper = undefined;
+let catWithPaper = -1;
 
 
 //Sounds
 let meow = new Audio;
 {
     meow.src = ('5MomsPlace/audio/meow.wav');
+    meow.volume = 0.3;
+    lockedDoor.volume = 0.1;
 }
 
-meow.volume = 0.3;
-lockedDoor.volume = 0.1;
+
 
 function initializeLV5 ()
     {
@@ -180,28 +181,6 @@ function initializeLV5 ()
                     [ 2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 22,  2,  2,  2,  2,  2,  2,  2,  2,  2]      //18
                 ];
             //L5
-            //Cats
-        }
-
-
-        if (lPMap[level] === undefined)
-        {
-            lPMap[level] = [];
-
-            for (let y = 0; y < 19; y++)                //Initialize all indices with 0
-            {
-                lPMap[level][y] = [];
-
-                for (let x = 0; x < 25; x++)
-                {
-                    lPMap[level][y].push(0)
-                }
-            }
-            lPMap[level][0][0] = 1;
-        }
-
-        //Enemies
-        {
             Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat1.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //0
             Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat2.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //1
             Enemy(false, 32, 32, 6, 3, "5MomsPlace/images/cat3.png", 3, 270, 60, 5, 8, 0, 800, 32, 600, undefined);    //2
@@ -223,10 +202,26 @@ function initializeLV5 ()
             enemy[5][catWithPaper]. hasPaper = true;
             //Mom
             Enemy(false, 32, 48, 6, 3, "5MomsPlace/images/momWCane.png", 3, 180, 20, 5, 8, 0, 800, 32, 600, 1000);
+            //Set mom as not a cat for fun.... or because she needs to not be a cat
             enemy[5][10].cat = false;
         }
 
 
+        if (lPMap[level] === undefined)
+        {
+            lPMap[level] = [];
+
+            for (let y = 0; y < 19; y++)                //Initialize all indices with 0
+            {
+                lPMap[level][y] = [];
+
+                for (let x = 0; x < 25; x++)
+                {
+                    lPMap[level][y].push(0)
+                }
+            }
+            lPMap[level][0][0] = 1;
+        }
 
         changePStartPos();
 

@@ -229,7 +229,7 @@ function initializeLV3()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }

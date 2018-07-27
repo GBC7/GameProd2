@@ -84,7 +84,7 @@ function initializeLV7()
         f = fullShelvesBottom;	// 5
         g = emptyShelvesTop;	// 6
         h = emptyShelvesBottom;	// 7
-        if (researchPaper == true)
+        if (researchPaper)
         {
             i = emptyShelvesTop;	// 8
             j = emptyShelvesBottom;	// 9
@@ -124,7 +124,7 @@ function initializeLV7()
         ee = fullShelvesTop;		// 29
         ff = fullShelvesBottom;	// 30
 
-    }//Assigne images to global letter variables
+    }//Assign images to global letter variables
 
 
     if (lMap[level] === undefined)
@@ -152,6 +152,11 @@ function initializeLV7()
                 [10,  1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	11,	1,	1,	1,	1,	1,	1,	1,	1,	1],
                 [0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	3,	0,	0,	0,	0,	0]
             ];
+
+        for (let numOf = 0; numOf !== 6; numOf++)
+        {
+            Enemy(true, 32, 32, 6, 3, "2Sewer/images/rat.png", 3, 180, 60, 7, 8, 0, 768, 96, 568, 1000);
+        }
     }
 
 
@@ -163,7 +168,7 @@ function initializeLV7()
         {
             lPMap[level][y] = [];
 
-            for (let x = 0; x < 24; x++)
+            for (let x = 0; x < 25; x++)
             {
                 lPMap[level][y].push(0)
             }
