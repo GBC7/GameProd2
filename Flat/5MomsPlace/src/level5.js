@@ -226,26 +226,7 @@ function initializeLV5 ()
         changePStartPos();
 
         kit.onload = function(){l5Ready=true;};
-        waitingForLoad();
+        waitForLoading();//Universal.. ish
 
-
-        function waitingForLoad()
-        {
-            if (!l5Ready)
-            {
-                ctx.fillStyle = '#ffffff';
-                ctx.font="20px Arial";
-                ctx.fillText("Loading...", 350, 290);
-                setTimeout(waitingForLoad, 10);
-            }
-            else
-            {
-                drawMap();                   //Draw next map
-                turnOnEnemies();
-            }
-        }
-
-
-        addEventListener("keydown", onKeyDown, false);
     }
 

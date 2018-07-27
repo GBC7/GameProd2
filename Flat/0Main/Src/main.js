@@ -147,7 +147,7 @@ let theyIsOff = false;
 let caneTrigger = true;
 let lighterTrigger = true;
 
-function startGame()
+function startGame(dontDrawP)
 {
     theyIsOff = false;
     resetSomeThings();//Pauses all sounds, resets global image variables, turns off all enemy's
@@ -165,7 +165,7 @@ function startGame()
         {
             p.attackSpace *= 1.75;
             l2Ready = false;
-            initializeLV2();
+            initializeLV2(dontDrawP);
         }
 
         else if (l3)//Clothing Store
@@ -216,6 +216,9 @@ function startGame()
 
     function resetSomeThings()
     {
+        //Do this
+        clearLevel3();
+
         //Reset the canvas
         {
             ctx.clearRect(0, 0, 800, 600);
@@ -645,20 +648,142 @@ function changePStartPos()
     p.prevCol = p.col;
 }
 
-function waitForLoading(levelReady)
+function waitForLoading(dontDrawP)
 {
-    if (!levelReady)
+    switch (level)
     {
-        ctx.fillStyle = '#ffffff';
-        ctx.font="20px Arial";
-        ctx.fillText("Loading...", 350, 290);
-        setTimeout(waitForLoading, 20);
-    }
-    else
-    {
-        drawMap();
-        turnOnEnemies();
-        addEventListener("keydown", onKeyDown, false);
+        case 1:
+            if (!l1Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+
+                ////TEMP////
+                turnOnEnemies();
+                ////TEMP////
+
+                //// PERM /////
+                //initializeTutorialLV1();
+                //// PERM /////
+
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 2:
+            if (!l2Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                if (dontDrawP === undefined)
+                    drawMap();
+                else
+                    drawMap(0);
+
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 3:
+            if (!l3Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 5:
+            if (!l5Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 6:
+            if (!l6Ready || !l6Ready2)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 7:
+            if (!l7Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 8:
+            if (!l8Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
+        case 11:
+            if (!l11Ready)
+            {
+                ctx.fillStyle = '#ffffff';
+                ctx.font="20px Arial";
+                ctx.fillText("Loading...", 350, 290);
+                setTimeout(waitForLoading, 20);
+            }
+            else
+            {
+                drawMap();
+                turnOnEnemies();
+                addEventListener("keydown", onKeyDown, false);
+            }
+            break;
     }
 }
 
@@ -1193,29 +1318,9 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     ctx.clearRect(0,0,800,600);             //Clear entire canvas
                     p.frameY = 0;                           //Change the frame of the players tilesheet to the direction
                                                             // the player will be facing
-                    l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
-
-
-                    waitForLoad();
                 }
             }
-
-            function waitForLoad()
-            {
-                if (!l2Ready)
-                {
-                    ctx.fillStyle = '#ffffff';
-                    ctx.font="20px Arial";
-                    ctx.fillText("Loading...", 350, 290);
-                    setTimeout(waitForLoad, 10);
-                }
-                else
-                {
-                    drawMap();                   //Draw next map
-                }
-            }
-
         }
         if (e === 38 && (p.col === 13 && p.row === 11 && notWalking)
             ||(e === 38 && p.col === 14 && p.row === 11 && notWalking)
@@ -1229,9 +1334,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             let pixelsAbove = 0;
 
             goThroughWindowWithEyesClosed();
-
-
-
             function goThroughWindowWithEyesClosed()
             {
                 stepsUp++;
@@ -1260,15 +1362,10 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                         l1 = l2 = l3 = l5 = l7 = l8 = l9 = l10 = l11 = false;            //Set all levels to false but the one being travelled to
                         l6 = true;                                  //Set level being travelled to as true
                         ctx.clearRect(0,0,800,600);                 //Clear map to make way for new one
-                        l6Ready = false;
-                        l6Ready2 = false;
                         startGame();                                //Load settings and assets for next map
-                        waitForLoad2();
                     }
                 }
             }
-
-
 
             function notGoingThroughYet()
             {
@@ -1298,22 +1395,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     }
                     else
                         setTimeout(notGoingThroughYet, walkingSpeed * 2);
-                }
-            }
-
-            function waitForLoad2()
-            {
-                if (!l6Ready || !l6Ready2)
-                {
-                    ctx.fillStyle = '#ffffff';
-                    ctx.font="20px Arial";
-                    ctx.fillText("Loading...", 350, 290);
-                    setTimeout(waitForLoad2, 10);
-                }
-                else
-                {
-                    drawMap();                   //Draw next map
-                    setTimeout(drawPMap, 100);
                 }
             }
         }
@@ -1349,9 +1430,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     l1 = true;
                     ctx.clearRect(0,0,800,600);
                     p.frameY = 2;
-
                     startGame();
-                    setTimeout(drawMap, 40);
                 }
             }
         }   //Go through the door to level 1
@@ -1360,50 +1439,42 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
         {
             p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
+            removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
+                                                              // cannot be changed while animating stair climbing
+            let staysClimbed = 0;                               //Define variable to use to count stairs climbed
 
-            let stairs = new Image();   //Define stairs so they can be re-drawn each 'step' taken
-            stairs.src = "2Sewer/images/stairs.png";  //Set stairs src property
+            goUpDaStays();                                      //Start climbing stairs
 
-
-            stairs.onload = function()//When the stairs image loads
+            function goUpDaStays()                  //Climbing stairs animation function
             {
-                removeEventListener("keydown", onKeyDown, false); //Turn of key input so that p.row and p.col cannot
-                                                                  // cannot be changed while animating stair climbing
-                let staysClimbed = 0;                               //Define variable to use to count stairs climbed
+                staysClimbed ++;                //Count each step taken
 
-                goUpDaStays();                                      //Start climbing stairs
+                ctx.clearRect(96*8, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
+                fillErasedMap();        //Draw the map image that was cleared
 
-                function goUpDaStays()                  //Climbing stairs animation function
+                //Draw scientist incrementally smaller each 'step' taken
+                // and move player slightly up to portray movement
+                ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed),96*8, 0, 32, 38 - (10 * staysClimbed));
+
+
+                if (staysClimbed !== 4)         //If player has not climbed all stairs
+                    setTimeout(goUpDaStays, 120);     //Keep climbing them - Call the stair climbing function again
+                else                            //Otherwise
                 {
-                    staysClimbed ++;                //Count each step taken
+                    keepDrawingFlames = false;
+                    clearInterval(burning);
+                    clearInterval(countingFlames);
+                    level = 3;                              //Change level identifier appropriately
+                    l1 = l2 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
+                    l3 = true;                              //Set the one that is being travelled to to true
+                    startX[3] = 1; startY[3] = 16;
+                    ctx.clearRect(0,0,800,600);             //Clear entire canvas
+                    p.frameY = 2;                           //Change tile sheet frame to match direction being faced
+                    startGame();                            //Load new levels assets and settings
 
-                    ctx.clearRect(96*8, 0, 32, 48);  //Clear tile player is on so new animation image can take its place
-                    fillErasedMap();        //Draw the map image that was cleared
-
-                    //Draw scientist incrementally smaller each 'step' taken
-                    // and move player slightly up to portray movement
-                    ctx.drawImage(scientist, 0, 144 + (10 * staysClimbed), 32, 38 - (10 * staysClimbed),96*8, 0, 32, 38 - (10 * staysClimbed));
-
-
-                    if (staysClimbed !== 4)         //If player has not climbed all stairs
-                        setTimeout(goUpDaStays, 120);     //Keep climbing them - Call the stair climbing function again
-                    else                            //Otherwise
-                    {
-                        keepDrawingFlames = false;
-                        clearInterval(burning);
-                        clearInterval(countingFlames);
-                        level = 3;                              //Change level identifier appropriately
-                        l1 = l2 = l5 = l6 = l7 = l8 = l9 = l10 = l11 = false;         //Set all levels not being travelled to as false
-                        l3 = true;                              //Set the one that is being travelled to to true
-                        startX[3] = 1; startY[3] = 16;
-                        ctx.clearRect(0,0,800,600);             //Clear entire canvas
-                        p.frameY = 2;                           //Change tile sheet frame to match direction being faced
-
-                        startGame();                            //Load new levels assets and settings
-
-                    }
                 }
-            };
+            }
+
         }  //Go through the door to level 3
 
         if (e === 38 && p.col === 10 && p.row === 0) //If going UP & character is under pipe
@@ -1440,29 +1511,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                         startGame();
                         changePStartPos();
                         removeEventListener("keydown", onKeyDown, false);
-                        if (alreadyBeenHereL11)
-                        {
-                            setTimeout(emerge, 120);
-                            drawMap();
-                        }
-                        else
-                            waitForLoad();
-
-                        function waitForLoad()
-                        {
-                            if (!l11Ready)
-                            {
-                                ctx.fillStyle = '#ffffff';
-                                ctx.font="20px Arial";
-                                ctx.fillText("Loading...", 350, 290);
-                                setTimeout(waitForLoad, 10);
-                            }
-                            else
-                            {
-                                setTimeout(emerge, 120);
-                                drawMap();
-                            }
-                        }
+                        setTimeout(emerge, 120);
                     }
 
                     function emerge()
@@ -1537,18 +1586,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                                                             // the player will be facing
                     l2Ready = false;
                     startGame();                            //Load assets and settings of the level being travelled to
-
-                    waitTillReady();
-                    function waitTillReady()
-                    {
-                        if (!l2Ready)
-                            setTimeout(waitTillReady, 10);
-                        else
-                        {
-                            setTimeout(drawMap, 40);                //Draw its map
-                            clearLevel3();
-                        }
-                    }
                 }
             }
         }
@@ -1620,8 +1657,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l5)//If it's Lvl 5
     {
-
-
         if (e === 38 && p.col === 0 && p.row === 0)
         {
             removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
@@ -1650,7 +1685,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     ctx.clearRect(0,0,800,600);
                     p.frameY = 1;
                     startGame();
-                    setTimeout(drawMap, 40);
                 }
             }
         }
@@ -1731,8 +1765,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
             startGame();                            //Load new levels assets and settings
-            setTimeout(drawMap, 40);                //Draw its entire map
-
         }  //Go up stairs to level 8
 
         if (e === 40 && p.col === 19 && p.row === 16 && researchBurned) //If going down and above staircase
@@ -1770,7 +1802,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
                     startGame();                            //Load new levels assets and settings
-                    setTimeout(drawMap, 40);                //Draw its entire map
                 }
             }
         }  //Go up stairs to level 8
@@ -1828,7 +1859,6 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     p.frameY = 2;                           //Change tile sheet frame to match direction being faced
 
                     startGame();                            //Load new levels assets and settings
-                    setTimeout(drawMap, 40);                //Draw its entire map
                 }
             }
         }  //Go up stairs to level 8
@@ -1873,12 +1903,10 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                     p.frameY = 0;
                     changePStartPos();
                     ctx.clearRect(0,0,800,600);
-                    l2Ready=false;
                     startGame(0);
                     sizer = 10;
                     removeEventListener("keydown", onKeyDown, false);
                     setTimeout(crawlOut, 80);
-                    drawMap(0);
                 }
 
                 function crawlOut()//crawl out the other side
@@ -3577,7 +3605,12 @@ function healthInventory()
 
 function resetLevel(time = 40)
 {
-    //Turn off the enemies and then call the function to erase them from the array
+    //Decrement lives
+    p.lives--;
+    p.livesChanged = true;
+    healthInventory();
+
+//Turn off the enemies and then call the function to erase them from the array
     for (let ens = 0; ens < enemy[level].length; ens++)
     {
         enemy[level][ens].dead = true;
@@ -3587,13 +3620,6 @@ function resetLevel(time = 40)
             setTimeout(resetTheEnsArray, 180);
         }
     }
-
-    //Decrement lives
-    p.lives--;
-    p.livesChanged = true;
-    healthInventory();
-
-
 
 
                             /* ChangeNeeded */
@@ -3711,7 +3737,7 @@ function resetLevel(time = 40)
         {
             enemy[level].pop();
 
-            if (theEns === enemy[level].length - 1)
+            if (theEns === enemy[level].length - 1 && p.lives !== 0)
                 putEmBack()
         }
     }
@@ -3807,6 +3833,7 @@ function gameover()
             setTimeout(blink, 200);
         }
     }
+
 }
 
 //Needs to be last so we know that the computer has had time to read through all scripts all the way

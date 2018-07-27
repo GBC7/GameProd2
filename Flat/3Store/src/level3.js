@@ -240,29 +240,9 @@ function initializeLV3()
 
     changePStartPos();
 
-
-    l3Ready = false;
     doorOpen_2.onload = function(){l3Ready=true;};
-    waitForLoading();
+    waitForLoading();//Universal.. ish
 
-
-    function waitForLoading()
-    {
-        if (!l3Ready)
-        {
-            ctx.fillStyle = '#ffffff';
-            ctx.font="20px Arial";
-            ctx.fillText("Loading...", 350, 290);
-            setTimeout(waitForLoading, 1);
-        }
-        else
-        {
-            drawMap();                   //Draw next map
-            turnOnEnemies();
-        }
-    }
-
-    addEventListener("keydown", onKeyDown, false);
 
     if (enemyIndexLevel3 < 10)
     {
@@ -273,12 +253,6 @@ function initializeLV3()
 
     else if (enemyIndexLevel3 === 10)
         resetTimer();
-
-    for (let i = 0; i < enemy[3].length; i++)
-    {
-        enemy[3][i].roam();
-    }
-
 }
 
 function detectMovementLevel3()
@@ -380,8 +354,6 @@ function appearEnemy()
 
 function clearLevel3()
 {
-    bgm_level3.pause();
-    dangerous.pause();
     clearInterval(timer_level3);
     dialogInitialize();
 }

@@ -301,37 +301,8 @@ function initializeLV1()
 
 
     LNightstand.onload = function(){l1Ready=true;};
-    waitForLoading2();
 
-
-
-
-
-    function waitForLoading2()
-    {
-        if (!l1Ready)
-        {
-            ctx.fillStyle = '#ffffff';
-            ctx.font="20px Arial";
-            ctx.fillText("Loading...", 350, 290);
-            setTimeout(waitForLoading2, 1);
-        }
-        else
-        {
-            drawMap();                   //Draw next map
-            /*initializeTutorialLV1();*/
-
-            ////////////////
-            // ** TEMP ** //
-            ////////////////
-            turnOnEnemies();
-            ////////////////
-            // ** TEMP ** //
-            ////////////////
-
-            addEventListener("keydown", onKeyDown, false);
-        }
-    }
+    waitForLoading();//Universal.. ish
 
 
     //dialogText(names[3], DialogNews[1], "20 px", "white");

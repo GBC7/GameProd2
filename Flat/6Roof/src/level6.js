@@ -130,22 +130,12 @@ function initializeLV6()
 
     alreadyDoinIt = false;
 
-    shinglesBRight.onload = function(){l6Ready=true;turnOnEnemies();};
-    addEventListener("keydown", onKeyDown, false);
-
-
-    for (let i = 0; i < enemy[6].length; i++)
-    {
-        enemy[6][i].roam();
-    }
-
-
+    shinglesBRight.onload = function(){l6Ready=true;};
+    waitForLoading();//Universal.. ish
 }
 
 function drawL6Full()
 {
-    l6Ready2 = false;
-
     let gate = new Image();
     let fence = new Image();
     let litWindow = new Image();
@@ -177,6 +167,8 @@ function drawL6Full()
     {
         shrub.onload = function(){l6Ready2 = true;}
     }
+
+    //If l6 and l6Read2 === true??? and paste the following code into it???
     if (l6)
     {
         ctx.drawImage(ladder, 5, 160);

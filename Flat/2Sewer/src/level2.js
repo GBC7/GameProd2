@@ -240,7 +240,7 @@ let torchNum = [];                              //To hold torch objects
 }                                           //Fill it with torch objects
 
 
-function initializeLV2()
+function initializeLV2(dontDrawP)
 {
     canvas.style.backgroundImage = "";
     newsReport.pause();
@@ -497,7 +497,7 @@ function initializeLV2()
     }
 
     changePStartPos();
-
+/*    startX[2] = startY[2] = 0;//Change start pos for level 1*/
 
     //Below ensures all elements are on screen when level is drawn
     floorSidewaysBarrel.onload = function()
@@ -534,37 +534,21 @@ function initializeLV2()
         l2Ready=true;
     };
 
-    waitTillLoaded();
+    waitForLoading(dontDrawP);//Universal.. ish
+
+    //Change  " if (e === 38 && p.col === 24 && p.row === 0) "
 
 
-    function waitTillLoaded()//Loads map after everything is loaded as long as
-    {
-        if (!l2Ready)
-        {
-            ctx.fillStyle = '#ffffff';
-            ctx.font="20px Arial";
-            ctx.fillText("Loading...", 350, 290);
-            setTimeout(waitTillLoaded, 10);
-        }
-        else if (!alreadyBeenHere)
-        {
-            drawMap();                   //Draw next map
-            turnOnEnemies();
-            alreadyBeenHere=true;
-        }
-    }
-    addEventListener("keydown", onKeyDown, false);
-    startX[2] = startY[2] = 0;
 
     burning = setInterval(letEmBurn, 120);              //Turn on the FYAAAA!!!!
 
     keepDrawingFlames = true;                           //Turn on the FYAAAA!!!!
     countingFlames = setInterval(changeFlame, 120);
 
-    startX[1] = 23;
-    startY[1] = 10;
+    /// TEMP ///
     if (lPMap[1] !== undefined)
-        lPMap[1][10][23] = 1;
+        lPMap[1][10][23] = 1;   //For testing
+    /// TEMP ///
 
     startX[1] = 6;
     startY[1] = 9;

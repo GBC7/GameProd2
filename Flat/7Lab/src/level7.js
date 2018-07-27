@@ -181,20 +181,6 @@ function initializeLV7()
 
 
     screenRight.onload = function(){l7Ready=true;};
-    level7NotReady();
-
-
-    function level7NotReady()
-    {
-        if (!l7Ready)
-            setTimeout(level7NotReady, 1);
-        else
-        {
-            drawMap();
-            turnOnEnemies();
-        }
-
-    }
-    addEventListener("keydown", onKeyDown, false);
+    waitForLoading();//Universal.. ish
 
 }
