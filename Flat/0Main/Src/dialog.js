@@ -16,20 +16,11 @@ portrait[4] = "url('0Main/images/Portrait_Pilot.png')";
 portrait[5] = "url('0Main/images/Portrait_Butler.png')";
 
 
-let SystemMSGLevel1 = [];
-let SystemMSGLevel2 = [];
-let SystemMSGLevel3 = [];
-let SystemMSGLevel4 = [];
-let SystemMSGLevel5 = [];
-let SystemMSGLevel6 = [];
-let SystemMSGLevel7 = [];
-let SystemMSGLevel8 = [];
 
 let DialogNews = [];
 let DialogLevel1 = [];
 let DialogLevel2 = [];
 let DialogLevel3 = [];
-let DialogLevel4 = [];
 let DialogLevel5 = [];
 let DialogLevel6 = [];
 let DialogLevel7 = [];
@@ -39,63 +30,6 @@ let DialogLevel12 = [];
 let TutorialL1 = [];
 
 
-//level1 system text
-SystemMSGLevel1[0] = " "; //initial value
-SystemMSGLevel1[1] = "Roof is blocked by angry mob of scientist. Not sure if they’re smart for finding a way up here or the opposite for not having planned a way down. " +
-    "Either way, I’m going to have to use the sewer for now.";
-SystemMSGLevel1[2] = "Last night we received a tip from a source who wishes to remain anonymous stating that  \n he has scientific proof that the world is actually flat. Mobs of enraged scientists have formed outside his house.";
-
-//level2 system text
-SystemMSGLevel2[0] = " "; //initial value
-SystemMSGLevel2[1] = "There has to be some way to brighten it up in here.";
-SystemMSGLevel2[2] = "Ahhhhh! I better light this place up first!";
-SystemMSGLevel2[3] = "The water is too powerful..";
-SystemMSGLevel2[4] = "Damn! It's locked!";
-
-//level3 system text
-SystemMSGLevel3[0] = " "; //initial value
-SystemMSGLevel3[1] = "I heard something! Mobbist will open window!\n";
-SystemMSGLevel3[2] = "Mobbists are finding me!\nI'd rather not move ";
-SystemMSGLevel3[3] = "I'd rather not dress like a girl...";
-SystemMSGLevel3[4] = "This will do! ";
-SystemMSGLevel3[5] = "Yes! I found the passcode!";
-SystemMSGLevel3[6] = "...There's nothing here.  ";
-SystemMSGLevel3[7] = "Hmmm.....I need a passcode.  I better look for the passcode. ";
-SystemMSGLevel3[8] = "I found some rollerblades. ";
-SystemMSGLevel3[9] = "This is all useless....just useless! ";
-SystemMSGLevel3[10] = "Better look for a map... ";
-SystemMSGLevel3[11] = "I found the map!";
-SystemMSGLevel3[12] = "I still need supplies.  It's not time to go out yet.";
-
-//level4 system text
-SystemMSGLevel4[0] = " "; //initial value
-
-
-//level5 system text
-SystemMSGLevel5[0] = " "; //initial value
-SystemMSGLevel5[1] = "Mob has moved on to the lab in order to find and disprove the paper. " +
-    "However, the ones who somehow found their way to the roof didn’t plan a way to get down. They are stuck there."
-
-//level6 system text
-SystemMSGLevel6[0] = " "; //initial value
-SystemMSGLevel6[1] = "Angry mob outside blocking the way is too large to fight off";
-SystemMSGLevel6[2] = "There are people inside. You must have left one of the windows open or something. Let’s find where they’re getting in and block it before we get overwhelmed."
-
-//level7 system text
-SystemMSGLevel7[0] = " "; //initial value
-SystemMSGLevel7[1] = "Yes! I found the research.  Now to burn it... ";
-SystemMSGLevel7[2] = "I need to find the research!";
-SystemMSGLevel7[3] = "I need to find something to burn this with...";
-SystemMSGLevel7[4] = "It's done....Now I can go to the publisher's office.";
-SystemMSGLevel7[5] = "I'm not done here yet. I still have more to accomplish!";
-
-
-//level8 system text
-SystemMSGLevel8[0] = " "; //initial value
-SystemMSGLevel8[1] = "Lighter fluid! That will work!";
-SystemMSGLevel8[2] = "The windows are closed now.  Now for that research...";
-SystemMSGLevel8[3] = "Close the windows before the mobbist get in and loot the place!";
-SystemMSGLevel8[4] = "If I go this way, the mobbist will see me!";
 
 DialogNews[0] = ""; //initial value
 DialogNews[1] = "Last night we received a tip from a source who wishes to remain anonymous stating that he has scientific proof that the world is actually flat. Mobs of enraged scientists have formed outside his house.";
@@ -115,17 +49,21 @@ TutorialL1[9] = "Excellent.  Now you know how to operate the game.  Arrows to mo
 TutorialL1[10] = "That isn't the right key.  Don't play dumb.  Get the keys right...";
 
 
-//level1 Dialogue text
+//level 1 Dialogue text
 DialogLevel1[0] = "";
 DialogLevel1[1] = "Sir...You should watch the TV.  There is something you should see."; //Butler to Scientist
 DialogLevel1[2] = "Mother!"; //Scientist
+DialogLevel1[3] = "You know how she can be, Sir."; //Butler to Scientist
+DialogLevel1[4] = "I need to get to her house to get that publisher's address."; //Scientist
+DialogLevel1[5] = "You can't take the helicopter, Sir.  There is a mob of people on the roof at the moment.  You could try to find the secret passage out of the house that the previous owner put in one of the bookcases.";  //Butler to Scientist
+DialogLevel1[6] = "Sir, take this lighter.  You may need it for light down there."; //Butler to Scientist
 
-    ["Hey son. I don’t know if you’ve heard yet, I called a publisher about that evidence you discovered.",
-        "Ya, no sh**. Thanks for the heads up.",
-        "I figured my son deserves to be recognized for his hard work!",
-        "I can’t talk right now mom, I have to go destroy the evidence."]
-];
-
+//level 2 Dialogue text
+DialogLevel2[0] = " "; //initial value
+DialogLevel2[1] = "Wow....its so dark in here. Thank god for the lighter from Jeffery.  There has to be some way to brighten it up in here.";
+DialogLevel2[2] = "Ahhhhh! What is that?! I better light this place up first!";
+DialogLevel2[3] = "The water is too powerful...Maybe there is a way to turn it off.";
+DialogLevel2[4] = "Damn! It's locked!";
 
 
 //level3 Dialogue text
@@ -140,6 +78,8 @@ DialogLevel3[7] = "It's locked...";
 DialogLevel3[8] = "Rollerblades?! I guess these will work...";
 DialogLevel3[9] = "It's locked...";
 DialogLevel3[10] = "I can't leave yet...I need supplies to make it past the mob!";
+DialogLevel3[11] = "I heard something.  The mob is trying to open the window.";
+DialogLevel3[12] = "The mob is looking into the store.  I better not move or they will see me.";
 
 
 
@@ -151,6 +91,10 @@ DialogLevel5[3] = "Are you serious? I just rollerbladed across town in a disguis
 DialogLevel5[4] = "Well...my baby deserves recognition. But if you insist.  The address to the Publisher is in the collar of my favourite cat."; //Mom to Scientist
 DialogLevel5[5] = "Remind me which cat that is?"; //Scientist to Mom
 DialogLevel5[6] = "The cat with the"; //Mom to Scientist **************Need variable names from Jed
+DialogLevel5[7] = "There it is...but you can't rollerblade all the way to the lab.  You are going to have to take the helicopter.";  //Mom to Scientist
+DialogLevel5[8] = "There are people on my roof or I would have flown here already and not rollerbladed across town."; //Scientist to Mom
+DialogLevel5[9] = "Here...Take my cane.  You can use it as a weapon."; //Mom to Scientist
+DialogLevel5[10] = "Thank you.  Guess I am heading back home to get the helicopter."; //Scientist ***Leave
 
 
 //level6 Dialogue text
@@ -173,9 +117,12 @@ DialogLevel7[9] = "Give that to me!"; //Scientist to Publisher ***FIGHT!
 
 //level8 Dialogue text
 DialogLevel8[0] = "";
-DialogLevel8[1] = "Yes! That's it! I found lighter fluid.";
-DialogLevel8[2] = "No....not here";
-DialogLevel8[3] = "Now where did my assistant put the research?  Maybe I should check in the Main Lab.";
+DialogLevel8[1] = "Why is the window open?! I better close it before the mob sees me in here!";
+DialogLevel8[2] = "Yes! That's it! I found lighter fluid.";
+DialogLevel8[3] = "No....not here";
+DialogLevel8[4] = "Now where did my assistant put the research?  Maybe I should check in the Main Lab.";
+DialogLevel8[5] = "If I go this way, the mob will see.";
+
 
 
 
