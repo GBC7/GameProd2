@@ -315,7 +315,7 @@ function initializeLV1()
         else
         {
             drawMap();                   //Draw next map
-            initializeTutorialLV1();
+            //initializeTutorialLV1();
 
             ////////////////
             // ** TEMP ** //

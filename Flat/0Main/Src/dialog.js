@@ -58,7 +58,7 @@ DialogLevel1[4] = "I need to get to her house to get that publisher's address.";
 DialogLevel1[5] = "You can't take the helicopter, Sir.  There is a mob of people on the roof at the moment.  You could try to find the secret passage out of the house that the previous owner put in one of the bookcases.";  //Butler to Scientist
 DialogLevel1[6] = "Sir, take this lighter.  You may need it for light down there."; //Butler to Scientist
 
-//level 2 Dialogue text
+//level 2 Dialogue text (done)
 DialogLevel2[0] = " "; //initial value
 DialogLevel2[1] = "Wow....its so dark in here. Thank god for the lighter from Jeffery.  There has to be some way to brighten it up in here.";
 DialogLevel2[2] = "Ahhhhh! What is that?! I better light this place up first!";
@@ -66,7 +66,7 @@ DialogLevel2[3] = "The water is too powerful...Maybe there is a way to turn it o
 DialogLevel2[4] = "Damn! It's locked!";
 
 
-//level3 Dialogue text
+//level3 Dialogue text (done)
 DialogLevel3[0] = "";
 DialogLevel3[1] = "Hey! A clothing store?! Wow...Lucky the sewer’s staircase leads here! And its closed mid-day too? Not odd at all...Let's see what I can salvage from the store to escape the mob.";
 DialogLevel3[2] = "A map of the city! Excellent!";

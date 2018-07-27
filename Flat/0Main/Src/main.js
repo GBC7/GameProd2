@@ -3157,13 +3157,13 @@ function checkActions()//Gets called when pressing space
                 (p.row === 15 && p.col === 22) || (p.row === 15 && p.col === 24) || (p.row === 17 && p.col === 18) || (p.row === 17 && p.col === 20) ||
                 (p.row === 17 && p.col === 23) || (p.row === 17 && p.col === 24) ))
         {
-            dialogText(names[1], DialogLevel3[3], "20 px", "white");
+            dialogText(names[1], DialogLevel3[4], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
         else if (!findDisguise && p.row === 15 && p.col === 18)
         {
 
-            dialogText(names[1], DialogLevel3[4], "20 px", "white");
+            dialogText(names[1], DialogLevel3[3], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findDisguise = true;
         }
@@ -3171,13 +3171,13 @@ function checkActions()//Gets called when pressing space
         //Pass code
         else if (!findPasscode && p.row ===2 && p.col ===1)
         {
-            dialogText(names[1], DialogLevel3[5], "20 px", "white");
+            dialogText(names[1], DialogLevel3[6], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findPasscode = true;
         }
         else if (!findPasscode && ((p.row ===1 && p.col ===3) || (p.row === 5 && p.col === 1) || (p.row === 4 && p.col === 3)))
         {
-            dialogText(names[1], DialogLevel3[6], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
@@ -3193,19 +3193,19 @@ function checkActions()//Gets called when pressing space
             (p.row === 3 && p.col === 20) || (p.row === 3 && p.col === 21) || (p.row === 3 && p.col === 23) || (p.row === 3 && p.col === 24) ||
             (p.row === 1 && p.col === 20) || (p.row === 1 && p.col === 21) || (p.row === 1 && p.col === 23) || (p.row === 1 && p.col === 24)))
         {
-            dialogText(names[1], DialogLevel3[9], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
 
         //Map
         else if (!findMap && p.row === 15 && (p.col > 0 && p.col < 5 || p.col === 6))
         {
-            dialogText(names[1], DialogLevel3[10], "20 px", "white");
+            dialogText(names[1], DialogLevel3[5], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
         }
         else if (findMap === false && p.row === 15 && p.col === 5)
         {
-            dialogText(names[1], DialogLevel3[11], "20 px", "white");
+            dialogText(names[1], DialogLevel3[2], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
@@ -3214,7 +3214,7 @@ function checkActions()//Gets called when pressing space
         //Found all
         else if (!findAllLevel3 && ((p.row === 0 && p.col === 10) || (p.row === 0 && p.col === 11)))
         {
-            dialogText(names[1], DialogLevel3[12], "20 px", "white");
+            dialogText(names[1], DialogLevel3[10], "20 px", "white");
             setTimeout(dialogInitialize, 3000);
             findMap = true;
         }
@@ -3255,7 +3255,7 @@ function checkActions()//Gets called when pressing space
 
             if (!researchPaper)
             {
-                dialogText(names[1], DialogLevel7[2], "20 px", "white");
+                dialogText(names[1], DialogLevel7[1], "20 px", "white");
                 setTimeout(dialogInitialize, 3000);
             }
             else if (!lighterFluid && researchPaper)
