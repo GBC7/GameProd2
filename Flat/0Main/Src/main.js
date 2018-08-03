@@ -1,4 +1,10 @@
-let gameOver = false;
+/*// Draw box around designated area for debugging purposes
+ctx.fillStyle = '#ff0c18';
+ctx.fillRect(xPos, yPos, 2, 32);
+ctx.fillRect(xPos, yPos, 32, 2);
+ctx.fillRect(xPos + 30, yPos, 2, 32);
+ctx.fillRect(xPos, yPos + 30, 32, 2);
+// Draw box around designated area for debugging purposes*/
 
 //Current Level Int
 let level = 1;

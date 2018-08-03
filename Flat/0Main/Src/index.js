@@ -1,8 +1,7 @@
 let canvas;  //Not using these in any of the intro pages (title, controls, or warning)
-let ctx;    //These are only defined after running loadActualGame();
+let ctx;    //These are only defined after running loadActualGame() inside of the controlsPage() function;
 let scriptsLoaded = false;
 let ctx3;
-//Uncomment the following to re-enable the title pages
 
 //TITLE PAGE
 {
@@ -114,7 +113,7 @@ let ctx3;
         function startWarningPage()
         {
             clearInterval(titleFlashTimer);
-            holder.style.width = "965px";
+            holder.style.width = "800px";
             holder.style.height = "600px";
             removeEventListener("keyup", startWarningPage);
             {
@@ -125,8 +124,6 @@ let ctx3;
                     "\n" +
                     "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
                     "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
-                    "\n" +
-                    "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
                     "    </div>";
 
             }//Add actual canvas while removing old one
@@ -141,11 +138,8 @@ function warningPage()
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
-    let statsCanvas = document.getElementById("statusInventory");
-    ctx3 = statsCanvas.getContext("2d");
-
-/*    canv.style.backgroundImage = "url('0Main/images/warning.gif";
-    canv.style.backgroundPosition = "center";*/
+    canv.style.backgroundImage = "url('0Main/images/warning.gif";
+    canv.style.backgroundPosition = "center";
     ctxT.fillRect(550,0,300,600);
     ctxT.fillRect(550,440,300,600);
     ctxT.fillRect(0,0,260,600);
@@ -269,6 +263,23 @@ function controlsPage()
     function loadActualGame()
     {
         clearInterval(controlsTimer);
+        let holder = document.getElementById("holder");
+        {
+            holder.innerHTML =
+
+                "<div id=\"center\">\n" +
+                "\n" +
+                "\n" +
+                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
+                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                "\n" +
+                "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
+                "    </div>";
+        }
+        holder.style.width = "965px";
+        holder.style.height = "600px";
+        let statsCanvas = document.getElementById("statusInventory");
+        ctx3 = statsCanvas.getContext("2d");
         canvas = document.getElementById("regular");
         ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, 800, 600);
@@ -288,48 +299,3 @@ function controlsPage()
         }
     }
 }
-
-
-   //             <---------------------------------- This is the warning and
-
-
-
-//  ********************TEMP********************
-    /*{
-        let holder = document.getElementById("holder");
-
-        holder.innerHTML =
-
-            "<div id=\"center\">\n" +
-            "\n" +
-            "\n" +
-            "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
-            "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
-            "\n" +
-            "<canvas id = \"statusInventory\" width = \"165\" height = \"800\">Your browser does not support Canvas.</canvas>" +
-            "    </div>";
-
-
-    }   //   <------ Removes extra div and over-sized canvas
-    canvas = document.getElementById("regular");                    //For testing, to enable
-    let statsCanvas = document.getElementById("statusInventory");
-    let ctx3 = statsCanvas.getContext("2d");
-
-    ctx = canvas.getContext("2d");                                  //skipping through the
-    ctx.clearRect(0, 0, 800, 600);                                  //title, controls, and warning
-                                                                    //pages to save time
-    waitForTheScriptsToLoad();
-
-    function waitForTheScriptsToLoad()
-    {
-        if (scriptsLoaded === false)
-        {
-            setTimeout(waitForTheScriptsToLoad, 10);
-        }
-        else
-        {
-            startGame();
-        }
-    }     */      //Waits for scripts to load to avoid errors
-                    //then calls the startGame function in main.js
-//  ********************TEMP********************
