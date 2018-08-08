@@ -1,7 +1,7 @@
-let CharacterName = document.getElementById("name");
-let DialogText = document.getElementById("output");
-let CharacterPortrait = document.getElementById("portrait");
-let DialogBG = document.getElementById("dialog");
+let CharacterName;
+let DialogText;
+let CharacterPortrait;
+let DialogBG;
 
 let dialogIndex = 0;
 let tog = 2;

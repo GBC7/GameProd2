@@ -3,6 +3,8 @@ let ctx;    //These are only defined after running loadActualGame() inside of th
 let scriptsLoaded = false;
 let ctx3;
 
+let wPage = false, cPage = false;//Used for skipping intro pages
+
 //TITLE PAGE
 {
     let holder = document.getElementById("holder");
@@ -135,6 +137,8 @@ let ctx3;
 //WARNING PAGE
 function warningPage()
 {
+    wPage = true;
+
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
@@ -154,26 +158,20 @@ function warningPage()
 
     function flashingText()
     {
+        getTheInput();
         count++;
         if(count%2 === 1)
         {
             ctxT.font = "20px Arial";
-            ctxT.fillStyle ='#ffe900';
-            ctxT.fillRect(280,425,250,35);
             ctxT.fillStyle ='#FF0000';
-            ctxT.fillText("Press Enter to Continue", 299, 450);
+            ctxT.fillText("Press any key to continue", 299, 450);
         }
         else
         {
-            /*ctxT.clearRect(280, 420, 270, 50);*/
-            ctxT.fillStyle ='#FF0000';
-            ctxT.fillRect(280,425,250,35);
             ctxT.fillStyle ='#ffe900';
-            ctxT.fillText("Press Enter to Continue", 299, 450);
+            ctxT.fillText("Press any key to continue", 299, 450);
         }
     }
-
-    setTimeout(getTheInput, 500);                                                    // after all effect, add keyboard input
 
     function getTheInput()
     {
@@ -191,6 +189,9 @@ function warningPage()
 //CONTROLS PAGE
 function controlsPage()
 {
+    wPage = false;
+    cPage = true;
+
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
@@ -235,7 +236,7 @@ function controlsPage()
         {
             ctxT.font = "26px Arial";
             ctxT.fillStyle = '#000000';
-            ctxT.fillText("Press Enter to Continue...", 250, 475);
+            ctxT.fillText("Press any key to continue...", 250, 475);
         }
         else
         {
@@ -251,19 +252,36 @@ function controlsPage()
         addEventListener("keydown", controlsInput, false);
     }
 
-    function controlsInput(e)
+    function controlsInput()
     {
-        if (e.keyCode === 13)//Space
-        {
-            removeEventListener("keydown", controlsInput, false);
-            loadActualGame();
-        }
+        removeEventListener("keydown", controlsInput, false);
+        loadActualGame();
     }
 
     function loadActualGame()
     {
         clearInterval(controlsTimer);
-        let holder = document.getElementById("holder");
+        let placeHolder = document.getElementById("placeHolder");//For the dialog canvas
+        {
+            placeHolder.innerHTML =
+                "<div id =\"dialog\">\n" +
+                "    <div id =\"portrait\"></div>\n" +
+                "    <p id = \"name\"></p>\n" +
+                "    <p id = \"output\"></p>\n" +
+                "\n" +
+                "</div>";
+        }
+
+        //Setup for dialog js containers
+        {
+            CharacterName = document.getElementById("name");
+            DialogText = document.getElementById("output");
+            CharacterPortrait = document.getElementById("portrait");
+            DialogBG = document.getElementById("dialog");
+        }
+
+
+        let holder = document.getElementById("holder");//For all other canvases canvas
         {
             holder.innerHTML =
 
@@ -299,3 +317,4 @@ function controlsPage()
         }
     }
 }
+

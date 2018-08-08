@@ -294,8 +294,6 @@ function fillErasedMap()
 
     ctx.clearRect(p.prevCol * 32, p.prevRow * 32, 32, 48);
 
-
-
     let thingToDraw = new Image(); //Setup an image variable to use for choosing what image to draw where
 
     for (let mR = p.row - 2; mR < p.row + 4; mR ++) //Run through all rows in the levels map (mR = map row)
