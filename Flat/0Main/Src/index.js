@@ -20,7 +20,7 @@ let wPage = false, cPage = false;//Used for skipping intro pages
     let titleImg = new Image();
     let playerImg = new Image();
 
-    let spotD, titleD, startD, setUpD, spot2D, titleFlashTimer, inp;
+    let spotD, titleD, spot2D, titleFlashTimer, inp;
 
     {
         startTextImg.src = "0Main/images/starttext.png";
@@ -37,17 +37,15 @@ let wPage = false, cPage = false;//Used for skipping intro pages
         addEventListener("keydown", skip, false);
         ctxT.fillStyle = '#fff1f8';
         ctxT.font = "23px Arial";
-        ctxT.fillText("Press any key to skip..", 390, 750);
+        ctxT.fillText("Press any key to continue..", 370, 720);
         ctxT.fillStyle = '#464646';
         ctxT.font = "23px Arial";
-        ctxT.fillText("Press any key to skip..", 391, 751);
+        ctxT.fillText("Press any key to continue..", 371, 721);
 
         //Draw title page
         playerDraw();
         spotD = setTimeout(spotlightDraw, 1000);
         titleD = setTimeout(titleDraw, 3000);
-        startD = setTimeout(startDraw, 3000);
-        setUpD = setTimeout(setUpFlash, 5300);
     };
 
     function playerDraw()
@@ -70,54 +68,7 @@ let wPage = false, cPage = false;//Used for skipping intro pages
         spot2D = setTimeout(spotlightRight, 1000);
     }
 
-    function startDraw()
-    {                                                       //stroke text animation
-        let startText = "Press any button to start";
-        let dashLen = 150, dashOffset = dashLen, speed = 25, x = 240, y= 700, i = 0;
-
-        ctxT.font = "40px Comic Sans MS";
-        ctxT.lineWidth = 3; ctxT.lineJoin = "round"; ctxT.globalAlpha = 1;
-        ctxT.strokeStyle = ctxT.fillStyle = "#f99862";                           // stroke letter
-
-        draw();
-
-        function draw()
-        {                                                      // animate
-            ctxT.setLineDash([dashLen - dashOffset, dashOffset - speed]);
-            dashOffset -= speed;
-            ctxT.strokeText(startText[i], x, y);
-
-            if (dashOffset > 0) requestAnimationFrame(draw);
-            else
-            {
-                ctxT.fillText(startText[i], x, y);                                // fill final letter
-                dashOffset = dashLen;
-                x += ctxT.measureText(startText[i++]).width + ctxT.lineWidth * Math.random();
-                ctxT.setTransform(1, 0, 0, 1, 0, 3 * Math.random());
-                if (i < startText.length) requestAnimationFrame(draw);           // loop until last letter
-            }
-        }
-    }
-
     let tog = 2;
-
-    function setUpFlash()
-    {
-        titleFlashTimer = setInterval(flashyText, 500);
-    }
-
-    function flashyText()
-    {
-        tog = (tog === 1)? 2 : 1;
-        if (tog === 1)
-        {
-            ctxT.clearRect(230, 660, 700, 70);
-        }
-        else
-        {
-            ctxT.drawImage(startTextImg, 240, 663);
-        }
-    }
 
     inp = setTimeout(input, 6000);                                                    // after all effect, add keyboard input
 
@@ -148,13 +99,11 @@ let wPage = false, cPage = false;//Used for skipping intro pages
 
     function skip()
     {
+        removeEventListener("keydown", skip, false);
         clearTimeout(spotD);
         clearTimeout(titleD);
-        clearTimeout(startD);
-        clearTimeout(setUpD);
         clearTimeout(spot2D);
         clearTimeout(inp);
-        clearInterval(titleFlashTimer);
         removeEventListener("keyup", startWarningPage);
         holder.style.width = "800px";
         holder.style.height = "600px";
@@ -190,36 +139,19 @@ function warningPage()
     ctxT.fillText("This game contains violence that may be ", 215, 161);
     ctxT.fillText("offensive to some players.", 280, 183);
 
-    let warningTextTimer = setInterval(flashingText, 1000);
-    let count = 0;
+    //Add skip option
+    addEventListener("keydown", skip, false);
+    ctxT.fillStyle = '#fff1f8';
+    ctxT.font = "23px Arial";
+    ctxT.fillText("Press any key to continue..", 270, 550);
+    ctxT.fillStyle = '#464646';
+    ctxT.font = "23px Arial";
+    ctxT.fillText("Press any key to continue..", 271, 551);
 
-    function flashingText()
+    function skip()
     {
-        getTheInput();
-        count++;
-        if(count%2 === 1)
-        {
-            ctxT.font = "20px Arial";
-            ctxT.fillStyle ='#FF0000';
-            ctxT.fillText("Press any key to continue", 299, 450);
-        }
-        else
-        {
-            ctxT.fillStyle ='#ffe900';
-            ctxT.fillText("Press any key to continue", 299, 450);
-        }
-    }
-
-    function getTheInput()
-    {
-        addEventListener("keyup", startControls);
-
-        function startControls()
-        {
-            clearInterval(warningTextTimer);
-            removeEventListener("keyup", startControls);
-            controlsPage();
-        }
+        removeEventListener("keydown", skip, false);
+        controlsPage();
     }
 }
 
@@ -261,8 +193,16 @@ function controlsPage()
                 enter.src = "0Main/images/EnterKey.png";
                 enter.onload = function()
                 {
+                    //Add skip option
+                    addEventListener("keydown", skip, false);
+                    ctxT.fillStyle = '#fff1f8';
+                    ctxT.font = "23px Arial";
+                    ctxT.fillText("Press any key to continue..", 270, 550);
+                    ctxT.fillStyle = '#464646';
+                    ctxT.font = "23px Arial";
+                    ctxT.fillText("Press any key to continue..", 271, 551);
+
                     render();
-                    controlsTimer = setInterval(flashingText, 1000);
                     setTimeout(input, 500);
                 };
             };
@@ -276,23 +216,6 @@ function controlsPage()
         ctxT.drawImage(arrowKeys, 125, 220);
         ctxT.drawImage(wasd, 125, 340);
         ctxT.drawImage(enter, 415, 340);
-        flashingText();
-    }
-
-    function flashingText()
-    {
-        count++;
-        if(count%2 === 1)
-        {
-            ctxT.font = "26px Arial";
-            ctxT.fillStyle = '#07ff01';
-            ctxT.fillText("Press any key to continue...", 255, 520);
-        }
-        else
-        {
-            ctxT.fillStyle = '#ffe105';
-            ctxT.fillText("Press any key to continue...", 255, 520);
-        }
     }
 
 
@@ -366,5 +289,10 @@ function controlsPage()
             }
         }
     }
-}
 
+    function skip()
+    {
+        removeEventListener("keydown", skip, false);
+        loadActualGame();
+    }
+}
