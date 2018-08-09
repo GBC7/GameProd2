@@ -96,30 +96,30 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="16" />
+          <entry key="css" value="20" />
           <entry key="html" value="5" />
-          <entry key="js" value="94" />
+          <entry key="js" value="96" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="16" />
+          <entry key="CSS" value="20" />
           <entry key="HTML" value="5" />
-          <entry key="JavaScript" value="94" />
+          <entry key="JavaScript" value="96" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="71" />
+          <entry key="css" value="295" />
           <entry key="html" value="103" />
-          <entry key="js" value="7778" />
+          <entry key="js" value="7987" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="71" />
-          <entry key="HTML" value="104" />
-          <entry key="JavaScript" value="7777" />
+          <entry key="CSS" value="295" />
+          <entry key="HTML" value="107" />
+          <entry key="JavaScript" value="7983" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -139,8 +139,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
+            <state relative-caret-position="350">
+              <caret line="245" column="23" selection-start-line="245" selection-start-column="23" selection-end-line="245" selection-end-column="23" />
               <folding>
                 <element signature="e#311#4423#0" />
                 <element signature="e#705#1031#0" />
@@ -148,27 +148,38 @@
                 <element signature="e#1333#1383#0" />
                 <element signature="e#1414#1461#0" />
                 <element signature="e#1496#1769#0" />
+                <element signature="e#1662#1721#0" />
                 <element signature="e#3577#4421#0" />
                 <element signature="e#3815#4553#0" />
+                <element signature="e#4018#4474#0" />
+                <element signature="e#4591#5445#0" />
                 <element signature="e#4950#5374#0" />
+                <element signature="n#!!block;n#warningPage#0" />
+                <element signature="n#!!block;n#skip#0;n#!!block;n#warningPage#0" />
+                <element signature="e#6616#7151#0" />
+                <element signature="e#6727#7144#0" />
+                <element signature="e#6831#7133#0" />
+                <element signature="e#6948#6988#0" />
+                <element signature="n#!!block;n#render#0;n#!!block;n#controlsPage#0" />
+                <element signature="n#!!block;n#input#0;n#!!block;n#controlsPage#0" />
                 <element signature="n#!!block;n#controlsInput#0;n#!!block;n#controlsPage#0" />
-                <element signature="e#7737#8029#0" />
                 <element signature="e#8080#8339#0" />
                 <element signature="e#8437#9016#0" />
                 <element signature="e#9424#9467#0" />
                 <element signature="n#!!block;n#waitForTheScriptsToLoad#0;n#!!block;n#loadActualGame#0;n#!!block;n#controlsPage#0" />
                 <element signature="e#9626#9698#0" />
                 <element signature="e#9728#9772#0" />
+                <element signature="n#!!block;n#skip#0;n#!!block;n#controlsPage#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/0Main/Src/index.css">
+        <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="30" />
+            <state relative-caret-position="380">
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -185,9 +196,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SystemMSGLevel1[0]</find>
-      <find>SystemMSGLevel</find>
-      <find>hear</find>
       <find>brokenWheelChair</find>
       <find>onK</find>
       <find>p.row</find>
@@ -215,6 +223,9 @@
       <find>e === 37</find>
       <find>font</find>
       <find>setUpD</find>
+      <find>url</find>
+      <find>URL</find>
+      <find>dialog</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -256,7 +267,6 @@
         <option value="$PROJECT_DIR$/7Lab/src/level7.js" />
         <option value="$PROJECT_DIR$/7Lab/src/level8.js" />
         <option value="$PROJECT_DIR$/0Main/Src/temp.js" />
-        <option value="$PROJECT_DIR$/0Main/Src/dialog.css" />
         <option value="$PROJECT_DIR$/../../GameProd2Git/3Store/src/level3.js" />
         <option value="$PROJECT_DIR$/3Store/src/level3.js" />
         <option value="$PROJECT_DIR$/2Sewer/src/level11.js" />
@@ -270,6 +280,7 @@
         <option value="$PROJECT_DIR$/0Main/Src/main.js" />
         <option value="$PROJECT_DIR$/0Main/Src/enemies.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/0Main/Src/dialog.css" />
         <option value="$PROJECT_DIR$/0Main/Src/index.js" />
       </list>
     </option>
@@ -301,12 +312,6 @@
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
               <item name="Flat" type="462c0819:PsiDirectoryNode" />
               <item name="0Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Flat" type="462c0819:PsiDirectoryNode" />
-              <item name="0Main" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Flat" type="b2602c69:ProjectViewProjectNode" />
@@ -373,12 +378,12 @@
       <workItem from="1532727679795" duration="827000" />
       <workItem from="1533228005200" duration="15453000" />
       <workItem from="1533768544996" duration="3984000" />
-      <workItem from="1533845322750" duration="5146000" />
+      <workItem from="1533845322750" duration="6868000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197196000" />
+    <option name="totallyTimeSpent" value="198918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -637,10 +642,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/healthInventory.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
-          <caret line="2549" column="8" lean-forward="true" selection-start-line="2549" selection-start-column="8" selection-end-line="2549" selection-end-column="30" />
+          <caret line="3893" column="47" selection-start-line="3893" selection-start-column="47" selection-end-line="3893" selection-end-column="47" />
           <folding>
             <element signature="e#398#579#0" />
             <element signature="e#799#2020#0" />
@@ -683,27 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/healthInventory.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="18" lean-forward="true" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/0Main/Src/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -711,10 +702,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0Main/Src/dialog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
+        <state relative-caret-position="350">
+          <caret line="245" column="23" selection-start-line="245" selection-start-column="23" selection-end-line="245" selection-end-column="23" />
           <folding>
             <element signature="e#311#4423#0" />
             <element signature="e#705#1031#0" />
@@ -722,17 +727,28 @@
             <element signature="e#1333#1383#0" />
             <element signature="e#1414#1461#0" />
             <element signature="e#1496#1769#0" />
+            <element signature="e#1662#1721#0" />
             <element signature="e#3577#4421#0" />
             <element signature="e#3815#4553#0" />
+            <element signature="e#4018#4474#0" />
+            <element signature="e#4591#5445#0" />
             <element signature="e#4950#5374#0" />
+            <element signature="n#!!block;n#warningPage#0" />
+            <element signature="n#!!block;n#skip#0;n#!!block;n#warningPage#0" />
+            <element signature="e#6616#7151#0" />
+            <element signature="e#6727#7144#0" />
+            <element signature="e#6831#7133#0" />
+            <element signature="e#6948#6988#0" />
+            <element signature="n#!!block;n#render#0;n#!!block;n#controlsPage#0" />
+            <element signature="n#!!block;n#input#0;n#!!block;n#controlsPage#0" />
             <element signature="n#!!block;n#controlsInput#0;n#!!block;n#controlsPage#0" />
-            <element signature="e#7737#8029#0" />
             <element signature="e#8080#8339#0" />
             <element signature="e#8437#9016#0" />
             <element signature="e#9424#9467#0" />
             <element signature="n#!!block;n#waitForTheScriptsToLoad#0;n#!!block;n#loadActualGame#0;n#!!block;n#controlsPage#0" />
             <element signature="e#9626#9698#0" />
             <element signature="e#9728#9772#0" />
+            <element signature="n#!!block;n#skip#0;n#!!block;n#controlsPage#0" />
           </folding>
         </state>
       </provider>

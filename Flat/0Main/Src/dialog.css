@@ -32,3 +32,23 @@
     font-size: 20px;
     color : white;
 }
+
+#logoCenterer
+{
+    width: 1000px;
+    position: relative;
+    margin: 0 auto;
+}
+
+#logo
+{
+    width: 135px;
+    height: 125px;
+    position: absolute;
+    left: 825px;
+    top: -135px;
+    background-image: url("../images/GBC7_Logo.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000000;
+}

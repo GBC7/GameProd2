@@ -3,8 +3,6 @@ let ctx;    //These are only defined after running loadActualGame() inside of th
 let scriptsLoaded = false;
 let ctx3;
 
-let wPage = false, cPage = false;//Used for skipping intro pages
-
 //TITLE PAGE
 {
     let holder = document.getElementById("holder");
@@ -12,6 +10,11 @@ let wPage = false, cPage = false;//Used for skipping intro pages
     holder.style.height = "800px";
     let canv = document.getElementById("canvas");
     let ctxT = canv.getContext("2d");
+    canv.style.backgroundPosition = "center";
+    canv.style.backgroundPositionY = "250px";
+    canv.style.backgroundColor = "#000000";
+    canv.style.backgroundRepeat = "no-repeat";
+    canv.style.backgroundImage = "url('0Main/images/GBC7_Logo.gif')";
 
 
     let startTextImg = new Image();
@@ -136,8 +139,8 @@ function warningPage()
     ctxT.fillRect(0,440,260,600);
     ctxT.font = "20px Arial";
     ctxT.fillStyle = '#FF0000';
-    ctxT.fillText("This game contains violence that may be ", 215, 161);
-    ctxT.fillText("offensive to some players.", 280, 183);
+    ctxT.fillText("This game contains violence that may be ", 215, 111);
+    ctxT.fillText("offensive to some players.", 280, 133);
 
     //Add skip option
     addEventListener("keydown", skip, false);
@@ -176,10 +179,6 @@ function controlsPage()
     let arrowKeys = new Image();
     let wasd = new Image();
     let enter = new Image();
-
-    let controlsTimer = undefined;
-    let count = 0;
-
 
     spacebar.src = "0Main/images/computer_key_spacebar.png";
     spacebar.onload = function()
@@ -233,7 +232,6 @@ function controlsPage()
 
     function loadActualGame()
     {
-        clearInterval(controlsTimer);
         let placeHolder = document.getElementById("placeHolder");//For the dialog canvas
         {
             placeHolder.innerHTML =
@@ -242,6 +240,9 @@ function controlsPage()
                 "    <p id = \"name\"></p>\n" +
                 "    <p id = \"output\"></p>\n" +
                 "\n" +
+                "</div>" +
+                "<div id=\"logoCenterer\">" +
+                "<canvas id=\"logo\">Your browser does not support canvas.</canvas>" +
                 "</div>";
         }
 
