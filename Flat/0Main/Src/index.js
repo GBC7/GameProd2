@@ -20,6 +20,8 @@ let wPage = false, cPage = false;//Used for skipping intro pages
     let titleImg = new Image();
     let playerImg = new Image();
 
+    let spotD, titleD, startD, setUpD, spot2D, titleFlashTimer, inp;
+
     {
         startTextImg.src = "0Main/images/starttext.png";
         spotlightRImg.src = "0Main/images/spotlight-right.png";
@@ -30,11 +32,22 @@ let wPage = false, cPage = false;//Used for skipping intro pages
 
     playerImg.onload = function()
     { //load player and background image
+
+        //Add skip option
+        addEventListener("keydown", skip, false);
+        ctxT.fillStyle = '#fff1f8';
+        ctxT.font = "23px Arial";
+        ctxT.fillText("Press any key to skip..", 390, 750);
+        ctxT.fillStyle = '#464646';
+        ctxT.font = "23px Arial";
+        ctxT.fillText("Press any key to skip..", 391, 751);
+
+        //Draw title page
         playerDraw();
-        setTimeout(spotlightDraw, 1000);
-        setTimeout(titleDraw, 3000);
-        setTimeout(startDraw, 3000);
-        setTimeout(setUpFlash, 5300);
+        spotD = setTimeout(spotlightDraw, 1000);
+        titleD = setTimeout(titleDraw, 3000);
+        startD = setTimeout(startDraw, 3000);
+        setUpD = setTimeout(setUpFlash, 5300);
     };
 
     function playerDraw()
@@ -54,7 +67,7 @@ let wPage = false, cPage = false;//Used for skipping intro pages
         {
             ctxT.drawImage(spotlightRImg, 0,0);
         }
-        setTimeout(spotlightRight, 1000);
+        spot2D = setTimeout(spotlightRight, 1000);
     }
 
     function startDraw()
@@ -86,7 +99,7 @@ let wPage = false, cPage = false;//Used for skipping intro pages
         }
     }
 
-    let tog = 2, titleFlashTimer = undefined;
+    let tog = 2;
 
     function setUpFlash()
     {
@@ -106,31 +119,57 @@ let wPage = false, cPage = false;//Used for skipping intro pages
         }
     }
 
-    setTimeout(input, 6000);                                                    // after all effect, add keyboard input
+    inp = setTimeout(input, 6000);                                                    // after all effect, add keyboard input
 
     function input()
     {
         addEventListener("keyup", startWarningPage);
+    }
 
-        function startWarningPage()
+    function startWarningPage()
+    {
+        clearInterval(titleFlashTimer);
+        holder.style.width = "800px";
+        holder.style.height = "600px";
+        removeEventListener("keyup", startWarningPage);
         {
-            clearInterval(titleFlashTimer);
-            holder.style.width = "800px";
-            holder.style.height = "600px";
-            removeEventListener("keyup", startWarningPage);
-            {
-                holder.innerHTML =
+            holder.innerHTML =
 
-                    "<div id=\"center\">\n" +
-                    "\n" +
-                    "\n" +
-                    "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
-                    "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
-                    "    </div>";
+                "<div id=\"center\">\n" +
+                "\n" +
+                "\n" +
+                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
+                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                "    </div>";
 
-            }//Add actual canvas while removing old one
-            warningPage();
-        }
+        }//Add actual canvas while removing old one
+        warningPage();
+    }
+
+    function skip()
+    {
+        clearTimeout(spotD);
+        clearTimeout(titleD);
+        clearTimeout(startD);
+        clearTimeout(setUpD);
+        clearTimeout(spot2D);
+        clearTimeout(inp);
+        clearInterval(titleFlashTimer);
+        removeEventListener("keyup", startWarningPage);
+        holder.style.width = "800px";
+        holder.style.height = "600px";
+        {
+            holder.innerHTML =
+
+                "<div id=\"center\">\n" +
+                "\n" +
+                "\n" +
+                "        <canvas id= \"regular\" width=\"800\" height=\"600\">Your browser does not support Canvas.</canvas>\n" +
+                "        <canvas id=\"HeloCanvas\" width=\"360\" height=\"360\">Your browser does not support Canvas.</canvas>\n" +
+                "    </div>";
+
+        }//Add actual canvas while removing old one
+        warningPage();
     }
 }
 

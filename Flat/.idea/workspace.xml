@@ -112,14 +112,14 @@
         <counts>
           <entry key="css" value="71" />
           <entry key="html" value="103" />
-          <entry key="js" value="7384" />
+          <entry key="js" value="7702" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="71" />
           <entry key="HTML" value="104" />
-          <entry key="JavaScript" value="7383" />
+          <entry key="JavaScript" value="7701" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -139,31 +139,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="583">
-              <caret line="254" selection-start-line="254" selection-end-line="254" />
+            <state relative-caret-position="480">
+              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
               <folding>
-                <element signature="e#311#4423#0" />
                 <element signature="e#705#1031#0" />
-                <element signature="e#1333#1383#0" />
                 <element signature="e#1414#1461#0" />
                 <element signature="e#1496#1769#0" />
-                <element signature="e#1662#1721#0" />
-                <element signature="e#1800#3039#0" />
-                <element signature="e#2284#3033#0" />
-                <element signature="e#2597#3023#0" />
                 <element signature="e#3118#3181#0" />
                 <element signature="e#3213#3429#0" />
-                <element signature="e#3280#3338#0" />
-                <element signature="e#3360#3423#0" />
                 <element signature="e#3577#4421#0" />
-                <element signature="e#3677#4415#0" />
-                <element signature="e#3880#4336#0" />
+                <element signature="e#3815#4553#0" />
+                <element signature="e#4591#5445#0" />
+                <element signature="e#4950#5374#0" />
                 <element signature="n#!!block;n#warningPage#0" />
                 <element signature="n#!!block;n#flashingText#0;n#!!block;n#warningPage#0" />
                 <element signature="e#5230#5384#0" />
                 <element signature="e#5406#5522#0" />
                 <element signature="n#!!block;n#getTheInput#0;n#!!block;n#warningPage#0" />
                 <element signature="n#!!block;n#startControls#0;n#!!block;n#getTheInput#0;n#!!block;n#warningPage#0" />
+                <element signature="n#!!block;n#controlsPage#0" />
                 <element signature="n#!!block;n#input#0;n#!!block;n#controlsPage#0" />
                 <element signature="n#!!block;n#controlsInput#0;n#!!block;n#controlsPage#0" />
                 <element signature="n#!!block;n#loadActualGame#0;n#!!block;n#controlsPage#0" />
@@ -200,7 +194,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>SystemMSGLevel3[1]</find>
       <find>Enem</find>
       <find>SystemMSGLevel1[0]</find>
       <find>SystemMSGLevel</find>
@@ -230,6 +223,7 @@
       <find>e === 32</find>
       <find>e.keyCode === 37</find>
       <find>e === 37</find>
+      <find>font</find>
     </findStrings>
     <replaceStrings>
       <replace>roofEnemy1,</replace>
@@ -388,12 +382,12 @@
       <workItem from="1532727679795" duration="827000" />
       <workItem from="1533228005200" duration="15453000" />
       <workItem from="1533768544996" duration="3984000" />
-      <workItem from="1533845322750" duration="2955000" />
+      <workItem from="1533845322750" duration="4034000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195005000" />
+    <option name="totallyTimeSpent" value="196084000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -728,31 +722,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/0Main/Src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="254" selection-start-line="254" selection-end-line="254" />
+        <state relative-caret-position="480">
+          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
           <folding>
-            <element signature="e#311#4423#0" />
             <element signature="e#705#1031#0" />
-            <element signature="e#1333#1383#0" />
             <element signature="e#1414#1461#0" />
             <element signature="e#1496#1769#0" />
-            <element signature="e#1662#1721#0" />
-            <element signature="e#1800#3039#0" />
-            <element signature="e#2284#3033#0" />
-            <element signature="e#2597#3023#0" />
             <element signature="e#3118#3181#0" />
             <element signature="e#3213#3429#0" />
-            <element signature="e#3280#3338#0" />
-            <element signature="e#3360#3423#0" />
             <element signature="e#3577#4421#0" />
-            <element signature="e#3677#4415#0" />
-            <element signature="e#3880#4336#0" />
+            <element signature="e#3815#4553#0" />
+            <element signature="e#4591#5445#0" />
+            <element signature="e#4950#5374#0" />
             <element signature="n#!!block;n#warningPage#0" />
             <element signature="n#!!block;n#flashingText#0;n#!!block;n#warningPage#0" />
             <element signature="e#5230#5384#0" />
             <element signature="e#5406#5522#0" />
             <element signature="n#!!block;n#getTheInput#0;n#!!block;n#warningPage#0" />
             <element signature="n#!!block;n#startControls#0;n#!!block;n#getTheInput#0;n#!!block;n#warningPage#0" />
+            <element signature="n#!!block;n#controlsPage#0" />
             <element signature="n#!!block;n#input#0;n#!!block;n#controlsPage#0" />
             <element signature="n#!!block;n#controlsInput#0;n#!!block;n#controlsPage#0" />
             <element signature="n#!!block;n#loadActualGame#0;n#!!block;n#controlsPage#0" />
