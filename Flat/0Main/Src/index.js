@@ -137,8 +137,6 @@ let wPage = false, cPage = false;//Used for skipping intro pages
 //WARNING PAGE
 function warningPage()
 {
-    wPage = true;
-
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
@@ -189,43 +187,56 @@ function warningPage()
 //CONTROLS PAGE
 function controlsPage()
 {
-    wPage = false;
-    cPage = true;
-
     //Canvas Declarations
     let canv = document.getElementById("regular");
     let ctxT = canv.getContext("2d");
 
-    ctxT.fillStyle = '#ffffff';
+    ctxT.fillStyle = '#000000';
     ctxT.fillRect(0,0,800,600);
     ctxT.font = "48px Arial";
-    ctxT.fillStyle = '#000000';
+    ctxT.fillStyle = '#ffffff';
     ctxT.fillText("Controls\n", 300, 100);
     ctxT.font = "26px Arial";
-    ctxT.fillText("The controls are simple.  Use the arrow keys to", 120, 175);
-    ctxT.fillText("move the character and the spacebar to attack!", 120, 200);
+    ctxT.fillText("Use the Arrow / WASD keys to move the character", 110, 160);
+    ctxT.fillText("and the Spacebar / Enter Key to interact & attack!", 110, 185);
 
     //Image Declarations
     let spacebar = new Image();
     let arrowKeys = new Image();
+    let wasd = new Image();
+    let enter = new Image();
+
     let controlsTimer = undefined;
     let count = 0;
 
-    spacebar.src = "0Main/images/computer_key_spacebar.png";
-    arrowKeys.src = "0Main/images/arrow-keys-vectors.jpg";
 
-    arrowKeys.onload = function()
+    spacebar.src = "0Main/images/computer_key_spacebar.png";
+    spacebar.onload = function()
     {
-        render();
-        controlsTimer = setInterval(flashingText, 1000);
-        setTimeout(input, 500);
+        arrowKeys.src = "0Main/images/arrow-keys-vectors.png";
+        arrowKeys.onload = function()
+        {
+            wasd.src = "0Main/images/WASD_Keys.png";
+            wasd.onload = function()
+            {
+                enter.src = "0Main/images/EnterKey.png";
+                enter.onload = function()
+                {
+                    render();
+                    controlsTimer = setInterval(flashingText, 1000);
+                    setTimeout(input, 500);
+                };
+            };
+        };
     };
 
 
     function render()
     {
-        ctxT.drawImage(spacebar, 350, 290);
-        ctxT.drawImage(arrowKeys, 120, 270);
+        ctxT.drawImage(spacebar, 325, 240);
+        ctxT.drawImage(arrowKeys, 125, 220);
+        ctxT.drawImage(wasd, 125, 340);
+        ctxT.drawImage(enter, 415, 340);
         flashingText();
     }
 
@@ -235,13 +246,13 @@ function controlsPage()
         if(count%2 === 1)
         {
             ctxT.font = "26px Arial";
-            ctxT.fillStyle = '#000000';
-            ctxT.fillText("Press any key to continue...", 250, 475);
+            ctxT.fillStyle = '#07ff01';
+            ctxT.fillText("Press any key to continue...", 255, 520);
         }
         else
         {
-            ctxT.fillStyle = '#ffffff';
-            ctxT.fillRect(0,450, 800, 26);
+            ctxT.fillStyle = '#ffe105';
+            ctxT.fillText("Press any key to continue...", 255, 520);
         }
     }
 
