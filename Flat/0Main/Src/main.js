@@ -1302,7 +1302,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
     //    37 - left , 38 - up , 39 - right , 40 - down
     if (l1)//If it's Lvl 1
     {
-        if (e === 37 && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
+        if ((e === 37 || e === 65) && p.col === 6 && p.row === 9 && uncovered)//TO lvl 2
         {
             let numOfStairz = 0;                //Create variable to be used for counting stairs
 
@@ -1331,9 +1331,9 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 }
             }
         }
-        if (e === 38 && (p.col === 13 && p.row === 11 && notWalking)
-            ||(e === 38 && p.col === 14 && p.row === 11 && notWalking)
-            ||(e === 38 && p.col === 15 && p.row === 11 && notWalking))
+        if ((e === 38 || e === 87) && (p.col === 13 && p.row === 11 && notWalking)
+            ||((e === 38 || e === 87) && p.col === 14 && p.row === 11 && notWalking)
+            ||((e === 38 || e === 87) && p.col === 15 && p.row === 11 && notWalking))
         {
             removeEventListener("keydown", onKeyDown, false);
             lPMap[level][p.row][p.col] = 0; //Remove the player from the map
@@ -1410,7 +1410,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l2)//If it's Lvl 2
     {
-        if (e === 38 && p.col === 0 && p.row === 0) //If going UP & character is right under door 1
+        if ((e === 38 || e === 87) && p.col === 0 && p.row === 0) //If going UP & character is right under door 1
         {
             removeEventListener("keydown", onKeyDown, false);
             ctx.clearRect(0, 0, 32, 48);
@@ -1443,7 +1443,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             }
         }   //Go through the door to level 1
 
-        if (e === 38 && p.col === 24 && p.row === 0) //If going UP & character is right under door 2
+        if ((e === 38 || e === 87) && p.col === 24 && p.row === 0) //If going UP & character is right under door 2
         {
             p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
@@ -1485,7 +1485,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
         }  //Go through the door to level 3
 
-        if (e === 38 && p.col === 10 && p.row === 0) //If going UP & character is under pipe
+        if ((e === 38 || e === 87) && p.col === 10 && p.row === 0) //If going UP & character is under pipe
         {
             if (sewersDrained)//Go through the door to level 11 (Sewer map 2)
             {
@@ -1554,7 +1554,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
                 CheckConversationAction();
         }  //Go through the pipe to l11 (second sewer map)
 
-        if (e === 37 && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
+        if ((e === 37 || e === 65) && !lightsOn && p.row === 11 && p.col === 9) //Not level switch condition (Shiver)
         {   //To check if character is in area where he isn't supposed to be when the light is off
             CheckConversationAction();
         }   //
@@ -1562,7 +1562,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l3)//If it's Lvl 3
     {
-        if (e === 37 && p.col === 1 && (p.row === 16))//If going LEFT at the staircase
+        if ((e === 37 || e === 65) && p.col === 1 && (p.row === 16))//If going LEFT at the staircase
         {//go back to sewer (from store)
             removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
 
@@ -1598,7 +1598,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             }
         }
 
-        if (e === 38 && p.row === 0 && (p.col === 10 || p.col === 11)) //If going UP & character is right under door 2
+        if ((e === 38 || e === 87) && p.row === 0 && (p.col === 10 || p.col === 11)) //If going UP & character is right under door 2
         {
             if (findAllLevel3){
                 p.frameY = 3; //Change player tile sheet frame being drawn so that character is facing stairs if not already
@@ -1665,7 +1665,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l5)//If it's Lvl 5
     {
-        if (e === 38 && p.col === 0 && p.row === 0)
+        if ((e === 38 || e === 87) && p.col === 0 && p.row === 0)
         {
             removeEventListener("keydown", onKeyDown, false);       //Turn controls off so columns and rows don't mess up
             ctx.clearRect(0, 0, 32, 32);
@@ -1762,7 +1762,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
     else if (l7)//If it's Lvl 8
     {
         // ChangeNeeded  --- Animation
-        if (e === 38 && p.col === 0 && p.row === 0) //If going up and above Exit
+        if ((e === 38 || e === 87) && p.col === 0 && p.row === 0) //If going up and above Exit
         {
 
             level = 8;                              //Change level identifier appropriately
@@ -1775,7 +1775,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
             startGame();                            //Load new levels assets and settings
         }  //Go up stairs to level 8
 
-        if (e === 40 && p.col === 19 && p.row === 16 && researchBurned) //If going down and above staircase
+        if ((e === 40 || e === 83) && p.col === 19 && p.row === 16 && researchBurned) //If going down and above staircase
         {
             p.frameY = 0; //Change player tile sheet frame being drawn so that character is facing stairs if not already
 
@@ -1817,7 +1817,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l8)//If it's Lvl 7
     {
-        if (e === 40 && p.col === 24 && p.row === 16) //If going down and above staircase
+        if ((e === 40 || e === 83) && p.col === 24 && p.row === 16) //If going down and above staircase
         {
 
 
@@ -1874,7 +1874,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
     else if (l11)//Sewer map 2
     {
-        if (e === 40 && p.col === 12 && p.row === 16) //If going down & character is over pipe/tube
+        if ((e === 40 || e === 83) && p.col === 12 && p.row === 16) //If going down & character is over pipe/tube
         {
             p.frameX++;
             p.srcX = p.width * (p.frameX % 4);
@@ -1990,6 +1990,7 @@ function checkLevelSwitch(e = 0/* passes e.keyCode through argument e */)
 
 function onKeyDown(e)
 {
+    console.log(e.keyCode);
     if (!l3)
         clearInterval(timer_level3);
 
@@ -2020,7 +2021,7 @@ function onKeyDown(e)
     }
 
 
-    if (e.keyCode === 37)//Left
+    if (e.keyCode === 37 || e.keyCode === 65)//Left
     {
         if (p.col > xMin[level] && notWalking && canGoThisWay)    //Levels boundaries
         {
@@ -2092,7 +2093,7 @@ function onKeyDown(e)
         }
         detectMovementLevel3();
     }
-    if (e.keyCode === 39)//Right
+    if (e.keyCode === 39 || (e.keyCode === 68))//Right
     {
         if (p.col < xMax[level] && notWalking && canGoThisWay)    //Levels boundaries
         {
@@ -2162,7 +2163,7 @@ function onKeyDown(e)
         }
         detectMovementLevel3();
     }
-    if (e.keyCode === 38)//Up
+    if (e.keyCode === 38 || e.keyCode === 87)//Up
     {
         if (p.row > yMin[level] && notWalking && canGoThisWay)        //Levels boundaries
         {
@@ -2242,7 +2243,7 @@ function onKeyDown(e)
         }
         detectMovementLevel3();
     }
-    if (e.keyCode === 40)//Down
+    if (e.keyCode === 40 || e.keyCode === 83)//Down
     {
         if (p.row < yMax[level] && notWalking && canGoThisWay)        //Levels boundaries
         {
@@ -2325,7 +2326,7 @@ function onKeyDown(e)
         }
         detectMovementLevel3();
     }
-    if (e.keyCode === 32) //Space
+    if (e.keyCode === 32 || e.keyCode === 13) //Space
     {
         checkActions();
         CheckConversationAction();
@@ -2546,7 +2547,7 @@ function onKeyDown(e)
 
 function checkBoundaries(e)//Gets called each step
 {
-    if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
         if (l1 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 1][p.col - 1] === floorNumbers[level]);
@@ -2611,7 +2612,7 @@ function checkBoundaries(e)//Gets called each step
         }
 
     }
-    if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
+    if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
         if (l1 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 1][p.col + 1] === floorNumbers[level]);
@@ -2667,7 +2668,7 @@ function checkBoundaries(e)//Gets called each step
                 );
         }
     }
-    if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
+    if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
         if (l1 || l7 || l8)
             canGoThisWay = (lMap[level][p.row][p.col] === floorNumbers[level]);
@@ -2723,7 +2724,7 @@ function checkBoundaries(e)//Gets called each step
                 );
         }
     }
-    if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
+    if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
         if (l1 || l7 || l8)
             canGoThisWay = (lMap[level][p.row + 2][p.col] === floorNumbers[level]);
@@ -2834,7 +2835,7 @@ function checkBoundaries(e)//Gets called each step
 
 function checkFloorObjects(e)//For picking something up when walking over it
 {
-    if (e === 37 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
+    if ((e === 37 || e === 65) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col - 1] !== undefined)//Left
     {
         if (lMap[level][p.row + 1][p.col - 1] === floorObjects[level])
         {
@@ -2851,7 +2852,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
             }
         }
     }
-    if (e === 39 && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
+    if ((e === 39 || e === 68) && lMap[level][p.row + 1] !== undefined && lMap[level][p.row + 1][p.col + 1] !== undefined)//Right
     {
         if (lMap[level][p.row + 1][p.col + 1] === floorObjects[level])
         {
@@ -2868,7 +2869,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
             }
         }
     }
-    if (e === 38 && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
+    if ((e === 38 || e === 87) && lMap[level][p.row] !== undefined && lMap[level][p.row][p.col] !== undefined)//Up
     {
         if (lMap[level][p.row][p.col] === floorObjects[level])
         {
@@ -2885,7 +2886,7 @@ function checkFloorObjects(e)//For picking something up when walking over it
             }
         }
     }
-    if (e === 40 && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
+    if ((e === 40 || e === 83) && lMap[level][p.row + 2] !== undefined && lMap[level][p.row + 2][p.col] !== undefined)//Down
     {
         if (lMap[level][p.row + 2][p.col] === floorObjects[level])
         {
@@ -3501,7 +3502,7 @@ function checkAttackSelect()//For attacking enemies or selecting NPCs for dialog
 
                 function nextDialog(e)
                 {
-                    if (e.keyCode === 32)
+                    if (e.keyCode === 32 || e.keyCode === 13)
                     {
                         l5DialogNum++;
 
@@ -3924,7 +3925,7 @@ function gameover()
 
     function startOver(e)
     {
-        if (e.keyCode === 32)
+        if (e.keyCode === 32 || e.keyCode === 13)
         {
             location.reload();
         }
