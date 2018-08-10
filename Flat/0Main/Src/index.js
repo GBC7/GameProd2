@@ -139,7 +139,7 @@ function warningPage()
     ctxT.fillRect(0,440,260,600);
     ctxT.font = "20px Arial";
     ctxT.fillStyle = '#FF0000';
-    ctxT.fillText("This game contains violence that may be ", 215, 111);
+    ctxT.fillText('This game contains "violence" that may be ', 215, 111);
     ctxT.fillText("offensive to some players.", 280, 133);
 
     //Add skip option
@@ -202,7 +202,6 @@ function controlsPage()
                     ctxT.fillText("Press any key to continue..", 271, 551);
 
                     render();
-                    setTimeout(input, 500);
                 };
             };
         };
@@ -219,16 +218,6 @@ function controlsPage()
 
 
     //After all effects, add keyboard input
-    function input()
-    {
-        addEventListener("keydown", controlsInput, false);
-    }
-
-    function controlsInput()
-    {
-        removeEventListener("keydown", controlsInput, false);
-        loadActualGame();
-    }
 
     function loadActualGame()
     {
@@ -252,6 +241,8 @@ function controlsPage()
             DialogText = document.getElementById("output");
             CharacterPortrait = document.getElementById("portrait");
             DialogBG = document.getElementById("dialog");
+            CharacterPortrait.style.backgroundColor = "black";
+            CharacterPortrait.style.backgroundImage = portrait[0];
         }
 
 
