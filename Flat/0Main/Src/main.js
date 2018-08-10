@@ -3660,48 +3660,48 @@ function healthInventory()
 
     if(lighterTrigger)
     {
-        ctx3.drawImage(lighter, 15, 202, 40, 32);
+        ctx3.drawImage(lighter, 15, 302, 40, 32);
     }
     if(keyFound)
     {
-        ctx3.drawImage(key, 67, 200, 32, 32);
+        ctx3.drawImage(key, 67, 300, 32, 32);
     }
     if(findPasscode)
     {
-        ctx3.drawImage(passcode, 15, 254, 32, 32);
+        ctx3.drawImage(passcode, 15, 354, 32, 32);
     }
     if(findDisguise)
     {
-        ctx3.drawImage(disguise, 63, 254, 32, 32);
+        ctx3.drawImage(disguise, 63, 354, 32, 32);
     }
     if(findRollerblades)
     {
-        ctx3.drawImage(rollerblades, 15, 306, 32, 32);
+        ctx3.drawImage(rollerblades, 15, 406, 32, 32);
     }
     if(findMap)
     {
-        ctx3.drawImage(mapV, 63, 306, 32, 32);
+        ctx3.drawImage(mapV, 63, 406, 32, 32);
     }
     if(caneTrigger)
     {
-        ctx3.drawImage(cane, 15, 358, 32, 32);
+        ctx3.drawImage(cane, 15, 458, 32, 32);
     }
     if(publishersPaper)
     {
-        ctx3.drawImage(publishersAddress, 67, 358, 32, 32);
+        ctx3.drawImage(publishersAddress, 67, 458, 32, 32);
     }
     if(researchPaper)
     {
-        ctx3.drawImage(research, 15, 410, 32, 32);
+        ctx3.drawImage(research, 15, 510, 32, 32);
     }
     if(lighterFluid)
     {
-        ctx3.drawImage(lighterFluidInv, 67, 410, 32, 32);
+        ctx3.drawImage(lighterFluidInv, 67, 510, 32, 32);
     }
     if(researchBurned)
     {
-        ctx3.clearRect(10, 409, 100, 35);
-        ctx3.drawImage(research, 15, 410, 32, 32);
+        ctx3.clearRect(10, 509, 100, 35);
+        ctx3.drawImage(research, 15, 510, 32, 32);
     }
 }
 
